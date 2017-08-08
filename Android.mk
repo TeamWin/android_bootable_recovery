@@ -141,6 +141,7 @@ ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
     LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0
     TWRP_REQUIRED_MODULES += libhardware android.hardware.boot@1.0-service android.hardware.boot@1.0-service.rc
+    TW_EXCLUDE_TWRPAPP := true
 endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
@@ -370,6 +371,9 @@ ifneq ($(TW_INCLUDE_LIBRESETPROP),)
     LOCAL_SHARED_LIBRARIES += libresetprop
     LOCAL_C_INCLUDES += external/magisk-prebuilt/include
     LOCAL_CFLAGS += -DTW_INCLUDE_LIBRESETPROP
+endif
+ifeq ($(TW_EXCLUDE_TWRPAPP),true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_TWRPAPP
 endif
 
 TWRP_REQUIRED_MODULES += \
