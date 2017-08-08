@@ -446,6 +446,9 @@ ifneq ($(TW_INCLUDE_LIBRESETPROP),)
         LOCAL_CFLAGS += -DTW_INCLUDE_LIBRESETPROP
     endif
 endif
+ifeq ($(TW_EXCLUDE_TWRPAPP),true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_TWRPAPP
+endif
 
 TWRP_REQUIRED_MODULES += \
     relink \
