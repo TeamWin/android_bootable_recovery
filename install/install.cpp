@@ -76,7 +76,6 @@ bool ReadMetadataFromPackage(ZipArchiveHandle zip, std::map<std::string, std::st
   ZipString path(METADATA_PATH);
   ZipEntry entry;
   if (FindEntry(zip, path, &entry) != 0) {
-    LOG(ERROR) << "Failed to find " << METADATA_PATH;
     return false;
   }
 
@@ -329,20 +328,11 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
                              std::vector<std::string>* log_buffer, int retry_count,
                              int* max_temperature) {
   std::map<std::string, std::string> metadata;
-  if (!ReadMetadataFromPackage(zip, &metadata)) {
-    LOG(ERROR) << "Failed to parse metadata in the zip file";
-    return INSTALL_CORRUPT;
+  bool is_ab_ota = false;
+  if (ReadMetadataFromPackage(zip, &metadata)) {
+    ReadSourceTargetBuild(metadata, log_buffer);
+    if (CheckPackageMetadata(metadata, OtaType::AB) == 0) is_ab_ota = true;
   }
-
-  bool is_ab = android::base::GetBoolProperty("ro.build.ab_update", false);
-  // Verifies against the metadata in the package first.
-  if (int check_status = is_ab ? CheckPackageMetadata(metadata, OtaType::AB) : 0;
-      check_status != 0) {
-    log_buffer->push_back(android::base::StringPrintf("error: %d", kUpdateBinaryCommandFailure));
-    return check_status;
-  }
-
-  ReadSourceTargetBuild(metadata, log_buffer);
 
   // The updater in child process writes to the pipe to communicate with recovery.
   android::base::unique_fd pipe_read, pipe_write;
@@ -387,8 +377,8 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
 
   std::vector<std::string> args;
   if (int update_status =
-          is_ab ? SetUpAbUpdateCommands(package, zip, pipe_write.get(), &args)
-                : SetUpNonAbUpdateCommands(package, zip, retry_count, pipe_write.get(), &args);
+          is_ab_ota ? SetUpAbUpdateCommands(package, zip, pipe_write.get(), &args)
+                    : SetUpNonAbUpdateCommands(package, zip, retry_count, pipe_write.get(), &args);
       update_status != 0) {
     log_buffer->push_back(android::base::StringPrintf("error: %d", kUpdateBinaryCommandFailure));
     return update_status;
