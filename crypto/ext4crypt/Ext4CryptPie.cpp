@@ -110,9 +110,9 @@ static bool e4crypt_is_emulated() {
     return property_get_bool("persist.sys.emulate_fbe", false);
 }
 
-static const char* escape_empty(const std::string& value) {
+/*static const char* escape_empty(const std::string& value) {
     return value.empty() ? "null" : value.c_str();
-}
+}*/
 
 static std::string get_de_key_path(userid_t user_id) {
     return StringPrintf("%s/de/%d", user_key_dir.c_str(), user_id);
@@ -327,12 +327,12 @@ static void get_data_file_encryption_modes(PolicyKeyRef* key_ref) {
         android::base::GetProperty("fbe.filenames", "aes-256-heh");
 }
 
-static bool ensure_policy(const PolicyKeyRef& key_ref, const std::string& path) {
+/*static bool ensure_policy(const PolicyKeyRef& key_ref, const std::string& path) {
     return true;
-    /*return e4crypt_policy_ensure(path.c_str(), key_ref.key_raw_ref.data(),
+    return e4crypt_policy_ensure(path.c_str(), key_ref.key_raw_ref.data(),
                                  key_ref.key_raw_ref.size(), key_ref.contents_mode.c_str(),
-                                 key_ref.filenames_mode.c_str()) == 0;*/
-}
+                                 key_ref.filenames_mode.c_str()) == 0;
+}*/
 
 static bool is_numeric(const char* name) {
     for (const char* p = name; *p != '\0'; p++) {
@@ -379,6 +379,9 @@ static bool load_all_de_keys() {
             if (!android::vold::installKey(key, &raw_ref)) return false;
             s_de_key_raw_refs[user_id] = raw_ref;
             LOG(DEBUG) << "Installed de key for user " << user_id << std::endl;
+
+            std::string user_prop = "twrp.user." + std::to_string(user_id) + ".decrypt";
+            property_set(user_prop.c_str(), "0");
         }
     }
     // ext4enc:TODO: go through all DE directories, ensure that all user dirs have the
@@ -438,10 +441,10 @@ bool e4crypt_init_user0() {
     // We can only safely prepare DE storage here, since CE keys are probably
     // entangled with user credentials.  The framework will always prepare CE
     // storage once CE keys are installed.
-    if (!e4crypt_prepare_user_storage("", 0, 0, /*android::os::IVold::*/STORAGE_FLAG_DE)) {
+    /*if (!e4crypt_prepare_user_storage("", 0, 0, STORAGE_FLAG_DE)) {
         LOG(ERROR) << "Failed to prepare user 0 storage" << std::endl;
         return false;
-    }
+    }*/
 
     // If this is a non-FBE device that recently left an emulated mode,
     // restore user data directories to known-good state.
@@ -566,7 +569,7 @@ static bool parse_hex(const std::string& hex, std::string* result) {
     return true;
 }
 
-static std::string volkey_path(const std::string& misc_path, const std::string& volume_uuid) {
+/*static std::string volkey_path(const std::string& misc_path, const std::string& volume_uuid) {
     return misc_path + "/vold/volume_keys/" + volume_uuid + "/default";
 }
 
@@ -607,7 +610,7 @@ static bool read_or_create_volkey(const std::string& misc_path, const std::strin
     return true;
 }
 
-/*static bool destroy_volkey(const std::string& misc_path, const std::string& volume_uuid) {
+static bool destroy_volkey(const std::string& misc_path, const std::string& volume_uuid) {
     auto path = volkey_path(misc_path, volume_uuid);
     if (!android::vold::pathExists(path)) return true;
     return android::vold::destroyKey(path);
@@ -703,19 +706,19 @@ bool e4crypt_unlock_user_key(userid_t user_id, int serial, const std::string& to
     }
 
     return true;
-}*/
+}
 
 static bool prepare_subdirs(const std::string& action, const std::string& volume_uuid,
                             userid_t user_id, int flags) {
     LOG(ERROR) << "not actually forking for vold_prepare_subdirs\n";
     return true;
-    /*if (0 != android::vold::ForkExecvp(
+    if (0 != android::vold::ForkExecvp(
                  std::vector<std::string>{prepare_subdirs_path, action, volume_uuid,
                                           std::to_string(user_id), std::to_string(flags)})) {
         LOG(ERROR) << "vold_prepare_subdirs failed";
         return false;
     }
-    return true;*/
+    return true;
 }
 
 bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_id, int serial,
@@ -723,7 +726,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
     LOG(DEBUG) << "e4crypt_prepare_user_storage for volume " << escape_empty(volume_uuid)
                << ", user " << user_id << ", serial " << serial << ", flags " << flags << std::endl;
 
-    if (flags & /*android::os::IVold::*/STORAGE_FLAG_DE) {
+    if (flags & STORAGE_FLAG_DE) {
         // DE_sys key
         auto system_legacy_path = android::vold::BuildDataSystemLegacyPath(user_id);
         auto misc_legacy_path = android::vold::BuildDataMiscLegacyPath(user_id);
@@ -763,7 +766,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
         }
     }
 
-    if (flags & /*android::os::IVold::*/STORAGE_FLAG_CE) {
+    if (flags & STORAGE_FLAG_CE) {
         // CE_n key
         auto system_ce_path = android::vold::BuildDataSystemCePath(user_id);
         auto misc_ce_path = android::vold::BuildDataMiscCePath(user_id);
@@ -804,7 +807,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
     }
     if (!prepare_subdirs("prepare", volume_uuid, user_id, flags)) return false;
     return true;
-}
+}*/
 
 /*bool e4crypt_destroy_user_storage(const std::string& volume_uuid, userid_t user_id, int flags) {
     LOG(DEBUG) << "TWRP NOT e4crypt_destroy_user_storage for volume " << escape_empty(volume_uuid)
