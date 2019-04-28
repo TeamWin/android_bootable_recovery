@@ -63,6 +63,7 @@ std::set<string> GUIAction::setActionsRunningInCallerThread;
 static string zip_queue[10];
 static int zip_queue_index;
 pid_t sideload_child_pid;
+extern std::vector<users_struct> Users_List;
 
 static void *ActionThread_work_wrapper(void *data);
 
@@ -1495,31 +1496,49 @@ int GUIAction::decrypt(std::string arg __unused)
 		simulate_progress_bar();
 	} else {
 		string Password;
-		DataManager::GetValue("tw_crypto_password", Password);
-		op_status = PartitionManager.Decrypt_Device(Password);
-		if (op_status != 0)
-			op_status = 1;
-		else {
+    string userID;
+    DataManager::GetValue("tw_crypto_password", Password);
 
-			DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+    if (DataManager::GetIntValue(TW_IS_FBE)) {  // for FBE
+      DataManager::GetValue("tw_crypto_user_id", userID);
+      if (userID != "") {
+        op_status = PartitionManager.Decrypt_Device(Password, atoi(userID.c_str()));
+        if (userID != "0") {
+          if (op_status != 0) op_status = 1;
+          operation_end(op_status);
+          return 0;
+        }
+      } else {
+        LOGINFO("Not find user id!\n");
+        op_status = 1;
+      }
+      ::sleep(1);
+    } else {  // for FDE
+      op_status = PartitionManager.Decrypt_Device(Password);
+    }
 
-			int has_datamedia;
+    if (op_status != 0)
+      op_status = 1;
+    else {
+      DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 
-			// Check for a custom theme and load it if exists
-			DataManager::GetValue(TW_HAS_DATA_MEDIA, has_datamedia);
-			if (has_datamedia != 0) {
-				if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
-					LOGINFO("Failed to get default contexts and file mode for storage files.\n");
-				} else {
-					LOGINFO("Got default contexts and file mode for storage files.\n");
-				}
-			}
-			PartitionManager.Decrypt_Adopted();
-		}
-	}
+      int has_datamedia;
 
-	operation_end(op_status);
-	return 0;
+      // Check for a custom theme and load it if exists
+      DataManager::GetValue(TW_HAS_DATA_MEDIA, has_datamedia);
+      if (has_datamedia != 0) {
+        if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
+          LOGINFO("Failed to get default contexts and file mode for storage files.\n");
+        } else {
+          LOGINFO("Got default contexts and file mode for storage files.\n");
+        }
+      }
+      PartitionManager.Decrypt_Adopted();
+    }
+  }
+
+  operation_end(op_status);
+  return 0;
 }
 
 int GUIAction::adbsideload(std::string arg __unused)

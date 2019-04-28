@@ -229,39 +229,40 @@ int main(int argc, char **argv) {
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
 		LOGINFO("Is encrypted, do decrypt page first\n");
-		if (gui_startPage("decrypt", 1, 1) != 0) {
-			LOGERR("Failed to start decrypt GUI page.\n");
-		} else {
-			// Check for and load custom theme if present
-			TWFunc::check_selinux_support();
-			gui_loadCustomResources();
-		}
-	} else if (datamedia) {
-		TWFunc::check_selinux_support();
-		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
-			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
-		} else {
-			LOGINFO("Got default contexts and file mode for storage files.\n");
-		}
-	}
+    if (DataManager::GetIntValue(TW_IS_FBE)) DataManager::SetValue("tw_crypto_user_id", "0");
+    if (gui_startPage("decrypt", 1, 1) != 0) {
+      LOGERR("Failed to start decrypt GUI page.\n");
+    } else {
+      // Check for and load custom theme if present
+      TWFunc::check_selinux_support();
+      gui_loadCustomResources();
+    }
+  } else if (datamedia) {
+    TWFunc::check_selinux_support();
+    if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
+      LOGINFO("Failed to get default contexts and file mode for storage files.\n");
+    } else {
+      LOGINFO("Got default contexts and file mode for storage files.\n");
+    }
+  }
 
-	// Fixup the RTC clock on devices which require it
-	if (crash_counter == 0)
-		TWFunc::Fixup_Time_On_Boot();
+  // Fixup the RTC clock on devices which require it
+  if (crash_counter == 0) TWFunc::Fixup_Time_On_Boot();
 
-	// Read the settings file
-	TWFunc::Update_Log_File();
-	DataManager::ReadSettingsFile();
-	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
-	GUIConsole::Translate_Now();
+  // Read the settings file
+  TWFunc::Update_Log_File();
+  DataManager::ReadSettingsFile();
+  PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
+  GUIConsole::Translate_Now();
 
-	// Run any outstanding OpenRecoveryScript
-	std::string cacheDir = TWFunc::get_cache_dir();
-	std::string orsFile = cacheDir + "/recovery/openrecoveryscript";
+  // Run any outstanding OpenRecoveryScript
+  std::string cacheDir = TWFunc::get_cache_dir();
+  std::string orsFile = cacheDir + "/recovery/openrecoveryscript";
 
-	if (TWFunc::Path_Exists(SCRIPT_FILE_TMP) || (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 && TWFunc::Path_Exists(orsFile))) {
-		OpenRecoveryScript::Run_OpenRecoveryScript();
-	}
+  if (TWFunc::Path_Exists(SCRIPT_FILE_TMP) ||
+      (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 && TWFunc::Path_Exists(orsFile))) {
+    OpenRecoveryScript::Run_OpenRecoveryScript();
+  }
 
 #ifdef TW_HAS_MTP
 	char mtp_crash_check[PROPERTY_VALUE_MAX];
