@@ -45,15 +45,15 @@ void print_usage(void) {
 	printf("  wipe <partition name>\n");
 	printf("  sideload\n");
 	printf("  set <variable> [value]\n");
-	printf("  decrypt <password>\n");
-	printf("  remountrw\n");
-	printf("  fixperms\n");
-	printf("  mount <path>\n");
-	printf("  unmount <path>\n");
-	printf("  print <value>\n");
-	printf("  mkdir <directory>\n");
-	printf("  reboot [recovery|poweroff|bootloader|download|edl]\n");
-	printf("\nSee more documentation at https://twrp.me/faq/openrecoveryscript.html\n");
+  printf("  decrypt <password> [USER ID]\n");
+  printf("  remountrw\n");
+  printf("  fixperms\n");
+  printf("  mount <path>\n");
+  printf("  unmount <path>\n");
+  printf("  print <value>\n");
+  printf("  mkdir <directory>\n");
+  printf("  reboot [recovery|poweroff|bootloader|download|edl]\n");
+  printf("\nSee more documentation at https://twrp.me/faq/openrecoveryscript.html\n");
 }
 
 int do_setcap(const char* filename, const char* capabilities)

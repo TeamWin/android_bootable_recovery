@@ -63,6 +63,7 @@
 #define MANAGE_MISC_DIRS 0
 
 #include <cutils/fs.h>
+#include <cutils/properties.h>
 
 #include <android-base/file.h>
 //#include <android-base/logging.h>
@@ -363,6 +364,9 @@ static bool load_all_de_keys() {
             if (!install_key(key, &raw_ref)) return false;
             s_de_key_raw_refs[user_id] = raw_ref;
             LOG(DEBUG) << "Installed de key for user " << user_id;
+
+            std::string user_prop = "twrp.user." + std::to_string(user_id) + ".decrypt";
+            property_set(user_prop.c_str(), "0");
         }
     }
     // ext4enc:TODO: go through all DE directories, ensure that all user dirs have the
