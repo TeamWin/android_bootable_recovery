@@ -630,11 +630,13 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		DataManager::SetValue(TW_IS_DECRYPTED, 1);
 		Is_Encrypted = true;
 		Is_Decrypted = true;
-		if (Key_Directory.empty())
+		if (Key_Directory.empty()) {
 			Is_FBE = false;
-		else
+			DataManager::SetValue(TW_IS_FBE, 0);
+		} else {
 			Is_FBE = true;
-		DataManager::SetValue(TW_IS_FBE, 0);
+			DataManager::SetValue(TW_IS_FBE, 1);
+		}
 		Decrypted_Block_Device = crypto_blkdev;
 		LOGINFO("Data already decrypted, new block device: '%s'\n", crypto_blkdev);
 	} else if (!Mount(false)) {
@@ -649,6 +651,7 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 					Setup_Image();
 					DataManager::SetValue(TW_IS_ENCRYPTED, 1);
 					DataManager::SetValue(TW_CRYPTO_PWTYPE, cryptfs_get_password_type());
+					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
 					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
 					DataManager::SetValue("tw_crypto_display", "");
 				} else {
@@ -687,6 +690,8 @@ bool TWPartition::Decrypt_FBE_DE() {
 if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
+		Is_FBE = true;
+		DataManager::SetValue(TW_IS_FBE, 1);
 		ExcludeAll(Mount_Point + "/convert_fbe");
 		ExcludeAll(Mount_Point + "/unencrypted");
 		//ExcludeAll(Mount_Point + "/system/users/0"); // we WILL need to retain some of this if multiple users are present or we just need to delete more folders for the extra users somewhere else
@@ -709,12 +714,11 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		int retry_count = 3;
 		while (!Decrypt_DE() && --retry_count)
 			usleep(2000);
+		PartitionManager.Parse_Users(); // after load_all_de_keys() to parse_users
 		if (retry_count > 0) {
 			property_set("ro.crypto.state", "encrypted");
 			Is_Encrypted = true;
 			Is_Decrypted = false;
-			Is_FBE = true;
-			DataManager::SetValue(TW_IS_FBE, 1);
 			DataManager::SetValue(TW_IS_ENCRYPTED, 1);
 			string filename;
 			int pwd_type = Get_Password_Type(0, filename);
@@ -723,6 +727,7 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 				pwd_type = 0; // default password
 			}
 			DataManager::SetValue(TW_CRYPTO_PWTYPE, pwd_type);
+			DataManager::SetValue("tw_crypto_pwtype_0", pwd_type);
 			DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
 			DataManager::SetValue("tw_crypto_display", "");
 			return true;
@@ -2510,6 +2515,20 @@ bool TWPartition::Backup_Tar(PartitionSettings *part_settings, pid_t *tar_fork_p
 	Full_FileName = part_settings->Backup_Folder + "/" + Backup_FileName;
 	if (Has_Data_Media)
 		gui_msg(Msg(msg::kWarning, "backup_storage_warning=Backups of {1} do not include any files in internal storage such as pictures or downloads.")(Display_Name));
+	if (Mount_Point == "/data" && DataManager::GetIntValue(TW_IS_FBE)) {
+		std::vector<users_struct>::iterator iter;
+		std::vector<users_struct>* userList = PartitionManager.Get_Users_List();
+		for (iter = userList->begin(); iter != userList->end(); iter++) {
+			if (!(*iter).isDecrypted && (*iter).userId != "0") {
+				gui_msg(Msg(msg::kWarning, "backup_storage_undecrypt_warning=Backup not include some files of user {1}, because the user is not decrypted.")((*iter).userId));
+				backup_exclusions.add_absolute_dir("/data/system_ce/" + (*iter).userId);
+				backup_exclusions.add_absolute_dir("/data/misc_ce/" + (*iter).userId);
+				backup_exclusions.add_absolute_dir("/data/vendor_ce/" + (*iter).userId);
+				backup_exclusions.add_absolute_dir("/data/media/" + (*iter).userId);
+				backup_exclusions.add_absolute_dir("/data/user/" + (*iter).userId);
+			}
+		}
+	}
 	tar.part_settings = part_settings;
 	tar.backup_exclusions = &backup_exclusions;
 	tar.setdir(Backup_Path);
