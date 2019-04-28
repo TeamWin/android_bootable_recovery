@@ -63,6 +63,7 @@
 #define MANAGE_MISC_DIRS 0
 
 #include <cutils/fs.h>
+#include <cutils/properties.h>
 
 #include <android-base/file.h>
 //#include <android-base/logging.h>
@@ -363,6 +364,9 @@ static bool load_all_de_keys() {
             if (!install_key(key, &raw_ref)) return false;
             s_de_key_raw_refs[user_id] = raw_ref;
             LOG(DEBUG) << "Installed de key for user " << user_id;
+
+            std::string user_prop = "twrp.user." + std::to_string(user_id) + ".decrypt";
+            property_set(user_prop.c_str(), "0");
         }
     }
     // ext4enc:TODO: go through all DE directories, ensure that all user dirs have the
@@ -414,10 +418,10 @@ bool e4crypt_init_user0() {
     // We can only safely prepare DE storage here, since CE keys are probably
     // entangled with user credentials.  The framework will always prepare CE
     // storage once CE keys are installed.
-    if (!e4crypt_prepare_user_storage(nullptr, 0, 0, FLAG_STORAGE_DE)) {
+    /*if (!e4crypt_prepare_user_storage(nullptr, 0, 0, FLAG_STORAGE_DE)) {
         LOG(ERROR) << "Failed to prepare user 0 storage";
         return false;
-    }
+    }*/
 
     // If this is a non-FBE device that recently left an emulated mode,
     // restore user data directories to known-good state.
@@ -472,7 +476,7 @@ bool e4crypt_unlock_user_key(userid_t user_id, int serial __unused, const char* 
     return true;
 }
 
-bool e4crypt_prepare_user_storage(const char* volume_uuid, userid_t user_id, int serial __unused,
+/*bool e4crypt_prepare_user_storage(const char* volume_uuid, userid_t user_id, int serial __unused,
         int flags) {
 
     if (flags & FLAG_STORAGE_DE) {
@@ -533,4 +537,4 @@ bool e4crypt_prepare_user_storage(const char* volume_uuid, userid_t user_id, int
     }
 
     return true;
-}
+}*/
