@@ -329,9 +329,9 @@ static void get_data_file_encryption_modes(PolicyKeyRef* key_ref) {
 
 static bool ensure_policy(const PolicyKeyRef& key_ref, const std::string& path) {
     return true;
-    /*return e4crypt_policy_ensure(path.c_str(), key_ref.key_raw_ref.data(),
+    return e4crypt_policy_ensure(path.c_str(), key_ref.key_raw_ref.data(),
                                  key_ref.key_raw_ref.size(), key_ref.contents_mode.c_str(),
-                                 key_ref.filenames_mode.c_str()) == 0;*/
+                                 key_ref.filenames_mode.c_str()) == 0;
 }
 
 static bool is_numeric(const char* name) {
@@ -379,6 +379,9 @@ static bool load_all_de_keys() {
             if (!android::vold::installKey(key, &raw_ref)) return false;
             s_de_key_raw_refs[user_id] = raw_ref;
             LOG(DEBUG) << "Installed de key for user " << user_id << std::endl;
+
+            std::string user_prop = "twrp.user." + std::to_string(user_id) + ".decrypt";
+            property_set(user_prop.c_str(), "0");
         }
     }
     // ext4enc:TODO: go through all DE directories, ensure that all user dirs have the
@@ -438,10 +441,10 @@ bool e4crypt_init_user0() {
     // We can only safely prepare DE storage here, since CE keys are probably
     // entangled with user credentials.  The framework will always prepare CE
     // storage once CE keys are installed.
-    if (!e4crypt_prepare_user_storage("", 0, 0, /*android::os::IVold::*/STORAGE_FLAG_DE)) {
+    /*if (!e4crypt_prepare_user_storage("", 0, 0, STORAGE_FLAG_DE)) {
         LOG(ERROR) << "Failed to prepare user 0 storage" << std::endl;
         return false;
-    }
+    }*/
 
     // If this is a non-FBE device that recently left an emulated mode,
     // restore user data directories to known-good state.
@@ -703,27 +706,27 @@ bool e4crypt_unlock_user_key(userid_t user_id, int serial, const std::string& to
     }
 
     return true;
-}*/
+}
 
 static bool prepare_subdirs(const std::string& action, const std::string& volume_uuid,
                             userid_t user_id, int flags) {
     LOG(ERROR) << "not actually forking for vold_prepare_subdirs\n";
     return true;
-    /*if (0 != android::vold::ForkExecvp(
+    if (0 != android::vold::ForkExecvp(
                  std::vector<std::string>{prepare_subdirs_path, action, volume_uuid,
                                           std::to_string(user_id), std::to_string(flags)})) {
         LOG(ERROR) << "vold_prepare_subdirs failed";
         return false;
     }
-    return true;*/
-}
+    return true;
+}*/
 
 bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_id, int serial,
                                   int flags) {
     LOG(DEBUG) << "e4crypt_prepare_user_storage for volume " << escape_empty(volume_uuid)
                << ", user " << user_id << ", serial " << serial << ", flags " << flags << std::endl;
 
-    if (flags & /*android::os::IVold::*/STORAGE_FLAG_DE) {
+    if (flags & STORAGE_FLAG_DE) {
         // DE_sys key
         auto system_legacy_path = android::vold::BuildDataSystemLegacyPath(user_id);
         auto misc_legacy_path = android::vold::BuildDataMiscLegacyPath(user_id);
@@ -735,7 +738,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
         auto vendor_de_path = android::vold::BuildDataVendorDePath(user_id);
         auto user_de_path = android::vold::BuildDataUserDePath(nullptr, user_id);
 
-        if (volume_uuid.empty()) {
+        /*if (volume_uuid.empty()) {
             if (!prepare_dir(system_legacy_path, 0700, AID_SYSTEM, AID_SYSTEM)) return false;
 #if MANAGE_MISC_DIRS
             if (!prepare_dir(misc_legacy_path, 0750, multiuser_get_uid(user_id, AID_SYSTEM),
@@ -746,7 +749,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             if (!prepare_dir(misc_de_path, 01771, AID_SYSTEM, AID_MISC)) return false;
             if (!prepare_dir(vendor_de_path, 0771, AID_ROOT, AID_ROOT)) return false;
         }
-        if (!prepare_dir(user_de_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;
+        if (!prepare_dir(user_de_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;*/
 
         if (e4crypt_is_native()) {
             PolicyKeyRef de_ref;
@@ -763,7 +766,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
         }
     }
 
-    if (flags & /*android::os::IVold::*/STORAGE_FLAG_CE) {
+    if (flags & STORAGE_FLAG_CE) {
         // CE_n key
         auto system_ce_path = android::vold::BuildDataSystemCePath(user_id);
         auto misc_ce_path = android::vold::BuildDataMiscCePath(user_id);
@@ -771,13 +774,13 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
         auto media_ce_path = android::vold::BuildDataMediaCePath(nullptr, user_id);
         auto user_ce_path = android::vold::BuildDataUserCePath(nullptr, user_id);
 
-        if (volume_uuid.empty()) {
+        /*if (volume_uuid.empty()) {
             if (!prepare_dir(system_ce_path, 0770, AID_SYSTEM, AID_SYSTEM)) return false;
             if (!prepare_dir(misc_ce_path, 01771, AID_SYSTEM, AID_MISC)) return false;
             if (!prepare_dir(vendor_ce_path, 0771, AID_ROOT, AID_ROOT)) return false;
         }
         if (!prepare_dir(media_ce_path, 0770, AID_MEDIA_RW, AID_MEDIA_RW)) return false;
-        if (!prepare_dir(user_ce_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;
+        if (!prepare_dir(user_ce_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;*/
 
         if (e4crypt_is_native()) {
             PolicyKeyRef ce_ref;
@@ -802,7 +805,7 @@ bool e4crypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             //android::vold::RestoreconRecursive(misc_ce_path);
         }
     }
-    if (!prepare_subdirs("prepare", volume_uuid, user_id, flags)) return false;
+    //if (!prepare_subdirs("prepare", volume_uuid, user_id, flags)) return false;
     return true;
 }
 

@@ -63,6 +63,7 @@
 #define MANAGE_MISC_DIRS 0
 
 #include <cutils/fs.h>
+#include <cutils/properties.h>
 
 #include <android-base/file.h>
 //#include <android-base/logging.h>
@@ -363,6 +364,9 @@ static bool load_all_de_keys() {
             if (!install_key(key, &raw_ref)) return false;
             s_de_key_raw_refs[user_id] = raw_ref;
             LOG(DEBUG) << "Installed de key for user " << user_id;
+
+            std::string user_prop = "twrp.user." + std::to_string(user_id) + ".decrypt";
+            property_set(user_prop.c_str(), "0");
         }
     }
     // ext4enc:TODO: go through all DE directories, ensure that all user dirs have the
@@ -414,10 +418,10 @@ bool e4crypt_init_user0() {
     // We can only safely prepare DE storage here, since CE keys are probably
     // entangled with user credentials.  The framework will always prepare CE
     // storage once CE keys are installed.
-    if (!e4crypt_prepare_user_storage(nullptr, 0, 0, FLAG_STORAGE_DE)) {
+    /*if (!e4crypt_prepare_user_storage(nullptr, 0, 0, FLAG_STORAGE_DE)) {
         LOG(ERROR) << "Failed to prepare user 0 storage";
         return false;
-    }
+    }*/
 
     // If this is a non-FBE device that recently left an emulated mode,
     // restore user data directories to known-good state.
@@ -487,7 +491,7 @@ bool e4crypt_prepare_user_storage(const char* volume_uuid, userid_t user_id, int
         auto misc_de_path = android::vold::BuildDataMiscDePath(user_id);
         auto user_de_path = android::vold::BuildDataUserDePath(volume_uuid, user_id);
 
-        if (!prepare_dir(system_legacy_path, 0700, AID_SYSTEM, AID_SYSTEM)) return false;
+        /*if (!prepare_dir(system_legacy_path, 0700, AID_SYSTEM, AID_SYSTEM)) return false;
 #if MANAGE_MISC_DIRS
         if (!prepare_dir(misc_legacy_path, 0750, multiuser_get_uid(user_id, AID_SYSTEM),
                 multiuser_get_uid(user_id, AID_EVERYBODY))) return false;
@@ -497,7 +501,7 @@ bool e4crypt_prepare_user_storage(const char* volume_uuid, userid_t user_id, int
 
         if (!prepare_dir(system_de_path, 0770, AID_SYSTEM, AID_SYSTEM)) return false;
         if (!prepare_dir(misc_de_path, 01771, AID_SYSTEM, AID_MISC)) return false;
-        if (!prepare_dir(user_de_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;
+        if (!prepare_dir(user_de_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;*/
 
         // For now, FBE is only supported on internal storage
         if (e4crypt_is_native() && volume_uuid == nullptr) {
@@ -516,10 +520,10 @@ bool e4crypt_prepare_user_storage(const char* volume_uuid, userid_t user_id, int
         auto media_ce_path = android::vold::BuildDataMediaCePath(volume_uuid, user_id);
         auto user_ce_path = android::vold::BuildDataUserCePath(volume_uuid, user_id);
 
-        if (!prepare_dir(system_ce_path, 0770, AID_SYSTEM, AID_SYSTEM)) return false;
+        /*if (!prepare_dir(system_ce_path, 0770, AID_SYSTEM, AID_SYSTEM)) return false;
         if (!prepare_dir(misc_ce_path, 01771, AID_SYSTEM, AID_MISC)) return false;
         if (!prepare_dir(media_ce_path, 0770, AID_MEDIA_RW, AID_MEDIA_RW)) return false;
-        if (!prepare_dir(user_ce_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;
+        if (!prepare_dir(user_ce_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;*/
 
         // For now, FBE is only supported on internal storage
         if (e4crypt_is_native() && volume_uuid == nullptr) {
