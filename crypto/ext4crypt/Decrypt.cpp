@@ -543,13 +543,15 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 	std::string disk_decryption_secret_key = "";
 
 	std::string keystore_alias_subid;
-	if (!Find_Keystore_Alias_SubID_And_Prep_Files(user_id, keystore_alias_subid, handle_str)) {
-		printf("failed to scan keystore alias subid and prep keystore files\n");
-		return disk_decryption_secret_key;
-	}
+  // Can be stored in user 0, so check for both.
+  if (!Find_Keystore_Alias_SubID_And_Prep_Files(user_id, keystore_alias_subid, handle_str) &&
+      !Find_Keystore_Alias_SubID_And_Prep_Files(0, keystore_alias_subid, handle_str)) {
+    printf("failed to scan keystore alias subid and prep keystore files\n");
+    return disk_decryption_secret_key;
+  }
 
-	// First get the keystore service
-    sp<IBinder> binder = getKeystoreBinderRetry();
+  // First get the keystore service
+  sp<IBinder> binder = getKeystoreBinderRetry();
 #ifdef USE_KEYSTORAGE_4
 	sp<security::IKeystoreService> service = interface_cast<security::IKeystoreService>(binder);
 #else
@@ -1167,9 +1169,9 @@ bool Decrypt_User_Synth_Pass(const userid_t user_id, const std::string& Password
 		printf("failed to e4crypt_prepare_user_storage\n");
 		return Free_Return(retval, weaver_key, &pwd);
 	}
-	printf("Decrypted Successfully!\n");
-	retval = true;
-	return Free_Return(retval, weaver_key, &pwd);
+  printf("User %i Decrypted Successfully!\n", user_id);
+  retval = true;
+  return Free_Return(retval, weaver_key, &pwd);
 }
 #endif //HAVE_SYNTH_PWD_SUPPORT
 
@@ -1257,10 +1259,10 @@ bool Decrypt_User(const userid_t user_id, const std::string& Password) {
 			printf("failed to e4crypt_prepare_user_storage\n");
 			return false;
 		}
-		printf("Decrypted Successfully!\n");
-		return true;
-	}
-	if (stat("/data/system_de/0/spblob", &st) == 0) {
+    printf("User %i Decrypted Successfully!\n", user_id);
+    return true;
+  }
+  if (stat("/data/system_de/0/spblob", &st) == 0) {
 #ifdef HAVE_SYNTH_PWD_SUPPORT
 		printf("Using synthetic password method\n");
 		return Decrypt_User_Synth_Pass(user_id, Password);
@@ -1345,6 +1347,6 @@ bool Decrypt_User(const userid_t user_id, const std::string& Password) {
 		printf("failed to e4crypt_prepare_user_storage\n");
 		return false;
 	}
-	printf("Decrypted Successfully!\n");
-	return true;
+  printf("User %i Decrypted Successfully!\n", user_id);
+  return true;
 }
