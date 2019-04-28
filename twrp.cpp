@@ -236,6 +236,8 @@ int main(int argc, char **argv) {
 			LOGINFO("Skipping decryption\n");
 		} else {
 			LOGINFO("Is encrypted, do decrypt page first\n");
+			if (DataManager::GetIntValue(TW_IS_FBE))
+				DataManager::SetValue("tw_crypto_user_id", "0");
 			if (gui_startPage("decrypt", 1, 1) != 0) {
 				LOGERR("Failed to start decrypt GUI page.\n");
 			} else {
