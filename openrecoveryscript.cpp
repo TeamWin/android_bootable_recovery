@@ -395,8 +395,17 @@ int OpenRecoveryScript::run_script_file(void) {
 				if (ret_val != 0)
 					ret_val = 1; // failure
 			} else if (strcmp(command, "decrypt") == 0) {
+				// twrp cmd cannot decrypt a password with space, should decrypt on gui
 				if (*value) {
-					ret_val = PartitionManager.Decrypt_Device(value);
+					string tmp = value;
+					std::vector<string> args = TWFunc::Split_String(tmp, " ");
+
+					string pass = parts[0];
+					string userid = "0";
+					if (parts.size() > 1)
+						userid = parts[1];
+
+					ret_val = PartitionManager.Decrypt_Device(pass, atoi(userid.c_str()));
 					if (ret_val != 0)
 						ret_val = 1; // failure
 				} else {
@@ -641,26 +650,47 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 
 // this is called by the "twcmd" GUI action when a command is received via FIFO from the "twrp" command line tool
 void OpenRecoveryScript::Run_CLI_Command(const char* command) {
-	if (strlen(command) > 11 && strncmp(command, "runscript", 9) == 0) {
-		const char* filename = command + 10;
-		if (OpenRecoveryScript::copy_script_file(filename) == 0) {
-			LOGINFO("Unable to copy script file\n");
+	string tmp = command;
+	std::vector<string> parts = TWFunc::Split_String(tmp, " "); // pats[0] is cmd, parts[1...] is args
+	string cmd_str = parts[0];
+
+	if (cmd_str == "runscript") {
+		if (parts.size() > 1) {
+			string filename = parts[1];
+			if (OpenRecoveryScript::copy_script_file(filename) == 0) {
+				LOGINFO("Unable to copy script file\n");
+			} else {
+				OpenRecoveryScript::run_script_file();
+			}
 		} else {
-			OpenRecoveryScript::run_script_file();
+			LOGINFO("Missing parameter: script file name\n");
 		}
-	} else if (strlen(command) > 5 && strncmp(command, "get", 3) == 0) {
-		const char* varname = command + 4;
-		string value;
-		DataManager::GetValue(varname, value);
-		gui_print("%s = %s\n", varname, value.c_str());
-	} else if (strlen(command) > 9 && strncmp(command, "decrypt", 7) == 0) {
-		const char* pass = command + 8;
-		gui_msg("decrypt_cmd=Attempting to decrypt data partition via command line.");
-		if (PartitionManager.Decrypt_Device(pass) == 0) {
-			// set_page_done = 1;  // done by singleaction_page anyway
-			std::string orsFile = TWFunc::get_cache_dir() + "/openrecoveryscript";
-			if (TWFunc::Path_Exists(orsFile)) {
-				Run_OpenRecoveryScript_Action();
+	} else if (cmd_str == "get") {
+		if (parts.size() > 1) {
+			string varname = parts[1];
+			string value;
+			DataManager::GetValue(varname, value);
+			gui_print("%s = %s\n", varname.c_str(), value.c_str());
+		} else {
+			LOGINFO("Missing parameter: var name\n");
+		}
+	} else if (cmd_str == "decrypt") {
+		// twrp cmd cannot decrypt a password with space, should decrypt on gui
+		if (parts.size() == 1) {
+			gui_err("no_pwd=No password provided.");
+		} else {
+			string pass = parts[1];
+			string userid = "0";
+			if (parts.size() > 2)
+				userid = parts[2];
+
+			gui_msg("decrypt_cmd=Attempting to decrypt data partition or user data via command line.");
+			if (PartitionManager.Decrypt_Device(pass, atoi(userid.c_str())) == 0) {
+				// set_page_done = 1;  // done by singleaction_page anyway
+				std::string orsFile = TWFunc::get_cache_dir() + "/openrecoveryscript";
+				if (TWFunc::Path_Exists(orsFile)) {
+					Run_OpenRecoveryScript_Action();
+				}
 			}
 		}
 	} else if (OpenRecoveryScript::Insert_ORS_Command(command)) {
