@@ -25,8 +25,70 @@
 
 #include <pthread.h>
 #include <algorithm>
+<<<<<<< HEAD   (c1bb76 Removing fake error: E: recv error on uevent)
 #include <string>
 #include "truetype.hpp"
+=======
+
+#define STRING_CACHE_MAX_ENTRIES 400
+#define STRING_CACHE_TRUNCATE_ENTRIES 150
+
+extern unsigned int gr_rotation;
+
+typedef struct
+{
+    int size;
+    int dpi;
+    char *path;
+} TrueTypeFontKey;
+
+typedef struct
+{
+    int type;
+    int refcount;
+    int size;
+    int dpi;
+    int max_height;
+    int base;
+    FT_Face face;
+    Hashmap *glyph_cache;
+    Hashmap *string_cache;
+    struct StringCacheEntry *string_cache_head;
+    struct StringCacheEntry *string_cache_tail;
+    pthread_mutex_t mutex;
+    TrueTypeFontKey *key;
+} TrueTypeFont;
+
+typedef struct
+{
+    FT_BBox bbox;
+    FT_BitmapGlyph glyph;
+} TrueTypeCacheEntry;
+
+typedef struct
+{
+    char *text;
+    int max_width;
+} StringCacheKey;
+
+struct StringCacheEntry
+{
+    GGLSurface surface;
+    int rendered_bytes; // number of bytes from C string rendered, not number of UTF8 characters!
+    StringCacheKey *key;
+    struct StringCacheEntry *prev;
+    struct StringCacheEntry *next;
+};
+
+typedef struct StringCacheEntry StringCacheEntry;
+
+typedef struct
+{
+    FT_Library ft_library;
+    Hashmap *fonts;
+    pthread_mutex_t mutex;
+} FontData;
+>>>>>>> CHANGE (82efb4 Choose hwrotation at runtime)
 
 static FontData font_data = {
 	.ft_library = NULL,
@@ -568,6 +630,7 @@ int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
 		return -1;
 	}
 
+<<<<<<< HEAD   (c1bb76 Removing fake error: E: recv error on uevent)
 #if TW_ROTATION != 0
 	// Do not perform relatively expensive operation if not needed
 	GGLSurface string_surface_rotated;
@@ -582,6 +645,22 @@ int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
  	string_surface_rotated.data    = (GGLubyte*) malloc(string_surface_rotated.stride * string_surface_rotated.height * 1);
  	surface_ROTATION_transform((gr_surface) &string_surface_rotated, (const gr_surface) &e->surface, 1);
 #endif
+=======
+    GGLSurface string_surface_rotated;
+    if (gr_rotation != 0) {
+        // Do not perform relatively expensive operation if not needed
+        string_surface_rotated.version = sizeof(string_surface_rotated);
+        // Skip the **(gr_rotation == 0)** || (gr_rotation == 180) check
+        // because we are under a gr_rotation != 0 conditional compilation statement
+        string_surface_rotated.width   = (gr_rotation == 180) ? e->surface.width  : e->surface.height;
+        string_surface_rotated.height  = (gr_rotation == 180) ? e->surface.height : e->surface.width;
+        string_surface_rotated.stride  = string_surface_rotated.width;
+        string_surface_rotated.format  = e->surface.format;
+        // e->surface.format is GGL_PIXEL_FORMAT_A_8 (grayscale)
+        string_surface_rotated.data    = (GGLubyte*) malloc(string_surface_rotated.stride * string_surface_rotated.height * 1);
+        surface_ROTATION_transform((gr_surface) &string_surface_rotated, (const gr_surface) &e->surface, 1);
+    }
+>>>>>>> CHANGE (82efb4 Choose hwrotation at runtime)
 
 	int y_bottom = y + e->surface.height;
 	int res = e->rendered_bytes;
@@ -596,12 +675,21 @@ int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
 		}
 	}
 
+<<<<<<< HEAD   (c1bb76 Removing fake error: E: recv error on uevent)
 	// Figuring out display coordinates works for TW_ROTATION == 0 too,
 	// and isn't as expensive as allocating and rotating another surface,
 	// so we do this anyway.
 	int x0_disp, y0_disp, x1_disp, y1_disp;
 	int l_disp, r_disp, t_disp, b_disp;
+=======
+    // Figuring out display coordinates works for gr_rotation == 0 too,
+    // and isn't as expensive as allocating and rotating another surface,
+    // so we do this anyway.
+    int x0_disp, y0_disp, x1_disp, y1_disp;
+    int l_disp, r_disp, t_disp, b_disp;
+>>>>>>> CHANGE (82efb4 Choose hwrotation at runtime)
 
+<<<<<<< HEAD   (c1bb76 Removing fake error: E: recv error on uevent)
 	x0_disp = ROTATION_X_DISP(x, y, gr_draw);
 	y0_disp = ROTATION_Y_DISP(x, y, gr_draw);
 	x1_disp = ROTATION_X_DISP(x + e->surface.width, y_bottom, gr_draw);
@@ -610,7 +698,18 @@ int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
 	r_disp = std::max(x0_disp, x1_disp);
 	t_disp = std::min(y0_disp, y1_disp);
 	b_disp = std::max(y0_disp, y1_disp);
+=======
+    x0_disp = ROTATION_X_DISP(x, y, gr_draw->width);
+    y0_disp = ROTATION_Y_DISP(x, y, gr_draw->height);
+    x1_disp = ROTATION_X_DISP(x + e->surface.width, y_bottom, gr_draw->width);
+    y1_disp = ROTATION_Y_DISP(x + e->surface.width, y_bottom, gr_draw->height);
+    l_disp = std::min(x0_disp, x1_disp);
+    r_disp = std::max(x0_disp, x1_disp);
+    t_disp = std::min(y0_disp, y1_disp);
+    b_disp = std::max(y0_disp, y1_disp);
+>>>>>>> CHANGE (82efb4 Choose hwrotation at runtime)
 
+<<<<<<< HEAD   (c1bb76 Removing fake error: E: recv error on uevent)
 #if TW_ROTATION != 0
 	gl->bindTexture(gl, &string_surface_rotated);
 #else
@@ -619,17 +718,35 @@ int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
 	gl->texEnvi(gl, GGL_TEXTURE_ENV, GGL_TEXTURE_ENV_MODE, GGL_REPLACE);
 	gl->texGeni(gl, GGL_S, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);
 	gl->texGeni(gl, GGL_T, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);
+=======
+    if (gr_rotation != 0) {
+        gl->bindTexture(gl, &string_surface_rotated);
+    } else {
+        gl->bindTexture(gl, &e->surface);
+    }
+    gl->texEnvi(gl, GGL_TEXTURE_ENV, GGL_TEXTURE_ENV_MODE, GGL_REPLACE);
+    gl->texGeni(gl, GGL_S, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);
+    gl->texGeni(gl, GGL_T, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);
+>>>>>>> CHANGE (82efb4 Choose hwrotation at runtime)
 
 	gl->enable(gl, GGL_TEXTURE_2D);
 	gl->texCoord2i(gl, -l_disp, -t_disp);
 	gl->recti(gl, l_disp, t_disp, r_disp, b_disp);
 	gl->disable(gl, GGL_TEXTURE_2D);
 
+<<<<<<< HEAD   (c1bb76 Removing fake error: E: recv error on uevent)
 #if TW_ROTATION != 0
 	free(string_surface_rotated.data);
 #endif
 	pthread_mutex_unlock(&font->mutex);;
 	return res;
+=======
+    if (gr_rotation != 0)
+        free(string_surface_rotated.data);
+
+    pthread_mutex_unlock(&font->mutex);
+    return res;
+>>>>>>> CHANGE (82efb4 Choose hwrotation at runtime)
 }
 
 int twrpTruetype::gr_ttf_getMaxFontHeight(void *font) {
