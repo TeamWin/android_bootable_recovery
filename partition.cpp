@@ -45,7 +45,11 @@
 #include "gui/gui.hpp"
 #include "adbbu/libtwadbbu.hpp"
 #ifdef TW_INCLUDE_CRYPTO
+	#ifdef OF_USE_LEGACY_CRYPTO
+	#include "crypto/lollipop/cryptfs.h"
+	#else
 	#include "crypto/fde/cryptfs.h"
+	#endif
 	#ifdef TW_INCLUDE_FBE
 		#include "crypto/ext4crypt/Decrypt.h"
 	#endif

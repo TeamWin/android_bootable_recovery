@@ -102,10 +102,10 @@ Keymaster::Keymaster() {
     mDevice = ::android::hardware::keymaster::V3_0::IKeymasterDevice::getService();
 }
 
-/*bool Keymaster::generateKey(const AuthorizationSet& inParams, std::string* key) {
+bool Keymaster::generateKey(const AuthorizationSet& inParams, std::string* key) {
     ErrorCode km_error;
     auto hidlCb = [&] (ErrorCode ret, const hidl_vec<uint8_t>& keyBlob,
-            const KeyCharacteristics& /*ignored* /) {
+            const KeyCharacteristics& ) {
         km_error = ret;
         if (km_error != ErrorCode::OK) return;
         if (key)
@@ -122,7 +122,7 @@ Keymaster::Keymaster() {
         return false;
     }
     return true;
-}*/
+}
 
 bool Keymaster::deleteKey(const std::string& key) {
 	LOG(ERROR) << "NOT deleting key in TWRP\n";
@@ -203,7 +203,6 @@ bool Keymaster::isSecure() {
 
 using namespace ::android::vold;
 
-/*
 int keymaster_compatibility_cryptfs_scrypt() {
     Keymaster dev;
     if (!dev) {
@@ -212,9 +211,8 @@ int keymaster_compatibility_cryptfs_scrypt() {
     }
     return dev.isSecure();
 }
-*/
 
-/*int keymaster_create_key_for_cryptfs_scrypt(uint32_t rsa_key_size,
+int keymaster_create_key_for_cryptfs_scrypt(uint32_t rsa_key_size,
                                             uint64_t rsa_exponent,
                                             uint32_t ratelimit,
                                             uint8_t* key_buffer,
@@ -261,7 +259,7 @@ int keymaster_compatibility_cryptfs_scrypt() {
 
     std::copy(key.data(), key.data() + key.size(), key_buffer);
     return 0;
-}*/
+}
 
 int keymaster_sign_object_for_cryptfs_scrypt(const uint8_t* key_blob,
                                              size_t key_blob_size,

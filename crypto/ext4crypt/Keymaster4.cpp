@@ -244,7 +244,6 @@ bool Keymaster::isSecure() {
 
 using namespace ::android::vold;
 
-/*
 int keymaster_compatibility_cryptfs_scrypt() {
     Keymaster dev;
     if (!dev) {
@@ -253,7 +252,6 @@ int keymaster_compatibility_cryptfs_scrypt() {
     }
     return dev.isSecure();
 }
-*/
 
 static bool write_string_to_buf(const std::string& towrite, uint8_t* buffer, uint32_t buffer_size,
                                 uint32_t* out_size) {
@@ -281,7 +279,6 @@ static km::AuthorizationSet keyParams(uint32_t rsa_key_size, uint64_t rsa_expone
         .Authorization(km::TAG_MIN_SECONDS_BETWEEN_OPS, ratelimit);
 }
 
-/*
 int keymaster_create_key_for_cryptfs_scrypt(uint32_t rsa_key_size, uint64_t rsa_exponent,
                                             uint32_t ratelimit, uint8_t* key_buffer,
                                             uint32_t key_buffer_size, uint32_t* key_out_size) {
@@ -298,7 +295,6 @@ int keymaster_create_key_for_cryptfs_scrypt(uint32_t rsa_key_size, uint64_t rsa_
     if (!write_string_to_buf(key, key_buffer, key_buffer_size, key_out_size)) return -1;
     return 0;
 }
-*/
 
 int keymaster_upgrade_key_for_cryptfs_scrypt(uint32_t rsa_key_size, uint64_t rsa_exponent,
                                              uint32_t ratelimit, const uint8_t* key_blob,

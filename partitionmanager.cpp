@@ -72,7 +72,11 @@ extern "C" {
 }
 
 #ifdef TW_INCLUDE_CRYPTO
+	#ifdef OF_USE_LEGACY_CRYPTO
+	#include "crypto/lollipop/cryptfs.h"
+	#else
 	#include "crypto/fde/cryptfs.h"
+	#endif
 	#include "gui/rapidxml.hpp"
 	#include "gui/pages.hpp"
 	#ifdef TW_INCLUDE_FBE
