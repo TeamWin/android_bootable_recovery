@@ -298,6 +298,9 @@ endif
 ifeq ($(TW_HAS_EDL_MODE), true)
     LOCAL_CFLAGS += -DTW_HAS_EDL_MODE
 endif
+ifeq ($(TW_SKIP_COMPATIBILITY_CHECK), true)
+    LOCAL_CFLAGS += -DTW_SKIP_COMPATIBILITY_CHECK
+endif
 ifeq ($(TW_NO_SCREEN_BLANK), true)
     LOCAL_CFLAGS += -DTW_NO_SCREEN_BLANK
 endif

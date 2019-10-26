@@ -718,6 +718,12 @@ void DataManager::SetDefaultValues()
 #else
 	mConst.SetValue(TW_HAS_INJECTTWRP, "0");
 #endif
+#ifdef TW_SKIP_COMPATIBILITY_CHECK
+	printf("TW_SKIP_COMPATIBILITY_CHECK := true\n");
+	mConst.SetValue(TW_SKIP_COMPATIBILITY, "1");
+#else
+	mConst.SetValue(TW_SKIP_COMPATIBILITY, "0");
+#endif
 #ifdef TW_HAS_DOWNLOAD_MODE
 	printf("TW_HAS_DOWNLOAD_MODE := true\n");
 	mConst.SetValue(TW_DOWNLOAD_MODE, "1");
