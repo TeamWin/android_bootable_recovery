@@ -403,6 +403,12 @@
 			</checkbox>
 
 			<checkbox>
+				<placement x="%indent%" y="row15_y"/>
+				<text>{@zip_err_compatibility=Skip Treble compatibility error}</text>
+				<data variable="tw_skip_compatibility"/>
+			</checkbox>
+
+			<checkbox>
 				<condition var1="tw_has_injecttwrp" var2="1"/>
 				<placement x="%indent%" y="%row15_y%"/>
 				<text>{@inject_twrp_chk=Inject TWRP after install}</text>
@@ -3185,6 +3191,9 @@
 				</listitem>
 				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
 					<data variable="tw_install_reboot"/>
+				</listitem>
+				<listitem name="{@zip_err_compatibility=Skip Treble compatibility error}">
+					<data variable="tw_skip_compatibility"/>
 				</listitem>
 				<listitem name="{@use_rmrf_chk=Use rm -rf instead of formatting}">
 					<data variable="tw_rm_rf"/>
