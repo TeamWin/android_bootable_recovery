@@ -224,7 +224,7 @@
 		<string name="enc_enabled">ingeschakeld</string>
 		<string name="enable_backup_comp_chk">Compressie inschakelen</string>
 		<string name="skip_digest_backup_chk" version="2">Genereren van digest tijdens back-up overslaan</string>
-		<string name="disable_backup_space_chk">Controle vrije ruimte uitschakelen</string>
+		<string name="disable_backup_space_chk" version="2">Controle vrije ruimte uitschakelen</string>
 		<string name="current_boot_slot">Huidige slot: %tw_active_slot%</string>
 		<string name="boot_slot_a">Slot A</string>
 		<string name="boot_slot_b">Slot B</string>
@@ -387,8 +387,8 @@
 		<string name="set_language_btn">Taal instellen</string>
 		<string name="advanced_hdr">Geavanceerd</string>
 		<string name="copy_log_confirm">Logbestand naar SD-kaart kopiëren?</string>
-		<string name="copying_log">Log naar SD-kaart kopiëren...</string>
-		<string name="copy_log_complete">Kopiëren logbestand voltooid</string>
+		<string name="copying_log" version="2">Log naar SD-kaart kopiëren...</string>
+		<string name="copy_log_complete" version="2">Kopiëren logbestand voltooid</string>
 		<string name="fix_context_btn">Contexten repareren</string>
 		<string name="part_sd_btn">SD-kaart partitioneren</string>
 		<string name="part_sd_s_btn">SD-kaart</string>
@@ -711,7 +711,7 @@
 		<string name="change_fs_err">Fout tijdens het wijzigen van het bestandssysteem.</string>
 		<string name="theme_ver_err">Versie maatwerkthema past niet bij deze versie van TWRP. Standaardthema wordt gebruikt.</string>
 		<string name="up_a_level">(Niveau omhoog)</string>
-		<string name="install_reboot">Herstarten over %tw_sleep% seconden</string>
+		<string name="install_reboot" version="2">Herstarten over %tw_sleep% seconden</string>
 		<string name="adbbackup_error">Fout bij ADB-back-up. Afgebroken..."</string>
 		<string name="adbbackup_control_error">Kan niet schrijven naar adb-beheerskanaal</string>
 		<string name="twrp_adbbu_option">--twrp optie vereist voor inschakelen twrp adb-backup</string>
