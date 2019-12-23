@@ -578,7 +578,7 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
 endif
 
 ifeq ($(TW_INCLUDE_REPACKTOOLS), true)
-    ifeq ($(wildcard external/magisk-prebuilt/Android.mk),)
+    ifeq ($(wildcard external/magisk-prebuilt/magiskboot/Android.mk),)
         $(warning Magisk repacking tools not found!)
         $(warning Please place https://github.com/TeamWin/external_magisk-prebuilt)
         $(warning into external/magisk-prebuilt)
