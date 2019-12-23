@@ -585,3 +585,13 @@ ifeq ($(TW_INCLUDE_REPACKTOOLS), true)
         $(error magiskboot prebuilts not present; exiting)
     endif
 endif
+
+ifeq ($(TW_USE_SYSTEM_FINGERPRINT), true)
+    ifeq ($(wildcard external/magisk-prebuilt/resetprop/Android.mk),)
+        $(warning Magisk resetprop tool not found!)
+        $(warning Please place https://github.com/TeamWin/external_magisk-prebuilt)
+        $(warning into external/magisk-prebuilt)
+        $(error resetprop prebuilts not present; exiting)
+    endif
+endif
+
