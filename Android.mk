@@ -522,9 +522,15 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
 	    sed 's/\(namespace.default.search.paths\)\s\{1,\}=/namespace.default.search.paths  = \/sbin\n\1 +=/' \
                 $(TARGET_OUT_ETC)/ld.config.vndk_lite.txt > $(TARGET_RECOVERY_ROOT_OUT)/sbin/ld.config.txt;
     else
+        LD_CONFIG_FILENAME := ld.config.txt
+        ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
+            ifneq ($(BOARD_VNDK_VERSION),)
+                LD_CONFIG_FILENAME := ld.config.${PLATFORM_VNDK_VERSION}.txt
+            endif
+        endif
         LOCAL_POST_INSTALL_CMD += \
-	    sed 's/\(namespace.default.search.paths\)\s\{1,\}=/namespace.default.search.paths  = \/sbin\n\1 +=/' \
-                $(TARGET_OUT_ETC)/ld.config.txt > $(TARGET_RECOVERY_ROOT_OUT)/sbin/ld.config.txt;
+            sed 's/\(namespace.default.search.paths\)\s\{1,\}=/namespace.default.search.paths  = \/sbin\n\1 +=/' \
+                $(TARGET_OUT_ETC)/${LD_CONFIG_FILENAME} > $(TARGET_RECOVERY_ROOT_OUT)/sbin/ld.config.txt;
     endif
 endif
 
