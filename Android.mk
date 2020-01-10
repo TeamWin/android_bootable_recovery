@@ -151,6 +151,10 @@ else
     LOCAL_SHARED_LIBRARIES += libcrypto
 endif
 
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 23; echo $$?),0)
+    LOCAL_SHARED_LIBRARIES += libbase
+endif
+
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 24; echo $$?),0)
     LOCAL_SHARED_LIBRARIES += libbase
 endif
