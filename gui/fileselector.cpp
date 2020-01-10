@@ -20,6 +20,12 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <algorithm>
+#include <vector>
+#ifdef __ANDROID_API_N__
+#include <android-base/strings.h>
+#else
+#include <base/strings.h>
+#endif
 
 extern "C" {
 #include "../twcommon.h"
@@ -279,11 +285,16 @@ int GUIFileSelector::GetFileList(const std::string folder)
 			if (mShowNavFolders || (data.fileName != "." && data.fileName != ".."))
 				mFolderList.push_back(data);
 		} else if (data.fileType == DT_REG || data.fileType == DT_LNK || data.fileType == DT_BLK) {
-			if (mExtn.empty() || (data.fileName.length() > mExtn.length() && data.fileName.substr(data.fileName.length() - mExtn.length()) == mExtn)) {
-				if (mExtn == ".ab" && twadbbu::Check_ADB_Backup_File(path))
-					mFolderList.push_back(data);
-				else
-					mFileList.push_back(data);
+			std::vector<std::string> mExtnResults = android::base::Split(mExtn, ";");
+			for (const std::string& mExtnElement : mExtnResults)
+			{
+				std::string mExtnName = android::base::Trim(mExtnElement);
+				if (mExtnName.empty() || (data.fileName.length() > mExtnName.length() && data.fileName.substr(data.fileName.length() - mExtnName.length()) == mExtnName)) {
+					if (mExtnName == ".ab" && twadbbu::Check_ADB_Backup_File(path))
+						mFolderList.push_back(data);
+					else
+						mFileList.push_back(data);
+				}
 			}
 		}
 	}
