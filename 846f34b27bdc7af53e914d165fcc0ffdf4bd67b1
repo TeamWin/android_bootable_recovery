@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "415c4e6c_36524745",
+        "filename": "partition.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-01-11T21:34:40Z",
+      "side": 1,
+      "message": "Please remove whitespace.",
+      "revId": "846f34b27bdc7af53e914d165fcc0ffdf4bd67b1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
