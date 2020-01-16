@@ -29,6 +29,9 @@ on init
 
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
+    export ANDROID_RUNTIME_ROOT /apex/com.android.runtime
+    export ANDROID_TZDATA_ROOT /apex/com.android.tzdata
+    export BOOTCLASSPATH /apex/com.android.runtime/javalib/core-oj.jar:/apex/com.android.runtime/javalib/core-libart.jar:/apex/com.android.runtime/javalib/okhttp.jar:/apex/com.android.runtime/javalib/bouncycastle.jar:/apex/com.android.runtime/javalib/apache-xml.jar:/apex/com.android.conscrypt/javalib/conscrypt.jar
     export EXTERNAL_STORAGE /sdcard
 
     mount cgroup none /acct cpuacct
@@ -42,6 +45,11 @@ on init
 
     chown root shell /tmp
     chmod 0775 /tmp
+
+    mkdir /apex
+    symlink /system/apex/com.android.conscrypt /apex/com.android.conscrypt
+    symlink /system/apex/com.android.runtime.release /apex/com.android.runtime
+    symlink /system/apex/com.android.tzdata /apex/com.android.tzdata
 
     write /proc/sys/kernel/panic_on_oops 1
     write /proc/sys/vm/max_map_count 1000000
