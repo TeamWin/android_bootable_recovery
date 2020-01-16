@@ -1,0 +1,108 @@
+dir.twrp = /sbin
+dir.twrp = /vendor
+
+dir.system = /system
+dir.system = /system_root
+
+[twrp]
+namespace.default.isolated = false
+
+namespace.default.search.paths  = /sbin
+namespace.default.search.paths += /vendor/${LIB}
+
+[system]
+additional.namespaces = runtime,conscrypt
+
+###############################################################################
+# "default" namespace
+#
+# Framework-side code runs in this namespace. Libs from /vendor partition
+# can't be loaded in this namespace.
+###############################################################################
+namespace.default.isolated = true
+
+namespace.default.search.paths  = /system/${LIB}
+namespace.default.search.paths += /system_root/system/${LIB}
+
+# We can't have entire /system/${LIB} as permitted paths because doing so
+# makes it possible to load libs in /system/${LIB}/vndk* directories by
+# their absolute paths (e.g. dlopen("/system/lib/vndk/libbase.so");).
+# VNDK libs are built with previous versions of Android and thus must not be
+# loaded into this namespace where libs built with the current version of
+# Android are loaded. Mixing the two types of libs in the same namespace can
+# cause unexpected problem.
+namespace.default.permitted.paths  = /system/${LIB}/drm
+namespace.default.permitted.paths += /system_root/system/${LIB}/drm
+namespace.default.permitted.paths += /system/${LIB}/extractors
+namespace.default.permitted.paths += /system_root/system/${LIB}/extractors
+namespace.default.permitted.paths += /system/${LIB}/hw
+namespace.default.permitted.paths += /system_root/system/${LIB}/hw
+# These are where odex files are located. libart has to be able to dlopen the files
+namespace.default.permitted.paths += /system/framework
+namespace.default.permitted.paths += /system_root/system/framework
+namespace.default.permitted.paths += /system/app
+namespace.default.permitted.paths += /system_root/system/app
+namespace.default.permitted.paths += /system/priv-app
+namespace.default.permitted.paths += /system_root/system/priv-app
+namespace.default.permitted.paths += /data
+namespace.default.permitted.paths += /system/apex/com.android.runtime.release/${LIB}/bionic
+namespace.default.permitted.paths += /system_root/system/apex/com.android.runtime.release/${LIB}/bionic
+namespace.default.permitted.paths += /system/${LIB}/bootstrap
+namespace.default.permitted.paths += /system_root/system/${LIB}/bootstrap
+
+# Keep in sync with ld.config.txt in the com.android.runtime APEX.
+# If a shared library or an executable requests a shared library that
+# cannot be loaded into the default namespace, the dynamic linker tries
+# to load the shared library from the runtime namespace. And then, if the
+# shared library cannot be loaded from the runtime namespace either, the
+# dynamic linker tries to load the shared library from the resolv namespace.
+# Finally, if all attempts fail, the dynamic linker returns an error.
+namespace.default.links = runtime
+# Visible because some libraries are dlopen'ed, e.g. libopenjdk is dlopen'ed by
+# libart.
+namespace.default.visible = true
+namespace.default.link.runtime.shared_libs  = libdexfile_external.so
+# libicuuc.so and libicui18n.so are kept for app compat reason. http://b/130788466
+namespace.default.link.runtime.shared_libs += libicui18n.so
+namespace.default.link.runtime.shared_libs += libicuuc.so
+namespace.default.link.runtime.shared_libs += libnativebridge.so
+namespace.default.link.runtime.shared_libs += libnativehelper.so
+namespace.default.link.runtime.shared_libs += libnativeloader.so
+namespace.default.link.runtime.shared_libs += libandroidicu.so
+
+# TODO(b/122876336): Remove libpac.so once it's migrated to Webview
+namespace.default.link.runtime.shared_libs += libpac.so
+
+###############################################################################
+# "runtime" APEX namespace
+#
+# This namespace exposes externally accessible libraries from the Runtime APEX.
+###############################################################################
+namespace.runtime.isolated = true
+namespace.runtime.visible = true
+
+# Keep in sync with ld.config.txt in the com.android.runtime APEX.
+namespace.runtime.search.paths  = /system/apex/com.android.runtime.release/${LIB}
+namespace.runtime.search.paths += /system_root/system/apex/com.android.runtime.release/${LIB}
+namespace.runtime.links = default
+# TODO(b/119867084): Restrict to Bionic dlopen dependencies and PALette library
+# when it exists.
+namespace.runtime.link.default.allow_all_shared_libs = true
+
+###############################################################################
+# "conscrypt" APEX namespace
+#
+# This namespace is for libraries within the conscrypt APEX.
+###############################################################################
+namespace.conscrypt.isolated = true
+namespace.conscrypt.visible = true
+
+# Keep in sync with ld.config.txt in the com.android.runtime APEX.
+namespace.conscrypt.search.paths  = /system/apex/com.android.conscrypt/${LIB}
+namespace.conscrypt.search.paths += /system_root/system/apex/com.android.conscrypt/${LIB}
+namespace.conscrypt.links = runtime,default
+namespace.conscrypt.link.runtime.shared_libs  = libandroidio.so
+namespace.conscrypt.link.default.shared_libs  = libc.so
+namespace.conscrypt.link.default.shared_libs += libm.so
+namespace.conscrypt.link.default.shared_libs += libdl.so
+namespace.conscrypt.link.default.shared_libs += liblog.so

@@ -435,6 +435,18 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 26; echo $$?),0)
     include $(BUILD_PREBUILT)
 endif
 
+#ld.config.txt
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
+    include $(CLEAR_VARS)
+    LOCAL_MODULE := tw.ld.config.txt
+    LOCAL_MODULE_TAGS := eng
+    LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+    LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+    LOCAL_MODULE_STEM := ld.config.txt
+    LOCAL_SRC_FILES := $(LOCAL_MODULE_STEM)
+    include $(BUILD_PREBUILT)
+endif
+
 ifeq ($(BOARD_HAS_NO_REAL_SDCARD),)
 	ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
 	    #prebuilt, static sgdisk
