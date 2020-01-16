@@ -67,7 +67,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
     LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 
-    LOCAL_SRC_FILES := init.recovery.ldconfig.rc
+    LOCAL_SRC_FILES := init.recovery.ldconfig26.rc
     include $(BUILD_PREBUILT)
 else
     include $(CLEAR_VARS)
@@ -77,6 +77,15 @@ else
     LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 
     LOCAL_SRC_FILES := init.recovery.hlthchrg25.rc
+    include $(BUILD_PREBUILT)
+
+    include $(CLEAR_VARS)
+    LOCAL_MODULE := init.recovery.ldconfig.rc
+    LOCAL_MODULE_TAGS := eng
+    LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+    LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+
+    LOCAL_SRC_FILES := init.recovery.ldconfig25.rc
     include $(BUILD_PREBUILT)
 endif
 

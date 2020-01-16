@@ -1,0 +1,2 @@
+on init
+    export LD_LIBRARY_PATH /sbin
