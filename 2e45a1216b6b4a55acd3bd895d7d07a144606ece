@@ -22,6 +22,30 @@
       "revId": "2e45a1216b6b4a55acd3bd895d7d07a144606ece",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11b53331_c9068946",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2836,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2020-01-23T17:28:45Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t there be an else here?\n\nit will still work as else if there will be false default condition will be executed",
+      "parentUuid": "1aac08af_053ad88c",
+      "range": {
+        "startLine": 2836,
+        "startChar": 10,
+        "endLine": 2836,
+        "endChar": 16
+      },
+      "revId": "2e45a1216b6b4a55acd3bd895d7d07a144606ece",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
