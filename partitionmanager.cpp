@@ -243,6 +243,10 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 			andsec_partition = (*iter);
 		else
 			(*iter)->Has_Android_Secure = false;
+
+		if ((*iter)->Mount_Point == "/" || (*iter)->Mount_Point == "/system" || (*iter)->Mount_Point == "/system_root") {
+			(*iter)->Mount_Point = Get_Android_Root_Path();
+		}
 	}
 
 	if (!datamedia && !settings_partition && Find_Partition_By_Path("/sdcard") == NULL && Find_Partition_By_Path("/internal_sd") == NULL && Find_Partition_By_Path("/internal_sdcard") == NULL && Find_Partition_By_Path("/emmc") == NULL) {
