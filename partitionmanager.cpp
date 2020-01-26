@@ -111,7 +111,7 @@ TWPartitionManager::TWPartitionManager(void) {
 #endif
 }
 
-int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error) {
+int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool Sar_Detect) {
 	FILE *fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
 	TWPartition* settings_partition = NULL;
@@ -245,9 +245,16 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 			(*iter)->Has_Android_Secure = false;
 
 		if ((*iter)->Mount_Point == "/" || (*iter)->Mount_Point == "/system" || (*iter)->Mount_Point == "/system_root") {
-			(*iter)->Mount_Point = Get_Android_Root_Path();
-			(*iter)->Backup_Path = (*iter)->Mount_Point;
-			(*iter)->Storage_Path = (*iter)->Mount_Point;
+			if (Sar_Detect) {
+				(*iter)->Mount_Point = "/s";
+				(*iter)->Mount_Read_Only = true;
+				return true;
+			}
+			else {
+				(*iter)->Mount_Point = Get_Android_Root_Path();
+				(*iter)->Backup_Path = (*iter)->Mount_Point;
+				(*iter)->Storage_Path = (*iter)->Mount_Point;
+			}
 		}
 	}
 
@@ -2837,7 +2844,7 @@ string TWPartitionManager::Get_Active_Slot_Display() {
 }
 
 string TWPartitionManager::Get_Android_Root_Path() {
-	if (property_get_bool("ro.build.system_root_image", false))
+	if (property_get_bool("ro.twrp.sar", false))
 		return "/system_root";
 	return "/system";
 }
