@@ -117,8 +117,36 @@ int main(int argc, char **argv) {
 	if (!TWFunc::Path_Exists(fstab_filename)) {
 		fstab_filename = "/etc/recovery.fstab";
 	}
+
+	// Begin SAR detection
+	TWPartitionManager TmpPartitionManager;
+	printf("=> Processing %s for SAR-detection\n", fstab_filename.c_str());
+	if (!TmpPartitionManager.Process_Fstab(fstab_filename, 1, 1)) {
+		LOGERR("Failing out of recovery due to problem with fstab.\n");
+		return -1;
+	}
+
+	mkdir("/s", 0755);
+	TmpPartitionManager.Mount_By_Path("/s", false);
+	if (TWFunc::Path_Exists("/s/build.prop")) {
+		LOGINFO("Non-SAR System detected\n");
+		property_set("ro.twrp.sar", "false");
+		rmdir("/system_root");
+	}
+	else if (TWFunc::Path_Exists("/s/system/build.prop")) {
+		LOGINFO("SAR System detected\n");
+		property_set("ro.twrp.sar", "true");
+	}
+	else property_set("ro.twrp.sar", property_get_bool("ro.build.system_root_image", false)?"true":"false");
+
+	TmpPartitionManager.UnMount_By_Path("/s", false);
+	rmdir("/s");
+
+	TWFunc::check_and_run_script("/sbin/sarsetup.sh", "boot");
+	// End SAR detection
+
 	printf("=> Processing %s\n", fstab_filename.c_str());
-	if (!PartitionManager.Process_Fstab(fstab_filename, 1)) {
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, 0)) {
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return -1;
 	}
