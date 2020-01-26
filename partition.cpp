@@ -1524,6 +1524,11 @@ bool TWPartition::Mount(bool Display_Error) {
 		string Command = "mount -o bind '" + Symlink_Path + "' '" + Symlink_Mount_Point + "'";
 		TWFunc::Exec_Cmd(Command);
 	}
+
+	if (Mount_Point == "/system_root") {
+		mount("/system_root/system", "/system", "auto", MS_BIND, NULL);
+	}
+
 	return true;
 }
 
@@ -1541,6 +1546,11 @@ bool TWPartition::UnMount(bool Display_Error) {
 		if (!Symlink_Mount_Point.empty())
 			umount(Symlink_Mount_Point.c_str());
 
+		if (Mount_Point == "/system_root") {
+			unlink("/system");
+			umount("/system");
+			mkdir("/system", 0755);
+		}
 		umount(Mount_Point.c_str());
 		if (Is_Mounted()) {
 			if (Display_Error)
