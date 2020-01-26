@@ -5543,6 +5543,7 @@
 			</checkbox>
 
 			<checkbox>
+				<condition var1="tw_ab_device" var2="0"/>
 				<placement x="%indent%" y="%row4a_y%"/>
 				<text>{@sideload_wipe_cache_chk=Wipe Cache}</text>
 				<data variable="tw_wipe_cache"/>
