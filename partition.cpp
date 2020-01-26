@@ -1524,6 +1524,12 @@ bool TWPartition::Mount(bool Display_Error) {
 		string Command = "mount -o bind '" + Symlink_Path + "' '" + Symlink_Mount_Point + "'";
 		TWFunc::Exec_Cmd(Command);
 	}
+
+	if (Mount_Point == "/system_root") {
+		rmdir("/system");
+		symlink("/system_root/system", "/system");
+	}
+
 	return true;
 }
 
@@ -1549,6 +1555,10 @@ bool TWPartition::UnMount(bool Display_Error) {
 				LOGINFO("Unable to unmount '%s'\n", Mount_Point.c_str());
 			return false;
 		} else {
+			if (Mount_Point == "/system_root") {
+				unlink("/system");
+				mkdir("/system", 0755);
+			}
 			return true;
 		}
 	} else {
