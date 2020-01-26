@@ -117,8 +117,53 @@ int main(int argc, char **argv) {
 	if (!TWFunc::Path_Exists(fstab_filename)) {
 		fstab_filename = "/etc/recovery.fstab";
 	}
+
+	// Begin SAR detection
+	TWPartitionManager * TmpPartitionManager = new TWPartitionManager;
+	printf("=> Processing %s for SAR-detection\n", fstab_filename.c_str());
+	if (!TmpPartitionManager->Process_Fstab(fstab_filename, 1, 1)) {
+		LOGERR("Failing out of recovery due to problem with fstab.\n");
+		return -1;
+	}
+
+	mkdir("/s", 0755);
+
+#ifdef AB_OTA_UPDATER
+	string fallback_sar = "true";
+#else
+	string fallback_sar = property_get_bool("ro.build.system_root_image", false)?"true":"false";
+#endif
+
+	if(TmpPartitionManager->Mount_By_Path("/s", false)){
+		if (TWFunc::Path_Exists("/s/build.prop")) {
+			LOGINFO("SAR-DETECT: Non-SAR System detected\n");
+			property_set("ro.twrp.sar", "false");
+			rmdir("/system_root");
+		}
+		else if (TWFunc::Path_Exists("/s/system/build.prop")) {
+			LOGINFO("SAR-DETECT: SAR System detected\n");
+			property_set("ro.twrp.sar", "true");
+		}
+		else{
+			LOGINFO("SAR-DETECT: No build.prop found, falling back to %s\n", fallback_sar=="true"?"SAR":"Non-SAR");
+			property_set("ro.twrp.sar", fallback_sar.c_str());
+		}
+		TmpPartitionManager->UnMount_By_Path("/s", false);
+	}
+	else{
+		LOGINFO("SAR-DETECT: Could not mount system partition, falling back to %s\n", fallback_sar=="true"?"SAR":"Non-SAR");
+		property_set("ro.twrp.sar", fallback_sar.c_str());
+	}
+
+	rmdir("/s");
+
+	delete TmpPartitionManager;
+
+	TWFunc::check_and_run_script("/sbin/sarsetup.sh", "boot");
+	// End SAR detection
+
 	printf("=> Processing %s\n", fstab_filename.c_str());
-	if (!PartitionManager.Process_Fstab(fstab_filename, 1)) {
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, 0)) {
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return -1;
 	}
