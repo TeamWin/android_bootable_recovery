@@ -28,6 +28,7 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <sys/mount.h>
 #include <unistd.h>
 
 #include <string.h>
@@ -440,6 +441,10 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 	} else {
 		if (Zip.EntryExists(AB_OTA)) {
 			LOGINFO("AB zip\n");
+			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
+			PartitionManager.Mount_By_Path("/vendor", true);
+			TWFunc::Exec_Cmd("cp -f /sbin/sh /tmp/sh");
+			mount("/tmp/sh", "/system/bin/sh", "auto", MS_BIND, NULL);
 			ret_val = Run_Update_Binary(path, &Zip, wipe_cache, AB_OTA_ZIP_TYPE);
 		} else {
 			if (Zip.EntryExists("ui.xml")) {
