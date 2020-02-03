@@ -440,6 +440,7 @@ int TWinstall_zip(const char* path, int* wipe_cache) {
 	} else {
 		if (Zip.EntryExists(AB_OTA)) {
 			LOGINFO("AB zip\n");
+			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
 			ret_val = Run_Update_Binary(path, &Zip, wipe_cache, AB_OTA_ZIP_TYPE);
 		} else {
 			if (Zip.EntryExists("ui.xml")) {
