@@ -107,6 +107,10 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
             endif
         endif
 
+        ifeq ($(TW_INCLUDE_RESETPROP), true)
+            LOCAL_CFLAGS += -DTW_INCLUDE_RESETPROP
+        endif
+
         LOCAL_SRC_FILES = vold_decrypt.cpp
         LOCAL_SHARED_LIBRARIES := libcutils
         include $(BUILD_STATIC_LIBRARY)
