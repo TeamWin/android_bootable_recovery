@@ -76,6 +76,12 @@ namespace {
 FILE *fp_kmsg = NULL;
 int sdkver = 20;
 
+#ifdef TW_INCLUDE_RESETPROP
+/* Resetprop Binary */
+#ifndef RESETPROP_BIN
+#define RESETPROP_BIN "/sbin/resetprop"
+#endif
+#endif
 
 /* Debugging Functions */
 #ifdef TW_CRYPTO_SYSTEM_VOLD_DEBUG
@@ -780,6 +786,83 @@ void Set_Needed_Properties(void) {
 	property_set("vendor.sys.listeners.registered", "false");
 }
 
+void Update_Patch_Level(void) {
+	char prop_value[PROPERTY_VALUE_MAX];
+
+	property_get("ro.build.version.release", prop_value, "");
+	std::string osver_orig = prop_value;
+	property_set("vold_decrypt.osver_orig", osver_orig.c_str());
+
+	property_get("ro.build.version.security_patch", prop_value, "");
+	std::string patchlevel_orig = prop_value;
+	property_set("vold_decrypt.patchlevel_orig", patchlevel_orig.c_str());
+
+	// keymaster requires Android version & patch level to match installed system
+	string sdkverstr = TWFunc::System_Property_Get("ro.build.version.sdk");
+	if (!sdkverstr.empty()) {
+		sdkver = atoi(sdkverstr.c_str());
+	}
+	if (sdkver <= 25) {
+		property_set("vold_decrypt.legacy_system", "true");
+	} else {
+		property_set("vold_decrypt.legacy_system", "false");
+	}
+
+	property_get("vold_decrypt.legacy_system", prop_value, "");
+	if (strcmp(prop_value, "true")) {
+		std::string osver = TWFunc::System_Property_Get("ro.build.version.release");
+		std::string patchlevel = TWFunc::System_Property_Get("ro.build.version.security_patch");
+		bool has_resetprop = false;
+		has_resetprop = TWFunc::Path_Exists(RESETPROP_BIN);
+		if (!has_resetprop) {
+			LOGERROR("Unable to find resetprop binary");
+			return;
+		} else {
+			TWFunc::Exec_Cmd("resetprop ro.build.version.release " + osver);
+			std::string sed_osver = "sed -i 's/ro.build.version.release=.*/ro.build.version.release=" + osver + "/g' /prop.default";
+			TWFunc::Exec_Cmd(sed_osver);
+			TWFunc::Exec_Cmd("resetprop ro.build.version.security_patch " + patchlevel);
+			std::string sed_patchlevel = "sed -i 's/ro.build.version.security_patch=.*/ro.build.version.security_patch=" + patchlevel + "/g' /prop.default";
+			TWFunc::Exec_Cmd(sed_patchlevel);
+			property_set("vold_decrypt.patched", "true");
+			return;
+		}
+	} else {
+		return;
+	}
+}
+
+void Revert_Patch_Level(void) {
+	char prop_value[PROPERTY_VALUE_MAX];
+
+	property_get("vold_decrypt.osver_orig", prop_value, "");
+	std::string osver_orig = prop_value;
+
+	property_get("vold_decrypt.patchlevel_orig", prop_value, "");
+	std::string patchlevel_orig = prop_value;
+
+	property_get("vold_decrypt.legacy_system", prop_value, "");
+	if (strcmp(prop_value, "true")) {
+		bool has_resetprop = false;
+		has_resetprop = TWFunc::Path_Exists(RESETPROP_BIN);
+		if (!has_resetprop) {
+			LOGERROR("Unable to find resetprop binary");
+			return;
+		} else {
+			TWFunc::Exec_Cmd("resetprop ro.build.version.release " + osver_orig);
+			std::string sed_osver_orig = "sed -i 's/ro.build.version.release=.*/ro.build.version.release=" + osver_orig + "/g' /prop.default";
+			TWFunc::Exec_Cmd(sed_osver_orig);
+			TWFunc::Exec_Cmd("resetprop ro.build.version.security_patch " + patchlevel_orig);
+			std::string sed_patchlevel_orig = "sed -i 's/ro.build.version.security_patch=.*/ro.build.version.security_patch=" + patchlevel_orig + "/g' /prop.default";
+			TWFunc::Exec_Cmd(sed_patchlevel_orig);
+			property_set("vold_decrypt.patched", "false");
+			return;
+		}
+	} else {
+		return;
+	}
+}
+
 static unsigned int get_blkdev_size(int fd) {
 	unsigned long nr_sec;
 
@@ -1161,6 +1244,9 @@ int Vold_Decrypt_Core(const string& Password) {
 	Symlink_Firmware_Files(is_vendor_symlinked, is_firmware_symlinked);
 
 	Set_Needed_Properties();
+#ifdef TW_INCLUDE_RESETPROP
+	Update_Patch_Level();
+#endif
 
 	// Start services needed for vold decrypt
 	LOGINFO("Starting services...\n");
@@ -1225,7 +1311,9 @@ int Vold_Decrypt_Core(const string& Password) {
 		LOGINFO("Failed to start vold\n");
 		res = VD_ERR_VOLD_FAILED_TO_START;
 	}
-
+#ifdef TW_INCLUDE_RESETPROP
+	Revert_Patch_Level();
+#endif
 	// Stop services needed for vold decrypt so /system can be unmounted
 	LOGINFO("Stopping services...\n");
 	Stop_Service("sys_vold");
