@@ -630,11 +630,14 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		DataManager::SetValue(TW_IS_DECRYPTED, 1);
 		Is_Encrypted = true;
 		Is_Decrypted = true;
-		if (Key_Directory.empty())
+		if (Key_Directory.empty()) {
 			Is_FBE = false;
-		else
+			DataManager::SetValue(TW_IS_FBE, 0);
+		}
+		else {
 			Is_FBE = true;
-		DataManager::SetValue(TW_IS_FBE, 0);
+			DataManager::SetValue(TW_IS_FBE, 1);
+		}
 		Decrypted_Block_Device = crypto_blkdev;
 		LOGINFO("Data already decrypted, new block device: '%s'\n", crypto_blkdev);
 	} else if (!Mount(false)) {
@@ -687,6 +690,8 @@ bool TWPartition::Decrypt_FBE_DE() {
 if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
+		Is_FBE = true;
+		DataManager::SetValue(TW_IS_FBE, 1);
 		ExcludeAll(Mount_Point + "/convert_fbe");
 		ExcludeAll(Mount_Point + "/unencrypted");
 		//ExcludeAll(Mount_Point + "/system/users/0"); // we WILL need to retain some of this if multiple users are present or we just need to delete more folders for the extra users somewhere else
@@ -713,8 +718,6 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 			property_set("ro.crypto.state", "encrypted");
 			Is_Encrypted = true;
 			Is_Decrypted = false;
-			Is_FBE = true;
-			DataManager::SetValue(TW_IS_FBE, 1);
 			DataManager::SetValue(TW_IS_ENCRYPTED, 1);
 			string filename;
 			int pwd_type = Get_Password_Type(0, filename);
