@@ -722,5 +722,11 @@
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+<<<<<<< HEAD   (c79f86 installcommand: port https://gerrit.twrp.me/c/android_bootab)
+=======
+		<string name="fbe_wipe_msg">WARNING: {1} wiped. FBE device should be booted into Android and not Recovery to set initial FBE policy after wipe.</string>
+		<string name="flash_ab_inactive">Flashing A/B zip to inactive slot: {1}</string>
+		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
+>>>>>>> CHANGE (5343a3 Add info that flashing AB zip will flash to the inactive slo)
 	</resources>
 </language>
