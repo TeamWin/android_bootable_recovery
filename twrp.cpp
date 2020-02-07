@@ -148,6 +148,18 @@ int main(int argc, char **argv) {
 			LOGINFO("SAR-DETECT: No build.prop found, falling back to %s\n", fallback_sar=="true"?"SAR":"Non-SAR");
 			property_set("ro.twrp.sar", fallback_sar.c_str());
 		}
+
+		stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
+		string current_prop;
+		while (getline(override_props, current_prop, ';')) {
+			string sys_val = TWFunc::System_Property_Get(current_prop, *TmpPartitionManager, "/s");
+			LOGINFO("Overwriting %s with system value: %s\n", current_prop.c_str(), sys_val.c_str());
+			int error = 0;
+			if ((error = TWFunc::Property_Override(current_prop, sys_val))) {
+				LOGERR("Failed overwriting property %s, error_code: %d\n", current_prop.c_str(), error);
+			}
+		}
+
 		TmpPartitionManager->UnMount_By_Path("/s", false);
 	}
 	else{
