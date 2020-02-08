@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bd7b2b3_f0be928f",
+        "filename": "data.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-02-08T00:22:12Z",
+      "side": 1,
+      "message": "Please remove the comment",
+      "revId": "d00f7f2846524f2b1ab500c8afd20a8b811a1d51",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92f60373_c4eb8c80",
+        "filename": "data.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-02-08T00:22:12Z",
+      "side": 1,
+      "message": "Please remove the comment",
+      "revId": "d00f7f2846524f2b1ab500c8afd20a8b811a1d51",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
