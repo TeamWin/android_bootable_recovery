@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7d3a1b_9140d217",
+        "filename": "twinstall.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-02-09T16:07:30Z",
+      "side": 1,
+      "message": "if (zip_verify \u0026\u0026 !verify_package_compatibility(\u0026Zip)) {",
+      "revId": "4218c6097a1b6f01f86eb284817184949bc6bc36",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
