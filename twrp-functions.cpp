@@ -895,25 +895,23 @@ string TWFunc::Get_Current_Date() {
 }
 
 string TWFunc::System_Property_Get(string Prop_Name) {
-	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path());
-}
-
-string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point) {
-	bool mount_state = PartitionManager.Is_Mounted_By_Path(Mount_Point);
+	bool mount_state = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
 	std::vector<string> buildprop;
-	string propvalue;
-	if (!PartitionManager.Mount_By_Path(Mount_Point, true))
+	string propvalue, out, prop_file;
+	char slot_suffix[PROPERTY_VALUE_MAX];
+	property_get ("ro.boot.slot_suffix", slot_suffix, "error");
+	if (strcmp (slot_suffix, "error") == 0)
+	strcpy(slot_suffix, "");
+	//TODO: Needed to be generic
+	if (TWFunc::Exec_Cmd("mount -t ext4 -o ro /dev/block/bootdevice/by-name/system" + std::string(slot_suffix) + " " + PartitionManager.Get_Android_Root_Path(), out) != 0)
 		return propvalue;
-	string prop_file = Mount_Point + "/build.prop";
+	if (TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/system") || TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/init.rc"))
+		prop_file = PartitionManager.Get_Android_Root_Path() + "/system/build.prop";
+	else
+		prop_file = PartitionManager.Get_Android_Root_Path() + "/build.prop";
 	if (!TWFunc::Path_Exists(prop_file))
-		prop_file = Mount_Point + "/system/build.prop"; // for devices with system as a root file system (e.g. Pixel)
-	if (TWFunc::read_file(prop_file, buildprop) != 0) {
-		LOGINFO("Unable to open build.prop for getting '%s'.\n", Prop_Name.c_str());
-		DataManager::SetValue(TW_BACKUP_NAME, Get_Current_Date());
-		if (!mount_state)
-			PartitionManager.UnMount_By_Path(Mount_Point, false);
-		return propvalue;
-	}
+		prop_file = PartitionManager.Get_Android_Root_Path() + "/system/build.prop"; // for devices with system as a root file system (e.g. Pixel)
+
 	int line_count = buildprop.size();
 	int index;
 	size_t start_pos = 0, end_pos;
@@ -924,12 +922,12 @@ string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &Partiti
 		if (propname == Prop_Name) {
 			propvalue = buildprop.at(index).substr(end_pos + 1, buildprop.at(index).size());
 			if (!mount_state)
-				PartitionManager.UnMount_By_Path(Mount_Point, false);
+				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 			return propvalue;
 		}
 	}
 	if (!mount_state)
-		PartitionManager.UnMount_By_Path(Mount_Point, false);
+		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 	return propvalue;
 }
 
