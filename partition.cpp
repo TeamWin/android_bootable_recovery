@@ -663,7 +663,7 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		}
 	} else {
 
-		if (!Decrypt_FBE_DE()) {
+		if (Is_FBE && !Decrypt_FBE_DE()) {
 			LOGINFO("Trying wrapped key.\n");
 			property_set("fbe.data.wrappedkey", "true");
 				if (!Decrypt_FBE_DE()) {
