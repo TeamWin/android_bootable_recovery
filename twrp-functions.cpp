@@ -894,6 +894,50 @@ string TWFunc::Get_Current_Date() {
 	return Current_Date;
 }
 
+static string mount_point_system() {
+	vector<string> fstab;
+	string path = "/dev/block/bootdevice/by-name/system", name, fn;
+	ifstream file;
+	fn = "/etc/twrp.fstab";
+	file.open(fn.c_str(), ios::in);
+	if (file.is_open()) {
+		while (getline(file, path))
+		{
+			fstab.push_back(path);
+		}
+		file.close();
+	}
+
+	for (size_t i=0; i<fstab.size(); i++)
+	{
+		string s = fstab.at(i);
+		for(size_t j= 0; j<s.length();j++) {
+			if (s[j] == '\t')
+			s.replace(j, j, " ");
+		}
+		fstab.at(i) = s;
+	}
+	size_t end_pos = 0, mid_pos = 0, las_pos = 0;
+	for (size_t i = 0; i <fstab.size(); i++)
+	{
+		string f1, f2;
+		end_pos = fstab.at(i).find("/dev");
+		f1 = fstab.at(i).substr(0, end_pos);
+		f2 = fstab.at(i).substr(end_pos + 1);
+		if (f1.find("system") != string::npos && f1.find("#") == string::npos)
+		{
+			mid_pos = f1.find(" ", 1);
+			//name = f1.substr(0,mid_pos);
+			end_pos = f2.find("/");
+			las_pos = f2.find(" ", end_pos);
+			path = "/" + f2.substr(end_pos - 3, las_pos);
+			LOGINFO("I: System point: %s\n ", path.c_str());
+			break;
+		}
+	}
+	return path;
+}
+
 string TWFunc::System_Property_Get(string Prop_Name) {
 	bool mount_state = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
 	std::vector<string> buildprop;
@@ -902,8 +946,7 @@ string TWFunc::System_Property_Get(string Prop_Name) {
 	property_get ("ro.boot.slot_suffix", slot_suffix, "error");
 	if (strcmp (slot_suffix, "error") == 0)
 	strcpy(slot_suffix, "");
-	//TODO: Needed to be generic
-	if (TWFunc::Exec_Cmd("mount -t ext4 -o ro /dev/block/bootdevice/by-name/system" + std::string(slot_suffix) + " " + PartitionManager.Get_Android_Root_Path(), out) != 0)
+	if (TWFunc::Exec_Cmd("mount -t ext4 -o ro " + mount_point_system() + "" + std::string(slot_suffix) + " " + PartitionManager.Get_Android_Root_Path(), out) != 0)
 		return propvalue;
 	if (TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/system") || TWFunc::Path_Exists(PartitionManager.Get_Android_Root_Path() + "/init.rc"))
 		prop_file = PartitionManager.Get_Android_Root_Path() + "/system/build.prop";
