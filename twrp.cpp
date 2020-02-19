@@ -43,6 +43,7 @@ extern "C" {
 #include "twrp-functions.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
+#include <android-base/strings.h>
 #include "openrecoveryscript.hpp"
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
@@ -162,6 +163,8 @@ int main(int argc, char **argv) {
 			} else
 				other_prop = current_prop;
 			string sys_val;
+			other_prop = android::base::Trim(other_prop);
+			current_prop = android::base::Trim(current_prop);
 			if (!(sys_val = TWFunc::System_Property_Get(other_prop, *TmpPartitionManager, "/s")).empty()) {
 				LOGINFO("Overriding %s with value: \"%s\" from system property %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str());
 				int error = 0;
