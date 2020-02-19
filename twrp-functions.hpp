@@ -93,6 +93,7 @@ public:
 	static int read_file(string fn, uint64_t& results); //read from file
 	static int write_to_file(const string& fn, const string& line);             //write to file
 	static bool Try_Decrypting_Backup(string Restore_Path, string Password); // true for success, false for failed to decrypt
+	static void trim(string &st); // Trim the extrac spaces available in string
 	static string System_Property_Get(string Prop_Name);                // Returns value of Prop_Name from reading /system/build.prop
 	static string System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point);                // Returns value of Prop_Name from reading /system/build.prop
 	static string Get_Current_Date(void);                               // Returns the current date in ccyy-m-dd--hh-nn-ss format

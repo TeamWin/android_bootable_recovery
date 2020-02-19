@@ -894,6 +894,25 @@ string TWFunc::Get_Current_Date() {
 	return Current_Date;
 }
 
+void TWFunc::trim(string &st) {
+	vector<char> s(st.begin(), st.end());
+	for (size_t i=0;i<s.size();i++)
+	{
+		if (s.at(i) == ' ' && i<s.size()-1 && s.at(i+1) == ' ')
+		{
+			s.erase(vector<char>::iterator (s.begin() + i));
+			i = i-1;
+		}
+		if (s.at(0) == ' ')
+			s.erase(vector<char>::iterator (s.begin()));
+		if (s.at(s.size()-1) == ' ')
+			s.erase(vector<char>::iterator (s.end()-1));
+	}
+	std::ostringstream v;
+	std::copy(s.begin(), s.end(),std::ostream_iterator<char>(v));
+	st = v.str();
+}
+
 string TWFunc::System_Property_Get(string Prop_Name) {
 	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path());
 }

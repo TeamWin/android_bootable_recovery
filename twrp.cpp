@@ -162,6 +162,8 @@ int main(int argc, char **argv) {
 			} else
 				other_prop = current_prop;
 			string sys_val;
+			TWFunc::trim(other_prop);
+			TWFunc::trim(current_prop);
 			if (!(sys_val = TWFunc::System_Property_Get(other_prop, *TmpPartitionManager, "/s")).empty()) {
 				LOGINFO("Overriding %s with value: \"%s\" from system property %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str());
 				int error = 0;
