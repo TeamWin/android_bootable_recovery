@@ -81,7 +81,7 @@ tar_set_file_perms(TAR *t, const char *realname)
 				filename, uid, gid, strerror(errno));
 # endif
 #endif /* HAVE_LCHOWN */
-			return -1;
+			return error;
 		}
 
 	/* change access/modification time */
@@ -154,7 +154,7 @@ tar_extract_file(TAR *t, const char *realname, const char *prefix, const int *pr
 	}
 
 	i = tar_set_file_perms(t, realname);
-	if (i != 0) {
+	if (i != 0 && i != ENOENT) {
 		fprintf(stderr, "tar_extract_file(): failed to set permissions on %s !!!\n", realname);
 		return i;
 	}
