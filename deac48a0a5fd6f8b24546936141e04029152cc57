@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1f98a7e_92f1acc3",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 353
+      },
+      "writtenOn": "2020-02-29T19:26:04Z",
+      "side": 1,
+      "message": "This line fails due to a missing include of \u003candroid-base/properties.h\u003e",
+      "revId": "deac48a0a5fd6f8b24546936141e04029152cc57",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
