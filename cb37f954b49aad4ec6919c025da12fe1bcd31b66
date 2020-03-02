@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bd6b0448_6820d03b",
+        "filename": "twinstall.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-03-02T15:04:56Z",
+      "side": 1,
+      "message": "What should happen on error though?\nIt surely shouldn\u0027t stop the installation from happening.\nAnd it should print an error anyway, since Display_Error is set.",
+      "parentUuid": "1c8c5d34_a730b9f9",
+      "revId": "cb37f954b49aad4ec6919c025da12fe1bcd31b66",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aad9b74b_9a4ff525",
         "filename": "twinstall.cpp",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2020-02-29T23:45:01Z",
       "side": 1,
       "message": "Can you use https://github.com/TeamWin/android_bootable_recovery/blob/android-9.0/twrp-functions.cpp#L755 to copy the file?",
+      "revId": "cb37f954b49aad4ec6919c025da12fe1bcd31b66",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1327efb_01afd830",
+        "filename": "twinstall.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-03-02T15:04:56Z",
+      "side": 1,
+      "message": "Will do, I wasn\u0027t happy with using Exec_Cmd anyway.",
+      "parentUuid": "aad9b74b_9a4ff525",
       "revId": "cb37f954b49aad4ec6919c025da12fe1bcd31b66",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
