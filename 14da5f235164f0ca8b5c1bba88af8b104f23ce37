@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a978fd9_ecded7ad",
+        "filename": "partition.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-03-08T22:45:38Z",
+      "side": 1,
+      "message": "Would it be possible to make this if statement in a new function to cut down on the size of the parent function?",
+      "revId": "14da5f235164f0ca8b5c1bba88af8b104f23ce37",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b651c18_6c910b44",
+        "filename": "twrp.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-03-08T22:45:38Z",
+      "side": 1,
+      "message": "Could we add this to a new function for SAR detection?",
+      "revId": "14da5f235164f0ca8b5c1bba88af8b104f23ce37",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
