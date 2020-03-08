@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd693207_009964ed",
+        "filename": "partition.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-03-08T02:06:45Z",
+      "side": 1,
+      "message": "I believe Is_FBE gets set in Decrypt_FBE_DE. I think we might just want to use the fstab flag method to run wrapped key decryption.",
+      "revId": "1cc891445a5a41045d866b17d98db2e49a64cc3d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
