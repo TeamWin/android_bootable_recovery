@@ -16,6 +16,24 @@
       "revId": "db91f8b678f8e6958df071e41d96e13fe9a0b455",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c955f1b_9300657d",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-03-09T23:34:49Z",
+      "side": 1,
+      "message": "Not sure I understand what you\u0027re asking...",
+      "parentUuid": "4417a06c_f4a7e232",
+      "revId": "db91f8b678f8e6958df071e41d96e13fe9a0b455",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
