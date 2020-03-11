@@ -16,6 +16,24 @@
       "revId": "1cc891445a5a41045d866b17d98db2e49a64cc3d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16acd7b1_c56a5f4d",
+        "filename": "partition.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-03-11T15:25:07Z",
+      "side": 1,
+      "message": "Changed this to use DataManager value from other FBE patch.",
+      "parentUuid": "fd693207_009964ed",
+      "revId": "1cc891445a5a41045d866b17d98db2e49a64cc3d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
