@@ -10,6 +10,10 @@ on early-init
     # Set the security context of /postinstall if present.
     restorecon /postinstall
 
+    # ueventd wants to write to /acct
+    mount cgroup none /acct cpuacct
+    mkdir /acct/uid
+
     start ueventd
 
 on init
@@ -20,6 +24,7 @@ on init
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
 
+<<<<<<< HEAD   (cb163e Relink update_engine_sideload)
     symlink /proc/self/fd/0 /dev/stdin
     symlink /proc/self/fd/1 /dev/stdout
     symlink /proc/self/fd/2 /dev/stderr
@@ -30,6 +35,8 @@ on init
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
 
+=======
+>>>>>>> CHANGE (ec350e init: ueventd already needs /acct)
     mkdir /system
     mkdir /data
     mkdir /cache
