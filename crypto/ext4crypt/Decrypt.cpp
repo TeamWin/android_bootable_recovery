@@ -385,6 +385,8 @@ static void kill_keystore() {
                 sprintf(cmdpath, "/proc/%d/cmdline", pid);
 
                 FILE* file = fopen(cmdpath, "r");
+                if (file == NULL)
+                    continue;
                 size_t task_size = PATH_MAX;
                 char task[PATH_MAX];
                 char* p = task;
