@@ -215,6 +215,7 @@ endif
 LOCAL_CFLAGS += -DTW_GIT_REVISION='"$(tw_git_revision)"'
 
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
+    TW_USE_TOOLBOX := true
 ifeq ($(TW_EXCLUDE_MTP),)
     LOCAL_SHARED_LIBRARIES += libtwrpmtp-ffs
 endif
