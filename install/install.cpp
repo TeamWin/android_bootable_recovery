@@ -183,19 +183,6 @@ static int CheckAbSpecificMetadata(const std::map<std::string, std::string>& met
 }
 
 int CheckPackageMetadata(const std::map<std::string, std::string>& metadata, OtaType ota_type) {
-  auto package_ota_type = get_value(metadata, "ota-type");
-  auto expected_ota_type = OtaTypeToString(ota_type);
-  if (ota_type != OtaType::AB && ota_type != OtaType::BRICK) {
-    LOG(INFO) << "Skip package metadata check for ota type " << expected_ota_type;
-    return 0;
-  }
-
-  if (package_ota_type != expected_ota_type) {
-    LOG(ERROR) << "Unexpected ota package type, expects " << expected_ota_type << ", actual "
-               << package_ota_type;
-    return INSTALL_ERROR;
-  }
-
   auto device = android::base::GetProperty("ro.product.device", "");
   auto pkg_device = get_value(metadata, "pre-device");
   if (pkg_device != device || pkg_device.empty()) {
@@ -331,7 +318,13 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
   bool is_ab_ota = false;
   if (ReadMetadataFromPackage(zip, &metadata)) {
     ReadSourceTargetBuild(metadata, log_buffer);
-    if (CheckPackageMetadata(metadata, OtaType::AB) == 0) is_ab_ota = true;
+    if (get_value(metadata, "ota-type") == OtaTypeToString(OtaType::AB)) {
+        is_ab_ota = true;
+        int check_status = CheckPackageMetadata(metadata, OtaType::AB);
+        if (check_status != 0) {
+            return check_status;
+        }
+    }
   }
 
   // The updater in child process writes to the pipe to communicate with recovery.
