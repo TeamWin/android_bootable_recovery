@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 process_file()
 {
@@ -26,6 +26,7 @@ process_file()
 
 dest=$1
 shift 1
+echo args: $*
 for ARG in $*
 do
     process_file $dest $ARG
