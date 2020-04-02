@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36315187_054796c8",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-04-02T23:46:55Z",
+      "side": 1,
+      "message": "why do we need another PartitionManager?",
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
