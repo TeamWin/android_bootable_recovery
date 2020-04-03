@@ -16,6 +16,75 @@
       "revId": "35c29633067eea12695da72adfaacc53844854bb",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc672c74_04bc49a7",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2020-04-03T02:43:24Z",
+      "side": 1,
+      "message": "bool",
+      "range": {
+        "startLine": 132,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 8
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aec6b6b5_c9f1ad60",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2020-04-03T02:43:24Z",
+      "side": 1,
+      "message": "fallback_sar ? \"1\" : \"0\"",
+      "range": {
+        "startLine": 149,
+        "startChar": 31,
+        "endLine": 149,
+        "endChar": 43
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dbad38f_e40f6a46",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2020-04-03T02:43:24Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 155,
+        "startChar": 30,
+        "endLine": 155,
+        "endChar": 42
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
