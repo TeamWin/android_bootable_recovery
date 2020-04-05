@@ -45,7 +45,7 @@ else
     $(if $(WITH_CRYPTO_UTILS),libcrypto_utils)
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 27; echo $$?),0)
         # Needed in Android 9.0
-        LOCAL_WHOLE_STATIC_LIBRARIES += libasyncio
+        LOCAL_WHOLE_STATIC_LIBRARIES += libasyncio libqemu_pipe
     endif
 endif
 

@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <android-base/properties.h>
+
 #include "adb.h"
 #include "adb_auth.h"
 #include "transport.h"
@@ -34,7 +36,30 @@ int minadbd_main() {
     auth_required = false;
 
     init_transport_registration();
-    usb_init();
+
+    bool is_usb = false;
+    if (access(USB_FFS_ADB_EP0, F_OK) == 0) {
+        // Listen on USB.
+        usb_init();
+        is_usb = true;
+    }
+
+    // If one of these properties is set, also listen on that port.
+    // If one of the properties isn't set and we couldn't listen on usb, listen
+    // on the default port.
+    std::string prop_port = android::base::GetProperty("service.adb.tcp.port", "");
+    if (prop_port.empty()) {
+        prop_port = android::base::GetProperty("persist.adb.tcp.port", "");
+    }
+
+    int port;
+    if (sscanf(prop_port.c_str(), "%d", &port) == 1 && port > 0) {
+        // Listen on TCP port specified by service.adb.tcp.port property.
+        local_init(port);
+    } else if (!is_usb) {
+        // Listen on default port.
+        local_init(DEFAULT_ADB_LOCAL_TRANSPORT_PORT);
+    }
 
     //VLOG(ADB) << "Event loop starting";
     fdevent_loop();
