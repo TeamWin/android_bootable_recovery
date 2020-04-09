@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f27fbeb_50a2c753",
+        "filename": "partition.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-04-09T21:26:01Z",
+      "side": 1,
+      "message": "We don\u0027t need to unlink system unless it\u0027s a symbolic link. I think this logic would be good for android-10.0",
+      "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
