@@ -16,6 +16,24 @@
       "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3a84e2c_e131d28b",
+        "filename": "partition.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-04-09T21:42:35Z",
+      "side": 1,
+      "message": "It will just silently fail, if it\u0027s a directory already.\nIt will be a symlink when built with BOARD_BUILD_SYSTEM_ROOT_IMAGE set to true.\nIf we don\u0027t unlink and create a directory in its place mounting will fail.",
+      "parentUuid": "8f27fbeb_50a2c753",
+      "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
