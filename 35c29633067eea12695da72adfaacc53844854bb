@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7ec6caf5_58b708b9",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-04-09T21:47:19Z",
+      "side": 1,
+      "message": "Because the default PartionManager will set up mount points and do other initialization which we don\u0027t want during SAR-detection as fstab might be changed by the device-maintainer after SAR-detection using /sbin/sarsetup.sh boot-script.",
+      "parentUuid": "36315187_054796c8",
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc672c74_04bc49a7",
         "filename": "twrp.cpp",
         "patchSetId": 24
@@ -30,6 +48,30 @@
       "writtenOn": "2020-04-03T02:43:24Z",
       "side": 1,
       "message": "bool",
+      "range": {
+        "startLine": 132,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 8
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "726960dd_fddae65e",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-04-09T21:47:19Z",
+      "side": 1,
+      "message": "why bool?\nwe set the property to the string \"true\" of \"false\".",
+      "parentUuid": "fc672c74_04bc49a7",
       "range": {
         "startLine": 132,
         "startChar": 1,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "2f3782ab_010b90e1",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-04-09T21:47:19Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "aec6b6b5_c9f1ad60",
+      "range": {
+        "startLine": 149,
+        "startChar": 31,
+        "endLine": 149,
+        "endChar": 43
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6dbad38f_e40f6a46",
         "filename": "twrp.cpp",
         "patchSetId": 24
@@ -76,6 +142,30 @@
       "writtenOn": "2020-04-03T02:43:24Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 155,
+        "startChar": 30,
+        "endLine": 155,
+        "endChar": 42
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b3d6b00_a1b82e96",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-04-09T21:47:19Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "6dbad38f_e40f6a46",
       "range": {
         "startLine": 155,
         "startChar": 30,
