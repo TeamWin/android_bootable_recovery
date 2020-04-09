@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3dc30769_8b41f18a",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2020-04-09T22:49:54Z",
+      "side": 1,
+      "message": "Sure, I guess that\u0027s a better name than TmpPartitionManager",
+      "parentUuid": "d2bb705e_044f5280",
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc672c74_04bc49a7",
         "filename": "twrp.cpp",
         "patchSetId": 24
