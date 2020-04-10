@@ -34,6 +34,24 @@
       "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "918900b5_fe4daecc",
+        "filename": "partition.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-04-10T21:05:57Z",
+      "side": 1,
+      "message": "I missed that in UnMount it will put the symlink back.",
+      "parentUuid": "b3a84e2c_e131d28b",
+      "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
