@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "ea131b37_185095d6",
+        "filename": "twrp.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2020-04-10T03:02:16Z",
+      "side": 1,
+      "message": "there\u0027s no need to store a std::string, exploit the ternary operator below and we\u0027re still able to set it to string literal \"true\"/\"false\" or \"1\"/\"0\", without extra overhead of metadata and string comparison `fallback_sar\u003d\u003d\"true\"?\"SAR\":\"Non-SAR\"`",
+      "parentUuid": "cf53ca41_69d6da33",
+      "range": {
+        "startLine": 132,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 8
+      },
+      "revId": "35c29633067eea12695da72adfaacc53844854bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aec6b6b5_c9f1ad60",
         "filename": "twrp.cpp",
         "patchSetId": 24
