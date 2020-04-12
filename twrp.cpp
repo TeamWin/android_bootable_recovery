@@ -51,6 +51,7 @@ extern "C" {
 #include "openrecoveryscript.hpp"
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
+#include "twrpApex.hpp"
 #ifdef TW_USE_NEW_MINADBD
 // #include "minadbd/minadbd.h"
 #else
@@ -376,7 +377,6 @@ int main(int argc, char **argv) {
 	// Check if system has never been changed
 	TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
-
 	if (sys) {
 		if (sys->Get_Super_Status()) {
 			if (!PartitionManager.Prepare_All_Super_Volumes()) {
