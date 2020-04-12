@@ -3256,7 +3256,7 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 		bare_partition_name = TWFunc::Remove_Beginning_Slash(twrpPart->Get_Mount_Point());
 
 	FstabEntry fstabEntry = {
-        .blk_device = bare_partition_name + PartitionManager.Get_Active_Slot_Suffix() ,
+        .blk_device = bare_partition_name + PartitionManager.Get_Active_Slot_Suffix(),
         .mount_point = twrpPart->Get_Mount_Point(),
         .fs_type = twrpPart->Current_File_System,
         .fs_mgr_flags.logical = twrpPart->Is_Super,
@@ -3268,7 +3268,12 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
         return false;
     }
 
+	while (access(fstabEntry.blk_device.c_str(), F_OK) != 0) {
+		usleep(100);
+	}
+
 	twrpPart->Set_Block_Device(fstabEntry.blk_device);
+	twrpPart->Mount(true);
 	twrpPart->Update_Size(true);
 
     return true;
