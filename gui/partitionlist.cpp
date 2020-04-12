@@ -1,5 +1,5 @@
 /*
-	Copyright 2013 bigbiff/Dees_Troy TeamWin
+	Copyright 2020 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -217,6 +217,8 @@ void GUIPartitionList::RenderItem(size_t itemindex, int yPos, bool selected)
 
 void GUIPartitionList::NotifySelect(size_t item_selected)
 {
+	LOGINFO("item_selected: %zu\n", item_selected);
+	LOGINFO("mList.size: %lu\n", mList.size());
 	if (item_selected < mList.size()) {
 		int listSize = mList.size();
 		if (ListType == "mount") {
@@ -261,7 +263,7 @@ void GUIPartitionList::NotifySelect(size_t item_selected)
 					}
 					mList.at(item_selected).selected = 1;
 					mUpdate = 1;
-
+					LOGINFO("setting %s to %s\n", mVariable.c_str(), str.c_str());
 					DataManager::SetValue(mVariable, str);
 				}
 			} else {
@@ -279,6 +281,7 @@ void GUIPartitionList::NotifySelect(size_t item_selected)
 				for (i=0; i<listSize; i++) {
 					if (mList.at(i).selected) {
 						variablelist += mList.at(i).Mount_Point + ";";
+						LOGINFO("variablelist: %s\n", variablelist.c_str());
 					}
 				}
 
