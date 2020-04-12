@@ -51,6 +51,7 @@ extern "C" {
 #include "openrecoveryscript.hpp"
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
+#include "twrpApex.hpp"
 #ifdef TW_USE_NEW_MINADBD
 // #include "minadbd/minadbd.h"
 #else
@@ -201,6 +202,24 @@ int main(int argc, char **argv) {
 
 	if (PartitionManager.Get_Super_Status())
 		PartitionManager.Setup_Super_Devices();
+
+	TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
+	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+
+	if (sys && sys->Get_Super_Status()) {
+		PartitionManager.Prepare_Super_Volume(sys);
+		sys->Change_Mount_Read_Only(true);
+		twrpApex apex;
+		if (!apex.loadApexImages()) {
+			LOGERR("Unable to load apex images from /system/apex.");
+		}
+		property_set("twrp.apex.loaded", "true");
+
+		if (ven && ven->Get_Super_Status()) {
+			PartitionManager.Prepare_Super_Volume(ven);
+			ven->Change_Mount_Read_Only(true);
+		}
+	}
 
 	// Load up all the resources
 	gui_loadResources();
@@ -373,38 +392,25 @@ int main(int argc, char **argv) {
 #endif
 
 #ifndef TW_OEM_BUILD
-	// Check if system has never been changed
-	TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
-	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
-
-	if (sys) {
-		if (sys->Get_Super_Status()) {
-			PartitionManager.Prepare_Super_Volume(sys);
-			if (ven->Get_Super_Status()) {
-				PartitionManager.Prepare_Super_Volume(ven);
-			}
-			sys->Change_Mount_Read_Only(true);
-			if (ven)
-				ven->Change_Mount_Read_Only(true);
-		} else {
-			if ((DataManager::GetIntValue("tw_mount_system_ro") == 0 && sys->Check_Lifetime_Writes() == 0) || DataManager::GetIntValue("tw_mount_system_ro") == 2) {
-				if (DataManager::GetIntValue("tw_never_show_system_ro_page") == 0) {
-					DataManager::SetValue("tw_back", "main");
-					if (gui_startPage("system_readonly", 1, 1) != 0) {
-						LOGERR("Failed to start system_readonly GUI page.\n");
-					}
-				} else if (DataManager::GetIntValue("tw_mount_system_ro") == 0) {
-					sys->Change_Mount_Read_Only(false);
-					if (ven)
-						ven->Change_Mount_Read_Only(false);
+	if (sys && !sys->Get_Super_Status()) {
+		// Check if system has never been changed
+		if ((DataManager::GetIntValue("tw_mount_system_ro") == 0 && sys->Check_Lifetime_Writes() == 0) || DataManager::GetIntValue("tw_mount_system_ro") == 2) {
+			if (DataManager::GetIntValue("tw_never_show_system_ro_page") == 0) {
+				DataManager::SetValue("tw_back", "main");
+				if (gui_startPage("system_readonly", 1, 1) != 0) {
+					LOGERR("Failed to start system_readonly GUI page.\n");
 				}
-			} else if (DataManager::GetIntValue("tw_mount_system_ro") == 1) {
-				// Do nothing, user selected to leave system read only
-			} else {
+			} else if (DataManager::GetIntValue("tw_mount_system_ro") == 0) {
 				sys->Change_Mount_Read_Only(false);
 				if (ven)
 					ven->Change_Mount_Read_Only(false);
 			}
+		} else if (DataManager::GetIntValue("tw_mount_system_ro") == 1) {
+			// Do nothing, user selected to leave system read only
+		} else {
+			sys->Change_Mount_Read_Only(false);
+			if (ven)
+				ven->Change_Mount_Read_Only(false);
 		}
 	}
 #endif
