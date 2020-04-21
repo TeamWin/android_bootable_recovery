@@ -113,11 +113,11 @@ bool MtpFfsHandle::openEndpoints(bool ptp) {
 void MtpFfsHandle::advise(int fd) {
 	for (unsigned i = 0; i < NUM_IO_BUFS; i++) {
 		if (posix_madvise(mIobuf[i].bufs.data(), MAX_FILE_CHUNK_SIZE,
-				POSIX_MADV_SEQUENTIAL | POSIX_MADV_WILLNEED) < 0)
+				POSIX_MADV_SEQUENTIAL | POSIX_MADV_WILLNEED) != 0)
 			MTPE("Failed to madvise\n");
 	}
 	if (posix_fadvise(fd, 0, 0,
-				POSIX_FADV_SEQUENTIAL | POSIX_FADV_NOREUSE | POSIX_FADV_WILLNEED) < 0)
+				POSIX_FADV_SEQUENTIAL | POSIX_FADV_NOREUSE | POSIX_FADV_WILLNEED) != 0)
 		MTPE("Failed to fadvise\n");
 }
 
