@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b55ec26f_9b38619f",
+        "filename": "twrp.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-04-26T15:35:41Z",
+      "side": 1,
+      "message": "please remove extra space.",
+      "revId": "ac73576adc733b1a28e005e02a3235f58d1934dd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
