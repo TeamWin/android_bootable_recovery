@@ -58,6 +58,10 @@
 #include <android/hardware/confirmationui/1.0/types.h>
 #include <android/security/BnConfirmationPromptCallback.h>
 #include <android/security/keystore/IKeystoreService.h>
+#ifdef USE_Q_FSCRYPT
+#include <keystore/keystore_promises.h>
+#include <keystore/KeystoreResponse.h>
+#endif
 #else
 #include <keystore/IKeystoreService.h>
 #include <keystore/authorization_set.h>
@@ -723,12 +727,19 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		String16 keystore_alias16(keystore_alias.c_str());
 #ifdef USE_KEYSTORAGE_4
 		android::hardware::keymaster::V4_0::KeyPurpose purpose = android::hardware::keymaster::V4_0::KeyPurpose::DECRYPT;
+		::android::security::keymaster::KeymasterArguments empty_params;
+#ifdef USE_Q_FSCRYPT
+		sp<::keystore::OperationResultPromise> promise(new ::keystore::OperationResultPromise());
+		auto future = promise->get_future();
+		int32_t error_code;
+		service->begin(promise, binder, keystore_alias16, (int32_t)purpose, true, android::security::keymaster::KeymasterArguments(begin_params.hidl_data()), entropy, -1, &error_code);
+#else
 		security::keymaster::OperationResult begin_result;
 		security::keymaster::OperationResult update_result;
 		security::keymaster::OperationResult finish_result;
-		::android::security::keymaster::KeymasterArguments empty_params;
 		// These parameters are mostly driven by the cipher.init call https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#63
 		service->begin(binder, keystore_alias16, (int32_t)purpose, true, android::security::keymaster::KeymasterArguments(begin_params.hidl_data()), entropy, -1, &begin_result);
+#endif
 #else
 		::keystore::KeyPurpose purpose = ::keystore::KeyPurpose::DECRYPT;
 		OperationResult begin_result;
@@ -739,7 +750,13 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		// These parameters are mostly driven by the cipher.init call https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#63
 		service->begin(binder, keystore_alias16, purpose, true, begin_params.hidl_data(), entropy, -1, &begin_result);
 #endif
+
+#ifdef USE_Q_FSCRYPT
+		ret = int32_t(error_code);
+		security::keymaster::OperationResult result = future.get();
+#else
 		ret = begin_result.resultCode;
+#endif
 		if (ret != 1 /*android::keystore::ResponseCode::NO_ERROR*/) {
 			printf("keystore begin error: (%d)\n", /*responses[ret],*/ ret);
 			return disk_decryption_secret_key;
@@ -748,8 +765,11 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		}
 		// The cipher.doFinal call triggers an update to the keystore followed by a finish https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#64
 		// See also https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/keystore/java/android/security/keystore/KeyStoreCryptoOperationChunkedStreamer.java#208
-		service->update(begin_result.token, empty_params, intermediate_key, &update_result);
-		ret = update_result.resultCode;
+#ifdef USE_Q_FSCRYPT
+		result = future.get();
+		service->update(promise, result.token, empty_params, intermediate_key, &error_code);
+		ret = int32_t(error_code);
+#endif
 		if (ret != 1 /*android::keystore::ResponseCode::NO_ERROR*/) {
 			printf("keystore update error: (%d)\n", /*responses[ret],*/ ret);
 			return disk_decryption_secret_key;
@@ -760,11 +780,16 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		// We must use the data in update_data.data before we call finish below or the data will be gone
 		// The payload data from the keystore update is further personalized at https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordManager.java#153
 		// We now have the disk decryption key!
+#ifdef USE_Q_FSCRYPT
+		disk_decryption_secret_key = PersonalizedHash(PERSONALIZATION_FBE_KEY, (const char*)&result.data[0], result.data.size());
+#else
 		disk_decryption_secret_key = PersonalizedHash(PERSONALIZATION_FBE_KEY, (const char*)&update_result.data[0], update_result.data.size());
+#endif
 		//printf("disk_decryption_secret_key: '%s'\n", disk_decryption_secret_key.c_str());
 		::keystore::hidl_vec<uint8_t> signature;
-		service->finish(begin_result.token, empty_params, signature, entropy, &finish_result);
-		ret = finish_result.resultCode;
+		result = future.get();
+		service->finish(promise, result.token, empty_params, signature, entropy, &error_code);
+		ret = int32_t(error_code);
 		if (ret != 1 /*android::keystore::ResponseCode::NO_ERROR*/) {
 			printf("keystore finish error: (%d)\n", /*responses[ret],*/ ret);
 			return disk_decryption_secret_key;
@@ -837,12 +862,19 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		String16 keystore_alias16(keystore_alias.c_str());
 #ifdef USE_KEYSTORAGE_4
 		android::hardware::keymaster::V4_0::KeyPurpose purpose = android::hardware::keymaster::V4_0::KeyPurpose::DECRYPT;
+		::android::security::keymaster::KeymasterArguments empty_params;
+#ifdef USE_Q_FSCRYPT
+		sp<::keystore::OperationResultPromise> promise(new ::keystore::OperationResultPromise());
+		auto future = promise->get_future();
+		int32_t error_code;
+		service->begin(promise, binder, keystore_alias16, (int32_t)purpose, true, begin_params.hidl_data(), entropy, -1, &error_code);
+#else
 		security::keymaster::OperationResult begin_result;
 		security::keymaster::OperationResult update_result;
 		security::keymaster::OperationResult finish_result;
-		::android::security::keymaster::KeymasterArguments empty_params;
 		// These parameters are mostly driven by the cipher.init call https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#63
 		service->begin(binder, keystore_alias16, (int32_t)purpose, true, android::security::keymaster::KeymasterArguments(begin_params.hidl_data()), entropy, -1, &begin_result);
+#endif
 #else
 		::keystore::KeyPurpose purpose = ::keystore::KeyPurpose::DECRYPT;
 		OperationResult begin_result;
@@ -853,7 +885,12 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		// These parameters are mostly driven by the cipher.init call https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#63
 		service->begin(binder, keystore_alias16, purpose, true, begin_params.hidl_data(), entropy, -1, &begin_result);
 #endif
+#ifdef USE_Q_FSCRYPT
+		ret = error_code;
+		security::keymaster::OperationResult result = future.get();
+#else
 		ret = begin_result.resultCode;
+#endif
 		if (ret != 1 /*android::keystore::ResponseCode::NO_ERROR*/) {
 			printf("keystore begin error: (%d)\n", /*responses[ret],*/ ret);
 			return disk_decryption_secret_key;
@@ -862,8 +899,15 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		}*/
 		// The cipher.doFinal call triggers an update to the keystore followed by a finish https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#64
 		// See also https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/keystore/java/android/security/keystore/KeyStoreCryptoOperationChunkedStreamer.java#208
+#ifdef USE_Q_FSCRYPT
+		result = future.get();
+		service->update(promise, result.token, empty_params, cipher_text_hidlvec, &error_code);
+		ret = error_code;
+#else
 		service->update(begin_result.token, empty_params, cipher_text_hidlvec, &update_result);
 		ret = update_result.resultCode;
+#endif
+
 		if (ret != 1 /*android::keystore::ResponseCode::NO_ERROR*/) {
 			printf("keystore update error: (%d)\n", /*responses[ret],*/ ret);
 			return disk_decryption_secret_key;
@@ -873,17 +917,30 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		}*/
 		//printf("keystore resulting data: "); output_hex((unsigned char*)&update_result.data[0], update_result.data.size()); printf("\n");
 		// We must copy the data in update_data.data before we call finish below or the data will be gone
+#ifdef USE_Q_FSCRYPT
+		size_t keystore_result_size = result.data.size();
+#else
 		size_t keystore_result_size = update_result.data.size();
+#endif
 		unsigned char* keystore_result = (unsigned char*)malloc(keystore_result_size);
 		if (!keystore_result) {
 			printf("malloc on keystore_result\n");
 			return disk_decryption_secret_key;
 		}
+#ifdef USE_Q_FSCRYPT
+		memcpy(keystore_result, &result.data[0], result.data.size());
+#else
 		memcpy(keystore_result, &update_result.data[0], update_result.data.size());
+#endif
 		//printf("keystore_result data: "); output_hex(keystore_result, keystore_result_size); printf("\n");
 		::keystore::hidl_vec<uint8_t> signature;
+#ifdef USE_Q_FSCRYPT
+		service->finish(promise, result.token, empty_params, signature, entropy, &error_code);
+		ret = error_code;
+#else
 		service->finish(begin_result.token, empty_params, signature, entropy, &finish_result);
-		ret = finish_result.resultCode;
+		ret = finish_result.resultCode
+#endif
 		if (ret != 1 /*android::keystore::ResponseCode::NO_ERROR*/) {
 			printf("keystore finish error: (%d)\n", /*responses[ret],*/ ret);
 			free(keystore_result);

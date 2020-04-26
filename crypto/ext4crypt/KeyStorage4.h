@@ -19,7 +19,11 @@
 
 #include "Keymaster4.h"
 #include "KeyBuffer.h"
+#ifndef USE_Q_FSCRYPT
 #include <ext4_utils/ext4_crypt.h>
+#else
+#include <fscrypt/fscrypt.h>
+#endif
 
 #include <string>
 
