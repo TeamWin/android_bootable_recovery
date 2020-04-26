@@ -27,7 +27,11 @@
 #include <string>
 
 #ifdef USE_SECURITY_NAMESPACE
+#ifdef USE_Q_FSCRYPT
+#include <android/security/keystore/IKeystoreService.h>
+#else
 #include <android/security/IKeystoreService.h>
+#endif
 #else
 #include <keystore/IKeystoreService.h>
 #include <keystore/authorization_set.h>
@@ -75,7 +79,11 @@ int main() {
 	sp<IServiceManager> sm = defaultServiceManager();
 	sp<IBinder> binder = sm->getService(String16("android.security.keystore"));
 #ifdef USE_SECURITY_NAMESPACE
+#ifdef USE_Q_FSCRYPT
+	sp<security::keystore::IKeystoreService> service = interface_cast<security::keystore::IKeystoreService>(binder);
+#else
 	sp<security::IKeystoreService> service = interface_cast<security::IKeystoreService>(binder);
+#endif
 #else
 	sp<IKeystoreService> service = interface_cast<IKeystoreService>(binder);
 #endif

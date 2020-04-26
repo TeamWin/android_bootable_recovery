@@ -31,7 +31,14 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
         #9.0 rules
         LOCAL_CFLAGS += -DUSE_KEYSTORAGE_4 -Wno-unused-variable -Wno-sign-compare -Wno-unused-parameter -Wno-comment
-        LOCAL_SRC_FILES += Ext4CryptPie.cpp Keymaster4.cpp KeyStorage4.cpp KeyUtil.cpp MetadataCrypt.cpp KeyBuffer.cpp
+        ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 29; echo $$?),0)
+            LOCAL_SRC_FILES += Ext4CryptQ.cpp
+            LOCAL_SHARED_LIBRARIES += libfscrypt
+            LOCAL_CFLAGS += -DUSE_Q_FSCRYPT
+        else
+            LOCAL_SRC_FILES += Ext4CryptPie.cpp
+        endif
+        LOCAL_SRC_FILES += Keymaster4.cpp KeyStorage4.cpp KeyUtil.cpp MetadataCrypt.cpp KeyBuffer.cpp
         LOCAL_SHARED_LIBRARIES += android.hardware.keymaster@4.0 libkeymaster4support
         LOCAL_SHARED_LIBRARIES += android.hardware.gatekeeper@1.0 libkeystore_parcelables libkeystore_aidl
         LOCAL_CFLAGS += -DHAVE_SYNTH_PWD_SUPPORT
@@ -102,6 +109,10 @@ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
 LOCAL_SRC_FILES := keystore_auth.cpp
 LOCAL_SHARED_LIBRARIES := libc libkeystore_binder libutils libbinder liblog
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
+    #10.0
+    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 29; echo $$?),0)
+        LOCAL_CFLAGS += -DUSE_Q_FSCRYPT
+    endif
     #9.0
     LOCAL_CFLAGS += -DUSE_SECURITY_NAMESPACE
     LOCAL_SHARED_LIBRARIES += libkeystore_aidl
