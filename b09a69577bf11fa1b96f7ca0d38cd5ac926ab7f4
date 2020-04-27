@@ -52,6 +52,23 @@
       "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82d25d4e_bda55547",
+        "filename": "partition.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2020-04-27T22:56:14Z",
+      "side": 1,
+      "message": "When we are having system already created either it is sar or not. https://github.com/TeamWin/android_bootable_recovery/blob/android-9.0/partition.cpp#L1075\nThen why unlinking and making again?",
+      "revId": "b09a69577bf11fa1b96f7ca0d38cd5ac926ab7f4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
