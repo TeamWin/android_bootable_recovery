@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b15ec257_6bc4bbfe",
+        "filename": "twrp.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2020-05-01T04:41:05Z",
+      "side": 1,
+      "message": "Suppose the point of allocating this on heap was to prevent use after detection, I moved it to stack and added the nested block to limit its scope.",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 41
+      },
+      "revId": "d11ed880ffc19d4e6da5e79fcf186aef0de6b50c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
