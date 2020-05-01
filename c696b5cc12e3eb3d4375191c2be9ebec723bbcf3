@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "514d3005_cbbebfe1",
+        "filename": "twinstall.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2020-05-01T05:25:35Z",
+      "side": 1,
+      "message": "Call UnMount_Main_Partitions() instead?",
+      "range": {
+        "startLine": 417,
+        "startChar": 23,
+        "endLine": 417,
+        "endChar": 38
+      },
+      "revId": "c696b5cc12e3eb3d4375191c2be9ebec723bbcf3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
