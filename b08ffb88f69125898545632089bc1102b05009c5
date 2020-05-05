@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7640e18_a2587f2e",
+        "filename": "partition.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2020-05-05T22:55:22Z",
+      "side": 1,
+      "message": "i think this should not be here, like if a device selects the TW_INCLUDE_FBE but it decrypts fde then it will create confusion. it should be below as after confirming that device is encrypted with fbe.",
+      "revId": "b08ffb88f69125898545632089bc1102b05009c5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
