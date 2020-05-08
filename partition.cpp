@@ -1,5 +1,5 @@
 /*
-	Copyright 2013 to 2017 TeamWin
+	Copyright 2013 to 2020 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -19,17 +19,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>
-#include <sys/vfs.h>
 #include <sys/mount.h>
+#include <sys/param.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/vfs.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <libgen.h>
-#include <zlib.h>
-#include <iostream>
-#include <sstream>
-#include <sys/param.h>
 #include <fcntl.h>
+#include <grp.h>
+#include <iostream>
+#include <libgen.h>
+#include <pwd.h>
+#include <zlib.h>
+#include <sstream>
 
 #include "cutils/properties.h"
 #include "libblkid/include/blkid.h"
@@ -2389,13 +2392,51 @@ bool TWPartition::Wipe_Data_Without_Wiping_Media() {
 
 	if (!Mount(true))
 		return false;
-
 	gui_msg("wiping_data=Wiping data without wiping /data/media ...");
+	ext4_encryption_policy policy = TWFunc::Get_Encryption_Policy(AB_CACHE_DIR);
 	ret = Wipe_Data_Without_Wiping_Media_Func(Mount_Point + "/");
+	if (TWFunc::get_cache_dir() == AB_CACHE_DIR) {
+		Recreate_AB_Cache_Dir(policy);
+	}
 	if (ret)
 		gui_msg("done=Done.");
 	return ret;
 #endif // ifdef TW_OEM_BUILD
+}
+
+void TWPartition::Recreate_AB_Cache_Dir(ext4_encryption_policy policy) {
+	struct passwd pd;
+	struct passwd *pwdptr = &pd;
+	struct passwd *tempPd;
+	char pwdBuf[512];
+	int uid = 0, gid = 0;
+
+	if ((getpwnam_r("system", pwdptr, pwdBuf, sizeof(pwdBuf), &tempPd)) != 0) {
+		LOGERR("unable to get system user id\n");
+	} else {
+		struct group grp;
+		struct group *grpptr = &grp;
+		struct group *tempGrp;
+		char grpBuf[512];
+
+		if ((getgrnam_r("cache", grpptr, grpBuf, sizeof(grpBuf), &tempGrp)) != 0) {
+			LOGERR("unable to get cache group id\n");
+		} else {
+			uid = pd.pw_uid;
+			gid = grp.gr_gid;
+			if (!TWFunc::Create_Dir_Recursive(AB_CACHE_DIR, S_IRWXU | S_IRWXG | S_IWGRP | S_IXGRP, uid, gid)) {
+				LOGERR("Unable to recreate %s\n", AB_CACHE_DIR);
+			}
+			if (setfilecon(AB_CACHE_DIR, "u:object_r:cache_file:s0") != 0) {	
+				LOGERR("Unable to set contexts for %s\n", AB_CACHE_DIR);
+			}
+			if (policy.version > 0) {
+				if (!TWFunc::Set_Encryption_Policy(AB_CACHE_DIR, policy)) {
+					LOGERR("Unable to set encryption policy for %s\n", AB_CACHE_DIR);
+				}
+			}
+		}
+	}
 }
 
 bool TWPartition::Wipe_Data_Without_Wiping_Media_Func(const string& parent __unused) {

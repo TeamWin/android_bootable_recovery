@@ -21,8 +21,10 @@
 
 #include <string>
 #include <vector>
+#include <ext4_utils/ext4_crypt.h>
 
 #include "twrpDigest/twrpDigest.hpp"
+#include "ext4crypt_tar.h"
 
 using namespace std;
 
@@ -47,6 +49,7 @@ enum Archive_Type {
 	ENCRYPTED,
 	COMPRESSED_ENCRYPTED
 };
+
 
 // Partition class
 class TWFunc
@@ -107,6 +110,8 @@ public:
 	static std::string get_cache_dir(); // return the cache partition existence
 	static void check_selinux_support(); // print whether selinux support is enabled to console
 	static bool Is_TWRP_App_In_System(); // Check if the TWRP app is installed in the system partition
+	static ext4_encryption_policy Get_Encryption_Policy(std::string path); // return encryption policy for path
+	static bool Set_Encryption_Policy(std::string path, ext4_encryption_policy policy); // set encryption policy for path
 
 private:
 	static void Copy_Log(string Source, string Destination);

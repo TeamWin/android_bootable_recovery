@@ -1315,4 +1315,34 @@ bool TWFunc::Is_TWRP_App_In_System() {
 	DataManager::SetValue("tw_app_installed_in_system", 0);
 	return false;
 }
+
+ext4_encryption_policy TWFunc::Get_Encryption_Policy(std::string path) {
+	ext4_encryption_policy eep;
+	if (!TWFunc::Path_Exists(path)) {
+		LOGERR("Unable to find %s to get policy\n", path.c_str());
+	}
+	if (e4crypt_policy_get_struct(path.c_str(), &eep)) {
+		char policy_hex[EXT4_KEY_DESCRIPTOR_SIZE_HEX];
+		policy_to_hex(eep.master_key_descriptor, policy_hex);
+		LOGINFO("policy: %s\n", policy_hex);
+	} else {
+		LOGERR("No policy set for path %s\n", path.c_str());
+	}
+	return eep;
+}
+
+bool TWFunc::Set_Encryption_Policy(std::string path, ext4_encryption_policy policy) {
+	if (!TWFunc::Path_Exists(path)) {
+		LOGERR("unable to find %s to set policy\n", path.c_str());
+		return false;
+	}
+	char binary_policy[EXT4_KEY_DESCRIPTOR_SIZE];
+	char policy_hex[EXT4_KEY_DESCRIPTOR_SIZE_HEX];
+	policy_to_hex(binary_policy, policy_hex);
+	if (!e4crypt_policy_set_struct(path.c_str(), &policy)) {
+		LOGERR("unable to set policy for path: %s\n", path.c_str());
+		return false;
+	}
+	return true;
+}
 #endif // ndef BUILD_TWRPTAR_MAIN
