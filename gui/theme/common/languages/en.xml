@@ -719,5 +719,6 @@
 		<string name="include_kernel_log">Include Kernel Log</string>
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
+		<string name="fbe_wipe_msg">WARNING: {1} recreated. FBE device should be booted into Android and not Recovery to set initial FBE policy after wipe.</string>
 	</resources>
 </language>
