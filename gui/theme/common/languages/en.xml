@@ -732,7 +732,11 @@
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+<<<<<<< HEAD   (0b25b1 Add support for multi-user decryption)
 		<string name="flash_ab_inactive">Flashing A/B zip to inactive slot: {1}</string>
 		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
+=======
+		<string name="fbe_wipe_msg">WARNING: {1} wiped. FBE device should be booted into Android and not Recovery to set initial FBE policy after wipe.</string>
+>>>>>>> CHANGE (a2bd7b factory reset: restore ext4 policy on /data/cache)
 	</resources>
 </language>
