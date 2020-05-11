@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5b92cf1_bf91a80b",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-05-11T20:03:30Z",
+      "side": 1,
+      "message": "If we merge in the fstab option patchset for wrappedkey, wouldn\u0027t it better to remove the 2nd call to Decrypt_FBE_DE since the property is checked for in e4crypt?",
+      "revId": "2421e48e6d8662c0273e2f5a8d3ae5eb2e321afe",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
