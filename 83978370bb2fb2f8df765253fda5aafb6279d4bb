@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be419bf9_c130354f",
+        "filename": "gui/theme/common/languages/en.xml",
+        "patchSetId": 22
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-05-15T23:37:59Z",
+      "side": 1,
+      "message": "can we move this after factory_reset_4?",
+      "revId": "83978370bb2fb2f8df765253fda5aafb6279d4bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31fe2948_00f3d5ec",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-05-15T23:37:59Z",
+      "side": 1,
+      "message": "can we use property_get with C++ to build the list?",
+      "revId": "83978370bb2fb2f8df765253fda5aafb6279d4bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
