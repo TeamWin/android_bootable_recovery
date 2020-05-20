@@ -52,6 +52,9 @@ ifeq ($(TARGET_USERIMAGES_USE_EXT4), true)
             system/extras/ext4_utils/include \
             bootable/recovery/crypto/ext4crypt
         LOCAL_SHARED_LIBRARIES += libext4_utils
+        ifeq ($(shell test $(PLATFORM_SDK_VERSION) -le 25; echo $$?),0)
+            LOCAL_CFLAGS += -DUSE_OLD_EXT4_INCLUDE
+        endif
     endif
 endif
 

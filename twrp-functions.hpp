@@ -21,7 +21,12 @@
 
 #include <string>
 #include <vector>
+
+#ifdef USE_OLD_EXT4_INCLUDE
+#include <ext4_crypt.h>
+#else
 #include <ext4_utils/ext4_crypt.h>
+#endif
 
 #include "twrpDigest/twrpDigest.hpp"
 #include "ext4crypt_tar.h"
