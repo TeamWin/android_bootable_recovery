@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03cd2993_3942ad00",
+        "filename": "partition.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-05-20T22:54:41Z",
+      "side": 1,
+      "message": "I am not sure TW_IS_FBE is getting set early enough. This line won\u0027t execute and decrypt FBE on marlin.\n\nAs far as I can see for whatever reason we set TW_IS_FBE in a separate if condition. Should we just set it in data.cpp if TW_INCLUDE_FBE is defined?\n\nI am not sure why the conditions are spread around for defining this however.\n\nI would like to see TW_INCLUDE_FBE setting TW_IS_FBE in data.cpp if defined and remove the setting of TW_IS_FBE from partition.cpp.",
+      "revId": "02eb75324c73a69fc9fc8fd482716375a6e97819",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
