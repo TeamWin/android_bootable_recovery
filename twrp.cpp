@@ -43,6 +43,7 @@ extern "C" {
 #include "twrp-functions.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
+
 #ifdef __ANDROID_API_N__
 #include <android-base/strings.h>
 #else
