@@ -43,7 +43,8 @@ extern "C" {
 #include "twrp-functions.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
-#ifdef __ANDROID_API_N__
+
+#if __ANDROID_API__ > 24
 #include <android-base/strings.h>
 #else
 #include <base/strings.h>

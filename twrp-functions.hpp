@@ -21,7 +21,12 @@
 
 #include <string>
 #include <vector>
+
+#ifdef ANDROID_API_LEVEL_H
+#include <ext4_crypt.h>
+#else
 #include <ext4_utils/ext4_crypt.h>
+#endif
 
 #include "twrpDigest/twrpDigest.hpp"
 #include "ext4crypt_tar.h"
