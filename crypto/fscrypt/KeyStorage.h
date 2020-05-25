@@ -19,7 +19,7 @@
 
 #include "Keymaster.h"
 #include "KeyBuffer.h"
-#include <ext4_utils/ext4_crypt.h>
+#include <cutils/multiuser.h>
 #include <string>
 
 namespace android {
