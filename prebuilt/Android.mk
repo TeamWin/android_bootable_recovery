@@ -506,11 +506,11 @@ LOCAL_MODULE := relink_init
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)
-RELINK_INIT := $(TARGET_RECOVERY_ROOT_OUT)/system/bin/init
+RELINK_INIT := $(call intermediates-dir-for,EXECUTABLES,init_second_stage.recovery)/init
 LOCAL_POST_INSTALL_CMD += $(RELINK) $(TARGET_RECOVERY_ROOT_OUT)/ $(RELINK_INIT) && \
-    mv $(TARGET_RECOVERY_ROOT_OUT)/system/bin/ueventd $(TARGET_RECOVERY_ROOT_OUT)/sbin/ && \
-    ln -sf /init $(TARGET_RECOVERY_ROOT_OUT)/sbin/init && \
-    ln -sf /init $(TARGET_RECOVERY_ROOT_OUT)/system/bin/init
+    $(RELINK) $(TARGET_RECOVERY_ROOT_OUT)/system/bin/ $(RELINK_INIT) && \
+    mv $(TARGET_RECOVERY_ROOT_OUT)/system/bin/ueventd $(TARGET_RECOVERY_ROOT_OUT)/sbin/
+
 LOCAL_REQUIRED_MODULES := init_second_stage.recovery reboot.recovery
 include $(BUILD_PHONY_PACKAGE)
 
