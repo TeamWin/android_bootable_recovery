@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93c32f82_0498018e",
+        "filename": "data.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-05-31T18:46:49Z",
+      "side": 1,
+      "message": "Why is boot also ignored?",
+      "revId": "bb94fbe35d8a1c3d2e690a18caa4525a1fc0ad62",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
