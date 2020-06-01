@@ -52,6 +52,23 @@
       "revId": "bb94fbe35d8a1c3d2e690a18caa4525a1fc0ad62",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c5aefb1_bb6ff495",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 3259,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-06-01T06:22:30Z",
+      "side": 1,
+      "message": "This should support both A-only \u0026 A/B device at the same time, not only for A/B.",
+      "revId": "bb94fbe35d8a1c3d2e690a18caa4525a1fc0ad62",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
