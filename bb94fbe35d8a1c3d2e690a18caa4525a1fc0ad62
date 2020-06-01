@@ -69,6 +69,24 @@
       "revId": "bb94fbe35d8a1c3d2e690a18caa4525a1fc0ad62",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20031405_d955e610",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 3259,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-01T14:19:13Z",
+      "side": 1,
+      "message": "I don\u0027t have any non a/b device that has a super partition. This will have to be tweaked in the future but I feel shouldn\u0027t block this patch being merged.",
+      "parentUuid": "4c5aefb1_bb6ff495",
+      "revId": "bb94fbe35d8a1c3d2e690a18caa4525a1fc0ad62",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
