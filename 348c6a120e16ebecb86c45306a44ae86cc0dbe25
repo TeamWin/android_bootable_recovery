@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e50d17e_6ef9c61c",
+        "filename": "twrp.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-06-02T14:04:08Z",
+      "side": 1,
+      "message": "It would be quite difficult for the users to mount other logical partitions without fstab, what about tracking all of them?\nIt should have odm, product and system_ext according to the document.",
+      "revId": "348c6a120e16ebecb86c45306a44ae86cc0dbe25",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
