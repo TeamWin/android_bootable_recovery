@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "dda234a7_7ebeb0f8",
+        "filename": "partition.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-03T18:02:23Z",
+      "side": 1,
+      "message": "Added ability to have super partitions set to Can_Be_Backed_Up to false.",
+      "parentUuid": "2427b65d_b00cf15f",
+      "revId": "36322feaba6e9c1f6fedd101a5fa3616859f9c21",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a73b234_1e8f5c99",
         "filename": "partitionmanager.cpp",
         "patchSetId": 8
