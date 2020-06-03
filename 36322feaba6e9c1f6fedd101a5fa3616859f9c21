@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2427b65d_b00cf15f",
+        "filename": "partition.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-06-03T00:34:16Z",
+      "side": 1,
+      "message": "There might be no need to wipe or backup logical partitions.",
+      "parentUuid": "635408e7_3d3b4029",
+      "revId": "36322feaba6e9c1f6fedd101a5fa3616859f9c21",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a73b234_1e8f5c99",
         "filename": "partitionmanager.cpp",
         "patchSetId": 8
