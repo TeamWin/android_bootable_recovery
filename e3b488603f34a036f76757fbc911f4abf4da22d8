@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "774f1a1b_9f466b6b",
+        "filename": "twrp.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-06-03T03:55:27Z",
+      "side": 0,
+      "message": "Rebase Mistake?",
+      "revId": "e3b488603f34a036f76757fbc911f4abf4da22d8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
