@@ -124,6 +124,7 @@ int write_to_file(const std::string& fn, const std::string& line) {
 }
 
 #ifndef TW_NO_HAPTICS
+#ifndef TW_HAPTICS_TSPDRV
 int vibrate(int timeout_ms)
 {
     if (timeout_ms > 10000) timeout_ms = 1000;
@@ -138,6 +139,7 @@ int vibrate(int timeout_ms)
 
     return 0;
 }
+#endif
 #endif
 
 /* Returns empty tokens */
