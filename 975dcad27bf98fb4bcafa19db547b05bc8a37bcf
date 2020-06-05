@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f413d156_be7d96a8",
+        "filename": "partition.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-06-05T10:21:40Z",
+      "side": 1,
+      "message": "case TWFLAG_LOGICAL:\n    break;",
+      "revId": "975dcad27bf98fb4bcafa19db547b05bc8a37bcf",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
