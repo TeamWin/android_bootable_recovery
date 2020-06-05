@@ -715,6 +715,7 @@ bool TWPartition::Decrypt_FBE_DE() {
 if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
+<<<<<<< HEAD   (4ee7cb Remove /system -> /system_root/system symlink in ZIP-install)
 		ExcludeAll(Mount_Point + "/convert_fbe");
 		ExcludeAll(Mount_Point + "/unencrypted");
 		//ExcludeAll(Mount_Point + "/system/users/0"); // we WILL need to retain some of this if multiple users are present or we just need to delete more folders for the extra users somewhere else
@@ -755,6 +756,56 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 			DataManager::SetValue("tw_crypto_display", "");
 			return true;
 		}
+=======
+	Is_FBE = true;
+	DataManager::SetValue(TW_IS_FBE, 1);
+	ExcludeAll(Mount_Point + "/convert_fbe");
+	ExcludeAll(Mount_Point + "/unencrypted");
+	ExcludeAll(Mount_Point + "/misc/vold/user_keys");
+	ExcludeAll(Mount_Point + "/system/gatekeeper.password.key");
+	ExcludeAll(Mount_Point + "/system/gatekeeper.pattern.key");
+	ExcludeAll(Mount_Point + "/system/locksettings.db");
+	ExcludeAll(Mount_Point + "/system/locksettings.db-wal");
+	ExcludeAll(Mount_Point + "/misc/gatekeeper");
+	ExcludeAll(Mount_Point + "/misc/keystore");
+	ExcludeAll(Mount_Point + "/drm/kek.dat");
+	ExcludeAll(Mount_Point + "/system_de/0/spblob");  // contains data needed to decrypt pixel 2
+	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
+	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
+	ExcludeAll(Mount_Point + "/cache");
+	int retry_count = 3;
+	while (!Decrypt_DE() && --retry_count)
+		usleep(2000);
+	if (retry_count > 0) {
+		property_set("ro.crypto.state", "encrypted");
+		Is_Encrypted = true;
+		Is_Decrypted = false;
+		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
+		string filename;
+		int pwd_type = Get_Password_Type(0, filename);
+		if (pwd_type < 0) {
+			LOGERR("This TWRP does not have synthetic password decrypt support\n");
+			pwd_type = 0;  // default password
+		}
+		PartitionManager.Parse_Users();  // after load_all_de_keys() to parse_users
+		std::vector<users_struct>::iterator iter;
+		std::vector<users_struct>* userList = PartitionManager.Get_Users_List();
+		for (iter = userList->begin(); iter != userList->end(); iter++) {
+			if (atoi((*iter).userId.c_str()) != 0) {
+				ExcludeAll(Mount_Point + "/system_de/" + (*iter).userId + "/spblob");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.password.key");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.pattern.key");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db-wal");
+			}
+		}
+		DataManager::SetValue(TW_CRYPTO_PWTYPE, pwd_type);
+		DataManager::SetValue("tw_crypto_pwtype_0", pwd_type);
+		DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
+		DataManager::SetValue("tw_crypto_display", "");
+		return true;
+	}
+>>>>>>> CHANGE (bf0b0f multiuser: Parse users only when Decrypt_DE runs successfull)
 #else
 		LOGERR("FBE found but FBE support not present in TWRP\n");
 #endif

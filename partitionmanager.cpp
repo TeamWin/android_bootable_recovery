@@ -1692,7 +1692,98 @@ void TWPartitionManager::Post_Decrypt(const string& Block_Device) {
 		LOGERR("Unable to locate data partition.\n");
 }
 
+<<<<<<< HEAD   (4ee7cb Remove /system -> /system_root/system symlink in ZIP-install)
 int TWPartitionManager::Decrypt_Device(string Password) {
+=======
+void TWPartitionManager::Parse_Users() {
+#ifdef TW_INCLUDE_FBE
+	char user_check_result[PROPERTY_VALUE_MAX];
+	for (int userId = 0; userId <= 9999; userId++) {
+		string prop = "twrp.user." + to_string(userId) + ".decrypt";
+		property_get(prop.c_str(), user_check_result, "-1");
+		if (strcmp(user_check_result, "-1") != 0) {
+			if (userId < 0 || userId > 9999) {
+				LOGINFO("Incorrect user id %d\n", userId);
+				continue;
+			}
+			struct users_struct user;
+			user.userId = to_string(userId);
+
+			// Attempt to get name of user. Fallback to user ID if this fails.
+			char* userFile = PageManager::LoadFileToBuffer("/data/system/users/" + to_string(userId) + ".xml", NULL);
+			if (userFile == NULL) 
+				user.userName = to_string(userId);
+			else {
+				xml_document<> *userXml = new xml_document<>();
+				userXml->parse<0>(userFile);
+				xml_node<>* userNode = userXml->first_node("user");
+				if (userNode == nullptr) {
+					user.userName = to_string(userId);
+				} else {
+					xml_node<>* nameNode = userNode->first_node("name");
+					if (nameNode == nullptr)
+						user.userName = to_string(userId);
+					else {
+						string userName = nameNode->value();
+						user.userName = userName + " (" + to_string(userId) + ")";
+					}
+				}
+			}
+
+			string filename;
+			user.type = Get_Password_Type(userId, filename);
+
+			user.isDecrypted = false;
+			if (strcmp(user_check_result, "1") == 0)
+				user.isDecrypted = true;
+			Users_List.push_back(user);
+		}
+	}
+	Check_Users_Decryption_Status();
+#endif
+}
+
+std::vector<users_struct>* TWPartitionManager::Get_Users_List() {
+	return &Users_List;
+}
+
+void TWPartitionManager::Mark_User_Decrypted(int userID) {
+#ifdef TW_INCLUDE_FBE
+	std::vector<users_struct>::iterator iter;
+	for (iter = Users_List.begin(); iter != Users_List.end(); iter++) {
+		if (atoi((*iter).userId.c_str()) == userID) {
+			(*iter).isDecrypted = true;
+			string user_prop_decrypted = "twrp.user." + to_string(userID) + ".decrypt";
+			property_set(user_prop_decrypted.c_str(), "1");
+			break;
+		}
+	}
+	Check_Users_Decryption_Status();
+#endif
+}
+
+void TWPartitionManager::Check_Users_Decryption_Status() {
+#ifdef TW_INCLUDE_FBE
+	int all_is_decrypted = 1;
+	std::vector<users_struct>::iterator iter;
+	for (iter = Users_List.begin(); iter != Users_List.end(); iter++) {
+		if (!(*iter).isDecrypted) {
+			LOGINFO("User %s is not decrypted.\n", (*iter).userId.c_str());
+			all_is_decrypted = 0;
+			break;
+		}
+	}
+	if (all_is_decrypted == 1) {
+		LOGINFO("All found users are decrypted.\n");
+		DataManager::SetValue("tw_all_users_decrypted", "1");
+		property_set("twrp.all.users.decrypted", "true");
+	} else
+		DataManager::SetValue("tw_all_users_decrypted", "0");
+#endif
+}
+
+int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
+>>>>>>> CHANGE (bf0b0f multiuser: Parse users only when Decrypt_DE runs successfull)
 #ifdef TW_INCLUDE_CRYPTO
 	char crypto_state[PROPERTY_VALUE_MAX], crypto_blkdev[PROPERTY_VALUE_MAX];
 	std::vector<TWPartition*>::iterator iter;
