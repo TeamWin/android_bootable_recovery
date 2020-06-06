@@ -512,16 +512,23 @@ else
 endif
 endif
 ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
-ifeq ($(shell test $(CM_PLATFORM_SDK_VERSION) -ge 3; echo $$?),0)
-    TWRP_REQUIRED_MODULES += \
-        fsck.f2fs \
-        mkfs.f2fs
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 3; echo $$?),0)
+    TWRP_REQUIRED_MODULES += fsck.f2fs
 endif
-ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
-    TWRP_REQUIRED_MODULES += sload.f2fs \
-        libfs_mgr \
-        fs_mgr \
-        libinit
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 29; echo $$?),0)
+    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 3; echo $$?),0)
+        TWRP_REQUIRED_MODULES += mkfs.f2fs
+    endif
+    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
+        TWRP_REQUIRED_MODULES += sload.f2fs \
+            libfs_mgr \
+            fs_mgr \
+            libinit
+    endif
+else
+    TWRP_REQUIRED_MODULES += \
+        make_f2fs \
+        sload_f2fs
 endif
 endif
 
