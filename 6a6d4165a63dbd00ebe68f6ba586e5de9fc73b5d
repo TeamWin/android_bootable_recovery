@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a96412f5_6eccb2c9",
+        "filename": "gui/gui.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:50:46Z",
+      "side": 1,
+      "message": "Instead of creating a void version of an int, try changing the argument in gui_startPage to\n\nextern \"C\" int gui_startPage(const char *page_name, (__attribute__((unused)) const int allow_commands, int stop_on_page_done",
+      "revId": "6a6d4165a63dbd00ebe68f6ba586e5de9fc73b5d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
