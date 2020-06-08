@@ -58,6 +58,18 @@ else
     LOCAL_SHARED_LIBRARIES += libminzip
     LOCAL_CFLAGS += -DUSE_MINZIP
 endif
+<<<<<<< HEAD   (32cbab apex: mount up apex files into /sbin for library access)
+=======
+ifeq ($(TARGET_USERIMAGES_USE_EXT4), true)
+    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -le 28; echo $$?),0)
+        LOCAL_C_INCLUDES += system/extras/ext4_utils \
+            system/extras/ext4_utils/include \
+            $(LOCAL_PATH)/../crypto/ext4crypt
+        LOCAL_SHARED_LIBRARIES += libext4_utils
+    endif
+endif
+
+>>>>>>> CHANGE (186eb7 ext4crypt: fix include location for recovery-twrp in lineage)
 LOCAL_MODULE := libguitwrp
 
 #TWRP_EVENT_LOGGING := true

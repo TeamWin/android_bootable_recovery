@@ -187,7 +187,15 @@ endif
 ifeq ($(TARGET_USERIMAGES_USE_EXT4), true)
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 28; echo $$?),0)
         LOCAL_CFLAGS += -DUSE_EXT4
+<<<<<<< HEAD   (32cbab apex: mount up apex files into /sbin for library access)
         LOCAL_C_INCLUDES += system/extras/ext4_utils
+=======
+    endif
+    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -le 28; echo $$?),0)
+        LOCAL_C_INCLUDES += system/extras/ext4_utils \
+            system/extras/ext4_utils/include \
+	    $(commands_TWRP_local_path)/crypto/ext4crypt
+>>>>>>> CHANGE (186eb7 ext4crypt: fix include location for recovery-twrp in lineage)
         LOCAL_SHARED_LIBRARIES += libext4_utils
         ifneq ($(wildcard external/lz4/Android.mk),)
             #LOCAL_STATIC_LIBRARIES += liblz4
