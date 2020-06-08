@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dae619d_4fdd5618",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "Can we move this code into a new file and call it tspdrv.cpp?\n\nWe can then ifdef this code to not run if TSPDRV is enabled and call the other code instead.\nThis should help with readability of this inserted into events.cpp as it is now.",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbc21d73_92268353",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "043913fd_c167d040",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4860bf9_17bfb67b",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f917b0e_cb01fe6f",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e548929_3584261a",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "079141ea_1c137d34",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e6f1a69_7e164b11",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-08T14:05:53Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "503804bddb1d9623cb40e7f0588ac65f06e26229",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
