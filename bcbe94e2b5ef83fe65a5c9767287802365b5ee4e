@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e08b9980_5c6a4c29",
+        "filename": "data.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-09T20:39:49Z",
+      "side": 1,
+      "message": "Can we add a check for non a-b devices before creating the directory?",
+      "revId": "bcbe94e2b5ef83fe65a5c9767287802365b5ee4e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
