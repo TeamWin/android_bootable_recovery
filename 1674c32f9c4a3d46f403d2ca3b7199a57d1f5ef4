@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0dcb4617_a773d6e5",
+        "filename": "prebuilt/relink.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-09T23:08:49Z",
+      "side": 1,
+      "message": "Actually why do we need to modify lib64 and lib directories? Libraries don\u0027t have headers like binaries as far as I know.",
+      "revId": "1674c32f9c4a3d46f403d2ca3b7199a57d1f5ef4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
