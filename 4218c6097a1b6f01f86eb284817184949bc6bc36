@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b7ae1640_b891b5d9",
+        "filename": "install.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-09T14:25:58Z",
+      "side": 1,
+      "message": "You might want to remove this so future AOSP merges can be done without conflict. I believe twinstall.cpp is the only one TWRP uses.",
+      "revId": "4218c6097a1b6f01f86eb284817184949bc6bc36",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a7d3a1b_9140d217",
         "filename": "twinstall.cpp",
         "patchSetId": 4
