@@ -16,6 +16,24 @@
       "revId": "1674c32f9c4a3d46f403d2ca3b7199a57d1f5ef4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c07ba302_0aad8aa8",
+        "filename": "prebuilt/relink.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2020-06-10T06:57:59Z",
+      "side": 1,
+      "message": "They don\u0027t have headers but the path which they carry like /system/xxx needed to be /sbin/",
+      "parentUuid": "0dcb4617_a773d6e5",
+      "revId": "1674c32f9c4a3d46f403d2ca3b7199a57d1f5ef4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
