@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "49db8ac2_011e02a1",
+        "filename": "gui/Android.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 37
+      },
+      "writtenOn": "2020-06-10T17:54:28Z",
+      "side": 1,
+      "message": "Yes, all devices will see .ozip files in the install menu and if they will try to flash the .ozip files could happend 2 options: the file has a wrong extension and it will be flashed as normal .zip; the file is a real .ozip file and the flash will stop because the key ( setted to 0 ) will be wrong.",
+      "parentUuid": "2ef9fe71_3fd4d1f2",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95a23f53_cdf4ef24",
         "filename": "gui/action.cpp",
         "patchSetId": 10
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "208f9c78_1a670404",
+        "filename": "gui/action.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 37
+      },
+      "writtenOn": "2020-06-10T17:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95a23f53_cdf4ef24",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0900035_b703e253",
         "filename": "gui/action.cpp",
         "patchSetId": 10
@@ -50,6 +86,24 @@
       "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96cc5a21_d1cd38a5",
+        "filename": "gui/action.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 37
+      },
+      "writtenOn": "2020-06-10T17:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0900035_b703e253",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     },
     {
       "key": {
