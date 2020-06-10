@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef9fe71_3fd4d1f2",
+        "filename": "gui/Android.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-10T15:23:37Z",
+      "side": 1,
+      "message": "will this condition ever be used in twrp for a key of 0? If not please remove.",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95a23f53_cdf4ef24",
+        "filename": "gui/action.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-10T15:23:37Z",
+      "side": 1,
+      "message": "please add spacing around \u003d\u003d and tab if statement to be indented under for statement",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0900035_b703e253",
+        "filename": "gui/action.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-10T15:23:37Z",
+      "side": 1,
+      "message": "fix tabbing",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08be5a84_9000c86e",
+        "filename": "ozip_decrypt/ozip_decrypt.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-10T15:23:37Z",
+      "side": 1,
+      "message": "Can you add the license file for this project to show it\u0027s not part of the TWRP source?",
+      "revId": "f760d708f946f59c0c8efd73dfc63b3776f1030c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
