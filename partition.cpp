@@ -1704,6 +1704,15 @@ bool TWPartition::Wipe(string New_File_System) {
 	}
 
 	if (wiped) {
+<<<<<<< HEAD   (712400 fastbootd: relink for startup)
+=======
+		if (Mount_Point == "/cache" && TWFunc::get_log_dir() != DATA_LOGS_DIR)
+			DataManager::Output_Version();
+
+		if (TWFunc::Path_Exists("/.layout_version") && Mount(false))
+			TWFunc::copy_file("/.layout_version", Layout_Filename, 0600);
+
+>>>>>>> CHANGE (25371a Fix up cache wipe issue in A-Only device)
 		if (update_crypt) {
 			Setup_File_System(false);
 			if (Is_Encrypted && !Is_Decrypted) {
