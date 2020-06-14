@@ -1704,6 +1704,9 @@ bool TWPartition::Wipe(string New_File_System) {
 	}
 
 	if (wiped) {
+		if (Mount_Point == "/cache" && TWFunc::get_log_dir() != DATA_LOGS_DIR)
+			DataManager::Output_Version();
+
 		if (update_crypt) {
 			Setup_File_System(false);
 			if (Is_Encrypted && !Is_Decrypted) {
