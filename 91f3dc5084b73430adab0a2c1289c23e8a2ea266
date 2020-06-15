@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef326ed_d1f20c5a",
+        "filename": "partition.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2020-06-15T19:11:16Z",
+      "side": 1,
+      "message": "Metadata should also be wiped.",
+      "revId": "91f3dc5084b73430adab0a2c1289c23e8a2ea266",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
