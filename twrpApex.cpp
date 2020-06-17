@@ -97,13 +97,13 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 	std::string loop_device = "/dev/block/loop" + std::to_string(loop_device_number);
 	int loop_fd = open(loop_device.c_str(), O_RDONLY);
 	if (loop_fd < 0) {
-		LOGERR("unable to open loop device: %s\n", loop_device.c_str());
+		LOGERR("unable to open loop device: %s: %s\n", loop_device.c_str(), strerror(errno));
 		close(fd);
 		return false;
 	}
 
 	if (ioctl(loop_fd, LOOP_SET_FD, fd) < 0) {
-		LOGERR("failed to mount %s to loop device %s\n", fileToMount.c_str(), loop_device.c_str());
+		LOGERR("failed to mount %s to loop device %s: %s\n", fileToMount.c_str(), loop_device.c_str(), strerror(errno));
 		close(fd);
 		close(loop_fd);
 		return false;
