@@ -3108,7 +3108,9 @@ bool TWPartitionManager::Prepare_Empty_Folder(const std::string& Folder) {
 	return TWFunc::Recursive_Mkdir(Folder);
 }
 
-bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Temp_Folder_Destination, const bool Create_Backup, const std::string& Backup_Name) {
+bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Temp_Folder_Destination,
+										 const bool Create_Backup, const std::string& Backup_Name,
+										 bool Retain_Ramdisk_Format) {
 	if (!Part) {
 		LOGERR("Partition was null!\n");
 		return false;
@@ -3150,10 +3152,11 @@ bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Te
 			return false;
 		}
 	}
-	return Prepare_Repack(target_image, Temp_Folder_Destination, false, false);
+	return Prepare_Repack(target_image, Temp_Folder_Destination, false, Retain_Ramdisk_Format);
 }
 
-bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const std::string& Temp_Folder_Destination, const bool Copy_Source, const bool Create_Destination) {
+bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const std::string& Temp_Folder_Destination, 
+										const bool Copy_Source, const bool Create_Destination, bool Retain_Ramdisk_Format) {
 	if (Create_Destination) {
 		if (!Prepare_Empty_Folder(Temp_Folder_Destination))
 			return false;
@@ -3163,12 +3166,18 @@ bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const st
 		if (TWFunc::copy_file(Source_Path, destination, 0644))
 			return false;
 	}
-	std::string command = "cd " + Temp_Folder_Destination + " && /sbin/magiskboot unpack -h '" + Source_Path +"'";
-	if (TWFunc::Exec_Cmd(command) != 0) {
+	std::string command = "cd " + Temp_Folder_Destination + " && /sbin/magiskboot unpack -h ";
+	if (Retain_Ramdisk_Format)
+		command = command + "-n ";
+	command = command + "'" + Source_Path +"'";
+
+	std::string magisk_unpack_output;
+	if (TWFunc::Exec_Cmd(command, magisk_unpack_output, true) != 0) {
 		LOGINFO("Error unpacking %s!\n", Source_Path.c_str());
 		gui_msg(Msg(msg::kError, "unpack_error=Error unpacking image."));
 		return false;
 	}
+	LOGINFO("magisk_unpack_output: %s\n", magisk_unpack_output.c_str());
 	return true;
 }
 
@@ -3185,11 +3194,11 @@ bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const st
 		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/boot"));
 		return false;
 	}
-	if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
+	if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack"), false))
 		return false;
 	DataManager::SetProgress(.25);
 	gui_msg(Msg("unpacking_image=Unpacking {1}...")(Target_Image));
-	if (!PartitionManager.Prepare_Repack(Target_Image, REPACK_NEW_DIR, true))
+	if (!PartitionManager.Prepare_Repack(Target_Image, REPACK_NEW_DIR, false))
 		return false;
 	DataManager::SetProgress(.5);
 	gui_msg(Msg("repacking_image=Repacking {1}...")(part->Display_Name));
@@ -3237,7 +3246,7 @@ bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const st
 		else
 			Set_Active_Slot("A");
 		DataManager::SetProgress(.25);
-		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
+		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack"), false))
 			return false;
 		if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
 			LOGERR("Failed to copy ramdisk\n");
@@ -3257,10 +3266,10 @@ bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const st
 			return false;
 		}
 		DataManager::SetProgress(1);
-		TWFunc::removeDir(REPACK_ORIG_DIR, false);
+		// TWFunc::removeDir(REPACK_ORIG_DIR, false);
 		Set_Active_Slot(Current_Slot);
 	}
-	TWFunc::removeDir(REPACK_NEW_DIR, false);
+	// TWFunc::removeDir(REPACK_NEW_DIR, false);
 	return true;
 }
 
