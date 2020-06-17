@@ -2195,7 +2195,7 @@ int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 			gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/boot"));
 			goto exit;
 		}
-		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, DataManager::GetIntValue("tw_repack_backup_first") != 0, gui_lookup("repack", "Repack")))
+		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, DataManager::GetIntValue("tw_repack_backup_first") != 0, gui_lookup("repack", "Repack"), false))
 			goto exit;
 		DataManager::SetProgress(.25);
 		gui_msg("fixing_recovery_loop_patch=Patching kernel...");

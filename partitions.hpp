@@ -411,6 +411,8 @@ private:
 	int mtp_write_fd;
 	pid_t tar_fork_pid;                                                       // PID of twrpTar fork
 	Backup_Method_enum Backup_Method;                                         // Method used for backup
+	std::string original_ramdisk_format;                                      // Ramdisk format of boot partition
+	std::string repacked_ramdisk_format;                                      // Ramdisk format of boot image to repack from
 
 private:
 	std::vector<TWPartition*> Partitions;                                     // Vector list of all partitions
