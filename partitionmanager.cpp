@@ -3108,7 +3108,9 @@ bool TWPartitionManager::Prepare_Empty_Folder(const std::string& Folder) {
 	return TWFunc::Recursive_Mkdir(Folder);
 }
 
-bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Temp_Folder_Destination, const bool Create_Backup, const std::string& Backup_Name) {
+bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Temp_Folder_Destination,
+										 const bool Create_Backup, const std::string& Backup_Name,
+										 bool Retain_Ramdisk_Format) {
 	if (!Part) {
 		LOGERR("Partition was null!\n");
 		return false;
@@ -3153,7 +3155,8 @@ bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Te
 	return Prepare_Repack(target_image, Temp_Folder_Destination, false, false);
 }
 
-bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const std::string& Temp_Folder_Destination, const bool Copy_Source, const bool Create_Destination) {
+bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const std::string& Temp_Folder_Destination, 
+										const bool Copy_Source, const bool Create_Destination, bool Retain_Ramdisk_Format) {
 	if (Create_Destination) {
 		if (!Prepare_Empty_Folder(Temp_Folder_Destination))
 			return false;
@@ -3163,7 +3166,11 @@ bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const st
 		if (TWFunc::copy_file(Source_Path, destination, 0644))
 			return false;
 	}
-	std::string command = "cd " + Temp_Folder_Destination + " && /sbin/magiskboot unpack -h '" + Source_Path +"'";
+	std::string command = "cd " + Temp_Folder_Destination + " && /sbin/magiskboot unpack -h ";
+	if (Retain_Ramdisk_Format)
+		command = command + "-n ";
+	command = command + "'" + Source_Path +"'";
+
 	if (TWFunc::Exec_Cmd(command) != 0) {
 		LOGINFO("Error unpacking %s!\n", Source_Path.c_str());
 		gui_msg(Msg(msg::kError, "unpack_error=Error unpacking image."));
@@ -3185,7 +3192,7 @@ bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const st
 		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/boot"));
 		return false;
 	}
-	if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
+	if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack"), true))
 		return false;
 	DataManager::SetProgress(.25);
 	gui_msg(Msg("unpacking_image=Unpacking {1}...")(Target_Image));
@@ -3237,7 +3244,7 @@ bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const st
 		else
 			Set_Active_Slot("A");
 		DataManager::SetProgress(.25);
-		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
+		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack"), true))
 			return false;
 		if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
 			LOGERR("Failed to copy ramdisk\n");
