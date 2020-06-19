@@ -424,7 +424,12 @@ int main(int argc, char **argv) {
 	// Reboot
 	TWFunc::Update_Intent_File(Send_Intent);
 	delete adb_bu_fifo;
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
 	TWFunc::Update_Log_File();
+=======
+	if (!TWFunc::Is_Data_Wiped())
+		TWFunc::Update_Log_File();
+>>>>>>> CHANGE (2df249 Is_Data_Wiped: simplify function signature)
 	gui_msg(Msg("rebooting=Rebooting..."));
 	string Reboot_Arg;
 	DataManager::GetValue("tw_reboot_arg", Reboot_Arg);
