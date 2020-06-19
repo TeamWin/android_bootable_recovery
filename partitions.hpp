@@ -212,6 +212,10 @@ private:
 	bool Wipe_NTFS();                                                         // Uses mkntfs to wipe
 	bool Wipe_Data_Without_Wiping_Media();                                    // Uses rm -rf to wipe but does not wipe /data/media
 	bool Wipe_Data_Without_Wiping_Media_Func(const string& parent);           // Uses rm -rf to wipe but does not wipe /data/media
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
+=======
+	bool Recreate_Logs_Dir();                                                 // Recreate TWRP_AB_LOGS_DIR after wipe
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 	void Wipe_Crypto_Key();                                                   // Wipe crypto key from either footer or block device
 	bool Backup_Tar(PartitionSettings *part_settings, pid_t *tar_fork_pid);   // Backs up using tar for file systems
 	bool Backup_Image(PartitionSettings *part_settings);                      // Backs up using raw read/write for emmc memory types

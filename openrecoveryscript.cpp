@@ -62,10 +62,16 @@ OpenRecoveryScript::VoidFunction OpenRecoveryScript::call_after_cli_command;
 #define SCRIPT_COMMAND_SIZE 512
 
 int OpenRecoveryScript::check_for_script_file(void) {
-	std::string orsFile = TWFunc::get_cache_dir() + "/recovery/openrecoveryscript";
+	std::string logDir = TWFunc::get_log_dir();
+	std::string orsFile;
+	if (logDir == DATA_LOGS_DIR)
+		orsFile = "/data/cache";
+	else
+		orsFile = logDir;
+	orsFile += "/recovery/openrecoveryscript";
 	if (!PartitionManager.Mount_By_Path(orsFile, false)) {
-		LOGINFO("Unable to mount %s for OpenRecoveryScript support.\n", TWFunc::get_cache_dir().c_str());
-		gui_msg(Msg(msg::kError, "unable_to_mount=Unable to mount {1}")(TWFunc::get_cache_dir()));
+		LOGINFO("Unable to mount %s for OpenRecoveryScript support.\n", logDir.c_str());
+		gui_msg(Msg(msg::kError, "unable_to_mount=Unable to mount {1}")(logDir.c_str()));
 		return 0;
 	}
 	if (TWFunc::Path_Exists(orsFile)) {
@@ -659,6 +665,7 @@ void OpenRecoveryScript::Run_CLI_Command(const char* command) {
 		} else {
 			OpenRecoveryScript::run_script_file();
 		}
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
 	} else if (strlen(command) > 5 && strncmp(command, "get", 3) == 0) {
 		const char* varname = command + 4;
 		string value;
@@ -672,6 +679,37 @@ void OpenRecoveryScript::Run_CLI_Command(const char* command) {
 			std::string orsFile = TWFunc::get_cache_dir() + "/openrecoveryscript";
 			if (TWFunc::Path_Exists(orsFile)) {
 				Run_OpenRecoveryScript_Action();
+=======
+	} else if (cmd_str == "get") {
+		if (parts.size() > 1) {
+			string varname = parts[1];
+			string value;
+			DataManager::GetValue(varname, value);
+			gui_print("%s = %s\n", varname.c_str(), value.c_str());
+		} else {
+			LOGINFO("Missing parameter: var name\n");
+		}
+	} else if (cmd_str == "decrypt") {
+		// twrp cmd cannot decrypt a password with space, should decrypt on gui
+		if (parts.size() == 1) {
+			gui_err("no_pwd=No password provided.");
+		} else {
+			string pass = parts[1];
+			string userid = "0";
+			if (parts.size() > 2)
+				userid = parts[2];
+
+			gui_msg("decrypt_cmd=Attempting to decrypt data partition or user data via command line.");
+			if (PartitionManager.Decrypt_Device(pass, atoi(userid.c_str())) == 0) {
+				// set_page_done = 1;  // done by singleaction_page anyway
+				std::string logDir = TWFunc::get_log_dir();
+				if (logDir == DATA_LOGS_DIR)
+					logDir = "/data/cache";
+				std::string orsFile = logDir + "/openrecoveryscript";
+				if (TWFunc::Path_Exists(orsFile)) {
+					Run_OpenRecoveryScript_Action();
+				}
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 			}
 		}
 	} else if (OpenRecoveryScript::Insert_ORS_Command(command)) {

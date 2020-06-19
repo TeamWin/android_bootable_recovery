@@ -593,11 +593,11 @@ void TWFunc::Copy_Log(string Source, string Destination) {
 }
 
 void TWFunc::Update_Log_File(void) {
-	std::string recoveryDir = get_cache_dir() + "recovery/";
+	std::string recoveryDir = get_log_dir() + "recovery/";
 
-	if (get_cache_dir() == NON_AB_CACHE_DIR) {
-		if (!PartitionManager.Mount_By_Path(NON_AB_CACHE_DIR, false)) {
-			LOGINFO("Failed to mount %s for TWFunc::Update_Log_File\n", NON_AB_CACHE_DIR);
+	if (get_log_dir() == CACHE_LOGS_DIR) {
+		if (!PartitionManager.Mount_By_Path(CACHE_LOGS_DIR, false)) {
+			LOGINFO("Failed to mount %s for TWFunc::Update_Log_File\n", CACHE_LOGS_DIR);
 		}
 	}
 
@@ -629,7 +629,7 @@ void TWFunc::Update_Log_File(void) {
 		}
 	}
 
-	if (get_cache_dir() == NON_AB_CACHE_DIR) {
+	if (get_log_dir() == CACHE_LOGS_DIR) {
 		if (PartitionManager.Mount_By_Path("/cache", false)) {
 			if (unlink("/cache/recovery/command") && errno != ENOENT) {
 				LOGINFO("Can't unlink %s\n", "/cache/recovery/command");
@@ -650,6 +650,10 @@ int TWFunc::tw_reboot(RebootCommand command)
 {
 	DataManager::Flush();
 	Update_Log_File();
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
+=======
+
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 	// Always force a sync before we reboot
 	sync();
 
@@ -1255,20 +1259,20 @@ int TWFunc::stream_adb_backup(string &Restore_Name) {
 	return ret;
 }
 
-std::string TWFunc::get_cache_dir() {
-	if (PartitionManager.Find_Partition_By_Path(NON_AB_CACHE_DIR) == NULL) {
-		if (PartitionManager.Find_Partition_By_Path(AB_CACHE_DIR) == NULL) {
-			if (PartitionManager.Find_Partition_By_Path(PERSIST_CACHE_DIR) == NULL) {
+std::string TWFunc::get_log_dir() {
+	if (PartitionManager.Find_Partition_By_Path(CACHE_LOGS_DIR) == NULL) {
+		if (PartitionManager.Find_Partition_By_Path(DATA_LOGS_DIR) == NULL) {
+			if (PartitionManager.Find_Partition_By_Path(PERSIST_LOGS_DIR) == NULL) {
 				LOGINFO("Unable to find a directory to store TWRP logs.");
 				return "";
 			}
-			return PERSIST_CACHE_DIR;
+			return PERSIST_LOGS_DIR;
 		} else {
-			return AB_CACHE_DIR;
+			return DATA_LOGS_DIR;
 		}
 	}
 	else {
-		return NON_AB_CACHE_DIR;
+		return CACHE_LOGS_DIR;
 	}
 }
 
@@ -1291,12 +1295,12 @@ void TWFunc::check_selinux_support() {
 		printf("SELinux contexts loaded from /file_contexts\n");
 	{ // Check to ensure SELinux can be supported by the kernel
 		char *contexts = NULL;
-		std::string cacheDir = TWFunc::get_cache_dir();
+		std::string cacheDir = TWFunc::get_log_dir();
 		std::string se_context_check = cacheDir + "recovery/";
 		int ret = 0;
 
-		if (cacheDir == NON_AB_CACHE_DIR) {
-			PartitionManager.Mount_By_Path(NON_AB_CACHE_DIR, false);
+		if (cacheDir == CACHE_LOGS_DIR) {
+			PartitionManager.Mount_By_Path(CACHE_LOGS_DIR, false);
 		}
 		if (TWFunc::Path_Exists(se_context_check)) {
 			ret = lgetfilecon(se_context_check.c_str(), &contexts);
@@ -1356,4 +1360,23 @@ void TWFunc::List_Mounts() {
 	}
 }
 
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
+=======
+bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy) {
+#ifdef TW_INCLUDE_FBE
+	if (!TWFunc::Path_Exists(path)) {
+		LOGERR("unable to find %s to set policy\n", path.c_str());
+		return false;
+	}
+	char binary_policy[EXT4_KEY_DESCRIPTOR_SIZE];
+	char policy_hex[EXT4_KEY_DESCRIPTOR_SIZE_HEX];
+	policy_to_hex(binary_policy, policy_hex);
+	if (!e4crypt_policy_set_struct(path.c_str(), &policy)) {
+		LOGERR("unable to set policy for path: %s\n", path.c_str());
+		return false;
+	}
+#endif
+	return true;
+}
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 #endif // ndef BUILD_TWRPTAR_MAIN

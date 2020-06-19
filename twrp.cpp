@@ -344,7 +344,9 @@ int main(int argc, char **argv) {
 	GUIConsole::Translate_Now();
 
 	// Run any outstanding OpenRecoveryScript
-	std::string cacheDir = TWFunc::get_cache_dir();
+	std::string cacheDir = TWFunc::get_log_dir();
+	if (cacheDir == DATA_LOGS_DIR)
+		cacheDir = "/data/cache";
 	std::string orsFile = cacheDir + "/recovery/openrecoveryscript";
 	if ((DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0 || SkipDecryption) && (TWFunc::Path_Exists(SCRIPT_FILE_TMP) || TWFunc::Path_Exists(orsFile))) {
 		OpenRecoveryScript::Run_OpenRecoveryScript();

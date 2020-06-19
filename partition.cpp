@@ -733,6 +733,7 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		DataManager::SetValue(TW_IS_FBE, 1);
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
 		ExcludeAll(Mount_Point + "/convert_fbe");
 		ExcludeAll(Mount_Point + "/unencrypted");
 		//ExcludeAll(Mount_Point + "/system/users/0"); // we WILL need to retain some of this if multiple users are present or we just need to delete more folders for the extra users somewhere else
@@ -767,6 +768,46 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 			if (pwd_type < 0) {
 				LOGERR("This TWRP does not have synthetic password decrypt support\n");
 				pwd_type = 0; // default password
+=======
+	Is_FBE = true;
+	ExcludeAll(Mount_Point + "/convert_fbe");
+	ExcludeAll(Mount_Point + "/unencrypted");
+	ExcludeAll(Mount_Point + "/misc/vold/user_keys");
+	ExcludeAll(Mount_Point + "/system/gatekeeper.password.key");
+	ExcludeAll(Mount_Point + "/system/gatekeeper.pattern.key");
+	ExcludeAll(Mount_Point + "/system/locksettings.db");
+	ExcludeAll(Mount_Point + "/system/locksettings.db-wal");
+	ExcludeAll(Mount_Point + "/misc/gatekeeper");
+	ExcludeAll(Mount_Point + "/misc/keystore");
+	ExcludeAll(Mount_Point + "/drm/kek.dat");
+	ExcludeAll(Mount_Point + "/system_de/0/spblob");  // contains data needed to decrypt pixel 2
+	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
+	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
+	int retry_count = 3;
+	while (!Decrypt_DE() && --retry_count)
+		usleep(2000);
+	if (retry_count > 0) {
+		property_set("ro.crypto.state", "encrypted");
+		Is_Encrypted = true;
+		Is_Decrypted = false;
+		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
+		string filename;
+		int pwd_type = Get_Password_Type(0, filename);
+		if (pwd_type < 0) {
+			LOGERR("This TWRP does not have synthetic password decrypt support\n");
+			pwd_type = 0;  // default password
+		}
+		PartitionManager.Parse_Users();  // after load_all_de_keys() to parse_users
+		std::vector<users_struct>::iterator iter;
+		std::vector<users_struct>* userList = PartitionManager.Get_Users_List();
+		for (iter = userList->begin(); iter != userList->end(); iter++) {
+			if (atoi((*iter).userId.c_str()) != 0) {
+				ExcludeAll(Mount_Point + "/system_de/" + (*iter).userId + "/spblob");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.password.key");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.pattern.key");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db");
+				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db-wal");
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 			}
 			DataManager::SetValue(TW_CRYPTO_PWTYPE, pwd_type);
 			DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
@@ -1181,6 +1222,11 @@ void TWPartition::Setup_Data_Media() {
 		DataManager::SetValue("tw_has_internal", 1);
 		DataManager::SetValue("tw_has_data_media", 1);
 		backup_exclusions.add_absolute_dir("/data/data/com.google.android.music/files");
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
+=======
+		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
+		backup_exclusions.add_absolute_dir("/data/cache");
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/.layout_version");
 		ExcludeAll(Mount_Point + "/system/storage.xml");
@@ -1667,6 +1713,14 @@ bool TWPartition::Wipe(string New_File_System) {
 
 	if (Has_Data_Media && Current_File_System == New_File_System) {
 		wiped = Wipe_Data_Without_Wiping_Media();
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
+=======
+		if (Mount_Point == "/data" && TWFunc::get_log_dir() == DATA_LOGS_DIR) {
+			bool created = Recreate_Logs_Dir();
+			if (!created)
+				LOGERR("Unable to create log directory for TWRP\n");
+		}
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 		recreate_media = false;
 	} else {
 		DataManager::GetValue(TW_RM_RF_VAR, check);
@@ -2463,6 +2517,49 @@ bool TWPartition::Wipe_Data_Without_Wiping_Media() {
 #endif // ifdef TW_OEM_BUILD
 }
 
+<<<<<<< HEAD   (f4c155 super: emmc shouldn't be mount-only.)
+=======
+bool TWPartition::Recreate_Logs_Dir() {
+#ifdef TW_INCLUDE_FBE
+	struct passwd pd;
+	struct passwd *pwdptr = &pd;
+	struct passwd *tempPd;
+	char pwdBuf[512];
+	int uid = 0, gid = 0;
+
+	if ((getpwnam_r("system", pwdptr, pwdBuf, sizeof(pwdBuf), &tempPd)) != 0) {
+		LOGERR("unable to get system user id\n");
+		return false;
+	} else {
+		struct group grp;
+		struct group *grpptr = &grp;
+		struct group *tempGrp;
+		char grpBuf[512];
+
+		if ((getgrnam_r("cache", grpptr, grpBuf, sizeof(grpBuf), &tempGrp)) != 0) {
+			LOGERR("unable to get cache group id\n");
+			return false;
+		} else {
+			uid = pd.pw_uid;
+			gid = grp.gr_gid;
+			std::string abLogsRecoveryDir(DATA_LOGS_DIR);
+			abLogsRecoveryDir += "/recovery/";
+
+			if (!TWFunc::Create_Dir_Recursive(abLogsRecoveryDir, S_IRWXU | S_IRWXG | S_IWGRP | S_IXGRP, uid, gid)) {
+				LOGERR("Unable to recreate %s\n", abLogsRecoveryDir.c_str());
+				return false;
+			}
+			if (setfilecon(abLogsRecoveryDir.c_str(), "u:object_r:cache_file:s0") != 0) {
+				LOGERR("Unable to set contexts for %s\n", abLogsRecoveryDir.c_str());
+				return false;
+			}
+		}
+	}
+#endif
+	return true;
+}
+
+>>>>>>> CHANGE (349ea5 log storage: change AB device log storage to /data/recovery)
 bool TWPartition::Wipe_Data_Without_Wiping_Media_Func(const string& parent __unused) {
 	string dir;
 
