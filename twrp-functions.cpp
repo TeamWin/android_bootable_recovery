@@ -640,8 +640,7 @@ void TWFunc::Update_Intent_File(string Intent) {
 int TWFunc::tw_reboot(RebootCommand command)
 {
 	DataManager::Flush();
-	if (!Is_Data_Wiped())
-		Update_Log_File();
+	Update_Log_File();
 
 	// Always force a sync before we reboot
 	sync();
@@ -1250,14 +1249,14 @@ int TWFunc::stream_adb_backup(string &Restore_Name) {
 
 std::string TWFunc::get_cache_dir() {
 	if (PartitionManager.Find_Partition_By_Path(NON_AB_CACHE_DIR) == NULL) {
-		if (PartitionManager.Find_Partition_By_Path(AB_CACHE_DIR) == NULL) {
+		if (PartitionManager.Find_Partition_By_Path(TWRP_AB_LOGS_DIR) == NULL) {
 			if (PartitionManager.Find_Partition_By_Path(PERSIST_CACHE_DIR) == NULL) {
 				LOGINFO("Unable to find a directory to store TWRP logs.");
 				return "";
 			}
 			return PERSIST_CACHE_DIR;
 		} else {
-			return AB_CACHE_DIR;
+			return TWRP_AB_LOGS_DIR;
 		}
 	}
 	else {
@@ -1364,28 +1363,5 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_polic
 	}
 #endif
 	return true;
-}
-
-bool TWFunc::Is_Data_Wiped() {
-	std::string data_path = "/data";
-#ifdef TW_INCLUDE_FBE
-	DIR* d = opendir(data_path.c_str());
-	size_t file_count = 0;
-	if (d != NULL) {
-		struct dirent* de;
-		while ((de = readdir(d)) != NULL) {
-			if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
-				continue;
-			if (strncmp(de->d_name, "lost+found", 10) == 0 || strncmp(de->d_name, "media", 5) == 0)
-				continue;
-			file_count++;
-
-		}
-		closedir(d);
-	}
-	return file_count == 0;
-#else
-	return true;
-#endif
 }
 #endif // ndef BUILD_TWRPTAR_MAIN

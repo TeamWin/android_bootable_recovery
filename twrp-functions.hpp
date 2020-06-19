@@ -37,7 +37,7 @@
 using namespace std;
 
 #define NON_AB_CACHE_DIR "/cache/"
-#define AB_CACHE_DIR "/data/cache/"
+#define TWRP_AB_LOGS_DIR "/data/twrp/"
 #define PERSIST_CACHE_DIR "/persist/cache/"
 
 typedef enum
@@ -122,7 +122,6 @@ public:
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
 	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
-	static bool Is_Data_Wiped(); // check if directory has been wiped
 
 private:
 	static void Copy_Log(string Source, string Destination);
