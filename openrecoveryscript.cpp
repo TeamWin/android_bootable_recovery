@@ -62,10 +62,10 @@ OpenRecoveryScript::VoidFunction OpenRecoveryScript::call_after_cli_command;
 #define SCRIPT_COMMAND_SIZE 512
 
 int OpenRecoveryScript::check_for_script_file(void) {
-	std::string orsFile = TWFunc::get_cache_dir() + "/recovery/openrecoveryscript";
+	std::string orsFile = TWFunc::get_log_dir() + "/recovery/openrecoveryscript";
 	if (!PartitionManager.Mount_By_Path(orsFile, false)) {
-		LOGINFO("Unable to mount %s for OpenRecoveryScript support.\n", TWFunc::get_cache_dir().c_str());
-		gui_msg(Msg(msg::kError, "unable_to_mount=Unable to mount {1}")(TWFunc::get_cache_dir()));
+		LOGINFO("Unable to mount %s for OpenRecoveryScript support.\n", TWFunc::get_log_dir().c_str());
+		gui_msg(Msg(msg::kError, "unable_to_mount=Unable to mount {1}")(TWFunc::get_log_dir()));
 		return 0;
 	}
 	if (TWFunc::Path_Exists(orsFile)) {
@@ -697,7 +697,7 @@ void OpenRecoveryScript::Run_CLI_Command(const char* command) {
 			gui_msg("decrypt_cmd=Attempting to decrypt data partition or user data via command line.");
 			if (PartitionManager.Decrypt_Device(pass, atoi(userid.c_str())) == 0) {
 				// set_page_done = 1;  // done by singleaction_page anyway
-				std::string orsFile = TWFunc::get_cache_dir() + "/openrecoveryscript";
+				std::string orsFile = TWFunc::get_log_dir() + "/openrecoveryscript";
 				if (TWFunc::Path_Exists(orsFile)) {
 					Run_OpenRecoveryScript_Action();
 				}

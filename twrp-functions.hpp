@@ -37,7 +37,7 @@
 using namespace std;
 
 #define NON_AB_CACHE_DIR "/cache/"
-#define AB_CACHE_DIR "/data/cache/"
+#define TWRP_AB_LOGS_DIR "/data/"
 #define PERSIST_CACHE_DIR "/persist/cache/"
 
 typedef enum
@@ -116,13 +116,12 @@ public:
 	static void copy_kernel_log(string curr_storage); // Copy Kernel Log to Current Storage (PSTORE/KMSG)
 	static bool isNumber(string strtocheck); // return true if number, false if not a number
 	static int stream_adb_backup(string &Restore_Name); // Tell ADB Backup to Stream to TWRP from GUI selection
-	static std::string get_cache_dir(); // return the cache partition existence
+	static std::string get_log_dir(); // return recovery log storage directory
 	static void check_selinux_support(); // print whether selinux support is enabled to console
 	static bool Is_TWRP_App_In_System(); // Check if the TWRP app is installed in the system partition
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
 	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
-	static bool Is_Data_Wiped(); // check if directory has been wiped
 
 private:
 	static void Copy_Log(string Source, string Destination);
