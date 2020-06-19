@@ -101,7 +101,7 @@ struct PartitionSettings {                                                    //
 	std::string Backup_Folder;                                                // Path to restore folder
 	bool adbbackup;                                                           // tell the system we are backing up over adb
 	bool adb_compression;                                                     // 0 == uncompressed, 1 == compressed
-	bool generate_digest;                                                      // tell system to create digest for partitions
+	bool generate_digest;                                                     // tell system to create digest for partitions
 	bool generate_md5;                                                        // tell system to create md5 for partitions
 	uint64_t total_restore_size;                                              // Total size of restored backup
 	uint64_t img_bytes_remaining;                                             // remaining img/emmc bytes to backup for progress indicator
@@ -153,7 +153,7 @@ public:
 	void Check_FS_Type();                                                     // Checks the fs type using blkid, does not do anything on MTD / yaffs2 because this crashes on some devices
 	bool Update_Size(bool Display_Error);                                     // Updates size information
 	void Recreate_Media_Folder();                                             // Recreates the /data/media folder
-	bool Flash_Image(PartitionSettings *part_settings);                                        // Flashes an image to the partition
+	bool Flash_Image(PartitionSettings *part_settings);                       // Flashes an image to the partition
 	void Change_Mount_Read_Only(bool new_value);                              // Changes Mount_Read_Only to new_value
 	bool Is_Read_Only();                                                      // Check if system is read-only in TWRP
 	int Check_Lifetime_Writes();
@@ -208,7 +208,7 @@ private:
 	bool Wipe_NTFS();                                                         // Uses mkntfs to wipe
 	bool Wipe_Data_Without_Wiping_Media();                                    // Uses rm -rf to wipe but does not wipe /data/media
 	bool Wipe_Data_Without_Wiping_Media_Func(const string& parent);           // Uses rm -rf to wipe but does not wipe /data/media
-	bool Recreate_AB_Cache_Dir(const ext4_encryption_policy &policy);				  // Recreate AB_CACHE_DIR after wipe
+	bool Recreate_TWRP_AB_Logs_Dir();                                         // Recreate TWRP_AB_LOGS_DIR after wipe
 	void Wipe_Crypto_Key();                                                   // Wipe crypto key from either footer or block device
 	bool Backup_Tar(PartitionSettings *part_settings, pid_t *tar_fork_pid);   // Backs up using tar for file systems
 	bool Backup_Image(PartitionSettings *part_settings);                      // Backs up using raw read/write for emmc memory types
