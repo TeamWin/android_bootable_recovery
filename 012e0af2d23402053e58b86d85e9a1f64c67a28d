@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87a9ba8c_43585388",
+        "filename": "crypto/fscrypt/FsCrypt.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-06-22T21:15:26Z",
+      "side": 1,
+      "message": "I am getting \n\nbootable/recovery/crypto/fscrypt/FsCrypt.cpp:214:29: error: use of undeclared identifier \u0027fs_mgr_get_entry_for_mount_point\u0027\n    struct fstab_rec* rec \u003d fs_mgr_get_entry_for_mount_point(fstab_default, mount_point);\n                            ^\nbootable/recovery/crypto/fscrypt/FsCrypt.cpp:218:5: error: use of undeclared identifier \u0027fs_mgr_get_file_encryption_modes\u0027\n    fs_mgr_get_file_encryption_modes(rec, \u0026contents_mode, \u0026filenames_mode);\n    ^\n2 errors generated.",
+      "revId": "012e0af2d23402053e58b86d85e9a1f64c67a28d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
