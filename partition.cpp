@@ -2634,6 +2634,7 @@ bool TWPartition::Backup_Tar(PartitionSettings *part_settings, pid_t *tar_fork_p
 				backup_exclusions.add_absolute_dir("/data/vendor_ce/" + (*iter).userId);
 				backup_exclusions.add_absolute_dir("/data/media/" + (*iter).userId);
 				backup_exclusions.add_absolute_dir("/data/user/" + (*iter).userId);
+				backup_exclusions.add_absolute_dir("/data/vendor_ce/" + (*iter).userid + "/facedata");
 			}
 		}
 	}
