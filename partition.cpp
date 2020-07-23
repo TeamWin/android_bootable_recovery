@@ -740,6 +740,7 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 	ExcludeAll(Mount_Point + "/system_de/0/spblob");  // contains data needed to decrypt pixel 2
 	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
 	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
+	ExcludeAll("/data/vendor_ce/0/facedata");
 	int retry_count = 3;
 	while (!Decrypt_DE() && --retry_count)
 		usleep(2000);
@@ -764,6 +765,7 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.pattern.key");
 				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db");
 				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db-wal");
+				ExcludeAll("/data/vendor_ce/" + (*iter).userid + "/facedata");
 			}
 		}
 		DataManager::SetValue(TW_CRYPTO_PWTYPE, pwd_type);
