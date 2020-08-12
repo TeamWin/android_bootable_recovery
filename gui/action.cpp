@@ -67,6 +67,7 @@ static string zip_queue[10];
 static int zip_queue_index;
 pid_t sideload_child_pid;
 extern std::vector<users_struct> Users_List;
+extern GUITerminal* term;
 
 static void *ActionThread_work_wrapper(void *data);
 
@@ -240,6 +241,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(uninstalltwrpsystemapp);
 		ADD_ACTION(repackimage);
 		ADD_ACTION(fixabrecoverybootloop);
+		ADD_ACTION(change_terminal);
 	}
 
 	// First, get the action
@@ -2285,5 +2287,18 @@ int GUIAction::enableadb(std::string arg __unused) {
 int GUIAction::enablefastboot(std::string arg __unused) {
 	android::base::SetProperty("sys.usb.config", "none");
 	android::base::SetProperty("sys.usb.config", "fastboot");
+	return 0;
+}
+
+int GUIAction::change_terminal(std::string arg) {
+//	uint8_t argc[] = new uint8_t[arg.size()];
+
+	if (term != NULL) {
+		for (uint8_t iter = 0; iter < arg.size(); iter++)
+			term->NotifyCharInput(arg.at(iter));
+		term->NotifyCharInput(13);
+	}
+	else
+		LOGINFO("error\n");
 	return 0;
 }

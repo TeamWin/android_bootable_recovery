@@ -4348,6 +4348,16 @@
 			</text>
 
 			<button style="main_button_half_height">
+				<condition var1="tw_fm_isfolder" var2="1"/>
+				<placement x="%center_x%" y="%row12a_y%"/>
+				<text>{@open_terminal_btn=Open Terminal Here}</text>
+				<actions>
+					<action function="change_terminal">cd %tw_filename1%</action>
+					<action function="page">terminalcommand</action>
+				</actions>
+			</button>
+
+			<button style="main_button_half_height">
 				<condition var1="tw_fm_isfolder" var2="0"/>
 				<placement x="%indent%" y="%row15a_y%"/>
 				<text>{@fm_copy_file_btn=Copy File}</text>

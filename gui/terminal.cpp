@@ -48,7 +48,6 @@ extern "C" {
 #endif
 
 extern int g_pty_fd; // in gui.cpp where the select is
-
 /*
 Pseudoterminal handler.
 */
@@ -144,7 +143,7 @@ public:
 			return -1;
 		}
 		int rc = ::write(fdMaster, buffer, size);
-		debug_printf("pty write: %d bytes -> %d\n", size, rc);
+		debug_printf("pty write: %zu bytes -> %d\n", size, rc);
 		if (rc < 0) {
 			LOGERR("pty write failed: %d\n", errno);
 			// assume child has died
