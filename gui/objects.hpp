@@ -371,6 +371,7 @@ protected:
 	int uninstalltwrpsystemapp(std::string arg);
 	int repackimage(std::string arg);
 	int fixabrecoverybootloop(std::string arg);
+	int change_terminal(std::string arg);
 
 	int simulate;
 };
