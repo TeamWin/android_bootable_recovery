@@ -67,6 +67,7 @@ static string zip_queue[10];
 static int zip_queue_index;
 pid_t sideload_child_pid;
 extern std::vector<users_struct> Users_List;
+extern GUITerminal* term;
 
 static void *ActionThread_work_wrapper(void *data);
 
@@ -205,6 +206,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(togglebacklight);
 		ADD_ACTION(enableadb);
 		ADD_ACTION(enablefastboot);
+		ADD_ACTION(change_terminal);
 
 		// remember actions that run in the caller thread
 		for (mapFunc::const_iterator it = mf.begin(); it != mf.end(); ++it)
@@ -2285,5 +2287,34 @@ int GUIAction::enableadb(std::string arg __unused) {
 int GUIAction::enablefastboot(std::string arg __unused) {
 	android::base::SetProperty("sys.usb.config", "none");
 	android::base::SetProperty("sys.usb.config", "fastboot");
+	return 0;
+}
+
+int GUIAction::change_terminal(std::string arg) {
+	bool res = true;
+	char* buf = nullptr;
+	if (term != NULL && !arg.empty()) {
+		std::string ret;
+		DataManager::GetValue("tw_terminal_location", ret);
+		DataManager::SetValue("tw_terminal_location", getcwd(buf, 100));
+		if (term->status()) {
+			term->stop();
+		}
+		if (arg == ret) {
+			chdir(arg.c_str());
+			return 0;
+		}
+		if (chdir(arg.c_str()) != 0) {
+			LOGINFO("Unable to change dir to %s\n", arg.c_str());
+			res = false;
+			DataManager::SetValue("tw_terminal_ch_err", 1);
+		}
+	}
+	else {
+		res = false;
+		LOGINFO("error\n");
+	}
+	if (res)
+		gui_changePage("terminalcommand");
 	return 0;
 }
