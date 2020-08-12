@@ -745,6 +745,7 @@
 		<string name="enable_adb">Enable ADB</string>
 		<string name="enable_fastboot">Enable Fastboot</string>
 		<string name="fastboot_console_msg">Entered Fastboot mode...</string>
+		<string name="open_terminal_btn">Open Terminal Here</string>
 		<!-- Android Rescue Party trigger -->
 		<string name="rescue_party0">Android Rescue Party trigger! Possible solutions? Either:</string>
 		<string name="rescue_party1"> 1. Wipe caches, and/or</string>
