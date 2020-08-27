@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bd389bf_125415bb",
+        "filename": "Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-08-27T23:51:23Z",
+      "side": 1,
+      "message": "needs removed",
+      "revId": "a9be55680b1c337a16ccda72316592b2f6607731",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "060ca76a_6772ba4a",
+        "filename": "Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-08-27T23:51:23Z",
+      "side": 1,
+      "message": "remove space",
+      "revId": "a9be55680b1c337a16ccda72316592b2f6607731",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a4d5b3f_9f7eeb1f",
+        "filename": "crypto/vold_decrypt/vold_decrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-08-27T23:51:23Z",
+      "side": 1,
+      "message": "this needs tested",
+      "revId": "a9be55680b1c337a16ccda72316592b2f6607731",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb590111_37b10e2b",
+        "filename": "twrpRepacker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-08-27T23:51:23Z",
+      "side": 1,
+      "message": "fix whitespace",
+      "revId": "a9be55680b1c337a16ccda72316592b2f6607731",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5adf4830_45c7073c",
+        "filename": "twrpRepacker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-08-27T23:51:23Z",
+      "side": 1,
+      "message": "fix whitespace",
+      "revId": "a9be55680b1c337a16ccda72316592b2f6607731",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
