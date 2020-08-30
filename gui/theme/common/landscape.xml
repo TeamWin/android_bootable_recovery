@@ -2639,6 +2639,127 @@
 			</action>
 		</page>
 
+		<page name="fastbootreboot">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@reboot_hdr=Reboot}</text>
+			</text>
+
+			<button style="main_button">
+				<condition var1="tw_reboot_system" var2="1"/>
+				<placement x="%col1_x_left%" y="%row2_y%"/>
+				<text>{@rb_system_btn=System}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="page">reboot_system_routine</action>
+				</actions>
+			</button>
+
+			<button style="main_button">
+				<condition var1="tw_reboot_poweroff" var2="1"/>
+				<placement x="%center_x%" y="%row2_y%"/>
+				<text>{@rb_poweroff_btn=Power Off}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=poweroff</action>
+					<action function="set">tw_reboot_param=poweroff</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@turning_off=Turning Off...}</action>
+					<action function="set">tw_complete_text1={@turning_off=Turning Off...}</action>
+					<action function="set">tw_slider_text={@swipe_power_off=Swipe to Power Off}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button">
+				<condition var1="tw_reboot_recovery" var2="1"/>
+				<placement x="%col1_x_left%" y="%row6a_y%"/>
+				<text>{@rb_recovery_btn=Recovery}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button">
+				<condition var1="tw_reboot_bootloader" var2="1"/>
+				<placement x="%center_x%" y="%row6a_y%"/>
+				<text>{@rb_bootloader_btn=Bootloader}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=bootloader</action>
+					<action function="set">tw_reboot_param=bootloader</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button">
+				<condition var1="tw_download_mode" var2="1"/>
+				<placement x="%col1_x_left%" y="%row11_y%"/>
+				<text>{@rb_download_btn=Download}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=download</action>
+					<action function="set">tw_reboot_param=download</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button">
+				<condition var1="tw_fastboot_mode" var2="1"/>
+				<placement x="%col1_x_left%" y="%row11_y%"/>
+				<text>{@fastboot_button=Fastboot}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=fastboot</action>
+					<action function="set">tw_reboot_param=fastboot</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<button style="main_button">
+				<condition var1="tw_edl_mode" var2="1"/>
+				<placement x="%center_x%" y="%row11_y%"/>
+				<text>{@rb_edl_btn=Edl}</text>
+				<actions>
+					<action function="set">tw_back=fastbootreboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=edl</action>
+					<action function="set">tw_reboot_param=edl</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_complete_text1={@rebooting=Rebooting...}</action>
+					<action function="set">tw_slider_text={@swipe_reboot=Swipe to Reboot}</action>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+		</page>
+
 		<page name="reboot">
 			<template name="page"/>
 
