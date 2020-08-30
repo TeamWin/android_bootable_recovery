@@ -650,8 +650,10 @@ static int runPages(const char *page_name, const int stop_on_page_done)
 			gui_changePage("main");
 			break;
 		}
-		if (DataManager::GetIntValue("tw_gui_done") != 0)
+		if (DataManager::GetIntValue("tw_gui_done") != 0) {
+			LOGINFO("gui exit\n");
 			break;
+		}
 	}
 	if (ors_read_fd > 0)
 		close(ors_read_fd);
