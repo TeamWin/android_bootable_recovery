@@ -360,6 +360,9 @@ ifneq ($(TW_INCLUDE_LIBRESETPROP),)
     LOCAL_C_INCLUDES += external/magisk-prebuilt/include
     LOCAL_CFLAGS += -DTW_INCLUDE_LIBRESETPROP
 endif
+ifneq ($(TW_ENABLE_PERSIST_LOG_STORAGE),)
+    LOCAL_CFLAGS += -DTW_ENABLE_PERSIST_LOG_STORAGE
+endif
 
 TWRP_REQUIRED_MODULES += \
     relink_libraries \
