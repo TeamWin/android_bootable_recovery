@@ -326,9 +326,14 @@ int main(int argc, char **argv) {
 	// Fixup the RTC clock on devices which require it
 	if (crash_counter == 0) TWFunc::Fixup_Time_On_Boot();
 
+<<<<<<< HEAD   (13b07f Exclude the dumpsys dumps from backups, to avoid error 255 w)
 	// Read the settings file
 	TWFunc::Update_Log_File();
 	DataManager::ReadSettingsFile();
+=======
+	if (!PartitionManager.Get_Super_Status())
+		DataManager::ReadSettingsFile();
+>>>>>>> CHANGE (899a04 persist logs: remove persist from available log directories )
 	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
 	GUIConsole::Translate_Now();
 
@@ -392,6 +397,12 @@ int main(int argc, char **argv) {
 		}
 	}
 #endif
+<<<<<<< HEAD   (13b07f Exclude the dumpsys dumps from backups, to avoid error 255 w)
+=======
+
+	TWFunc::Update_Log_File();
+
+>>>>>>> CHANGE (899a04 persist logs: remove persist from available log directories )
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	adb_bu_fifo->threadAdbBuFifo();
 
