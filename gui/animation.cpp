@@ -126,7 +126,7 @@ int GUIAnimation::Update(void)
 	if (mLoop == -2)		return 0;
 
 	// Determine if we need the next frame yet...
-	if (++mUpdateCount > 30 / mFPS)
+	if (++mUpdateCount > 60 / mFPS)
 	{
 		mUpdateCount = 0;
 		if (++mFrame >= mAnimation->GetResourceCount())

@@ -528,9 +528,9 @@ static void loopTimer(int input_timeout_ms)
 
 		timespec diff = TWFunc::timespec_diff(lastCall, curTime);
 
-		// This is really 2 or 30 times per second
+		// This is really 2 or 60 times per second
 		// As long as we get events, increase the timeout so we can catch up with input
-		long timeout = got_event ? 500000000 : 33333333;
+		long timeout = got_event ? 500000000 : 16666666;
 
 		if (diff.tv_sec || diff.tv_nsec > timeout)
 		{
