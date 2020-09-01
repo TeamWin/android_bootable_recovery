@@ -533,9 +533,9 @@ LOCAL_POST_INSTALL_CMD += $(RELINK) $(TARGET_RECOVERY_ROOT_OUT)/ $(RELINK_INIT) 
     ln -sf /init $(TARGET_RECOVERY_ROOT_OUT)/system/bin/init && \
     mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/ && \
     cp $(TARGET_ROOT_OUT)/../system/etc/selinux/plat_service_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/plat_service_contexts && \
-    cp $(TARGET_ROOT_OUT)/../system/etc/selinux/plat_hwservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/plat_hwservice_contexts && \
-    cp $(TARGET_ROOT_OUT)/../vendor/etc/selinux/vndservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/vndservice_contexts && \
-    cp $(TARGET_ROOT_OUT)/../vendor/etc/selinux/vendor_hwservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/vendor_hwservice_contexts
+    echo cp $(TARGET_ROOT_OUT)/../system/etc/selinux/plat_hwservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/plat_hwservice_contexts && \
+    echo cp $(TARGET_ROOT_OUT)/../vendor/etc/selinux/vndservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/vndservice_contexts && \
+    echo cp $(TARGET_ROOT_OUT)/../vendor/etc/selinux/vendor_hwservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/vendor_hwservice_contexts
 LOCAL_REQUIRED_MODULES := init_second_stage.recovery reboot.recovery plat_service_contexts plat_hardware_contexts vndservice_contexts
 include $(BUILD_PHONY_PACKAGE)
 
