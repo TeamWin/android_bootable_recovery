@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0651165_baba6b92",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2020-09-09T18:16:02Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "75099423_b6e30e76",
+      "revId": "ee9f40b0d8ef05c43bd7cecca6d071fcf04fccf3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36dfcbb6_4345f165",
         "filename": "partitionmanager.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "ee9f40b0d8ef05c43bd7cecca6d071fcf04fccf3",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "985f997f_bf5bfd02",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2008,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2020-09-09T18:16:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36dfcbb6_4345f165",
+      "revId": "ee9f40b0d8ef05c43bd7cecca6d071fcf04fccf3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
