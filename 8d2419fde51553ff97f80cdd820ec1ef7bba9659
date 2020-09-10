@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1ecd3f4_69fb089d",
+        "filename": "twrp.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2020-09-10T07:48:39Z",
+      "side": 1,
+      "message": "Actually we need to call this",
+      "revId": "8d2419fde51553ff97f80cdd820ec1ef7bba9659",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
