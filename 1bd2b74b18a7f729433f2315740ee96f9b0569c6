@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d51f0fd_0cd5e48a",
+        "filename": "gui/theme/common/landscape.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-09-10T12:30:46Z",
+      "side": 1,
+      "message": "remove extra tabs.",
+      "revId": "1bd2b74b18a7f729433f2315740ee96f9b0569c6",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
