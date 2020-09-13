@@ -384,7 +384,8 @@ TWRP_REQUIRED_MODULES += \
     awk \
     toybox \
     toolbox \
-    mkshrc_twrp
+    mkshrc_twrp \
+    minadbd
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
