@@ -291,10 +291,8 @@ static void CreateMinadbdServiceAndExecuteCommands(
   if (child == 0) {
     recovery_socket.reset();
     std::vector<std::string> minadbd_commands = {
-      "/system/bin/recovery",
-      "recovery",
-      "--adbd",
-      install_file,
+      "/system/bin/minadbd",
+      "--socket_fd",
       std::to_string(minadbd_socket.release()),
     };
     if (rescue_mode) {
