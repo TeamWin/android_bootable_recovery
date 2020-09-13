@@ -373,11 +373,11 @@ int OpenRecoveryScript::run_script_file(void) {
 
 				int wipe_cache = 0;
 				string result;
+				pid_t sideload_child_pid;
 
 				gui_msg("start_sideload=Starting ADB sideload feature...");
 
-				Device::BuiltinAction reboot_action = Device::REBOOT_BOOTLOADER;
-				ret_val = ApplyFromAdb("/", &reboot_action);
+				ret_val = ApplyFromAdb(&sideload_child_pid);
 				if (ret_val != 0) {
 					if (ret_val == -2)
 						gui_err("need_new_adb=You need adb 1.0.32 or newer to sideload to this device.");
@@ -389,7 +389,7 @@ int OpenRecoveryScript::run_script_file(void) {
 					ret_val = 1; // failure
 				}
 				sideload = 1; // Causes device to go to the home screen afterwards
-#ifdef USE_28_INSTALL 
+#ifdef USE_28_INSTALL
 				if (sideload_child_pid != 0) {
 					LOGINFO("Signaling child sideload process to exit.\n");
 					struct stat st;

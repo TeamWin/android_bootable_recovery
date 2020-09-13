@@ -1589,9 +1589,7 @@ int GUIAction::adbsideload(std::string arg __unused)
 		bool mtp_was_enabled = TWFunc::Toggle_MTP(false);
 
 		// wait for the adb connection
-		// int ret = apply_from_adb("/", &sideload_child_pid);
-		Device::BuiltinAction reboot_action = Device::REBOOT_BOOTLOADER;
-		int ret = ApplyFromAdb("/", &reboot_action);
+		int ret = ApplyFromAdb(&sideload_child_pid);
 		DataManager::SetValue("tw_has_cancel", 0); // Remove cancel button from gui now that the zip install is going to start
 
 		if (ret != 0) {
