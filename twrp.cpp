@@ -51,15 +51,6 @@ extern "C" {
 #include "openrecoveryscript.hpp"
 #include "variables.h"
 #include "twrpAdbBuFifo.hpp"
-#ifdef TW_USE_NEW_MINADBD
-// #include "minadbd/minadbd.h"
-#else
-extern "C" {
-#include "minadbd21/adb.h"
-}
-#endif
-
-//extern int adb_server_main(int is_daemon, int server_port, int /* reply_fd */);
 
 TWPartitionManager PartitionManager;
 int Log_Offset;
@@ -110,18 +101,6 @@ int main(int argc, char **argv) {
 	setbuf(stderr, NULL);
 
 	signal(SIGPIPE, SIG_IGN);
-
-	// Handle ADB sideload
-	if (argc == 3 && strcmp(argv[1], "--adbd") == 0) {
-		property_set("ctl.stop", "adbd");
-#ifdef TW_USE_NEW_MINADBD
-		//adb_server_main(0, DEFAULT_ADB_PORT, -1); TODO fix this for android8
-		// minadbd_main();
-#else
-		adb_main(argv[2]);
-#endif
-		return 0;
-	}
 
 #ifdef RECOVERY_SDCARD_ON_DATA
 	datamedia = true;
