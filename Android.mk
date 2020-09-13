@@ -387,7 +387,8 @@ TWRP_REQUIRED_MODULES += \
     toybox \
     toolbox \
     mkshrc_twrp \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.0-service \
+    minadbd
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
