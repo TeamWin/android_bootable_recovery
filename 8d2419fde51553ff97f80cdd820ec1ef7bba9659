@@ -16,6 +16,24 @@
       "revId": "8d2419fde51553ff97f80cdd820ec1ef7bba9659",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e608b157_16d3ce62",
+        "filename": "twrp.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-09-17T22:06:38Z",
+      "side": 1,
+      "message": "I think this patchset is just to read settings before decryption.",
+      "parentUuid": "a1ecd3f4_69fb089d",
+      "revId": "8d2419fde51553ff97f80cdd820ec1ef7bba9659",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
