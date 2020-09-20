@@ -16,6 +16,24 @@
       "revId": "90c12fb785a7d327534ecacb040c7da24f5198c4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f678ad24_fe33f43d",
+        "filename": "minuitwrp/graphics.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-09-20T13:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac52621_c0d077d3",
+      "revId": "90c12fb785a7d327534ecacb040c7da24f5198c4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
