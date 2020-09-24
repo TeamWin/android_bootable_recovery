@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0450d8d7_fc61efae",
+        "filename": "partition.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2020-09-24T17:53:44Z",
+      "side": 1,
+      "message": "Minor typo 😄",
+      "range": {
+        "startLine": 737,
+        "startChar": 147,
+        "endLine": 737,
+        "endChar": 155
+      },
+      "revId": "ec814511367a38d1012a876e995e07412ae908f6",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
