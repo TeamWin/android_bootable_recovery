@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb0189c0_c3f4035e",
+        "filename": "minuitwrp/graphics.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 156
+      },
+      "writtenOn": "2020-09-24T20:12:02Z",
+      "side": 1,
+      "message": "See here. This line pulls in the cflag that\u0027s currently used. And if the below property_get gets nothing, it will use this cflag. Which means there\u0027s no change needed to existing trees.",
+      "revId": "82efb4a5126a6f662bcf2576b0c39509f8e1a7df",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
