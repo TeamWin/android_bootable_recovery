@@ -40,7 +40,6 @@
 #include "../twrp-functions.hpp"
 #include "../twrpRepacker.hpp"
 #include "../openrecoveryscript.hpp"
-
 #include "install/adb_install.h"
 
 #include "fuse_sideload.h"
@@ -1070,6 +1069,11 @@ int GUIAction::flash(std::string arg)
 		DataManager::SetValue(TW_ZIP_INDEX, (i + 1));
 
 		TWFunc::SetPerformanceMode(true);
+
+		if (PartitionManager.Get_Super_Status()) {
+			PartitionManager.apex.unloadApexImages();
+			PartitionManager.UnMount_Main_Partitions(); //unmount main partitions before flashing a zip, cuz we dunno the behaviour of the zip
+		}
 		ret_val = flash_zip(zip_path, &wipe_cache);
 		TWFunc::SetPerformanceMode(false);
 		if (ret_val != 0) {
@@ -1087,6 +1091,8 @@ int GUIAction::flash(std::string arg)
 
 	reinject_after_flash();
 	PartitionManager.Update_System_Details();
+	if (PartitionManager.Get_Super_Status()) // Remount apex
+		PartitionManager.apex.reloadApexImages();
 	operation_end(ret_val);
 	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
 	DataManager::SetValue(TW_ZIP_QUEUE_COUNT, zip_queue_index);

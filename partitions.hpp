@@ -381,6 +381,7 @@ public:
 	bool Get_Super_Status();												  // Return whether device has a super partition
 	void Setup_Super_Partition();											  // Setup the super partition for backup and restore
 	bool Recreate_Logs_Dir();                                                 // Recreate TWRP_AB_LOGS_DIR after wipe
+	twrpApex apex;
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
