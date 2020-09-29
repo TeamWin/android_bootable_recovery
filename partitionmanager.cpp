@@ -144,7 +144,7 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 
 	fstabFile = fopen("/etc/twrp.flags", "rt");
 	if (fstabFile != NULL) {
-		LOGINFO("reading /etc/twrp.flags\n");
+		LOGINFO("Reading /etc/twrp.flags\n");
 		while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
 			if (fstab_line[0] != '/')
 				continue;
@@ -3227,7 +3227,11 @@ void TWPartitionManager::Setup_Super_Partition() {
 	superPartition->Mount_Point = "/super";
 	superPartition->Actual_Block_Device = superPart;
 	superPartition->Alternate_Block_Device = superPart;
+#ifdef BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST
+	superPartition->Backup_Display_Name = "super (" BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST ")";
+#else
 	superPartition->Backup_Display_Name = "super";
+#endif
 	superPartition->Can_Flash_Img = true;
 	superPartition->Current_File_System = "emmc";
 	superPartition->Can_Be_Backed_Up = true;
