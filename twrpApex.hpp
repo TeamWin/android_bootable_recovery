@@ -27,9 +27,13 @@
 class twrpApex {
 public:
 	bool loadApexImages();
+	bool unloadApexImages();
+	bool reloadApexImages();
 
 private:
 	std::string unzipImage(std::string file);
+	std::vector<std::string> apexFiles;
+	size_t apexFileCount;
 	bool createLoopBackDevices(size_t count);
 	bool loadApexImage(std::string fileToMount, size_t loop_device_number);
 };

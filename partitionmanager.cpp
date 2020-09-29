@@ -284,7 +284,6 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 			if (ven) {
 				ven->Mount(true);
 			}
-			twrpApex apex;
 			if (!apex.loadApexImages()) {
 				LOGERR("Unable to load apex images from %s\n", APEX_DIR);
 				property_set("twrp.apex.loaded", "false");
