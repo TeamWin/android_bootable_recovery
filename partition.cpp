@@ -268,7 +268,6 @@ TWPartition::TWPartition() {
 	Adopted_GUID = "";
 	SlotSelect = false;
 	Key_Directory = "";
-	Is_Super = false;
 }
 
 TWPartition::~TWPartition(void) {
@@ -286,7 +285,6 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 	std::map<string, Flags_Map>::iterator it;
 
 	strlcpy(full_line, fstab_line, sizeof(full_line));
-
 	for (index = 0; index < line_len; index++) {
 		if (full_line[index] == 34)
 			skip = !skip;
@@ -302,14 +300,6 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 		fs_index = 2;
 	}
 
-	Is_Super = PartitionManager.Is_Super_Partition(fstab_line);
-	if (Is_Super) {
-		block_device_index = 0;
-		fstab_version = 2;
-		mount_point_index = 1;
-		fs_index = 2;
-	}
-
 	index = 0;
 	while (index < line_len) {
 		while (index < line_len && full_line[index] == '\0')
@@ -319,7 +309,7 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 		ptr = full_line + index;
 		if (item_index == mount_point_index) {
 			Mount_Point = ptr;
-			if (fstab_version == 2 && Is_Super == false) {
+			if (fstab_version == 2) {
 				additional_entry = PartitionManager.Find_Partition_By_Path(Mount_Point);
 				if (!Sar_Detect && additional_entry) {
 					LOGINFO("Found an additional entry for '%s'\n", Mount_Point.c_str());
@@ -352,13 +342,11 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 				if (*ptr != '/')
 					LOGERR("Until we get better BML support, you will have to find and provide the full block device path to the BML devices e.g. /dev/block/bml9 instead of the partition name\n");
 			} else if (*ptr != '/') {
-				if (!Is_Super) {
-					if (Display_Error)
-						LOGERR("Invalid block device '%s' in fstab line '%s'", ptr, fstab_line);
-					else
-						LOGINFO("Invalid block device '%s' in fstab line '%s'", ptr, fstab_line);
-					return false;
-				}
+				if (Display_Error)
+					LOGERR("Invalid block device '%s' in fstab line '%s'", ptr, fstab_line);
+				else
+					LOGINFO("Invalid block device '%s' in fstab line '%s'", ptr, fstab_line);
+				return false;
 			} else {
 				Primary_Block_Device = ptr;
 				Find_Real_Block_Device(Primary_Block_Device, Display_Error);
@@ -628,11 +616,6 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			Backup_Path = Mount_Point;
 			Storage_Path = Mount_Point;
 			Make_Dir(Mount_Point, Display_Error);
-		}
-		if (Is_Super) {
-			Can_Be_Backed_Up = false;
-			Can_Be_Wiped = false;
-			Wipe_Available_in_GUI = false;
 		}
 	}
 
@@ -1427,6 +1410,7 @@ bool TWPartition::Is_Mounted(void) {
 
 	// Compare the device IDs -- if they match then we're (probably) using tmpfs instead of an actual device
 	int ret = (st1.st_dev != st2.st_dev) ? true : false;
+
 	return ret;
 }
 
@@ -2881,9 +2865,6 @@ bool TWPartition::Update_Size(bool Display_Error) {
 
 	Find_Actual_Block_Device();
 
-	if (Actual_Block_Device.empty())
-		return false;
-
 	if (!Can_Be_Mounted && !Is_Encrypted) {
 		if (TWFunc::Path_Exists(Actual_Block_Device) && Find_Partition_Size()) {
 			Used = Size;
@@ -2894,7 +2875,6 @@ bool TWPartition::Update_Size(bool Display_Error) {
 	}
 
 	Was_Already_Mounted = Is_Mounted();
-
 	if (Removable || Is_Encrypted) {
 		if (!Mount(false))
 			return true;
@@ -3393,25 +3373,4 @@ void TWPartition::Set_Backup_FileName(string fname) {
 
 string TWPartition::Get_Backup_Name() {
 	return Backup_Name;
-}
-
-string TWPartition::Get_Mount_Point() {
-	return Mount_Point;
-}
-
-void TWPartition::Set_Block_Device(std::string block_device) {
-	Primary_Block_Device = Actual_Block_Device = block_device;
-}
-
-bool TWPartition::Get_Super_Status() {
-	return Is_Super;
-}
-
-void TWPartition::Set_Can_Be_Backed_Up(bool val) {
-	Can_Be_Backed_Up = val;
-}
-
-void TWPartition::Set_Can_Be_Wiped(bool val) {
-	Can_Be_Wiped = val;
-	Wipe_Available_in_GUI = val;
 }
