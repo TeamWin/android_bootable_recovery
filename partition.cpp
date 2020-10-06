@@ -1497,6 +1497,9 @@ bool TWPartition::Mount(bool Display_Error) {
 		} else {
 			LOGINFO("ntfs-3g failed to mount, trying regular mount method.\n");
 		}
+	} else {
+		if (Current_File_System == "ntfs" && TWFunc::Path_Exists("/sys/module/tntfs"))
+			Current_File_System = "tntfs";
 	}
 
 	if (Mount_Read_Only)
