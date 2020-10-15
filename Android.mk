@@ -396,13 +396,13 @@ TWRP_REQUIRED_MODULES += \
     toybox \
     toolbox \
     mkshrc_twrp \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.0-service \
+    plat_hwservice_contexts \
+    vendor_hwservice_contexts
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
     plat_service_contexts \
-    plat_hwservice_contexts \
-    vendor_hwservice_contexts \
     hwservicemanager \
     servicemanager \
     vndservicemanager \
