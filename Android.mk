@@ -381,7 +381,11 @@ TWRP_REQUIRED_MODULES += \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
     init.recovery.ldconfig.rc \
+    android.hardware.boot@1.0-service \
+    android.hardware.boot@1.0-service.rc \
+    hwservicemanager \
     hwservicemanager.rc \
+    servicemanager \
     servicemanager.rc \
     awk \
     toybox \
@@ -393,8 +397,6 @@ TWRP_REQUIRED_MODULES += \
     plat_service_contexts \
     plat_hwservice_contexts \
     vendor_hwservice_contexts \
-    hwservicemanager \
-    servicemanager \
     vndservicemanager \
     vold_prepare_subdirs \
     task_recovery_profiles.json \
