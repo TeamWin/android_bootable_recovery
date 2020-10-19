@@ -79,6 +79,7 @@ RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../system/bin/keystore_cli_v2
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../system/bin/hwservicemanager
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../system/bin/servicemanager
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../system/bin/vold_prepare_subdirs
+RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../vendor/bin/hw/android.hardware.boot@1.0-service
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../vendor/bin/vndservicemanager
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../vendor/bin/hw/android.hardware.health@2.0-service
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_ROOT_OUT)/../system/bin/toybox
