@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa4f8f58_e1aa63ac",
+        "filename": "startupArgs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-23T22:52:46Z",
+      "side": 1,
+      "message": "can we use a static string like the other options?",
+      "revId": "9655fd3f974d3d9250f6300807350d344a5a2523",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
