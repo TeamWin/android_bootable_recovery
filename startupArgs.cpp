@@ -25,10 +25,14 @@ void startupArgs::parse(int *argc, char ***argv) {
 	LOGINFO("Startup Commands: ");
 	for (index = 1; index < args.size(); index++) {
 		if (args[index].find("--prompt_and_wipe_data") != std::string::npos) {
-		      gui_print("\n");
-		      gui_print_color("error",
-		      "\nAndroid Rescue Party trigger! Possible solutions? Either: \n  1. Wipe caches, and/or\n  2. Format data, and/or\n  3. Clean-flash your ROM.\n\n");
-		      gui_print_color("error", "Problem='%s'\n\n", args[index+1].c_str());
+		      gui_print("\n\n");
+		      gui_msg(Msg(msg::kError, "rescue_party0=Android Rescue Party trigger! Possible solutions? Either:"));
+		      gui_msg(Msg(msg::kError, "rescue_party1= 1. Wipe caches, and/or"));
+		      gui_msg(Msg(msg::kError, "rescue_party2= 2. Format data, and/or"));
+		      gui_msg(Msg(msg::kError, "rescue_party3= 3. Clean-flash your ROM."));
+		      gui_print(" \n");
+		      gui_msg(Msg(msg::kError, "rescue_party4=The reported problem is:"));
+		      gui_print_color("error", " '%s'\n\n", args[index+1].c_str());
 		} else
 		printf("'%s'", args[index].c_str());
 		if (args[index] == FASTBOOT) {
