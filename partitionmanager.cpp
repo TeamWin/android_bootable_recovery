@@ -443,6 +443,7 @@ void TWPartitionManager::Decrypt_Data() {
 				}
 			}
 		} else {
+			property_set("ro.crypto.type", "block");
 			int password_type = cryptfs_get_password_type();
 			if (password_type == CRYPT_TYPE_DEFAULT) {
 				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
