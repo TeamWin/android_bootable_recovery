@@ -339,6 +339,7 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 				}
 			}
 		} else {
+			property_set("ro.crypto.type", "block");
 			int password_type = cryptfs_get_password_type();
 			if (password_type == CRYPT_TYPE_DEFAULT) {
 				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
