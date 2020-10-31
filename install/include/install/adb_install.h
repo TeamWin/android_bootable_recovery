@@ -22,3 +22,4 @@
 // InstallResult`). When a reboot has been requested, INSTALL_REBOOT will be the return value, with
 // the reboot target set in reboot_action.
 int ApplyFromAdb(const char* install_file, Device::BuiltinAction* reboot_action);
+pid_t GetMiniAdbdPid();

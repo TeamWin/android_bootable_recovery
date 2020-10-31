@@ -158,27 +158,27 @@ static int CheckAbSpecificMetadata(const std::map<std::string, std::string>& met
   }
 
   // Check for downgrade version.
-  int64_t build_timestamp =
-      android::base::GetIntProperty("ro.build.date.utc", std::numeric_limits<int64_t>::max());
-  int64_t pkg_post_timestamp = 0;
+  // int64_t build_timestamp =
+      // android::base::GetIntProperty("ro.build.date.utc", std::numeric_limits<int64_t>::max());
+  // int64_t pkg_post_timestamp = 0;
   // We allow to full update to the same version we are running, in case there
   // is a problem with the current copy of that version.
   auto pkg_post_timestamp_string = get_value(metadata, "post-timestamp");
-  if (pkg_post_timestamp_string.empty() ||
-      !android::base::ParseInt(pkg_post_timestamp_string, &pkg_post_timestamp) ||
-      pkg_post_timestamp < build_timestamp) {
-    if (get_value(metadata, "ota-downgrade") != "yes") {
-      LOG(ERROR) << "Update package is older than the current build, expected a build "
-                    "newer than timestamp "
-                 << build_timestamp << " but package has timestamp " << pkg_post_timestamp
-                 << " and downgrade not allowed.";
-      return INSTALL_ERROR;
-    }
-    if (pkg_pre_build_fingerprint.empty()) {
-      LOG(ERROR) << "Downgrade package must have a pre-build version set, not allowed.";
-      return INSTALL_ERROR;
-    }
-  }
+  // if (pkg_post_timestamp_string.empty() ||
+  //     !android::base::ParseInt(pkg_post_timestamp_string, &pkg_post_timestamp) ||
+  //     pkg_post_timestamp < build_timestamp) {
+  //   if (get_value(metadata, "ota-downgrade") != "yes") {
+  //     LOG(ERROR) << "Update package is older than the current build, expected a build "
+  //                   "newer than timestamp "
+  //                << build_timestamp << " but package has timestamp " << pkg_post_timestamp
+  //                << " and downgrade not allowed.";
+  //     return INSTALL_ERROR;
+  //   }
+  //   if (pkg_pre_build_fingerprint.empty()) {
+  //     LOG(ERROR) << "Downgrade package must have a pre-build version set, not allowed.";
+  //     return INSTALL_ERROR;
+  //   }
+  // }
 
   return 0;
 }
@@ -283,7 +283,7 @@ int SetUpNonAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, i
   }
 
   const std::string binary_path = Paths::Get().temporary_update_binary();
-  unlink(binary_path.c_str());
+  // unlink(binary_path.c_str());
   android::base::unique_fd fd(
       open(binary_path.c_str(), O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0755));
   if (fd == -1) {
@@ -506,7 +506,8 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
 // Verifes the compatibility info in a Treble-compatible package. Returns true directly if the
 // entry doesn't exist. Note that the compatibility info is packed in a zip file inside the OTA
 // package.
-bool verify_package_compatibility(ZipArchiveHandle package_zip) {
+bool verify_package_compatibility(ZipArchiveHandle package_zip __unused) {
+#ifdef TWRP
   LOG(INFO) << "Verifying package compatibility...";
 
   static constexpr const char* COMPATIBILITY_ZIP_ENTRY = "compatibility.zip";
@@ -569,11 +570,13 @@ bool verify_package_compatibility(ZipArchiveHandle package_zip) {
 
   LOG(ERROR) << "Failed to verify package compatibility (result " << result << "): " << err;
   return false;
+#endif
+  return true;
 }
 
-static int really_install_package(const std::string& path, bool* wipe_cache, bool needs_mount,
-                                  std::vector<std::string>* log_buffer, int retry_count,
-                                  int* max_temperature) {
+static int really_install_package(const std::string& path, bool* wipe_cache __unused, bool needs_mount __unused,
+                                  std::vector<std::string>* log_buffer __unused, int retry_count __unused,
+                                  int* max_temperature __unused) {
   // ui->SetBackground(RecoveryUI::INSTALLING_UPDATE);
   // ui->Print("Finding update package...\n");
   // Give verification half the progress bar...
@@ -583,7 +586,6 @@ static int really_install_package(const std::string& path, bool* wipe_cache, boo
 
   // Map the update package into memory.
   // ui->Print("Opening update package...\n");
-
   if (needs_mount) {
     if (path[0] == '@') {
       ensure_path_mounted(path.substr(1));
@@ -628,7 +630,6 @@ static int really_install_package(const std::string& path, bool* wipe_cache, boo
       try_update_binary(path, zip, wipe_cache, log_buffer, retry_count, max_temperature);
   // ui->SetEnableReboot(true);
   // ui->Print("\n");
-
   return result;
 }
 
@@ -643,15 +644,15 @@ int install_package(const std::string& path, bool should_wipe_cache, bool needs_
 
   int result;
   std::vector<std::string> log_buffer;
-  if (setup_install_mounts() != 0) {
-    LOG(ERROR) << "failed to set up expected mounts for install; aborting";
-    result = INSTALL_ERROR;
-  } else {
+  // if (setup_install_mounts() != 0) {
+  //   LOG(ERROR) << "failed to set up expected mounts for install; aborting";
+  //   result = INSTALL_ERROR;
+  // } else {
     bool updater_wipe_cache = false;
     result = really_install_package(path, &updater_wipe_cache, needs_mount, &log_buffer,
                                     retry_count, &max_temperature);
     should_wipe_cache = should_wipe_cache || updater_wipe_cache;
-  }
+  // }
 
   // Measure the time spent to apply OTA update in seconds.
   std::chrono::duration<double> duration = std::chrono::system_clock::now() - start;

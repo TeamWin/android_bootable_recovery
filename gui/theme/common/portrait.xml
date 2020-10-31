@@ -814,7 +814,13 @@
 				<text>{@cancel_btn=Cancel}</text>
 				<action function="%tw_cancel_action%">%tw_cancel_param%</action>
 			</button>
-
+			
+			<button style="main_button">
+				<placement x="%indent%" y="%row8_y%"/>
+				<text>{@terminal_btn=Terminal}</text>
+				<action function="page">terminalcommand</action>
+			</button>
+			
 			<action>
 				<condition var1="tw_operation_state" var2="1"/>
 				<actions>

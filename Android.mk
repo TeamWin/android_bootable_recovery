@@ -407,7 +407,8 @@ TWRP_REQUIRED_MODULES += \
     android.hardware.health@2.0-service \
     android.hardware.health@2.0-service.rc \
     plat_hwservice_contexts \
-    vendor_hwservice_contexts
+    vendor_hwservice_contexts \
+    minadbd
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
