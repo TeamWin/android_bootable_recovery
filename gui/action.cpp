@@ -42,11 +42,11 @@
 #include "../twrpRepacker.hpp"
 #include "../openrecoveryscript.hpp"
 
-#include "install/adb_install.h"
+#include "twinstall/adb_install.h"
 
 #include "fuse_sideload.h"
 #include "blanktimer.hpp"
-#include "../twinstall.h"
+#include "twinstall.h"
 
 extern "C" {
 #include "../twcommon.h"
@@ -1589,9 +1589,9 @@ int GUIAction::adbsideload(std::string arg __unused)
 		bool mtp_was_enabled = TWFunc::Toggle_MTP(false);
 
 		// wait for the adb connection
-		// int ret = apply_from_adb("/", &sideload_child_pid);
 		Device::BuiltinAction reboot_action = Device::REBOOT_BOOTLOADER;
-		int ret = ApplyFromAdb("/", &reboot_action);
+		int ret = twrp_sideload("/", &reboot_action);
+		sideload_child_pid = GetMiniAdbdPid();
 		DataManager::SetValue("tw_has_cancel", 0); // Remove cancel button from gui now that the zip install is going to start
 
 		if (ret != 0) {
@@ -1602,27 +1602,11 @@ int GUIAction::adbsideload(std::string arg __unused)
 			int wipe_cache = 0;
 			int wipe_dalvik = 0;
 			DataManager::GetValue("tw_wipe_dalvik", wipe_dalvik);
-
-			if (TWinstall_zip(FUSE_SIDELOAD_HOST_PATHNAME, &wipe_cache) == 0) {
-				if (wipe_cache || DataManager::GetIntValue("tw_wipe_cache"))
-					PartitionManager.Wipe_By_Path("/cache");
-				if (wipe_dalvik)
-					PartitionManager.Wipe_Dalvik_Cache();
-			} else {
-				ret = 1; // failure
-			}
+			if (wipe_cache || DataManager::GetIntValue("tw_wipe_cache"))
+				PartitionManager.Wipe_By_Path("/cache");
+			if (wipe_dalvik)
+				PartitionManager.Wipe_Dalvik_Cache();
 		}
-		if (sideload_child_pid) {
-			LOGINFO("Signaling child sideload process to exit.\n");
-			struct stat st;
-			// Calling stat() on this magic filename signals the minadbd
-			// subprocess to shut down.
-			stat(FUSE_SIDELOAD_HOST_EXIT_PATHNAME, &st);
-			int status;
-			LOGINFO("Waiting for child sideload process to exit.\n");
-			waitpid(sideload_child_pid, &status, 0);
-		}
-		property_set("ctl.start", "adbd");
 		TWFunc::Toggle_MTP(mtp_was_enabled);
 		reinject_after_flash();
 		operation_end(ret);
@@ -1639,6 +1623,7 @@ int GUIAction::adbsideloadcancel(std::string arg __unused)
 	// Calling stat() on this magic filename signals the minadbd
 	// subprocess to shut down.
 	stat(FUSE_SIDELOAD_HOST_EXIT_PATHNAME, &st);
+	sideload_child_pid = GetMiniAdbdPid();
 	if (!sideload_child_pid) {
 		LOGERR("Unable to get child ID\n");
 		return 0;
