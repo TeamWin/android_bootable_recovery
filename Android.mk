@@ -459,9 +459,12 @@ ifneq ($(TW_EXCLUDE_DEFAULT_USB_INIT), true)
     TWRP_REQUIRED_MODULES += init.recovery.usb.rc
 endif
 ifeq ($(TWRP_INCLUDE_LOGCAT), true)
-    TWRP_REQUIRED_MODULES += logcat event-log-tags
+    TWRP_REQUIRED_MODULES += logcat
     ifeq ($(TARGET_USES_LOGD), true)
-        TWRP_REQUIRED_MODULES += logd libsysutils libnl init.recovery.logd.rc
+        TWRP_REQUIRED_MODULES += logd libsysutils libnl event-log-tags init.recovery.logd.rc
+        LOCAL_POST_INSTALL_CMD += \
+            $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/etc && \
+            cp $(TARGET_OUT_ETC)/event-log-tags $(TARGET_RECOVERY_ROOT_OUT)/system/etc/ &&
     endif
 endif
 # Allow devices to specify device-specific recovery dependencies
@@ -500,7 +503,7 @@ LOCAL_MODULE := file_contexts_text
 LOCAL_MODULE_TAGS := optional
 LOCAL_REQUIRED_MODULES := file_contexts.bin
 
-LOCAL_POST_INSTALL_CMD := \
+LOCAL_POST_INSTALL_CMD += \
     $(hide) cp -f $(PRODUCT_OUT)/obj/ETC/file_contexts.bin_intermediates/file_contexts.concat.tmp $(TARGET_RECOVERY_ROOT_OUT)/file_contexts
 
 include $(BUILD_PHONY_PACKAGE)
@@ -509,7 +512,7 @@ include $(BUILD_PHONY_PACKAGE)
 # ===============================
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
-    recovery-persist.cpp 
+    recovery-persist.cpp
 LOCAL_MODULE := recovery-persist
 LOCAL_SHARED_LIBRARIES := liblog libbase libmetricslogger
 LOCAL_STATIC_LIBRARIES := libotautil
