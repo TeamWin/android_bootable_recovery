@@ -3340,6 +3340,14 @@ bool TWPartitionManager::Is_Super_Partition(const char* fstab_line) {
 		return false;
 	std::vector<std::string> super_partition_list = {"system", "vendor", "odm", "product", "system_ext"};
 
+#ifdef MORE_LOGICAL
+	char more_parts[] = MORE_LOGICAL;
+	char* parts = strtok(more_parts, " ");
+	while(parts != NULL) {
+		super_partition_list.push_back(std::string(parts));
+		parts = strtok(NULL, " ");
+	}
+#endif
 	for (auto&& fstab_partition_check: super_partition_list) {
 		if (strncmp(fstab_line, fstab_partition_check.c_str(), fstab_partition_check.size()) == 0) {
 			DataManager::SetValue(TW_IS_SUPER, "1");
