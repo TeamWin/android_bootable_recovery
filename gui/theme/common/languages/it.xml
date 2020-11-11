@@ -30,6 +30,7 @@
 		<string name="sdext">SD-EXT</string>
 		<string name="adopted_data">Data annessa</string>
 		<string name="adopted_storage">Archivio annesso</string>
+		<string name="autostorage">Archivio</string>
 
 		<!-- GUI XML strings -->
 		<string name="twrp_header">Team Win Recovery Project</string>
@@ -98,6 +99,7 @@
 		<string name="install_failed">Installazione fallita</string>
 		<string name="install_successful">Installazione riuscita</string>
 		<string name="wipe_cache_dalvik_btn">Pulisci Cache/Dalvik</string>
+		<string name="wipe_dalvik_btn">Pulisci Dalvik</string>
 		<string name="reboot_system_btn">Riavvia sistema</string>
 		<string name="install_sel_target">Scegli partizione</string>
 		<string name="flash_image_select">Scegli la partizione su cui installare:</string>
@@ -105,8 +107,10 @@
 		<string name="flashing_image">Installazione Immagine...</string>
 		<string name="image_flashed">Immagine installata</string>
 		<string name="wipe_cache_dalvik_confirm">Pulire Cache &amp; Dalvik?</string>
+		<string name="wipe_dalvik_confirm">Pulire Dalvik？</string>
 		<string name="wiping_cache_dalvik">Pulizia Cache &amp; Dalvik...</string>
 		<string name="wipe_cache_dalvik_complete">Pulizia Cache &amp; Dalvik completata</string>
+		<string name="wipe_dalvik_complete">Pulizia Dalvik completata</string>
 		<string name="swipe_wipe">Scorri per pulire</string>
 		<string name="swipe_wipe_s">   Pulisci</string>
 		<string name="no_os1">Nessun SO installato. Sei</string>
@@ -122,6 +126,10 @@
 		<string name="reboot_install_app_system">Installa come app di Sistema</string>
 		<string name="reboot_installing_app">Installazione dell'app...</string>
 		<string name="swipe_to_install_app">Scorri per installare l'app</string>
+		<string name="uninstall_twrp_system_app">Disinstalla l'app TWRP</string>
+		<string name="uninstall_twrp_system_app_confirm">Sei sicuro di disinstallare l'app TWRP？</string>
+		<string name="uninstalling_twrp_system_app">Disinstallazione l'app TWRP...</string>
+		<string name="uninstall_twrp_system_app_complete">Disinstallazione l'app TWRP completata</string>
 		<string name="swipe_flash">Scorri per installare</string>
 		<string name="confirm_action">Conferma l'azione</string>
 		<string name="back_cancel">Premi indietro per annullare.</string>
@@ -133,6 +141,7 @@
 		<string name="factory_reset2">(l'archivio interno sarà escluso)</string>
 		<string name="factory_reset3">La maggior parte delle volte, questo</string>
 		<string name="factory_reset4">sarà l'unico tipo di pulizia necessario.</string>
+		<string name="factory_reset5">(Non include utente/lockscreen)</string>
 		<string name="factory_resetting">Reset in corso...</string>
 		<string name="advanced_wipe_hdr">Pulizia avanzata</string>
 		<string name="advanced_wipe_btn">Pulizia avanzata</string>
@@ -318,6 +327,7 @@
 		<string name="settings_tz_btn">Fuso orario</string>
 		<string name="settings_screen_btn">Schermo</string>
 		<string name="settings_screen_bright_btn">Luminosità</string>
+		<string name="vibration_disabled">Vibrazione disabilitato</string>
 		<string name="settings_vibration_btn">Vibrazione</string>
 		<string name="settings_language_btn">Lingua</string>
 		<string name="time_zone_hdr">Fuso orario</string>
@@ -455,6 +465,7 @@
 		<string name="decrypt_data_failed_pattern">Sequenza errata! Riprova.</string>
 		<string name="decrypt_data_enter_pattern">Inserisci sequenza di sblocco.</string>
 		<string name="decrypt_data_trying">Tentativo di decriptazione in corso...</string>
+		<string name="decrypt_data_vold_os_missing">Manca file per decriptazione di vold：{1}</string>
 		<string name="term_hdr">Terminale</string>
 		<string name="term_s_hdr">Terminale</string>
 		<string name="term_kill_btn">TERMINA</string>
@@ -479,6 +490,41 @@
 		<string name="install_cancel">Non installare</string>
 		<string name="sel_storage_list">Scegli archivio</string>
 		<string name="ok_btn">OK</string>
+		<string name="install_twrp_ramdisk">Installa Recovery Ramdisk</string>
+		<string name="install_kernel">Installa Kernel</string>
+		<string name="repack_kernel_confirm_hdr">Installa Kernel</string>
+		<string name="repack_ramdisk_confirm_hdr">Installa Recovery</string>
+		<string name="repack_kernel_confirm">Installare Kernel?</string>
+		<string name="repack_ramdisk_confirm">Installare Recovery？</string>
+		<string name="repack_backup_first">Effettua prima il backup dell'immagine originale</string>
+		<string name="repack">Reimballare</string>
+		<string name="swipe_to_install">Scorri per installare</string>
+		<string name="installing">Installando...</string>
+		<string name="install_complete">Installazione completata</string>
+		<string name="unpack_error">Disimballaggio ha commesso errori</string>
+		<string name="repack_error">Imballaggio ha commesso errori</string>
+		<string name="unpacking_image">Disimballaggiando {1}...</string>
+		<string name="repacking_image">Imballaggio {1}...</string>
+		<string name="repack_image_hdr">Scegli Immagine</string>
+		<string name="fix_recovery_loop">Riparazione loop del Recovery</string>
+		<string name="fix_recovery_loop_confirm">Riparare loop del Recovery?</string>
+		<string name="fixing_recovery_loop">Riparando loop del Recovery...</string>
+		<string name="fix_recovery_loop_complete">loop del Recovery riparato</string>
+		<string name="fixing_recovery_loop_patch">Patch del kernel...</string>
+		<string name="fix_recovery_loop_patch_error">Si è verificato un errore durante patch del kernel.</string>
+		<string name="decrypt_users">Decriptare utente</string>
+		<string name="decrypt_users_selection">Scegli un utente ID da decriptare</string>
+		<string name="select_user">Scegli utente</string>
+		<string name="backup_storage_undecrypt_warning">Il backup non include alcuni file dell'utente {1} perché questo utente non è decriptato</string>
+		<string name="decrypting_user_fbe">Tentativo di decriptazione l'FBE dell'utente {1}...</string>
+		<string name="decrypt_user_success_fbe">L'utente {1} decriptato successo</string>
+		<string name="decrypt_user_fail_fbe">L'utente {1} decriptato fallito</string>
+		<string name="decrypt_data_enter_pass_fbe">Inserire password dell'utente [%tw_crypto_user_id%]</string>
+		<string name="decrypt_data_enter_pattern_fbe">Disegnare password dell'utente [%tw_crypto_user_id%]</string>
+		<string name="multiuser_warning1">Alcuni utenti non sono stati decriptato!</string>
+		<string name="multiuser_warning2">L'operazione di backup / ripristino potrebbe non funziona!</string>
+		<string name="multiuser_warning_accept">CONTINUA</string>
+		<string name="multiuser_warning_hdr">Avviso multiutente</string>
 
 		<!-- Various console messages - these consist of user displayed messages, oftentimes errors -->
 		<string name="no_kernel_selinux">Il kernel non supporta la lettura dei contesti SELinux.</string>
@@ -532,7 +578,8 @@
 		<string name="update_part_details_done">...fatto</string>
 		<string name="wiping_dalvik">Pulizia delle cartelle della cache Dalvik...</string>
 		<string name="cleaned">Cartella pulita: {1}...</string>
-		<string name="dalvik_done">-- pulizia delle cartelle della cache Dalvik completata!</string>
+		<string name="cache_dalvik_done">-- pulizia delle cartelle della cache Dalvik completata!</string>
+		<string name="dalvik_done">-- pulizia delle cartelle della Dalvik completata!</string>
 		<string name="no_andsec">Nessuna partizione Android protetta trovata.</string>
 		<string name="unable_to_locate">Impossibile localizzare {1}.</string>
 		<string name="wiping_datamedia">Pulizia dell'archivio interno -- /data/media...</string>
@@ -630,8 +677,8 @@
 		<string name="recovery_commands_complete">Esecuzione dei comandi completata</string>
 		<string name="running_ors">Esecuzione di OpenRecoveryScript...</string>
 		<string name="ors_complete">Esecuzione di OpenRecoveryScript completata</string>
-		<string name="invalid_zip_format">File zip non valido!</string>
 		<string name="check_for_digest" version="2">Controllo sull'Digest in corso...</string>
+		<string name="invalid_zip_format">File zip non valido!</string>
 		<string name="fail_sysmap">Impossibile mappare '{1}'</string>
 		<string name="verify_zip_sig">Verifica della firma dello Zip in corso...</string>
 		<string name="verify_zip_fail">Verifica della firma non riuscita!</string>
@@ -654,7 +701,7 @@
 		<!-- These 2 items are saved in the data manager instead of resource manager, so %llu, etc is correct instead of {1} -->
 		<string name="file_progress">File %llu di %llu, %i%%</string>
 		<string name="size_progress">%lluMB di %lluMB, %i%%</string>
-		<string name="decrypt_cmd">Tentativo di decriptare Data da riga di comando.</string>
+		<string name="decrypt_cmd" version="2">Tentativo di decriptare Data/Utente da riga di comando.</string>
 		<string name="base_pkg_err">Errore nel caricamento dei pacchetti base.</string>
 		<string name="simulating">Simulazione azioni in corso...</string>
 		<string name="backup_cancel">Backup annullato</string>
@@ -684,6 +731,25 @@
 		<string name="partition_not_found">percorso: {1} non trovato nella lista delle partizioni</string>
 		<string name="copy_kernel_log">Log del kernel copiato in {1}</string>
 		<string name="include_kernel_log">Includi Log del Kernel</string>
+		<string name="sha2_chk">Usa SHA2 per eseguire controllo hash</string>
 		<string name="unable_set_boot_slot">Errore nel cambio slot d'avvio del bootloader in {1}</string>
+		<string name="unmount_sys_install">Disinstallare il sistema (mount) prima di installare ZIP</string>
+		<string name="unmount_system">Disinstallando sistema...</string>
+		<string name="unmount_system_err">Disinsta fallito</string>
+		<string name="flash_ab_inactive">Installando A/B zip a slot: {1}</string>
+		<string name="flash_ab_reboot">Per installare altri file zip，devi riavviare in Recovery per avere slot aggiornato</string>
+		<string name="ozip_decrypt_decryption">Decriptando Ozip...</string>
+		<string name="ozip_decrypt_finish">Ozip decriptato！</string>
+		<string name="fbe_wipe_msg">Attenzione: {1} è pulito. Dispositivo FBE deve riavviare a Android, e non Recovery, per riavviare impostazione di policy FBE dopo la pulizia</string>
+		<string name="fastboot_button">Fastboot</string>
+		<string name="enable_adb">Abilita ADB</string>
+		<string name="enable_fastboot">Abilita Fastboot</string>
+		<string name="fastboot_console_msg">Entra modalità Fastboot...</string>
+		<!-- Android Rescue Party trigger -->
+		<string name="rescue_party0">Android attiva modalità rescue! Possibile soluzione:</string>
+		<string name="rescue_party1"> 1. Pulisci cache, e/o</string>
+		<string name="rescue_party2"> 2. Pulisci dati, e/o</string>
+		<string name="rescue_party3"> 3. Reinstare rom.</string>
+		<string name="rescue_party4">Il problema segnalato è:</string>
 	</resources>
 </language>
