@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "48f30ad6_403057d0",
+        "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-11-11T23:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "344ab4e4_4c0c503a",
+      "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a33201db_c6fec403",
         "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1171d48e_66ea222a",
+        "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-11-11T23:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a33201db_c6fec403",
+      "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "038297d8_964a099a",
         "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95f92e2e_7ca3adef",
+        "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-11-11T23:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "038297d8_964a099a",
+      "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
     }
   ]
 }
