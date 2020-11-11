@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "344ab4e4_4c0c503a",
+        "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-11-11T21:53:28Z",
+      "side": 1,
+      "message": "fix conflict marker",
+      "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a33201db_c6fec403",
+        "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-11-11T21:53:28Z",
+      "side": 1,
+      "message": "fix conflict marker",
+      "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "038297d8_964a099a",
+        "filename": "gui/theme/extra-languages/languages/zh_CN.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-11-11T21:53:28Z",
+      "side": 1,
+      "message": "fix conflict marker",
+      "revId": "fc69976eb79981f6db9d71fae3de043e9f8f5f9d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    }
+  ]
+}
