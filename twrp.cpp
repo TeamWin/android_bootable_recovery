@@ -326,6 +326,23 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+
+	// Symlink mapper to bootdevice, etc, if we have dynamic partitions
+	if (PartitionManager.Get_Super_Status()) {
+ 		printf("=> Linking dynamic partitions (%s)\n", DYNAMIC_PARTITIONS_LIST_FOR_SYMLINK);
+  		string src, dest, dest2;
+  		std::vector <std::string> partitions = TWFunc::Split_String(DYNAMIC_PARTITIONS_LIST_FOR_SYMLINK, " ");
+		for (auto&& part : partitions) {
+   		   	src = "/dev/block/mapper/" + part;
+   		   	dest = "/dev/block/by-name/" + part;
+   		   	dest2 = "/dev/block/bootdevice/by-name/" + part;
+ 			LOGINFO("=> Symlink %s => %s\n", src.c_str(), dest.c_str());
+		   	symlink(src.c_str(), dest.c_str());
+ 			LOGINFO("=> Symlink %s => %s\n", src.c_str(), dest2.c_str());
+		   	symlink(src.c_str(), dest2.c_str());
+		}
+	}
+
 	printf("Starting the UI...\n");
 	gui_init();
 
