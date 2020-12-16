@@ -326,6 +326,20 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+
+	// Symlink mapper to bootdevice, etc, if we have dynamic partitions
+	if (PartitionManager.Get_Super_Status()) {
+ 		printf("=> Linking dynamic partitions...\n");
+ 		sleep(1);
+		symlink("/dev/block/mapper/product", "/dev/block/bootdevice/by-name/product");
+		symlink("/dev/block/mapper/vendor", "/dev/block/bootdevice/by-name/vendor");
+		symlink("/dev/block/mapper/system", "/dev/block/bootdevice/by-name/system");
+
+		symlink("/dev/block/mapper/product", "/dev/block/by-name/product");
+		symlink("/dev/block/mapper/vendor", "/dev/block/by-name/vendor");
+		symlink("/dev/block/mapper/system", "/dev/block/by-name/system");
+	}
+
 	printf("Starting the UI...\n");
 	gui_init();
 
