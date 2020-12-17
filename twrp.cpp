@@ -329,15 +329,19 @@ int main(int argc, char **argv) {
 
 	// Symlink mapper to bootdevice, etc, if we have dynamic partitions
 	if (PartitionManager.Get_Super_Status()) {
- 		printf("=> Linking dynamic partitions...\n");
+ 		printf("=> Linking dynamic partitions (%s)\n", DYNAMIC_PARTITIONS_LIST_FOR_SYMLINK);
  		sleep(1);
-		symlink("/dev/block/mapper/product", "/dev/block/bootdevice/by-name/product");
-		symlink("/dev/block/mapper/vendor", "/dev/block/bootdevice/by-name/vendor");
-		symlink("/dev/block/mapper/system", "/dev/block/bootdevice/by-name/system");
-
-		symlink("/dev/block/mapper/product", "/dev/block/by-name/product");
-		symlink("/dev/block/mapper/vendor", "/dev/block/by-name/vendor");
-		symlink("/dev/block/mapper/system", "/dev/block/by-name/system");
+  		std::vector <std::string> parts = TWFunc::Split_String(DYNAMIC_PARTITIONS_LIST_FOR_SYMLINK, " ");
+  		string src, dest, dest2;
+  		for (size_t i = 0; i < parts.size(); ++i) {
+   		   	src = "/dev/block/mapper/" + parts[i];
+   		   	dest = "/dev/block/by-name/" + parts[i];
+   		   	dest2 = "/dev/block/bootdevice/by-name/" + parts[i];
+ 			printf("=> Symlink %s => %s\n", src.c_str(), dest.c_str());
+		   	symlink(src.c_str(), dest.c_str());
+ 			printf("=> Symlink %s => %s\n", src.c_str(), dest2.c_str());
+		   	symlink(src.c_str(), dest2.c_str());
+    		}
 	}
 
 	printf("Starting the UI...\n");
