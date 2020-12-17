@@ -20,6 +20,24 @@
     },
     {
       "key": {
+        "uuid": "4ce8f7df_989219e5",
+        "filename": "twrp.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2020-12-17T22:04:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a77e391_53e1215c",
+      "revId": "da0a6349b32689b8f867024a3ae09486cc6991e0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40e75350_9075f398",
         "filename": "twrp.cpp",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "48c88e11_4f42ae5b",
+        "filename": "twrp.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2020-12-17T22:04:34Z",
+      "side": 1,
+      "message": "It could be. But there are already other printf() statements in that part of twrp.cpp - I assumed that there are reasons why they are not all LOGINFO.",
+      "parentUuid": "40e75350_9075f398",
+      "revId": "da0a6349b32689b8f867024a3ae09486cc6991e0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8ae71c0a_bb9287e2",
         "filename": "twrp.cpp",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2020-12-17T18:32:38Z",
       "side": 1,
       "message": "Should this be LOGINFO?",
+      "revId": "da0a6349b32689b8f867024a3ae09486cc6991e0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3729822b_d5ece62a",
+        "filename": "twrp.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2020-12-17T22:04:34Z",
+      "side": 1,
+      "message": "It could be.",
+      "parentUuid": "8ae71c0a_bb9287e2",
       "revId": "da0a6349b32689b8f867024a3ae09486cc6991e0",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
