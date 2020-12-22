@@ -17,6 +17,24 @@
       "revId": "428cdb11a6593ad7193233909b100eb091c3eb3b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1a56fa7_3f47524d",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-22T01:16:13Z",
+      "side": 1,
+      "message": "I mean I could do the same with int by making the default 1 and setting to 0 if system isn\u0027t mounted. But if you prefer me to use bool I can do that.",
+      "parentUuid": "bf36aed5_90d6d194",
+      "revId": "428cdb11a6593ad7193233909b100eb091c3eb3b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
+      "unresolved": true
     }
   ]
 }
