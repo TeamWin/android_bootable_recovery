@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406a85e7_bbf95a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-25T15:58:29Z",
+      "side": 1,
+      "message": "Patch works now, however Ian\u0027s feedback still hasn\u0027t been addressed. Additionally none of the other actions have an underscore in the name, so that should be removed for consistency. I\u0027m also not sure \"changeterminal\" is a great name since it doesn\u0027t really describe the function of the action.\n\nI\u0027m also seeing an issue where even after exiting the Terminal after opening it from a folder, it re-opens to the previous location rather than to a clear/clean Terminal back at \"/\". To reproduce:\n\n- Mount System in Mount page\n- Navigate to /system_root/system in File Manager and Open Terminal Here\n- Terminal will open at /system_root/system (good)\n- Exit using \"exit\" command in Terminal\n- Unmount System in Mount page (if possible - I was unable to do it after opening Terminal here)\n- If unable to unmount System, go back to Terminal and umount -l /system_root (to lazy unmount it)\n- Exit using \"exit\" command in Terminal (again)\n- Confirm in Mount page that system is now unmounted\n- Go back to Advanced -\u003e Terminal to open a new one, and it ends up opening \"(unreachable)/system\"",
+      "revId": "f27b95f5b4f6d4f67edb37371d56f1a07284e578",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
