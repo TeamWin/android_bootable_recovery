@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f400d407_f65a220d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-26T22:20:23Z",
+      "side": 1,
+      "message": "I actually think the original behavior of the patch was fine, outside of the \"cd\" output in Terminal. I actually like the Terminal keeping the content from the prior commands, which is fine. I think the only time it\u0027s a problem is if the path it\u0027s trying to open no longer exists, in which case it should just default back to /. Can we make that the behavior?",
+      "revId": "e2456400d00b1fcea3cec03acfa7d126818a50f2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
