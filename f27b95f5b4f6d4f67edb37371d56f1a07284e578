@@ -34,6 +34,24 @@
       "parentUuid": "406a85e7_bbf95a88",
       "revId": "f27b95f5b4f6d4f67edb37371d56f1a07284e578",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "974b222b_d652d960",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-26T22:17:32Z",
+      "side": 1,
+      "message": "Now the Terminal is getting reset even if I don\u0027t exit it. So then I\u0027m losing what I\u0027ve done if I just go to a different page and come back to input additional commands. It only seems to open if I enter the Terminal using the \"Open Terminal Here\" button, though.",
+      "parentUuid": "e432d168_71fe7699",
+      "revId": "f27b95f5b4f6d4f67edb37371d56f1a07284e578",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
