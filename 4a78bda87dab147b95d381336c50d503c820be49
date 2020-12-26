@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4881e447_13d61533",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-26T03:59:29Z",
+      "side": 1,
+      "message": "Fixes missing listbox issue on reboot page. Tested on ASUS TF201T (landscape device)",
+      "revId": "4a78bda87dab147b95d381336c50d503c820be49",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
