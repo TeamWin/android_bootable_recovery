@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0574440b_454175f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2020-12-28T12:24:58Z",
+      "side": 1,
+      "message": "As a side note: The commit message is Peter\u0027s original.",
+      "revId": "b9caef2134f4b1ee5f58fbe8efc7a40437b8d781",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
