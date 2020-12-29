@@ -930,10 +930,16 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 			}
 			break;
 		case TWFLAG_WRAPPEDKEY:
-			// Set fbe.data.wrappedkey to true
+			// Set wrappedkey props to true for data and/or metadata
 			{
-				property_set("fbe.data.wrappedkey", "true");
-				LOGINFO("FBE wrapped key enabled\n");
+				if (Mount_Point == "/data") {
+					property_set("fbe.data.wrappedkey", "true");
+					LOGINFO("FBE wrapped key enabled for %s\n", Mount_Point.c_str());
+				}
+				if (Mount_Point == "/metadata") {
+					property_set("fbe.metadata.wrappedkey", "true");
+					LOGINFO("FBE wrapped key enabled for %s\n", Mount_Point.c_str());
+				}
 			}
 			break;
 		case TWFLAG_FLASHIMG:
