@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10efcce4_347db8e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T15:24:34Z",
+      "side": 1,
+      "message": "This is working for me. This allows the \"wrappedkey\" flag to be used for the metadata partition as well, to set fbe.metadata.wrappedkey automatically rather than needing to do this manually in system.prop. This new prop is needed for fscrypt to properly identify wrappedkey for metadata. See here for reference: https://github.com/TeamWin/android_bootable_recovery/blob/android-10.0/crypto/fscrypt/FsCrypt.cpp#L233-L243",
+      "revId": "d9a94fcbc7178be87a9268767fe831ca4eed2bb7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
