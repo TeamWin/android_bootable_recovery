@@ -68,6 +68,24 @@
       "message": "please remove blank space",
       "revId": "1a652faa6be5e5d3eb5abc113becda551357afb8",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150f8f6a_1b8fec2b",
+        "filename": "gui/action.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1964,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T23:49:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66a0603f_ffac2fc9",
+      "revId": "1a652faa6be5e5d3eb5abc113becda551357afb8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

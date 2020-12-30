@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b91b3b6_19f2013c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T23:49:08Z",
+      "side": 1,
+      "message": "Only the checks when switching to the Advanced page are removed. The option is still there.",
+      "revId": "9d930a2015d49671176a7b65503a359d9c22a8ce",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
