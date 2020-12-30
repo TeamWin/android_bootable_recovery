@@ -16,6 +16,24 @@
       "message": "Working for me, and much better in the log. Thanks!",
       "revId": "09e626fab67f4ad06f51d5ce2979d2c9e4740b15",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb66864_e0f79520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2020-12-30T15:45:41Z",
+      "side": 1,
+      "message": ":D",
+      "parentUuid": "d8be3dc7_f26cacc6",
+      "revId": "09e626fab67f4ad06f51d5ce2979d2c9e4740b15",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
