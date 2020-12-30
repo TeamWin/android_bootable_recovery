@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1609344551 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1609344559-02F5FB2D0DF5D405E96593B1FEA09F3B71A3F497\n\n0000000000000000000000000000000000000000 83c22343bf55e4edaf0555928b13a34476037592 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAl/spicACgkQAqwBp3le\n7riP6xAAkiFjah1iNpNEdc+Zsdz7MHSZWpafjej1U953Cdw7LSCpvtpn7XxeIISz\njEEulPR4mFmnF8jjwMz4RKWPpZbZ9BFlxYSiasQVRRfmltxfLspfL0pZi2NU6ohi\n4hLlOMQuGhprlAtA2go0SXnymE97lIfiJxK4DoWakp+dqXEpfY9FalDdU9X7ddJj\nxI7AXIWt4XhIfp/Jr4LZ//zS2YYIHd9CLKfW6FWIjYZUBiPG0mlwv40GjmAaDbsU\nn1Eugc+UEtZpJEAyzH4NPsyCS21JrGr2pkGD//XvMYaA/yClktYaEf+rgtqj+Nxf\nqhmWdETzs9EhuHbIgWDCrr1lLm6AMgOsVeIUkHDNv454AZz78z4aj2IH8Gy5RBZo\n2NYiX/wdSd5B5A5PUpfIRf11CBqalaDtL2NqcYa1iIdiJgVsysjdjTaPzGGicytR\nEcUXjmaimoRX2TdvgnfV6RwyJtjudD4qIl+PSgNT5A6X6oNHOf49AaASg4swP3he\n4SS8ae2iLohxav0rRqPZtvctfQCn84RdCF4x55XQz+dWBU86cpOly2RfagFA23++\neClgLPmv3jXu34RcrNZXzqjNWpfIE61+0/TPJYAI5ULYDJ4aU9uCM4jIPaZ9TxSo\nSbPizHKObI8YAYjid0ZkFwihWOHo84TyNAWU3QG1dBBDHc/amt0\u003d\n\u003dWUHz\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19163011_c7ae4f45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T16:22:13Z",
+      "side": 1,
+      "message": "Tested on FBE device and unencrypted FDE device, and wrappedkey works on the former and doesn\u0027t show up on the latter.",
+      "revId": "83c22343bf55e4edaf0555928b13a34476037592",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
