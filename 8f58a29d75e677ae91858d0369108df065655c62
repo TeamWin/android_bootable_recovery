@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee767b8c_dab86d68",
+        "filename": "gui/theme/common/portrait.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3570,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-12-30T23:19:13Z",
+      "side": 0,
+      "message": "I thought Dees_Troy\u0027s intention was to have this check in the advanced page.",
+      "revId": "8f58a29d75e677ae91858d0369108df065655c62",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
