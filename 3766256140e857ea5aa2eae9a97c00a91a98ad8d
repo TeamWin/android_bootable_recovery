@@ -17,6 +17,23 @@
       "message": "My question on this one is whether legacy FBE devices use wrappedkey? In those cases, Key_Directory would still be empty, so this check would be skipped. Just want to make sure it won\u0027t cause any issue there. My assumption is that any device that would be using wrappedkey would also be specifying a keydirectory for metadata encryption. I believe that\u0027s a valid assumption, but please correct me if I\u0027m wrong.",
       "revId": "3766256140e857ea5aa2eae9a97c00a91a98ad8d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3c4dac_6b8a6ebe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T16:22:40Z",
+      "side": 1,
+      "message": "I think this should be fine.",
+      "revId": "3766256140e857ea5aa2eae9a97c00a91a98ad8d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
