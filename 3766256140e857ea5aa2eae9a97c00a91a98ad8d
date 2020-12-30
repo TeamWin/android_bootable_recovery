@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1609338017 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1609338026-83A6803C88B07E5A278C6A64DF31D01CE7B7893A\n\n0000000000000000000000000000000000000000 3766256140e857ea5aa2eae9a97c00a91a98ad8d refs/for/android-10.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAl/sjKEACgkQAqwBp3le\n7riXCxAAqyxsrpEsRS7TGRawM/FIFVHHHqIGmWGTohNHUERSE+dZeE+cUiXM6Qz1\nITn2D2IDkAbLCb8UVvgjHBdP2FrLcKKmzqS7TlHrw09gm+qi4lLhH+jFwL0ORGCb\n9nbHMFGzQ0fLn8VcVxTmKrEsK8lapiQTDwx//JozMRiw3bHVhOW7zWLWW306Zmju\nzp5HKVy+VbuAGypyZRYFTGUAy5CKvO+k82FGEbWCxrAinfFE9jpbw4+xcUES35IU\nbILO0mMG3ItCmafbA2ZcR5Abxp87EktvW1ZRG5tfDrx/O6PuFuW0+qhNM0s+s0Li\n8u6FaBnwEN/TrtRXEYACItYfgiF5IhwtMkZriYR0QlCzODTiJHCB+9Gr+DkVv5pC\nwdQg1DQg78h7imORx7eWHaCN/A+ZczyO+yxOeF1wip4ZuLQBcOhrOA/AZLp1Ri0c\nKy2d+UEoamhJIWHop+3fxGMr8Lp712XLOqcUOcfV93kha5DIj9IKTRdiFTgQ3Cae\n+sj/h/xGBix+3h01CsjkRFoOlW4Zxi3rKD743U0bRzmmeqGUNlcCPONTUeFucIMS\nXhw06HZfPkZpC7aXWcwY/ZWE3LmzZyTAxThL2Tb+lPpG7QPS2gOaAEwT5w/zpm3/\nGOrxQj/C5frKthiqthC55ndLVR+EiZTge2B9MbOXWhZw/KU3HXI\u003d\n\u003dlsm9\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b167ebf_ec996872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T15:29:19Z",
+      "side": 1,
+      "message": "My question on this one is whether legacy FBE devices use wrappedkey? In those cases, Key_Directory would still be empty, so this check would be skipped. Just want to make sure it won\u0027t cause any issue there. My assumption is that any device that would be using wrappedkey would also be specifying a keydirectory for metadata encryption. I believe that\u0027s a valid assumption, but please correct me if I\u0027m wrong.",
+      "revId": "3766256140e857ea5aa2eae9a97c00a91a98ad8d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
