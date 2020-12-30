@@ -16,6 +16,23 @@
       "message": "As a side note: The commit message is Peter\u0027s original.",
       "revId": "b9caef2134f4b1ee5f58fbe8efc7a40437b8d781",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "651b8db6_c4f49ab3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T23:39:06Z",
+      "side": 1,
+      "message": "This doesn\u0027t break anything for me, so I guess it\u0027s fine.",
+      "revId": "b9caef2134f4b1ee5f58fbe8efc7a40437b8d781",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
