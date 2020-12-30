@@ -51,6 +51,24 @@
       "message": "As in the other comment, I assumed Dees_Troy would want this to stay in advanced.",
       "revId": "09e626fab67f4ad06f51d5ce2979d2c9e4740b15",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5575ec5_70dd921c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-30T23:50:08Z",
+      "side": 1,
+      "message": "Only the checks when switching to the Advanced page are removed. The option is still there.",
+      "parentUuid": "69bddd5c_f05eed22",
+      "revId": "09e626fab67f4ad06f51d5ce2979d2c9e4740b15",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
