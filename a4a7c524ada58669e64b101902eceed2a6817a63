@@ -16,6 +16,41 @@
       "message": "I haven\u0027t dug deep into the issue but on pixel 4 with dynamic partitions I am getting the following error:\n\nI:operation_start: \u0027Install TWRP App\u0027\nI:Mount: Unable to find partition for path \u0027/system\u0027\nI:Path /system/bin/me.twrp.twrpapp.apk does not exist. Unable to copy /data/app/me.twrp.twrpapp-1/base.apk\nE:Error copying apk file\nI:checking for twrp app\nI:App found at \u0027/data/app/me.twrp.twrpapp-1\u0027",
       "revId": "a4a7c524ada58669e64b101902eceed2a6817a63",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe926e0_1bbeaace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-31T02:23:50Z",
+      "side": 1,
+      "message": "Does it do that without the patch?",
+      "parentUuid": "94adcd4f_47ee0003",
+      "revId": "a4a7c524ada58669e64b101902eceed2a6817a63",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1574eb07_97dc292e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-31T02:23:50Z",
+      "side": 1,
+      "message": "bigbiff, that\u0027s not an issue with this patch. That error is present without it. This patch doesn\u0027t change the installation method.",
+      "revId": "a4a7c524ada58669e64b101902eceed2a6817a63",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
