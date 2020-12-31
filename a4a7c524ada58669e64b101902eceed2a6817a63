@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94adcd4f_47ee0003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-12-31T02:07:05Z",
+      "side": 1,
+      "message": "I haven\u0027t dug deep into the issue but on pixel 4 with dynamic partitions I am getting the following error:\n\nI:operation_start: \u0027Install TWRP App\u0027\nI:Mount: Unable to find partition for path \u0027/system\u0027\nI:Path /system/bin/me.twrp.twrpapp.apk does not exist. Unable to copy /data/app/me.twrp.twrpapp-1/base.apk\nE:Error copying apk file\nI:checking for twrp app\nI:App found at \u0027/data/app/me.twrp.twrpapp-1\u0027",
+      "revId": "a4a7c524ada58669e64b101902eceed2a6817a63",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
