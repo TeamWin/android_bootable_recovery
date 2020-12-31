@@ -51,6 +51,24 @@
       "parentUuid": "d570677a_d67656d8",
       "revId": "2172088d9c4ed4bb9fcbfd099a378e1296ad38d9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ff68ac_e0da9bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-31T15:13:35Z",
+      "side": 1,
+      "message": "I only tested on the branch the patch was added on, so no, I didn\u0027t test on android-10 since the patch wasn\u0027t on that branch. I also don\u0027t have an adoptable storage device I can test on in the 10 tree, but I can test it with the 9.0 branch later.",
+      "parentUuid": "f43c6085_0c9e7315",
+      "revId": "2172088d9c4ed4bb9fcbfd099a378e1296ad38d9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
