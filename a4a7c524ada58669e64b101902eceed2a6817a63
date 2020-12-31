@@ -51,6 +51,24 @@
       "message": "bigbiff, that\u0027s not an issue with this patch. That error is present without it. This patch doesn\u0027t change the installation method.",
       "revId": "a4a7c524ada58669e64b101902eceed2a6817a63",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f085afe6_106a87a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2020-12-31T04:59:37Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s related with the patch. This patch doesn\u0027t modifying actual installation method to install app. Its just shifting the check for app function into a better place, so that It can be accessible from twrp.cpp and other parts as well.",
+      "parentUuid": "afe926e0_1bbeaace",
+      "revId": "a4a7c524ada58669e64b101902eceed2a6817a63",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
