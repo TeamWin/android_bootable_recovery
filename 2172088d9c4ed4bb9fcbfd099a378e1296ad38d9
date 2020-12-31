@@ -33,6 +33,24 @@
       "message": "Has this been tested in android-10.0 branch?",
       "revId": "2172088d9c4ed4bb9fcbfd099a378e1296ad38d9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f43c6085_0c9e7315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2020-12-31T08:58:51Z",
+      "side": 1,
+      "message": "I don\u0027t have an device using that branch, so not from me. It seems like Captain Throwback picked the whole patchset though, maybe he did.",
+      "parentUuid": "d570677a_d67656d8",
+      "revId": "2172088d9c4ed4bb9fcbfd099a378e1296ad38d9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
