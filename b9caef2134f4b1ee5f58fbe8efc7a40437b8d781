@@ -50,6 +50,24 @@
       "message": "I will submit this, but I feel the bullet point should be removed about TWRP people. It doesn\u0027t seem to have anything to do with the commit and is a bit passive agressive.",
       "revId": "b9caef2134f4b1ee5f58fbe8efc7a40437b8d781",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50055bd0_3f79fdd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2020-12-31T08:55:28Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7d44c5ff_6641d466",
+      "revId": "b9caef2134f4b1ee5f58fbe8efc7a40437b8d781",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
