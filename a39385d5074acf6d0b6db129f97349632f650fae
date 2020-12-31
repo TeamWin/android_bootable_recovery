@@ -17,6 +17,23 @@
       "message": "This will fix the TWRP app issue you reported in the other patch.",
       "revId": "a39385d5074acf6d0b6db129f97349632f650fae",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "055dd5bc_6594a448",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2020-12-31T03:12:09Z",
+      "side": 1,
+      "message": "While this fixes the TWRP app install error, the app doesn\u0027t actually appear to install, and gets deleted when my device boots. But I think that would have to be addressed in a separate patch.",
+      "revId": "a39385d5074acf6d0b6db129f97349632f650fae",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
