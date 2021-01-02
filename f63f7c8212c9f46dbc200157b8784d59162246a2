@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f7b1c6_a6ebe854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 194
+      },
+      "writtenOn": "2021-01-02T18:56:59Z",
+      "side": 1,
+      "message": "This duplicate function seems to be fine when compiling with omni minimal sources but causes errors when compiling with alternative sources",
+      "revId": "f63f7c8212c9f46dbc200157b8784d59162246a2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
