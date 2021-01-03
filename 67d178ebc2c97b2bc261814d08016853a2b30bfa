@@ -106,6 +106,24 @@
       "parentUuid": "287883cf_78391581",
       "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c72d99_379e45cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 239
+      },
+      "writtenOn": "2021-01-03T23:20:43Z",
+      "side": 1,
+      "message": "I actually also have zero idea why this is needed on those devices. My devices that need this patch all have no open-source kernel, so it is really hard to figure out exactly why. Basically, when creating the devicemapper node from the data block device on these devices, you have to use the symlinked path, otherwise it fails with something like `device or resource busy` or some other random error code (I\u0027m pretty sure on my Umidigi F1 it\u0027s another error but I don\u0027t have the device on hand to check as of now).",
+      "parentUuid": "4e6efb20_d6d4e524",
+      "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
