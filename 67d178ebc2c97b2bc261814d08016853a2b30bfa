@@ -16,6 +16,24 @@
       "message": "devices like?",
       "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "699e82dc_3204379d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-01-03T11:25:14Z",
+      "side": 1,
+      "message": "UMIDIGI F1, Volla Phone, Gigaset GS290 - all are MediaTek.",
+      "parentUuid": "8a5429a2_6eab1520",
+      "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
