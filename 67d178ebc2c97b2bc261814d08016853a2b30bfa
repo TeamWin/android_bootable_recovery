@@ -70,6 +70,24 @@
       "parentUuid": "3f27dac2_9e0c4516",
       "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "287883cf_78391581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-01-03T16:13:50Z",
+      "side": 1,
+      "message": "P.S.: I am not the author of the patch, so don\u0027t ask me why it works or why it doesn\u0027t without the patch. I just can tell - it does.",
+      "parentUuid": "653e24d3_b67f4a70",
+      "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
