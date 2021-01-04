@@ -124,6 +124,24 @@
       "parentUuid": "4e6efb20_d6d4e524",
       "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c8c4bc_f4b389b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-01-04T08:14:06Z",
+      "side": 1,
+      "message": "Well, the Volla Phone kernel is open source: https://github.com/HelloVolla/android_kernel_volla_mt6763\n\nBut debugging \u0026 fixing the bug in there wouldn\u0027t fix it for the other devices, therefore this patch is the best solution.",
+      "parentUuid": "d4c72d99_379e45cc",
+      "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
