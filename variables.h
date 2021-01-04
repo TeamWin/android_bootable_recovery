@@ -19,6 +19,8 @@
 
 #define TW_MAIN_VERSION_STR       "3.5.0_9"
 #define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
+#define TW_SETTINGS_FILE            ".twrps"
+#define TW_DEFAULT_FOLDER           "/TWRP"
 
 #define TW_USE_COMPRESSION_VAR      "tw_use_compression"
 #define TW_FILENAME                 "tw_filename"
@@ -78,6 +80,7 @@
 #define TW_RM_RF_VAR                "tw_rm_rf"
 
 #define TW_BACKUPS_FOLDER_VAR       "tw_backups_folder"
+#define TW_MAIN_FOLDER_VAR          "tw_main_folder"
 
 #define TW_SDEXT_SIZE               "tw_sdext_size"
 #define TW_SWAP_SIZE                "tw_swap_size"
