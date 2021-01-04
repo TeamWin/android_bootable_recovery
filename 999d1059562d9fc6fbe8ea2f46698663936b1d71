@@ -33,6 +33,57 @@
       "message": "Remove extra tab",
       "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ca3326_df5b070c",
+        "filename": "gui/action.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T15:25:04Z",
+      "side": 1,
+      "message": "Function names in this file don\u0027t have underscores and are all lowercase. please name the function to be consistent with the others.",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ce09dc_7eba858e",
+        "filename": "gui/action.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2223,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T15:25:04Z",
+      "side": 1,
+      "message": "See above note.",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b571e5_d54d6063",
+        "filename": "gui/objects.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T15:25:04Z",
+      "side": 1,
+      "message": "See note in action.cpp",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
