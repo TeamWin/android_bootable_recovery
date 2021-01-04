@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a65526a9_473cd13b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T21:25:23Z",
+      "side": 1,
+      "message": "I tested this with PS2, and when both a custom folder and a TWRP folder exists, the TWRP folder is always the one that gets loaded. I had to manually delete the TWRP folder to get the custom folder settings file to load.",
+      "parentUuid": "852fda83_0fcd2cfa",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98a68315_1f4ba8f4",
         "filename": "data.cpp",
         "patchSetId": 1
