@@ -1412,4 +1412,98 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_polic
 #endif
 	return true;
 }
+
+string TWFunc::Check_For_TwrpFolder(){
+	string oldFolder = "";
+	vector<string> customTWRPFolders;
+	string mainPath = DataManager::GetCurrentStoragePath();
+	string settingFileName = DataManager::GetStrValue(TW_SETTINGS_FILE_VAR);
+	DIR* d;
+	struct dirent* de;
+
+	if(DataManager::GetIntValue(TW_IS_ENCRYPTED)){
+		goto exit;
+	}
+
+
+	d = opendir(mainPath.c_str());
+	if (d == NULL) {
+		goto exit;
+	}
+
+	while ((de = readdir(d)) != NULL) {
+		string name = de->d_name;
+		string fullPath = mainPath + '/' + name;
+		unsigned char type = de->d_type;
+
+		if(name == "." || name == "..") continue;
+
+		if(type == DT_UNKNOWN){
+			type = Get_D_Type_From_Stat(fullPath);
+		}
+
+		if(type == DT_DIR && Path_Exists(fullPath + "/.twrps")){
+			if(name == "TWRP"){
+				oldFolder = name;
+			}else{
+				customTWRPFolders.push_back(name);
+			}
+		}
+	}
+
+	closedir(d);
+
+	if(oldFolder == "" && customTWRPFolders.empty()){
+		LOGINFO("E: No TWRP folder found. Using TWRP as default.\n");
+		goto exit;
+	}else if(customTWRPFolders.empty()){
+		LOGINFO("W: No custom TWRP folder found. Using TWRP as default.\n");
+		goto exit;
+	}else{
+		if(customTWRPFolders.size() > 1){
+			LOGINFO("W: More than one custom TWRP folder found. Using first one from the list.\n");
+		}else{
+			LOGINFO("I: One custom TWRP folder found.\n");
+		}
+		string customPath =  '/' + customTWRPFolders.at(0);
+
+		if(Path_Exists(mainPath + "/TWRP")){
+			string oldBackupFolder = mainPath + "/TWRP/BACKUPS/" + DataManager::GetStrValue("device_id");
+			string newBackupFolder = mainPath + customPath + "/BACKUPS/" + DataManager::GetStrValue("device_id");
+			
+			if(Path_Exists(oldBackupFolder)){
+				vector<string> backups;
+				d = opendir(oldBackupFolder.c_str());
+
+				if (d != NULL) {
+					while ((de = readdir(d)) != NULL) {
+						string name = de->d_name;
+						unsigned char type = de->d_type;
+
+						if(name == "." || name == "..") continue;
+
+						if(type == DT_UNKNOWN){
+							type = Get_D_Type_From_Stat(mainPath + '/' + name);
+						}
+
+						if(type == DT_DIR){
+							backups.push_back(name);
+						}
+					}
+					closedir(d);
+				}
+
+				for(auto it = backups.begin(); it != backups.end(); it++){
+					Exec_Cmd("mv -f \"" + oldBackupFolder + '/' + *it + "\" \"" + newBackupFolder + '/' + *it + (Path_Exists(newBackupFolder + '/' + *it) ? "_new\"" : "\""));
+				}
+			}
+			Exec_Cmd("rm -rf \"" + mainPath + "/TWRP\"");
+		}
+
+		return customPath;
+	}
+
+exit:
+	return "/TWRP";
+}
 #endif // ndef BUILD_TWRPTAR_MAIN
