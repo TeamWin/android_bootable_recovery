@@ -18,6 +18,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d03ef037_2dbaddd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T16:24:32Z",
+      "side": 1,
+      "message": "So what happens if someone boots a TWRP with this feature, changes the folder name, and then boots into a TWRP that doesn\u0027t have it? There would be two folders, and the settings file would be gone. And then if booting back into the TWRP with this feature, which settings would be used, since both would exist? Is there any handling for that situation?",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98a68315_1f4ba8f4",
