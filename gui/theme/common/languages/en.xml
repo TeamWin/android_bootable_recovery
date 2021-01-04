@@ -740,5 +740,9 @@
 		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
+		<string name="change_twrp_folder_btn">Change TWRP folder</string>
+		<string name="change_twrp_folder_on_process">Changing TWRP folder</string>
+		<string name="change_twrp_folder_after_process">TWRP folder changed to</string>
+		<string name="tw_folder_exists">A folder with that name already exists!</string>
 	</resources>
 </language>
