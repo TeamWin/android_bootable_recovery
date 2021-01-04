@@ -24,6 +24,8 @@
 #include <cctype>
 #include <cutils/properties.h>
 #include <unistd.h>
+#include <openssl/sha.h>
+#include <iomanip>
 
 #include "variables.h"
 #include "data.hpp"
@@ -526,7 +528,7 @@ void DataManager::SetBackupFolder()
 {
 	string str = GetCurrentStoragePath();
 	TWPartition* partition = PartitionManager.Find_Partition_By_Path(str);
-	str += "/TWRP/BACKUPS/";
+	str += TWFunc::check_for_twrpFolder() + "/BACKUPS/";
 
 	string dev_id;
 	GetValue("device_id", dev_id);
@@ -613,9 +615,12 @@ void DataManager::SetDefaultValues()
 	mConst.SetValue(TW_SHOW_DUMLOCK, "0");
 #endif
 
+	mConst.SetValue(TW_SETTINGS_FILE_VAR, DataManager::GetSettingsFileName());
+	mData.SetValue(TW_MAIN_FOLDER_VAR, TWFunc::check_for_twrpFolder());
+
 	str = GetCurrentStoragePath();
 	mPersist.SetValue(TW_ZIP_LOCATION_VAR, str);
-	str += "/TWRP/BACKUPS/";
+	str += DataManager::GetStrValue(TW_MAIN_FOLDER_VAR) + "/BACKUPS/";
 
 	string dev_id;
 	mConst.GetValue("device_id", dev_id);
@@ -1095,8 +1100,8 @@ void DataManager::ReadSettingsFile(void)
 
 	memset(mkdir_path, 0, sizeof(mkdir_path));
 	memset(settings_file, 0, sizeof(settings_file));
-	sprintf(mkdir_path, "%s/TWRP", GetSettingsStoragePath().c_str());
-	sprintf(settings_file, "%s/.twrps", mkdir_path);
+	sprintf(mkdir_path, "%s%s", GetSettingsStoragePath().c_str(), GetStrValue(TW_MAIN_FOLDER_VAR).c_str());
+	sprintf(settings_file, "%s/%s", mkdir_path, GetStrValue(TW_SETTINGS_FILE_VAR).c_str());
 
 	if (!PartitionManager.Mount_Settings_Storage(false))
 	{
@@ -1135,4 +1140,27 @@ void DataManager::Vibrate(const string& varName)
 		vibrate(vib_value);
 	}
 #endif
+}
+
+
+void DataManager::LoadTWRP_FolderInfo(){
+	string mainPath = GetCurrentStoragePath();
+	SetValue(TW_MAIN_FOLDER_VAR, TWFunc::check_for_twrpFolder());
+	mBackingFile = mainPath + GetStrValue(TW_MAIN_FOLDER_VAR) + '/' + GetStrValue(TW_SETTINGS_FILE_VAR);
+}
+
+string DataManager::GetSettingsFileName(){
+	string str = GetStrValue("device_id") + ".twrps";
+	
+	stringstream ss;
+	unsigned char hash[SHA_DIGEST_LENGTH];
+    SHA_CTX ctx;
+    SHA1_Init(&ctx);
+    SHA1_Update(&ctx, str.c_str(), str.size());
+    SHA1_Final(hash, &ctx);
+
+	for(unsigned char uc : hash){
+		ss << std::setw(2) << (int)uc;
+	}
+    return '.' + ss.str();
 }

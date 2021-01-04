@@ -78,6 +78,8 @@
 #define TW_RM_RF_VAR                "tw_rm_rf"
 
 #define TW_BACKUPS_FOLDER_VAR       "tw_backups_folder"
+#define TW_MAIN_FOLDER_VAR          "tw_main_folder"
+#define TW_SETTINGS_FILE_VAR        "tw_settings_file"
 
 #define TW_SDEXT_SIZE               "tw_sdext_size"
 #define TW_SWAP_SIZE                "tw_swap_size"

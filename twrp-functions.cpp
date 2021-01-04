@@ -1412,4 +1412,41 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_polic
 #endif
 	return true;
 }
+
+string TWFunc::check_for_twrpFolder(){
+	string mainPath = DataManager::GetCurrentStoragePath();
+	string settingFileName = DataManager::GetSettingsFileName();
+	DIR* d;
+	struct dirent* de;
+
+	if(DataManager::GetIntValue(TW_IS_ENCRYPTED)){
+		goto exit;
+	}
+
+
+	d = opendir(mainPath.c_str());
+	if (d == NULL) {
+		goto exit;
+	}
+
+	while ((de = readdir(d)) != NULL) {
+		string name = de->d_name;
+		string fullPath = mainPath + '/' + name;
+		unsigned char type = de->d_type;
+
+		if(name == "." || name == "..") continue;
+
+		if(type == DT_UNKNOWN){
+			type = Get_D_Type_From_Stat(fullPath);
+		}
+
+		if(type == DT_DIR && (Path_Exists(fullPath + '/' + settingFileName) || Path_Exists(fullPath + "/.twrps"))){
+			if(Path_Exists(fullPath + "/.twrps")) Exec_Cmd("mv -f \"" + fullPath + "/.twrps\" \"" + fullPath + '/' + settingFileName + '\"');
+			return '/' + name;
+		}
+	}
+	closedir(d);
+exit:
+	return "/TWRP";
+}
 #endif // ndef BUILD_TWRPTAR_MAIN
