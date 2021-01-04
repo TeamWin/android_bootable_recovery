@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a950ed_a4b49c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T14:39:02Z",
+      "side": 1,
+      "message": "Will test soon",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a68315_1f4ba8f4",
+        "filename": "data.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-04T14:39:02Z",
+      "side": 1,
+      "message": "Remove extra tab",
+      "revId": "999d1059562d9fc6fbe8ea2f46698663936b1d71",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
