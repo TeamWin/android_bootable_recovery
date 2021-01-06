@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1cfcb76_4c2834e3",
+        "filename": "data.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "we shouldn\u0027t need a function to get the settings file name since we\u0027re not changing it anymore. It should just be a #define",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bac0900_81c3b7e4",
+        "filename": "data.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "fix misspelling - but we shouldn\u0027t need a function to get the settings file name since we\u0027re not changing it anymore. It should just be a #define",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d671776_3bd7ce96",
+        "filename": "data.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "no need for this function - we\u0027re just using .twrps",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ae0816_10daa2ea",
+        "filename": "data.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "shouldn\u0027t be needed if we\u0027re not renaming the file",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7449894c_5e7cd9fc",
+        "filename": "data.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "misspelled - should be GenerateSettingsFileName - but do we still need this if we\u0027re not renaming the .twrps file?",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe9ab85_5322e8cf",
+        "filename": "gui/action.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c4564f_81b190ea",
+        "filename": "gui/action.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd3137d_f58e45ca",
+        "filename": "gui/action.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3c0b56_a9729fb0",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-06T20:55:22Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "049ca21bf9ba7fbe1451531095a1846000860d3a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
