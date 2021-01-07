@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t appear to be working when the function is run before the data partition is available. Also, there should be no \"E:\" in the message - it\u0027s either an info message (which is handled by using LOGINFO) or an error message, which would be LOGERROR and would appear in the TWRP console. None of the messages should have a prefix in them. Please correct all of the messages.",
       "revId": "e012ad80e40c7072a269e8e43c31847dfbc016da",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e546fd8f_f0b44c19",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-01-07T19:21:47Z",
+      "side": 1,
+      "message": "If /data encrypted, the function will return /TWRP as default. So I think it will be better if I use LOGINFO instead of LOGERR because there will be one situation where this function will run before fstab loads.",
+      "parentUuid": "a7e85933_4cb7a9ac",
+      "revId": "e012ad80e40c7072a269e8e43c31847dfbc016da",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
