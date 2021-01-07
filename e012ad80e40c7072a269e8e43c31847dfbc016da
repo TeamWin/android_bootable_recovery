@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e85933_4cb7a9ac",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-07T18:00:58Z",
+      "side": 1,
+      "message": "This doesn\u0027t appear to be working when the function is run before the data partition is available. Also, there should be no \"E:\" in the message - it\u0027s either an info message (which is handled by using LOGINFO) or an error message, which would be LOGERROR and would appear in the TWRP console. None of the messages should have a prefix in them. Please correct all of the messages.",
+      "revId": "e012ad80e40c7072a269e8e43c31847dfbc016da",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
