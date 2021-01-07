@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529a4c06_11c225e1",
+        "filename": "data.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-07T20:52:30Z",
+      "side": 1,
+      "message": "Can we set this default value as a variable using a #define as well, like with the settings file? Although I think the value shouldn\u0027t need to have the leading slash - when you call that variable you can add the slash here.",
+      "revId": "a8b51c4d8d58e1763254b76c86a0f53df55789cc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
