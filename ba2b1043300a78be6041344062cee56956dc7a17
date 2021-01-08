@@ -16,6 +16,24 @@
       "message": "It would be better if we defined the variable here without any leading slash. So maybe it should be named \"TW_DEFAULT_FOLDER_NAME\" and the value would just be \"TWRP\". Otherwise this variable appears to indicate that the TWRP folder is in in the root filesystem by default.",
       "revId": "ba2b1043300a78be6041344062cee56956dc7a17",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "864697ec_af7d0654",
+        "filename": "variables.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-01-08T16:07:40Z",
+      "side": 1,
+      "message": "Solved",
+      "parentUuid": "0fd47fc6_f64258b0",
+      "revId": "ba2b1043300a78be6041344062cee56956dc7a17",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
