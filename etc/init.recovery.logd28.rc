@@ -9,7 +9,6 @@ on fs
 
 on load_persist_props_action
     start logd
-    start logd-reinit
 
 service logd /sbin/logd
     socket logd stream 0666 logd logd
@@ -19,13 +18,5 @@ service logd /sbin/logd
     file /dev/kmsg w
     user logd
     group logd system package_info readproc
-    writepid /dev/cpuset/system-background/tasks
-    seclabel u:r:logd:s0
-
-service logd-reinit /sbin/logd --reinit
-    oneshot
-    disabled
-    user logd
-    group logd
     writepid /dev/cpuset/system-background/tasks
     seclabel u:r:logd:s0
