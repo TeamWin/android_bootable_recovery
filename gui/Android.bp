@@ -31,13 +31,16 @@ cc_library_static {
         "system/core/libziparchive/include",
         "bootable/recovery/recovery_ui/include",
         "bootable/recovery/fuse_sideload/include",
+        "bootable/recovery/gui/include",
         "bootable/recovery/twrpinstall",
         "bootable/recovery/twrpinstall/include",
         "bootable/recovery/libpixelflinger/include",
+        "bootable/recovery/minuitwrp/include",
         "bionic",
         "system/core/base/include",
         "system/core/include",
-        "external/freetype/include"
+        "external/freetype/include",
+        "external/libpng"
 
     ],
     srcs: [ 
@@ -78,6 +81,7 @@ cc_library_static {
         "libziparchive"
     ],
     static_libs: [
-        "libotautil"
+        "libotautil",
+        "libpng"
     ]
 }
