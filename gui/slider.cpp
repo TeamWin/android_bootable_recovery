@@ -40,7 +40,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -136,15 +136,15 @@ int GUISlider::Render(void)
 		return -1;
 
 	// Draw the slider
-	gr_blit(sSlider->GetResource(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
+	gr_blit(sSlider->GetResource().get(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
 
 	// Draw the used
 	if (sSliderUsed && sSliderUsed->GetResource() && sCurTouchX > mRenderX)
-		gr_blit(sSliderUsed->GetResource(), 0, 0, sCurTouchX - mRenderX, mRenderH, mRenderX, mRenderY);
+		gr_blit(sSliderUsed->GetResource().get(), 0, 0, sCurTouchX - mRenderX, mRenderH, mRenderX, mRenderY);
 
 	// Draw the touch icon
 	if (sTouch && sTouch->GetResource())
-		gr_blit(sTouch->GetResource(), 0, 0, sTouchW, sTouchH, sCurTouchX, (mRenderY + ((mRenderH - sTouchH) / 2)));
+		gr_blit(sTouch->GetResource().get(), 0, 0, sTouchW, sTouchH, sCurTouchX, (mRenderY + ((mRenderH - sTouchH) / 2)));
 
 	if (sSliderLabel) {
 		int ret = sSliderLabel->Render();

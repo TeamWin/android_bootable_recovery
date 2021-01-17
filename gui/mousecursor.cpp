@@ -36,7 +36,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -101,7 +101,7 @@ int MouseCursor::Render(void)
 
 	if (m_image && m_image->GetResource())
 	{
-		gr_blit(m_image->GetResource(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
+		gr_blit(m_image->GetResource().get(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
 	}
 	else
 	{

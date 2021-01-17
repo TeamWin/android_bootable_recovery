@@ -26,7 +26,7 @@
 #include <pthread.h>
 #include <algorithm>
 #include <string>
-#include "truetype.hpp"
+#include "minuitwrp/truetype.hpp"
 
 extern unsigned int gr_rotation;
 
@@ -549,7 +549,7 @@ int twrpTruetype::gr_ttf_maxExW(const char *s, void *font, int max_width) {
 int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
 					const char *s, void *pFont,
 					int max_width, int max_height,
-					const gr_surface gr_draw_surface) {
+					const GRSurface* gr_draw_surface) {
 	GGLContext *gl = (GGLContext *)context;
 	TrueTypeFont *font = (TrueTypeFont *)pFont;
 	const GRSurface *gr_draw = (const GRSurface*) gr_draw_surface;
@@ -582,7 +582,7 @@ int twrpTruetype::gr_ttf_textExWH(void *context, int x, int y,
 		string_surface_rotated.format  = e->surface.format;
 		// e->surface.format is GGL_PIXEL_FORMAT_A_8 (grayscale)
 		string_surface_rotated.data    = (GGLubyte*) malloc(string_surface_rotated.stride * string_surface_rotated.height * 1);
-		surface_ROTATION_transform((gr_surface) &string_surface_rotated, (const gr_surface) &e->surface, 1);
+		surface_ROTATION_transform(convertGGLSurfaceToGRSurface(&string_surface_rotated).get(), convertGGLSurfaceToGRSurface(&e->surface).get(), 1);
 	}
 
 	int y_bottom = y + e->surface.height;

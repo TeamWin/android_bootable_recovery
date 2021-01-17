@@ -38,8 +38,8 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
-#include "../minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -299,7 +299,7 @@ int GUISliderValue::Render(void)
 	// line
 	if (mBackgroundImage && mBackgroundImage->GetResource())
 	{
-		gr_blit(mBackgroundImage->GetResource(), 0, 0, mLineW, mLineH, mLineX, mLineY);
+		gr_blit(mBackgroundImage->GetResource().get(), 0, 0, mLineW, mLineH, mLineX, mLineY);
 	}
 	else
 	{
@@ -312,10 +312,10 @@ int GUISliderValue::Render(void)
 
 	if (mHandleImage && mHandleImage->GetResource())
 	{
-		gr_surface s = mHandleImage->GetResource();
-		if (mDragging && mHandleHoverImage && mHandleHoverImage->GetResource())
-			s = mHandleHoverImage->GetResource();
-		gr_blit(s, 0, 0, mSliderW, mSliderH, sliderX, mLineY + (mLineH/2 - mSliderH/2));
+		// GRSurface* s = mHandleImage->GetResource().get();
+		// if (mDragging && mHandleHoverImage && mHandleHoverImage->GetResource())
+			// s = mHandleHoverImage->GetResource().get();
+		gr_blit(mHandleImage->GetResource().get(), 0, 0, mSliderW, mSliderH, sliderX, mLineY + (mLineH/2 - mSliderH/2));
 	}
 	else
 	{
