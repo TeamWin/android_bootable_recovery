@@ -33,12 +33,12 @@
 
 #include <cutils/properties.h>
 #include <pixelflinger/pixelflinger.h>
-#include "../gui/placement.h"
-#include "minui.h"
+#include "gui/placement.h"
+#include "minuitwrp/minui.h"
 #include "graphics.h"
 // For std::min and std::max
 #include <algorithm>
-#include "truetype.hpp"
+#include "minuitwrp/truetype.hpp"
 
 struct GRFont {
     GRSurface* texture;
@@ -260,7 +260,6 @@ void gr_fill(int x, int y, int w, int h)
     r_disp = std::max(x0_disp, x1_disp);
     t_disp = std::min(y0_disp, y1_disp);
     b_disp = std::max(y0_disp, y1_disp);
-
     gl->recti(gl, l_disp, t_disp, r_disp, b_disp);
 
     if(gr_is_curr_clr_opaque)
