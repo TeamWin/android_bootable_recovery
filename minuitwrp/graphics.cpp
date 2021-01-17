@@ -33,12 +33,12 @@
 
 #include <cutils/properties.h>
 #include <pixelflinger/pixelflinger.h>
-#include "../gui/placement.h"
-#include "minui.h"
+#include "gui/placement.h"
+#include "minuitwrp/minui.h"
 #include "graphics.h"
 // For std::min and std::max
 #include <algorithm>
-#include "truetype.hpp"
+#include "minuitwrp/truetype.hpp"
 
 struct GRFont {
     GRSurface* texture;
@@ -261,6 +261,14 @@ void gr_fill(int x, int y, int w, int h)
     t_disp = std::min(y0_disp, y1_disp);
     b_disp = std::max(y0_disp, y1_disp);
 
+    printf("x0_disp::%d\n", x0_disp);
+    printf("y0_disp::%d\n", y0_disp);
+    printf("x1_disp::%d\n", x1_disp);
+    printf("y1_disp::%d\n", y1_disp);
+    printf("l_disp::%d\n", l_disp);
+    printf("r_disp::%d\n", r_disp);
+    printf("t_disp::%d\n", t_disp);
+    printf("b_disp::%d\n", b_disp);
     gl->recti(gl, l_disp, t_disp, r_disp, b_disp);
 
     if(gr_is_curr_clr_opaque)
@@ -452,6 +460,8 @@ void gr_exit(void)
 
 int gr_fb_width(void)
 {
+    printf("gr_fb_width::width::%d\n", gr_draw->width);
+    printf("gr_fb_width::height::%d\n", gr_draw->height);
     return (gr_rotation == 0 || gr_rotation == 180) ?
             gr_draw->width  - 2 * overscan_offset_x :
             gr_draw->height - 2 * overscan_offset_y;
