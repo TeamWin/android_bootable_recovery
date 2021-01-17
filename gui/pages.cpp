@@ -47,7 +47,7 @@ extern "C" {
 #include "../twcommon.h"
 #include "gui.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -524,6 +524,8 @@ int Page::Render(void)
 {
 	// Render background
 	gr_color(mBackground.red, mBackground.green, mBackground.blue, mBackground.alpha);
+	LOGINFO("Render::gr_fb_width::%d\n", gr_fb_width());
+	LOGINFO("Render::gr_fb_height::%d\n", gr_fb_height());
 	gr_fill(0, 0, gr_fb_width(), gr_fb_height());
 
 	// Render remaining objects
@@ -1189,7 +1191,7 @@ char* PageManager::LoadFileToBuffer(std::string filename, ZipArchiveHandle packa
 	size_t len;
 	char* buffer = NULL;
 
-	if (package) {
+	if (package == nullptr) {
 		// We can try to load the XML directly...
 		LOGINFO("PageManager::LoadFileToBuffer loading filename: '%s' directly\n", filename.c_str());
 		struct stat st;

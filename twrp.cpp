@@ -292,6 +292,7 @@ int main(int argc, char **argv) {
 	// set by init
 	umask(0);
 
+	sleep(10);
 	Log_Offset = 0;
 
 	// Set up temporary log file (/tmp/recovery.log)

@@ -1,3 +1,4 @@
+
 # Copyright (C) 2007 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -88,7 +89,6 @@ LOCAL_C_INCLUDES += \
     system/gsid/include/ \
     system/core/init/ \
     system/extras/ext4_utils/include \
-    $(LOCAL_PATH)/twinstall/include
 
 ifneq ($(TARGET_RECOVERY_REBOOT_SRC),)
   LOCAL_SRC_FILES += $(TARGET_RECOVERY_REBOOT_SRC)
@@ -114,6 +114,8 @@ LOCAL_C_INCLUDES += \
     external/boringssl/include \
     external/libcxx/include \
     external/libselinux/include \
+    external/libpng \
+    $(LOCAL_PATH)/gui/include \
     $(LOCAL_PATH)/recovery_ui/include \
     $(LOCAL_PATH)/otautil/include \
     $(LOCAL_PATH)/install/include \
@@ -121,7 +123,9 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/install/include \
     $(LOCAL_PATH)/twrpinstall/include \
     $(LOCAL_PATH)/recovery_utils/include \
-    $(LOCAL_PATH)/libpixelflinger/include
+    $(LOCAL_PATH)/libpixelflinger/include \
+    $(LOCAL_PATH)/minuitwrp/include \
+    $(LOCAL_PATH)/twinstall/include
 
 LOCAL_STATIC_LIBRARIES += libguitwrp
 LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
@@ -396,6 +400,7 @@ TWRP_REQUIRED_MODULES += \
     init.recovery.hlthchrg.rc \
     init.recovery.service.rc \
     init.recovery.ldconfig.rc \
+    ueventd.rc.recovery \
     awk \
     toybox \
     toolbox \
@@ -404,14 +409,17 @@ TWRP_REQUIRED_MODULES += \
     vendor_hwservice_contexts \
     minadbd \
     twrpbu \
-    adbd_system_api_recovery
+    adbd_system_api_recovery \
     me.twrp.twrpapp.apk \
-    privapp-permissions-twrpapp.xml
+    privapp-permissions-twrpapp.xml \
+    adbd_system_api_recovery \
+    libsync.recovery
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \
     tzdata_twrp
 endif
+
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
