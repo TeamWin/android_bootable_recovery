@@ -21,7 +21,7 @@
 #include <linux/fb.h>
 #include <string.h>
 
-#include "minui.h"
+#include "minuitwrp/minui.h"
 
 struct fb_var_screeninfo vi;
 extern GGLSurface gr_mem_surface;
