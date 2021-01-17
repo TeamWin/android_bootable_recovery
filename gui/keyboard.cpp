@@ -27,8 +27,8 @@ extern "C" {
 #include "../twcommon.h"
 #include "gui.h"
 }
-#include "../minuitwrp/minui.h"
-#include "../minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
