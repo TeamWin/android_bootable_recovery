@@ -19,17 +19,12 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DMSM_BSP")
 	}
 
-	matches, err := filepath.Glob("system/core/adf/Android.*")
-	_ = matches
-	if err == nil {
-		cflags = append(cflags, "-DHAS_ADF")
-	}
-
 	if ctx.AConfig().Getenv("TW_NEW_ION_HEAP") == "true" {
 		cflags = append(cflags, "-DNEW_ION_HEAP")
 	}
 
-	matches, err = filepath.Glob("external/libdrm/Android.*")
+	matches, err := filepath.Glob("external/libdrm/Android.*")
+	_ = matches
 	if err == nil {
 		cflags = append(cflags, "-DHAS_DRM")
 	}
@@ -168,17 +163,6 @@ func globalSrcs(ctx android.BaseContext) []string {
 
 	if ctx.AConfig().Getenv("TW_TARGET_USES_QCOM_BSP") == "true" {
 		srcs = append(srcs, "graphics_overlay.cpp")
-	}
-
-	matches, err := filepath.Glob("system/core/adf/Android.*")
-	_ = matches
-	if err == nil {
-		srcs = append(srcs, "graphics_adf.cpp")
-	}
-
-	matches, err = filepath.Glob("external/libdrm/Android.*")
-	if err == nil {
-		srcs = append(srcs, "graphics_drm.cpp")
 	}
 
 	if ctx.AConfig().Getenv("TW_HAPTICS_TSPDRV") == "true" {

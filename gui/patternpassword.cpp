@@ -32,7 +32,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 #include "../twrp-functions.hpp"
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -55,8 +55,8 @@ GUIPatternPassword::GUIPatternPassword(xml_node<>* node)
 	ConvertStrToColor("white", &mActiveDotColor);
 	ConvertStrToColor("blue", &mLineColor);
 
-	mDotImage = mActiveDotImage = NULL;
-	mDotCircle = mActiveDotCircle = NULL;
+	// mDotImage = mActiveDotImage = NULL;
+	// mDotCircle = mActiveDotCircle = NULL;
 	mDotRadius = 50;
 	mLineWidth = 35;
 
@@ -121,11 +121,11 @@ GUIPatternPassword::~GUIPatternPassword()
 	delete[] mDots;
 	delete[] mConnectedDots;
 
-	if (mDotCircle)
-		gr_free_surface(mDotCircle);
+	// if (mDotCircle)
+	// 	res_free_surface(mDotCircle);
 
-	if (mActiveDotCircle)
-		gr_free_surface(mActiveDotCircle);
+	// if (mActiveDotCircle)
+	// 	res_free_surface(mActiveDotCircle);
 }
 
 void GUIPatternPassword::ResetActiveDots()
@@ -204,16 +204,16 @@ int GUIPatternPassword::Render(void)
 
 	for (size_t i = 0; i < mGridSize * mGridSize; ++i) {
 		if (mDotCircle) {
-			gr_blit(mDotCircle, 0, 0, gr_get_width(mDotCircle), gr_get_height(mDotCircle), mDots[i].x, mDots[i].y);
+			gr_blit(mDotCircle.get(), 0, 0, gr_get_width(mDotCircle.get()), gr_get_height(mDotCircle.get()), mDots[i].x, mDots[i].y);
 			if (mDots[i].active) {
-				gr_blit(mActiveDotCircle, 0, 0, gr_get_width(mActiveDotCircle), gr_get_height(mActiveDotCircle), mDots[i].x + mDotRadius/2, mDots[i].y + mDotRadius/2);
+				gr_blit(mActiveDotCircle.get(), 0, 0, gr_get_width(mActiveDotCircle.get()), gr_get_height(mActiveDotCircle.get()), mDots[i].x + mDotRadius/2, mDots[i].y + mDotRadius/2);
 			}
 		} else {
 			if (mDots[i].active && mActiveDotImage && mActiveDotImage->GetResource()) {
-				gr_blit(mActiveDotImage->GetResource(), 0, 0, mActiveDotImage->GetWidth(), mActiveDotImage->GetHeight(),
+				gr_blit(mActiveDotImage->GetResource().get(), 0, 0, mActiveDotImage->GetWidth(), mActiveDotImage->GetHeight(),
 						mDots[i].x + (mDotRadius - mActiveDotImage->GetWidth()/2), mDots[i].y + (mDotRadius - mActiveDotImage->GetHeight()/2));
 			} else if (mDotImage && mDotImage->GetResource()) {
-				gr_blit(mDotImage->GetResource(), 0, 0, mDotImage->GetWidth(), mDotImage->GetHeight(), mDots[i].x, mDots[i].y);
+				gr_blit(mDotImage->GetResource().get(), 0, 0, mDotImage->GetWidth(), mDotImage->GetHeight(), mDots[i].x, mDots[i].y);
 			}
 		}
 	}

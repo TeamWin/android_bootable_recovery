@@ -38,7 +38,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -120,12 +120,12 @@ int GUICheckbox::Render(void)
 	if (lastState)
 	{
 		if (mChecked && mChecked->GetResource())
-			gr_blit(mChecked->GetResource(), 0, 0, mCheckW, mCheckH, mRenderX, mRenderY);
+			gr_blit(mChecked->GetResource().get(), 0, 0, mCheckW, mCheckH, mRenderX, mRenderY);
 	}
 	else
 	{
 		if (mUnchecked && mUnchecked->GetResource())
-			gr_blit(mUnchecked->GetResource(), 0, 0, mCheckW, mCheckH, mRenderX, mRenderY);
+			gr_blit(mUnchecked->GetResource().get(), 0, 0, mCheckW, mCheckH, mRenderX, mRenderY);
 	}
 	if (mLabel)
 		ret = mLabel->Render();

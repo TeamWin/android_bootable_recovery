@@ -111,7 +111,7 @@ public:
     static int gr_ttf_textExWH(void *context, int x, int y,
                     const char *s, void *pFont,
                     int max_width, int max_height,
-                    const gr_surface gr_draw_surface);
+                    const GRSurface* gr_draw_surface);
     static int gr_ttf_getMaxFontHeight(void *font);
     static void gr_ttf_string_cache_truncate(TrueTypeFont *font);
 };

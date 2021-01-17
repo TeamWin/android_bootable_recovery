@@ -88,7 +88,6 @@ LOCAL_C_INCLUDES += \
     system/gsid/include/ \
     system/core/init/ \
     system/extras/ext4_utils/include \
-    $(LOCAL_PATH)/twinstall/include
 
 ifneq ($(TARGET_RECOVERY_REBOOT_SRC),)
   LOCAL_SRC_FILES += $(TARGET_RECOVERY_REBOOT_SRC)
@@ -114,6 +113,8 @@ LOCAL_C_INCLUDES += \
     external/boringssl/include \
     external/libcxx/include \
     external/libselinux/include \
+    external/libpng \
+    $(LOCAL_PATH)/gui/include \
     $(LOCAL_PATH)/recovery_ui/include \
     $(LOCAL_PATH)/otautil/include \
     $(LOCAL_PATH)/install/include \
@@ -121,7 +122,9 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/install/include \
     $(LOCAL_PATH)/twrpinstall/include \
     $(LOCAL_PATH)/recovery_utils/include \
-    $(LOCAL_PATH)/libpixelflinger/include
+    $(LOCAL_PATH)/libpixelflinger/include \
+    $(LOCAL_PATH)/minuitwrp/include \
+    $(LOCAL_PATH)/twinstall/include
 
 LOCAL_STATIC_LIBRARIES += libguitwrp
 LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 

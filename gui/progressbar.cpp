@@ -38,7 +38,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -104,8 +104,8 @@ int GUIProgressBar::RenderInternal(void)
 	if (!mFullBar || !mFullBar->GetResource())
 		return -1;
 
-	gr_blit(mEmptyBar->GetResource(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
-	gr_blit(mFullBar->GetResource(), 0, 0, mLastPos, mRenderH, mRenderX, mRenderY);
+	gr_blit(mEmptyBar->GetResource().get(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
+	gr_blit(mFullBar->GetResource().get(), 0, 0, mLastPos, mRenderH, mRenderX, mRenderY);
 	return 0;
 }
 
