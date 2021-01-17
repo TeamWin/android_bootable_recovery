@@ -205,8 +205,6 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_ROUND_SCREEN")
 	}
 
-	cflags = append(cflags, "-DTWRES=\""+getMakeVars(ctx, "TWRES_PATH")+"\"")
-
 	return cflags
 }
 

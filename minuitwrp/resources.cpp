@@ -36,7 +36,7 @@ extern "C" {
 #include "jpeglib.h"
 }
 #endif
-#include "minui.h"
+#include "minuitwrp/minui.h"
 
 #define SURFACE_DATA_ALIGNMENT 8
 
@@ -355,7 +355,6 @@ exit:
 
 int res_create_surface(const char* name, gr_surface* pSurface) {
     int ret;
-
     if (!name)      return -1;
 
 #ifdef TW_INCLUDE_JPEG
@@ -363,7 +362,7 @@ int res_create_surface(const char* name, gr_surface* pSurface) {
         return res_create_surface_jpg(name,pSurface);
 #endif
 
-    ret = res_create_surface_png(name,pSurface);
+    ret = res_create_surface_png(name, pSurface);
 #ifdef TW_INCLUDE_JPEG
     if (ret < 0)
         ret = res_create_surface_jpg(name,pSurface);

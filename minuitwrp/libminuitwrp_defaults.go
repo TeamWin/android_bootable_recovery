@@ -30,6 +30,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	matches, err = filepath.Glob("external/libdrm/Android.*")
+	_ = matches
 	if err == nil {
 		cflags = append(cflags, "-DHAS_DRM")
 	}
@@ -92,6 +93,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	pixelFormat = strings.Replace(getMakeVars(ctx, "TARGET_RECOVERY_PIXEL_FORMAT"), "\"", "", -1)
+	fmt.Printf("pixelFormat: %s\n", pixelFormat)
 	switch pixelFormat {
 	case "ABGR_8888":
 		cflags = append(cflags, "-DRECOVERY_ABGR")
@@ -159,7 +161,6 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_HAPTICS_TSPDRV")
 	}
 
-	cflags = append(cflags, "-DTWRES="+getMakeVars(ctx, "TWRES_PATH"))
 	return cflags
 }
 
