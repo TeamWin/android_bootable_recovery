@@ -27,7 +27,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 #include "../twrp-functions.hpp"
 #include "../variables.h"
 
