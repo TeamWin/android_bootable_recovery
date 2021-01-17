@@ -30,6 +30,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	matches, err = filepath.Glob("external/libdrm/Android.*")
+	_ = matches
 	if err == nil {
 		cflags = append(cflags, "-DHAS_DRM")
 	}
@@ -134,6 +135,8 @@ func globalFlags(ctx android.BaseContext) []string {
 			cflags = append(cflags, "-DTW_ROTATION=0")
 		}
 	}
+
+	fmt.Println("cflags: %s\n", cflags)
 
 	if getMakeVars(ctx, "TW_IGNORE_MAJOR_AXIS_0") == "true" {
 		cflags = append(cflags, "-DTW_IGNORE_MAJOR_AXIS_0")

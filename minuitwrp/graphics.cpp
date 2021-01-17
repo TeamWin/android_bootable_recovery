@@ -14,58 +14,44 @@
  * limitations under the License.
  */
 
-#include <stdbool.h>
+#include "graphics.h"
+
+#include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
-#include <fcntl.h>
-#include <stdio.h>
+#include <memory>
 
-#include <sys/ioctl.h>
-#include <sys/mman.h>
-#include <sys/types.h>
+#include <android-base/properties.h>
 
-#include <linux/fb.h>
-#include <linux/kd.h>
+#include "graphics_adf.h"
+#include "graphics_drm.h"
+#include "graphics_fbdev.h"
+#include "gui/placement.h"
+#include "minuitwrp/minui.h"
+#include "pixelflinger/pixelflinger.h"
+#include "minuitwrp/truetype.hpp"
 
-#include <time.h>
+static GRFont* gr_font = nullptr;
+static MinuiBackend* gr_backend = nullptr;
 
-#include <cutils/properties.h>
-#include <pixelflinger/pixelflinger.h>
-#include "../gui/placement.h"
-#include "minui.h"
-#include "graphics.h"
-// For std::min and std::max
-#include <algorithm>
-#include "truetype.hpp"
-
-struct GRFont {
-    GRSurface* texture;
-    int cwidth;
-    int cheight;
-};
-
-static minui_backend* gr_backend = NULL;
-
-static int overscan_percent = OVERSCAN_PERCENT;
 static int overscan_offset_x = 0;
 static int overscan_offset_y = 0;
 
-static unsigned char gr_current_r = 255;
-static unsigned char gr_current_g = 255;
-static unsigned char gr_current_b = 255;
+static uint32_t gr_current = ~0;
+static constexpr uint32_t alpha_mask = 0xff000000;
 
-GRSurface* gr_draw = NULL;
-
+// gr_draw is owned by backends.
+GRSurface* gr_draw = nullptr;
+static GRRotation rotation = GRRotation::NONE;
+static PixelFormat pixel_format = PixelFormat::UNKNOWN;
 static GGLContext *gr_context = 0;
 GGLSurface gr_mem_surface;
+unsigned int gr_rotation = 0;
 static int gr_is_curr_clr_opaque = 0;
 
-unsigned int gr_rotation = 0;
-
-int gr_textEx_scaleW(int x, int y, const char *s, void* pFont, int max_width, int placement, int scale)
-{
+int gr_textEx_scaleW(int x, int y, const char *s, void* pFont, int max_width, int placement, int scale) {
     GGLContext *gl = gr_context;
     void* vfont = pFont;
     GRFont *font = (GRFont*) pFont;
@@ -114,8 +100,170 @@ int gr_textEx_scaleW(int x, int y, const char *s, void* pFont, int max_width, in
     return twrpTruetype::gr_ttf_textExWH(gl, x, y + y_scale, s, vfont, measured_width + x, -1, gr_draw);
 }
 
-void gr_clip(int x, int y, int w, int h)
-{
+static bool outside(int x, int y) {
+  auto swapped = (rotation == GRRotation::LEFT || rotation == GRRotation::RIGHT);
+  return x < 0 || x >= (swapped ? gr_draw->height : gr_draw->width) || y < 0 ||
+         y >= (swapped ? gr_draw->width : gr_draw->height);
+}
+
+const GRFont* gr_sys_font() {
+  return gr_font;
+}
+
+PixelFormat gr_pixel_format() {
+  return pixel_format;
+}
+
+int gr_measure(const GRFont* font, const char* s) {
+  if (font == nullptr) {
+    return -1;
+  }
+
+  return font->char_width * strlen(s);
+}
+
+int gr_font_size(const GRFont* font, int* x, int* y) {
+  if (font == nullptr) {
+    return -1;
+  }
+
+  *x = font->char_width;
+  *y = font->char_height;
+  return 0;
+}
+
+// Blends gr_current onto pix value, assumes alpha as most significant byte.
+static inline uint32_t pixel_blend(uint8_t alpha, uint32_t pix) {
+  if (alpha == 255) return gr_current;
+  if (alpha == 0) return pix;
+  uint32_t pix_r = pix & 0xff;
+  uint32_t pix_g = pix & 0xff00;
+  uint32_t pix_b = pix & 0xff0000;
+  uint32_t cur_r = gr_current & 0xff;
+  uint32_t cur_g = gr_current & 0xff00;
+  uint32_t cur_b = gr_current & 0xff0000;
+
+  uint32_t out_r = (pix_r * (255 - alpha) + cur_r * alpha) / 255;
+  uint32_t out_g = (pix_g * (255 - alpha) + cur_g * alpha) / 255;
+  uint32_t out_b = (pix_b * (255 - alpha) + cur_b * alpha) / 255;
+
+  return (out_r & 0xff) | (out_g & 0xff00) | (out_b & 0xff0000) | (gr_current & 0xff000000);
+}
+
+// Increments pixel pointer right, with current rotation.
+static void incr_x(uint32_t** p, int row_pixels) {
+  if (rotation == GRRotation::LEFT) {
+    *p = *p - row_pixels;
+  } else if (rotation == GRRotation::RIGHT) {
+    *p = *p + row_pixels;
+  } else if (rotation == GRRotation::DOWN) {
+    *p = *p - 1;
+  } else {  // GRRotation::NONE
+    *p = *p + 1;
+  }
+}
+
+// Increments pixel pointer down, with current rotation.
+static void incr_y(uint32_t** p, int row_pixels) {
+  if (rotation == GRRotation::LEFT) {
+    *p = *p + 1;
+  } else if (rotation == GRRotation::RIGHT) {
+    *p = *p - 1;
+  } else if (rotation == GRRotation::DOWN) {
+    *p = *p - row_pixels;
+  } else {  // GRRotation::NONE
+    *p = *p + row_pixels;
+  }
+}
+
+// Returns pixel pointer at given coordinates with rotation adjustment.
+static uint32_t* PixelAt(GRSurface* surface, int x, int y, int row_pixels) {
+  switch (rotation) {
+    case GRRotation::NONE:
+      return reinterpret_cast<uint32_t*>(surface->data()) + y * row_pixels + x;
+    case GRRotation::RIGHT:
+      return reinterpret_cast<uint32_t*>(surface->data()) + x * row_pixels + (surface->width - y);
+    case GRRotation::DOWN:
+      return reinterpret_cast<uint32_t*>(surface->data()) + (surface->height - 1 - y) * row_pixels +
+             (surface->width - 1 - x);
+    case GRRotation::LEFT:
+      return reinterpret_cast<uint32_t*>(surface->data()) + (surface->height - 1 - x) * row_pixels +
+             y; 
+    default:
+      printf("invalid rotation %d", static_cast<int>(rotation));
+  }
+  return nullptr;
+}
+
+static void TextBlend(const uint8_t* src_p, int src_row_bytes, uint32_t* dst_p, int dst_row_pixels,
+                      int width, int height) {
+  uint8_t alpha_current = static_cast<uint8_t>((alpha_mask & gr_current) >> 24);
+  for (int j = 0; j < height; ++j) {
+    const uint8_t* sx = src_p;
+    uint32_t* px = dst_p;
+    for (int i = 0; i < width; ++i, incr_x(&px, dst_row_pixels)) {
+      uint8_t a = *sx++;
+      if (alpha_current < 255) a = (static_cast<uint32_t>(a) * alpha_current) / 255;
+      *px = pixel_blend(a, *px);
+    }
+    src_p += src_row_bytes;
+    incr_y(&dst_p, dst_row_pixels);
+  }
+}
+
+void gr_text(const GRFont* font, int x, int y, const char* s, bool bold) {
+  if (!font || !font->texture || (gr_current & alpha_mask) == 0) return;
+
+  if (font->texture->pixel_bytes != 1) {
+    printf("gr_text: font has wrong format\n");
+    return;
+  }
+
+  bold = bold && (font->texture->height != font->char_height);
+
+  x += overscan_offset_x;
+  y += overscan_offset_y;
+
+  unsigned char ch;
+  while ((ch = *s++)) {
+    if (outside(x, y) || outside(x + font->char_width - 1, y + font->char_height - 1)) break;
+
+    if (ch < ' ' || ch > '~') {
+      ch = '?';
+    }
+
+    int row_pixels = gr_draw->row_bytes / gr_draw->pixel_bytes;
+    const uint8_t* src_p = font->texture->data() + ((ch - ' ') * font->char_width) +
+                           (bold ? font->char_height * font->texture->row_bytes : 0);
+    uint32_t* dst_p = PixelAt(gr_draw, x, y, row_pixels);
+
+    TextBlend(src_p, font->texture->row_bytes, dst_p, row_pixels, font->char_width,
+              font->char_height);
+
+    x += font->char_width;
+  }
+}
+
+void gr_texticon(int x, int y, const GRSurface* icon) {
+  if (icon == nullptr) return;
+
+  if (icon->pixel_bytes != 1) {
+    printf("gr_texticon: source has wrong format\n");
+    return;
+  }
+
+  x += overscan_offset_x;
+  y += overscan_offset_y;
+
+  if (outside(x, y) || outside(x + icon->width - 1, y + icon->height - 1)) return;
+
+  int row_pixels = gr_draw->row_bytes / gr_draw->pixel_bytes;
+  const uint8_t* src_p = icon->data();
+  uint32_t* dst_p = PixelAt(gr_draw, x, y, row_pixels);
+  TextBlend(src_p, icon->row_bytes, dst_p, row_pixels, icon->width, icon->height);
+}
+
+void gr_clip(int x, int y, int w, int h) {
     GGLContext *gl = gr_context;
 
     switch (gr_rotation) {
@@ -135,8 +283,7 @@ void gr_clip(int x, int y, int w, int h)
     gl->enable(gl, GGL_SCISSOR_TEST);
 }
 
-void gr_noclip()
-{
+void gr_noclip() {
     GGLContext *gl = gr_context;
     gl->scissor(gl, 0, 0,
                 gr_draw->width - 2 * overscan_offset_x,
@@ -144,8 +291,34 @@ void gr_noclip()
     gl->disable(gl, GGL_SCISSOR_TEST);
 }
 
-void gr_line(int x0, int y0, int x1, int y1, int width)
-{
+void gr_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) {
+  uint32_t r32 = r, g32 = g, b32 = b, a32 = a;
+  if (pixel_format == PixelFormat::ARGB || pixel_format == PixelFormat::BGRA) {
+    gr_current = (a32 << 24) | (r32 << 16) | (g32 << 8) | b32;
+  } else {
+    gr_current = (a32 << 24) | (b32 << 16) | (g32 << 8) | r32;
+  }
+}
+
+void gr_clear() {
+  if ((gr_current & 0xff) == ((gr_current >> 8) & 0xff) &&
+      (gr_current & 0xff) == ((gr_current >> 16) & 0xff) &&
+      (gr_current & 0xff) == ((gr_current >> 24) & 0xff) &&
+      gr_draw->row_bytes == gr_draw->width * gr_draw->pixel_bytes) {
+    memset(gr_draw->data(), gr_current & 0xff, gr_draw->height * gr_draw->row_bytes);
+  } else {
+    uint32_t* px = reinterpret_cast<uint32_t*>(gr_draw->data());
+    int row_diff = gr_draw->row_bytes / gr_draw->pixel_bytes - gr_draw->width;
+    for (int y = 0; y < gr_draw->height; ++y) {
+      for (int x = 0; x < gr_draw->width; ++x) {
+        *px++ = gr_current;
+      }
+      px += row_diff;
+    }
+  }
+}
+
+void gr_line(int x0, int y0, int x1, int y1, int width) {
     GGLContext *gl = gr_context;
     int x0_disp, y0_disp, x1_disp, y1_disp;
 
@@ -165,8 +338,241 @@ void gr_line(int x0, int y0, int x1, int y1, int width)
         gl->enable(gl, GGL_BLEND);
 }
 
-gr_surface gr_render_circle(int radius, unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
+void gr_fill(int x1, int y1, int x2, int y2) {
+  x1 += overscan_offset_x;
+  y1 += overscan_offset_y;
+
+  x2 += overscan_offset_x;
+  y2 += overscan_offset_y;
+
+  if (outside(x1, y1) || outside(x2 - 1, y2 - 1)) return;
+
+  int row_pixels = gr_draw->row_bytes / gr_draw->pixel_bytes;
+  uint32_t* p = PixelAt(gr_draw, x1, y1, row_pixels);
+  uint8_t alpha = static_cast<uint8_t>(((gr_current & alpha_mask) >> 24));
+  if (alpha > 0) {
+    for (int y = y1; y < y2; ++y) {
+      uint32_t* px = p;
+      for (int x = x1; x < x2; ++x) {
+        *px = pixel_blend(alpha, *px);
+        incr_x(&px, row_pixels);
+      }
+      incr_y(&p, row_pixels);
+    }
+  }
+}
+
+void gr_blit(const GRSurface* source, int sx, int sy, int w, int h, int dx, int dy) {
+  if (source == nullptr) return;
+
+  if (gr_draw->pixel_bytes != source->pixel_bytes) {
+    printf("gr_blit: source has wrong format\n");
+    return;
+  }
+
+  dx += overscan_offset_x;
+  dy += overscan_offset_y;
+
+  if (outside(dx, dy) || outside(dx + w - 1, dy + h - 1)) return;
+
+  if (rotation != GRRotation::NONE) {
+    int src_row_pixels = source->row_bytes / source->pixel_bytes;
+    int row_pixels = gr_draw->row_bytes / gr_draw->pixel_bytes;
+    const uint32_t* src_py =
+        reinterpret_cast<const uint32_t*>(source->data()) + sy * source->row_bytes / 4 + sx;
+    uint32_t* dst_py = PixelAt(gr_draw, dx, dy, row_pixels);
+
+    for (int y = 0; y < h; y += 1) {
+      const uint32_t* src_px = src_py;
+      uint32_t* dst_px = dst_py;
+      for (int x = 0; x < w; x += 1) {
+        *dst_px = *src_px++;
+        incr_x(&dst_px, row_pixels);
+      }
+      src_py += src_row_pixels;
+      incr_y(&dst_py, row_pixels);
+    }
+  } else {
+    const uint8_t* src_p = source->data() + sy * source->row_bytes + sx * source->pixel_bytes;
+    uint8_t* dst_p = gr_draw->data() + dy * gr_draw->row_bytes + dx * gr_draw->pixel_bytes;
+
+    for (int i = 0; i < h; ++i) {
+      memcpy(dst_p, src_p, w * source->pixel_bytes);
+      src_p += source->row_bytes;
+      dst_p += gr_draw->row_bytes;
+    }
+  }
+}
+
+unsigned int gr_get_width(const GRSurface* surface) {
+  if (surface == nullptr) {
+    return 0;
+  }
+  return surface->width;
+}
+
+unsigned int gr_get_height(const GRSurface* surface) {
+  if (surface == nullptr) {
+    return 0;
+  }
+  return surface->height;
+}
+
+int gr_init_font(const char* name, GRFont** dest) {
+  GRFont* font = static_cast<GRFont*>(calloc(1, sizeof(*gr_font)));
+  if (font == nullptr) {
+    return -1;
+  }
+
+  int res = res_create_alpha_surface(name, &(font->texture));
+  if (res < 0) {
+    free(font);
+    return res;
+  }
+
+  // The font image should be a 96x2 array of character images.  The
+  // columns are the printable ASCII characters 0x20 - 0x7f.  The
+  // top row is regular text; the bottom row is bold.
+  font->char_width = font->texture->width / 96;
+  font->char_height = font->texture->height / 2;
+
+  *dest = font;
+
+  return 0;
+}
+
+void gr_flip() {
+  gr_draw = gr_backend->Flip();
+}
+
+static void get_memory_surface(GGLSurface* ms) {
+  ms->version = sizeof(*ms);
+  ms->width = gr_draw->width;
+  ms->height = gr_draw->height;
+  ms->stride = gr_draw->row_bytes / gr_draw->pixel_bytes;
+  ms->data = (GGLubyte*)gr_draw->data();
+  ms->format = convertPixelFormatToGGLPixelFormat(gr_pixel_format());
+}
+
+int gr_init() {
+  printf("gr_init()\n");
+  // pixel_format needs to be set before loading any resources or initializing backends.
+  std::string format = android::base::GetProperty("ro.minui.pixel_format", "");
+  if (format == "ABGR_8888") {
+    pixel_format = PixelFormat::ABGR;
+  } else if (format == "RGBX_8888") {
+    pixel_format = PixelFormat::RGBX;
+  } else if (format == "ARGB_8888") {
+    pixel_format = PixelFormat::ARGB;
+  } else if (format == "BGRA_8888") {
+    pixel_format = PixelFormat::BGRA;
+  } else {
+    pixel_format = PixelFormat::UNKNOWN;
+  }
+
+  int ret = gr_init_font("font", &gr_font);
+  if (ret != 0) {
+    printf("Failed to init font: %d, continuing graphic backend initialization without font file\n",
+           ret);
+  }
+
+  auto backend = std::unique_ptr<MinuiBackend>{ std::make_unique<MinuiBackendAdf>() };
+  gr_draw = backend->Init();
+  printf("backend->InitAdf()\n");
+
+  if (!gr_draw) {
+    backend = std::make_unique<MinuiBackendDrm>();
+    gr_draw = backend->Init();
+    printf("backend->InitDrm()\n");
+  }
+
+  if (!gr_draw) {
+    backend = std::make_unique<MinuiBackendFbdev>();
+    gr_draw = backend->Init();
+    printf("backend->Initfbdev()\n");
+  }
+
+  if (!gr_draw) {
+    printf("backend failed\n");
+    return -1;
+  }
+
+  gr_backend = backend.release();
+
+  int overscan_percent = android::base::GetIntProperty("ro.minui.overscan_percent", 0);
+  overscan_offset_x = gr_draw->width * overscan_percent / 100;
+  overscan_offset_y = gr_draw->height * overscan_percent / 100;
+
+  // Set up pixelflinger
+  get_memory_surface(&gr_mem_surface);
+  gglInit(&gr_context);
+  GGLContext *gl = gr_context;
+  gl->colorBuffer(gl, &gr_mem_surface);
+
+  gl->activeTexture(gl, 0);
+  gl->enable(gl, GGL_BLEND);
+  gl->blendFunc(gl, GGL_SRC_ALPHA, GGL_ONE_MINUS_SRC_ALPHA);
+  
+  gr_flip();
+  gr_flip();
+  if (!gr_draw) {
+    printf("gr_init: gr_draw becomes nullptr after gr_flip\n");
+    return -1;
+  }
+
+  std::string rotation_str =
+      android::base::GetProperty("ro.minui.default_rotation", "ROTATION_NONE");
+  if (rotation_str == "ROTATION_RIGHT") {
+    gr_rotate(GRRotation::RIGHT);
+  } else if (rotation_str == "ROTATION_DOWN") {
+    gr_rotate(GRRotation::DOWN);
+  } else if (rotation_str == "ROTATION_LEFT") {
+    gr_rotate(GRRotation::LEFT);
+  } else {  // "ROTATION_NONE" or unknown string
+    gr_rotate(GRRotation::NONE);
+  }
+
+  if (gr_draw->pixel_bytes != 4) {
+    printf("gr_init: Only 4-byte pixel formats supported\n");
+  }
+
+#ifdef TW_SCREEN_BLANK_ON_BOOT
+  printf("TW_SCREEN_BLANK_ON_BOOT := true\n");
+  gr_fb_blank(true);
+  gr_fb_blank(false);
+#endif
+  return 0;
+}
+
+void gr_exit() {
+  delete gr_backend;
+  gr_backend = nullptr;
+
+  delete gr_font;
+  gr_font = nullptr;
+}
+
+int gr_fb_width() {
+  return (rotation == GRRotation::LEFT || rotation == GRRotation::RIGHT)
+             ? gr_draw->height - 2 * overscan_offset_y
+             : gr_draw->width - 2 * overscan_offset_x;
+}
+
+int gr_fb_height() {
+  return (rotation == GRRotation::LEFT || rotation == GRRotation::RIGHT)
+             ? gr_draw->width - 2 * overscan_offset_x
+             : gr_draw->height - 2 * overscan_offset_y;
+}
+
+void gr_fb_blank(bool blank) {
+  gr_backend->Blank(blank);
+}
+
+void gr_rotate(GRRotation rot) {
+  rotation = rot;
+}
+
+std::unique_ptr<GRSurface> gr_render_circle(int radius, unsigned char r, unsigned char g, unsigned char b, unsigned char a) {
     int rx, ry;
     GGLSurface *surface;
     const int diameter = radius*2 + 1;
@@ -196,307 +602,6 @@ gr_surface gr_render_circle(int radius, unsigned char r, unsigned char g, unsign
             if(rx*rx+ry*ry <= radius_check)
                 *(data + diameter*(radius + ry) + (radius+rx)) = px;
 
-    return (gr_surface)surface;
+    return convertGGLSurfaceToGRSurface(surface);
 }
 
-void gr_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
-    GGLContext *gl = gr_context;
-    GGLint color[4];
-#if defined(RECOVERY_ABGR) || defined(RECOVERY_BGRA)
-    color[0] = ((b << 8) | r) + 1;
-    color[1] = ((g << 8) | g) + 1;
-    color[2] = ((r << 8) | b) + 1;
-    color[3] = ((a << 8) | a) + 1;
-#else
-    color[0] = ((r << 8) | r) + 1;
-    color[1] = ((g << 8) | g) + 1;
-    color[2] = ((b << 8) | b) + 1;
-    color[3] = ((a << 8) | a) + 1;
-#endif
-    gl->color4xv(gl, color);
-
-    gr_is_curr_clr_opaque = (a == 255);
-}
-
-void gr_clear()
-{
-    if (gr_draw->pixel_bytes == 2) {
-        gr_fill(0, 0, gr_fb_width(), gr_fb_height());
-        return;
-    }
-
-    // This code only works on 32bpp devices
-    if (gr_current_r == gr_current_g && gr_current_r == gr_current_b) {
-        memset(gr_draw->data, gr_current_r, gr_draw->height * gr_draw->row_bytes);
-    } else {
-        unsigned char* px = gr_draw->data;
-        for (int y = 0; y < gr_draw->height; ++y) {
-            for (int x = 0; x < gr_draw->width; ++x) {
-                *px++ = gr_current_r;
-                *px++ = gr_current_g;
-                *px++ = gr_current_b;
-                px++;
-            }
-            px += gr_draw->row_bytes - (gr_draw->width * gr_draw->pixel_bytes);
-        }
-    }
-}
-
-void gr_fill(int x, int y, int w, int h)
-{
-    GGLContext *gl = gr_context;
-    int x0_disp, y0_disp, x1_disp, y1_disp;
-    int l_disp, r_disp, t_disp, b_disp;
-
-    if(gr_is_curr_clr_opaque)
-        gl->disable(gl, GGL_BLEND);
-
-    x0_disp = ROTATION_X_DISP(x, y, gr_draw->width);
-    y0_disp = ROTATION_Y_DISP(x, y, gr_draw->height);
-    x1_disp = ROTATION_X_DISP(x + w, y + h, gr_draw->width);
-    y1_disp = ROTATION_Y_DISP(x + w, y + h, gr_draw->height);
-    l_disp = std::min(x0_disp, x1_disp);
-    r_disp = std::max(x0_disp, x1_disp);
-    t_disp = std::min(y0_disp, y1_disp);
-    b_disp = std::max(y0_disp, y1_disp);
-
-    gl->recti(gl, l_disp, t_disp, r_disp, b_disp);
-
-    if(gr_is_curr_clr_opaque)
-        gl->enable(gl, GGL_BLEND);
-}
-
-void gr_blit(gr_surface source, int sx, int sy, int w, int h, int dx, int dy)
-{
-    if (gr_context == NULL) {
-        return;
-    }
-
-    GGLContext *gl = gr_context;
-    GGLSurface *surface = (GGLSurface*)source;
-
-    if(surface->format == GGL_PIXEL_FORMAT_RGBX_8888)
-        gl->disable(gl, GGL_BLEND);
-
-    int dx0_disp, dy0_disp, dx1_disp, dy1_disp;
-    int l_disp, r_disp, t_disp, b_disp;
-
-    // Figuring out display coordinates works for gr_rotation == 0 too,
-    // and isn't as expensive as allocating and rotating another surface,
-    // so we do this anyway.
-    dx0_disp = ROTATION_X_DISP(dx, dy, gr_draw->width);
-    dy0_disp = ROTATION_Y_DISP(dx, dy, gr_draw->height);
-    dx1_disp = ROTATION_X_DISP(dx + w, dy + h, gr_draw->width);
-    dy1_disp = ROTATION_Y_DISP(dx + w, dy + h, gr_draw->height);
-    l_disp = std::min(dx0_disp, dx1_disp);
-    r_disp = std::max(dx0_disp, dx1_disp);
-    t_disp = std::min(dy0_disp, dy1_disp);
-    b_disp = std::max(dy0_disp, dy1_disp);
-
-    GGLSurface surface_rotated;
-    if (gr_rotation != 0) {
-        // Do not perform relatively expensive operation if not needed
-        surface_rotated.version = sizeof(surface_rotated);
-        // Skip the **(gr_rotation == 0)** || (gr_rotation == 180) check
-        // because we are under a gr_rotation != 0 conditional compilation statement
-        surface_rotated.width   = (gr_rotation == 180) ? surface->width  : surface->height;
-        surface_rotated.height  = (gr_rotation == 180) ? surface->height : surface->width;
-        surface_rotated.stride  = surface_rotated.width;
-        surface_rotated.format  = surface->format;
-        surface_rotated.data    = (GGLubyte*) malloc(surface_rotated.stride * surface_rotated.height * 4);
-        surface_ROTATION_transform((gr_surface) &surface_rotated, (const gr_surface) surface, 4);
-
-        gl->bindTexture(gl, &surface_rotated);
-    } else {
-        gl->bindTexture(gl, surface);
-    }
-
-    gl->texEnvi(gl, GGL_TEXTURE_ENV, GGL_TEXTURE_ENV_MODE, GGL_REPLACE);
-    gl->texGeni(gl, GGL_S, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);
-    gl->texGeni(gl, GGL_T, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);
-    gl->enable(gl, GGL_TEXTURE_2D);
-    gl->texCoord2i(gl, sx - l_disp, sy - t_disp);
-    gl->recti(gl, l_disp, t_disp, r_disp, b_disp);
-    gl->disable(gl, GGL_TEXTURE_2D);
-
-    if (gr_rotation != 0)
-        free(surface_rotated.data);
-
-    if(surface->format == GGL_PIXEL_FORMAT_RGBX_8888)
-        gl->enable(gl, GGL_BLEND);
-}
-
-unsigned int gr_get_width(gr_surface surface) {
-    if (surface == NULL) {
-        return 0;
-    }
-    return ((GGLSurface*) surface)->width;
-}
-
-unsigned int gr_get_height(gr_surface surface) {
-    if (surface == NULL) {
-        return 0;
-    }
-    return ((GGLSurface*) surface)->height;
-}
-
-void gr_flip() {
-    gr_draw = gr_backend->flip(gr_backend);
-    // On double buffered back ends, when we flip, we need to tell
-    // pixel flinger to draw to the other buffer
-    gr_mem_surface.data = (GGLubyte*)gr_draw->data;
-    gr_context->colorBuffer(gr_context, &gr_mem_surface);
-}
-
-static void get_memory_surface(GGLSurface* ms) {
-    ms->version = sizeof(*ms);
-    ms->width = gr_draw->width;
-    ms->height = gr_draw->height;
-    ms->stride = gr_draw->row_bytes / gr_draw->pixel_bytes;
-    ms->data = (GGLubyte*)gr_draw->data;
-    ms->format = gr_draw->format;
-}
-
-int gr_init(void)
-{
-    gr_draw = NULL;
-
-    char gr_rotation_string[PROPERTY_VALUE_MAX];
-    char default_rotation[4];
-    snprintf(default_rotation, 4, "%d", TW_ROTATION);
-    property_get("persist.twrp.rotation", gr_rotation_string, default_rotation);
-    gr_rotation = atoi(gr_rotation_string);
-    if (!(gr_rotation == 90 || gr_rotation == 180 || gr_rotation == 270))
-        gr_rotation = 0;
-
-#ifdef MSM_BSP
-    gr_backend = open_overlay();
-    if (gr_backend) {
-        gr_draw = gr_backend->init(gr_backend);
-        if (!gr_draw) {
-            gr_backend->exit(gr_backend);
-        } else
-            printf("Using overlay graphics.\n");
-    }
-#endif
-
-#ifdef HAS_ADF
-    if (!gr_backend || !gr_draw) {
-        gr_backend = open_adf();
-        if (gr_backend) {
-            gr_draw = gr_backend->init(gr_backend);
-            if (!gr_draw) {
-                gr_backend->exit(gr_backend);
-            } else
-                printf("Using adf graphics.\n");
-        }
-    }
-#else
-#ifdef MSM_BSP
-	printf("Skipping adf graphics because TW_TARGET_USES_QCOM_BSP := true\n");
-#else
-    printf("Skipping adf graphics -- not present in build tree\n");
-#endif
-#endif
-
-#ifdef HAS_DRM
-    if (!gr_backend || !gr_draw) {
-        gr_backend = open_drm();
-        gr_draw = gr_backend->init(gr_backend);
-        if (gr_draw)
-            printf("Using drm graphics.\n");
-    }
-#else
-    printf("Skipping drm graphics -- not present in build tree\n");
-#endif
-
-    if (!gr_backend || !gr_draw) {
-        gr_backend = open_fbdev();
-        gr_draw = gr_backend->init(gr_backend);
-        if (gr_draw == NULL) {
-            return -1;
-        } else
-            printf("Using fbdev graphics.\n");
-    }
-
-    overscan_offset_x = gr_draw->width * overscan_percent / 100;
-    overscan_offset_y = gr_draw->height * overscan_percent / 100;
-
-    // Set up pixelflinger
-    get_memory_surface(&gr_mem_surface);
-    gglInit(&gr_context);
-    GGLContext *gl = gr_context;
-    gl->colorBuffer(gl, &gr_mem_surface);
-
-    gl->activeTexture(gl, 0);
-    gl->enable(gl, GGL_BLEND);
-    gl->blendFunc(gl, GGL_SRC_ALPHA, GGL_ONE_MINUS_SRC_ALPHA);
-
-    gr_flip();
-    gr_flip();
-
-#ifdef TW_SCREEN_BLANK_ON_BOOT
-    printf("TW_SCREEN_BLANK_ON_BOOT := true\n");
-    gr_fb_blank(true);
-    gr_fb_blank(false);
-#endif
-
-    return 0;
-}
-
-void gr_exit(void)
-{
-    gr_backend->exit(gr_backend);
-}
-
-int gr_fb_width(void)
-{
-    return (gr_rotation == 0 || gr_rotation == 180) ?
-            gr_draw->width  - 2 * overscan_offset_x :
-            gr_draw->height - 2 * overscan_offset_y;
-}
-
-int gr_fb_height(void)
-{
-    return (gr_rotation == 0 || gr_rotation == 180) ?
-            gr_draw->height - 2 * overscan_offset_y :
-            gr_draw->width  - 2 * overscan_offset_x;
-}
-
-void gr_fb_blank(bool blank)
-{
-    gr_backend->blank(gr_backend, blank);
-}
-
-int gr_get_surface(gr_surface* surface)
-{
-    GGLSurface* ms = (GGLSurface*)malloc(sizeof(GGLSurface));
-    if (!ms)    return -1;
-
-    // Allocate the data
-    get_memory_surface(ms);
-    ms->data = (GGLubyte*)malloc(ms->stride * ms->height * gr_draw->pixel_bytes);
-
-    // Now, copy the data
-    memcpy(ms->data, gr_mem_surface.data, gr_draw->width * gr_draw->height * gr_draw->pixel_bytes / 8);
-
-    *surface = (gr_surface*) ms;
-    return 0;
-}
-
-int gr_free_surface(gr_surface surface)
-{
-    if (!surface)
-        return -1;
-
-    GGLSurface* ms = (GGLSurface*) surface;
-    free(ms->data);
-    free(ms);
-    return 0;
-}
-
-void gr_write_frame_to_file(int fd)
-{
-    write(fd, gr_mem_surface.data, gr_draw->width * gr_draw->height * gr_draw->pixel_bytes / 8);
-}

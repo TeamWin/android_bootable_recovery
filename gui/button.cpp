@@ -37,7 +37,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -136,7 +136,7 @@ int GUIButton::Render(void)
 		gr_fill(mRenderX, mRenderY, mRenderW, mRenderH);
 	}
 	if (mButtonIcon && mButtonIcon->GetResource())
-		gr_blit(mButtonIcon->GetResource(), 0, 0, mIconW, mIconH, mIconX, mIconY);
+		gr_blit(mButtonIcon->GetResource().get(), 0, 0, mIconW, mIconH, mIconX, mIconY);
 	if (mButtonLabel) {
 		int w, h;
 		mButtonLabel->GetCurrentBounds(w, h);
@@ -176,7 +176,7 @@ int GUIButton::Update(void)
 	{
 		// The button re-rendered, so everyone else is a render
 		if (mButtonIcon && mButtonIcon->GetResource())
-			gr_blit(mButtonIcon->GetResource(), 0, 0, mIconW, mIconH, mIconX, mIconY);
+			gr_blit(mButtonIcon->GetResource().get(), 0, 0, mIconW, mIconH, mIconX, mIconY);
 		if (mButtonLabel)   ret = mButtonLabel->Render();
 		if (ret < 0)		return ret;
 		ret = 1;
