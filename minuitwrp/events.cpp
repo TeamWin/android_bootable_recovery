@@ -34,7 +34,7 @@
 
 #include "common.h"
 
-#include "minui.h"
+#include "minuitwrp/minui.h"
 
 //#define _EVENT_LOGGING
 

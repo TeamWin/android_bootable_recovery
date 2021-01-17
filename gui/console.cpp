@@ -32,7 +32,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -263,7 +263,7 @@ int GUIConsole::RenderSlideout(void)
 	if (!mSlideoutImage || !mSlideoutImage->GetResource())
 		return -1;
 
-	gr_blit(mSlideoutImage->GetResource(), 0, 0, mSlideoutW, mSlideoutH, mSlideoutX, mSlideoutY);
+	gr_blit(mSlideoutImage->GetResource().get(), 0, 0, mSlideoutW, mSlideoutH, mSlideoutX, mSlideoutY);
 	return 0;
 }
 

@@ -40,8 +40,8 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
-#include "../minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -310,7 +310,7 @@ int GUIInput::Render(void)
 	{
 		mBackgroundX = mRenderX + ((mRenderW - mBackgroundW) / 2);
 		mBackgroundY = mRenderY + ((mRenderH - mBackgroundH) / 2);
-		gr_blit(mBackground->GetResource(), 0, 0, mBackgroundW, mBackgroundH, mBackgroundX, mBackgroundY);
+		gr_blit(mBackground->GetResource().get(), 0, 0, mBackgroundW, mBackgroundH, mBackgroundX, mBackgroundY);
 	}
 
 	int ret = 0;

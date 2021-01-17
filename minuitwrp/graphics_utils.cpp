@@ -21,7 +21,7 @@
 #include <linux/fb.h>
 #include <string.h>
 
-#include "minui.h"
+#include "minuitwrp/minui.h"
 
 struct fb_var_screeninfo vi;
 extern GGLSurface gr_mem_surface;
@@ -164,7 +164,7 @@ int ROTATION_Y_DISP(int x, int y, int h) {
     }                                                                         \
 }
 
-void surface_ROTATION_transform(gr_surface dst_ptr, const gr_surface src_ptr,
+void surface_ROTATION_transform(GRSurface* dst_ptr, const GRSurface* src_ptr,
                                   size_t num_bytes_per_pixel)
 {
     GGLSurface *dst = (GGLSurface*) dst_ptr;
@@ -180,4 +180,11 @@ void surface_ROTATION_transform(gr_surface dst_ptr, const gr_surface src_ptr,
     } else if (num_bytes_per_pixel == 1) {
         DO_MATRIX_ROTATION(8, 1);
     }
+}
+
+std::unique_ptr<GRSurface> convertGGLSurfaceToGRSurface(GGLSurface* surface) {
+    // size_t pixelSize = surface->stride * surface->height;
+    auto grsurface = GRSurface::Create(surface->width, surface->height, surface->width, 1);
+    std::memcpy(grsurface->data(), surface->data, grsurface->height * grsurface->row_bytes);
+    return grsurface;
 }
