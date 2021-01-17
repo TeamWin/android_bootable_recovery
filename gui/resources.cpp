@@ -37,8 +37,8 @@ extern "C" {
 #include "gui.h"
 }
 
-#include "../minuitwrp/truetype.hpp"
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -74,33 +74,33 @@ int Resource::ExtractResource(ZipArchiveHandle pZip, std::string folderName, std
 	return 0;
 }
 
-void Resource::LoadImage(ZipArchiveHandle pZip, std::string file, gr_surface* surface)
+void Resource::LoadImage(ZipArchiveHandle pZip, std::string file, GRSurface* surface)
 {
 	int rc = 0;
 	if (ExtractResource(pZip, "images", file, ".png", TMP_RESOURCE_NAME) == 0)
 	{
-		rc = res_create_surface(TMP_RESOURCE_NAME, surface);
+		rc = res_create_display_surface(TMP_RESOURCE_NAME, &surface);
 		unlink(TMP_RESOURCE_NAME);
 	}
 	else if (ExtractResource(pZip, "images", file, "", TMP_RESOURCE_NAME) == 0)
 	{
 		// JPG includes the .jpg extension in the filename so extension should be blank
-		rc = res_create_surface(TMP_RESOURCE_NAME, surface);
+		rc = res_create_display_surface(TMP_RESOURCE_NAME, &surface);
 		unlink(TMP_RESOURCE_NAME);
 	}
 	else if (!pZip)
 	{
 		// File name in xml may have included .png so try without adding .png
-		rc = res_create_surface(file.c_str(), surface);
+		rc = res_create_display_surface(file.c_str(), &surface);
 	}
 	if (rc != 0)
 		LOGINFO("Failed to load image from %s%s, error %d\n", file.c_str(), pZip ? " (zip)" : "", rc);
 }
 
-void Resource::CheckAndScaleImage(gr_surface source, gr_surface* destination, int retain_aspect)
+void Resource::CheckAndScaleImage(const GRSurface* source, const GRSurface* destination, int retain_aspect)
 {
-	if (!source) {
-		*destination = NULL;
+	if (!source->data()) {
+		destination = nullptr;
 		return;
 	}
 	if (get_scale_w() != 0 && get_scale_h() != 0) {
@@ -113,10 +113,10 @@ void Resource::CheckAndScaleImage(gr_surface source, gr_surface* destination, in
 		}
 		if (res_scale_surface(source, destination, scale_w, scale_h)) {
 			LOGINFO("Error scaling image, using regular size.\n");
-			*destination = source;
+			destination = source;
 		}
 	} else {
-		*destination = source;
+		destination = source;
 	}
 }
 
@@ -214,7 +214,7 @@ ImageResource::ImageResource(xml_node<>* node, ZipArchiveHandle pZip)
  : Resource(node, pZip)
 {
 	std::string file;
-	gr_surface temp_surface = NULL;
+	GRSurface* temp_surface = nullptr;
 
 	mSurface = NULL;
 	if (!node) {
@@ -231,14 +231,14 @@ ImageResource::ImageResource(xml_node<>* node, ZipArchiveHandle pZip)
 
 	bool retain_aspect = (node->first_attribute("retainaspect") != NULL);
 	// the value does not matter, if retainaspect is present, we assume that we want to retain it
-	LoadImage(pZip, file, &temp_surface);
-	CheckAndScaleImage(temp_surface, &mSurface, retain_aspect);
+	LoadImage(pZip, file, temp_surface);
+	CheckAndScaleImage(temp_surface, mSurface, retain_aspect);
 }
 
 ImageResource::~ImageResource()
 {
-	if (mSurface)
-		res_free_surface(mSurface);
+	// if (mSurface)
+		// res_free_surface(mSurface);
 }
 
 AnimationResource::AnimationResource(xml_node<>* node, ZipArchiveHandle pZip)
@@ -264,11 +264,12 @@ AnimationResource::AnimationResource(xml_node<>* node, ZipArchiveHandle pZip)
 		std::ostringstream fileName;
 		fileName << file << std::setfill ('0') << std::setw (3) << fileNum;
 
-		gr_surface surface, temp_surface = NULL;
-		LoadImage(pZip, fileName.str(), &temp_surface);
-		CheckAndScaleImage(temp_surface, &surface, retain_aspect);
+		GRSurface* surface = nullptr;
+		GRSurface* temp_surface = nullptr;
+		LoadImage(pZip, fileName.str(), temp_surface);
+		CheckAndScaleImage(temp_surface, surface, retain_aspect);
 		if (surface) {
-			mSurfaces.push_back(surface);
+			mSurfaces.push_back(std::unique_ptr<GRSurface>(surface));
 			fileNum++;
 		} else
 			break; // Done loading animation images
@@ -277,10 +278,11 @@ AnimationResource::AnimationResource(xml_node<>* node, ZipArchiveHandle pZip)
 
 AnimationResource::~AnimationResource()
 {
-	std::vector<gr_surface>::iterator it;
+	// std::vector<std::unique_ptr<GRSurface>>::iterator it;
 
-	for (it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
-		res_free_surface(*it);
+	// for (it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+	// for (const auto& it: mSurfaces)
+		// res_free_surface(*it);
 
 	mSurfaces.clear();
 }

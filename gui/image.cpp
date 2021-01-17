@@ -38,7 +38,7 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -88,13 +88,13 @@ int GUIImage::Render(void)
 		return 0;
 
 	if (isHighlighted && mHighlightImage && mHighlightImage->GetResource()) {
-		gr_blit(mHighlightImage->GetResource(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
+		gr_blit(mHighlightImage->GetResource().get(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
 		return 0;
 	}
 	else if (!mImage || !mImage->GetResource())
 		return -1;
 
-	gr_blit(mImage->GetResource(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
+	gr_blit(mImage->GetResource().get(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
 	return 0;
 }
 

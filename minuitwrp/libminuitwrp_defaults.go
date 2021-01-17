@@ -30,6 +30,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	matches, err = filepath.Glob("external/libdrm/Android.*")
+	_ = matches
 	if err == nil {
 		cflags = append(cflags, "-DHAS_DRM")
 	}

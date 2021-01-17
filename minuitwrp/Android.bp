@@ -28,7 +28,9 @@ cc_library_shared {
         "external/freetype/include",
         "external/libcxx/include",
         "bootable/recovery/twrpinstall/include",
-        "bootable/recovery/libpixelflinger/include"
+        "bootable/recovery/libpixelflinger/include",
+        "bootable/recovery/minuitwrp/include",
+        "bootable/recovery/gui/include"
     ],
     srcs: [
         "graphics.cpp",
@@ -47,7 +49,9 @@ cc_library_shared {
         "libutils", 
         "libc++",
         "libcutils",
-        "liblog", 
+        "liblog",
+        "libbase",
+        "libsync" 
     ],
     static_libs: ["libpixelflinger_twrp"]
 }

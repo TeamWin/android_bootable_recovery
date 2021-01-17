@@ -27,8 +27,8 @@ extern "C" {
 #include "../twcommon.h"
 #include "gui.h"
 }
-#include "../minuitwrp/minui.h"
-#include "../minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -329,7 +329,7 @@ void GUIKeyboard::DrawKey(Key& key, int keyX, int keyY, int keyW, int keyH)
 		int h = labelImage->GetHeight();
 		int x = keyX + (keyW - w) / 2;
 		int y = keyY + (keyH - h) / 2;
-		gr_blit(labelImage->GetResource(), 0, 0, w, h, x, y);
+		gr_blit(labelImage->GetResource().get(), 0, 0, w, h, x, y);
 	}
 	else if (!labelText.empty() && labelFont && labelFont->GetResource())
 	{
@@ -376,7 +376,7 @@ int GUIKeyboard::Render(void)
 	bool drawKeys = false;
 	if (lay.keyboardImg && lay.keyboardImg->GetResource())
 		// keyboard is image based
-		gr_blit(lay.keyboardImg->GetResource(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
+		gr_blit(lay.keyboardImg->GetResource().get(), 0, 0, mRenderW, mRenderH, mRenderX, mRenderY);
 	else {
 		// keyboard is software drawn
 		// fill background
