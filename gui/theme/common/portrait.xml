@@ -403,6 +403,12 @@
 			</checkbox>
 
 			<checkbox>
+				<placement x="%indent%" y="row15_y"/>
+				<text>{@zip_err_compatibility=Bypass Treble Compatibility}</text>
+				<data variable="tw_skip_compatibility"/>
+			</checkbox>
+
+			<checkbox>
 				<condition var1="tw_has_injecttwrp" var2="1"/>
 				<placement x="%indent%" y="%row15_y%"/>
 				<text>{@inject_twrp_chk=Inject TWRP after install}</text>
@@ -3114,6 +3120,9 @@
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
 				<listitem name="{@zip_sig_chk=Zip signature verification}">
 					<data variable="tw_signed_zip_verify"/>
+				</listitem>
+				<listitem name="{@zip_err_compatibility=Bypass Treble Compatibility Error}">
+					<data variable="tw_skip_compatibility"/>
 				</listitem>
 				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
 					<data variable="tw_install_reboot"/>

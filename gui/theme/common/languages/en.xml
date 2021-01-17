@@ -80,6 +80,7 @@
 		<string name="zip_warn2">software and render your device unusable.</string>
 		<string name="zip_back_cancel">Press back to cancel adding this zip.</string>
 		<string name="zip_back_clear">Press back button to clear the queue.</string>
+		<string name="zip_err_compatibility">Skip Treble compatibility error</string>
 		<string name="folder">Folder:</string>
 		<string name="file">File:</string>
 		<string name="zip_sig_chk">Zip signature verification</string>
