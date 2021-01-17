@@ -21,8 +21,8 @@
 extern "C" {
 #include "../twcommon.h"
 }
-#include "../minuitwrp/minui.h"
-#include "../minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -207,7 +207,7 @@ int GUIScrollList::Render(void)
 		int BackgroundH = mBackground->GetHeight();
 		int BackgroundX = mRenderX + ((mRenderW - BackgroundW) / 2);
 		int BackgroundY = mRenderY + ((mRenderH - BackgroundH) / 2);
-		gr_blit(mBackground->GetResource(), 0, 0, BackgroundW, BackgroundH, BackgroundX, BackgroundY);
+		gr_blit(mBackground->GetResource().get(), 0, 0, BackgroundW, BackgroundH, BackgroundX, BackgroundY);
 	}
 
 	// This tells us how many full lines we can actually render
@@ -260,7 +260,7 @@ int GUIScrollList::Render(void)
 		// render the icon if it exists
 		if (mHeaderIcon && mHeaderIcon->GetResource())
 		{
-			gr_blit(mHeaderIcon->GetResource(), 0, 0, mHeaderIconWidth, mHeaderIconHeight, mRenderX + ((mHeaderIconWidth - maxIconWidth) / 2), (yPos + (int)((mHeaderH - mHeaderIconHeight) / 2)));
+			gr_blit(mHeaderIcon->GetResource().get(), 0, 0, mHeaderIconWidth, mHeaderIconHeight, mRenderX + ((mHeaderIconWidth - maxIconWidth) / 2), (yPos + (int)((mHeaderH - mHeaderIconHeight) / 2)));
 			IconOffsetX = maxIconWidth;
 		}
 
@@ -343,7 +343,7 @@ void GUIScrollList::RenderStdItem(int yPos, bool selected, ImageResource* icon, 
 		int iconW = icon->GetWidth();
 		int iconY = yPos + (iconAndTextH - iconH) / 2;
 		int iconX = mRenderX + (maxIconWidth - iconW) / 2;
-		gr_blit(icon->GetResource(), 0, 0, iconW, iconH, iconX, iconY);
+		gr_blit(icon->GetResource().get(), 0, 0, iconW, iconH, iconX, iconY);
 	}
 
 	// render label text

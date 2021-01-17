@@ -26,10 +26,10 @@
 #include <map>
 #include "rapidxml.hpp"
 #include "ziparchive/zip_archive.h"
-#include "../minuitwrp/truetype.hpp"
+#include "minuitwrp/truetype.hpp"
 
 extern "C" {
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/minui.h"
 }
 
 // Base Objects
@@ -47,8 +47,8 @@ private:
 
 protected:
 	static int ExtractResource(ZipArchiveHandle pZip, std::string folderName, std::string fileName, std::string fileExtn, std::string destFile);
-	static void LoadImage(ZipArchiveHandle pZip, std::string file, gr_surface* surface);
-	static void CheckAndScaleImage(gr_surface source, gr_surface* destination, int retain_aspect);
+	static void LoadImage(ZipArchiveHandle pZip, std::string file, GRSurface* surface);
+	static void CheckAndScaleImage(const GRSurface* source, const GRSurface* destination, int retain_aspect);
 };
 
 class FontResource : public Resource
@@ -81,12 +81,12 @@ public:
 	virtual ~ImageResource();
 
 public:
-	gr_surface GetResource() { return mSurface; }
+	std::unique_ptr <GRSurface> GetResource() { return std::unique_ptr<GRSurface>(mSurface); }
 	int GetWidth() { return gr_get_width(mSurface); }
 	int GetHeight() { return gr_get_height(mSurface); }
 
 protected:
-	gr_surface mSurface;
+	GRSurface* mSurface;
 };
 
 class AnimationResource : public Resource
@@ -96,14 +96,14 @@ public:
 	virtual ~AnimationResource();
 
 public:
-	gr_surface GetResource() { return mSurfaces.empty() ? NULL : mSurfaces.at(0); }
-	gr_surface GetResource(int entry) { return mSurfaces.empty() ? NULL : mSurfaces.at(entry); }
+	const GRSurface* GetResource() { return mSurfaces.empty() ? nullptr : (const GRSurface*) mSurfaces.at(0).get(); }
+	const GRSurface* GetResource(int entry) { return mSurfaces.empty() ? nullptr : (const GRSurface*) mSurfaces.at(entry).get(); }
 	int GetWidth() { return gr_get_width(GetResource()); }
 	int GetHeight() { return gr_get_height(GetResource()); }
 	int GetResourceCount() { return mSurfaces.size(); }
 
 protected:
-	std::vector<gr_surface> mSurfaces;
+	std::vector<std::unique_ptr<GRSurface>> mSurfaces;
 };
 
 class ResourceManager
