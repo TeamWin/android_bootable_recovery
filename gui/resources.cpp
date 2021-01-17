@@ -37,8 +37,8 @@ extern "C" {
 #include "gui.h"
 }
 
-#include "../minuitwrp/truetype.hpp"
-#include "../minuitwrp/minui.h"
+#include "minuitwrp/truetype.hpp"
+#include "minuitwrp/minui.h"
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
@@ -100,7 +100,7 @@ void Resource::LoadImage(ZipArchiveHandle pZip, std::string file, gr_surface* su
 void Resource::CheckAndScaleImage(gr_surface source, gr_surface* destination, int retain_aspect)
 {
 	if (!source) {
-		*destination = NULL;
+		*destination = nullptr;
 		return;
 	}
 	if (get_scale_w() != 0 && get_scale_h() != 0) {
@@ -214,7 +214,7 @@ ImageResource::ImageResource(xml_node<>* node, ZipArchiveHandle pZip)
  : Resource(node, pZip)
 {
 	std::string file;
-	gr_surface temp_surface = NULL;
+	gr_surface temp_surface = nullptr;
 
 	mSurface = NULL;
 	if (!node) {
@@ -264,7 +264,8 @@ AnimationResource::AnimationResource(xml_node<>* node, ZipArchiveHandle pZip)
 		std::ostringstream fileName;
 		fileName << file << std::setfill ('0') << std::setw (3) << fileNum;
 
-		gr_surface surface, temp_surface = NULL;
+		gr_surface surface = nullptr;
+		gr_surface temp_surface = nullptr;
 		LoadImage(pZip, fileName.str(), &temp_surface);
 		CheckAndScaleImage(temp_surface, &surface, retain_aspect);
 		if (surface) {
