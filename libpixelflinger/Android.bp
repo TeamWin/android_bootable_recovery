@@ -1,21 +1,3 @@
-//bootstrap_go_package {
-//    name: "soong-libpixelflingertwrp_defaults",
-//    pkgPath: "bootable/recovery/libpixelflinger",
-//    deps: [
-//        "soong",
-//        "soong-android",
-//        "soong-cc"
-//    ],
-//    srcs: [
-//        "libpixelflingertwrp_defaults.go"
-//    ],
-//    pluginFor: ["soong_build"]
-//}
-
-//libpixelflingertwrp_defaults {
-//    name: "libpixelflingertwrp_defaults"
-//}
-
 cc_defaults {
     name: "libpixelflingertwrp_defaults",
 

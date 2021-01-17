@@ -30,7 +30,7 @@
 #include <linux/fb.h>
 #include <linux/kd.h>
 
-#include "minui.h"
+#include "minuitwrp/minui.h"
 #include "graphics.h"
 #include <pixelflinger/pixelflinger.h>
 
