@@ -177,6 +177,23 @@
       "parentUuid": "7f650d58_87b9d7dc",
       "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "285a3d9c_de6b510b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 513
+      },
+      "writtenOn": "2021-01-22T23:54:27Z",
+      "side": 1,
+      "message": "Yes, sorry.  Ignore the cherrypick to 10.0 comment.\n\nI checked the Volla kernel (v4.4.146).  It has the identical dm-crypt.c code as the X606F kernel (v4.9.117).  \n\nSo I\u0027d assume that other MTK devices using HW FDE that have v4.x kernels (built with CONFIG_MTK_HW_FDE) will require this patch for decryption to work.\n\nMaybe the commit message could be more descriptive:\n    * On some mediatek devices we must use symlinked path instead of the \n      real block device.  Needed for decryption on some MTK HW FDE devices.",
+      "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
