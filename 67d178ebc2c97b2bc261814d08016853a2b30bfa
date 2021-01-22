@@ -159,6 +159,24 @@
       "message": "I\u0027d upvote the TWFLAG_DM_USE_ORIGINAL_PATH flag patch.  I was going to offer a different solution, but I just cherrypicked this and it works for me.\n\nI can use it for decryption on Lenovo TB-X606F tablet, which has an MTK Helio P22T SOC and uses MTK HW FDE.\n\nIn the X606F kernel, in drivers/md/dm_crypt.c (https://github.com/Yahoo-Mike/android_kernel_lenovo_X606F/blob/master/drivers/md/dm-crypt.c) the call to crypt_dev_id() checks for the string \"bootdevice\" in the blkdev path.  Because TWPartition::Process_Fstab_line() removes \"bootdevice\", crypt_dev_id() returns -1, which breaks dm-crypt decryption.  Here\u0027s the dmesg.log:\n   [dm-crypt] dev path: /dev/block/mmcblk0p38, type: -1\n   device-mapper: table: 253:0: crypt: Unknown error\n   device-mapper: ioctl: error adding target to table\n\nResulting in recovery.log message:\n   E:Cannot load dm-crypt mapping table.\n   E:Error creating decrypted block device\n   E:Password did not matchFailed to decrypt data.\n\nIf the \"original path\" from fstab is used (which includes \"bootdevice\"), crypt_dev_id() returns the expected value of 0:\n   [dm-crypt] dev path: /dev/block/platform/bootdevice/by-name/userdata, type: 0\n   \nResulting in decryption success:\n   I:Password matchesD:test_mount_encrypted_fs(): Master key saved\n   Data successfully decrypted, new block device: \u0027/dev/block/dm-0\u0027\n\nI recommend the patch be cherry-picked to android-10.0.  I suspect it will fix MTK HW FDE decryption problems on quite a few MTK devices.\n\nI don\u0027t need and didn\u0027t test the TWFLAG_ADOPTED_MOUNT_DELAY flag patch.",
       "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b474e6b8_0f16766a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-01-22T09:20:08Z",
+      "side": 1,
+      "message": "You just commented on the Android 10 cherrypick",
+      "parentUuid": "7f650d58_87b9d7dc",
+      "revId": "67d178ebc2c97b2bc261814d08016853a2b30bfa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
