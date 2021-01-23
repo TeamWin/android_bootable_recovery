@@ -292,7 +292,7 @@ int GUIFileSelector::GetFileList(const std::string folder)
 			for (const std::string& mExtnElement : mExtnResults)
 			{
 				std::string mExtnName = android::base::Trim(mExtnElement);
-				if (mExtnName.empty() || (data.fileName.length() > mExtnName.length() && data.fileName.substr(data.fileName.length() - mExtnName.length()) == mExtnName)) {
+				if (mExtnName.empty() || (data.fileName.length() >= mExtnName.length() && data.fileName.substr(data.fileName.length() - mExtnName.length()) == mExtnName)) {
 					if (mExtnName == ".ab" && twadbbu::Check_ADB_Backup_File(path))
 						mFolderList.push_back(data);
 					else
@@ -306,7 +306,7 @@ int GUIFileSelector::GetFileList(const std::string folder)
 			} else {
 			mExtnf = mExtn;
 			}
-			if (mExtnf.empty() || (data.fileName.length() > mExtnf.length() && data.fileName.substr(data.fileName.length() - mExtnf.length()) == mExtnf)) {
+			if (mExtnf.empty() || (data.fileName.length() >= mExtnf.length() && data.fileName.substr(data.fileName.length() - mExtnf.length()) == mExtnf)) {
 				if (mExtnf == ".ab" && twadbbu::Check_ADB_Backup_File(path))
 					mFolderList.push_back(data);
 				else
