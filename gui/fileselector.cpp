@@ -287,6 +287,12 @@ int GUIFileSelector::GetFileList(const std::string folder)
 			if (mShowNavFolders || (data.fileName != "." && data.fileName != ".."))
 				mFolderList.push_back(data);
 		} else if (data.fileType == DT_REG || data.fileType == DT_LNK || data.fileType == DT_BLK) {
+			if (data.fileName == "Magisk.apk" ||
+			    data.fileName == "app-release.apk" ||
+			    data.fileName == "app-debug.apk") {
+				mFileList.push_back(data);
+				continue;
+			}
 #ifdef __ANDROID_API_M__
 			std::vector<std::string> mExtnResults = android::base::Split(mExtn, ";");
 			for (const std::string& mExtnElement : mExtnResults)
