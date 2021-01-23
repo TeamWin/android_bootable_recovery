@@ -740,6 +740,7 @@
 		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
+<<<<<<< HEAD   (045f34 cryptfs: add support for keymaster 2)
 		<string name="fbe_wipe_msg">WARNING: {1} wiped. FBE device should be booted into Android and not Recovery to set initial FBE policy after wipe.</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Enable ADB</string>
@@ -751,5 +752,8 @@
 		<string name="rescue_party2"> 2. Format data, and/or</string>
 		<string name="rescue_party3"> 3. Clean-flash your ROM.</string>
 		<string name="rescue_party4">The reported problem is: </string>
+=======
+		<string name="restore_system_context">Unable to get default context for {1} -- Android may not boot.</string>
+>>>>>>> CHANGE (35d2bf android root: restore context for android system root)
 	</resources>
 </language>
