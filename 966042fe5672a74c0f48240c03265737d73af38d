@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0a8eb78_78dab2a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-24T18:26:53Z",
+      "side": 1,
+      "message": "Patch set 3 looks for Magisk.apk instead of MagiskManager*.apk, as this is evidently the new non-canary name.",
+      "revId": "966042fe5672a74c0f48240c03265737d73af38d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
