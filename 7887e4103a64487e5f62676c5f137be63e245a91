@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabb1c00_542f13a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-24T03:29:17Z",
+      "side": 1,
+      "message": "The XML approach used by patch set 1 works only for extensions, such as .apk.\n\nIf we want to catch the common names used by the Magisk Manager app, we\u0027ll need some actual code.\n\nThe list of possible app names should probably be externalised somewhere.",
+      "revId": "7887e4103a64487e5f62676c5f137be63e245a91",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
