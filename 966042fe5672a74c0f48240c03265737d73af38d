@@ -33,6 +33,23 @@
       "message": "In case of old magisk app release or user fault rename. It wont be flashable.",
       "revId": "966042fe5672a74c0f48240c03265737d73af38d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be21ffcc_45cf8ca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-25T08:21:40Z",
+      "side": 1,
+      "message": "Yes, Captain Throwback felt it was safer to be restrictive.\n\nOtherwise, we can just allow *.apk, which was the approach taken by patch set 1.\n\nI don\u0027t have a strong feeling about it, but I do foresee that a lot of users will rename the canary .apk from app-debug.apk, since that name includes no version information and doesn\u0027t even identify the app.",
+      "revId": "966042fe5672a74c0f48240c03265737d73af38d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
