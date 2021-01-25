@@ -16,6 +16,23 @@
       "message": "Patch set 4 reverts to the XML approach, which avoids hard-coding the filenames in C++.\n\nInstead, the extension handling code is minimally altered to allow an extension to match a full filename. This allows us to simply list allowable exceptions in the list of extensions. ",
       "revId": "17fc2c4cae478e2989c80feaefae1536d16d7640",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c1be45_23ba0d86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-25T11:34:25Z",
+      "side": 1,
+      "message": "There\u0027s still an issue, however.\n\nWhen one actually tries to flash a Magisk .apk, it fails and complains that the digest file can\u0027t be found. I need to look into that.",
+      "revId": "17fc2c4cae478e2989c80feaefae1536d16d7640",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
