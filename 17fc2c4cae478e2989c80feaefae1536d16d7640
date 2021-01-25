@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9bd7d8_1f42b978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-25T10:05:52Z",
+      "side": 1,
+      "message": "Patch set 4 reverts to the XML approach, which avoids hard-coding the filenames in C++.\n\nInstead, the extension handling code is minimally altered to allow an extension to match a full filename. This allows us to simply list allowable exceptions in the list of extensions. ",
+      "revId": "17fc2c4cae478e2989c80feaefae1536d16d7640",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
