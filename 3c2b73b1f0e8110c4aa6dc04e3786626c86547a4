@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ea9ca84_ad1352bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-25T14:12:37Z",
+      "side": 1,
+      "message": "The digest code assumed that a ZIP file would always have the extension .zip, the logic of which returned a false positive, thereby triggering digest verification.\n\nPatch set 5 fixes this. I have verified that everything works as expected now.",
+      "revId": "3c2b73b1f0e8110c4aa6dc04e3786626c86547a4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
