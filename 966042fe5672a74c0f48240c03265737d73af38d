@@ -16,6 +16,23 @@
       "message": "Patch set 3 looks for Magisk.apk instead of MagiskManager*.apk, as this is evidently the new non-canary name.",
       "revId": "966042fe5672a74c0f48240c03265737d73af38d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5532f560_dd149f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2021-01-25T08:13:25Z",
+      "side": 1,
+      "message": "In case of old magisk app release or user fault rename. It wont be flashable.",
+      "revId": "966042fe5672a74c0f48240c03265737d73af38d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
