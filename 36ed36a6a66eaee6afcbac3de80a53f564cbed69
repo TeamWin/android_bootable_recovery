@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec61e35_f1e623aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-01-26T17:00:49Z",
+      "side": 1,
+      "message": "Patch set 6 introduces a prefix filter, so that filenames like Magisk-* can now be matched. This will be important when the new, single-file form of Magisk packaging makes its way from canary to beta and stable.\n\nAll of the existing Magisk-related filter strings have now been moved to the prefix filter, and Magisk-* has been added as a new filter.\n\n",
+      "revId": "36ed36a6a66eaee6afcbac3de80a53f564cbed69",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
