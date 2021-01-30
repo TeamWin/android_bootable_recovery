@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1612027649 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1612027649-431C0BA8C98729D7720D447E487FD10A7FF1FAD2\n\n0000000000000000000000000000000000000000 cb1aeaee18e3f72d2d058aa8ea7b9fc9bc33edcc refs/for/android-10.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmAVlwEACgkQAqwBp3le\n7riRYg//alTRY3r5ga+ihPPh2zChqJzQJv6rWMVbTJe6P99AIa8M1DPXgb0IHG7L\nJSTfNZbAf4b//sARUshn2UYR6DDb28jAKLmGUI2rwB/MyFVdfZ8dJWh+lF0G6c0X\nP7/3VkC89R5OQSpwy17sisCWBVmFVA9z7SLfVW7Q1HFXeUc7MyCTzIitRqYnu+gr\nAT/8WJNVnl+rtvD1U4ZCXJD/M0c1YflJTd+jS+vxZSeYnxVcG5a1kKIODqY84pLG\n87yPmFjRLvJ1RMwC/BVHT35by/solQrQ7XaP+2UhjP5ATGHmxRS3z2fDOvF1muMD\n0S+t8Hn+9FuXwbHo3h3GCpmUohaK4Rb10ngs95uWz3kiDJ9gzgwPGvs/wCSCqE5U\noRYdgN3GPVkf5nPYr6TzqjV1VyQPlJTB4Ck1qAGhAaSazxJlhNXGTVuCnEMMrWMI\nauHVevLs7LscFOSBoiAaswmQ4kkC2KJqMdih3/UHyLzm2qF6+SNnxMJwJUugJwmD\ntKUtf5hcxu0NFrw5NwLaXdGRfrv7Fg3xddyyWSNKE8O+8GSjQNFsSN+8yjkZ+w2f\nz7p00sjBPZhymtpQRu6+73tSGYwPGrywge6ZS80SO5WC3ArmNtoy8fD9Ec0sWafC\nRqtGPyXPOJDb1+op9tAddtBbjVgZFIu/gMU7nxbLKpkXDMzVmok\u003d\n\u003dlJ5v\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8cf350_037d7042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-30T17:28:29Z",
+      "side": 1,
+      "message": "Same patch from 9.0 branch.",
+      "revId": "cb1aeaee18e3f72d2d058aa8ea7b9fc9bc33edcc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
