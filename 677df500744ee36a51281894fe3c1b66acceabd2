@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1612025407 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1612025408-D832DF64FB7FD7F3F37DE3D501B2401AFEDB5A68\n\n0000000000000000000000000000000000000000 677df500744ee36a51281894fe3c1b66acceabd2 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmAVjj8ACgkQAqwBp3le\n7rjaaw//U732T5ceM9Sj6JOdS1r+OC36wViP3MjCC1H2KNIJ0YFHG3Ou+qeNq/h9\nBobNO27eyTpl/BYouB85if2y0H43hktVHWLn32bO/ESH3yiP5cpuJi544LTLoV2a\nnpeaWX1NUW+3M3wl+Ca6zCubWDRhgmQHRJycATgOro6HDtBg1NrSkbhXmTy9KGAb\nNYzymbOt5ij0MezXzRvqE7yVyQmmEEzdKqIH+kDFYx86X/6uMgpQft2x7yUjcWIZ\nShC1cCKt0KMxR2lDObo+vC4zGwMdn0MsnySAzYvYf7O5a3uyrhIvqyHeqKKPUMLg\nlYlgslWC9SOgcY+23KO8Zjet+jGdx4+NPU1D6pJC090fBg2rwojS1d+X3t3jxoqZ\nzvdwB7d0mx7rqWr8vJQOFXJf2pJQFoXmb4VzZnBEE3Cn0gw4jTdi9uA5ZMGJZXJw\notwfYMuzwipYURhBCG7zUzpOUyzXCuGrP/3TqvC7F5HXu0uZNUcymsqSjBQJgbid\nvQvB/zrwdUn8ZZfKJecBIPjqGJJQsbzMj6uC6jOAcJiO/lgtdgGgqEr/58ARRLkg\nye9ocJ8sclD9VYHNxhYCJoep7TueoVCR74vZJfLCWWViScTzRiAt052srTPjir00\n+6r5Z3gHZxdcJZEuKBCwAzcSMoRSdzRElViehoTiqX6xbi3FLBA\u003d\n\u003dTYmV\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2e1433_4884ae6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-01-30T17:21:39Z",
+      "side": 1,
+      "message": "A LOT of recoveries have this error so it\u0027s probably a good idea to include this by default. On devices with larger recovery partitions/boot image ramdisks this shouldn\u0027t be a problem, but since the file is almost 500KB, I figured that excluding it should also be an option.\n\nI can make it exclude by default if you think that makes more sense, but I think this is better, personally.",
+      "revId": "677df500744ee36a51281894fe3c1b66acceabd2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
