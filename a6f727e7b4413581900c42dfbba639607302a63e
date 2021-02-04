@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "105dd7c1_9d59f947",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-04T00:42:29Z",
+      "side": 1,
+      "message": "I applied this patch and still getting the warning in recovery.log on taimen:\n\ntaimen:/ # grep tzdata /tmp/recovery.log\n__bionic_open_tzdata: couldn\u0027t find any tzdata when looking for CST6CDT,M3.2.0,M11.1.0!\n__bionic_open_tzdata: couldn\u0027t find any tzdata when looking for posixrules!",
+      "revId": "a6f727e7b4413581900c42dfbba639607302a63e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
