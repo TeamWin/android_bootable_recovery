@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1612455312 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1612455316-43BA0FBB61986882154F79F2CDC08A8D39BDCA9D\n\n0000000000000000000000000000000000000000 f60170273504902c5a66c1aabc20ecff3a488c80 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmAcHZAACgkQAqwBp3le\n7rjQqBAAnk85hEyOa56LG5bN4No8oZfZLrMC3sjPw2/9c0qiSwBNyv2lOUnGZfx1\nAZ0fG39M72kcdOuNfbo0DG9diz4FRHWxr21u7Zf0Gdl4m95EWS9tSxdJY8XZgjFU\nAr1A/g7nkyySbV5920ffs6ZftHYBIfqIfNTLH2cvAX/Z8VulcBRnCr9BaW7uZn9s\nGSFYMYEELySAHFzLa8a//gMZ1x7ayYF9ZT7z4f/DWNFLYFO8bHh46cFX/FFpFQFI\nkjUAqbV6iEoMqxzfNtgSXgiek+MgQTLg0qWrxmCF2vnUqm3QFC4Gq32kGpZQSmGS\nvUiv2tv1tnvj6caZy3q+upay3sOH6+igYv6dbQ5ZZQWP1EO5HHKZ/ag3BJeb+5p7\nGxSQBspHgvTj5oFIO3lk99hvQMx3t2XhhEO1lJCqC7qMbx2JqS87ZvYu0mFfJskH\nRTKk2kp+f/H34z6yhydfJLXDPXc1cnEFc9oWsN0foKPsiAJ/Q6JO6P+6Qgh5YObc\ntQJmTEynWFegk6Iv400sce7wRTWNPSfDwuBXWzfTSSsE4wr6jf7eLkavT5dTwqAE\nLVk8k+F8wWipclRvXJeb8efsUELolxq58Uuc/7lBsgiV206vPCcq6H3GRVxbZipa\nELFJ7oq6WVdS0mWjv6h0AzC1xLnMhe/rRFnq15vrWOgjPiamZqg\u003d\n\u003dZ5XX\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a98ea004_e1881399",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-04T16:29:52Z",
+      "side": 1,
+      "message": "I tested both with recoveryimage and bootimage, and the file ends up in the recovery ramdisk in the correct location. If you can test this on taimen bigbiff and confirm that the file ends up in the ramdisk, I\u0027d appreciate it. If the warnings are still there, that would mean the /system_root/system -\u003e /system bind mount is broken on your device.",
+      "revId": "f60170273504902c5a66c1aabc20ecff3a488c80",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
