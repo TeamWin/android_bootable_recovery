@@ -16,6 +16,23 @@
       "message": "Please +1 if ready for review.",
       "revId": "fe7599583228fd477b01537309cc2139f3153cf3",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3198290_735ced82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-02-04T05:53:30Z",
+      "side": 1,
+      "message": "Erfan tested the patchset on android-10.0 as he brought up the new branch together with the stock ROM update.",
+      "revId": "fe7599583228fd477b01537309cc2139f3153cf3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
