@@ -51,6 +51,24 @@
       "message": "This gives a conflict when rebasing.",
       "revId": "702c900562fbd9af39e8d566d98e408eea4f7153",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4271f45d_1fe9e31b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-02-05T07:28:15Z",
+      "side": 1,
+      "message": "I think I fixed.",
+      "parentUuid": "805c2d29_a6b87de2",
+      "revId": "702c900562fbd9af39e8d566d98e408eea4f7153",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
