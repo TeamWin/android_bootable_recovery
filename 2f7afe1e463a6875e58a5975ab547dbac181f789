@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1612489071 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1612489074-F821F912D97056CF22A019E0EA1CD1E451772924\n\n0000000000000000000000000000000000000000 2f7afe1e463a6875e58a5975ab547dbac181f789 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmAcoW8ACgkQAqwBp3le\n7rhIKxAApTLEnTy2KII5VTTOWr0ws359q2f3eO1otDCoce+tG4dY+gLjYzYRMb9h\nArHqx5WrEJKF3ewFkvTWXJvZ2ZRoytohchfWcGPZJvNtUIPL4exE/ya6tLZRhBw9\n2kgcH4i7fWml6hUHrBAl9wVCkE1u4PREmktxF3Y1gAwFXizQnwriPcvvWgiYdaio\nwJmmL5LCNoG08U0m1++5GpBN7A06/OJueWCYHQXOtHBD0V5jSnl+NDcatyM5NtXG\naN164lnLYDUl+bVWyvh7fFbI6Xm3Xn5krc7LLnapYWCB5qyn+JmKVHut1jjOiXHc\n350l1GMJnNV82zC/b64hoAQ0py/DNdRBDIMrpuEg9tRpUKW8qUyfL0SlIDjM+wGn\nvHgluwhvhf09NnI2PVcSmjUwFthO2w2QZHvumPXDcs360bT4GnZ44eQk2TBFZXhN\nFbeQlZFSjrCyDp6mz7vAFMphbTAq+y9h4Nt+Iv4gU/dwa+nmoTEj/47hVb5SjZp7\n6HGkF73Isk9zO5jHvE2PP13YGzJm5CCnhMEEj+ZCn4l41x9BGbB7rDnPHwveOBAg\nZ2CoUQfRFaNeXAWiCiARzoUTCZzhkSDCXLvWDaELKOYKE81YjOB7pmDFyJq0hL7L\ndbEabKe+mjxzBcPwR0a0qxOzjVTIhq+WmWnD+6pEjFOLk22pcFc\u003d\n\u003dBZTR\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc168c98_f9c41020",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-05T01:39:02Z",
+      "side": 1,
+      "message": "Reverted back to PS2, per bigbiff. Should be good to merge.",
+      "revId": "2f7afe1e463a6875e58a5975ab547dbac181f789",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
