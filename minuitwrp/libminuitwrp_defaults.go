@@ -11,11 +11,11 @@ import (
 func globalFlags(ctx android.BaseContext) []string {
 	var cflags []string
 
-	if ctx.AConfig().Getenv("TW_SUPPORT_INPUT_1_2_HAPTICS") == "true" {
+	if getMakeVars(ctx, "TW_SUPPORT_INPUT_1_2_HAPTICS") == "true" {
 		cflags = append(cflags, "-DUSE_QTI_HAPTICS")
 	}
 
-	if ctx.AConfig().Getenv("TW_TARGET_USES_QCOM_BSP") == "true" {
+	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
 		cflags = append(cflags, "-DMSM_BSP")
 	}
 
@@ -25,7 +25,7 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DHAS_ADF")
 	}
 
-	if ctx.AConfig().Getenv("TW_NEW_ION_HEAP") == "true" {
+	if getMakeVars(ctx, "TW_NEW_ION_HEAP") == "true" {
 		cflags = append(cflags, "-DNEW_ION_HEAP")
 	}
 
@@ -35,35 +35,35 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DHAS_DRM")
 	}
 
-	if ctx.AConfig().Getenv("TW_INCLUDE_JPEG") != "" {
+	if getMakeVars(ctx, "TW_INCLUDE_JPEG") != "" {
 		cflags = append(cflags, "-DTW_INCLUDE_JPEG")
 	}
 
-	if ctx.AConfig().Getenv("RECOVERY_TOUCHSCREEN_SWAP_XY") == "true" {
+	if getMakeVars(ctx, "RECOVERY_TOUCHSCREEN_SWAP_XY") == "true" {
 		cflags = append(cflags, "-DRECOVERY_TOUCHSCREEN_SWAP_XY")
 	}
 
-	if ctx.AConfig().Getenv("RECOVERY_TOUCHSCREEN_FLIP_X") == "true" {
+	if getMakeVars(ctx, "RECOVERY_TOUCHSCREEN_FLIP_X") == "true" {
 		cflags = append(cflags, "-DRECOVERY_TOUCHSCREEN_FLIP_X")
 	}
 
-	if ctx.AConfig().Getenv("RECOVERY_TOUCHSCREEN_FLIP_Y") == "true" {
+	if getMakeVars(ctx, "RECOVERY_TOUCHSCREEN_FLIP_Y") == "true" {
 		cflags = append(cflags, "-DRECOVERY_TOUCHSCREEN_FLIP_Y")
 	}
 
-	if ctx.AConfig().Getenv("RECOVERY_GRAPHICS_FORCE_USE_LINELENGTH") == "true" {
+	if getMakeVars(ctx, "RECOVERY_GRAPHICS_FORCE_USE_LINELENGTH") == "true" {
 		cflags = append(cflags, "-DRECOVERY_GRAPHICS_FORCE_USE_LINELENGTH")
 	}
 
-	if ctx.AConfig().Getenv("RECOVERY_GRAPHICS_FORCE_SINGLE_BUFFER") == "true" {
+	if getMakeVars(ctx, "RECOVERY_GRAPHICS_FORCE_SINGLE_BUFFER") == "true" {
 		cflags = append(cflags, "-DRECOVERY_GRAPHICS_FORCE_SINGLE_BUFFER")
 	}
 
-	if ctx.AConfig().Getenv("TWRP_EVENT_LOGGING") == "true" {
+	if getMakeVars(ctx, "TWRP_EVENT_LOGGING") == "true" {
 		cflags = append(cflags, "-D_EVENT_LOGGING")
 	}
 
-	var pixelFormat = strings.Replace(ctx.AConfig().Getenv("TARGET_RECOVERY_FORCE_PIXEL_FORMAT"), "\"", "", -1)
+	var pixelFormat = strings.Replace(getMakeVars(ctx, "TARGET_RECOVERY_FORCE_PIXEL_FORMAT"), "\"", "", -1)
 
 	switch pixelFormat {
 	case "RGBA_8888":
@@ -92,7 +92,7 @@ func globalFlags(ctx android.BaseContext) []string {
 		break
 	}
 
-	pixelFormat = strings.Replace(ctx.AConfig().Getenv("TWRP_EVENT_LOGGING"), "\"", "", -1)
+	pixelFormat = strings.Replace(getMakeVars(ctx, "TARGET_RECOVERY_PIXEL_FORMAT"), "\"", "", -1)
 	switch pixelFormat {
 	case "ABGR_8888":
 		cflags = append(cflags, "-DRECOVERY_ABGR")
@@ -107,21 +107,21 @@ func globalFlags(ctx android.BaseContext) []string {
 		break
 	}
 
-	if ctx.AConfig().Getenv("TARGET_RECOVERY_OVERSCAN_PERCENT") != "" {
-		cflags = append(cflags, "-DDOVERSCAN_PERCENT="+ctx.AConfig().Getenv("TARGET_RECOVERY_OVERSCAN_PERCENT"))
+	if getMakeVars(ctx, "TARGET_RECOVERY_OVERSCAN_PERCENT") != "" {
+		cflags = append(cflags, "-DDOVERSCAN_PERCENT="+getMakeVars(ctx, "TARGET_RECOVERY_OVERSCAN_PERCENT"))
 	} else {
 		cflags = append(cflags, "-DOVERSCAN_PERCENT=0")
 	}
 
-	if ctx.AConfig().Getenv("TW_SCREEN_BLANK_ON_BOOT") == "true" {
+	if getMakeVars(ctx, "TW_SCREEN_BLANK_ON_BOOT") == "true" {
 		cflags = append(cflags, "-DTW_SCREEN_BLANK_ON_BOOT")
 	}
 
-	if ctx.AConfig().Getenv("TW_FBIOPAN") == "true" {
+	if getMakeVars(ctx, "TW_FBIOPAN") == "true" {
 		cflags = append(cflags, "-DTW_FBIOPAN")
 	}
 
-	var tw_rotation = ctx.AConfig().Getenv("TW_ROTATION")
+	var tw_rotation = getMakeVars(ctx, "TW_ROTATION")
 	switch tw_rotation {
 	case "0":
 	case "90":
@@ -129,34 +129,34 @@ func globalFlags(ctx android.BaseContext) []string {
 	case "270":
 		cflags = append(cflags, "-DTW_ROTATION="+tw_rotation)
 	default:
-		if ctx.AConfig().Getenv("BOARD_HAS_FLIPPED_SCREEN") == "true" {
+		if getMakeVars(ctx, "BOARD_HAS_FLIPPED_SCREEN") == "true" {
 			cflags = append(cflags, "-DTW_ROTATION=180")
 		} else {
 			cflags = append(cflags, "-DTW_ROTATION=0")
 		}
 	}
 
-	if ctx.AConfig().Getenv("TW_IGNORE_MAJOR_AXIS_0") == "true" {
+	if getMakeVars(ctx, "TW_IGNORE_MAJOR_AXIS_0") == "true" {
 		cflags = append(cflags, "-DTW_IGNORE_MAJOR_AXIS_0")
 	}
 
-	if ctx.AConfig().Getenv("TW_IGNORE_MT_POSITION_0") == "true" {
+	if getMakeVars(ctx, "TW_IGNORE_MT_POSITION_0") == "true" {
 		cflags = append(cflags, "-DTW_IGNORE_MT_POSITION_0")
 	}
 
-	if ctx.AConfig().Getenv("TW_IGNORE_ABS_MT_TRACKING_ID") == "true" {
+	if getMakeVars(ctx, "TW_IGNORE_ABS_MT_TRACKING_ID") == "true" {
 		cflags = append(cflags, "-DTW_IGNORE_ABS_MT_TRACKING_ID")
 	}
 
-	if ctx.AConfig().Getenv("TW_INPUT_BLACKLIST") != "" {
-		cflags = append(cflags, "-DTW_INPUT_BLACKLIST="+ctx.AConfig().Getenv("TW_INPUT_BLACKLIST"))
+	if getMakeVars(ctx, "TW_INPUT_BLACKLIST") != "" {
+		cflags = append(cflags, "-DTW_INPUT_BLACKLIST="+getMakeVars(ctx, "TW_INPUT_BLACKLIST"))
 	}
 
-	if ctx.AConfig().Getenv("TW_WHITELIST_INPUT") != "" {
-		cflags = append(cflags, "-DWHITELIST_INPUT="+ctx.AConfig().Getenv("TW_WHITELIST_INPUT"))
+	if getMakeVars(ctx, "TW_WHITELIST_INPUT") != "" {
+		cflags = append(cflags, "-DWHITELIST_INPUT="+getMakeVars(ctx, "TW_WHITELIST_INPUT"))
 	}
 
-	if ctx.AConfig().Getenv("TW_HAPTICS_TSPDRV") == "true" {
+	if getMakeVars(ctx, "TW_HAPTICS_TSPDRV") == "true" {
 		cflags = append(cflags, "-DTW_HAPTICS_TSPDRV")
 	}
 
@@ -166,7 +166,7 @@ func globalFlags(ctx android.BaseContext) []string {
 func globalSrcs(ctx android.BaseContext) []string {
 	var srcs []string
 
-	if ctx.AConfig().Getenv("TW_TARGET_USES_QCOM_BSP") == "true" {
+	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
 		srcs = append(srcs, "graphics_overlay.cpp")
 	}
 
@@ -181,7 +181,7 @@ func globalSrcs(ctx android.BaseContext) []string {
 		srcs = append(srcs, "graphics_drm.cpp")
 	}
 
-	if ctx.AConfig().Getenv("TW_HAPTICS_TSPDRV") == "true" {
+	if getMakeVars(ctx, "TW_HAPTICS_TSPDRV") == "true" {
 		srcs = append(srcs, "tspdrv.cpp")
 	}
 	return srcs
@@ -190,25 +190,25 @@ func globalSrcs(ctx android.BaseContext) []string {
 func globalIncludes(ctx android.BaseContext) []string {
 	var includes []string
 
-	if ctx.AConfig().Getenv("TW_INCLUDE_CRYPTO") != "" {
+	if getMakeVars(ctx, "TW_INCLUDE_CRYPTO") != "" {
 		includes = append(includes, "bootable/recovery/crypto/fscrypt")
 	}
 
-	if ctx.AConfig().Getenv("TW_TARGET_USES_QCOM_BSP") == "true" {
-		if ctx.AConfig().Getenv("TARGET_PREBUILT_KERNEL") != "" {
-			includes = append(includes, ctx.AConfig().Getenv("TARGET_OUT_INTERMEDIATES")+"/KERNEL_OBJ/usr/include")
+	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
+		if getMakeVars(ctx, "TARGET_PREBUILT_KERNEL") != "" {
+			includes = append(includes, getMakeVars(ctx, "TARGET_OUT_INTERMEDIATES")+"/KERNEL_OBJ/usr/include")
 		} else {
-			if ctx.AConfig().Getenv("TARGET_CUSTOM_KERNEL_HEADERS") != "" {
+			if getMakeVars(ctx, "TARGET_CUSTOM_KERNEL_HEADERS") != "" {
 				includes = append(includes, "bootable/recovery/minuitwrp")
 			} else {
-				includes = append(includes, ctx.AConfig().Getenv("TARGET_CUSTOM_KERNEL_HEADERS"))
+				includes = append(includes, getMakeVars(ctx, "TARGET_CUSTOM_KERNEL_HEADERS"))
 			}
 		}
 	} else {
 		includes = append(includes, "bootable/recovery/minuitwrp")
 	}
 
-	if ctx.AConfig().Getenv("TW_INCLUDE_JPEG") != "" {
+	if getMakeVars(ctx, "TW_INCLUDE_JPEG") != "" {
 		includes = append(includes, "external/jpeg")
 	}
 
@@ -240,12 +240,12 @@ func globalStaticLibs(ctx android.BaseContext) []string {
 func globalSharedLibs(ctx android.BaseContext) []string {
 	var sharedLibs []string
 
-	if ctx.AConfig().Getenv("TW_SUPPORT_INPUT_1_2_HAPTICS") == "true" {
+	if getMakeVars(ctx, "TW_SUPPORT_INPUT_1_2_HAPTICS") == "true" {
 		sharedLibs = append(sharedLibs, "android.hardware.vibrator@1.2")
 		sharedLibs = append(sharedLibs, "libhidlbase")
 	}
 
-	if ctx.AConfig().Getenv("TW_INCLUDE_JPEG") != "" {
+	if getMakeVars(ctx, "TW_INCLUDE_JPEG") != "" {
 		sharedLibs = append(sharedLibs, "libjpeg")
 	}
 	return sharedLibs
@@ -254,8 +254,8 @@ func globalSharedLibs(ctx android.BaseContext) []string {
 func globalRequiredModules(ctx android.BaseContext) []string {
 	var requiredModules []string
 
-	if ctx.AConfig().Getenv("TARGET_PREBUILT_KERNEL") != "" {
-		var kernelDir = ctx.AConfig().Getenv("TARGET_OUT_INTERMEDIATES") + ")/KERNEL_OBJ/usr"
+	if getMakeVars(ctx, "TARGET_PREBUILT_KERNEL") != "" {
+		var kernelDir = getMakeVars(ctx, "TARGET_OUT_INTERMEDIATES") + ")/KERNEL_OBJ/usr"
 		requiredModules = append(requiredModules, kernelDir)
 	}
 	return requiredModules

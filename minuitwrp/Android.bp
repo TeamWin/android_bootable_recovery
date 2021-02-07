@@ -7,7 +7,8 @@ bootstrap_go_package {
         "soong-cc"
     ],
     srcs: [
-        "libminuitwrp_defaults.go"
+        "libminuitwrp_defaults.go",
+        "../soong/makevars.go"
     ],
     pluginFor: ["soong_build"]
 }
@@ -42,17 +43,17 @@ cc_library_shared {
         "events.cpp"
     ],
     shared_libs: [
-        "libft2",
-        "libz",
-        "libc",
-        "libcutils",
-        "libpng",
-        "libutils",
+        "libft2", 
+        "libz", 
+        "libc", 
+        "libcutils", 
+        "libpng", 
+        "libutils", 
         "libc++",
         "libcutils",
         "liblog",
         "libbase",
-        "libsync"
+        "libsync" 
     ],
     static_libs: ["libpixelflinger_twrp"]
 }
