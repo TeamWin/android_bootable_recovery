@@ -1,4 +1,4 @@
-package liba_defaults
+package twrp
 
 import (
 	"android/soong/android"
@@ -8,7 +8,7 @@ import (
 func globalFlags(ctx android.BaseContext) []string {
 	var cflags []string
 
-	if ctx.AConfig().Getenv("AB_OTA_UPDATER") == "true" {
+	if getMakeVars(ctx, "AB_OTA_UPDATER") == "true" {
 		cflags = append(cflags, "-DAB_OTA_UPDATER=1")
 	}
 	return cflags
@@ -17,8 +17,8 @@ func globalFlags(ctx android.BaseContext) []string {
 func globalSrcs(ctx android.BaseContext) []string {
 	var srcs []string
 
-	if ctx.AConfig().Getenv("TWRP_CUSTOM_KEYBOARD") != "" {
-		srcs = append(srcs, ctx.AConfig().Getenv("TWRP_CUSTOM_KEYBOARD"))
+	if getMakeVars(ctx, "TWRP_CUSTOM_KEYBOARD") != "" {
+		srcs = append(srcs, getMakeVars(ctx, "TWRP_CUSTOM_KEYBOARD"))
 	}
 
 	return srcs
@@ -27,7 +27,7 @@ func globalSrcs(ctx android.BaseContext) []string {
 func globalIncludes(ctx android.BaseContext) []string {
 	var includes []string
 
-	if ctx.AConfig().Getenv("TW_INCLUDE_CRYPTO") != "" {
+	if getMakeVars(ctx, "TW_INCLUDE_CRYPTO") != "" {
 		includes = append(includes, "bootable/recovery/crypto/fscrypt")
 	}
 
