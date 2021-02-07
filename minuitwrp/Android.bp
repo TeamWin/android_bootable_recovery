@@ -7,7 +7,8 @@ bootstrap_go_package {
         "soong-cc"
     ],
     srcs: [
-        "libminuitwrp_defaults.go"
+        "libminuitwrp_defaults.go",
+        "../soong/makevars.go"
     ],
     pluginFor: ["soong_build"]
 }
