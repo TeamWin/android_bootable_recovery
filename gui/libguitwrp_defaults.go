@@ -1,68 +1,235 @@
-package libgui_defaults
+package twrp
 
 import (
 	"android/soong/android"
 	"android/soong/cc"
+	"fmt"
+	"os"
+	"path"
+	"strconv"
+	"strings"
 )
+
+func printThemeWarning(theme string) {
+	if theme == "" {
+		theme = "not set"
+	}
+	themeWarning := "***************************************************************************\n"
+	themeWarning += "Could not find ui.xml for TW_THEME: "
+	themeWarning += theme
+	themeWarning += "\nSet TARGET_SCREEN_WIDTH and TARGET_SCREEN_HEIGHT to automatically select\n"
+	themeWarning += "an appropriate theme, or set TW_THEME to one of the following:\n"
+	themeWarning += "landscape_hdpi landscape_mdpi portrait_hdpi portrait_mdpi watch_mdpi\n"
+	themeWarning += "****************************************************************************\n"
+	themeWarning += "(theme selection failed; exiting)\n"
+
+	fmt.Printf(themeWarning)
+}
+
+func printCustomThemeWarning(theme string, location string) {
+	customThemeWarning := "****************************************************************************\n"
+	customThemeWarning += "Could not find ui.xml for TW_CUSTOM_THEME: "
+	customThemeWarning += theme + "\n"
+	customThemeWarning += "Expected to find custom theme's ui.xml at: "
+	customThemeWarning += location
+	customThemeWarning += "Please fix this or set TW_THEME to one of the following:\n"
+	customThemeWarning += "landscape_hdpi landscape_mdpi portrait_hdpi portrait_mdpi watch_mdpi\n"
+	customThemeWarning += "****************************************************************************\n"
+	customThemeWarning += "(theme selection failed; exiting)\n"
+	fmt.Printf(customThemeWarning)
+}
+
+func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) {
+	outDir := ctx.Config().Getenv("OUT")
+	twRes := outDir + "/recovery/root/twres/"
+	recoveryDir := getRecoveryAbsDir(ctx)
+	theme := determineTheme(ctx)
+	for idx, dir := range dirs {
+		_ = idx
+		dirToCopy := ""
+		destDir := twRes + path.Base(dir)
+		baseDir := path.Base(dir)
+		if baseDir == theme {
+			destDir = twRes
+			dirToCopy = recoveryDir + dir
+		} else {
+			dirToCopy = recoveryDir + dir
+		}
+		copyDir(dirToCopy, destDir)
+	}
+	for idx, file := range files {
+		_ = idx
+		fileToCopy := recoveryDir + file
+		fileDest := twRes + path.Base(file)
+		copyFile(fileToCopy, fileDest)
+	}
+}
+
+func copyCustomTheme(ctx android.BaseContext, customTheme string) {
+	outDir := ctx.Config().Getenv("OUT")
+	twRes := outDir + "/recovery/root/twres/"
+	fileDest := twRes + path.Base(customTheme)
+	fileToCopy := fmt.Sprintf("%s%s", getBuildAbsDir(ctx), customTheme)
+	copyFile(fileToCopy, fileDest)
+}
+
+func determineTheme(ctx android.BaseContext) string {
+	guiWidth := 0
+	guiHeight := 0
+	if getMakeVars(ctx, "TW_CUSTOM_THEME") == "" {
+		if getMakeVars(ctx, "TW_THEME") == "" {
+			if getMakeVars(ctx, "DEVICE_RESOLUTION") == "" {
+				width, err := strconv.Atoi(getMakeVars(ctx, "TARGET_SCREEN_WIDTH"))
+				if err == nil {
+					guiWidth = width
+				}
+				height, err := strconv.Atoi(getMakeVars(ctx, "TARGET_SCREEN_HEIGHT"))
+				if err == nil {
+					guiHeight = height
+				}
+			} else {
+				deviceRes := getMakeVars(ctx, "DEVICE_RESOLUTION")
+				width, err := strconv.Atoi(strings.Split(deviceRes, "x")[0])
+				if err == nil {
+					guiWidth = width
+				}
+				height, err := strconv.Atoi(strings.Split(deviceRes, "x")[1])
+				if err == nil {
+					guiHeight = height
+				}
+			}
+		}
+		if guiWidth > 100 {
+			if guiHeight > 100 {
+				if guiWidth > guiHeight {
+					if guiWidth > 1280 {
+						return "landscape_hdpi"
+					} else {
+						return "landscape_mdpi"
+					}
+				} else if guiWidth < guiHeight {
+					if guiWidth > 720 {
+						return "portrait_hdpi"
+					} else {
+						return "portrait_mdpi"
+					}
+				} else if guiWidth == guiHeight {
+					return "watch_mdpi"
+				}
+			}
+		}
+	}
+
+	return getMakeVars(ctx, "TW_THEME")
+}
+
+func copyTheme(ctx android.BaseContext) bool {
+	var directories []string
+	var files []string
+	var customThemeLoc string
+	localPath := ctx.ModuleDir()
+	directories = append(directories, "gui/theme/common/fonts/")
+	directories = append(directories, "gui/theme/common/languages/")
+	if getMakeVars(ctx, "TW_EXTRA_LANGUAGES") == "true" {
+		directories = append(directories, "gui/theme/extra-languages/fonts/")
+		directories = append(directories, "gui/theme/extra-languages/languages/")
+	}
+	var theme = determineTheme(ctx)
+	directories = append(directories, "gui/theme/"+theme)
+	themeXML := fmt.Sprintf("gui/theme/common/%s.xml", strings.Split(theme, "_")[0])
+	files = append(files, themeXML)
+	if getMakeVars(ctx, "TW_CUSTOM_THEME") == "" {
+		defaultTheme := fmt.Sprintf("%s/theme/%s/ui.xml", localPath, theme)
+		if android.ExistentPathForSource(ctx, defaultTheme).Valid() {
+			fullDefaultThemePath := fmt.Sprintf("gui/theme/%s/ui.xml", theme)
+			files = append(files, fullDefaultThemePath)
+		} else {
+			printThemeWarning(theme)
+			return false
+		}
+	} else {
+		customThemeLoc = getMakeVars(ctx, "TW_CUSTOM_THEME")
+		if android.ExistentPathForSource(ctx, customThemeLoc).Valid() {
+		} else {
+			printCustomThemeWarning(customThemeLoc, getMakeVars(ctx, "TW_CUSTOM_THEME"))
+			return false
+		}
+	}
+	copyThemeResources(ctx, directories, files)
+	if customThemeLoc != "" {
+		copyCustomTheme(ctx, customThemeLoc)
+	}
+	return true
+}
 
 func globalFlags(ctx android.BaseContext) []string {
 	var cflags []string
 
-	if ctx.AConfig().Getenv("TW_DELAY_TOUCH_INIT_MS") != "" {
-		cflags = append(cflags, "-DTW_DELAY_TOUCH_INIT_MS="+ctx.AConfig().Getenv("TW_DELAY_TOUCH_INIT_MS"))
+	if getMakeVars(ctx, "TW_DELAY_TOUCH_INIT_MS") != "" {
+		cflags = append(cflags, "-DTW_DELAY_TOUCH_INIT_MS="+getMakeVars(ctx, "TW_DELAY_TOUCH_INIT_MS"))
 	}
 
-	if ctx.AConfig().Getenv("TW_EVENT_LOGGING") == "true" {
+	if getMakeVars(ctx, "TW_EVENT_LOGGING") == "true" {
 		cflags = append(cflags, "-D_EVENT_LOGGING")
 	}
 
-	if ctx.AConfig().Getenv("TW_USE_KEY_CODE_TOUCH_SYNC") != "" {
-		cflags = append(cflags, "-DTW_USE_KEY_CODE_TOUCH_SYNC="+ctx.AConfig().Getenv("TW_USE_KEY_CODE_TOUCH_SYNC"))
+	if getMakeVars(ctx, "TW_USE_KEY_CODE_TOUCH_SYNC") != "" {
+		cflags = append(cflags, "DTW_USE_KEY_CODE_TOUCH_SYNC="+getMakeVars(ctx, "TW_USE_KEY_CODE_TOUCH_SYNC"))
 	}
 
 	if ctx.AConfig().Getenv("TW_SCREEN_BLANK_ON_BOOT") != "" {
 		cflags = append(cflags, "-DTW_SCREEN_BLANK_ON_BOOT")
 	}
 
-	if ctx.AConfig().Getenv("TW_OZIP_DECRYPT_KEY") != "" {
-		cflags = append(cflags, "-DTW_OZIP_DECRYPT_KEY=\""+ctx.AConfig().Getenv("TW_OZIP_DECRYPT_KEY")+"\"")
+	if getMakeVars(ctx, "TW_OZIP_DECRYPT_KEY") != "" {
+		cflags = append(cflags, "-DTW_OZIP_DECRYPT_KEY=\""+getMakeVars(ctx, "TW_OZIP_DECRYPT_KEY")+"\"")
 	} else {
 		cflags = append(cflags, "-DTW_OZIP_DECRYPT_KEY=0")
 	}
 
-	if ctx.AConfig().Getenv("TW_NO_SCREEN_BLANK") != "" {
+	if getMakeVars(ctx, "TW_NO_SCREEN_BLANK") != "" {
 		cflags = append(cflags, "-DTW_NO_SCREEN_BLANK")
 	}
 
-	if ctx.AConfig().Getenv("TW_NO_SCREEN_TIMEOUT") != "" {
+	if getMakeVars(ctx, "TW_NO_SCREEN_TIMEOUT") != "" {
 		cflags = append(cflags, "-DTW_NO_SCREEN_TIMEOUT")
 	}
 
-	if ctx.AConfig().Getenv("TW_OEM_BUILD") != "" {
+	if getMakeVars(ctx, "TW_OEM_BUILD") != "" {
 		cflags = append(cflags, "-DTW_OEM_BUILD")
 	}
 
-	if ctx.AConfig().Getenv("TW_X_OFFSET") != "" {
-		cflags = append(cflags, "-DTW_X_OFFSET="+ctx.AConfig().Getenv("TW_X_OFFSET"))
+	if getMakeVars(ctx, "TW_X_OFFSET") != "" {
+		cflags = append(cflags, "-DTW_X_OFFSET="+getMakeVars(ctx, "TW_X_OFFSET"))
 	}
 
-	if ctx.AConfig().Getenv("TW_Y_OFFSET") != "" {
-		cflags = append(cflags, "-DTW_Y_OFFSET="+ctx.AConfig().Getenv("TW_Y_OFFSET"))
+	if getMakeVars(ctx, "TW_Y_OFFSET") != "" {
+		cflags = append(cflags, "-DTW_Y_OFFSET="+getMakeVars(ctx, "TW_Y_OFFSET"))
 	}
 
-	if ctx.AConfig().Getenv("TW_W_OFFSET") != "" {
-		cflags = append(cflags, "-DTW_W_OFFSET="+ctx.AConfig().Getenv("TW_W_OFFSET"))
+	if getMakeVars(ctx, "TW_W_OFFSET") != "" {
+		cflags = append(cflags, "-DTW_W_OFFSET="+getMakeVars(ctx, "TW_W_OFFSET"))
 	}
 
-	if ctx.AConfig().Getenv("TW_H_OFFSET") != "" {
-		cflags = append(cflags, "-DTW_H_OFFSET="+ctx.AConfig().Getenv("TW_H_OFFSET"))
+	if getMakeVars(ctx, "TW_H_OFFSET") != "" {
+		cflags = append(cflags, "-DTW_H_OFFSET="+getMakeVars(ctx, "TW_H_OFFSET"))
 	}
 
-	if ctx.AConfig().Getenv("TW_ROUND_SCREEN") == "true" {
+	if getMakeVars(ctx, "TW_ROUND_SCREEN") == "true" {
 		cflags = append(cflags, "-DTW_ROUND_SCREEN")
 	}
 
-	cflags = append(cflags, "-DTWRES=\""+ctx.AConfig().Getenv("TWRES_PATH")+"\"")
+	if getMakeVars(ctx, "TW_EXCLUDE_NANO") == "true" {
+		cflags = append(cflags, "-DTW_EXCLUDE_NANO")
+	}
+
+	if getMakeVars(ctx, "AB_OTA_UPDATER") == "true" {
+		cflags = append(cflags, "-DAB_OTA_UPDATER=1")
+	}
+
+	if getMakeVars(ctx, "TW_SCREEN_BLANK_ON_BOOT") == "true" {
+		cflags = append(cflags, "-DTW_NO_SCREEN_BLANK")
+	}
 
 	return cflags
 }
@@ -70,8 +237,8 @@ func globalFlags(ctx android.BaseContext) []string {
 func globalSrcs(ctx android.BaseContext) []string {
 	var srcs []string
 
-	if ctx.AConfig().Getenv("TWRP_CUSTOM_KEYBOARD") != "" {
-		srcs = append(srcs, ctx.AConfig().Getenv("TWRP_CUSTOM_KEYBOARD"))
+	if getMakeVars(ctx, "TWRP_CUSTOM_KEYBOARD") != "" {
+		srcs = append(srcs, getMakeVars(ctx, "TWRP_CUSTOM_KEYBOARD"))
 	} else {
 		srcs = append(srcs, "hardwarekeyboard.cpp")
 	}
@@ -81,10 +248,9 @@ func globalSrcs(ctx android.BaseContext) []string {
 func globalIncludes(ctx android.BaseContext) []string {
 	var includes []string
 
-	if ctx.AConfig().Getenv("TW_INCLUDE_CRYPTO") != "" {
+	if getMakeVars(ctx, "TW_INCLUDE_CRYPTO") != "" {
 		includes = append(includes, "bootable/recovery/crypto/fscrypt")
 	}
-
 	return includes
 }
 
@@ -108,6 +274,9 @@ func libGuiDefaults(ctx android.LoadHookContext) {
 	i := globalIncludes(ctx)
 	p.Include_dirs = i
 	ctx.AppendProperties(p)
+	if copyTheme(ctx) == false {
+		os.Exit(-1)
+	}
 }
 
 func init() {
