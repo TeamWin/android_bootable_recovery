@@ -23,7 +23,8 @@ bootstrap_go_package {
         "soong-cc"
     ],
     srcs: [
-        "libaosprecovery_defaults.go"
+        "libaosprecovery_defaults.go",
+        "soong/makevars.go"
     ],
     pluginFor: ["soong_build"]
 }
