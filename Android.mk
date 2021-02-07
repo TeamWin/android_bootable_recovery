@@ -409,7 +409,7 @@ TWRP_REQUIRED_MODULES += \
     vendor_hwservice_contexts \
     minadbd \
     twrpbu \
-    adbd_system_api_recovery
+    adbd_system_api_recovery \
     me.twrp.twrpapp.apk \
     privapp-permissions-twrpapp.xml
 
