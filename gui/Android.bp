@@ -7,7 +7,9 @@ bootstrap_go_package {
         "soong-cc"
     ],
     srcs: [
-        "libguitwrp_defaults.go"
+        "libguitwrp_defaults.go",
+        "../soong/copy.go",
+        "../soong/makevars.go"
     ],
     pluginFor: ["soong_build"]
 }
@@ -22,7 +24,8 @@ cc_library_static {
     cflags: [
         "-fno-strict-aliasing", 
         "-Wno-implicit-fallthrough",
-        "-D_USE_SYSTEM_ZIPARCHIVE"
+        "-D_USE_SYSTEM_ZIPARCHIVE",
+        "-DTWRES=\"/twres/\""
     ],
     include_dirs: [
         "bootable/recovery/crypto/scrypt/lib/util",
