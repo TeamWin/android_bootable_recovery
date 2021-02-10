@@ -240,6 +240,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(uninstalltwrpsystemapp);
 		ADD_ACTION(repackimage);
 		ADD_ACTION(fixabrecoverybootloop);
+		ADD_ACTION(updatesystemdetails);
 	}
 
 	// First, get the action
@@ -2235,5 +2236,14 @@ int GUIAction::enableadb(std::string arg __unused) {
 int GUIAction::enablefastboot(std::string arg __unused) {
 	android::base::SetProperty("sys.usb.config", "none");
 	android::base::SetProperty("sys.usb.config", "fastboot");
+	return 0;
+}
+
+int GUIAction::updatesystemdetails(std::string arg __unused)
+{
+	int op_status = 0;
+	operation_start("Update System Details");
+	PartitionManager.Update_System_Details();
+	operation_end(op_status);
 	return 0;
 }
