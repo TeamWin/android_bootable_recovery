@@ -207,6 +207,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(enableadb);
 		ADD_ACTION(enablefastboot);
 		ADD_ACTION(changeterminal);
+		ADD_ACTION(updatesystemdetails);
 
 		// remember actions that run in the caller thread
 		for (mapFunc::const_iterator it = mf.begin(); it != mf.end(); ++it)
@@ -2272,5 +2273,11 @@ int GUIAction::changeterminal(std::string arg) {
 	}
 	if (res)
 		gui_changePage("terminalcommand");
+	return 0;
+}
+
+int GUIAction::updatesystemdetails(std::string arg __unused)
+{
+	PartitionManager.Update_System_Details();
 	return 0;
 }
