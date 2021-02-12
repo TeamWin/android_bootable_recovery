@@ -143,3 +143,14 @@ ifeq ($(TW_USE_TOOLBOX), true)
     LOCAL_SRC_FILES := $(LOCAL_MODULE)
     include $(BUILD_PREBUILT)
 endif
+
+ifneq ($(TW_EXCLUDE_NANO), true)
+	include $(CLEAR_VARS)
+	LOCAL_MODULE := nano.rc
+	LOCAL_MODULE_TAGS := optional
+	LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+
+	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+	include $(BUILD_PREBUILT)
+endif
