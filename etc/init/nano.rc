@@ -1,0 +1,3 @@
+on fs
+    export TERM pcansi
+	export TERMINFO /system/etc/terminfo
