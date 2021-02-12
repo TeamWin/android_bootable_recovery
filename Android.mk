@@ -409,6 +409,12 @@ TWRP_REQUIRED_MODULES += \
     tzdata_twrp
 endif
 
+ifneq ($(TW_EXCLUDE_NANO), true)
+TWRP_REQUIRED_MODULES += \
+    nano_twrp
+endif
+
+
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
     hwservicemanager \
