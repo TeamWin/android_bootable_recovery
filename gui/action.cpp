@@ -242,6 +242,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(uninstalltwrpsystemapp);
 		ADD_ACTION(repackimage);
 		ADD_ACTION(fixabrecoverybootloop);
+		ADD_ACTION(editfile);
 	}
 
 	// First, get the action
@@ -2272,5 +2273,16 @@ int GUIAction::changeterminal(std::string arg) {
 	}
 	if (res)
 		gui_changePage("terminalcommand");
+	return 0;
+}
+
+int GUIAction::editfile(std::string arg) {
+	if (term != NULL) {
+		for (uint8_t iter = 0; iter < arg.size(); iter++)
+			term->NotifyCharInput(arg.at(iter));
+		term->NotifyCharInput(13);
+	}
+	else
+		LOGINFO("error\n");
 	return 0;
 }

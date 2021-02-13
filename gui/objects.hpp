@@ -374,6 +374,7 @@ protected:
 	int enableadb(std::string arg);
 	int enablefastboot(std::string arg);
 	int changeterminal(std::string arg);
+	int editfile(std::string arg);
 	int simulate;
 };
 
