@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1613179608 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1613179612-52D5709C0401545FBB42DF8CA750903D4496607A\n\n0000000000000000000000000000000000000000 6a2ed35439fa874f45899cdcdf59d92eeb8ba43b refs/for/android-10.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmAnKtgACgkQAqwBp3le\n7rhtzxAAwqnHK8t/R6+A80svlduehIdDU79lUync9vFszwhX8w1pNVAbqLd1B93Z\nmfGSeRR3gpSY39p3tLoTz4M47Giy6VKrmdeCCHlIMiI/styivG5wuKokZ1xHbsdp\nO+/hk1lIBfDnImQkZG909oX7JdoSEItkuG3aOwJnsftMg2fXc6efM7t0M8iWp9W9\nHpELWQw4YBs4xKvb7LzmdWuug3I5VZREGD0GfXp0RskLlzNtW9mH88xNDzbdL9gU\ngnEImtsH5NRRxNUyaxqcgsPhsCM6Z4xvA505L4CTeVrG3tKwxZ3Req4MIlUjvjB3\nibwH+MEfwOzFu4xYY48puCaEeLqb1J+3KC9pUpBxvJrb+HrZXKjvVxSqsBHYq3MF\nvquOA4jwe3zWq5dzve1htw32Cgy5ptEgtR8DVD7YAPeaVt0X6trGc24a4Hqcm47W\nRzo4fAs8w7HE0OUpdPN4uZPxyuK/155eioA4U8v4AkFJUvMHAMRZpJfWAP1IMHS1\ntazIstDGUEddXvajvfBnOdvgLQR653dcM/mrZwjANR2WnqtNmRN15p+/IPQsP6BN\nB2E8LiWlLBhkdPGFHfZ/mQFYTdjJ0ME1YMVdFRwx84aUSKKLdgVkZb++AJM6XT36\np5oK8RIgAdPzXR3XcZPu8safcQJElG+q6luX4UK0sjznFhl2L50\u003d\n\u003d98I7\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae72a6e_1f995a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-13T01:29:55Z",
+      "side": 1,
+      "message": "Should be good to go. Is working for me standalone, and with the File Manager patch.",
+      "revId": "597e8ea10c6420d368aa77e84e211d5428613bfd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
