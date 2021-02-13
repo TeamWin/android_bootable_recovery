@@ -33,6 +33,24 @@
       "message": "This seems to be working fine, although I don\u0027t have a zip that requires the check to be skipped.",
       "revId": "f6c7f89eafe8cb1f94309d3a435296082639104b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e84c08c_70ff030e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2021-02-13T10:26:27Z",
+      "side": 1,
+      "message": "mauronofrio can check on his realme devices",
+      "parentUuid": "4d8acebc_3ab628dd",
+      "revId": "f6c7f89eafe8cb1f94309d3a435296082639104b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
