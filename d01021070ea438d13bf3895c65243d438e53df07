@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d1bba9_081dc765",
+        "filename": "data.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Can we remove the underscore to Retain TitleCase only?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ff1e57_eeb250c0",
+        "filename": "data.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Can this have a getter/setter and stay protected?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c010e3_c7497a46",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2231,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Would you mind adding spaces around () in the if statements and {} brackets for readability?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16bda00d_16d9de0d",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Is there any way we can use system calls instead to move the folder?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5c2e05_cc687bfc",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Can we use int TWFunc::Recursive_Mkdir(string Path)?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc82421_c4e506ff",
+        "filename": "gui/theme/common/watch.xml",
+        "patchSetId": 12
+      },
+      "lineNbr": 4228,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Has anyone tested this on a watch?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04039744_5b1d2832",
+        "filename": "twrp-functions.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T22:10:49Z",
+      "side": 1,
+      "message": "Can this be Check_For_Twrp_Folder()?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
