@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9962a82d_1dd5a63c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-14T23:14:34Z",
+      "side": 1,
+      "message": "When I reset defaults I should have my backups moved from the custom folder to the TWRP directory. Thanks for your time and effort on this patch.",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d1bba9_081dc765",
