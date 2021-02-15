@@ -71,6 +71,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be3ac301_cccf231d",
+        "filename": "data.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T11:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "827cefa8_a5f00ea2",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18ff1e57_eeb250c0",
@@ -141,6 +159,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "817f6f15_1630cd27",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2231,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T11:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da196417_d494a51a",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16bda00d_16d9de0d",
@@ -207,6 +243,24 @@
       "side": 1,
       "message": "I never used that. I can try. If it works like mkdir -p then I will replace this one with functional one",
       "parentUuid": "7e5c2e05_cc687bfc",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f329ab_84f3a7ca",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T11:30:45Z",
+      "side": 1,
+      "message": "Yes It works. I replaced that function to Recursive mkdir one",
+      "parentUuid": "5f173990_fdfb41dd",
       "revId": "d01021070ea438d13bf3895c65243d438e53df07",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
