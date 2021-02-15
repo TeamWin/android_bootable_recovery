@@ -34,6 +34,24 @@
       "message": "This introduces quite a delay to the start of a back-up on my Samsung devices. After swiping to start the back-up, 10 to 15 seconds pass before it actually starts. During that time, pressing the Cancel button also has no effect.\n\nI wonder if this is somehow related to the fact that none of my devices is encrypted.",
       "revId": "dac6facebaa90a9e0504afdde8b5b33d59dc549b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7072eb55_289b536a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-15T18:12:07Z",
+      "side": 1,
+      "message": "Are the partition details being updated at all before that point? I thought that putting it here: https://gerrit.twrp.me/c/android_bootable_recovery/+/3423/4/twrp.cpp#80\nwould account for devices that aren\u0027t encrypted, but perhaps that isn\u0027t the case and one of the other instances needs to stay. Do you have a recovery log?",
+      "parentUuid": "729ce2b7_aee18067",
+      "revId": "dac6facebaa90a9e0504afdde8b5b33d59dc549b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
