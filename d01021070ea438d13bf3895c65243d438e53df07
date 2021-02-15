@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c68a4ab_20b0333b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T10:36:31Z",
+      "side": 1,
+      "message": "Yes it does. If user presses reset default from the TWRP Folder page then all the backups will be moved to TWRP folder. Another thing, I didn\u0027t implemented reset default in Setting page",
+      "parentUuid": "9962a82d_1dd5a63c",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d1bba9_081dc765",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-02-14T22:10:49Z",
       "side": 1,
       "message": "Can we remove the underscore to Retain TitleCase only?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827cefa8_a5f00ea2",
+        "filename": "data.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T10:36:31Z",
+      "side": 1,
+      "message": "Yes. Why Not :)",
+      "parentUuid": "16d1bba9_081dc765",
       "revId": "d01021070ea438d13bf3895c65243d438e53df07",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "730788bc_d0a5303e",
+        "filename": "data.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T10:36:31Z",
+      "side": 1,
+      "message": "Yes we can. But I don\u0027t think this variable will be used in other operations. So adding getter setter will add more code and further complexity.",
+      "parentUuid": "18ff1e57_eeb250c0",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7c010e3_c7497a46",
         "filename": "gui/action.cpp",
         "patchSetId": 12
@@ -65,6 +119,24 @@
       "writtenOn": "2021-02-14T22:10:49Z",
       "side": 1,
       "message": "Would you mind adding spaces around () in the if statements and {} brackets for readability?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da196417_d494a51a",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2231,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T10:36:31Z",
+      "side": 1,
+      "message": "Ok I will correct those formats. Actually that\u0027s how I format all functions.",
+      "parentUuid": "a7c010e3_c7497a46",
       "revId": "d01021070ea438d13bf3895c65243d438e53df07",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87424ba2_f11e3892",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T10:36:31Z",
+      "side": 1,
+      "message": "I don\u0027t know about that much. So I use shell cmd to move the folder. If you know then you can replace those in the patch",
+      "parentUuid": "16bda00d_16d9de0d",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e5c2e05_cc687bfc",
         "filename": "gui/action.cpp",
         "patchSetId": 12
@@ -99,6 +189,24 @@
       "writtenOn": "2021-02-14T22:10:49Z",
       "side": 1,
       "message": "Can we use int TWFunc::Recursive_Mkdir(string Path)?",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f173990_fdfb41dd",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-15T10:36:31Z",
+      "side": 1,
+      "message": "I never used that. I can try. If it works like mkdir -p then I will replace this one with functional one",
+      "parentUuid": "7e5c2e05_cc687bfc",
       "revId": "d01021070ea438d13bf3895c65243d438e53df07",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
