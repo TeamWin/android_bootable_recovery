@@ -34,6 +34,23 @@
       "message": "Waiting for android-9.0 version of this patchset to be updated. ",
       "revId": "185880422563aef147577cbf4778b8d30d652225",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60377fb_70b3b81f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-02-15T14:35:46Z",
+      "side": 1,
+      "message": "I\u0027m guessing that \u0027%col2_x_right\u0027 needs to be changed to \u0027%col2_x_left\u0027 for the Open Terminal Here button, but I am guessing, because it\u0027s not clear to me how exactly the left, right and center components affect placement.",
+      "revId": "185880422563aef147577cbf4778b8d30d652225",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
