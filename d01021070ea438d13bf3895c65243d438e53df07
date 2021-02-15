@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8d3470a_a4f7ec89",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-15T15:59:07Z",
+      "side": 1,
+      "message": "What about rename? https://www.codespeedy.com/move-all-the-files-from-one-directory-to-another-in-cpp/",
+      "parentUuid": "87424ba2_f11e3892",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e5c2e05_cc687bfc",
         "filename": "gui/action.cpp",
         "patchSetId": 12
