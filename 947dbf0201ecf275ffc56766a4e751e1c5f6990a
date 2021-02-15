@@ -16,6 +16,23 @@
       "message": "Updated LOGINFO to be more descriptive (I don\u0027t think this is something we need to show up in the console, so LOGINFO is fine) and fixed the typo in landscape.xml that was causing the button to be misaligned.",
       "revId": "947dbf0201ecf275ffc56766a4e751e1c5f6990a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c28c76_a9a7d8e8",
+        "filename": "gui/action.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-15T18:46:11Z",
+      "side": 1,
+      "message": "can these comments be removed?",
+      "revId": "947dbf0201ecf275ffc56766a4e751e1c5f6990a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
