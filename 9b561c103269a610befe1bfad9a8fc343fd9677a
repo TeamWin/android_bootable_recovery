@@ -17,6 +17,24 @@
       "message": "Maybe this LOGINFO should be used or updated to describe an error with the appropriate facility?",
       "revId": "9b561c103269a610befe1bfad9a8fc343fd9677a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb0bc03_fc70384c",
+        "filename": "gui/action.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2250,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-15T17:04:31Z",
+      "side": 1,
+      "message": "I have no idea what this error should say. I believe that was part of the original cherry-pick, so I\u0027m not sure what exactly the issue is at this point. I guess the error should be \"Unable to switch to Terminal\" or something like that? Not sure if there should be a different return for that or not, either.",
+      "parentUuid": "905b7b3b_aec0c3d1",
+      "revId": "9b561c103269a610befe1bfad9a8fc343fd9677a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
