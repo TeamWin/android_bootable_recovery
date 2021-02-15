@@ -16,6 +16,23 @@
       "message": "Removed commented code.",
       "revId": "70d83163e8367e209e965f437c4eb5a67e1050f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8277050f_c4233293",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-02-15T20:33:14Z",
+      "side": 1,
+      "message": "Patchset 14 caused me to get stuck on the TWRP splash screen. I see there\u0027s already a patchset 15. Is this the fix?",
+      "revId": "70d83163e8367e209e965f437c4eb5a67e1050f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
