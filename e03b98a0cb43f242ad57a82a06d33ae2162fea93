@@ -16,6 +16,24 @@
       "message": "Still getting an error when trying to rebase.",
       "revId": "e03b98a0cb43f242ad57a82a06d33ae2162fea93",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f96778_405d7486",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 414
+      },
+      "writtenOn": "2021-02-15T14:56:27Z",
+      "side": 1,
+      "message": "is it now fine? I rebased on the parent change and now it tells me it\u0027s up to date.",
+      "parentUuid": "b0877e68_739605e8",
+      "revId": "e03b98a0cb43f242ad57a82a06d33ae2162fea93",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
