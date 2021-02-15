@@ -250,6 +250,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aed18d3e_6806c6af",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-15T23:43:14Z",
+      "side": 1,
+      "message": "It should support OTG and external media because of partition.cpp:539:                      Storage_Path \u003d EXPAND(TW_EXTERNAL_STORAGE_PATH);",
+      "parentUuid": "350e87f9_3ed00a7b",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf31f46c_db52cbae",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-15T23:43:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "350e87f9_3ed00a7b",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e5c2e05_cc687bfc",
         "filename": "gui/action.cpp",
         "patchSetId": 12
