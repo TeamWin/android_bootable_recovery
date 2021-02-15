@@ -17,6 +17,23 @@
       "message": "Updated to use the existing \"refreshsizes\" action on Cancel button press. Ready for review. Tested and working for me.",
       "revId": "dac6facebaa90a9e0504afdde8b5b33d59dc549b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729ce2b7_aee18067",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-02-15T14:19:53Z",
+      "side": 1,
+      "message": "This introduces quite a delay to the start of a back-up on my Samsung devices. After swiping to start the back-up, 10 to 15 seconds pass before it actually starts. During that time, pressing the Cancel button also has no effect.\n\nI wonder if this is somehow related to the fact that none of my devices is encrypted.",
+      "revId": "dac6facebaa90a9e0504afdde8b5b33d59dc549b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
