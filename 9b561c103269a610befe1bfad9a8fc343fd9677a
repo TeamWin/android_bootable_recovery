@@ -2,6 +2,23 @@
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1610123647 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1610123651-1E8991B48E0697E9E6F79329AE2851C4A694C593\n\n0000000000000000000000000000000000000000 9b561c103269a610befe1bfad9a8fc343fd9677a refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAl/4iX8ACgkQAqwBp3le\n7rhZfg/+IZOLURKLR/6yuNqB4jD6KjLw2ggwovTjA4OeISEwfaQSR2gheVswFyId\nHkgRKZ9JpltZoCn3sZ3XlC0cUYoMRvMQE+Fej5VEZ2gwdsBYraxzFReK7YyeH4Gn\n8ExEWe4Fi+/JCg/TZIk1O1fRAwF0eo7pTS19DVVkRwSvk2GvhNVS9bVDar7HzyDm\nE16NdqwBIZo0FUrrZyR3h0/jT/lrfszKjY2hSRDHh9qiVrtiEazyDRDhbP5FQxau\ndOl9SxM9M/sZMCeHcqx8ftSpaJ3MjtP6GreqgFp0WGzaPI8Wa10M0Az7pW7eCWbO\nVwee5Nqg/FcZTFKvR5AIirrRIF4Bep5OD5p2d6FhBoF5lIgUj1FwU/I+TgL7O9FN\n1KI859K9Phf2NEo0g5Y1qTurVIP+a9IF/6xf6ZGT/wYNs5eO7LimYeEPSr3AKfD/\neIDZF2wdjPU0O/Ut2P2qzOuIoStMXi/oSKA8o3hdjlM4odBXIBSG0q3tvihF8lMT\nBGHFitdletaZqQWcwMVpF0wJPAAXs0vzeuMXiYA9GcC2lLQjnioTJQqPM6ei8K3B\nsggB9XWWjW/z48AEe8USkv0T+3VKv9vDMUOew6/THaO9nDX8qHxjVh5QkttvPhoL\n/sT7cKKm+L1SedmpfAVF7BokcQz/u7LEC/5P/vNgocOtbagiA84\u003d\n\u003dIOT3\n-----END PGP SIGNATURE-----\n",
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d460c9c2_a0f320e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-15T17:56:46Z",
+      "side": 1,
+      "message": "This might have to be abandoned and re-cherry picked when the parent from the android-10 branch is completed.",
+      "revId": "9b561c103269a610befe1bfad9a8fc343fd9677a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "905b7b3b_aec0c3d1",
@@ -33,6 +50,24 @@
       "side": 1,
       "message": "I have no idea what this error should say. I believe that was part of the original cherry-pick, so I\u0027m not sure what exactly the issue is at this point. I guess the error should be \"Unable to switch to Terminal\" or something like that? Not sure if there should be a different return for that or not, either.",
       "parentUuid": "905b7b3b_aec0c3d1",
+      "revId": "9b561c103269a610befe1bfad9a8fc343fd9677a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce4cc69_d6e6bef9",
+        "filename": "gui/action.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2250,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-15T17:56:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbb0bc03_fc70384c",
       "revId": "9b561c103269a610befe1bfad9a8fc343fd9677a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
