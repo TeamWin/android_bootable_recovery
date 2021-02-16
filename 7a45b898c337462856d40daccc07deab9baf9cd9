@@ -16,6 +16,23 @@
       "message": "I\u0027m a little late to trying this on older trees, but it breaks the build in the minimal 6.0 tree.",
       "revId": "7a45b898c337462856d40daccc07deab9baf9cd9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3184b758_893e7586",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-16T01:48:11Z",
+      "side": 1,
+      "message": "I can confirm that it does build fine in 5.1, 7.1, 8.1 \u0026 9.0. Only 6.0 seems to be missing the keymaster2 header:\n```\nbootable/recovery/crypto/fde/cryptfs.cpp:77:33: fatal error: hardware/keymaster2.h: No such file or directory\n #include \u003chardware/keymaster2.h\u003e\n                                 ^\ncompilation terminated.\n```",
+      "revId": "7a45b898c337462856d40daccc07deab9baf9cd9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
