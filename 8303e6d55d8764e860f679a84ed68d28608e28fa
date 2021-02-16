@@ -17,6 +17,23 @@
       "message": "This fixes the build in the 6.0 tree for me.",
       "revId": "8303e6d55d8764e860f679a84ed68d28608e28fa",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "115a60c6_321f68f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-16T13:07:49Z",
+      "side": 1,
+      "message": "Should this be cherry-picked to the 10 branch?",
+      "revId": "8303e6d55d8764e860f679a84ed68d28608e28fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
