@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 62C0B86D5916910E 1613445245 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1613445258-D53653491DAF3FDBFE04D7D6076A0E2ACB63D936\n\n0000000000000000000000000000000000000000 8303e6d55d8764e860f679a84ed68d28608e28fa refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEiJO+llDGWqgtMle9YsC4bVkWkQ4FAmArOH0ACgkQYsC4bVkW\nkQ5Tdw/7BeZQUBIp9u6OnYlg44/pwfj4LH8ZNsmaECsDaG0M+y4yGP5jwfjMmBvJ\nS29YhNUCkx8knr0YPAEGFnpWRzeQUt28rUZqYJbyuEvB6BxC9iyb6L1nx7JWWCrW\nGrfjNzbKR0XcPxBDPFXBELGA+Ya4ftpFJuMWe89/hCGGH5rlVMD/jFafXtQTrki4\nN5Hk7NsbTyLZv8MybgV7+UP42XsPdnTul4h18SgqPZauIcIX/UgoFgAArhtJf6ss\nn8dXkcInOP29uLS61xbKpOt/3soUERZy/cohBPUXdRgeweEtuCYpx5ASsr4z/Z+s\nZmJsEJw8z0xCNdrLyVRMrVdlFiIUfkdOzcD2VpN9JrALMLXlV64/vOVwjlfWIWnS\nwDGLFm6TTXFkSKNOcoD3ce8SIZHDhlh+5CnfkjfZbCudoJdhLBOOjoR/4FiFNrHT\n6r7wVhnrZRFubm7r52M3GM7Srem55fK+YANJok7U4WlYBKZ98WKwAp8aSRGBsSvB\nzAOb0o+/BCB5P+LNBOXuNVyDUOS7UF+3306eHIQ9vGHLSfs0QuG+oJ3b9ONHwW7A\nv/LslrYYNelv/jEp5GljgFVKlEbCxam3alkDxpZ6Dn71O4/sp89oxWWzGgf22+dD\nLHu4AgV36yyMi6OyzrzcDrxXDb9pQHMepXUICT2vRh4Kpx2J4pA\u003d\n\u003dUTjG\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a3583f2_560c8cb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-16T03:17:08Z",
+      "side": 1,
+      "message": "This fixes the build in the 6.0 tree for me.",
+      "revId": "8303e6d55d8764e860f679a84ed68d28608e28fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
