@@ -16,6 +16,23 @@
       "message": "I fixed those you mention in comments. Check new patch.",
       "revId": "8319d61c9957f7fddc9dac53939e2fef30c7799e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60e9a43d_36a4650d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-17T00:07:19Z",
+      "side": 1,
+      "message": "Also there is a merge conflict.",
+      "revId": "8319d61c9957f7fddc9dac53939e2fef30c7799e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
