@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1613578656 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1613578660-B490A891DBB1D2093AB7BC1135BC1F61F2E18EC5\n\n0000000000000000000000000000000000000000 e294cc0996758af51ecf8469c3ad7ec079034df0 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmAtQaAACgkQAqwBp3le\n7rhqmA//YCCx3uTUixTq9YR38N+SOs4C5wKID9mxt/mVSr3h6m/sCi9Ixy2ODYcr\n7264iKv/Y+v6e1ieui8JwW0DJBbYd5gWrnXK4gkSXV62+aUSl2Im9q2h62SWmtwD\nf0JMydcXymUFpLK0oUsV2aPowVC22T0sHSxpMJDGcrpOpk9npxO2oyvqETDQUJf3\nuuSeBu/Z6iGPWN4T2hnBFPMjXZktaf4RnwGytZgLSsYhrxo5RvSdYwkkho7hUSli\nCliWcqKXkvF6ciUZxzDk/HB5chql2kS1kGVuMIDTw8sM9TwU2Tkaq/qRu5VEccuo\nLQHkA7N1iZauHByhEpjQBjJvCjh2HJlDctAsYCpPYlzQ+uJorucuJJdLSBR1CLGf\nTgbFVrZar51/9lb+O9l4pocS4XdZG9K32swOKRyiZtYaF7WappdkJo6P8PElgGZb\nXZWdLcRVjkM4klWh2WnI3JR/mxcidofd78jJP4uLck3YtGt4vCJmcm6KjfZSoE53\n0g5fMDnMS3c7HRTL8fRQ2cXe/zWU5qKpmbUty/ihx4pYU8wukfrk34htsiFsQE4e\n+BYe/4VC38ZDgkFPzFKQpdYPT704mm+I4qIuijD+s/tfcdcInUPtA6VwAoUVwYgL\nG9483qGH9mjXkVbdv8b00tUNQx8RVwpzrimomSHwi8JK3MiH2SU\u003d\n\u003dv74m\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14f2a3f4_43c5d73a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-17T16:19:04Z",
+      "side": 1,
+      "message": "Not sure what happened there. Playing with too many build trees, I guess. At any rate, it\u0027s fixed now.",
+      "revId": "e294cc0996758af51ecf8469c3ad7ec079034df0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }

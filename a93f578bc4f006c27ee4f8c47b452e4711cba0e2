@@ -19,6 +19,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2768c28b_7b359b9a",
+        "filename": "gui/action.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2250,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-17T16:19:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b83b179_a8647bf8",
+      "revId": "a93f578bc4f006c27ee4f8c47b452e4711cba0e2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c807e84_4dcb11b8",
@@ -32,6 +50,24 @@
       "writtenOn": "2021-02-16T00:45:44Z",
       "side": 1,
       "message": "was this reverted?",
+      "revId": "a93f578bc4f006c27ee4f8c47b452e4711cba0e2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51dfdf29_8ecd5dfa",
+        "filename": "gui/theme/common/landscape.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 4127,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-17T16:19:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c807e84_4dcb11b8",
       "revId": "a93f578bc4f006c27ee4f8c47b452e4711cba0e2",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
