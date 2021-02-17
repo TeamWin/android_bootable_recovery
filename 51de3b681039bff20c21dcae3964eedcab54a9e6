@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "176810e8_cf5b3067",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-17T16:54:33Z",
+      "side": 1,
+      "message": "Updated LOGINFO to be more descriptive and match \"changeterminal\" message.",
+      "revId": "51de3b681039bff20c21dcae3964eedcab54a9e6",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
