@@ -325,6 +325,10 @@ ifneq ($(TW_EXCLUDE_NANO), true)
     RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libssl.so
 endif
 
+ifneq ($(TW_EXCLUDE_BASH), true)
+    RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/bash
+endif
+
 include $(CLEAR_VARS)
 LOCAL_MODULE := relink_libraries
 LOCAL_MODULE_TAGS := optional
@@ -539,4 +543,18 @@ LOCAL_POST_INSTALL_CMD += \
     cp -rf $(TARGET_OUT_ETC)/nano $(TARGET_RECOVERY_ROOT_OUT)/system/etc/; \
     cp -rf external/libncurses/lib/terminfo $(TARGET_RECOVERY_ROOT_OUT)/system/etc/;
 include $(BUILD_PHONY_PACKAGE)
+
+ifneq ($(TW_EXCLUDE_BASH), true)
+	include $(CLEAR_VARS)
+	LOCAL_MODULE := bash_twrp
+	LOCAL_MODULE_TAGS := optional
+	LOCAL_MODULE_CLASS := ETC
+	LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)/system/bin
+	LOCAL_REQUIRED_MODULES := bash
+
+	LOCAL_POST_INSTALL_CMD += \
+		mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/etc/bash/; \
+		cp -rf external/bash/etc/ $(TARGET_RECOVERY_ROOT_OUT)/system/etc/bash;
+	include $(BUILD_PHONY_PACKAGE)
+endif
 

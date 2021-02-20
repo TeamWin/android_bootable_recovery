@@ -419,6 +419,12 @@ TWRP_REQUIRED_MODULES += \
     nano.rc
 endif
 
+ifneq ($(TW_EXCLUDE_BASH), true)
+    ifneq ($(wildcard $(dir external/bash)),)
+    TWRP_REQUIRED_MODULES += \
+        bash_twrp
+    endif
+endif
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
