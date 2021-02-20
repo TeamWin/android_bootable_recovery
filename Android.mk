@@ -137,6 +137,7 @@ ifeq ($(TW_OEM_BUILD),true)
     TW_EXCLUDE_MTP := true
     TW_EXCLUDE_TZDATA := true
     TW_EXCLUDE_NANO := true
+    TW_EXCLUDE_BASH := true
 endif
 
 ifeq ($(AB_OTA_UPDATER),true)
@@ -419,6 +420,12 @@ TWRP_REQUIRED_MODULES += \
     nano.rc
 endif
 
+ifneq ($(TW_EXCLUDE_BASH), true)
+    ifneq ($(wildcard external/bash/.),)
+    TWRP_REQUIRED_MODULES += \
+        bash_twrp
+    endif
+endif
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
