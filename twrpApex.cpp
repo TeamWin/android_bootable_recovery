@@ -138,7 +138,7 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 
 	ret = mount(loop_device.c_str(), bind_mount.c_str(), "ext4", MS_RDONLY, nullptr);
 	if (ret != 0) {
-		LOGERR("unable to mount loop device %s to %s\n", loop_device.c_str(), bind_mount.c_str());
+		LOGERR("unable to mount loop device %s to %s. reason: %s\n", loop_device.c_str(), bind_mount.c_str(), strerror(errno));
 		return false;
 	}
 
