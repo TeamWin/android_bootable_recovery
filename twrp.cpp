@@ -20,8 +20,8 @@
 #include <stdlib.h>
 #include <string>
 #include <sys/stat.h>
+#include <sys/time.h>
 #include <sys/types.h>
-#include <time.h>
 #include <unistd.h>
 #include <signal.h>
 #include "gui/twmsg.h"
