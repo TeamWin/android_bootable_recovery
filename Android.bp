@@ -90,6 +90,7 @@ cc_library_shared {
     required: [
         "init_recovery.rc",
         "libdl_android.bootstrap",
+        "ziptool.recovery"
     ]
 }
 
