@@ -1821,11 +1821,57 @@ int GUIAction::flashimage(std::string arg __unused)
 	string path, filename;
 	DataManager::GetValue("tw_zip_location", path);
 	DataManager::GetValue("tw_file", filename);
+
+#ifdef AB_OTA_UPDATER
+	string target = DataManager::GetStrValue("tw_flash_partition");
+	unsigned int pos = target.find_last_of(';');
+	string mount_point = pos != string::npos ? target.substr(0, pos) : "";
+	TWPartition* t_part = PartitionManager.Find_Partition_By_Path(mount_point);
+	bool flash_in_both_slots = DataManager::GetIntValue("tw_flash_both_slots") ? true : false;
+
+	if(flash_in_both_slots){
+		LOGINFO("FLASH IN BOTH SLOTS ENABLED\n");
+	}else{
+		LOGINFO("FLASH IN BOTH SLOTS Not active. Skipping..\n");
+	}
+
+	LOGINFO("FLASH Mount Point - %s\n", mount_point.c_str());
+
+	if(t_part){
+		if(t_part->SlotSelect){
+			LOGINFO("Slot partition found\n");
+		}else{
+			LOGINFO("Partition is not slot based. Skipping\n");
+		}
+	}else{
+		LOGINFO("FLASH IN BOTH SLOTS Not active. Skipping..\n");
+	}
+
+
+	if (t_part != NULL && (flash_in_both_slots && t_part->SlotSelect)) 
+	{
+		string current_slot = PartitionManager.Get_Active_Slot_Display();
+		LOGINFO("Current slot - %s\n", current_slot.c_str());
+		bool pre_op_status = PartitionManager.Flash_Image(path, filename);
+
+		if (pre_op_status)
+			LOGINFO("Slot 1 flashing Successful\n");
+		else
+			LOGINFO("Slot 1 flashing failed. Skipping\n");
+
+		PartitionManager.Set_Active_Slot(current_slot == "A" ? "B" : "A");
+		op_status = (int) !(pre_op_status && PartitionManager.Flash_Image(path, filename));
+		PartitionManager.Set_Active_Slot(current_slot);
+		goto exit;
+	}
+#endif
+
 	if (PartitionManager.Flash_Image(path, filename))
 		op_status = 0; // success
 	else
 		op_status = 1; // fail
 
+exit:
 	operation_end(op_status);
 	return 0;
 }
