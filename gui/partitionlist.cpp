@@ -272,6 +272,9 @@ void GUIPartitionList::NotifySelect(size_t item_selected)
 					mList.at(item_selected).selected = 0;
 				else
 					mList.at(item_selected).selected = 1;
+					TWPartition* t_part = PartitionManager.Find_Partition_By_Path(mList.at(item_selected).Mount_Point);
+					if (t_part != NULL)
+						DataManager::SetValue("tw_is_slot_part", (int) t_part->SlotSelect);
 
 				int i;
 				string variablelist;
