@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "694d4dd7_f2d2895f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-24T17:47:21Z",
+      "side": 1,
+      "message": "Don\u0027t merged. If everything goes well then I will add language string in checkbox and complete gui for other screen sizes.",
+      "revId": "69a05e7bc4a5467c955128f77e6625586d55aac2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
