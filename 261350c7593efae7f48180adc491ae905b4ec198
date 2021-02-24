@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d38c03_5be2c33d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-24T16:05:37Z",
+      "side": 1,
+      "message": "This gets nano working properly on the older tree devices that don\u0027t have a \"syntax\" folder in the source, but have those files in the /etc source folder. It seems in some trees that these files don\u0027t get copied properly, so copying them directly from the source folder is the most reliable.",
+      "revId": "261350c7593efae7f48180adc491ae905b4ec198",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
