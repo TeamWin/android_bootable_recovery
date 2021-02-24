@@ -662,6 +662,30 @@
 				<listtype name="flashimg"/>
 			</partitionlist>
 
+			<button style="checkbox">
+				<conditions>
+					<condition var1="tw_flash_partition" op="=" var2="/boot;"/>
+					<condition var1="tw_flash_both_slots" op="=" var2="0"/>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+				</conditions>
+				<placement x="%indent%" y="%row19a_y%" textplacement="6"/>
+				<text>Flash Boot Image in Both slots</text>
+				<image resource="checkbox_false"/>
+				<action function="set">tw_flash_both_slots=1</action>
+			</button>
+
+			<button style="checkbox">
+				<conditions>
+					<condition var1="tw_flash_partition" op="=" var2="/boot;"/>
+					<condition var1="tw_flash_both_slots" op="=" var2="1"/>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+				</conditions>
+				<placement x="%indent%" y="%row19a_y%" textplacement="6"/>
+				<text>Flash Boot Image in Both slots</text>
+				<image resource="checkbox_true"/>
+				<action function="set">tw_flash_both_slots=0</action>
+			</button>
+
 			<slider>
 				<text>{@swipe_flash=Swipe to confirm Flash}</text>
 				<actions>

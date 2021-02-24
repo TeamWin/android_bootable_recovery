@@ -1821,11 +1821,31 @@ int GUIAction::flashimage(std::string arg __unused)
 	string path, filename;
 	DataManager::GetValue("tw_zip_location", path);
 	DataManager::GetValue("tw_file", filename);
+
+#ifdef AB_OTA_UPDATER
+	string target = DataManager::GetStrValue("tw_flash_partition");
+	bool flash_in_both_slots = DataManager::GetIntValue("tw_flash_both_slots") ? true : false;
+
+	if (flash_in_both_slots && target == "/boot;") 
+	{
+		TWPartitionManager t_part;
+		string current_slot;
+
+		current_slot = t_part.Get_Active_Slot_Display();
+		bool pre_op_status = PartitionManager.Flash_Image(path, filename);
+		t_part.Set_Active_Slot(current_slot == "A" ? "B" : "A");
+		op_status = (int) !(pre_op_status && PartitionManager.Flash_Image(path, filename));
+		t_part.Set_Active_Slot(current_slot);
+		goto exit;
+	}
+#endif
+
 	if (PartitionManager.Flash_Image(path, filename))
 		op_status = 0; // success
 	else
 		op_status = 1; // fail
 
+exit:
 	operation_end(op_status);
 	return 0;
 }
