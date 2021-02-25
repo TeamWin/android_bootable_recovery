@@ -3,4 +3,6 @@ recovery_only(`
   permissive init;
   permissive logd;
   permissive adbd;
+  allow kernel tmpfs:file { read };
+  allow kernel recovery:fd { use };
 ')
