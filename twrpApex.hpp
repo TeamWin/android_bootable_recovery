@@ -18,11 +18,11 @@
 #include <ziparchive/zip_archive.h>
 #include "twcommon.h"
 
-
 #define APEX_DIR "/system_root/system/apex"
 #define APEX_PAYLOAD "apex_payload.img"
 #define LOOP_BLOCK_DEVICE_DIR "/dev/block/"
 #define APEX_BASE "/apex/"
+#define LOOP_CONTROL "/dev/loop-control"
 
 class twrpApex {
 public:
@@ -30,7 +30,7 @@ public:
 
 private:
 	std::string unzipImage(std::string file);
-	bool createLoopBackDevices(size_t count);
+	bool mountApexOnLoopbackDevices(std::vector<std::string> apexFiles);
 	bool loadApexImage(std::string fileToMount, size_t loop_device_number);
 };
 #endif
