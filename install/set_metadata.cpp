@@ -36,10 +36,10 @@ static int has_stat = 0;
 
 int tw_get_context(const char* filename) {
 	if (lgetfilecon(filename, &selinux_context) >= 0) {
-		printf("tw_get_context got selinux context: %s\n", selinux_context);
+		printf("tw_get_context got selinux context: %s, file: %s\n", selinux_context, filename);
 		return 0;
 	} else {
-		printf("tw_get_context failed to get selinux context\n");
+		printf("tw_get_context failed to get selinux context, file %s\n", filename);
 		selinux_context = NULL;
 	}
 	return -1;
