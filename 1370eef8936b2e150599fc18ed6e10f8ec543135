@@ -51,6 +51,24 @@
       "message": "\u003e Patch Set 4:\n\u003e \n\u003e \u003e Patch Set 4:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e I added a symlink for bash to /sbin. Seems the build system doesn\u0027t like it. I\u0027ll look into it later.\n\nAdd this before the \"ln -sf\" line: \n\nmkdir -p $(TARGET_RECOVERY_ROOT_OUT)/sbin/; \\",
       "revId": "1370eef8936b2e150599fc18ed6e10f8ec543135",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3dad95_e03dd1de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-26T19:30:26Z",
+      "side": 1,
+      "message": "That fixed it. Thanks!",
+      "parentUuid": "621e180e_bba63a62",
+      "revId": "1370eef8936b2e150599fc18ed6e10f8ec543135",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
