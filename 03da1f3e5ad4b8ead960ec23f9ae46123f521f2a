@@ -17,6 +17,23 @@
       "message": "Just re-arranged the added function calls a bit. Hoping this gets the details updated at boot time even on unencrypted devices.",
       "revId": "03da1f3e5ad4b8ead960ec23f9ae46123f521f2a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e07bc63c_33eadd8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-02-26T16:20:51Z",
+      "side": 1,
+      "message": "Yeah, that seems to have done the trick here. No delay now.",
+      "revId": "03da1f3e5ad4b8ead960ec23f9ae46123f521f2a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
