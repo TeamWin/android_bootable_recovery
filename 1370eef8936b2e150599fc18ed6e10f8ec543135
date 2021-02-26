@@ -17,6 +17,23 @@
       "message": "Ready for review.",
       "revId": "1370eef8936b2e150599fc18ed6e10f8ec543135",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2941d1ab_23f88fb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2021-02-26T16:14:26Z",
+      "side": 1,
+      "message": "Patchset 4 breaks the build for me:\n\nln: cannot create symbolic link from \u0027/system/bin/bash\u0027 to \u0027/src/twrp/10/out/target/product/c2s/recovery/root/sbin/bash\u0027: No such file or directory\n17:09:58 ninja failed with: exit status 1\n\nPatchset 3 was fine.",
+      "revId": "1370eef8936b2e150599fc18ed6e10f8ec543135",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
