@@ -359,7 +359,11 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 				return false;
 			} else {
 				Primary_Block_Device = ptr;
-				Find_Real_Block_Device(Primary_Block_Device, Display_Error);
+				LOGINFO("setting Primary_Block_Device: %s\n", Primary_Block_Device.c_str());
+				LOGINFO("Sar_Detect: %d\n", Sar_Detect);
+				if (PartitionManager.Get_Android_Root_Path() != "/system_root")
+					Find_Real_Block_Device(Primary_Block_Device, Display_Error);
+				LOGINFO("Reset Primary_Block_Device: %s\n", Primary_Block_Device.c_str());
 			}
 			item_index++;
 		} else if (item_index > 2) {
@@ -422,7 +426,9 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 	}
 	if (Primary_Block_Device.find("*") != string::npos)
 		Wildcard_Block_Device = true;
-
+	LOGINFO("Sar_Detect: %d\n", Sar_Detect);
+	LOGINFO("Mount_Point: %s\n", Mount_Point.c_str());
+	LOGINFO("Slot_Select: %d\n", SlotSelect);
 	if (Sar_Detect) {
 		if(Is_File_System(Fstab_File_System) && (Mount_Point == "/" || Mount_Point == "/system" || Mount_Point == "/system_root"))
 			Find_Actual_Block_Device();
@@ -988,6 +994,7 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 				Can_Be_Wiped = true;
 			break;
 		case TWFLAG_SLOTSELECT:
+			LOGINFO("Setting SlotSelect to true\n");
 			SlotSelect = true;
 			break;
 		case TWFLAG_ALTDEVICE:
