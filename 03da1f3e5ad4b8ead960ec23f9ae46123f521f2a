@@ -34,6 +34,23 @@
       "message": "Yeah, that seems to have done the trick here. No delay now.",
       "revId": "03da1f3e5ad4b8ead960ec23f9ae46123f521f2a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77e910ff_3ff9343a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-27T17:19:03Z",
+      "side": 1,
+      "message": "Should be good to go now",
+      "revId": "03da1f3e5ad4b8ead960ec23f9ae46123f521f2a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
