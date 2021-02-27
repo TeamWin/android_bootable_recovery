@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c69b3231_6c587e68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-27T17:12:41Z",
+      "side": 1,
+      "message": "Is there a way to make the Image Flash page refresh when a partition is selected? Even if I choose \"Install Recovery Ramdisk\", the option to flash to both slots remains, even though it technically has no effect in that case.",
+      "revId": "98bd9beeab116e4939fb7aa5e9768174184c0a09",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "574ec01a_e3b66fb9",
