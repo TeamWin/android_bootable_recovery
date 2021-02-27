@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0aef4e9b_21cecff0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-27T22:45:00Z",
+      "side": 1,
+      "message": "Do you mean to show that checkbox while we are selecting a slot partition?\n\nYes its possible. We can modify some code in gui/partitionlist in order to make that checkbox dynamic",
+      "parentUuid": "c69b3231_6c587e68",
+      "revId": "98bd9beeab116e4939fb7aa5e9768174184c0a09",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "574ec01a_e3b66fb9",
         "filename": "gui/action.cpp",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2021-02-27T14:50:34Z",
       "side": 1,
       "message": "I am not a huge fan of goto. Can we have this just set this as part of the #else if in the #ifdef?",
+      "revId": "98bd9beeab116e4939fb7aa5e9768174184c0a09",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ecf01a_20afa10d",
+        "filename": "gui/action.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-27T22:45:00Z",
+      "side": 1,
+      "message": "If we wrap that bottom part into flags then normal flashing would not work. \n\nOn thing I can do , I can put \"}else\" in line 1842. It will looks weird for most of the people but that will same thing as you want. \n\nLike this - \n\n\t\t\n\t}else\n#endif\n\tif (PartitionManager.Flash_Image(path, filename))\n\t\top_status \u003d 0; // success\n\telse\n\t\top_status \u003d 1; // fail\n\n\nBut I think using goto will solve this problem easily and code will looks more readable.",
+      "parentUuid": "574ec01a_e3b66fb9",
       "revId": "98bd9beeab116e4939fb7aa5e9768174184c0a09",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
