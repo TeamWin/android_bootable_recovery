@@ -338,6 +338,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca6b6a3c_7242243b",
+        "filename": "gui/action.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-27T14:30:32Z",
+      "side": 1,
+      "message": "After investigating I see you are basing the storage folder for recovery on tw_storage_path which is set to the current storage that is used for backup. I think it is a non-issue. Marking done.",
+      "parentUuid": "0a7fc985_d6c323f1",
+      "revId": "d01021070ea438d13bf3895c65243d438e53df07",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e5c2e05_cc687bfc",

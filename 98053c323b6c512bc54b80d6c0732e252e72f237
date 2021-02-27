@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38863435_236d51be",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-27T14:30:32Z",
+      "side": 1,
+      "message": "spaces around brackets please.",
+      "revId": "98053c323b6c512bc54b80d6c0732e252e72f237",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
