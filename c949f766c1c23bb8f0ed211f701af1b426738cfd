@@ -16,6 +16,24 @@
       "message": "Bump. Any update on this one? Would be nice to get it fixed and merged.",
       "revId": "c949f766c1c23bb8f0ed211f701af1b426738cfd",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c124cb_6b1f04bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2021-02-27T20:16:39Z",
+      "side": 1,
+      "message": "I don\u0027t have an AB device, so there is no way to test any code that checks for slots.",
+      "parentUuid": "9f15eca2_9dae638a",
+      "revId": "c949f766c1c23bb8f0ed211f701af1b426738cfd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
