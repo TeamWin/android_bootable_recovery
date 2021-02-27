@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0977eef_5a733b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-27T14:38:53Z",
+      "side": 1,
+      "message": "Is this patch to just add bash or to replace /sbin/sh?",
+      "revId": "8ed561523733b5902a665cd053c00e27af3ee1ff",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
