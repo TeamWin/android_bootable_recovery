@@ -68,6 +68,24 @@
       "message": "I tested branch 9.0 after you said about that issue. There is no such issue in 9.0 .",
       "revId": "d3411fa66a67a2ecddd9d9bfdc9044e87a305f1b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01dea0f_15bf5156",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-02-28T15:12:52Z",
+      "side": 1,
+      "message": "This is a screenshot from my device built with the 9.0 branch:\nhttps://www.dropbox.com/s/fc32uj1bfzgivjo/Screenshot_2021-02-28-10-09-55.png?dl\u003d0\nLook at the top folder after restoring the default folder.",
+      "parentUuid": "2bc6a7f1_96650b1f",
+      "revId": "d3411fa66a67a2ecddd9d9bfdc9044e87a305f1b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
