@@ -17,6 +17,23 @@
       "message": "Everything looks good for me. Did you test in 10 devices? I don\u0027t have testing environment. If everything working fine then all ok 😊",
       "revId": "d3411fa66a67a2ecddd9d9bfdc9044e87a305f1b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae391fc_a64379e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-02-28T07:29:14Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review+1\n\u003e \n\u003e \u003e Patch Set 1: Code-Review+1\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e It\u0027s working fine except after renaming the folder, I end up with a new folder in root with just quotes (\"). I think there may be extra quotes in the code somewhere. Maybe you can see if you can find it.\n\nI compared with 9.0\u0027s patch but I didn\u0027t find any new changes. \n\nDid you saw the log?? \n\nI think there maybe problem in gui/action.cpp\nLine 2296 (You have to debug that variable maybe there is problem)\nLine 2308 (I am not sure about this. But you will see the command in log)\nLine 2313 (If something is changed in this function that can cause this issue. Like function again wrap the path with double quotes)",
+      "revId": "d3411fa66a67a2ecddd9d9bfdc9044e87a305f1b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
