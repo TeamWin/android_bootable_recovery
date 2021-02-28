@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1614367611 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1614367616-158F43938A1513C68D8253F16D0EF62F995E667B\n\n0000000000000000000000000000000000000000 6514f0359b520aea859b581ca0dc607ab5ee26d5 refs/for/android-10.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmA5S3sACgkQAqwBp3le\n7rghyg/5AQjwW+MYy9dbXKCdFeDvI0s7vjt7tqJTYIW5Ob9Io7qo2ciUaxpYf6Y8\nEmJ5vsbkHi2vOxCeHQkPzo+la8CmnkWADIL5IXmFCRWK5U+XNuDxe9LU2yxrQGC+\njl9ZrJCl4KnIDDF/4ePSRW17MS3s9ebZ7Qre+xmx4KhlvKl9RAjK6Mx4Her+33VB\n+p9I0LpNKHPd6QfAWX18WlwiJXzCq7fLZoDY08Fpl4oC5cSV7RkSnHwOSC8aYItT\nedUzWQ4807njwWQuUs0gQvGaeOfBDeoSMkcTaXQzEfOlcpgh266mQYuyP3Rha1Eq\nGHa6dNGVpoZoh7vjiFgtSfaqCGBXz9ujBPnMgCLE5ILMNDMx+X7EIHKjcOYkZ2vN\nfMKPEwjIA5sfJH2S2ctQb97HTZ5LYlKopJp7/8fmBm8srkfe+4Itq14AGGEuRYb6\nNQwSh3J2BjCJi2Rh5FlwE4DFegUyMgYvYQLhp7V2qkEqw6NtlROXLQyEcm3juFq7\nHGMUkVGPpLTeKQHbWQ490rXuqxrqphMWJvpniLBS9Vm+K+AzgWChi7hWLAjDJOhh\n/ju2FMaBq0q7lIG/DqYgTgIQ/1DzsoOBVCKsK4LLhJu2N4rSs+ipgf64/PxtklwR\nG/CMEDLeaxcjpRTp8LxsDAYDzP6e/oiKrkSU/lzZjO08ZJpDw5g\u003d\n\u003d5Q/O\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "141d165c_7cb5103d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-28T21:56:25Z",
+      "side": 1,
+      "message": "Please fix merge conflict.",
+      "revId": "6514f0359b520aea859b581ca0dc607ab5ee26d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
