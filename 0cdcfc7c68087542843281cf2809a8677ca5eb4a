@@ -69,6 +69,24 @@
       "parentUuid": "df16d06a_2996c8b5",
       "revId": "0cdcfc7c68087542843281cf2809a8677ca5eb4a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b586d8_38a7bea7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-03-01T20:31:32Z",
+      "side": 1,
+      "message": "If this is truly a patch for only a single OEM, can the option be qualified to only appear on devices where the manufacturer/brand matches that OEM?",
+      "parentUuid": "a955b766_cbd10773",
+      "revId": "0cdcfc7c68087542843281cf2809a8677ca5eb4a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
