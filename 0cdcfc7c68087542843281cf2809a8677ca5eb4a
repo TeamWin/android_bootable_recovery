@@ -51,6 +51,24 @@
       "parentUuid": "6297e6f4_6dd0210e",
       "revId": "0cdcfc7c68087542843281cf2809a8677ca5eb4a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a955b766_cbd10773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-03-01T18:46:53Z",
+      "side": 1,
+      "message": "So you\u0027re saying there are no landscape or watch devices that will ever need this?",
+      "parentUuid": "df16d06a_2996c8b5",
+      "revId": "0cdcfc7c68087542843281cf2809a8677ca5eb4a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
