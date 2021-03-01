@@ -33,6 +33,24 @@
       "message": "I also just noticed that the \"Flash to both slots\" option doesn\u0027t appear if I choose to flash another image, even though it uses the previous selection as the default. Meaning if I flash a system image, then go back and choose a different system image to flash, the \"System Image\" option is already selected, but the \"Flash to both slots\" option doesn\u0027t appear unless I press the already selected \"System Image\" option again. The option doesn\u0027t appear to refresh when switched to that page if something is already selected.",
       "revId": "956198857e48e2d77629619a06fd7be1b5c07389",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57c5b00_fb4bf648",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-03-01T16:14:30Z",
+      "side": 1,
+      "message": "Try new patch",
+      "parentUuid": "3d04b617_4c529825",
+      "revId": "956198857e48e2d77629619a06fd7be1b5c07389",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
