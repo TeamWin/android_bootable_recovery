@@ -16,6 +16,23 @@
       "message": "The latest patch causes the TWRP GUI to restart when selecting the \"Install Recovery Ramdisk\" option from the Install Image page. In the log it\u0027s restarting at \"I:Set page: \u0027flashimage_confirm\u0027\"\n\nThe checkbox option should never appear for the Install Recovery Ramdisk option, since it always flashes to both slots. Perhaps some exception code needs to be added for that?",
       "revId": "956198857e48e2d77629619a06fd7be1b5c07389",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d04b617_4c529825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-03-01T15:37:18Z",
+      "side": 1,
+      "message": "I also just noticed that the \"Flash to both slots\" option doesn\u0027t appear if I choose to flash another image, even though it uses the previous selection as the default. Meaning if I flash a system image, then go back and choose a different system image to flash, the \"System Image\" option is already selected, but the \"Flash to both slots\" option doesn\u0027t appear unless I press the already selected \"System Image\" option again. The option doesn\u0027t appear to refresh when switched to that page if something is already selected.",
+      "revId": "956198857e48e2d77629619a06fd7be1b5c07389",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
