@@ -17,6 +17,24 @@
       "message": "Fixed checkbox placement on the landscape theme. Is there anyone that can test the watch theme?",
       "revId": "ac3ac83e74e8731b84747d42099ff6536cadbbc0",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b4c2ce_556207b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-03-02T20:43:07Z",
+      "side": 1,
+      "message": "Great 😊\nNow only watch is left. I think landscape and watch have very similar layouts. Idk I am just assuming.",
+      "parentUuid": "88e8f5fe_e815fd86",
+      "revId": "ac3ac83e74e8731b84747d42099ff6536cadbbc0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
