@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935ed078_ecc18350",
+        "filename": "gui/action.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-03-04T00:27:05Z",
+      "side": 1,
+      "message": "Do we need to set the current slot during flashing? It looks like it\u0027s just switching back to the current slot.",
+      "revId": "374c82fa0c42060b326b5dea37c3cdef8af78795",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
