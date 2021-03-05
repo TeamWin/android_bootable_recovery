@@ -16,6 +16,24 @@
       "message": "Do we need to set the current slot during flashing? It looks like it\u0027s just switching back to the current slot.",
       "revId": "374c82fa0c42060b326b5dea37c3cdef8af78795",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61e3fdc_2d5d54a3",
+        "filename": "gui/action.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-03-05T00:04:47Z",
+      "side": 1,
+      "message": "Resolving as done. We should refactor Set_Active_Slot into 2 functions.\nOne to actually set the bootloader slot and one to just returns the current slot and the opposite slot without setting the slot active,",
+      "parentUuid": "935ed078_ecc18350",
+      "revId": "374c82fa0c42060b326b5dea37c3cdef8af78795",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
