@@ -14,14 +14,12 @@ LOCAL_C_INCLUDES += external/libselinux/include
 LOCAL_SHARED_LIBRARIES += libselinux
 
 ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
-    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 29; echo $$?),0)
-        LOCAL_SHARED_LIBRARIES += libtwrpfscrypt
-        LOCAL_CFLAGS += -DUSE_FSCRYPT
-        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt
+    LOCAL_SHARED_LIBRARIES += libtwrpfscrypt
+    LOCAL_CFLAGS += -DUSE_FSCRYPT
+    ifeq ($(TW_USE_KM4), true)
+        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt-km4
     else
-        LOCAL_SHARED_LIBRARIES += libe4crypt
-        LOCAL_CFLAGS += -DHAVE_EXT4_CRYPT
-        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/ext4crypt
+        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt-km4.1
     endif
 endif
 
@@ -45,14 +43,12 @@ LOCAL_C_INCLUDES += external/libselinux/include
 LOCAL_STATIC_LIBRARIES += libselinux
 
 ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
-    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 29; echo $$?),0)
-        LOCAL_SHARED_LIBRARIES += libtwrpfscrypt
-        LOCAL_CFLAGS += -DUSE_FSCRYPT
-        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt
+    LOCAL_SHARED_LIBRARIES += libtwrpfscrypt
+    LOCAL_CFLAGS += -DUSE_FSCRYPT
+    ifeq ($(TW_USE_KM4), true)
+        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt-km4
     else
-        LOCAL_SHARED_LIBRARIES += libe4crypt
-        LOCAL_CFLAGS += -DHAVE_EXT4_CRYPT
-        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/ext4crypt
+        LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt-km4.1
     endif
 endif
 
