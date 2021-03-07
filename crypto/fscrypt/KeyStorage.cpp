@@ -16,10 +16,10 @@
 
 #include "KeyStorage.h"
 
+#include "Checkpoint.h"
 #include "Keymaster.h"
 #include "ScryptParameters.h"
 #include "Utils.h"
-#include "Checkpoint.h"
 
 #include <thread>
 #include <vector>
@@ -37,22 +37,19 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <android-base/unique_fd.h>
 #include <android-base/properties.h>
+#include <android-base/unique_fd.h>
 
 #include <cutils/properties.h>
 
 #include <hardware/hw_auth_token.h>
-#include <keymasterV4_0/authorization_set.h>
-#include <keymasterV4_0/keymaster_utils.h>
+#include <keymasterV4_1/authorization_set.h>
+#include <keymasterV4_1/keymaster_utils.h>
 
 extern "C" {
 
 #include "crypto_scrypt.h"
 }
-
-namespace android {
-namespace vold {
 
 const KeyAuthentication kEmptyAuthentication{"", ""};
 
@@ -64,7 +61,6 @@ static constexpr size_t SECDISCARDABLE_BYTES = 1 << 14;
 static constexpr size_t STRETCHED_BYTES = 1 << 6;
 
 static constexpr uint32_t AUTH_TIMEOUT = 30;  // Seconds
-constexpr int EXT4_AES_256_XTS_KEY_SIZE = 64;
 
 static const char* kCurrentVersion = "1";
 static const char* kRmPath = "/system/bin/rm";
@@ -123,70 +119,42 @@ static bool generateKeymasterKey(Keymaster& keymaster, const KeyAuthentication& 
             return false;
         }
         const hw_auth_token_t* at = reinterpret_cast<const hw_auth_token_t*>(auth.token.data());
-        paramBuilder.Authorization(km::TAG_USER_SECURE_ID, at->user_id);
+        auto user_id = at->user_id;  // Make a copy because at->user_id is unaligned.
+        paramBuilder.Authorization(km::TAG_USER_SECURE_ID, user_id);
         paramBuilder.Authorization(km::TAG_USER_AUTH_TYPE, km::HardwareAuthenticatorType::PASSWORD);
         paramBuilder.Authorization(km::TAG_AUTH_TIMEOUT, AUTH_TIMEOUT);
     }
-    return keymaster.generateKey(paramBuilder, key);
+
+    auto paramsWithRollback = paramBuilder;
+    paramsWithRollback.Authorization(km::TAG_ROLLBACK_RESISTANCE);
+
+    // Generate rollback-resistant key if possible.
+    return keymaster.generateKey(paramsWithRollback, key) ||
+           keymaster.generateKey(paramBuilder, key);
 }
 
-bool generateWrappedKey(userid_t user_id, KeyType key_type,
-                                     KeyBuffer* key) {
+bool generateWrappedStorageKey(KeyBuffer* key) {
     Keymaster keymaster;
     if (!keymaster) return false;
-    *key = KeyBuffer(EXT4_AES_256_XTS_KEY_SIZE);
     std::string key_temp;
-    auto paramBuilder = km::AuthorizationSetBuilder()
-                               .AesEncryptionKey(AES_KEY_BYTES * 8)
-                               .GcmModeMinMacLen(GCM_MAC_BYTES * 8)
-                               .Authorization(km::TAG_USER_ID, user_id);
-    km::KeyParameter param1;
-    param1.tag = (km::Tag) (android::hardware::keymaster::V4_0::KM_TAG_FBE_ICE);
-    param1.f.boolValue = true;
-    paramBuilder.push_back(param1);
-
-    km::KeyParameter param2;
-    if ((key_type == KeyType::DE_USER) || (key_type == KeyType::DE_SYS || (key_type == KeyType::ME))) {
-        param2.tag = (km::Tag) (android::hardware::keymaster::V4_0::KM_TAG_KEY_TYPE);
-        param2.f.integer = 0;
-    } else if (key_type == KeyType::CE_USER) {
-        param2.tag = (km::Tag) (android::hardware::keymaster::V4_0::KM_TAG_KEY_TYPE);
-        param2.f.integer = 1;
-    }
-    paramBuilder.push_back(param2);
-
+    auto paramBuilder = km::AuthorizationSetBuilder().AesEncryptionKey(AES_KEY_BYTES * 8);
+    paramBuilder.Authorization(km::TAG_ROLLBACK_RESISTANCE);
+    paramBuilder.Authorization(km::TAG_STORAGE_KEY);
     if (!keymaster.generateKey(paramBuilder, &key_temp)) return false;
     *key = KeyBuffer(key_temp.size());
     memcpy(reinterpret_cast<void*>(key->data()), key_temp.c_str(), key->size());
     return true;
 }
 
-bool getEphemeralWrappedKey(km::KeyFormat format, KeyBuffer& kmKey, KeyBuffer* key) {
-    std::string key_temp;
+bool exportWrappedStorageKey(const KeyBuffer& kmKey, KeyBuffer* key) {
     Keymaster keymaster;
     if (!keymaster) return false;
+    std::string key_temp;
 
-    //Export once, if upgrade needed, upgrade and export again
-    bool export_again = true;
-    while (export_again) {
-        export_again = false;
-        auto ret = keymaster.exportKey(format, kmKey, "!", "!", &key_temp);
-        if (ret == km::ErrorCode::OK) {
-            *key = KeyBuffer(key_temp.size());
-            memcpy(reinterpret_cast<void*>(key->data()), key_temp.c_str(), key->size());
-            return true;
-        }
-        if (ret != km::ErrorCode::KEY_REQUIRES_UPGRADE) return false;
-        LOG(DEBUG) << "Upgrading key";
-        std::string kmKeyStr(reinterpret_cast<const char*>(kmKey.data()), kmKey.size());
-        std::string newKey;
-        if (!keymaster.upgradeKey(kmKeyStr, km::AuthorizationSet(), &newKey)) return false;
-        memcpy(reinterpret_cast<void*>(kmKey.data()), newKey.c_str(), kmKey.size());
-        LOG(INFO) << "Key upgraded";
-        export_again = true;
-    }
-    //Should never come here
-    return false;
+    if (!keymaster.exportKey(kmKey, &key_temp)) return false;
+    *key = KeyBuffer(key_temp.size());
+    memcpy(reinterpret_cast<void*>(key->data()), key_temp.c_str(), key->size());
+    return true;
 }
 
 static std::pair<km::AuthorizationSet, km::HardwareAuthToken> beginParams(
@@ -212,7 +180,7 @@ static bool readFileToString(const std::string& filename, std::string* result) {
 
 static bool readRandomBytesOrLog(size_t count, std::string* out) {
     auto status = ReadRandomBytes(count, *out);
-    if (status != OK) {
+    if (status != android::OK) {
         LOG(ERROR) << "Random read failed with status: " << status;
         return false;
     }
@@ -234,27 +202,26 @@ bool readSecdiscardable(const std::string& filename, std::string* hash) {
     return true;
 }
 
-// static void deferedKmDeleteKey(const std::string& kmkey) {
-//     while (!android::base::WaitForProperty("vold.checkpoint_committed", "1")) {
-//         LOG(ERROR) << "Wait for boot timed out";
-//     }
-//     Keymaster keymaster;
-//     if (!keymaster || !keymaster.deleteKey(kmkey)) {
-//         LOG(ERROR) << "Defered Key deletion failed during upgrade";
-//     }
-// }
+static void deferedKmDeleteKey(const std::string& kmkey) {
+    while (!android::base::WaitForProperty("vold.checkpoint_committed", "1")) {
+        LOG(ERROR) << "Wait for boot timed out";
+    }
+    Keymaster keymaster;
+    if (!keymaster || !keymaster.deleteKey(kmkey)) {
+        LOG(ERROR) << "Defered Key deletion failed during upgrade";
+    }
+}
 
 bool kmDeleteKey(Keymaster& keymaster, const std::string& kmKey) {
-    return true;
-    // bool needs_cp = cp_needsCheckpoint();
+    bool needs_cp = cp_needsCheckpoint();
 
-    // if (needs_cp) {
-    //     std::thread(deferedKmDeleteKey, kmKey).detach();
-    //     LOG(INFO) << "Deferring Key deletion during upgrade";
-    //     return true;
-    // } else {
-    //     return keymaster.deleteKey(kmKey);
-    // }
+    if (needs_cp) {
+        std::thread(deferedKmDeleteKey, kmKey).detach();
+        LOG(INFO) << "Deferring Key deletion during upgrade";
+        return true;
+    } else {
+        return keymaster.deleteKey(kmKey);
+    }
 }
 
 static KeymasterOperation begin(Keymaster& keymaster, const std::string& dir,
@@ -283,7 +250,7 @@ static KeymasterOperation begin(Keymaster& keymaster, const std::string& dir,
         //         PLOG(ERROR) << "Unable to move upgraded key to location: " << kmKeyPath;
         //         return KeymasterOperation();
         //     }
-        //     if (!android::vold::FsyncDirectory(dir)) {
+        //     if (!::FsyncDirectory(dir)) {
         //         LOG(ERROR) << "Key dir sync failed: " << dir;
         //         return KeymasterOperation();
         //     }
@@ -292,7 +259,7 @@ static KeymasterOperation begin(Keymaster& keymaster, const std::string& dir,
         //     }
         // }
         kmKey = newKey;
-        LOG(INFO) << "Key upgraded in memory: " << dir;
+        LOG(INFO) << "Key upgraded: " << dir;
     }
 }
 
@@ -522,7 +489,7 @@ bool storeKey(const std::string& dir, const KeyAuthentication& auth, const KeyBu
     if (!writeStringToFile(stretching, dir + "/" + kFn_stretching)) return false;
     std::string salt;
     if (stretchingNeedsSalt(stretching)) {
-        if (ReadRandomBytes(SALT_BYTES, salt) != OK) {
+        if (ReadRandomBytes(SALT_BYTES, salt) != android::OK) {
             LOG(ERROR) << "Random read failed";
             return false;
         }
@@ -561,7 +528,7 @@ bool storeKeyAtomically(const std::string& key_path, const std::string& tmp_path
         LOG(DEBUG) << "Already exists, destroying: " << tmp_path;
         destroyKey(tmp_path);  // May be partially created so ignore errors
     }
-    if (!storeKey(tmp_path, auth, key)) return false;
+    if (!::storeKey(tmp_path, auth, key)) return false;
     if (rename(tmp_path.c_str(), key_path.c_str()) != 0) {
         PLOG(ERROR) << "Unable to move new key to location: " << key_path;
         return false;
@@ -653,6 +620,3 @@ bool destroyKey(const std::string& dir) {
     success &= recursiveDeleteKey(dir);
     return success;
 }
-
-}  // namespace vold
-}  // namespace android
