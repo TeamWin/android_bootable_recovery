@@ -297,8 +297,8 @@ ifeq ($(TW_INCLUDE_L_CRYPTO), true)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
-    # LOCAL_SHARED_LIBRARIES += libcryptfsfde
-    LOCAL_SHARED_LIBRARIES += libgpt_twrp
+    LOCAL_SHARED_LIBRARIES += libcryptfsfde
+    LOCAL_SHARED_LIBRARIES += libgpt_twrp libstatssocket.recovery
     LOCAL_C_INCLUDES += external/boringssl/src/include bootable/recovery/crypto/fscrypt \
         bootable/recovery/crypto
     TW_INCLUDE_CRYPTO_FBE := true
@@ -649,7 +649,7 @@ ifneq ($(TW_OZIP_DECRYPT_KEY),)
 endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
-    # include $(commands_TWRP_local_path)/crypto/fde/Android.mk
+    include $(commands_TWRP_local_path)/crypto/fde/Android.mk
     include $(commands_TWRP_local_path)/crypto/scrypt/Android.mk
     ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         include $(commands_TWRP_local_path)/crypto/fscrypt/Android.mk

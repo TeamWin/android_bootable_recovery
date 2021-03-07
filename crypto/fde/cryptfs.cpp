@@ -879,7 +879,7 @@ static int get_crypt_ftr_and_key(struct crypt_mnt_ftr *crypt_ftr)
     return -1;
   }
   if (fname[0] != '/') {
-    SLOGE("Unexpected value for crypto key location\n");
+    SLOGE("fde::get_crypt_ftr_and_key::Unexpected value for crypto key location: %s\n", fname);
     return -1;
   }
   if ( (fd = open(fname, O_RDWR|O_CLOEXEC)) < 0) {

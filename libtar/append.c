@@ -48,6 +48,10 @@
 
 #include "android_utils.h"
 
+#ifdef TW_LIBTAR_DEBUG
+#define DEBUG 1
+#endif
+
 struct tar_dev
 {
 	dev_t td_dev;
@@ -84,8 +88,8 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	char path[MAXPATHLEN];
 
 #ifdef DEBUG
-	printf("==> tar_append_file(TAR=0x%lx (\"%s\"), realname=\"%s\", "
-	       "savename=\"%s\")\n", t, t->pathname, realname,
+	printf("==> tar_append_file(TAR=0x%p (\"%s\"), realname=\"%s\", "
+	       "savename=\"%s\")\n", (void*) t, t->pathname, realname,
 	       (savename ? savename : "[NULL]"));
 #endif
 
@@ -266,7 +270,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	else
 	{
 #ifdef DEBUG
-		printf("+++ adding hash for device (0x%lx, 0x%lx)...\n",
+		printf("+++ adding hash for device (0x%x, 0x%x)...\n",
 		       major(s.st_dev), minor(s.st_dev));
 #endif
 		td = (tar_dev_t *)calloc(1, sizeof(tar_dev_t));
@@ -292,9 +296,9 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	else
 	{
 #ifdef DEBUG
-		printf("+++ adding entry: device (0x%lx,0x%lx), inode %ld "
+		printf("+++ adding entry: device (0x%d,0x%x), inode %lu"
 		       "(\"%s\")...\n", major(s.st_dev), minor(s.st_dev),
-		       s.st_ino, realname);
+		       (unsigned long) s.st_ino, realname);
 #endif
 		ti = (tar_ino_t *)calloc(1, sizeof(tar_ino_t));
 		if (ti == NULL)
@@ -332,7 +336,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	if (th_write(t) != 0)
 	{
 #ifdef DEBUG
-		printf("t->fd = %d\n", t->fd);
+		printf("t->fd = %ld\n", t->fd);
 #endif
 		return -1;
 	}
@@ -448,7 +452,7 @@ tar_append_file_contents(TAR *t, const char *savename, mode_t mode,
 	if (th_write(t) != 0)
 	{
 #ifdef DEBUG
-		fprintf(stderr, "tar_append_file_contents(): could not write header, t->fd = %d\n", t->fd);
+		fprintf(stderr, "tar_append_file_contents(): could not write header, t->fd = %ld\n", t->fd);
 #endif
 		return -1;
 	}
