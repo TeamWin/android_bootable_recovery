@@ -18,16 +18,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fscrypt_policy.h"
+#include "fscrypt/fscrypt.h"
 
 int main(int argc, char *argv[]) {
 	if (argc != 2) {
 		printf("Must specify a path\n");
 		return -1;
 	} else  {
-		fscrypt_encryption_policy fep;
+#ifdef USE_FSCRYPT_POLICY_V1
+		fscrypt_policy_v1 fep;
+#else
+		fscrypt_policy_v2 fep;
+#endif
 		if (fscrypt_policy_get_struct(argv[1], &fep)) {
-			char policy_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
-			policy_to_hex(fep.master_key_descriptor, policy_hex);
+			char policy_hex[FSCRYPT_KEY_IDENTIFIER_HEX_SIZE];
+			bytes_to_hex(fep.master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
 			printf("%s\n", policy_hex);
 		} else {
 			printf("No policy set\n");

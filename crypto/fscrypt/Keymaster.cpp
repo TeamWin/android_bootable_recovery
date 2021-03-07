@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at  
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,11 +17,9 @@
 #include "Keymaster.h"
 
 #include <android-base/logging.h>
-#include <keymasterV4_0/authorization_set.h>
-#include <keymasterV4_0/keymaster_utils.h>
+#include <keymasterV4_1/authorization_set.h>
+#include <keymasterV4_1/keymaster_utils.h>
 
-namespace android {
-namespace vold {
 
 using ::android::hardware::hidl_string;
 using ::android::hardware::hidl_vec;
@@ -138,30 +136,25 @@ bool Keymaster::generateKey(const km::AuthorizationSet& inParams, std::string* k
     return true;
 }
 
-km::ErrorCode Keymaster::exportKey(km::KeyFormat format, KeyBuffer& kmKey, const std::string& clientId,
-                          const std::string& appData, std::string* key) {
+bool Keymaster::exportKey(const KeyBuffer& kmKey, std::string* key) {
     auto kmKeyBlob = km::support::blob2hidlVec(std::string(kmKey.data(), kmKey.size()));
-    auto emptyAssign = NULL;
-    auto kmClientId = (clientId == "!") ? emptyAssign: km::support::blob2hidlVec(clientId);
-    auto kmAppData = (appData == "!") ? emptyAssign: km::support::blob2hidlVec(appData);
     km::ErrorCode km_error;
     auto hidlCb = [&](km::ErrorCode ret, const hidl_vec<uint8_t>& exportedKeyBlob) {
         km_error = ret;
         if (km_error != km::ErrorCode::OK) return;
-        if(key)
-            key->assign(reinterpret_cast<const char*>(&exportedKeyBlob[0]),
-                            exportedKeyBlob.size());
+        if (key)
+            key->assign(reinterpret_cast<const char*>(&exportedKeyBlob[0]), exportedKeyBlob.size());
     };
-    auto error = mDevice->exportKey(format, kmKeyBlob, kmClientId, kmAppData, hidlCb);
+    auto error = mDevice->exportKey(km::KeyFormat::RAW, kmKeyBlob, {}, {}, hidlCb);
     if (!error.isOk()) {
         LOG(ERROR) << "export_key failed: " << error.description();
-        return km::ErrorCode::UNKNOWN_ERROR;
+        return false;
     }
     if (km_error != km::ErrorCode::OK) {
         LOG(ERROR) << "export_key failed, code " << int32_t(km_error);
-        return km_error;
+        return false;
     }
-    return km::ErrorCode::OK;
+    return true;
 }
 
 bool Keymaster::deleteKey(const std::string& key) {
@@ -233,10 +226,22 @@ bool Keymaster::isSecure() {
     return mDevice->halVersion().securityLevel != km::SecurityLevel::SOFTWARE;
 }
 
-}  // namespace vold
-}  // namespace android
-
-using namespace ::android::vold;
+void Keymaster::earlyBootEnded() {
+    auto devices = KmDevice::enumerateAvailableDevices();
+    for (auto& dev : devices) {
+        auto error = dev->earlyBootEnded();
+        if (!error.isOk()) {
+            LOG(ERROR) << "earlyBootEnded call failed: " << error.description() << " for "
+                       << dev->halVersion().keymasterName;
+        }
+        km::V4_1_ErrorCode km_error = error;
+        if (km_error != km::V4_1_ErrorCode::OK && km_error != km::V4_1_ErrorCode::UNIMPLEMENTED) {
+            LOG(ERROR) << "Error reporting early boot ending to keymaster: "
+                       << static_cast<int32_t>(km_error) << " for "
+                       << dev->halVersion().keymasterName;
+        }
+    }
+}
 
 int keymaster_compatibility_cryptfs_scrypt() {
     Keymaster dev;

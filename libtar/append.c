@@ -38,15 +38,15 @@
 
 #include <selinux/selinux.h>
 
-#ifdef HAVE_EXT4_CRYPT
-#include "ext4crypt_tar.h"
-#endif
-
 #ifdef USE_FSCRYPT
 #include "fscrypt_policy.h"
 #endif
 
 #include "android_utils.h"
+
+#ifdef TW_LIBTAR_DEBUG
+#define DEBUG 1
+#endif
 
 struct tar_dev
 {
@@ -84,8 +84,8 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	char path[MAXPATHLEN];
 
 #ifdef DEBUG
-	printf("==> tar_append_file(TAR=0x%lx (\"%s\"), realname=\"%s\", "
-	       "savename=\"%s\")\n", t, t->pathname, realname,
+	printf("==> tar_append_file(TAR=0x%p (\"%s\"), realname=\"%s\", "
+	       "savename=\"%s\")\n", (void*) t, t->pathname, realname,
 	       (savename ? savename : "[NULL]"));
 #endif
 
@@ -134,45 +134,6 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 		}
 	}
 
-#ifdef HAVE_EXT4_CRYPT
-	if (TH_ISDIR(t) && t->options & TAR_STORE_EXT4_POL)
-	{
-		if (t->th_buf.eep != NULL)
-		{
-			free(t->th_buf.eep);
-			t->th_buf.eep = NULL;
-		}
-
-		t->th_buf.eep = (struct ext4_encryption_policy*)malloc(sizeof(struct ext4_encryption_policy));
-		if (!t->th_buf.eep) {
-			printf("malloc ext4_encryption_policy\n");
-			return -1;
-		}
-
-		if (e4crypt_policy_get_struct(realname, t->th_buf.eep))
-		{
-			char tar_policy[EXT4_KEY_DESCRIPTOR_SIZE];
-			memset(tar_policy, 0, sizeof(tar_policy));
-			char policy_hex[EXT4_KEY_DESCRIPTOR_SIZE_HEX];
-			policy_to_hex(t->th_buf.eep->master_key_descriptor, policy_hex);
-			if (lookup_ref_key(t->th_buf.eep->master_key_descriptor, &tar_policy[0])) {
-				printf("found policy '%s' - '%s' - '%s'\n", realname, tar_policy, policy_hex);
-				memcpy(t->th_buf.eep->master_key_descriptor, tar_policy, EXT4_KEY_DESCRIPTOR_SIZE);
-			} else {
-				printf("failed to lookup tar policy for '%s' - '%s'\n", realname, policy_hex);
-				free(t->th_buf.eep);
-				t->th_buf.eep = NULL;
-				return -1;
-			}
-		}
-		else
-		{
-			// no policy found, but this is not an error as not all dirs will have a policy
-			free(t->th_buf.eep);
-			t->th_buf.eep = NULL;
-		}
-	}
-#endif
 #ifdef USE_FSCRYPT
 	if (TH_ISDIR(t) && t->options & TAR_STORE_FSCRYPT_POL)
 	{
@@ -181,21 +142,31 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 			free(t->th_buf.fep);
 			t->th_buf.fep = NULL;
 		}
-
-		t->th_buf.fep = (struct fscrypt_encryption_policy*)malloc(sizeof(struct fscrypt_encryption_policy));
+#ifdef USE_FSCRYPT_POLICY_V1
+		t->th_buf.fep = (struct fscrypt_policy_v1 *)malloc(sizeof(struct fscrypt_policy_v1));
+#else
+		t->th_buf.fep = (struct fscrypt_policy_v2 *)malloc(sizeof(struct fscrypt_policy_v2));
+#endif
 		if (!t->th_buf.fep) {
 			printf("malloc fs_encryption_policy\n");
 			return -1;
 		}
 
 		if (fscrypt_policy_get_struct(realname, t->th_buf.fep)) {
-			uint8_t tar_policy[FS_KEY_DESCRIPTOR_SIZE];
+			uint8_t tar_policy[FSCRYPT_KEY_IDENTIFIER_SIZE];
 			memset(tar_policy, 0, sizeof(tar_policy));
-			char policy_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
-			policy_to_hex(t->th_buf.fep->master_key_descriptor, policy_hex);
-			if (lookup_ref_key(t->th_buf.fep->master_key_descriptor, &tar_policy[0])) {
-				printf("found fscrypt policy '%s' - '%s' - '%s'\n", realname, tar_policy, policy_hex);
-				memcpy(t->th_buf.fep->master_key_descriptor, tar_policy, FS_KEY_DESCRIPTOR_SIZE);
+			char policy_hex[FSCRYPT_KEY_IDENTIFIER_HEX_SIZE];
+			bytes_to_hex(t->th_buf.fep->master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
+			if (lookup_ref_key(t->th_buf.fep,  &tar_policy[0])) {
+				if (strncmp((char *) tar_policy, "0CE0", 4) == 0 || strncmp((char *) tar_policy, "0DE0", 4) == 0 
+				|| strncmp((char *) tar_policy, "0DK", 3) == 0) {
+					memcpy(t->th_buf.fep->master_key_identifier, tar_policy, FSCRYPT_KEY_IDENTIFIER_SIZE);
+					printf("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_identifier, policy_hex);
+				} else {
+					printf("failed to match fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
+					free(t->th_buf.fep);
+					t->th_buf.fep = NULL;
+				}
 			} else {
 				printf("failed to lookup fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
 				free(t->th_buf.fep);
@@ -266,7 +237,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	else
 	{
 #ifdef DEBUG
-		printf("+++ adding hash for device (0x%lx, 0x%lx)...\n",
+		printf("+++ adding hash for device (0x%x, 0x%x)...\n",
 		       major(s.st_dev), minor(s.st_dev));
 #endif
 		td = (tar_dev_t *)calloc(1, sizeof(tar_dev_t));
@@ -292,9 +263,9 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	else
 	{
 #ifdef DEBUG
-		printf("+++ adding entry: device (0x%lx,0x%lx), inode %ld "
+		printf("+++ adding entry: device (0x%d,0x%x), inode %lu"
 		       "(\"%s\")...\n", major(s.st_dev), minor(s.st_dev),
-		       s.st_ino, realname);
+		       (unsigned long) s.st_ino, realname);
 #endif
 		ti = (tar_ino_t *)calloc(1, sizeof(tar_ino_t));
 		if (ti == NULL)
@@ -332,7 +303,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	if (th_write(t) != 0)
 	{
 #ifdef DEBUG
-		printf("t->fd = %d\n", t->fd);
+		printf("t->fd = %ld\n", t->fd);
 #endif
 		return -1;
 	}
@@ -448,7 +419,7 @@ tar_append_file_contents(TAR *t, const char *savename, mode_t mode,
 	if (th_write(t) != 0)
 	{
 #ifdef DEBUG
-		fprintf(stderr, "tar_append_file_contents(): could not write header, t->fd = %d\n", t->fd);
+		fprintf(stderr, "tar_append_file_contents(): could not write header, t->fd = %ld\n", t->fd);
 #endif
 		return -1;
 	}

@@ -22,10 +22,6 @@
 #define DEBUG 1
 #endif
 
-#ifdef HAVE_EXT4_CRYPT
-#include "ext4crypt_tar.h"
-#endif
-
 #ifdef USE_FSCRYPT
 #include "fscrypt_policy.h"
 #endif
@@ -36,10 +32,6 @@
 // metadata. From RedHat implementation.
 #define SELINUX_TAG "RHT.security.selinux="
 #define SELINUX_TAG_LEN strlen(SELINUX_TAG)
-
-// Used to identify e4crypt_policy in extended ('x')
-#define E4CRYPT_TAG "TWRP.security.e4crypt="
-#define E4CRYPT_TAG_LEN strlen(E4CRYPT_TAG)
 
 // Used to identify fscrypt_policy in extended ('x')
 #define FSCRYPT_TAG "TWRP.security.fscrypt="
@@ -153,10 +145,6 @@ th_read(TAR *t)
 		free(t->th_buf.gnu_longlink);
 	if (t->th_buf.selinux_context != NULL)
 		free(t->th_buf.selinux_context);
-#ifdef HAVE_EXT4_CRYPT
-	if (t->th_buf.eep != NULL)
-		free(t->th_buf.eep);
-#endif
 
 #ifdef USE_FSCRYPT
 	if (t->th_buf.fep != NULL)
@@ -362,71 +350,41 @@ th_read(TAR *t)
 				printf("    th_read(): android user.inode_code_cache xattr detected\n");
 #endif
 			} // end android user.inode_code_cache xattr
-#ifdef HAVE_EXT4_CRYPT
-			start = strstr(buf, E4CRYPT_TAG);
-			if (start && start+E4CRYPT_TAG_LEN < buf+len)
-			{
-				t->th_buf.eep = (struct ext4_encryption_policy*)malloc(sizeof(struct ext4_encryption_policy));
-				if (!t->th_buf.eep) {
-					printf("malloc ext4_encryption_policy\n");
-					return -1;
-				}
-				start += E4CRYPT_TAG_LEN;
-				if (*start == '2')
-				{
-					start++;
-					char *newline_check = start + sizeof(struct ext4_encryption_policy);
-					if (*newline_check != '\n')
-						printf("did not find newline char in expected location, continuing anyway...\n");
-					memcpy(t->th_buf.eep, start, sizeof(struct ext4_encryption_policy));
-#ifdef DEBUG
-					printf("    th_read(): E4Crypt policy v2 detected: %i %i %i %i %s\n",
-						(int)t->th_buf.eep->version,
-						(int)t->th_buf.eep->contents_encryption_mode,
-						(int)t->th_buf.eep->filenames_encryption_mode,
-						(int)t->th_buf.eep->flags,
-						t->th_buf.eep->master_key_descriptor);
-#endif
-				}
-				else
-				{
-					e4crypt_policy_fill_default_struct(t->th_buf.eep);
-					char *end = strchr(start, '\n');
-					if(!end)
-						end = strchr(start, '\0');
-					if(end)
-					{
-						strncpy(t->th_buf.eep->master_key_descriptor, start, end-start);
-#ifdef DEBUG
-						printf("    th_read(): E4Crypt policy v1 detected: %s\n", t->th_buf.eep->master_key_descriptor);
-#endif
-					}
-				}
-			}
-#endif // HAVE_EXT4_CRYPT
 
 #ifdef USE_FSCRYPT
 			start = strstr(buf, FSCRYPT_TAG);
 			if (start && start+FSCRYPT_TAG_LEN < buf+len) {
-				t->th_buf.fep = (struct fscrypt_encryption_policy*)malloc(sizeof(struct fscrypt_encryption_policy));
+#ifdef USE_FSCRYPT_POLICY_V1
+				t->th_buf.fep = (struct fscrypt_policy_v1*)malloc(sizeof(struct fscrypt_policy_v1));
+#else
+				t->th_buf.fep = (struct fscrypt_policy_v2*)malloc(sizeof(struct fscrypt_policy_v2));
+#endif
 				if (!t->th_buf.fep) {
-					printf("malloc fscrypt_encryption_policy\n");
+					printf("malloc failed for fscrypt policy\n");
 					return -1;
 				}
 				start += FSCRYPT_TAG_LEN;
 				if (*start == '0') {
 					start++;
-					char *newline_check = start + sizeof(struct fscrypt_encryption_policy);
+#ifdef USE_FSCRYPT_POLICY_V1
+					char *newline_check = start + sizeof(struct fscrypt_policy_v1);
+#else
+					char *newline_check = start + sizeof(struct fscrypt_policy_v2);
+#endif
 					if (*newline_check != '\n')
 						printf("did not find newline char in expected location, continuing anyway...\n");
-					memcpy(t->th_buf.fep, start, sizeof(struct fscrypt_encryption_policy));
+#ifdef USE_FSCRYPT_POLICY_V1
+					memcpy(t->th_buf.fep, start, sizeof(struct fscrypt_policy_v1));
+#else
+					memcpy(t->th_buf.fep, start, sizeof(struct fscrypt_policy_v2));
+#endif
 #ifdef DEBUG
-					printf("    th_read(): FSCrypt policy v1 detected: %i %i %i %i %s\n",
+					printf("    th_read(): FSCrypt policy detected: %i %i %i %i %s\n",
 						(int)t->th_buf.fep->version,
 						(int)t->th_buf.fep->contents_encryption_mode,
 						(int)t->th_buf.fep->filenames_encryption_mode,
 						(int)t->th_buf.fep->flags,
-						t->th_buf.fep->master_key_descriptor);
+						t->th_buf.fep->master_key_identifier);
 #endif
 				}
 				else {
@@ -632,48 +590,20 @@ th_write(TAR *t)
 		ptr += sz;
 	}
 
-#ifdef HAVE_EXT4_CRYPT
-	if((t->options & TAR_STORE_EXT4_POL) && t->th_buf.eep != NULL)
-	{
-#ifdef DEBUG
-		printf("th_write(): using e4crypt_policy %s\n",
-		       t->th_buf.eep->master_key_descriptor);
-#endif
-		/* setup size - EXT header has format "*size of this whole tag as ascii numbers* *space* *version code* *content* *newline* */
-		//                                                       size   newline
-		sz = E4CRYPT_TAG_LEN + sizeof(struct ext4_encryption_policy) + 1 + 3  +    1;
-
-		if(sz >= 100) // another ascci digit for size
-			++sz;
-
-		if (total_sz + sz >= T_BLOCKSIZE)
-		{
-			if (th_write_extended(t, &buf[0], total_sz))
-				return -1;
-			ptr = buf;
-			total_sz = sz;
-		}
-		else
-			total_sz += sz;
-
-		snprintf(ptr, T_BLOCKSIZE, "%d "E4CRYPT_TAG"2", (int)sz);
-		memcpy(ptr + sz - sizeof(struct ext4_encryption_policy) - 1, t->th_buf.eep, sizeof(struct ext4_encryption_policy));
-		char *nlptr = ptr + sz - 1;
-		*nlptr = '\n';
-		ptr += sz;
-	}
-#endif
-
 #ifdef USE_FSCRYPT
 	if((t->options & TAR_STORE_FSCRYPT_POL) && t->th_buf.fep != NULL)
 	{
 #ifdef DEBUG
 		printf("th_write(): using fscrypt_policy %s\n",
-		       t->th_buf.fep->master_key_descriptor);
+		       t->th_buf.fep->master_key_identifier);
 #endif
 		/* setup size - EXT header has format "*size of this whole tag as ascii numbers* *space* *version code* *content* *newline* */
 		//                                                       size   newline
-		sz = FSCRYPT_TAG_LEN + sizeof(struct fscrypt_encryption_policy) + 1 + 3  +    1;
+#ifdef USE_FSCRYPT_POLICY_V1
+		sz = FSCRYPT_TAG_LEN + sizeof(struct fscrypt_policy_v1) + 1 + 3  +    1;
+#else
+		sz = FSCRYPT_TAG_LEN + sizeof(struct fscrypt_policy_v2) + 1 + 3  +    1;
+#endif
 
 		if(sz >= 100) // another ascci digit for size
 			++sz;
@@ -689,7 +619,11 @@ th_write(TAR *t)
 			total_sz += sz;
 
 		snprintf(ptr, T_BLOCKSIZE, "%d "FSCRYPT_TAG"0", (int)sz);
-		memcpy(ptr + sz - sizeof(struct fscrypt_encryption_policy) - 1, t->th_buf.fep, sizeof(struct fscrypt_encryption_policy));
+#ifdef USE_FSCRYPT_POLICY_V1
+		memcpy(ptr + sz - sizeof(struct fscrypt_policy_v1) - 1, t->th_buf.fep, sizeof(struct fscrypt_policy_v1));
+#else
+		memcpy(ptr + sz - sizeof(struct fscrypt_policy_v2) - 1, t->th_buf.fep, sizeof(struct fscrypt_policy_v2));
+#endif
 		char *nlptr = ptr + sz - 1;
 		*nlptr = '\n';
 		ptr += sz;
