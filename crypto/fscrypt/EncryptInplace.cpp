@@ -391,6 +391,8 @@ static int cryptfs_enable_inplace_f2fs(const char* crypto_blkdev, const char* re
     struct encryptGroupsData data;
     struct f2fs_info* f2fs_info = NULL;
     int rc = ENABLE_INPLACE_ERR_OTHER;
+    struct timespec time_started = {0};
+
     if (previously_encrypted_upto > *size_already_done) {
         LOG(DEBUG) << "Not fast encrypting since resuming part way through";
         return ENABLE_INPLACE_ERR_OTHER;
@@ -423,8 +425,13 @@ static int cryptfs_enable_inplace_f2fs(const char* crypto_blkdev, const char* re
 
     data.one_pct = data.tot_used_blocks / 100;
     data.cur_pct = 0;
-    data.time_started = time(NULL);
+    if (clock_gettime(CLOCK_MONOTONIC, &time_started)) {
+        LOG(WARNING) << "Error getting time at start";
+        // Note - continue anyway - we'll run with 0
+    }
+    data.time_started = time_started.tv_sec;
     data.remaining_time = -1;
+
 
     data.buffer = (char*)malloc(f2fs_info->block_size);
     if (!data.buffer) {
