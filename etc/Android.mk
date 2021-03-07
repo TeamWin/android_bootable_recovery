@@ -85,7 +85,6 @@ ifeq ($(AB_OTA_UPDATER),true)
 	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
 endif
-$(warning LOCAL_POST_INSTALL_CMD: $(LOCAL_POST_INSTALL_CMD))
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
 	include $(CLEAR_VARS)
