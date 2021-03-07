@@ -403,6 +403,7 @@ void TWPartitionManager::Decrypt_Data() {
 		property_set("ro.crypto.type", "file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
+			LOGINFO("fscrypt_mount_metadata_encrypted\n");
 			if (fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false)) {
 				std::string crypto_blkdev =android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
 				Decrypt_Data->Decrypted_Block_Device = crypto_blkdev;
