@@ -24,10 +24,6 @@
 # include <string.h>
 #endif
 
-#ifdef HAVE_EXT4_CRYPT
-#include "ext4crypt_tar.h"
-#endif
-
 #ifdef USE_FSCRYPT
 #include "fscrypt_policy.h"
 #endif
@@ -64,13 +60,10 @@ th_print(TAR *t)
 	       (t->th_buf.gnu_longname ? t->th_buf.gnu_longname : "[NULL]"));
 	printf("  gnu_longlink = \"%s\"\n",
 	       (t->th_buf.gnu_longlink ? t->th_buf.gnu_longlink : "[NULL]"));
-#ifdef HAVE_EXT4_CRYPT
-	printf("  eep = \"%s\"\n",
-	       (t->th_buf.eep ? t->th_buf.eep->master_key_descriptor : "[NULL]"));
-#endif
+		   
 #ifdef USE_FSCRYPT
 	printf("  fep = \"%s\"\n",
-	       (t->th_buf.fep ? t->th_buf.fep->master_key_descriptor : (uint8_t*) "[NULL]"));
+	       (t->th_buf.fep ? t->th_buf.fep->master_key_identifier : (uint8_t*) "[NULL]"));
 #endif
 }
 

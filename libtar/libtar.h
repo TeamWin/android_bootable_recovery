@@ -20,10 +20,6 @@
 
 #include "libtar_listhash.h"
 
-#ifdef HAVE_EXT4_CRYPT
-# include "ext4crypt_tar.h"
-#endif
-
 #ifdef USE_FSCRYPT
 #include "fscrypt_policy.h"
 #endif
@@ -72,11 +68,12 @@ struct tar_header
 	char *gnu_longname;
 	char *gnu_longlink;
 	char *selinux_context;
-#ifdef HAVE_EXT4_CRYPT
-	struct ext4_encryption_policy *eep;
-#endif
 #ifdef USE_FSCRYPT
-	struct fscrypt_encryption_policy *fep;
+#ifdef USE_FSCRYPT_POLICY_V1
+	struct fscrypt_policy_v1 *fep;
+#else
+	struct fscrypt_policy_v2  *fep;
+#endif
 #endif
 	int has_cap_data;
 	struct vfs_cap_data cap_data;
@@ -127,12 +124,11 @@ TAR;
 #define TAR_IGNORE_CRC		64	/* ignore CRC in file header */
 #define TAR_STORE_SELINUX	128	/* store selinux context */
 #define TAR_USE_NUMERIC_ID	256	/* favor numeric owner over names */
-#ifdef HAVE_EXT4_CRYPT
-#define TAR_STORE_EXT4_POL	512	/* store ext4 crypto policy */
-#endif
+
 #ifdef USE_FSCRYPT
 #define TAR_STORE_FSCRYPT_POL 512 /* store fscrypt crypto policy */
 #endif
+
 #define TAR_STORE_POSIX_CAP	1024	/* store posix file capabilities */
 #define TAR_STORE_ANDROID_USER_XATTR	2048	/* store android user.* xattr */
 

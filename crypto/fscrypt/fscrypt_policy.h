@@ -25,6 +25,7 @@
 __BEGIN_DECLS
 
 #define FS_KEY_DESCRIPTOR_SIZE_HEX (2 * FS_KEY_DESCRIPTOR_SIZE + 1)
+#define FSCRYPT_KEY_IDENTIFIER_HEX_SIZE ((2 * FSCRYPT_KEY_IDENTIFIER_SIZE) + 1)
 
 /* modes not supported by upstream kernel, so not in <linux/fs.h> */
 #define FS_ENCRYPTION_MODE_AES_256_HEH      126
@@ -42,22 +43,29 @@ __BEGIN_DECLS
 
 #define HEX_LOOKUP "0123456789abcdef"
 
-struct fscrypt_encryption_policy {
-  uint8_t version;
-  uint8_t contents_encryption_mode;
-  uint8_t filenames_encryption_mode;
-  uint8_t flags;
-  uint8_t master_key_descriptor[FS_KEY_DESCRIPTOR_SIZE];
-} __attribute__((packed));
-
-
 bool fscrypt_set_mode();
-bool lookup_ref_key(const uint8_t *policy, uint8_t* policy_type);
+
+#ifdef USE_FSCRYPT_POLICY_V1
+bool lookup_ref_key(struct fscrypt_policy_v1 *fep, uint8_t* policy_type);
+#else
+bool lookup_ref_key(struct fscrypt_policy_v2 *fep, uint8_t* policy_type);
+#endif
+
 bool lookup_ref_tar(const uint8_t *policy_type, uint8_t *policy);
-void policy_to_hex(const uint8_t* policy, char* hex);
-bool fscrypt_policy_get_struct(const char *directory, struct fscrypt_encryption_policy *fep);
-bool fscrypt_policy_set_struct(const char *directory, const struct fscrypt_encryption_policy *fep);
-void fscrypt_policy_fill_default_struct(struct fscrypt_encryption_policy *fep);
+
+#ifdef USE_FSCRYPT_POLICY_V1
+bool fscrypt_policy_get_struct(const char *directory, struct fscrypt_policy_v1  *fep);
+#else
+bool fscrypt_policy_get_struct(const char *directory, struct fscrypt_policy_v2  *fep);
+#endif
+
+#ifdef USE_FSCRYPT_POLICY_V1
+bool fscrypt_policy_set_struct(const char *directory, const struct fscrypt_policy_v1  *fep);
+#else
+bool fscrypt_policy_set_struct(const char *directory, const struct fscrypt_policy_v2  *fep);
+#endif
+
+void bytes_to_hex(const uint8_t *bytes, size_t num_bytes, char *hex);
 __END_DECLS
 
 #endif // _FS_CRYPT_H_
