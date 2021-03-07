@@ -78,7 +78,11 @@ RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/keystore_cli_v2
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/hwservicemanager
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/servicemanager
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/vold_prepare_subdirs
-RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_EXECUTABLES)/hw/android.hardware.boot@1.0-service
+ifeq ($(ENABLE_VIRTUAL_AB), true)
+    RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_EXECUTABLES)/hw/android.hardware.boot@1.1-service
+else
+    RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_EXECUTABLES)/hw/android.hardware.boot@1.0-service
+endif
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_EXECUTABLES)/vndservicemanager
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/toybox
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_EXECUTABLES)/hw/android.hardware.health@2.0-service
@@ -224,7 +228,11 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
 endif
 ifeq ($(AB_OTA_UPDATER), true)
     RECOVERY_BINARY_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/system/bin/update_engine_sideload
-    RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.boot@1.0.so
+    ifeq ($(ENABLE_VIRTUAL_AB), true)
+        RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.boot@1.1.so
+    else
+        RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.boot@1.0.so
+    endif
     RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/bootctl
 endif
 
@@ -354,7 +362,14 @@ LOCAL_MODULE := relink_binaries
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/
-LOCAL_POST_INSTALL_CMD += $(RELINK) $(TARGET_RECOVERY_ROOT_OUT)/system/bin $(RECOVERY_BINARY_SOURCE_FILES)
+LOCAL_POST_INSTALL_CMD += \
+	$(RELINK) $(TARGET_RECOVERY_ROOT_OUT)/system/bin $(RECOVERY_BINARY_SOURCE_FILES); \
+	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/etc/vintf/manifest/; \
+	for bin in $(RECOVERY_BINARY_SOURCE_FILES); do \
+	if echo $$bin | grep -q "\-service"; then prfx=$(TARGET_OUT);\
+	if echo $$bin | grep -q "vendor"; then prfx=$(TARGET_OUT_VENDOR); fi; \
+	xml=$$(echo $$bin | awk -F'/' '{ print $$NF }' | cut -d'-' -f1).xml && \
+	cp -f $${prfx}/etc/vintf/manifest/$${xml} $(TARGET_RECOVERY_ROOT_OUT)/system/etc/vintf/manifest/; fi; done
 TARGET_BINARY_RELINK_FILES := $(filter-out bu, $(notdir $(RECOVERY_BINARY_SOURCE_FILES)))
 LOCAL_REQUIRED_MODULES += $(TARGET_BINARY_RELINK_FILES)
 include $(BUILD_PHONY_PACKAGE)

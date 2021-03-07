@@ -145,8 +145,15 @@ endif
 
 ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
-    LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0
-    TWRP_REQUIRED_MODULES += libhardware android.hardware.boot@1.0-service android.hardware.boot@1.0-service.rc
+    LOCAL_SHARED_LIBRARIES += libhardware
+    TWRP_REQUIRED_MODULES += libhardware
+    ifeq ($(ENABLE_VIRTUAL_AB), true)
+        TWRP_REQUIRED_MODULES += android.hardware.boot@1.1-service android.hardware.boot@1.1-service.rc
+        LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.1
+    else
+        TWRP_REQUIRED_MODULES += android.hardware.boot@1.0-service android.hardware.boot@1.0-service.rc
+        LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0
+    endif
 endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
