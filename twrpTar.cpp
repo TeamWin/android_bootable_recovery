@@ -57,17 +57,11 @@ extern "C" {
 #ifdef TW_INCLUDE_FBE
 #ifdef USE_FSCRYPT
 #include "fscrypt_policy.h"
-#else
-#include "crypto/ext4crypt/ext4crypt_tar.h"
 #endif
 #endif
 
-#ifdef TW_INCLUDE_FBE
 #ifdef USE_FSCRYPT
 #define TWTAR_FLAGS TAR_GNU | TAR_STORE_SELINUX | TAR_STORE_POSIX_CAP | TAR_STORE_ANDROID_USER_XATTR | TAR_STORE_FSCRYPT_POL
-#else
-#define TWTAR_FLAGS TAR_GNU | TAR_STORE_SELINUX | TAR_STORE_POSIX_CAP | TAR_STORE_ANDROID_USER_XATTR | TAR_STORE_EXT4_POL
-#endif
 #else
 #define TWTAR_FLAGS TAR_GNU | TAR_STORE_SELINUX | TAR_STORE_POSIX_CAP | TAR_STORE_ANDROID_USER_XATTR
 #endif
@@ -90,12 +84,9 @@ twrpTar::twrpTar(void) {
 	input_fd = -1;
 	output_fd = -1;
 	backup_exclusions = NULL;
-#ifdef TW_INCLUDE_FBE
+
 #ifdef USE_FSCRYPT
 	fscrypt_set_mode();
-#else
-	e4crypt_set_mode();
-#endif
 #endif
 }
 

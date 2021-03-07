@@ -14,6 +14,8 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
     LOCAL_CPPFLAGS := -std=c++11
 endif
 
+LOCAL_C_INCLUDES += $(commands_TWRP_local_path)/crypto/fscrypt
+
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     #8.0 or higher
     LOCAL_C_INCLUDES +=  external/boringssl/src/include
