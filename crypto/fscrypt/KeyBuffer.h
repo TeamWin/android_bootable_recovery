@@ -21,8 +21,6 @@
 #include <memory>
 #include <vector>
 
-namespace android {
-namespace vold {
 
 /**
  * Variant of memset() that should never be optimized away. Borrowed from keymaster code.
@@ -55,9 +53,6 @@ using KeyBuffer = std::vector<char, ZeroingAllocator>;
 // Convenience methods to concatenate key buffers.
 KeyBuffer operator+(KeyBuffer&& lhs, const KeyBuffer& rhs);
 KeyBuffer operator+(KeyBuffer&& lhs, const char* rhs);
-
-}  // namespace vold
-}  // namespace android
 
 #endif
 

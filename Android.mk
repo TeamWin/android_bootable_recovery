@@ -100,7 +100,6 @@ LOCAL_CLANG := true
 
 LOCAL_C_INCLUDES += \
     bionic \
-    system/vold \
     system/extras \
     system/core/adb \
     system/core/libsparse \
@@ -287,10 +286,10 @@ ifeq ($(TW_INCLUDE_L_CRYPTO), true)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
-    # LOCAL_SHARED_LIBRARIES += libcryptfsfde
-    LOCAL_SHARED_LIBRARIES += libgpt_twrp
-    LOCAL_C_INCLUDES += external/boringssl/src/include bootable/recovery/crypto/fscrypt \
-        bootable/recovery/crypto
+    LOCAL_SHARED_LIBRARIES += libcryptfsfde
+    LOCAL_SHARED_LIBRARIES += libgpt_twrp libstatssocket.recovery
+    LOCAL_C_INCLUDES += external/boringssl/src/include bootable/recovery/crypto
+    LOCAL_C_INCLUDES += $(commands_TWRP_local_path)/crypto/fscrypt
     TW_INCLUDE_CRYPTO_FBE := true
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE
     LOCAL_SHARED_LIBRARIES += libtwrpfscrypt android.frameworks.stats@1.0 android.hardware.authsecret@1.0 \
@@ -374,6 +373,8 @@ endif
 ifeq ($(TW_EXCLUDE_NANO), true)
     LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
 endif
+
+LOCAL_C_INCLUDES += system/vold \
 
 TWRP_REQUIRED_MODULES += \
     relink_libraries \
@@ -638,7 +639,7 @@ ifneq ($(TW_OZIP_DECRYPT_KEY),)
 endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
-    # include $(commands_TWRP_local_path)/crypto/fde/Android.mk
+    include $(commands_TWRP_local_path)/crypto/fde/Android.mk
     include $(commands_TWRP_local_path)/crypto/scrypt/Android.mk
     ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         include $(commands_TWRP_local_path)/crypto/fscrypt/Android.mk
