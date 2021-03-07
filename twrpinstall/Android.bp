@@ -64,7 +64,8 @@ cc_library_static {
     include_dirs: [
         "bootable/recovery",
         "bootable/recovery/install/include",
-        "bootable/recovery/recovery_utils/include"
+        "bootable/recovery/recovery_utils/include",
+        "bootable/recovery/crypto/fscrypt"
     ],
 
     srcs: [
