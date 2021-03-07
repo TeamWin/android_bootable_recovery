@@ -29,6 +29,7 @@
 #include <unistd.h>
 
 #include <fstream>
+#include <mntent.h>
 #include <unordered_set>
 
 #include <android-base/file.h>
@@ -79,6 +80,51 @@ static bool checkSymlink(const std::string& path, const std::string& prefix) {
         }
     }
     return false;
+}
+
+// TODO: Refactor the code with KillProcessesWithOpenFiles().
+int KillProcessesWithMounts(const std::string& prefix, int signal) {
+    std::unordered_set<pid_t> pids;
+
+    auto proc_d = std::unique_ptr<DIR, int (*)(DIR*)>(opendir("/proc"), closedir);
+    if (!proc_d) {
+        PLOG(ERROR) << "Failed to open proc";
+        return -1;
+    }
+
+    struct dirent* proc_de;
+    while ((proc_de = readdir(proc_d.get())) != nullptr) {
+        // We only care about valid PIDs
+        pid_t pid;
+        if (proc_de->d_type != DT_DIR) continue;
+        if (!android::base::ParseInt(proc_de->d_name, &pid)) continue;
+
+        // Look for references to prefix
+        std::string mounts_file(StringPrintf("/proc/%d/mounts", pid));
+        auto fp = std::unique_ptr<FILE, int (*)(FILE*)>(
+                setmntent(mounts_file.c_str(), "r"), endmntent);
+        if (!fp) {
+            PLOG(WARNING) << "Failed to open " << mounts_file;
+            continue;
+        }
+
+        // Check if obb directory is mounted, and get all packages of mounted app data directory.
+        mntent* mentry;
+        while ((mentry = getmntent(fp.get())) != nullptr) {
+            if (android::base::StartsWith(mentry->mnt_dir, prefix)) {
+                pids.insert(pid);
+                break;
+            }
+        }
+    }
+    if (signal != 0) {
+        for (const auto& pid : pids) {
+            LOG(WARNING) << "Killing pid "<< pid << " with signal " << strsignal(signal) <<
+                    " because it has a mount with prefix " << prefix;
+            kill(pid, signal);
+        }
+    }
+    return pids.size();
 }
 
 int KillProcessesWithOpenFiles(const std::string& prefix, int signal) {
