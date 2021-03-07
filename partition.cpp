@@ -1018,6 +1018,7 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 			break;
 		case TWFLAG_KEYDIRECTORY:
 			Key_Directory = str;
+			LOGINFO("setting Key_Directory to: %s\n", Key_Directory.c_str());
 			break;
 		case TWFLAG_DM_USE_ORIGINAL_PATH:
 			Use_Original_Path = true;
