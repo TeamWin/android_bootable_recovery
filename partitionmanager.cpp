@@ -92,12 +92,10 @@ extern "C" {
 #include "gui/rapidxml.hpp"
 #include "gui/pages.hpp"
 #ifdef TW_INCLUDE_FBE
-#include "crypto/ext4crypt/Decrypt.h"
+#include "Decrypt.h"
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 	#ifdef USE_FSCRYPT
-	#include "crypto/fscrypt/MetadataCrypt.h"
-	#else
-	#include "crypto/ext4crypt/MetadataCrypt.h"
+	#include "MetadataCrypt.h"
 	#endif
 #endif
 #endif
@@ -404,13 +402,9 @@ void TWPartitionManager::Decrypt_Data() {
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
 			if (fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false)) {
-				std::string crypto_blkdev =android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
+				std::string crypto_blkdev = android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
 				Decrypt_Data->Decrypted_Block_Device = crypto_blkdev;
 				LOGINFO("Successfully decrypted metadata encrypted data partition with new block device: '%s'\n", crypto_blkdev.c_str());
-#else
-			if (e4crypt_mount_metadata_encrypted(Decrypt_Data->Mount_Point, false, Decrypt_Data->Key_Directory, Decrypt_Data->Actual_Block_Device, &Decrypt_Data->Decrypted_Block_Device)) {
-				LOGINFO("Successfully decrypted metadata encrypted data partition with new block device: '%s'\n", 
-				Decrypt_Data->Decrypted_Block_Device.c_str());
 #endif
 				Decrypt_Data->Is_Decrypted = true; // Needed to make the mount function work correctly
 				int retry_count = 10;
@@ -1794,8 +1788,9 @@ void TWPartitionManager::Parse_Users() {
 
 			// Attempt to get name of user. Fallback to user ID if this fails.
 			char* userFile = PageManager::LoadFileToBuffer("/data/system/users/" + to_string(userId) + ".xml", NULL);
-			if (userFile == NULL) 
+			if (userFile == NULL) {
 				user.userName = to_string(userId);
+			}
 			else {
 				xml_document<> *userXml = new xml_document<>();
 				userXml->parse<0>(userFile);
@@ -1895,6 +1890,7 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 				user_need_decrypt = true;
 			}
 		}
+		user_need_decrypt = true;
 		if (!user_need_decrypt) {
 			LOGINFO("User %d does not require decryption\n", user_id);
 			return 0;
@@ -1924,7 +1920,7 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 						gui_msg(Msg("decrypt_user_fail_fbe=Failed to decrypt user {1}")(tmp_user_id));
 					}
 				}
-				Post_Decrypt("");
+				// Post_Decrypt("");
 			}
 
 			return 0;
