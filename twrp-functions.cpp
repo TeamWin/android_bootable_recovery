@@ -1333,6 +1333,7 @@ void TWFunc::List_Mounts() {
 	}
 }
 
+#ifdef TW_INCLUDE_CRYPTO
 bool TWFunc::Get_Encryption_Policy(fscrypt_encryption_policy &policy, std::string path) {
 	if (!TWFunc::Path_Exists(path)) {
 		LOGERR("Unable to find %s to get policy\n", path.c_str());
@@ -1359,6 +1360,7 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const fscrypt_encryption_po
 	}
 	return true;
 }
+#endif
 
 string TWFunc::Check_For_TwrpFolder() {
 	string oldFolder = "";

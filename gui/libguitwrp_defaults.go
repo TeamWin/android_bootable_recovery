@@ -245,7 +245,11 @@ func globalIncludes(ctx android.BaseContext) []string {
 	var includes []string
 
 	if getMakeVars(ctx, "TW_INCLUDE_CRYPTO") != "" {
-		includes = append(includes, "bootable/recovery/crypto/fscrypt")
+		if (getMakeVars(ctx, "PLATFORM_SDK_VERSION") == "29") {
+			includes = append(includes, "bootable/recovery/crypto/fscrypt-km4")
+		} else {
+			includes = append(includes, "bootable/recovery/crypto/fscrypt-km4.1")
+		}
 	}
 	return includes
 }
