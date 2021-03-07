@@ -5,16 +5,17 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libtwrpfscrypt
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -Wno-unused-variable -Wno-sign-compare -Wno-unused-parameter -Wno-comment -Wno-missing-field-initializers \
-    -DHAVE_LIBKEYUTILS -std=gnu++2a -Wno-macro-redefined -Wno-unused-function
-LOCAL_SRC_FILES := Decrypt.cpp ScryptParameters.cpp Utils.cpp HashPassword.cpp \
-    FsCrypt.cpp KeyUtil.cpp Keymaster.cpp KeyStorage.cpp MetadataCrypt.cpp KeyBuffer.cpp \
-    Process.cpp EncryptInplace.cpp Weaver1.cpp fscrypt_policy.cpp
+    -DHAVE_LIBKEYUTILS -std=gnu++2a -Wno-macro-redefined -Wno-unused-function -fpic
+LOCAL_SRC_FILES := FsCrypt.cpp Decrypt.cpp ScryptParameters.cpp fscrypt_policy.cpp Utils.cpp HashPassword.cpp \
+    KeyUtil.cpp Keymaster.cpp KeyStorage.cpp MetadataCrypt.cpp KeyBuffer.cpp \
+    Process.cpp EncryptInplace.cpp Weaver1.cpp cryptfs.cpp Checkpoint.cpp CryptoType.cpp VoldUtil.cpp
 LOCAL_SHARED_LIBRARIES := libselinux libc libc++ libext4_utils libbase libcrypto libcutils \
 libkeymaster_messages libhardware libprotobuf-cpp-lite libfscrypt android.hardware.confirmationui@1.0 \
 android.hardware.keymaster@3.0 libkeystore_binder libhidlbase libutils libbinder android.hardware.gatekeeper@1.0 \
-libfs_mgr android.hardware.keymaster@4.0 libkeymaster4support libf2fs_sparseblock libkeystore_parcelables \
-libkeystore_aidl android.hardware.weaver@1.0 libkeyutils liblog libhwbinder libchrome
-LOCAL_STATIC_LIBRARIES := libscrypt_static
+libfs_mgr android.hardware.keymaster@4.0 android.hardware.keymaster@4.1 libkeymaster4support libkeymaster4_1support \
+libf2fs_sparseblock libkeystore_parcelables libkeystore_aidl android.hardware.weaver@1.0 libkeyutils liblog libhwbinder \
+libchrome android.hardware.boot@1.0 libbootloader_message
+LOCAL_STATIC_LIBRARIES := libscrypt_static libvold_binder libc++fs
 LOCAL_C_INCLUDES := system/extras/ext4_utils \
     system/extras/ext4_utils/include/ext4_utils \
     external/scrypt/lib/crypto \
@@ -32,7 +33,8 @@ LOCAL_C_INCLUDES := system/extras/ext4_utils \
     system/core/init/ \
     system/vold/model \
     system/vold/ \
-    system/extras/f2fs_utils/
+    system/extras/f2fs_utils/ \
+    bootable/recovery/bootloader_message/include
 
 ifneq ($(wildcard hardware/libhardware/include/hardware/keymaster0.h),)
     LOCAL_CFLAGS += -DTW_CRYPTO_HAVE_KEYMASTERX
@@ -43,7 +45,16 @@ LOCAL_REQUIRED_MODULES := keystore_auth keystore
 LOCAL_CLANG := true
 include $(BUILD_SHARED_LIBRARY)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE := fscryptpolicyget
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
+LOCAL_C_INCLUDES += system/extras/libfscrypt/include
+LOCAL_SRC_FILES := fscryptpolicyget.cpp
+LOCAL_SHARED_LIBRARIES := libtwrpfscrypt
 
+include $(BUILD_EXECUTABLE)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := twrpfbe
@@ -51,16 +62,6 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
 LOCAL_SRC_FILES := main.cpp
-LOCAL_SHARED_LIBRARIES := libtwrpfscrypt
-
-include $(BUILD_EXECUTABLE)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := fscryptpolicyget
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
-LOCAL_SRC_FILES := fscryptpolicyget.cpp
 LOCAL_SHARED_LIBRARIES := libtwrpfscrypt
 
 include $(BUILD_EXECUTABLE)
