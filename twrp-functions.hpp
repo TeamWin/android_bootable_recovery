@@ -115,8 +115,10 @@ public:
 	static bool Is_TWRP_App_In_System(); // Check if the TWRP app is installed in the system partition
 	static void checkforapp();
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
+#ifdef TW_INCLUDE_CRYPTO
 	static bool Get_Encryption_Policy(fscrypt_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const fscrypt_encryption_policy &policy); // set encryption policy for path
+#endif
 	static void List_Mounts();
 	static void Clear_Bootloader_Message();
 	static string Check_For_TwrpFolder();
