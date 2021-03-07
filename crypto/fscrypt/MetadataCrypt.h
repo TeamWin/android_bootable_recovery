@@ -19,7 +19,17 @@
 
 #include <string>
 
+#include "KeyBuffer.h"
+#include "KeyUtil.h"
+
+
 bool fscrypt_mount_metadata_encrypted(const std::string& block_device,
                                       const std::string& mount_point, bool needs_encrypt);
+
+bool defaultkey_volume_keygen(KeyGeneration* gen);
+
+bool defaultkey_setup_ext_volume(const std::string& label, const std::string& blk_device,
+                                 const KeyBuffer& key,
+                                 std::string* out_crypto_blkdev);
 
 #endif
