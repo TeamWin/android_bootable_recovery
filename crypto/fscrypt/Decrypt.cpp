@@ -16,6 +16,7 @@
 
 #include "Decrypt.h"
 #include "FsCrypt.h"
+#include <fscrypt/fscrypt.h>
 
 #include <map>
 #include <string>
@@ -72,8 +73,8 @@
 #include <keystore/OperationResult.h>
 #include "keystore_client.pb.h"
 
-#include <keymasterV4_0/authorization_set.h>
-#include <keymasterV4_0/keymaster_utils.h>
+#include <keymasterV4_1/authorization_set.h>
+#include <keymasterV4_1/keymaster_utils.h>
 
 extern "C" {
 #include "crypto_scrypt.h"
@@ -87,24 +88,26 @@ using android::security::keystore::IKeystoreService;
 using keystore::KeystoreResponsePromise;
 using keystore::OperationResultPromise;
 using android::security::keymaster::OperationResult;
-using android::hardware::keymaster::V4_0::support::blob2hidlVec;
+using android::hardware::keymaster::V4_1::support::blob2hidlVec;
 
-// Store main DE raw ref / policy
-extern std::string de_raw_ref;
-extern std::map<userid_t, std::string> s_de_key_raw_refs;
-extern std::map<userid_t, std::string> s_ce_key_raw_refs;
+// Store main DE/CE policy
+// extern std::string de_raw_ref;
+// extern std::map<userid_t, std::string> s_de_key_raw_refs;
+// extern std::map<userid_t, std::string> s_ce_key_raw_refs;
+extern std::map<userid_t, android::fscrypt::EncryptionPolicy> s_de_policies;
+extern std::map<userid_t, android::fscrypt::EncryptionPolicy> s_ce_policies;
 
 inline std::string hidlVec2String(const ::keystore::hidl_vec<uint8_t>& value) {
     return std::string(reinterpret_cast<const std::string::value_type*>(&value[0]), value.size());
 }
 
-static bool lookup_ref_key_internal(std::map<userid_t, std::string>& key_map, const uint8_t* policy, userid_t* user_id) {
+static bool lookup_ref_key_internal(std::map<userid_t, android::fscrypt::EncryptionPolicy>& key_map, const uint8_t* policy, userid_t* user_id) {
 	char policy_string_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
 	char key_map_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
 	policy_to_hex(policy, policy_string_hex);
 
-    for (std::map<userid_t, std::string>::iterator it=key_map.begin(); it!=key_map.end(); ++it) {
-		policy_to_hex(reinterpret_cast<const uint8_t*>(&it->second[0]), key_map_hex);
+    for (std::map<userid_t, android::fscrypt::EncryptionPolicy>::iterator it=key_map.begin(); it!=key_map.end(); ++it) {
+		policy_to_hex(reinterpret_cast<const uint8_t*>(&it->second.key_raw_ref[0]), key_map_hex);
 		std::string key_map_hex_string = std::string(key_map_hex);
 		if (key_map_hex_string == policy_string_hex) {
             *user_id = it->first;
@@ -119,7 +122,9 @@ extern "C" bool lookup_ref_key(const uint8_t* policy, uint8_t* policy_type) {
 	char policy_string_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
 	char de_raw_ref_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
 	policy_to_hex(policy, policy_string_hex);
-	policy_to_hex(reinterpret_cast<const uint8_t*>(&de_raw_ref[0]), de_raw_ref_hex);
+	EncryptionPolicy de_policy;
+	lookup_policy(s_de_policies, user_id, &de_policy);
+	policy_to_hex(reinterpret_cast<const uint8_t*>(&de_policy.key_raw_ref[0]), de_raw_ref_hex);
 	std::string de_raw_ref_hex_string = std::string(de_raw_ref_hex);
 
 	std::string policy_type_string;
@@ -129,8 +134,8 @@ extern "C" bool lookup_ref_key(const uint8_t* policy, uint8_t* policy_type) {
 		return true;
 	}
 
-    if (!lookup_ref_key_internal(s_de_key_raw_refs, policy, &user_id)) {
-        if (!lookup_ref_key_internal(s_ce_key_raw_refs, policy, &user_id)) {
+    if (!lookup_ref_key_internal(s_de_policies, policy, &user_id)) {
+        if (!lookup_ref_key_internal(s_ce_policies, policy, &user_id)) {
             return false;
 		} else
 			policy_type_string = "0CE" + std::to_string(user_id);
@@ -145,6 +150,8 @@ extern "C" bool lookup_ref_tar(const uint8_t* policy_type, uint8_t* policy) {
 	char policy_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
 	policy_to_hex(policy_type, policy_hex);
 
+	userid_t user_id = atoi(policy_type_string.substr(3, 4).c_str());
+
 	// Current encryption fscrypt policy is v1 (which is stored as version 0e)
 	if (policy_type_string.substr(0,1) != "0") {
         printf("Unexpected version %c\n", policy_type[0]);
@@ -152,20 +159,21 @@ extern "C" bool lookup_ref_tar(const uint8_t* policy_type, uint8_t* policy) {
     }
 
 	if (policy_type_string.substr(1, 2) == "DK") {
-        memcpy(policy, de_raw_ref.data(), de_raw_ref.size());
+		EncryptionPolicy de_policy;
+		lookup_policy(s_de_policies, user_id, &de_policy);
+        memcpy(policy, de_policy.key_raw_ref.data(), de_policy.key_raw_ref.size());
         return true;
     }
 
-	userid_t user_id = atoi(policy_type_string.substr(3, 4).c_str());
     std::string raw_ref;
 
 	if (policy_type_string.substr(1, 1) == "D") {
-        if (lookup_key_ref(s_de_key_raw_refs, user_id, &raw_ref)) {
+        if (lookup_key_ref(s_de_policies, user_id, &raw_ref)) {
             memcpy(policy, raw_ref.data(), raw_ref.size());
         } else
             return false;
     } else if (policy_type_string.substr(1, 1) == "C") {
-        if (lookup_key_ref(s_ce_key_raw_refs, user_id, &raw_ref)) {
+        if (lookup_key_ref(s_ce_policies, user_id, &raw_ref)) {
             memcpy(policy, raw_ref.data(), raw_ref.size());
         } else
             return false;
@@ -688,14 +696,17 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
         	return disk_decryption_secret_key;
     	}
 		OperationResult result = future.get();
-		auto handle = std::move(result.token);
+		// auto handle = std::move(result.token);
+		std::map<uint64_t, android::sp<android::IBinder>> active_operations_;
+		uint64_t next_virtual_handle_ = 1;
+		active_operations_[next_virtual_handle_] = result.token;
 
 		// The cipher.doFinal call triggers an update to the keystore followed by a finish https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/services/core/java/com/android/server/locksettings/SyntheticPasswordCrypto.java#64
 		// See also https://android.googlesource.com/platform/frameworks/base/+/android-8.0.0_r23/keystore/java/android/security/keystore/KeyStoreCryptoOperationChunkedStreamer.java#208
 		future = {};
 		promise = new OperationResultPromise();
 	    future = promise->get_future();
-		binder_result = service->update(promise, handle, empty_params, cipher_text_hidlvec, &error_code);
+		binder_result = service->update(promise, active_operations_[next_virtual_handle_], empty_params, cipher_text_hidlvec, &error_code);
 		rc = ::keystore::KeyStoreNativeReturnCode(error_code);
         if (!rc.isOk()) {
             printf("Keystore update returned: %d\n", error_code);
@@ -717,11 +728,15 @@ std::string unwrapSyntheticPasswordBlob(const std::string& spblob_path, const st
 		future = {};
 		promise = new OperationResultPromise();
 		future = promise->get_future();
-		std::tie(rc, keyBlob, charBlob, lockedEntry) = mKeyStore->getKeyForName(name8, callingUid, TYPE_KEYMASTER_10);
 		
-		auto hidlInput = blob2hidlVec(input_data);
-		::keystore::hidl_vec<uint8_t> signature;
-		binder_result = service->finish(promise, handle, empty_params, hidlInput, signature, entropy, &error_code);
+		auto hidlSignature = blob2hidlVec("");
+		auto hidlInput = blob2hidlVec(disk_decryption_secret_key);
+		// auto binder_result = keystore_->finish(
+        // promise, active_operations_[handle],
+        // android::security::keymaster::KeymasterArguments(input_parameters.hidl_data()),
+        // (std::vector<uint8_t>)hidlInput, (std::vector<uint8_t>)hidlSignature, hidl_vec<uint8_t>(),
+        // &error_code);
+		binder_result = service->finish(promise, active_operations_[next_virtual_handle_], empty_params, hidlInput, hidlSignature, ::keystore::hidl_vec<uint8_t>(), &error_code);
 		if (!binder_result.isOk()) {
 			printf("communication error while calling keystore\n");
 			free(keystore_result);
