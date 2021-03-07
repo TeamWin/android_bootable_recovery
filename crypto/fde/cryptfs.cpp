@@ -60,12 +60,7 @@
 //#include "f2fs_sparseblock.h"
 //#include "EncryptInplace.h"
 //#include "Process.h"
-#if TW_KEYMASTER_MAX_API == 3
-#include "../ext4crypt/Keymaster3.h"
-#endif
-#if TW_KEYMASTER_MAX_API == 4
-#include "../ext4crypt/Keymaster4.h"
-#endif
+#include "Keymaster.h"
 #if TW_KEYMASTER_MAX_API == 0
 #include <hardware/keymaster.h>
 #else // so far, all trees that have keymaster >= 1 have keymaster 1 support
@@ -879,7 +874,7 @@ static int get_crypt_ftr_and_key(struct crypt_mnt_ftr *crypt_ftr)
     return -1;
   }
   if (fname[0] != '/') {
-    SLOGE("Unexpected value for crypto key location\n");
+    SLOGE("fde::get_crypt_ftr_and_key::Unexpected value for crypto key location: %s\n", fname);
     return -1;
   }
   if ( (fd = open(fname, O_RDWR|O_CLOEXEC)) < 0) {
