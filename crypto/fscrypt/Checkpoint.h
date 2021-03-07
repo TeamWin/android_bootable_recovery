@@ -20,8 +20,6 @@
 #include <binder/Status.h>
 #include <string>
 
-namespace android {
-namespace vold {
 
 android::binder::Status cp_supportsCheckpoint(bool& result);
 
@@ -39,13 +37,14 @@ bool cp_needsRollback();
 
 bool cp_needsCheckpoint();
 
+bool cp_isCheckpointing();
+
 android::binder::Status cp_prepareCheckpoint();
 
 android::binder::Status cp_restoreCheckpoint(const std::string& mountPoint, int count = 0);
 
 android::binder::Status cp_markBootAttempt();
 
-}  // namespace vold
-}  // namespace android
+void cp_resetCheckpoint();
 
 #endif
