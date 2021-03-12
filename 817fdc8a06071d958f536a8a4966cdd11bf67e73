@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75de1cac_424ba997",
+        "filename": "twrpDigestDriver.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-03-12T14:53:37Z",
+      "side": 1,
+      "message": "Can we remove this if statement since map files shouldn\u0027t even enter this class now?",
+      "revId": "817fdc8a06071d958f536a8a4966cdd11bf67e73",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e169c57_e673d3d7",
+        "filename": "twrpDigestDriver.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-03-12T14:53:37Z",
+      "side": 1,
+      "message": "Can we move this message out of the if statement and return after delete digest statement?",
+      "revId": "817fdc8a06071d958f536a8a4966cdd11bf67e73",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
