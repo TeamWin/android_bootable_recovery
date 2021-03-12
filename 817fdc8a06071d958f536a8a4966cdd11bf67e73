@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc246aa8_f02368c2",
+        "filename": "twrpDigestDriver.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-03-12T16:42:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75de1cac_424ba997",
+      "revId": "817fdc8a06071d958f536a8a4966cdd11bf67e73",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e169c57_e673d3d7",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-12T14:53:37Z",
       "side": 1,
       "message": "Can we move this message out of the if statement and return after delete digest statement?",
+      "revId": "817fdc8a06071d958f536a8a4966cdd11bf67e73",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62525bcc_61fb7b46",
+        "filename": "twrpDigestDriver.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 606
+      },
+      "writtenOn": "2021-03-12T16:42:55Z",
+      "side": 1,
+      "message": "Done :)",
+      "parentUuid": "0e169c57_e673d3d7",
       "revId": "817fdc8a06071d958f536a8a4966cdd11bf67e73",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
