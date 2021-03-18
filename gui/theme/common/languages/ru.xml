@@ -740,5 +740,9 @@
         <string name="flash_ab_reboot">Для прошивки дополнительных ZIP перезагрузите рекавери для переключения на обновлённый слот.</string>
 		<string name="ozip_decrypt_decryption">Начало расшифровки Ozip...</string>
 		<string name="ozip_decrypt_finish">Расшифровка Ozip завершена!</string>
+		<string name="change_twrp_folder_btn">Изменить папку TWRP</string>
+		<string name="change_twrp_folder_on_process">Изменение папки TWRP</string>
+		<string name="change_twrp_folder_after_process">Папка TWRP изменена на</string>
+		<string name="tw_folder_exists">Папка с таким именем уже существует!</string>
 	</resources>
 </language>
