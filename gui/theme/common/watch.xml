@@ -3732,6 +3732,9 @@
 				<listitem name="{@restore_enable_digest_chk=Enable Digest verification of backup files}">
 					<data variable="tw_skip_digest_check"/>
 				</listitem>
+				<listitem name="{@skip_digest_zip_chk=Skip Digest check before flashing zip}">
+					<data variable="tw_skip_digest_check_zip"/>
+				</listitem>
 				<listitem name="{@use24clock_chk=Use 24-hour clock}">
 					<data variable="tw_military_time"/>
 				</listitem>
