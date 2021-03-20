@@ -71,7 +71,7 @@ bool twrpDigestDriver::Check_File_Digest(const string& Filename) {
 	if (!TWFunc::Path_Exists(digestfile)) {
 		delete digest;
 		gui_msg(Msg(msg::kError, "no_digest_found=No digest file found for '{1}'. Please unselect Enable Digest verification to restore.")(Filename));
-		return false;
+		return true;
 	}
 
 
