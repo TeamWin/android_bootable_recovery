@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b90fc3_60edee2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-03-21T21:20:16Z",
+      "side": 1,
+      "message": "Hello, would you be able to add the following translations?\nРусский\n\u0027fm_open_terminal_btn\u0027 present in English and not in Русский\n\u0027fm_edit_file\u0027 present in English and not in Русский\n\u0027flash_ab_both_slots\u0027 present in English and not in Русский\n\u0027restore_system_context\u0027 present in English and not in Русский",
+      "revId": "9a79dadac03855a7f483f13d09c215062657afba",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
