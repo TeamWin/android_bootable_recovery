@@ -1,0 +1,75 @@
+bootstrap_go_package {
+    name: "soong-prebuilt_defaults",
+    pkgPath: "bootable/recovery/prebuilt",
+    deps: [
+        "soong",
+        "soong-android",
+        "soong-cc"
+    ],
+    srcs: [
+        "prebuilt_defaults.go",
+        "../soong/copy.go",
+        "../soong/makevars.go"
+    ],
+    pluginFor: ["soong_build"]
+}
+
+prebuilt_twrp {
+    name: "libcryptfsfde.so",
+    src: "system/lib64/libcryptfsfde.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "libdexfile_support.so",
+    src: "system/lib64/libdexfile_support.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "libf2fs_sparseblock.so",
+    src: "system/lib64/libf2fs_sparseblock.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "libhardware.so",
+    src: "system/lib64/libhardware.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "android.hardware.authsecret@1.0.so",
+    src: "system/lib64/android.hardware.authsecret@1.0.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "android.hardware.oemlock@1.0.so",
+    src: "system/lib64/android.hardware.oemlock@1.0.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "libnos_transport.so",
+    src: "vendor/lib64/libnos_transport.so",
+    vendor_library: true
+}
+
+prebuilt_twrp {
+    name: "libnos_datagram.so",
+    src: "vendor/lib64/libnos_datagram.so",
+    vendor_library: true
+}
+
+prebuilt_twrp {
+    name: "android.hardware.keymaster@3.0.so",
+    src: "system/lib64/android.hardware.keymaster@3.0.so",
+    system_library: true
+}
+
+prebuilt_twrp {
+    name: "libgpt_twrp.so",
+    src: "system/lib64/libgpt_twrp.so",
+    system_library: true
+}
