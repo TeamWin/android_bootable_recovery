@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67daa80_88b24d04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-01T22:10:06Z",
+      "side": 1,
+      "message": "If no one finds any issues I will try to merge this over the weekend.\n\nI tested md5 digest with magisk installer and backup/restore digests.",
+      "revId": "40b7f7a109d6cda83c189ac739b0d5d508ab3643",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
