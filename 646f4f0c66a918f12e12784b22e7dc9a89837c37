@@ -16,6 +16,24 @@
       "message": "Everything looks good.",
       "revId": "646f4f0c66a918f12e12784b22e7dc9a89837c37",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2fdee9b_f40448df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-03T23:57:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3553faf_4ad79d47",
+      "revId": "646f4f0c66a918f12e12784b22e7dc9a89837c37",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
