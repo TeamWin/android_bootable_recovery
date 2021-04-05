@@ -32,6 +32,13 @@
 #include <android/hardware/vibrator/1.2/IVibrator.h>
 #endif
 
+#ifdef USE_QTI_AIDL_HAPTICS
+#include <android/hardware/vibrator/IVibrator.h>
+#include <binder/IServiceManager.h>
+using android::String16;
+using android::hardware::vibrator::IVibrator;
+#endif
+
 #include "common.h"
 
 #include "minuitwrp/minui.h"
@@ -139,6 +146,11 @@ int vibrate(int timeout_ms)
     android::sp<android::hardware::vibrator::V1_2::IVibrator> vib = android::hardware::vibrator::V1_2::IVibrator::getService();
     if (vib != nullptr) {
         vib->on((uint32_t)timeout_ms);
+    }
+#elif defined(USE_QTI_AIDL_HAPTICS)
+    android::sp<android::hardware::vibrator::IVibrator> vib = android::waitForDeclaredService<IVibrator>(String16());
+    if (vib != nullptr) {
+        vib->on((uint32_t)timeout_ms, nullptr);
     }
 #else
     if (std::ifstream(LEDS_HAPTICS_ACTIVATE_FILE).good()) {
