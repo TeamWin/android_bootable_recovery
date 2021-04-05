@@ -15,6 +15,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DUSE_QTI_HAPTICS")
 	}
 
+	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS") == "true" {
+		cflags = append(cflags, "-DUSE_QTI_AIDL_HAPTICS")
+	}
+
 	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
 		cflags = append(cflags, "-DMSM_BSP")
 	}
@@ -243,6 +247,11 @@ func globalSharedLibs(ctx android.BaseContext) []string {
 	if getMakeVars(ctx, "TW_SUPPORT_INPUT_1_2_HAPTICS") == "true" {
 		sharedLibs = append(sharedLibs, "android.hardware.vibrator@1.2")
 		sharedLibs = append(sharedLibs, "libhidlbase")
+	}
+
+	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS") == "true" {
+		sharedLibs = append(sharedLibs, "android.hardware.vibrator-ndk_platform")
+		sharedLibs = append(sharedLibs, "android.hardware.vibrator-cpp")
 	}
 
 	if getMakeVars(ctx, "TW_INCLUDE_JPEG") != "" {
