@@ -53,7 +53,8 @@ cc_library_shared {
         "libcutils",
         "liblog",
         "libbase",
-        "libsync"
+        "libsync",
+	"libbinder_ndk"
     ],
     static_libs: ["libpixelflinger_twrp"]
 }
