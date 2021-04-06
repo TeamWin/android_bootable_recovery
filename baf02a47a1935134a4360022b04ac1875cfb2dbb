@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1617743911 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1617743924-E65C4A176CFD8C0A9DF1D5FE0A4C26139A98F2B2\n\n0000000000000000000000000000000000000000 baf02a47a1935134a4360022b04ac1875cfb2dbb refs/for/android-10.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAmBs0CcACgkQAqwBp3le\n7rjwxw/+MGF7UYIJZgoVGBWfakrwnOpsTXRmovwg4GYDHvwvBAGeqXV7EMOlvBM5\n6/BYWe5iDt4IUrAgoyoCyD8TvaiPYnIk2Q32WKgqgvGpYPlyxEN9Dy/EUeDRa9ML\nAX+WUlZRtFlTuaMwKkgrjZP6dpeeQjgcLsAmaHek9fHyNepEVtGiytNdRhEVBRi2\nB/Y0pvnXTGk9/oKInHYmyVSYkwgb0ncMXs0ww3WyyZzR6AC8jmLFn7Wu7ar79e61\nLHxtUOL/7uMNXM0UKwajMjWOb+X6hnswqgtwY1ssnOyTW32Uax52Ni7AKpGNOdng\n+unIvAkzBMVco0Km/nR6nZqfeb5KUXBIZ/yy2O+m6ubY3tsIMtNTnetGpQ2DuXvD\niWBMk4mD57jZ7KtG7rx9BL8k3+Uv4lYBMcdqnAnA/c5+z8uzGCMzC5MPLGL2920J\n6E5Vvp1V9gLtxQhDJBUsvbuMqk2odfHd4FC92Wt7XOJbjx3xXz5VL0CYh63BMYfz\nQPcSoN8cOjVXNd//VSmwsJeriF02wjX1B9mn1DeK7NKuSr0OzkQ8oi5YbAjom+tc\nw3fDMcMzKyL3apcMOmlC82tYZbEbYw8WLC8jq4WXP3gzlqqnRigDHS1C96U8JBhF\n5DFfckUjCBpCbYR10mS84PGkMOZDYTBySJo0AJJqofOgx8BkgBs\u003d\n\u003dtwrl\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804ba199_61d5c61a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-04-06T21:25:20Z",
+      "side": 1,
+      "message": "This simplifies things quite a bit and is what I was originally looking for when the original patch was created.\n\nThere is a question of partitions that may be logical but not included in the super partition group (because the build system won\u0027t allow it), but these would ideally be included in the list that shows in TWRP. It seems that all logical partitions are parsed from fstab, so perhaps updating the code to use that list could also be implemented?\n\nThat may also requires allowing the text to be resized, since some devices may include quite a few extra partitions in super.",
+      "revId": "baf02a47a1935134a4360022b04ac1875cfb2dbb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
