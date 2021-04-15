@@ -138,6 +138,7 @@ enum TW_FSTAB_FLAGS {
 	TWFLAG_FSFLAGS,
 	TWFLAG_IGNOREBLKID,
 	TWFLAG_LENGTH,
+	TWFLAG_LOGICAL,
 	TWFLAG_MOUNTTODECRYPT,
 	TWFLAG_REMOVABLE,
 	TWFLAG_SETTINGSSTORAGE,
@@ -182,6 +183,7 @@ const struct flag_list tw_flags[] = {
 	{ "fsflags=",               TWFLAG_FSFLAGS },
 	{ "ignoreblkid",            TWFLAG_IGNOREBLKID },
 	{ "length=",                TWFLAG_LENGTH },
+	{ "logical",                TWFLAG_LOGICAL },
 	{ "mounttodecrypt",         TWFLAG_MOUNTTODECRYPT },
 	{ "removable",              TWFLAG_REMOVABLE },
 	{ "settingsstorage",        TWFLAG_SETTINGSSTORAGE },
@@ -899,6 +901,7 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 		case TWFLAG_NOTRIM:
 		case TWFLAG_VOLDMANAGED:
 		case TWFLAG_RESIZE:
+		case TWFLAG_LOGICAL:
 			// Do nothing
 			break;
 		case TWFLAG_DISPLAY:
