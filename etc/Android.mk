@@ -76,8 +76,8 @@ ifeq ($(AB_OTA_UPDATER),true)
 
 	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
-endif
 
+<<<<<<< HEAD   (7d7d08 gui: fix bad merge)
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
 	include $(CLEAR_VARS)
 	LOCAL_MODULE := android.hardware.health@2.0-service.rc
@@ -90,6 +90,8 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
 endif
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
+=======
+>>>>>>> CHANGE (20c0e6 etc: vndservice and hwservice managers are required by boot )
 	include $(CLEAR_VARS)
 	LOCAL_MODULE := hwservicemanager.rc
 	LOCAL_MODULE_TAGS := optional
@@ -107,6 +109,39 @@ ifneq ($(TW_INCLUDE_CRYPTO),)
 
 	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
+endif
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+	include $(CLEAR_VARS)
+	LOCAL_MODULE := android.hardware.health@2.0-service.rc
+	LOCAL_MODULE_TAGS := optional
+	LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+
+	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+	include $(BUILD_PREBUILT)
+endif
+
+ifneq ($(TW_INCLUDE_CRYPTO),)
+	ifneq ($(AB_OTA_UPDATER), true)
+		include $(CLEAR_VARS)
+		LOCAL_MODULE := hwservicemanager.rc
+		LOCAL_MODULE_TAGS := optional
+		LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+		LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+
+		LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+		include $(BUILD_PREBUILT)
+
+		include $(CLEAR_VARS)
+		LOCAL_MODULE := vndservicemanager.rc
+		LOCAL_MODULE_TAGS := optional
+		LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+		LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+
+		LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+		include $(BUILD_PREBUILT)
+	endif
 
 	ifneq ($(TW_INCLUDE_CRYPTO_FBE),)
 		include $(CLEAR_VARS)
