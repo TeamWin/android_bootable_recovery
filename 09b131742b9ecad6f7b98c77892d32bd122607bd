@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t this take care of it? https://github.com/TeamWin/android_bootable_recovery/blob/android-11/prebuilt/Android.mk#L163\n\nIt\u0027s in my ramdisk.",
       "revId": "09b131742b9ecad6f7b98c77892d32bd122607bd",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09cf90f8_6fdf37b7",
+        "filename": "prebuilt/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2021-04-17T13:30:14Z",
+      "side": 1,
+      "message": "hmmm nope because, this comes under the crypto flag what about those who build without crypto flags? check the commit msg",
+      "parentUuid": "1972e29b_ba643587",
+      "revId": "09b131742b9ecad6f7b98c77892d32bd122607bd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
