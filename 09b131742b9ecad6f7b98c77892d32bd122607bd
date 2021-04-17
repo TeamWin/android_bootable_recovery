@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1972e29b_ba643587",
+        "filename": "prebuilt/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-17T13:13:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this take care of it? https://github.com/TeamWin/android_bootable_recovery/blob/android-11/prebuilt/Android.mk#L163\n\nIt\u0027s in my ramdisk.",
+      "revId": "09b131742b9ecad6f7b98c77892d32bd122607bd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
