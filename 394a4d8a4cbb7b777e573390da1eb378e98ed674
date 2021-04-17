@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "122412d5_cf373a42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-17T23:51:32Z",
+      "side": 1,
+      "message": "I have this in this https://gerrit.twrp.me/c/android_bootable_recovery/+/3338/22/Android.mk but we could rebase it to Android.bp if you like.",
+      "revId": "394a4d8a4cbb7b777e573390da1eb378e98ed674",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
