@@ -17,7 +17,11 @@ func globalFlags(ctx android.BaseContext) []string {
 	}
 
 	if ctx.AConfig().Getenv("TW_USE_KEY_CODE_TOUCH_SYNC") != "" {
-		cflags = append(cflags, "DTW_USE_KEY_CODE_TOUCH_SYNC="+ctx.AConfig().Getenv("TW_USE_KEY_CODE_TOUCH_SYNC"))
+		cflags = append(cflags, "-DTW_USE_KEY_CODE_TOUCH_SYNC="+ctx.AConfig().Getenv("TW_USE_KEY_CODE_TOUCH_SYNC"))
+	}
+
+	if ctx.AConfig().Getenv("TW_SCREEN_BLANK_ON_BOOT") != "" {
+		cflags = append(cflags, "-DTW_SCREEN_BLANK_ON_BOOT")
 	}
 
 	if ctx.AConfig().Getenv("TW_OZIP_DECRYPT_KEY") != "" {
