@@ -1191,7 +1191,7 @@ char* PageManager::LoadFileToBuffer(std::string filename, ZipArchiveHandle packa
 	size_t len;
 	char* buffer = NULL;
 
-	if (package) {
+	if (!package) {
 		// We can try to load the XML directly...
 		LOGINFO("PageManager::LoadFileToBuffer loading filename: '%s' directly\n", filename.c_str());
 		struct stat st;
