@@ -153,7 +153,8 @@ endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     LOCAL_CFLAGS += -DPRODUCT_USE_DYNAMIC_PARTITIONS=1
-    TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-service.rc
+    TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-service.rc
+    #android.hardware.health@2.0-service android.hardware.health@2.0-service.rc
 endif
 
 ifeq ($(TW_USES_VENDOR_LIBS),true)
