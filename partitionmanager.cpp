@@ -136,8 +136,8 @@ TWPartitionManager::TWPartitionManager(void) {
 }
 
 int TWPartitionManager::Set_FDE_Encrypt_Status(void) {
-	property_set("ro.crypto.state", "encrypted");
-	property_set("ro.crypto.type", "block");
+	TWFunc::Property_Override("ro.crypto.state", "encrypted");
+	TWFunc::Property_Override("ro.crypto.type", "block");
 	// Sleep for a bit so that services can start if needed
 	sleep(1);
 	return 0;
@@ -398,9 +398,9 @@ void TWPartitionManager::Decrypt_Data() {
 	#ifdef TW_INCLUDE_CRYPTO
 	TWPartition* Decrypt_Data = Find_Partition_By_Path("/data");
 	if (Decrypt_Data && Decrypt_Data->Is_Encrypted && !Decrypt_Data->Is_Decrypted) {
-		property_set("ro.crypto.state", "encrypted");
+		TWFunc::Property_Override("ro.crypto.state", "encrypted");
 		if (!Decrypt_Data->Key_Directory.empty() && Mount_By_Path(Decrypt_Data->Key_Directory, false)) {
-		property_set("ro.crypto.type", "file");
+		TWFunc::Property_Override("ro.crypto.type", "file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
 			if (fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false)) {

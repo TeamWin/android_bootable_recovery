@@ -747,8 +747,8 @@ bool TWPartition::Decrypt_FBE_DE() {
 	if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		DataManager::SetValue(TW_IS_FBE, 1);
 		DataManager::SetValue(TW_CRYPTO_PWTYPE, "0"); // Set initial value so that recovery will not be confused when using unencrypted data or failed to decrypt data
-		property_set("ro.crypto.state", "encrypted");
-		property_set("ro.crypto.type", "file");
+		TWFunc::Property_Override("ro.crypto.state", "encrypted");
+		TWFunc::Property_Override("ro.crypto.type", "file");
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
 	Is_FBE = true;
@@ -772,7 +772,7 @@ bool TWPartition::Decrypt_FBE_DE() {
 	while (!Decrypt_DE() && --retry_count)
 		usleep(2000);
 	if (retry_count > 0) {
-		property_set("ro.crypto.state", "encrypted");
+		TWFunc::Property_Override("ro.crypto.state", "encrypted");
 		Is_Encrypted = true;
 		Is_Decrypted = false;
 		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
