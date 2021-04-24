@@ -126,6 +126,7 @@ public:
 	bool UnMount(bool Display_Error);                                         // Unmounts the partition if it is mounted
 	bool ReMount(bool Display_Error);                                         // Remounts the partition
 	bool ReMount_RW(bool Display_Error);                                      // Remounts the partition with read/write access
+	bool Bind_Mount(bool Display_Error);                                      // Bind mount partition if symlink mountpoint is populated
 	bool Wipe(string New_File_System);                                        // Wipes the partition
 	bool Wipe();                                                              // Wipes the partition
 	bool Wipe_AndSec();                                                       // Wipes android secure

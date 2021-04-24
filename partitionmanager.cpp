@@ -1766,6 +1766,8 @@ void TWPartitionManager::Post_Decrypt(const string& Block_Device) {
 		DataManager::LoadTWRPFolderInfo();
 		Update_System_Details();
 		Output_Partition(dat);
+		if (!dat->Bind_Mount(false))
+			LOGERR("Unable to bind mount /sdcard to %s\n", dat->Storage_Path.c_str());
 	} else
 		LOGERR("Unable to locate data partition.\n");
 }
