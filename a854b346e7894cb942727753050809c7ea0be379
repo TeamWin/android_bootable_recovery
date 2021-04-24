@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "818ee7a0_c652a7a1",
+        "filename": "gui/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-24T23:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ca44077_29f9b660",
+      "revId": "a854b346e7894cb942727753050809c7ea0be379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d87d5758_3ba51d0f",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-17T16:31:28Z",
       "side": 1,
       "message": "remove commented code",
+      "revId": "a854b346e7894cb942727753050809c7ea0be379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "748bd191_11ffe780",
+        "filename": "gui/patternpassword.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-24T23:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d87d5758_3ba51d0f",
       "revId": "a854b346e7894cb942727753050809c7ea0be379",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
@@ -52,6 +88,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a26e14b_37bc8183",
+        "filename": "gui/patternpassword.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-24T23:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8af07f5c_343e8a07",
+      "revId": "a854b346e7894cb942727753050809c7ea0be379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cb285e8_714e8448",
@@ -69,6 +123,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73bc218_53c989d9",
+        "filename": "gui/resources.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-24T23:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cb285e8_714e8448",
+      "revId": "a854b346e7894cb942727753050809c7ea0be379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83033fc9_cb24e2da",
@@ -82,6 +154,24 @@
       "writtenOn": "2021-01-17T16:31:28Z",
       "side": 1,
       "message": "remove commented code",
+      "revId": "a854b346e7894cb942727753050809c7ea0be379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d58fb79_d90fd203",
+        "filename": "gui/resources.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-24T23:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83033fc9_cb24e2da",
       "revId": "a854b346e7894cb942727753050809c7ea0be379",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
