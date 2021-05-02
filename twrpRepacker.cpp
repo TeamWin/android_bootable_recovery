@@ -152,6 +152,13 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 		LOGERR("Invalid repacking options specified\n");
 		return false;
 	}
+	std::string repackFile(REPACK_ORIG_DIR);
+	repackFile = repackFile + "recovery_ramdisk";
+	TWFunc::write_to_file(repackFile, "repack");
+	if (!Add_File_To_Ramdisk(repackFile, REPACK_ORIG_DIR, "")) {
+		LOGERR("Unable to add ramdisk repack file\n");
+		return false;
+	}
 	if (Repack_Options.Disable_Verity)
 		LOGERR("Disabling verity is not implemented yet\n");
 	if (Repack_Options.Disable_Force_Encrypt)
@@ -191,7 +198,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 		return false;
 	}
 	DataManager::SetProgress(1);
-	TWFunc::removeDir(REPACK_ORIG_DIR, false);
+	// TWFunc::removeDir(REPACK_ORIG_DIR, false);
 	if (part->Is_SlotSelect() && Repack_Options.Type == REPLACE_RAMDISK) {
 		LOGINFO("Switching slots to flash ramdisk to both partitions\n");
 		string Current_Slot = PartitionManager.Get_Active_Slot_Display();
@@ -241,9 +248,25 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 			return false;
 		}
 		DataManager::SetProgress(1);
-		TWFunc::removeDir(REPACK_ORIG_DIR, false);
+		// TWFunc::removeDir(REPACK_ORIG_DIR, false);
 		PartitionManager.Set_Active_Slot(Current_Slot);
 	}
-	TWFunc::removeDir(REPACK_NEW_DIR, false);
+	// TWFunc::removeDir(REPACK_NEW_DIR, false);
+	return true;
+}
+
+bool twrpRepacker::Add_File_To_Ramdisk(const std::string& file_to_add, const std::string& path, const std::string& ramdisk_root_path) {
+	std::string ramdisk_file = basename(file_to_add.c_str());
+	std::string command = "cd " + path + " && /system/bin/magiskboot cpio ";
+	LOGINFO("cmd::file_to_add::%s\n", file_to_add.c_str());
+	LOGINFO("cmd::path::%s\n", path.c_str());
+	LOGINFO("cmd::ramdisk_root_path::%s\n", ramdisk_root_path.c_str());
+	command += path + "ramdisk.cpio ";
+	command += "\"add 0644 " + ramdisk_file + " " + ramdisk_root_path + file_to_add + " " + "\"";
+	if (TWFunc::Exec_Cmd(command) != 0) {
+		gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
+		return false;
+	}
+	LOGINFO("cmd: %s\n", command.c_str());
 	return true;
 }
