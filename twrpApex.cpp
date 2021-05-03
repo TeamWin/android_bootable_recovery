@@ -5,13 +5,19 @@ namespace fs = std::filesystem;
 
 bool twrpApex::loadApexImages() {
 	std::vector<std::string> apexFiles;
+	std::vector<std::string> checkApexFlatFiles;
+	apexFiles.push_back(APEX_DIR "/com.android.apex.cts.shim.apex");
+	apexFiles.push_back(APEX_DIR "/com.google.android.tzdata2.apex");
+	apexFiles.push_back(APEX_DIR "/com.android.art.release.apex");
+	apexFiles.push_back(APEX_DIR "/com.google.android.media.swcodec.apex");
+
 	if (access(APEX_DIR, F_OK) != 0) {
 		LOGERR("Unable to open %s\n", APEX_DIR);
 		return false;
 	}
 	for (const auto& entry : fs::directory_iterator(APEX_DIR)) {
 	   if (entry.is_regular_file()) {
-		   apexFiles.push_back(entry.path().string());
+		   checkApexFlatFiles.push_back(entry.path().string());
 	   }
 	}
 
