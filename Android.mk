@@ -284,6 +284,9 @@ endif
 ifeq ($(TW_INCLUDE_L_CRYPTO), true)
     TW_INCLUDE_CRYPTO := true
 endif
+ifneq ($(TW_ADDITIONAL_APEX_FILES),)
+    LOCAL_CFLAGS += -DTW_ADDITIONAL_APEX_FILES=$(TW_ADDITIONAL_APEX_FILES)
+endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
     LOCAL_SHARED_LIBRARIES += libcryptfsfde
