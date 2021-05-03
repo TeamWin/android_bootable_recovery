@@ -1,17 +1,38 @@
 #include "twrpApex.hpp"
 #include "twrp-functions.hpp"
+#include "common.h"
 
 namespace fs = std::filesystem;
 
 bool twrpApex::loadApexImages() {
 	std::vector<std::string> apexFiles;
+	std::vector<std::string> checkApexFlatFiles;
+#ifdef TW_ADDITIONAL_APEX_FILES
+	char* additionalFiles = strdup(EXPAND(TW_ADDITIONAL_APEX_FILES));
+	char* additionalApexFiles = std::strtok(additionalFiles, " ");
+#endif
+
+	apexFiles.push_back(APEX_DIR "/com.android.apex.cts.shim.apex");
+	apexFiles.push_back(APEX_DIR "/com.google.android.tzdata2.apex");
+	apexFiles.push_back(APEX_DIR "/com.android.art.release.apex");
+	apexFiles.push_back(APEX_DIR "/com.google.android.media.swcodec.apex");
+
+#ifdef TW_ADDITIONAL_APEX_FILES
+	while(additionalApexFiles) {
+		std::stringstream apexFile;
+		apexFile << APEX_DIR << "/" << additionalApexFiles;
+		apexFiles.push_back(apexFile.str());
+		additionalApexFiles = std::strtok(nullptr, " ");
+	}
+#endif
+
 	if (access(APEX_DIR, F_OK) != 0) {
 		LOGERR("Unable to open %s\n", APEX_DIR);
 		return false;
 	}
 	for (const auto& entry : fs::directory_iterator(APEX_DIR)) {
 	   if (entry.is_regular_file()) {
-		   apexFiles.push_back(entry.path().string());
+		   checkApexFlatFiles.push_back(entry.path().string());
 	   }
 	}
 
