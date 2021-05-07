@@ -180,7 +180,11 @@ extern "C" bool fscrypt_policy_get_struct(const char *directory, struct fscrypt_
         close(fd);
         return false;
     }
+#ifdef USE_FSCRYPT_POLICY_V1
+    memcpy(fep, &ex_policy.policy.v1, sizeof(ex_policy.policy.v1));
+#else
     memcpy(fep, &ex_policy.policy.v2, sizeof(ex_policy.policy.v2));
+#endif
     close(fd);
     return true;
 }

@@ -384,7 +384,11 @@ th_read(TAR *t)
 						(int)t->th_buf.fep->contents_encryption_mode,
 						(int)t->th_buf.fep->filenames_encryption_mode,
 						(int)t->th_buf.fep->flags,
+#ifdef USE_FSCRYPT_POLICY_V1
+						t->th_buf.fep->master_key_descriptor);
+#else
 						t->th_buf.fep->master_key_identifier);
+#endif
 #endif
 				}
 				else {
@@ -594,8 +598,13 @@ th_write(TAR *t)
 	if((t->options & TAR_STORE_FSCRYPT_POL) && t->th_buf.fep != NULL)
 	{
 #ifdef DEBUG
+#ifdef USE_FSCRYPT_POLICY_V1
+		printf("th_write(): using fscrypt_policy %s\n",
+		       t->th_buf.fep->master_key_descriptor);
+#else
 		printf("th_write(): using fscrypt_policy %s\n",
 		       t->th_buf.fep->master_key_identifier);
+#endif
 #endif
 		/* setup size - EXT header has format "*size of this whole tag as ascii numbers* *space* *version code* *content* *newline* */
 		//                                                       size   newline
