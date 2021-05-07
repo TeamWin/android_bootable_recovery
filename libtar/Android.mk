@@ -16,6 +16,11 @@ LOCAL_SHARED_LIBRARIES += libselinux
 ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
     LOCAL_SHARED_LIBRARIES += libtwrpfscrypt
     LOCAL_CFLAGS += -DUSE_FSCRYPT
+    ifeq ($(TW_USE_FSCRYPT_POLICY), 1)
+        LOCAL_CFLAGS += -DUSE_FSCRYPT_POLICY_V1
+    else
+        LOCAL_CFLAGS += -DUSE_FSCRYPT_POLICY_V2
+    endif
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/../crypto/fscrypt
 endif
 
