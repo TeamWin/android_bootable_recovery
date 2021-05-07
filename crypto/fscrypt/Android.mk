@@ -36,6 +36,12 @@ LOCAL_C_INCLUDES := system/extras/ext4_utils \
     system/extras/f2fs_utils/ \
     bootable/recovery/bootloader_message/include
 
+ifeq  ($(TW_USE_FSCRYPT_POLICY), 1)
+    LOCAL_CFLAGS += -DUSE_FSCRYPT_POLICY_V1
+else
+    LOCAL_CFLAGS += -DUSE_FSCRYPT_POLICY_V2
+endif
+
 ifneq ($(wildcard hardware/libhardware/include/hardware/keymaster0.h),)
     LOCAL_CFLAGS += -DTW_CRYPTO_HAVE_KEYMASTERX
     LOCAL_C_INCLUDES +=  external/boringssl/src/include

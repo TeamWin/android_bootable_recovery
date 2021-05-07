@@ -557,20 +557,42 @@ tar_extract_dir(TAR *t, const char *realname)
 #ifdef USE_FSCRYPT
 	if(t->th_buf.fep != NULL)
 	{
-                char policy_hex[FSCRYPT_KEY_IDENTIFIER_HEX_SIZE];
+#ifdef USE_FSCRYPT_POLICY_V1
+		char policy_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
+#else
+		char policy_hex[FSCRYPT_KEY_IDENTIFIER_HEX_SIZE];
+#endif
 #ifdef DEBUG
+#ifdef USE_FSCRYPT_POLICY_V1
+		bytes_to_hex(t->th_buf.fep->master_key_descriptor, FS_KEY_DESCRIPTOR_SIZE, policy_hex);
+#else
 		bytes_to_hex(t->th_buf.fep->master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
+#endif
 		printf("tar_extract_dir(): restoring fscrypt policy %s to dir %s\n", (char *)policy_hex, realname);
 #endif
+#ifdef USE_FSCRYPT_POLICY_V1
+		uint8_t binary_policy[FS_KEY_DESCRIPTOR_SIZE];
+		memset(&binary_policy, 0, FS_KEY_DESCRIPTOR_SIZE);
+#else
 		uint8_t binary_policy[FSCRYPT_KEY_IDENTIFIER_SIZE];
 		memset(&binary_policy, 0, FSCRYPT_KEY_IDENTIFIER_SIZE);
+#endif
 
+#ifdef USE_FSCRYPT_POLICY_V1
+		if (!lookup_ref_tar(t->th_buf.fep->master_key_descriptor, &binary_policy[0])) {
+			printf("error looking up fscrypt policy for '%s' - %s\n", realname, t->th_buf.fep->master_key_descriptor);
+			return -1;
+		}
+		memcpy(&t->th_buf.fep->master_key_descriptor, binary_policy, FS_KEY_DESCRIPTOR_SIZE);
+		bytes_to_hex(t->th_buf.fep->master_key_descriptor, FS_KEY_DESCRIPTOR_SIZE, policy_hex);
+#else
 		if (!lookup_ref_tar(t->th_buf.fep->master_key_identifier, &binary_policy[0])) {
 			printf("error looking up fscrypt policy for '%s' - %s\n", realname, t->th_buf.fep->master_key_identifier);
 			return -1;
 		}
 		memcpy(&t->th_buf.fep->master_key_identifier, binary_policy, FSCRYPT_KEY_IDENTIFIER_SIZE);
 		bytes_to_hex(t->th_buf.fep->master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
+#endif
 		printf("attempting to restore policy: %s\n", policy_hex);
 		if (!fscrypt_policy_set_struct(realname, t->th_buf.fep))
 		{

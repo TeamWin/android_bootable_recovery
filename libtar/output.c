@@ -62,8 +62,13 @@ th_print(TAR *t)
 	       (t->th_buf.gnu_longlink ? t->th_buf.gnu_longlink : "[NULL]"));
 		   
 #ifdef USE_FSCRYPT
+#ifdef USE_FSCRYPT_POLICY_V1
+	printf("  fep = \"%s\"\n",
+	       (t->th_buf.fep ? t->th_buf.fep->master_key_descriptor : (uint8_t*) "[NULL]"));
+#else
 	printf("  fep = \"%s\"\n",
 	       (t->th_buf.fep ? t->th_buf.fep->master_key_identifier : (uint8_t*) "[NULL]"));
+#endif
 #endif
 }
 
