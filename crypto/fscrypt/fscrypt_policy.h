@@ -27,6 +27,22 @@ __BEGIN_DECLS
 #define FS_KEY_DESCRIPTOR_SIZE_HEX (2 * FS_KEY_DESCRIPTOR_SIZE + 1)
 #define FSCRYPT_KEY_IDENTIFIER_HEX_SIZE ((2 * FSCRYPT_KEY_IDENTIFIER_SIZE) + 1)
 
+#ifdef USE_FSCRYPT_POLICY_V1
+#define USER_CE_FSCRYPT_POLICY           "0CE"
+#define USER_DE_FSCRYPT_POLICY           "0DE"
+#define SYSTEM_DE_FSCRYPT_POLICY         "0DK"
+#else
+#define USER_CE_FSCRYPT_POLICY           "2CE"
+#define USER_DE_FSCRYPT_POLICY           "2DE"
+#define SYSTEM_DE_FSCRYPT_POLICY         "2DK"
+#endif
+
+#define FSCRYPT_V1                        "0"
+#define FSCRYPT_V2                        "2"
+#define SYSTEM_DE_KEY                     "DK"
+#define USER_CE_KEY                       "C"
+#define USER_DE_KEY                       "D"
+
 /* modes not supported by upstream kernel, so not in <linux/fs.h> */
 #define FS_ENCRYPTION_MODE_AES_256_HEH      126
 #define FS_ENCRYPTION_MODE_PRIVATE          127
