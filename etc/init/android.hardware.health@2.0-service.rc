@@ -1,4 +1,4 @@
-service health-hal-2-1 /system/bin/android.hardware.health@2.1-service
+service health-hal-2-0 /system/bin/android.hardware.health@2.0-service
     disabled
     user root
     group root
