@@ -147,6 +147,7 @@
 #define TW_NO_SHA2                  "tw_no_sha2"
 #define TW_UNMOUNT_SYSTEM           "tw_unmount_system"
 #define TW_IS_SUPER                 "tw_is_super"
+#define TW_AUTO_REFLASHTWRP_VAR                "tw_auto_reflashtwrp"
 
 // Also used:
 //   tw_boot_is_mountable
