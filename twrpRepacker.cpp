@@ -128,8 +128,12 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 	if (!Backup_Image_For_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
 		return false;
 	DataManager::SetProgress(.25);
-	gui_msg(Msg("unpacking_image=Unpacking {1}...")(Target_Image));
-	image_ramdisk_format = Unpack_Image(Target_Image, REPACK_NEW_DIR, true);
+	if (Repack_Options.Type == REPLACE_RAMDISK_UNPACKED) {
+	image_ramdisk_format = "gzip";
+	} else {
+		gui_msg(Msg("unpacking_image=Unpacking {1}...")(Target_Image));
+		image_ramdisk_format = Unpack_Image(Target_Image, REPACK_NEW_DIR, true);
+	}
 	if (image_ramdisk_format.empty())
 		return false;
 	DataManager::SetProgress(.5);
@@ -141,6 +145,12 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 			LOGERR("Failed to copy ramdisk\n");
 			return false;
 		}
+	} else if (Repack_Options.Type == REPLACE_RAMDISK_UNPACKED) {
+			if (TWFunc::copy_file(Target_Image, REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
+			LOGERR("Failed to copy ramdisk\n");
+			return false;
+			}
+	path = REPACK_ORIG_DIR;
 	} else if (Repack_Options.Type == REPLACE_RAMDISK) {
 		// Repack the ramdisk
 		if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
