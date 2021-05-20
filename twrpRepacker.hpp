@@ -26,6 +26,7 @@ enum Repack_Type {
 	REPLACE_NONE = 0,
 	REPLACE_RAMDISK = 1,
 	REPLACE_KERNEL = 2,
+	REPLACE_RAMDISK_UNPACKED = 3,
 };
 
 struct Repack_Options_struct {
