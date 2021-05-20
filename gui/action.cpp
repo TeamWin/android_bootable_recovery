@@ -238,6 +238,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(installapp);
 		ADD_ACTION(uninstalltwrpsystemapp);
 		ADD_ACTION(repackimage);
+		ADD_ACTION(reflashtwrp);
 		ADD_ACTION(fixabrecoverybootloop);
 		ADD_ACTION(applycustomtwrpfolder);
 #ifndef TW_EXCLUDE_NANO
@@ -2153,6 +2154,37 @@ exit:
 	return 0;
 }
 
+int GUIAction::reflashtwrp(std::string arg __unused)
+{
+	int op_status = 1;
+	twrpRepacker repacker;
+
+	operation_start("Repack Image");
+	if (!simulate)
+	{
+                if (!TWFunc::Path_Exists("/ramdisk-files.txt")) {
+                        LOGERR("can not find ramdisk-files.txt");
+                        goto exit;
+                }
+		Repack_Options_struct Repack_Options;
+		Repack_Options.Disable_Verity = false;
+		Repack_Options.Disable_Force_Encrypt = false;
+                Repack_Options.Type = REPLACE_RAMDISK;
+		Repack_Options.Backup_First = DataManager::GetIntValue("tw_repack_backup_first") != 0;
+		std::string command = "/system/bin/cpio -o < /ramdisk-files.txt > /tmp/currentramdisk.cpio && /system/bin/gzip /tmp/currentramdisk.cpio";
+		if (TWFunc::Exec_Cmd(command) != 0) {
+			gui_msg(Msg(msg::kError, "failed to create ramdisk to flash"));
+			goto exit;
+		}
+		if (!repacker.Repack_Image_And_Flash("/tmp/currentramdisk.cpio.gz", Repack_Options))
+			goto exit;
+	} else
+		simulate_progress_bar();
+	op_status = 0;
+exit:
+        operation_end(op_status);
+        return 0;
+}
 int GUIAction::fixabrecoverybootloop(std::string arg __unused)
 {
 	int op_status = 1;
