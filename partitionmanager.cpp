@@ -1098,6 +1098,9 @@ int TWPartitionManager::Run_Restore(const string& Restore_Name) {
 	part_settings.adbbackup = false;
 	part_settings.PM_Method = PM_RESTORE;
 
+	Unlock_Block_Partitions();
+	sleep(200);
+
 	gui_msg("restore_started=[RESTORE STARTED]");
 	gui_msg(Msg("restore_folder=Restore folder: '{1}'")(Restore_Name));
 
