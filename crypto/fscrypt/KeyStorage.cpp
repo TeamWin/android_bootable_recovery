@@ -151,8 +151,20 @@ bool exportWrappedStorageKey(const KeyBuffer& kmKey, KeyBuffer* key) {
     if (!keymaster) return false;
     std::string key_temp;
 
-    if (!keymaster.exportKey(kmKey, &key_temp)) return false;
-    *key = KeyBuffer(key_temp.size());
+    auto ret = keymaster.exportKey(kmKey, &key_temp);
+    if (ret != km::ErrorCode::OK) {
+        if (ret == km::ErrorCode::KEY_REQUIRES_UPGRADE) {
+           std::string kmKeyStr(reinterpret_cast<const char*>(kmKey.data()), kmKey.size());
+           std::string Keystr;
+           if (!keymaster.upgradeKey(kmKeyStr, km::AuthorizationSet(), &Keystr)) return false;
+           KeyBuffer upgradedKey = KeyBuffer(Keystr.size());
+           memcpy(reinterpret_cast<void*>(upgradedKey.data()), Keystr.c_str(), upgradedKey.size());
+           ret = keymaster.exportKey(upgradedKey, &key_temp);
+           if (ret != km::ErrorCode::OK) return false;
+        } else {
+           return false;
+        }
+    }    *key = KeyBuffer(key_temp.size());
     memcpy(reinterpret_cast<void*>(key->data()), key_temp.c_str(), key->size());
     return true;
 }
@@ -164,7 +176,7 @@ static std::pair<km::AuthorizationSet, km::HardwareAuthToken> beginParams(
                             .Authorization(km::TAG_APPLICATION_ID, km::support::blob2hidlVec(appId));
     km::HardwareAuthToken authToken;
     if (!auth.token.empty()) {
-        LOG(DEBUG) << "Supplying auth token to Keymaster";
+        LOG(INFO) << "Supplying auth token to Keymaster";
         authToken = km::support::hidlVec2AuthToken(km::support::blob2hidlVec(auth.token));
     }
     return {paramBuilder, authToken};
@@ -243,21 +255,21 @@ static KeymasterOperation begin(Keymaster& keymaster, const std::string& dir,
         LOG(DEBUG) << "Upgrading key: " << dir;
         std::string newKey;
         if (!keymaster.upgradeKey(kmKey, keyParams, &newKey)) return KeymasterOperation();
-        // auto newKeyPath = dir + "/" + kFn_keymaster_key_blob_upgraded;
-        // if (!writeStringToFile(newKey, newKeyPath)) return KeymasterOperation();
-        // if (!keepOld) {
-        //     if (rename(newKeyPath.c_str(), kmKeyPath.c_str()) != 0) {
-        //         PLOG(ERROR) << "Unable to move upgraded key to location: " << kmKeyPath;
-        //         return KeymasterOperation();
-        //     }
-        //     if (!::FsyncDirectory(dir)) {
-        //         LOG(ERROR) << "Key dir sync failed: " << dir;
-        //         return KeymasterOperation();
-        //     }
-        //     if (!kmDeleteKey(keymaster, kmKey)) {
-        //         LOG(ERROR) << "Key deletion failed during upgrade, continuing anyway: " << dir;
-        //     }
-        // }
+        auto newKeyPath = dir + "/" + kFn_keymaster_key_blob_upgraded;
+        if (!writeStringToFile(newKey, newKeyPath)) return KeymasterOperation();
+        if (!keepOld) {
+            if (rename(newKeyPath.c_str(), kmKeyPath.c_str()) != 0) {
+                PLOG(ERROR) << "Unable to move upgraded key to location: " << kmKeyPath;
+                return KeymasterOperation();
+            }
+            if (!::FsyncDirectory(dir)) {
+                LOG(ERROR) << "Key dir sync failed: " << dir;
+                return KeymasterOperation();
+            }
+            if (!kmDeleteKey(keymaster, kmKey)) {
+                LOG(ERROR) << "Key deletion failed during upgrade, continuing anyway: " << dir;
+            }
+        }
         kmKey = newKey;
         LOG(INFO) << "Key upgraded: " << dir;
     }

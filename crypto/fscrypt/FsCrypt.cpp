@@ -201,7 +201,7 @@ static bool read_and_fixate_user_ce_key(userid_t user_id,
     auto const paths = get_ce_key_paths(directory_path);
     for (auto const ce_key_path : paths) {
         LOG(INFO) << "Trying user CE key " << ce_key_path;
-        if (retrieveKey(ce_key_path, auth, ce_key)) {
+        if (retrieveKey(ce_key_path, auth, ce_key, true)) {
             LOG(INFO) << "Successfully retrieved key";
             fixate_user_ce_key(directory_path, ce_key_path, paths);
             return true;
@@ -409,7 +409,7 @@ static bool load_all_de_keys() {
         userid_t user_id = std::stoi(entry->d_name);
         auto key_path = de_dir + "/" + entry->d_name;
         KeyBuffer de_key;
-        if (!retrieveKey(key_path, kEmptyAuthentication, &de_key)) return false;
+        if (!retrieveKey(key_path, kEmptyAuthentication, &de_key, true)) return false;
         EncryptionPolicy de_policy;
         if (!install_storage_key(DATA_MNT_POINT, options, de_key, &de_policy)) return false;
         auto ret = s_de_policies.insert({user_id, de_policy});
@@ -707,12 +707,12 @@ static bool fscrypt_rewrap_user_key(userid_t user_id, int serial,
     auto const directory_path = get_ce_key_directory_path(user_id);
     KeyBuffer ce_key;
     std::string ce_key_current_path = get_ce_key_current_path(directory_path);
-    if (retrieveKey(ce_key_current_path, retrieve_auth, &ce_key)) {
+    if (retrieveKey(ce_key_current_path, retrieve_auth, &ce_key, true)) {
         LOG(INFO) << "Successfully retrieved key";
         // TODO(147732812): Remove this once Locksettingservice is fixed.
         // Currently it calls fscrypt_clear_user_key_auth with a secret when lockscreen is
         // changed from swipe to none or vice-versa
-    } else if (retrieveKey(ce_key_current_path, kEmptyAuthentication, &ce_key)) {
+    } else if (retrieveKey(ce_key_current_path, kEmptyAuthentication, &ce_key, true)) {
         LOG(INFO) << "Successfully retrieved key with empty auth";
     } else {
         LOG(ERROR) << "Failed to retrieve key for user " << user_id;

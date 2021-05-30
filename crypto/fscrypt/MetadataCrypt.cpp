@@ -160,6 +160,7 @@ static bool read_key(const std::string& metadata_key_dir, const KeyGeneration& g
      * or we rebooted before commiting the keys in a freak accident.
      * Either way, we can re-upgrade the key if we need to.
      */
+
     Keymaster keymaster;
     if (pathExists(newKeyPath)) {
         if (!android::base::ReadFileToString(newKeyPath, &sKey))
@@ -170,7 +171,7 @@ static bool read_key(const std::string& metadata_key_dir, const KeyGeneration& g
             unlink(newKeyPath.c_str());
     }
     bool needs_cp = cp_needsCheckpoint();
-    if (!retrieveOrGenerateKey(dir, temp, kEmptyAuthentication, gen, key, needs_cp)) return false;
+    if (!retrieveOrGenerateKey(dir, temp, kEmptyAuthentication, gen, key, true)) return false;
     if (needs_cp && pathExists(newKeyPath)) std::thread(commit_key, dir).detach();
     return true;
 }
