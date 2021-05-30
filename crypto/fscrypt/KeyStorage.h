@@ -60,7 +60,7 @@ bool storeKeyAtomically(const std::string& key_path, const std::string& tmp_path
 
 // Retrieve the key from the named directory.
 bool retrieveKey(const std::string& dir, const KeyAuthentication& auth, KeyBuffer* key,
-                 bool keepOld = false);
+                 bool keepOld);
 
 // Securely destroy the key stored in the named directory and delete the directory.
 bool destroyKey(const std::string& dir);

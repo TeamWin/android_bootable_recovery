@@ -112,7 +112,7 @@ class Keymaster {
     // Generate a key in the keymaster from the given params.
     bool generateKey(const km::AuthorizationSet& inParams, std::string* key);
     // Exports a keymaster key with STORAGE_KEY tag wrapped with a per-boot ephemeral key
-    bool exportKey(const KeyBuffer& kmKey, std::string* key);
+    km::ErrorCode exportKey(const KeyBuffer& kmKey, std::string* key);
     // If the keymaster supports it, permanently delete a key.
     bool deleteKey(const std::string& key);
     // Replace stored key blob in response to KM_ERROR_KEY_REQUIRES_UPGRADE.
