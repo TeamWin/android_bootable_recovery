@@ -450,6 +450,7 @@ void TWPartitionManager::Decrypt_Data() {
 				}
 			}
 		} else {
+			LOGINFO("FBE setup failed. Trying FDE...");
 			Set_FDE_Encrypt_Status();
 			int password_type = cryptfs_get_password_type();
 			if (password_type == CRYPT_TYPE_DEFAULT) {
