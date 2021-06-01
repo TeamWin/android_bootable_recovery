@@ -17,6 +17,7 @@
 #ifndef _MTP_FFS_HANDLE_H
 #define _MTP_FFS_HANDLE_H
 
+#include <android-base/properties.h>
 #include <android-base/unique_fd.h>
 #include <linux/aio_abi.h>
 #include <mutex>
@@ -55,6 +56,7 @@ protected:
 	static int getPacketSize(int ffs_fd);
 
 	bool mCanceled;
+	bool mBatchCancel;
 
 	android::base::unique_fd mControl;
 	// "in" from the host's perspective => sink for mtp server
@@ -74,7 +76,8 @@ protected:
 	int iobufSubmit(struct io_buffer *buf, int fd, unsigned length, bool read);
 
 	// Cancel submitted requests from start to end in the given array. Return 0 or -1.
-	int cancelEvents(struct iocb **iocb, struct io_event *events, unsigned start, unsigned end);
+	int cancelEvents(struct iocb **iocb, struct io_event *events, unsigned start, unsigned end,
+						bool is_batch_cancel);
 
 	// Wait for at minimum the given number of events. Returns the amount of data in the returned
 	// events. Increments counter by the number of events returned.
