@@ -156,7 +156,10 @@ endif
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     LOCAL_CFLAGS += -DPRODUCT_USE_DYNAMIC_PARTITIONS=1
     TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-impl.recovery android.hardware.health@2.1-service.rc android.hardware.health@2.1.xml
-    TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc
+    TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc 
+    ifeq ($(TW_EXCLUDE_LPDUMP),)
+        TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
+    endif
 endif
 
 ifeq ($(TW_USES_VENDOR_LIBS),true)

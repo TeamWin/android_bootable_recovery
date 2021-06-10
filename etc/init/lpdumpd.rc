@@ -1,0 +1,36 @@
+#
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+service lpdumpd /system/bin/lpdumpd
+    # TODO(b/129011369): make this killable by lmkd
+    oneshot
+    disabled
+    user root
+    group root
+    # On Launch devices, assume "super". On virtual devices, ${ro.boot.super_partition}
+    # might be something else.
+    file /dev/block/by-name/${ro.boot.super_partition:-super} r
+    # On retrofit devices, ${ro.boot.super_partition} is slot-suffixed.
+    # Use NO_SUCH_DEVICE_NO_SUCH_SUFFIX as default values so that host_init_verifier does
+    # not complain about missing sysprops
+    file /dev/block/by-name/${ro.boot.super_partition:-NO_SUCH_DEVICE}${ro.boot.slot_suffix:-_NO_SUCH_SUFFIX} r
+    seclabel u:r:recovery:s0
+
+on property:sys.lpdumpd=start
+    start lpdumpd
+
+on property:sys.lpdumpd=stop
+    stop lpdumpd
