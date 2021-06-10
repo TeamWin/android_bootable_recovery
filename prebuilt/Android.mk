@@ -233,6 +233,7 @@ ifeq ($(AB_OTA_UPDATER), true)
     RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.boot@1.0.so
     RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.boot@1.1.so
     RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/bootctl
+    RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/lpdump
 endif
 
 ifneq ($(wildcard system/core/libsparse/Android.*),)
