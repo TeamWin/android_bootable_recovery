@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "130248ac_01b76dae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-12T19:16:12Z",
+      "side": 1,
+      "message": "I just wanted to be sure, this is to take an unpacked ramdisk, and replace the files in boot with that unpacked ramdisk?",
+      "revId": "260d408ff9f5a756c0cc9ba9c6fdbf3ae2ef59df",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
