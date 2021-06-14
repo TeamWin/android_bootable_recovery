@@ -16,6 +16,24 @@
       "message": "I just wanted to be sure, this is to take an unpacked ramdisk, and replace the files in boot with that unpacked ramdisk?",
       "revId": "260d408ff9f5a756c0cc9ba9c6fdbf3ae2ef59df",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7c53f0_8770e740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2021-06-14T10:13:18Z",
+      "side": 1,
+      "message": "this is to create a TWRP ramdisk from the files in ram and flash that ramdisk to boot",
+      "parentUuid": "130248ac_01b76dae",
+      "revId": "260d408ff9f5a756c0cc9ba9c6fdbf3ae2ef59df",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
