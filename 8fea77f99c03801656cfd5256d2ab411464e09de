@@ -50,6 +50,24 @@
       "message": "Since it\u0027s a constant, it can be moved after line 38, outside of the function",
       "revId": "8fea77f99c03801656cfd5256d2ab411464e09de",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f95ed2_533dedda",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 701
+      },
+      "writtenOn": "2021-06-19T00:21:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "403885ff_5b634ed0",
+      "revId": "8fea77f99c03801656cfd5256d2ab411464e09de",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6bd44f_685fc66c",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 701
+      },
+      "writtenOn": "2021-06-19T00:21:08Z",
+      "side": 1,
+      "message": "Newline after this",
+      "revId": "951f59922c80ffd3a44f5b3a7e927655dd095b5e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
