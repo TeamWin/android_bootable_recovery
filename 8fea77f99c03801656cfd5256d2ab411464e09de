@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c399fd5f_105899cf",
+        "filename": "minuitwrp/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 701
+      },
+      "writtenOn": "2021-06-19T00:17:22Z",
+      "side": 1,
+      "message": "Would be nice to add a comma after libbinder_ndk entry so next shared lib that\u0027s gonna be added won\u0027t edit it (like you do now with libsync)",
+      "revId": "8fea77f99c03801656cfd5256d2ab411464e09de",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5243675f_661c8c9d",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 701
+      },
+      "writtenOn": "2021-06-19T00:17:22Z",
+      "side": 1,
+      "message": "Add a newline after this",
+      "revId": "8fea77f99c03801656cfd5256d2ab411464e09de",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "403885ff_5b634ed0",
+        "filename": "minuitwrp/events.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 701
+      },
+      "writtenOn": "2021-06-19T00:17:22Z",
+      "side": 1,
+      "message": "Since it\u0027s a constant, it can be moved after line 38, outside of the function",
+      "revId": "8fea77f99c03801656cfd5256d2ab411464e09de",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
