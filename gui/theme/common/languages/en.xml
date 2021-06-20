@@ -760,5 +760,13 @@
 		<string name="change_twrp_folder_on_process">Changing TWRP folder</string>
 		<string name="change_twrp_folder_after_process">TWRP folder changed to</string>
 		<string name="tw_folder_exists">A folder with that name already exists!</string>
+		<string name="unmap_super_devices">Unmap Super Devices</strings>
+		<string name="unmap_super_devices_confirm">Unmap all Super Devices?</string>
+		<string name="unmapping_super_devices">Unmapping Super Devices...</string>
+		<string name="unmap_super_devices_complete">Unmapped all Super Devices</string>
+		<string name="remove_dynamic_groups_confirm">Unmap all Super Devices?</string>
+		<string name="remove_dynamic_groups">Unmapping Super Devices...</string>
+		<string name="remove_dynamic_groups_complete">Unmapped all Super Devices</string>
+		<string name="mount_vab_partitions">Devices on super may not mount until rebooting recovery.</string>
 	</resources>
 </language>

@@ -334,17 +334,21 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 			// We need this so backuptool can do its magic
 			bool system_mount_state = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
 			bool vendor_mount_state = PartitionManager.Is_Mounted_By_Path("/vendor");
-			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
-			PartitionManager.Mount_By_Path("/vendor", true);
+			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+			PartitionManager.Mount_By_Path("/vendor", false);
 			TWFunc::copy_file("/system/bin/sh", "/tmp/sh", 0755);
 			mount("/tmp/sh", "/system/bin/sh", "auto", MS_BIND, NULL);
 			ret_val = Run_Update_Binary(path, wipe_cache, AB_OTA_ZIP_TYPE);
 			umount("/system/bin/sh");
 			unlink("/tmp/sh");
 			if (!vendor_mount_state)
-				PartitionManager.UnMount_By_Path("/vendor", true);
+				PartitionManager.UnMount_By_Path("/vendor", false);
 			if (!system_mount_state)
-				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
+				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+			if (android::base::GetBoolProperty("ro.virtual_ab.enabled", true)) {
+				PartitionManager.Prepare_All_Super_Volumes();
+				gui_warn("mount_vab_partitions=Devices on super may not mount until rebooting recovery.");
+			}
 			gui_warn("flash_ab_reboot=To flash additional zips, please reboot recovery to switch to the updated slot.");
 		} else {
 			std::string binary_name("ui.xml");
