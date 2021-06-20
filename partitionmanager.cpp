@@ -52,8 +52,12 @@
 #include <fs_mgr.h>
 #include <fs_mgr_dm_linear.h>
 #include <fs_mgr_overlayfs.h>
+#include <fs_mgr/roots.h>
 #include <libgsi/libgsi.h>
 #include <liblp/liblp.h>
+#include <libgsi/libgsi.h>
+#include <liblp/builder.h>
+#include <libsnapshot/snapshot.h>
 
 #include "variables.h"
 #include "twcommon.h"
@@ -111,6 +115,7 @@ extern "C" {
 
 using android::fs_mgr::Fstab;
 using android::fs_mgr::FstabEntry;
+using android::fs_mgr::DestroyLogicalPartition;
 
 extern bool datamedia;
 std::vector<users_struct> Users_List;
@@ -1570,8 +1575,14 @@ int TWPartitionManager::Wipe_Android_Secure(void) {
 
 int TWPartitionManager::Format_Data(void) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
+	TWPartition* metadata = Find_Partition_By_Path("/metadata");
+	metadata->UnMount(false);
 
 	if (dat != NULL) {
+		Remove_Super_Devices();
+		if (!dat->Check_Pending_Merges()) {
+			return false;
+		}
 		return dat->Wipe_Encryption();
 	} else {
 		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/data"));
@@ -3301,14 +3312,16 @@ bool TWPartitionManager::Prepare_Empty_Folder(const std::string& Folder) {
 	return TWFunc::Recursive_Mkdir(Folder);
 }
 
+std::string TWPartitionManager::Get_Bare_Partition_Name(std::string Mount_Point) {
+	if (Mount_Point == "/system_root")
+		return "system";
+	else
+		return TWFunc::Remove_Beginning_Slash(Mount_Point);
+}
+
 bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
     Fstab fstab;
-	std::string bare_partition_name;
-
-	if (twrpPart->Get_Mount_Point() == "/system_root")
-		bare_partition_name = "system";
-	else
-		bare_partition_name = TWFunc::Remove_Beginning_Slash(twrpPart->Get_Mount_Point());
+	std::string bare_partition_name = Get_Bare_Partition_Name(twrpPart->Get_Mount_Point());
 
 	LOGINFO("Trying to prepare %s from super partition\n", bare_partition_name.c_str());
 
@@ -3480,4 +3493,26 @@ void TWPartitionManager::Unlock_Block_Partitions() {
 		}
 		closedir(d);
 	}
+}
+
+bool TWPartitionManager::Remove_Super_Devices() {
+	std::vector<TWPartition*>::iterator iter;
+	bool destroyed = false;
+
+	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
+		if ((*iter)->Is_Super) {
+			std::string bare_partition_name = Get_Bare_Partition_Name((*iter)->Get_Mount_Point());
+			std::string blk_device_partition = bare_partition_name + PartitionManager.Get_Active_Slot_Suffix();
+			(*iter)->UnMount(false);
+			destroyed = DestroyLogicalPartition(blk_device_partition);
+			rmdir((*iter)->Mount_Point.c_str());
+			TWPartition *part = *iter;
+			iter = Partitions.erase(iter);
+			delete part;
+			if (!destroyed) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
