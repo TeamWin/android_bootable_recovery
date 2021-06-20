@@ -4365,6 +4365,17 @@
 						<action function="page">confirm_action</action>
 					</actions>
 				</listitem>
+				<listitem name="{@unmap_super_devices=Unmap Super Devices}">
+					<actions>
+						<action function="set">tw_back=advanced</action>
+						<action function="set">tw_action=unmapsuperdevices</action>
+						<action function="set">tw_text1={@unmap_super_devices_confirm=Unmap all Super Devices?}</action>
+						<action function="set">tw_action_text1={@unmapping_super_devices=Unmapping Super Devices...}</action>
+						<action function="set">tw_complete_text1={@unmap_super_devices_complete=Unmapped all Super Devices}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
 			</listbox>
 
 			<button>
