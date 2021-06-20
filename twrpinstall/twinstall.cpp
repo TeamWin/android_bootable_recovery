@@ -272,13 +272,13 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 
 	if (zip_verify) {
 		gui_msg("verify_zip_sig=Verifying zip signature...");
-		static constexpr const char* CERTIFICATE_ZIP_FILE = "/system/etc/security/otacerts.zip";
+		std::string CERTIFICATE_ZIP_FILE = "/system/etc/security/otacerts.zip";
 		std::vector<Certificate> loaded_keys = LoadKeysFromZipfile(CERTIFICATE_ZIP_FILE);
 		if (loaded_keys.empty()) {
 			LOGERR("Failed to load keys\n");
 			return -1;
 		}
-		LOGINFO("%zu key(s) loaded from %s\n", loaded_keys.size(), CERTIFICATE_ZIP_FILE);
+		LOGINFO("%zu key(s) loaded from %s\n", loaded_keys.size(), CERTIFICATE_ZIP_FILE.c_str());
 
 		ret_val = verify_file(package.get(), loaded_keys, std::bind(&DataManager::SetProgress, std::placeholders::_1));
 		if (ret_val != VERIFY_SUCCESS) {
@@ -330,6 +330,8 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 		ZipEntry ab_binary_entry;
 		if (FindEntry(Zip, ab_binary_name, &ab_binary_entry) == 0) {
 			LOGINFO("AB zip\n");
+			PartitionManager.Unmap_Cow_Devices();
+			PartitionManager.Remove_Dynamic_Groups();
 			gui_msg(Msg(msg::kHighlight, "flash_ab_inactive=Flashing A/B zip to inactive slot: {1}")(PartitionManager.Get_Active_Slot_Display()=="A"?"B":"A"));
 			// We need this so backuptool can do its magic
 			bool system_mount_state = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
