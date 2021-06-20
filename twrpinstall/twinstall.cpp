@@ -330,6 +330,8 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 		ZipEntry ab_binary_entry;
 		if (FindEntry(Zip, ab_binary_name, &ab_binary_entry) == 0) {
 			LOGINFO("AB zip\n");
+			PartitionManager.Unmap_Cow_Devices();
+			PartitionManager.Remove_Dynamic_Groups();
 			gui_msg(Msg(msg::kHighlight, "flash_ab_inactive=Flashing A/B zip to inactive slot: {1}")(PartitionManager.Get_Active_Slot_Display()=="A"?"B":"A"));
 			// We need this so backuptool can do its magic
 			bool system_mount_state = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());

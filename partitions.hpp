@@ -176,7 +176,8 @@ public:
 protected:
 	bool Has_Data_Media;                                                      // Indicates presence of /data/media, may affect wiping and backup methods
 	void Setup_Data_Media();                                                  // Sets up a partition as a /data/media emulated storage partition
-	void Set_Block_Device(std::string block_device);						  // Allow super partition setup to change block device
+	void Set_Block_Device(std::string block_device);                          // Allow super partition setup to change block device
+	bool Check_Pending_Merges();                                              // Check and run pending merges on data for VAB devices
 
 private:
 	bool Process_Fstab_Line(const char *fstab_line, bool Display_Error, std::map<string, Flags_Map> *twrp_flags); // Processes a fstab line
@@ -390,6 +391,7 @@ public:
 	void read_uevent();                                                       // Reads uevent data into a buffer
 	void close_uevent();                                                      // Closes the uevent netlink socket
 	void Add_Partition(TWPartition* Part);                                    // Adds a new partition to the Partitions vector
+	std::string Get_Bare_Partition_Name(std::string Mount_Point);
     bool Prepare_Super_Volume(TWPartition* twrpPart);					  	  // Prepare logical super partition volume for mounting
 	std::string Get_Super_Partition();										  // Get Super Partition block device path
 	void Setup_Super_Devices();												  // Setup logical dm devices on super partition
@@ -399,6 +401,8 @@ public:
 	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
 	int Set_FDE_Encrypt_Status();                                             // Sets encryption state for FDE devices (ro.crypto.state and ro.crypto.type)
 	void Unlock_Block_Partitions();                                           // Unlock all block devices after update_engine runs
+	bool Unmap_Cow_Devices();
+	bool Remove_Dynamic_Groups();
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
@@ -420,7 +424,8 @@ private:
 	std::string original_ramdisk_format;                                      // Ramdisk format of boot partition
 	std::string repacked_ramdisk_format;                                      // Ramdisk format of boot image to repack from
 	void Mark_User_Decrypted(int userID);                                     // Marks given user ID in Users_List as decrypted
-	void Check_Users_Decryption_Status();                                      // Checks to see if all users are decrypted
+	void Check_Users_Decryption_Status();                                     // Checks to see if all users are decrypted
+	bool Remove_Super_Devices();
 
 private:
 	std::vector<TWPartition*> Partitions;                                     // Vector list of all partitions
