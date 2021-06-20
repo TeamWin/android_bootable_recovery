@@ -207,6 +207,8 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(enableadb);
 		ADD_ACTION(enablefastboot);
 		ADD_ACTION(changeterminal);
+		ADD_ACTION(unmapsuperdevices);
+		ADD_ACTION(removedynamicgroups);
 
 		// remember actions that run in the caller thread
 		for (mapFunc::const_iterator it = mf.begin(); it != mf.end(); ++it)
@@ -2266,6 +2268,39 @@ int GUIAction::changeterminal(std::string arg) {
 		gui_changePage("terminalcommand");
 	return 0;
 }
+
+int GUIAction::unmapsuperdevices(std::string arg __unused) {
+	int op_status = 1;
+
+	operation_start("Remove Super Devices");
+	if (simulate) {
+		simulate_progress_bar();
+	} else {
+		if (PartitionManager.Unmap_Super_Devices()) {
+			op_status = 0;
+		}
+	}
+
+	operation_end(op_status);
+	return 0;
+}
+
+int GUIAction::removedynamicgroups(std:: string arg __unused) {
+	int op_status = 1;
+
+	operation_start("Remove Logical Groups");
+	if (simulate) {
+		simulate_progress_bar();
+	} else {
+		if (PartitionManager.Remove_Dynamic_Groups()) {
+			op_status = 0;
+		}
+	}
+
+	operation_end(op_status);
+	return 0;
+}
+
 #ifndef TW_EXCLUDE_NANO
 int GUIAction::editfile(std::string arg) {
 	if (term != NULL) {
