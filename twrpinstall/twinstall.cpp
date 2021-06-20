@@ -330,21 +330,23 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 		ZipEntry ab_binary_entry;
 		if (FindEntry(Zip, ab_binary_name, &ab_binary_entry) == 0) {
 			LOGINFO("AB zip\n");
+			PartitionManager.Remove_Super_Devices();
+			PartitionManager.Remove_Dynamic_Groups();
 			gui_msg(Msg(msg::kHighlight, "flash_ab_inactive=Flashing A/B zip to inactive slot: {1}")(PartitionManager.Get_Active_Slot_Display()=="A"?"B":"A"));
 			// We need this so backuptool can do its magic
 			bool system_mount_state = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
 			bool vendor_mount_state = PartitionManager.Is_Mounted_By_Path("/vendor");
-			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
-			PartitionManager.Mount_By_Path("/vendor", true);
+			PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+			PartitionManager.Mount_By_Path("/vendor", false);
 			TWFunc::copy_file("/system/bin/sh", "/tmp/sh", 0755);
 			mount("/tmp/sh", "/system/bin/sh", "auto", MS_BIND, NULL);
 			ret_val = Run_Update_Binary(path, wipe_cache, AB_OTA_ZIP_TYPE);
 			umount("/system/bin/sh");
 			unlink("/tmp/sh");
 			if (!vendor_mount_state)
-				PartitionManager.UnMount_By_Path("/vendor", true);
+				PartitionManager.UnMount_By_Path("/vendor", false);
 			if (!system_mount_state)
-				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
+				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
 			gui_warn("flash_ab_reboot=To flash additional zips, please reboot recovery to switch to the updated slot.");
 		} else {
 			std::string binary_name("ui.xml");
