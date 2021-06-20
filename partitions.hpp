@@ -227,6 +227,7 @@ private:
 	bool Flash_Sparse_Image(const string& Filename);                          // Flashes a sparse image using simg2img
 	bool Flash_Image_FI(const string& Filename, ProgressTracking *progress);  // Flashes an image to the partition using flash_image for mtd nand
 	void ExcludeAll(const string& path);                                      // Adds an exclusion for path to both the backup and wipe exclusion lists
+	bool Check_Pending_Merges();
 
 private:
 	bool Can_Be_Mounted;                                                      // Indicates that the partition can be mounted

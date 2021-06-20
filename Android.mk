@@ -148,7 +148,10 @@ endif
 
 ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
-    LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0 android.hardware.boot@1.1
+    LOCAL_C_INCLUDES += system/core/fs_mgr/libsnapshot/include
+    LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0 android.hardware.boot@1.1 libprotobuf-cpp-lite
+    LOCAL_STATIC_LIBRARIES += libsnapshot_nobinder libhidlbase libutils liblog libfs_mgr liblp libfec libsquashfs_utils \
+        libcrypto_utils libfec_rs
     TWRP_REQUIRED_MODULES += libhardware android.hardware.boot@1.0-service android.hardware.boot@1.0-service.rc \
     android.hardware.boot@1.1-service android.hardware.boot@1.1-service.rc android.hardware.boot@1.1.xml
 endif
