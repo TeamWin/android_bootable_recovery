@@ -32,6 +32,8 @@
 #include <libgen.h>
 #include <zlib.h>
 #include <sstream>
+#include <android-base/properties.h>
+#include <libsnapshot/snapshot.h>
 
 #include "cutils/properties.h"
 #include "libblkid/include/blkid.h"
@@ -1714,7 +1716,6 @@ bool TWPartition::Wipe(string New_File_System) {
 		recreate_media = false;
 	} else {
 		DataManager::GetValue(TW_RM_RF_VAR, check);
-
 		if (check || Use_Rm_Rf)
 			wiped = Wipe_RMRF();
 		else if (New_File_System == "ext4")
@@ -3468,4 +3469,27 @@ std::string TWPartition::Get_Display_Name() {
 
 bool TWPartition::Is_SlotSelect() {
 	return SlotSelect;
+}
+
+bool TWPartition::Check_Pending_Merges() {
+	if (!android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
+		return true;
+	}
+	auto sm = android::snapshot::SnapshotManager::NewForFirstStageMount();
+	if (!sm) {
+		LOGERR("Unable to call snapshot manager\n");
+		return false;
+	}
+
+	auto callback = [&]() -> void {
+		double progress;
+		sm->GetUpdateState(&progress);
+		LOGINFO("waiting for merge to complete: %.2f\n", progress);
+	};
+
+	if (!sm->HandleImminentDataWipe(callback)) {
+		LOGERR("Unable to check merge status\n");
+		return false;
+	}
+	return true;
 }
