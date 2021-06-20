@@ -328,6 +328,7 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 	} else {
 		std::string ab_binary_name(AB_OTA);
 		ZipEntry ab_binary_entry;
+		PartitionManager.Unmap_Cow_Devices();
 		if (FindEntry(Zip, ab_binary_name, &ab_binary_entry) == 0) {
 			LOGINFO("AB zip\n");
 			gui_msg(Msg(msg::kHighlight, "flash_ab_inactive=Flashing A/B zip to inactive slot: {1}")(PartitionManager.Get_Active_Slot_Display()=="A"?"B":"A"));
