@@ -185,3 +185,7 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 
 	return true;
 }
+
+bool twrpApex::Unmount() {
+	return (umount2(APEX_BASE, MNT_DETACH) == 0);
+}
