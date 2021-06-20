@@ -36,10 +36,10 @@
 #include <sys/wait.h>
 #include <linux/fs.h>
 #include <sys/mount.h>
-
-
 #include <sys/poll.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <linux/types.h>
 #include <linux/netlink.h>
 #include <android-base/chrono_utils.h>
@@ -52,8 +52,12 @@
 #include <fs_mgr.h>
 #include <fs_mgr_dm_linear.h>
 #include <fs_mgr_overlayfs.h>
+#include <fs_mgr/roots.h>
 #include <libgsi/libgsi.h>
 #include <liblp/liblp.h>
+#include <libgsi/libgsi.h>
+#include <liblp/builder.h>
+#include <libsnapshot/snapshot.h>
 
 #include "variables.h"
 #include "twcommon.h"
@@ -109,8 +113,10 @@ extern "C" {
 #include <hardware/boot_control.h>
 #endif
 
+using android::fs_mgr::DestroyLogicalPartition;
 using android::fs_mgr::Fstab;
 using android::fs_mgr::FstabEntry;
+using android::fs_mgr::MetadataBuilder;
 
 extern bool datamedia;
 std::vector<users_struct> Users_List;
@@ -279,8 +285,9 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 		else
 			(*iter)->Has_Android_Secure = false;
 
-		if (Is_Super_Partition(TWFunc::Remove_Beginning_Slash((*iter)->Get_Mount_Point()).c_str()))
+		if (Is_Super_Partition(TWFunc::Remove_Beginning_Slash((*iter)->Get_Mount_Point()).c_str())) {
 			Prepare_Super_Volume((*iter));
+		}
 	}
 
 	//Setup Apex before decryption
@@ -553,6 +560,8 @@ void TWPartitionManager::Output_Partition(TWPartition* Part) {
 		printf("SlotSelect ");
 	if (Part->Mount_Read_Only)
 		printf("Mount_Read_Only ");
+	if (Part->Is_Super)
+		printf("Is_Super ");
 	printf("\n");
 	if (!Part->SubPartition_Of.empty())
 		printf("   SubPartition_Of: %s\n", Part->SubPartition_Of.c_str());
@@ -1570,8 +1579,21 @@ int TWPartitionManager::Wipe_Android_Secure(void) {
 
 int TWPartitionManager::Format_Data(void) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
+	TWPartition* metadata = Find_Partition_By_Path("/metadata");
+	if (metadata != NULL)
+		metadata->UnMount(false);
 
 	if (dat != NULL) {
+		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", true)) {
+#ifndef TW_EXCLUDE_APEX
+			twrpApex apex;
+			apex.Unmount();
+#endif
+			if (metadata != NULL)
+				metadata->Mount(true);
+			if (!dat->Check_Pending_Merges())
+				return false;
+		}
 		return dat->Wipe_Encryption();
 	} else {
 		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/data"));
@@ -3307,14 +3329,16 @@ bool TWPartitionManager::Prepare_Empty_Folder(const std::string& Folder) {
 	return TWFunc::Recursive_Mkdir(Folder);
 }
 
+std::string TWPartitionManager::Get_Bare_Partition_Name(std::string Mount_Point) {
+	if (Mount_Point == "/system_root")
+		return "system";
+	else
+		return TWFunc::Remove_Beginning_Slash(Mount_Point);
+}
+
 bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
     Fstab fstab;
-	std::string bare_partition_name;
-
-	if (twrpPart->Get_Mount_Point() == "/system_root")
-		bare_partition_name = "system";
-	else
-		bare_partition_name = TWFunc::Remove_Beginning_Slash(twrpPart->Get_Mount_Point());
+	std::string bare_partition_name = Get_Bare_Partition_Name(twrpPart->Get_Mount_Point());
 
 	LOGINFO("Trying to prepare %s from super partition\n", bare_partition_name.c_str());
 
@@ -3486,4 +3510,39 @@ void TWPartitionManager::Unlock_Block_Partitions() {
 		}
 		closedir(d);
 	}
+}
+
+bool TWPartitionManager::Unmap_Super_Devices() {
+	bool destroyed = false;
+#ifndef TW_EXCLUDE_APEX
+	twrpApex apex;
+	apex.Unmount();
+#endif
+	for (auto iter = Partitions.begin(); iter != Partitions.end();) {
+		LOGINFO("Checking partition: %s\n", (*iter)->Get_Mount_Point().c_str());
+		if ((*iter)->Is_Super) {
+			TWPartition *part = *iter;
+			std::string bare_partition_name = Get_Bare_Partition_Name((*iter)->Get_Mount_Point());
+			std::string blk_device_partition = bare_partition_name + PartitionManager.Get_Active_Slot_Suffix();
+			(*iter)->UnMount(false);
+			LOGINFO("removing dynamic partition: %s\n", blk_device_partition.c_str());
+			destroyed = DestroyLogicalPartition(blk_device_partition);
+			std::string cow_partition = blk_device_partition + "-cow";
+			std::string cow_partition_path = "/dev/block/mapper/" + cow_partition;
+			struct stat st;
+			if (lstat(cow_partition_path.c_str(), &st) == 0) {
+				LOGINFO("removing cow partition: %s\n", cow_partition.c_str());
+				destroyed = DestroyLogicalPartition(cow_partition);
+			}
+			rmdir((*iter)->Mount_Point.c_str());
+			iter = Partitions.erase(iter);
+			delete part;
+			if (!destroyed) {
+				return false;
+			}
+		} else {
+			++iter;
+		}
+	}
+	return true;
 }

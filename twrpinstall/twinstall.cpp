@@ -346,6 +346,7 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 				PartitionManager.UnMount_By_Path("/vendor", true);
 			if (!system_mount_state)
 				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), true);
+			PartitionManager.Prepare_All_Super_Volumes();
 			gui_warn("flash_ab_reboot=To flash additional zips, please reboot recovery to switch to the updated slot.");
 			DataManager::GetValue(TW_AUTO_REFLASHTWRP_VAR, reflashtwrp);
 			if (reflashtwrp) {

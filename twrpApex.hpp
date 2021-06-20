@@ -29,6 +29,7 @@
 class twrpApex {
 public:
 	bool loadApexImages();
+	bool Unmount();
 
 private:
 	std::string unzipImage(std::string file);
