@@ -176,7 +176,8 @@ public:
 protected:
 	bool Has_Data_Media;                                                      // Indicates presence of /data/media, may affect wiping and backup methods
 	void Setup_Data_Media();                                                  // Sets up a partition as a /data/media emulated storage partition
-	void Set_Block_Device(std::string block_device);						  // Allow super partition setup to change block device
+	void Set_Block_Device(std::string block_device);                          // Allow super partition setup to change block device
+	bool Check_Pending_Merges();                                              // Check and run pending merges on data for VAB devices
 
 private:
 	bool Process_Fstab_Line(const char *fstab_line, bool Display_Error, std::map<string, Flags_Map> *twrp_flags); // Processes a fstab line
