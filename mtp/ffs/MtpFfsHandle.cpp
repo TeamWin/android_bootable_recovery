@@ -518,7 +518,8 @@ int MtpFfsHandle::receiveFile(mtp_file_range mfr, bool zero_packet) {
 				}
 			}
 			if (short_packet) {
-				if (cancelEvents(mIobuf[i].iocb.data(), ioevs, short_i, mIobuf[i].actual, false)) {
+				if (cancelEvents(mIobuf[i].iocb.data(), ioevs, short_i, mIobuf[i].actual,
+						mBatchCancel)) {
 					write_error = true;
 				}
 			}
