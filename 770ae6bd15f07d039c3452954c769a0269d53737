@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26309f3_0925286e",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-23T18:20:58Z",
+      "side": 1,
+      "message": "need to if this",
+      "revId": "770ae6bd15f07d039c3452954c769a0269d53737",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
