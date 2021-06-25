@@ -15,6 +15,7 @@
 #include <sys/sysmacros.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <android-base/properties.h>
 
 #include <ziparchive/zip_archive.h>
 #include "twcommon.h"

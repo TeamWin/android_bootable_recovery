@@ -400,6 +400,11 @@ int GUIAction::flash_zip(std::string filename, int* wipe_cache)
 	if (simulate) {
 		simulate_progress_bar();
 	} else {
+		char apex_enabled[PROPERTY_VALUE_MAX];
+		property_get("twrp.apex.flattened", apex_enabled, "");
+		if (strcmp(apex_enabled, "true") == 0) {
+			umount("/apex");
+		}
 		ret_val = TWinstall_zip(filename.c_str(), wipe_cache, (bool) !DataManager::GetIntValue(TW_SKIP_DIGEST_CHECK_ZIP_VAR));
 		PartitionManager.Unlock_Block_Partitions();
 		// Now, check if we need to ensure TWRP remains installed...

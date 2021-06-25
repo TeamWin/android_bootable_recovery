@@ -45,6 +45,7 @@ bool twrpApex::loadApexImages() {
 			LOGERR("Unable to bind mount flattened apex directory\n");
 			return false;
 		}
+		android::base::SetProperty("twrp.apex.flattened", "true");
 		return true;
 	}
 	if (!mountApexOnLoopbackDevices(apexFiles)) {
