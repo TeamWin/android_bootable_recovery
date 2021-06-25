@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t this be moved to device tree for both versions of the service?",
       "revId": "a1815f8710f437d73627abee7239e2dfc3b50fa3",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35685add_f1f6d17b",
+        "filename": "etc/init/android.hardware.health@2.0-service.rc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-25T22:38:58Z",
+      "side": 1,
+      "message": "If we think so we can do this in a further patchset.",
+      "parentUuid": "126a6bc7_04eb97ed",
+      "revId": "a1815f8710f437d73627abee7239e2dfc3b50fa3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
