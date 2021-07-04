@@ -110,8 +110,7 @@ static bool read_pkcs7(const uint8_t* pkcs7_der, size_t pkcs7_der_len,
   return true;
 }
 
-int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys,
-  const std::function<void(float)>& set_progress) {
+int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys, const std::function<void(float)>& set_progress) {
   CHECK(package);
   package->SetProgress(0.0);
 
@@ -241,7 +240,7 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
       package->SetProgress(f);
       frac = f;
       if (set_progress) {
-        set_progress(f);
+        set_progress(0.0);
       }
     }
   }
@@ -317,83 +316,9 @@ int verify_file(VerifierInterface* package, const std::vector<Certificate>& keys
   return VERIFY_FAILURE;
 }
 
-std::unique_ptr<RSA, RSADeleter> parse_rsa_key(FILE* file, uint32_t exponent) {
-    // Read key length in words and n0inv. n0inv is a precomputed montgomery
-    // parameter derived from the modulus and can be used to speed up
-    // verification. n0inv is 32 bits wide here, assuming the verification logic
-    // uses 32 bit arithmetic. However, BoringSSL may use a word size of 64 bits
-    // internally, in which case we don't have a valid n0inv. Thus, we just
-    // ignore the montgomery parameters and have BoringSSL recompute them
-    // internally. If/When the speedup from using the montgomery parameters
-    // becomes relevant, we can add more sophisticated code here to obtain a
-    // 64-bit n0inv and initialize the montgomery parameters in the key object.
-    uint32_t key_len_words = 0;
-    uint32_t n0inv = 0;
-    if (fscanf(file, " %i , 0x%x", &key_len_words, &n0inv) != 2) {
-        return nullptr;
-    }
-
-    if (key_len_words > 8192 / 32) {
-        LOG(ERROR) << "key length (" << key_len_words << ") too large";
-        return nullptr;
-    }
-
-    // Read the modulus.
-    std::unique_ptr<uint32_t[]> modulus(new uint32_t[key_len_words]);
-    if (fscanf(file, " , { %u", &modulus[0]) != 1) {
-        return nullptr;
-    }
-    for (uint32_t i = 1; i < key_len_words; ++i) {
-        if (fscanf(file, " , %u", &modulus[i]) != 1) {
-            return nullptr;
-        }
-    }
-
-    // Cconvert from little-endian array of little-endian words to big-endian
-    // byte array suitable as input for BN_bin2bn.
-    std::reverse((uint8_t*)modulus.get(),
-                 (uint8_t*)(modulus.get() + key_len_words));
-
-    // The next sequence of values is the montgomery parameter R^2. Since we
-    // generally don't have a valid |n0inv|, we ignore this (see comment above).
-    uint32_t rr_value;
-    if (fscanf(file, " } , { %u", &rr_value) != 1) {
-        return nullptr;
-    }
-    for (uint32_t i = 1; i < key_len_words; ++i) {
-        if (fscanf(file, " , %u", &rr_value) != 1) {
-            return nullptr;
-        }
-    }
-    if (fscanf(file, " } } ") != 0) {
-        return nullptr;
-    }
-
-    // Initialize the key.
-    std::unique_ptr<RSA, RSADeleter> key(RSA_new());
-    if (!key) {
-      return nullptr;
-    }
-
-    key->n = BN_bin2bn((uint8_t*)modulus.get(),
-                       key_len_words * sizeof(uint32_t), NULL);
-    if (!key->n) {
-      return nullptr;
-    }
-
-    key->e = BN_new();
-    if (!key->e || !BN_set_word(key->e, exponent)) {
-      return nullptr;
-    }
-
-    return key;
-}
-
-
 static std::vector<Certificate> IterateZipEntriesAndSearchForKeys(const ZipArchiveHandle& handle) {
   void* cookie;
-  std::string suffix("x509.pem");
-  int32_t iter_status = StartIteration(handle, &cookie, nullptr, suffix);
+  int32_t iter_status = StartIteration(handle, &cookie, "", "x509.pem");
   if (iter_status != 0) {
     LOG(ERROR) << "Failed to iterate over entries in the certificate zipfile: "
                << ErrorCodeString(iter_status);
@@ -402,22 +327,21 @@ static std::vector<Certificate> IterateZipEntriesAndSearchForKeys(const ZipArchi
 
   std::vector<Certificate> result;
 
-  std::string name;
+  std::string_view name;
   ZipEntry entry;
   while ((iter_status = Next(cookie, &entry, &name)) == 0) {
     std::vector<uint8_t> pem_content(entry.uncompressed_length);
     if (int32_t extract_status =
             ExtractToMemory(handle, &entry, pem_content.data(), pem_content.size());
         extract_status != 0) {
-      LOG(ERROR) << "Failed to extract " << std::string(name.c_str(), name.c_str() + name.size());
+      LOG(ERROR) << "Failed to extract " << name;
       return {};
     }
 
     Certificate cert(0, Certificate::KEY_TYPE_RSA, nullptr, nullptr);
     // Aborts the parsing if we fail to load one of the key file.
     if (!LoadCertificateFromBuffer(pem_content, &cert)) {
-      LOG(ERROR) << "Failed to load keys from "
-                 << std::string(name.c_str(), name.c_str() + name.size());
+      LOG(ERROR) << "Failed to load keys from " << name;
       return {};
     }
 
