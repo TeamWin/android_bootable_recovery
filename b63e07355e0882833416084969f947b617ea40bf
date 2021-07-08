@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df72e42_f8068212",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2021-07-08T14:52:48Z",
+      "side": 1,
+      "message": "Fixed the conflicts with the android-11.0 branch",
+      "revId": "b63e07355e0882833416084969f947b617ea40bf",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
