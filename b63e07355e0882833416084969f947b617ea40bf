@@ -16,6 +16,23 @@
       "message": "Fixed the conflicts with the android-11.0 branch",
       "revId": "b63e07355e0882833416084969f947b617ea40bf",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7f2c78_135c05bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2021-07-09T10:39:09Z",
+      "side": 1,
+      "message": "Just deleted the old twrp-11 sources and resynced to verify if vibration works but it seems to be broken now.",
+      "revId": "b63e07355e0882833416084969f947b617ea40bf",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
