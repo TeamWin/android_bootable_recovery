@@ -744,11 +744,11 @@
 		<string name="flash_ab_both_slots">Flash to both slots</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
-		<string name="fbe_wipe_msg">WARNING: {1} wiped. FBE device should be booted into Android and not Recovery to set initial FBE policy after wipe.</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Enable ADB</string>
 		<string name="enable_fastboot">Enable Fastboot</string>
 		<string name="fastboot_console_msg">Entered Fastboot mode...</string>
+		<string name="data_media_fbe_msg">TWRP will not recreate /data/media on an FBE device. Please reboot into your rom to create /data/media</string>
 		<!-- Android Rescue Party trigger -->
 		<string name="rescue_party0">Android Rescue Party trigger! Possible solutions? Either:</string>
 		<string name="rescue_party1"> 1. Wipe caches, and/or</string>
