@@ -740,5 +740,18 @@
 		<string name="flash_ab_reboot">如需刷入其它的 Zip 刷機包，請重新啓動 Recovery 切換到新槽位。</string>
 		<string name="ozip_decrypt_decryption">正在解密 Ozip…</string>
 		<string name="ozip_decrypt_finish">Ozip 解密完成！</string>
+<<<<<<< HEAD   (a1ad7e crypto: only set crypto state and type if not already set)
+=======
+		<string name="fastboot_button">Fastboot</string>
+		<string name="enable_adb">啓用 ADB</string>
+		<string name="enable_fastboot">啓用 Fastboot</string>
+		<string name="fastboot_console_msg">進入 Fastboot 模式…</string>
+		<!-- Android Rescue Party trigger -->
+		<string name="rescue_party0">Android 搶救模式已觸發！您可以嘗試下面的操作：</string>
+		<string name="rescue_party1"> 1. 清除 Cache；</string>
+		<string name="rescue_party2"> 2. 格式化 Data 分區；</string>
+		<string name="rescue_party3"> 3. 重新刷入您的 ROM。</string>
+		<string name="rescue_party4">報告的問題為：</string>
+>>>>>>> CHANGE (2d5486 fbe formatting: add warning for fbe devices and remove unuse)
 	</resources>
 </language>
