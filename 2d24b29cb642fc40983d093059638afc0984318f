@@ -16,6 +16,24 @@
       "message": "Don\u0027t do this if no vab.",
       "revId": "2d24b29cb642fc40983d093059638afc0984318f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac93c5a_48f61a8d",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-07-26T23:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96b8f919_adccbcd5",
+      "revId": "2d24b29cb642fc40983d093059638afc0984318f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
