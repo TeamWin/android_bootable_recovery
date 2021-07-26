@@ -41,6 +41,7 @@ bool twrpRepacker::Backup_Image_For_Repack(TWPartition* Part, const std::string&
 	if (!Prepare_Empty_Folder(Temp_Folder_Destination))
 		return false;
 	std::string target_image = Temp_Folder_Destination + "boot.img";
+	PartitionManager.Update_System_Details();
 	PartitionSettings part_settings;
 	part_settings.Part = Part;
 	if (Create_Backup) {
