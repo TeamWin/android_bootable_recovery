@@ -1,5 +1,5 @@
 /*
-	Copyright 2012-2020 TeamWin
+	Copyright 2012-2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -24,6 +24,13 @@ void startupArgs::parse(int *argc, char ***argv) {
 
 	LOGINFO("Startup Commands: ");
 	for (index = 1; index < args.size(); index++) {
+		if (!processRecoveryArgs(args, index))
+			break;
+	}
+	printf("\n");
+}
+
+bool startupArgs::processRecoveryArgs(std::vector<std::string> args, int index) {
 		if (args[index].find(RESCUE_PARTY) != std::string::npos) {
 		      gui_print("\n\n");
 		      gui_msg(Msg(msg::kError, "rescue_party0=Android Rescue Party trigger! Possible solutions? Either:"));
@@ -53,7 +60,7 @@ void startupArgs::parse(int *argc, char ***argv) {
 				std::string ORSCommand = "install " + arg;
 				SkipDecryption = arg.find("@") == 1;
 				if (!OpenRecoveryScript::Insert_ORS_Command(ORSCommand))
-					break;
+					return false;
 			}
 		} else if (args[index].find(SEND_INTENT) != std::string::npos) {
 			std::string::size_type eq_pos = args[index].find("=");
@@ -65,17 +72,16 @@ void startupArgs::parse(int *argc, char ***argv) {
 			}
 		} else if (args[index].find(WIPE_DATA) != std::string::npos) {
 			if (!OpenRecoveryScript::Insert_ORS_Command("wipe data\n"))
-				break;
+				return false;
 		} else if (args[index].find(WIPE_CACHE) != std::string::npos) {
 			if (!OpenRecoveryScript::Insert_ORS_Command("wipe cache\n"))
-				break;
+				return false;
 		} else if (args[index].find(NANDROID) != std::string::npos) {
 			DataManager::SetValue(TW_BACKUP_NAME, gui_parse_text("{@auto_generate}"));
 			if (!OpenRecoveryScript::Insert_ORS_Command("backup BSDCAE\n"))
-				break;
+				return false;
 		}
-	}
-	printf("\n");
+		return true;
 }
 
 bool startupArgs::Should_Skip_Decryption() {

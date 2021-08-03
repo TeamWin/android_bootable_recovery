@@ -41,7 +41,7 @@ on init
 
     mkdir /system
     mkdir /data
-    mkdir /cache
+    symlink /data/cache /cache
     mkdir /sideload
     mkdir /mnt/system
     mount tmpfs tmpfs /tmp
