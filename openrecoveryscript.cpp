@@ -1,5 +1,5 @@
 /*
-	Copyright 2003 to 2017 TeamWin
+	Copyright 2003 to 2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -652,7 +652,7 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 	if (TWFunc::Path_Exists(SCRIPT_FILE_TMP)) {
 		gui_msg("running_recovery_commands=Running Recovery Commands");
 		if (OpenRecoveryScript::run_script_file() == 0) {
-			reboot = 1;
+			reboot = 0;
 			op_status = 0;
 		}
 	}
