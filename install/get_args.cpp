@@ -1,8 +1,6 @@
 #include "twinstall/get_args.h"
 
 std::string stage;
-bool has_cache = false;
-static constexpr const char* COMMAND_FILE = "/cache/recovery/command";
 
 // command line args come from, in decreasing precedence:
 //   - the actual command line
@@ -12,6 +10,7 @@ std::vector<std::string> args::get_args(const int *argc, char*** const argv) {
   CHECK_GT(*argc, 0);
 
   bootloader_message boot = {};
+
   std::string err;
   if (!read_bootloader_message(&boot, &err)) {
     LOG(ERROR) << err;
@@ -51,22 +50,6 @@ std::vector<std::string> args::get_args(const int *argc, char*** const argv) {
       LOG(INFO) << "Got " << args.size() << " arguments from boot message";
     } else if (boot.recovery[0] != 0) {
       LOG(ERROR) << "Bad boot message: \"" << boot_recovery << "\"";
-    }
-  }
-
-  // --- if that doesn't work, try the command file (if we have /cache).
-  if (args.size() == 1 && has_cache) {
-    std::string content;
-    if (ensure_path_mounted(COMMAND_FILE) == 0 &&
-        android::base::ReadFileToString(COMMAND_FILE, &content)) {
-      std::vector<std::string> tokens = android::base::Split(content, "\n");
-      // All the arguments in COMMAND_FILE are needed (unlike the BCB message,
-      // COMMAND_FILE doesn't use filename as the first argument).
-      for (auto it = tokens.begin(); it != tokens.end(); it++) {
-        // Skip empty and '\0'-filled tokens.
-        if (!it->empty() && (*it)[0] != '\0') args.push_back(std::move(*it));
-      }
-      LOG(INFO) << "Got " << args.size() << " arguments from " << COMMAND_FILE;
     }
   }
 

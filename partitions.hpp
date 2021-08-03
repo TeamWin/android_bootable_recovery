@@ -1,5 +1,5 @@
 /*
-	Copyright 2014 to 2017 TeamWin
+	Copyright 2014 to 2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -130,6 +130,7 @@ public:
 	bool Wipe(string New_File_System);                                        // Wipes the partition
 	bool Wipe();                                                              // Wipes the partition
 	bool Wipe_AndSec();                                                       // Wipes android secure
+	bool Wipe_Data_Cache();                                                   // Wipe /data/cache with devices that have no cache partition
 	bool Can_Repair();                                                        // Checks to see if we have everything needed to be able to repair the current file system
 	uint64_t Get_Max_FileSize();                                              // get partition maxFileSie
 	bool Repair();                                                            // Repairs the current file system
