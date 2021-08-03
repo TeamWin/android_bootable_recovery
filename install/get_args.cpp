@@ -1,8 +1,8 @@
 #include "twinstall/get_args.h"
 
 std::string stage;
-bool has_cache = false;
-static constexpr const char* COMMAND_FILE = "/cache/recovery/command";
+bool has_cache = true;
+static constexpr const char* COMMAND_FILE = "/data/cache/command";
 
 // command line args come from, in decreasing precedence:
 //   - the actual command line
@@ -12,6 +12,7 @@ std::vector<std::string> args::get_args(const int *argc, char*** const argv) {
   CHECK_GT(*argc, 0);
 
   bootloader_message boot = {};
+
   std::string err;
   if (!read_bootloader_message(&boot, &err)) {
     LOG(ERROR) << err;
@@ -57,8 +58,9 @@ std::vector<std::string> args::get_args(const int *argc, char*** const argv) {
   // --- if that doesn't work, try the command file (if we have /cache).
   if (args.size() == 1 && has_cache) {
     std::string content;
-    if (ensure_path_mounted(COMMAND_FILE) == 0 &&
-        android::base::ReadFileToString(COMMAND_FILE, &content)) {
+    LOG(INFO) << "has_cache::COMMAND_FILE::" << COMMAND_FILE;
+    if (android::base::ReadFileToString(COMMAND_FILE, &content)) {
+      LOG(INFO) << "has_cache::content::" << content;
       std::vector<std::string> tokens = android::base::Split(content, "\n");
       // All the arguments in COMMAND_FILE are needed (unlike the BCB message,
       // COMMAND_FILE doesn't use filename as the first argument).
@@ -70,7 +72,7 @@ std::vector<std::string> args::get_args(const int *argc, char*** const argv) {
     }
   }
 
-  // Write the arguments (excluding the filename in args[0]) back into the
+    // Write the arguments (excluding the filename in args[0]) back into the
   // bootloader control block. So the device will always boot into recovery to
   // finish the pending work, until finish_recovery() is called.
   std::vector<std::string> options(args.cbegin() + 1, args.cend());

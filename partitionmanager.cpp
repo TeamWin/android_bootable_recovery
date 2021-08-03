@@ -1,5 +1,5 @@
 /*
-	Copyright 2014 to 2020 TeamWin
+	Copyright 2014 to 2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -63,6 +63,7 @@
 #include "twcommon.h"
 #include "partitions.hpp"
 #include "data.hpp"
+#include "startupArgs.hpp"
 #include "twrp-functions.hpp"
 #include "fixContexts.hpp"
 #include "exclude.hpp"
@@ -1406,6 +1407,16 @@ int TWPartitionManager::Wipe_By_Path(string Path) {
 
 	if (Local_Path == "/system")
 		Local_Path = Get_Android_Root_Path();
+	if (Path == "/cache") {
+		TWPartition* cache = Find_Partition_By_Path("/cache");
+		if (cache == nullptr) {
+			TWPartition* dat = Find_Partition_By_Path("/data");
+			if (dat) {
+				dat->Wipe_Data_Cache();
+				found = true;
+			}
+		}
+	}
 	// Iterate through all partitions
 	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
 		if ((*iter)->Mount_Point == Local_Path || (!(*iter)->Symlink_Mount_Point.empty() && (*iter)->Symlink_Mount_Point == Local_Path)) {
@@ -1771,6 +1782,11 @@ void TWPartitionManager::Post_Decrypt(const string& Block_Device) {
 	TWPartition* dat = Find_Partition_By_Path("/data");
 
 	if (dat != NULL) {
+		// reparse for /cache/recovery/command
+		startupArgs startup;
+		std::vector<std::string> args = {startupArgs::WIPE_CACHE};
+		startup.processRecoveryArgs(args, 0);
+
 		DataManager::SetValue(TW_IS_DECRYPTED, 1);
 		dat->Is_Decrypted = true;
 		if (!Block_Device.empty()) {

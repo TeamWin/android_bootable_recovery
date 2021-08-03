@@ -45,6 +45,7 @@ public:
 	bool Should_Skip_Decryption();
 	std::string Get_Intent();
 	bool Get_Fastboot_Mode();
+	bool processRecoveryArgs(std::vector<std::string> args, int index);
 
 private:
 	bool SkipDecryption = false;
