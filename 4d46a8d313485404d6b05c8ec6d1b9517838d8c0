@@ -2,6 +2,7 @@
   "pushCert": "certificate version 0.1\npusher 02AC01A7795EEEB8 1607627037 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1607627037-FFAA8790EE33B9DEF790782E4056EC40691D6FB0\n\n0000000000000000000000000000000000000000 4d46a8d313485404d6b05c8ec6d1b9517838d8c0 refs/for/android-10.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEwl4aGFhPbHPCDtvWAqwBp3le7rgFAl/ScR0ACgkQAqwBp3le\n7rgGvBAApA7FbHL6EVbjBd+/mnmjLF8EQJ7g++9ZEBQShF+IYTpLTEavtMu+rB7R\n6w7+pfhCsxPEXc6tJsgytq8zw4ZIAid1HUVuyQxERpPq55FDHcU7mFVAZBd9eTJx\ndsnVuoNBeQW97Q/EspqLIm7+p2XoiDhh6cpURqvVWRrNquDCLs94WRE32ooQiERf\nG0bgFSFbnAp8JLLqCNb/HbaIHF07OeEBCirmtm6RR6h/LoTHHEleuE4u7weE42Tj\ndmq76OVYRXEWOalcDMsb0qVcvQZtz0B/rCmXcBo/C3cF+we6E6PxD48/XJnbR7QI\n8ruk/pewP5R2Ve5N0xm4cGu9BrCaeLEV9fkIggs0e6Jhzze8iBKfb+u/De4Awhmt\n0IvdWa48EczZk9WE3xguutENwkkLKIlgWKXyjXNfz5sv2HpJPsrz/jzR1c2kNCpY\nQaqE8cgDfztnJ38k0pO9niwAWns/eo8uFW7ixUhgOD9fgbpYUEq3tKQP8+ZyKFJO\nz/NKoPJjpAamW2/s7kL8rrljQdGfsd+/1l3ORIRfMcwWbPuPzFMzFvnqQBC3y/Ms\nVKtAyOVWgmtpwAF0I/QXr06qOkJJGJxOG86rJog5xHvR/gn++JiQSp2OJSXc0qSD\nMbPU5hS1v/cJAVpqJDYuMAt4CehEtcxxCLLKRkzsF9EVpfgGg08\u003d\n\u003dIzro\n-----END PGP SIGNATURE-----\n",
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "3694f1ce_3d9d3b2c",
         "filename": "Android.mk",
@@ -15,10 +16,10 @@
       "side": 1,
       "message": "I would like to see the flag a little more descriptive: maybe -DEXTRA_LOGICAL_PARTITIONS",
       "revId": "4d46a8d313485404d6b05c8ec6d1b9517838d8c0",
-      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
-      "unresolved": true
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "fef09801_688e2a0e",
         "filename": "Android.mk",
@@ -33,10 +34,28 @@
       "message": "sounds good",
       "parentUuid": "3694f1ce_3d9d3b2c",
       "revId": "4d46a8d313485404d6b05c8ec6d1b9517838d8c0",
-      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
-      "unresolved": true
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "513100eb_33abfe69",
+        "filename": "Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-04T00:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef09801_688e2a0e",
+      "revId": "4d46a8d313485404d6b05c8ec6d1b9517838d8c0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "e6a0a55c_b6dd1946",
         "filename": "partitionmanager.cpp",
@@ -50,10 +69,10 @@
       "side": 1,
       "message": "minor question: should parts be single or are there more than one per loop entry?",
       "revId": "4d46a8d313485404d6b05c8ec6d1b9517838d8c0",
-      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
-      "unresolved": true
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "920be35f_38b7e6b3",
         "filename": "partitionmanager.cpp",
@@ -68,8 +87,25 @@
       "message": "it will iterate per each entry, if one partition then only one iteration",
       "parentUuid": "e6a0a55c_b6dd1946",
       "revId": "4d46a8d313485404d6b05c8ec6d1b9517838d8c0",
-      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833",
-      "unresolved": true
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ac905d_04d89b0b",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3355,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-04T00:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "920be35f_38b7e6b3",
+      "revId": "4d46a8d313485404d6b05c8ec6d1b9517838d8c0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
