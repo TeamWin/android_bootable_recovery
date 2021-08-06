@@ -153,9 +153,6 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 	if (fstabFile != NULL) {
 		LOGINFO("Reading /etc/twrp.flags\n");
 		while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
-			if (fstab_line[0] != '/')
-				continue;
-
 			size_t line_size = strlen(fstab_line);
 			if (fstab_line[line_size - 1] != '\n')
 				fstab_line[line_size] = '\n';
@@ -217,13 +214,11 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 		LOGINFO("Reading %s\n", Fstab_Filename.c_str());
 
 	while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
-		bool isSuper = Is_Super_Partition(fstab_line);
-
-		if (!isSuper && fstab_line[0] != '/')
-			continue;
-
 		if (strstr(fstab_line, "swap"))
 			continue; // Skip swap in recovery
+
+		if (fstab_line[0] == '#')
+			continue;
 
 		size_t line_size = strlen(fstab_line);
 		if (fstab_line[line_size - 1] != '\n')
@@ -279,7 +274,7 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 		else
 			(*iter)->Has_Android_Secure = false;
 
-		if (Is_Super_Partition(TWFunc::Remove_Beginning_Slash((*iter)->Get_Mount_Point()).c_str()))
+		if ((*iter)->Is_Super)
 			Prepare_Super_Volume((*iter));
 	}
 
@@ -3358,20 +3353,6 @@ bool TWPartitionManager::Prepare_All_Super_Volumes() {
 	}
 	Update_System_Details();
 	return status;
-}
-
-bool TWPartitionManager::Is_Super_Partition(const char* fstab_line) {
-	if (!Get_Super_Status())
-		return false;
-	std::vector<std::string> super_partition_list = {"system", "vendor", "odm", "product", "system_ext"};
-
-	for (auto&& fstab_partition_check: super_partition_list) {
-		if (strncmp(fstab_line, fstab_partition_check.c_str(), fstab_partition_check.size()) == 0) {
-			DataManager::SetValue(TW_IS_SUPER, "1");
-			return true;
-		}
-	}
-	return false;
 }
 
 std::string TWPartitionManager::Get_Super_Partition() {
