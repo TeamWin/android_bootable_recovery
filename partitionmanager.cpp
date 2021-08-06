@@ -159,9 +159,6 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 	if (fstabFile != NULL) {
 		LOGINFO("Reading /etc/twrp.flags\n");
 		while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
-			if (fstab_line[0] != '/')
-				continue;
-
 			size_t line_size = strlen(fstab_line);
 			if (fstab_line[line_size - 1] != '\n')
 				fstab_line[line_size] = '\n';
@@ -223,13 +220,11 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 		LOGINFO("Reading %s\n", Fstab_Filename.c_str());
 
 	while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
-		bool isSuper = Is_Super_Partition(fstab_line);
-
-		if (!isSuper && fstab_line[0] != '/')
-			continue;
-
 		if (strstr(fstab_line, "swap"))
 			continue; // Skip swap in recovery
+
+		if (fstab_line[0] == '#')
+			continue;
 
 		size_t line_size = strlen(fstab_line);
 		if (fstab_line[line_size - 1] != '\n')
@@ -285,9 +280,8 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 		else
 			(*iter)->Has_Android_Secure = false;
 
-		if (Is_Super_Partition(TWFunc::Remove_Beginning_Slash((*iter)->Get_Mount_Point()).c_str())) {
+		if ((*iter)->Is_Super)
 			Prepare_Super_Volume((*iter));
-		}
 	}
 
 	//Setup Apex before decryption
@@ -3340,6 +3334,7 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
     Fstab fstab;
 	std::string bare_partition_name = Get_Bare_Partition_Name(twrpPart->Get_Mount_Point());
 
+	Super_Partition_List.push_back(bare_partition_name);
 	LOGINFO("Trying to prepare %s from super partition\n", bare_partition_name.c_str());
 
 	std::string blk_device_partition;
@@ -3390,23 +3385,9 @@ bool TWPartitionManager::Prepare_All_Super_Volumes() {
 	return status;
 }
 
-bool TWPartitionManager::Is_Super_Partition(const char* fstab_line) {
-	if (!Get_Super_Status())
-		return false;
-	std::vector<std::string> super_partition_list = {"system", "vendor", "odm", "product", "system_ext"};
-
-	for (auto&& fstab_partition_check: super_partition_list) {
-		if (strncmp(fstab_line, fstab_partition_check.c_str(), fstab_partition_check.size()) == 0) {
-			DataManager::SetValue(TW_IS_SUPER, "1");
-			return true;
-		}
-	}
-	return false;
-}
-
 std::string TWPartitionManager::Get_Super_Partition() {
 	int slot_number = Get_Active_Slot_Display() == "A" ? 0 : 1;
-	std::string super_device = 	fs_mgr_get_super_partition_name(slot_number);
+	std::string super_device = fs_mgr_get_super_partition_name(slot_number);
 	return "/dev/block/by-name/" + super_device;
 }
 
@@ -3423,11 +3404,23 @@ void TWPartitionManager::Setup_Super_Partition() {
 	superPartition->Mount_Point = "/super";
 	superPartition->Actual_Block_Device = superPart;
 	superPartition->Alternate_Block_Device = superPart;
-#ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
-	superPartition->Backup_Display_Name = "Super (" BOARD_SUPER_PARTITION_PARTITION_LIST ")";
-#else
-	superPartition->Backup_Display_Name = "Super";
-#endif
+	superPartition->Backup_Display_Name = "Super (";
+	// Add first 4 items to fstab as logical that you would like to display in Backup_Display_Name
+	// for the Super partition
+	int list_size = Super_Partition_List.size();
+	int orig_list_size = list_size;
+	int max_display_size = 3; // total of 4 items since we start at 0
+
+	for (auto partition: Super_Partition_List) {
+		superPartition->Backup_Display_Name = superPartition->Backup_Display_Name + partition;
+		if ((orig_list_size - list_size) == max_display_size) {
+			break;
+		}
+		if (list_size != 1)
+			superPartition->Backup_Display_Name = superPartition->Backup_Display_Name + " ";
+		list_size--;
+	}
+	superPartition->Backup_Display_Name += ")";
 	superPartition->Can_Flash_Img = true;
 	superPartition->Current_File_System = "emmc";
 	superPartition->Can_Be_Backed_Up = true;
