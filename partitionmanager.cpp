@@ -3363,7 +3363,19 @@ bool TWPartitionManager::Prepare_All_Super_Volumes() {
 bool TWPartitionManager::Is_Super_Partition(const char* fstab_line) {
 	if (!Get_Super_Status())
 		return false;
-	std::vector<std::string> super_partition_list = {"system", "vendor", "odm", "product", "system_ext"};
+	std::string partition_list(BOARD_SUPER_PARTITION_PARTITION_LIST);
+	std::string partition;
+	std::vector<std::string> super_partition_list;
+	for (auto ch : partition_list) {
+		if (ch == ' ') {
+			super_partition_list.push_back(partition);
+			partition = "";
+		} else if (ch == ',') {
+			continue;
+		} else {
+			partition = partition + ch;
+		}
+	}
 
 	for (auto&& fstab_partition_check: super_partition_list) {
 		if (strncmp(fstab_line, fstab_partition_check.c_str(), fstab_partition_check.size()) == 0) {
