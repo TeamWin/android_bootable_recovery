@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4640dd64_6a42dff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-06T23:29:58Z",
+      "side": 1,
+      "message": "bootable/recovery/twrpRepacker.cpp:173:68: error: invalid operands to binary expression (\u0027const char [34]\u0027 and \u0027const char [2]\u0027)\n                std::string decompress_cmd \u003d \"/system/bin/magiskboot decompress\" + \" \" + orig_compressed_image + \" \" + copy_compressed_image;\n                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~\nbootable/recovery/twrpRepacker.cpp:218:69: error: invalid operands to binary expression (\u0027const char [34]\u0027 and \u0027const char [2]\u0027)\n                        std::string decompress_cmd \u003d \"/system/bin/magiskboot decompress\" + \" \" + orig_compressed_image + \" \" + copy_compressed_image;\n                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~\n2 errors generated.",
+      "revId": "dc61b40609a49db825513a8f13d13972f1204f4a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
