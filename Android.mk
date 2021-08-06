@@ -166,10 +166,6 @@ ifeq ($(TW_USES_VENDOR_LIBS),true)
     LOCAL_CFLAGS += -DUSE_VENDOR_LIBS=1
 endif
 
-ifneq ($(BOARD_SUPER_PARTITION_PARTITION_LIST),)
-	LOCAL_CFLAGS += "-DBOARD_SUPER_PARTITION_PARTITION_LIST=\"$(shell echo $(BOARD_SUPER_PARTITION_PARTITION_LIST) | sed -r 's/\b(.)/\u\1/g' | sed -e 's/ \+/, /g')\""
-endif
-
 ifeq ($(TW_NO_BIND_SYSTEM),true)
     LOCAL_CFLAGS += -DTW_NO_BIND_SYSTEM
 endif

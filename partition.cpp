@@ -160,6 +160,7 @@ enum TW_FSTAB_FLAGS {
 	TWFLAG_WRAPPEDKEY,
 	TWFLAG_ADOPTED_MOUNT_DELAY,
 	TWFLAG_DM_USE_ORIGINAL_PATH,
+	TWFLAG_LOGICAL,
 };
 
 /* Flags without a trailing '=' are considered dual format flags and can be
@@ -206,6 +207,7 @@ const struct flag_list tw_flags[] = {
 	{ "wrappedkey",             TWFLAG_WRAPPEDKEY },
 	{ "adopted_mount_delay=",   TWFLAG_ADOPTED_MOUNT_DELAY },
 	{ "dm_use_original_path",   TWFLAG_DM_USE_ORIGINAL_PATH },
+	{ "logical",                TWFLAG_LOGICAL },
 	{ 0,                        0 },
 };
 
@@ -299,6 +301,9 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 	}
 	if (line_len < 10)
 		return false; // There can't possibly be a valid fstab line that is less than 10 chars
+	if (fstab_line[0] == '#')
+		return false; // skip comments
+
 	if (strncmp(fstab_line, "/dev/", strlen("/dev/")) == 0 || strncmp(fstab_line, "/devices/", strlen("/devices/")) == 0) {
 		fstab_version = 2;
 		block_device_index = 0;
@@ -306,8 +311,7 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 		fs_index = 2;
 	}
 
-	Is_Super = PartitionManager.Is_Super_Partition(fstab_line);
-	if (Is_Super) {
+	if (fstab_line[0] != '/') {
 		block_device_index = 0;
 		fstab_version = 2;
 		mount_point_index = 1;
@@ -354,17 +358,10 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 				Primary_Block_Device = ptr;
 				if (*ptr != '/')
 					LOGERR("Until we get better BML support, you will have to find and provide the full block device path to the BML devices e.g. /dev/block/bml9 instead of the partition name\n");
-			} else if (*ptr != '/') {
-				if (!Is_Super) {
-					if (Display_Error)
-						LOGERR("Invalid block device '%s' in fstab line '%s'", ptr, fstab_line);
-					else
-						LOGINFO("Invalid block device '%s' in fstab line '%s'", ptr, fstab_line);
-					return false;
-				}
 			} else {
 				Primary_Block_Device = ptr;
-				Find_Real_Block_Device(Primary_Block_Device, Display_Error);
+				if (*ptr == '/')
+					Find_Real_Block_Device(Primary_Block_Device, Display_Error);
 			}
 			item_index++;
 		} else if (item_index > 2) {
@@ -1024,6 +1021,9 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 		case TWFLAG_DM_USE_ORIGINAL_PATH:
 			Use_Original_Path = true;
 			break;
+		case TWFLAG_LOGICAL:
+			Is_Super = true;
+			break;
 		default:
 			// Should not get here
 			LOGINFO("Flag identified for processing, but later unmatched: %i\n", flag);
@@ -1246,16 +1246,8 @@ void TWPartition::Find_Real_Block_Device(string& Block, bool Display_Error) {
 		memset(realDevice, 0, sizeof(realDevice));
 	}
 
-	if (device[0] != '/') {
-		if (Display_Error)
-			LOGERR("Invalid symlink path '%s' found on block device '%s'\n", device, Block.c_str());
-		else
-			LOGINFO("Invalid symlink path '%s' found on block device '%s'\n", device, Block.c_str());
-		return;
-	} else {
-		Block = device;
-		return;
-	}
+	Block = device;
+	return;
 }
 
 bool TWPartition::Mount_Storage_Retry(bool Display_Error) {
