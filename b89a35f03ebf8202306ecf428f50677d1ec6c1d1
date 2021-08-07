@@ -33,6 +33,23 @@
       "message": "Instead of a new board variable can we use BOARD_SUPER_PARTITIONS_LIST?",
       "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce796da_e3cd8805",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-08-07T17:29:29Z",
+      "side": 1,
+      "message": "I think this is fine now.",
+      "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
