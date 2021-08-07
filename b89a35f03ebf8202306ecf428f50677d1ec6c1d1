@@ -50,6 +50,40 @@
       "message": "I think this is fine now.",
       "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd13e8f_1b7cf2b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-08-07T17:33:35Z",
+      "side": 1,
+      "message": "Please fix build error, then it should be fine.",
+      "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2267bd2a_47b7968b",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3352,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-08-07T17:33:35Z",
+      "side": 1,
+      "message": "error: no member named \u0027npos\u0027 in namespace \u0027std\u0027",
+      "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
