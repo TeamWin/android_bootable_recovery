@@ -84,6 +84,24 @@
       "message": "error: no member named \u0027npos\u0027 in namespace \u0027std\u0027",
       "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd57260_54d39755",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3352,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2021-08-07T21:21:25Z",
+      "side": 1,
+      "message": "sorry for being inactive. I will resolve it asap.",
+      "parentUuid": "2267bd2a_47b7968b",
+      "revId": "b89a35f03ebf8202306ecf428f50677d1ec6c1d1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
