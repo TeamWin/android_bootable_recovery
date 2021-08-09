@@ -16,6 +16,23 @@
       "message": "this is the first time i use gerrit, i\u0027m sorry if i made a stupid mistake while proposing this change",
       "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf638aa0_f7574565",
+        "filename": "gui/theme/extra-languages/languages/ar.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2021-08-09T22:41:42Z",
+      "side": 1,
+      "message": "did you google translate this?",
+      "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
