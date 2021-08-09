@@ -18,6 +18,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "803ecaa0_2d8cec3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 716
+      },
+      "writtenOn": "2021-08-09T23:57:53Z",
+      "side": 1,
+      "message": "nope,\nyou speaking about the 27th line? it\u0027s ok to leave it as it was (Android Secure), it looks like a proper noun anyway.\ni guess that\u0027s what i\u0027m going to do",
+      "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf638aa0_f7574565",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-08-09T22:41:42Z",
       "side": 1,
       "message": "did you google translate this?",
+      "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c57ccb19_9e51a47c",
+        "filename": "gui/theme/extra-languages/languages/ar.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 716
+      },
+      "writtenOn": "2021-08-09T23:57:53Z",
+      "side": 1,
+      "message": "nope,\nEDIT1: wait, you speaking about the 27th line, it\u0027s ok to leave it as it was (Android Secure), it looks like a proper noun anyway.\nEDIT2: ig that\u0027s what i\u0027m going to do",
+      "parentUuid": "cf638aa0_f7574565",
       "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
