@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab5fcd8_49791825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2021-08-10T10:04:03Z",
+      "side": 1,
+      "message": "I\u0027d also leave partition display names (14-22) and all the translations of cache/recovery to English\n\nI\u0027ll see how this looks when I have some time",
+      "revId": "8f36badde7f6a5bd0a13271f7abaeac304f70d4b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
