@@ -16,6 +16,24 @@
       "message": "I\u0027d also leave partition display names (14-22) and all the translations of cache/recovery to English\n\nI\u0027ll see how this looks when I have some time",
       "revId": "8f36badde7f6a5bd0a13271f7abaeac304f70d4b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9200b1_e7b51ad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 716
+      },
+      "writtenOn": "2021-08-10T14:47:32Z",
+      "side": 1,
+      "message": "tbh, i was trying to minimize the use of latin characters in the middle of arabic caracters as much as i can, because - as you probably know - thing get messy when RTL characters are mixed with LTR characters",
+      "parentUuid": "2ab5fcd8_49791825",
+      "revId": "8f36badde7f6a5bd0a13271f7abaeac304f70d4b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
