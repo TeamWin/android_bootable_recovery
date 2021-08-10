@@ -34,6 +34,24 @@
       "parentUuid": "2ab5fcd8_49791825",
       "revId": "8f36badde7f6a5bd0a13271f7abaeac304f70d4b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ccf6337_cc4c774b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 716
+      },
+      "writtenOn": "2021-08-10T15:22:00Z",
+      "side": 1,
+      "message": "i took as a reference on what i should translate and what i should leave as it is the french translation",
+      "parentUuid": "dd9200b1_e7b51ad1",
+      "revId": "8f36badde7f6a5bd0a13271f7abaeac304f70d4b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
