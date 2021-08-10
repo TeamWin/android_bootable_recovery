@@ -68,6 +68,24 @@
       "parentUuid": "cf638aa0_f7574565",
       "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d452b922_fd2a0744",
+        "filename": "gui/theme/extra-languages/languages/ar.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 716
+      },
+      "writtenOn": "2021-08-10T00:40:51Z",
+      "side": 1,
+      "message": "sooooooo... is it going to be approved ?",
+      "parentUuid": "c57ccb19_9e51a47c",
+      "revId": "fb553dc92cbbeb5986d09fac1cb9fe7f696c81ad",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
