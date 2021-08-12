@@ -2386,22 +2386,23 @@ bool TWPartition::Wipe_RMRF() {
 }
 
 bool TWPartition::Wipe_F2FS() {
-	std::string command;
-	std::string f2fs_bin;
+	std::string f2fs_command;
 
 	if (!UnMount(true))
 		return false;
 
 	if (TWFunc::Path_Exists("/system/bin/mkfs.f2fs"))
-		f2fs_bin = "/system/bin/mkfs.f2fs";
+		f2fs_command = "/system/bin/mkfs.f2fs";
 	else if (TWFunc::Path_Exists("/system/bin/make_f2fs"))
-		f2fs_bin = "/system/bin/make_f2fs";
+		f2fs_command = "/system/bin/make_f2fs -g android";
 	else {
 		LOGINFO("mkfs.f2fs binary not found, using rm -rf to wipe.\n");
 		return Wipe_RMRF();
 	}
 
 	bool NeedPreserveFooter = true;
+	bool needs_casefold = false;
+  	bool needs_projid = false;
 
 	Find_Actual_Block_Device();
 	if (!Is_Present) {
@@ -2409,19 +2410,27 @@ bool TWPartition::Wipe_F2FS() {
 		gui_msg(Msg(msg::kError, "unable_to_wipe=Unable to wipe {1}.")(Display_Name));
 		return false;
 	}
-	
+
+	needs_casefold = android::base::GetBoolProperty("external_storage.casefold.enabled", false);
+    needs_projid = android::base::GetBoolProperty("external_storage.projid.enabled", false);
 	unsigned long long dev_sz = TWFunc::IOCTL_Get_Block_Size(Actual_Block_Device.c_str());
 	if (!dev_sz)
 		return false;
 
 	if (NeedPreserveFooter)
 		Length < 0 ? dev_sz += Length : dev_sz -= CRYPT_FOOTER_OFFSET;
-
 	char dev_sz_str[48];
 	sprintf(dev_sz_str, "%llu", (dev_sz / 4096));
-	command = f2fs_bin + " -d1 -f -O encrypt -O quota -O verity -w 4096 " + Actual_Block_Device + " " + dev_sz_str;
+	if(needs_projid)
+		f2fs_command += " -O project_quota,extra_attr";
+
+	if(needs_casefold)
+		f2fs_command += " -O casefold -C utf8";
+
+	f2fs_command += " " + Actual_Block_Device + " " + dev_sz_str;
+
 	if (TWFunc::Path_Exists("/system/bin/sload.f2fs")) {
-		command += " && sload.f2fs -t /data " + Actual_Block_Device;
+		f2fs_command += " && sload.f2fs -t /data " + Actual_Block_Device;
 	}
 
 	/**
@@ -2432,8 +2441,8 @@ bool TWPartition::Wipe_F2FS() {
 			Crypto_Key_Location != "footer") {
 		NeedPreserveFooter = false;
 	}
-	LOGINFO("mkfs.f2fs command: %s\n", f2fs_bin.c_str());
-	if (TWFunc::Exec_Cmd(command) == 0) {
+	LOGINFO("mkfs.f2fs command: %s\n", f2fs_command.c_str());
+	if (TWFunc::Exec_Cmd(f2fs_command) == 0) {
 		if (NeedPreserveFooter)
 			Wipe_Crypto_Key();
 		Recreate_AndSec_Folder();
