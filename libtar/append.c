@@ -185,7 +185,6 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 				printf("failed to lookup fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
 				free(t->th_buf.fep);
 				t->th_buf.fep = NULL;
-				return -1;
 			}
 		}
 		else {
