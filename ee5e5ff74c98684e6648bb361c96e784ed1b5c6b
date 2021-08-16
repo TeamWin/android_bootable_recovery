@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c98d5d3_64dde37e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2021-08-16T04:54:05Z",
+      "side": 1,
+      "message": "This commit paired with the addition of the var in vendor_twrp: https://gerrit.twrp.me/c/android_vendor_twrp/+/4232\nFixes the haptics. ",
+      "revId": "ee5e5ff74c98684e6648bb361c96e784ed1b5c6b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
