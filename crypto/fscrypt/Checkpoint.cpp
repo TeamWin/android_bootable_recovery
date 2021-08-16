@@ -267,6 +267,7 @@ bool cp_needsRollback() {
 }
 
 bool cp_needsCheckpoint() {
+	return true;
     std::lock_guard<std::mutex> lock(isCheckpointingLock);
 
     // Make sure we only return true during boot. See b/138952436 for discussion
