@@ -19,6 +19,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DUSE_QTI_AIDL_HAPTICS")
 	}
 
+	if getMakeVars(ctx, "TW_USE_SAMSUNG_HAPTICS") == "true" {
+                cflags = append(cflags, "-DUSE_SAMSUNG_HAPTICS")
+        }
+
 	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
 		cflags = append(cflags, "-DMSM_BSP")
 	}
