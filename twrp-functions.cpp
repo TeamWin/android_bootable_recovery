@@ -595,6 +595,8 @@ int TWFunc::tw_reboot(RebootCommand command)
 
 	// Always force a sync before we reboot
 	sync();
+	sync();
+	sleep(1);
 
 	switch (command) {
 		case rb_current:
