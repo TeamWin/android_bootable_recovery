@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68c2d305_91413d3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-08-20T19:47:59Z",
+      "side": 1,
+      "message": "This was already done for the boot-hal services, so I assume this should be done here as well, otherwise both services will try to start.",
+      "revId": "51c7ce92185bd85346b3549730e8f7deedc6caf1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
