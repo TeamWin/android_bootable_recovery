@@ -1,6 +1,3 @@
-on boot
-    start health-hal-2-1
-
 service health-hal-2-1 /system/bin/android.hardware.health@2.1-service
     disabled
     user root
