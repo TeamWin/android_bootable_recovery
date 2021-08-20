@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "553179a0_30d68838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 716
+      },
+      "writtenOn": "2021-08-20T19:35:13Z",
+      "side": 1,
+      "message": "is there something wrong with this merge request ?",
+      "revId": "769922baf1a191e894277121f3403352605dd850",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
