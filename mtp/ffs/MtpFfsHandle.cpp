@@ -48,6 +48,9 @@ constexpr unsigned FFS_NUM_EVENTS = 5;
 constexpr unsigned MAX_FILE_CHUNK_SIZE = AIO_BUFS_MAX * AIO_BUF_LEN;
 
 constexpr uint32_t MAX_MTP_FILE_SIZE = 0xFFFFFFFF;
+// Note: POLL_TIMEOUT_MS = 0 means return immediately i.e. no sleep.
+// And this will cause high CPU usage.
+constexpr int32_t POLL_TIMEOUT_MS = 500;
 
 struct timespec ZERO_TIMEOUT = { 0, 0 };
 
@@ -305,7 +308,7 @@ int MtpFfsHandle::waitEvents(__attribute__((unused)) struct io_buffer *buf, int 
 	int error = 0;
 
 	while (num_events < min_events) {
-		if (poll(mPollFds, 2, 0) == -1) {
+		if (poll(mPollFds, 2, POLL_TIMEOUT_MS) == -1) {
 			MTPE("Mtp error during poll()\n");
 			return -1;
 		}
