@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d26f80b_4030e734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-28T21:03:42Z",
+      "side": 1,
+      "message": "Works for me on redfin. Please fix spacing on patchset. Adding nebrassy to review",
+      "revId": "c533ee849fa5156cabe2e7d672d14f6e471478c3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372b3efc_c6758547",
+        "filename": "partition.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2416,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-28T21:03:42Z",
+      "side": 1,
+      "message": "can we remove spacing?",
+      "revId": "c533ee849fa5156cabe2e7d672d14f6e471478c3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cf0296_3ef428f7",
+        "filename": "partition.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2423,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-28T21:03:42Z",
+      "side": 1,
+      "message": "can we remove spacing?",
+      "revId": "c533ee849fa5156cabe2e7d672d14f6e471478c3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7428797b_0f24ce0a",
+        "filename": "partition.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-28T21:03:42Z",
+      "side": 1,
+      "message": "can we remove spacing?",
+      "revId": "c533ee849fa5156cabe2e7d672d14f6e471478c3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
