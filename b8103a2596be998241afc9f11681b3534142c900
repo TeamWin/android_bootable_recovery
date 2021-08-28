@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9EC537C841413911 1630178520 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1630178521-F6732C092A8640D4D2FB04E1458E81456BCEA5C6\n\n0000000000000000000000000000000000000000 b8103a2596be998241afc9f11681b3534142c900 refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEWol18TdXW9pNdPNmnsU3yEFBOREFAmEqjNgACgkQnsU3yEFB\nORG5/RAAh81pXru+Q+05zseRCWQePLKqut70oxjRRNW0A5/8N6PXq+zUqVFsXiEc\nxLjVAxr99/TpzDZDeQtey/6xXT7H6xdlLrYIVvZ8qFA6VECJ27ysANw2R1d92ckb\n/bVp5ow/SsYqVChKD3TUzHU6GoEbT5FG+rwvN7xUlFUDNd/9+iFOO5ua+m+Q7xxL\ninINxArsNNWKcYcpqIPlIZsniI5egFqMZj+4dQ1MPWqUipqo+1lmHV8tksCqTFuc\nKTTx/S2gsxkUShxy0XBU727T+N0IboY5nCGIVOJyYBZVjDqKMqzv5gMBf/HR6LVt\nfDHGqLoEb9YmmVLdQMjA89ovAc6btrAA+c6AEAjKV2usnHVFjy2MhyWZ6cSNdS30\nPDwegIRQTYbH3/n/l9MW2uK4F5HQxKvSZXSvR3OZS+i4+PhYyXK8OlDXcwgK5SkL\nUqvoyEVwT3eabkYL15IsWi9mDXjMb2vNeggRJo5+zO/a09sA+qLBYveWuXwkuemC\n5vJvccBZ7lskCojnic1lVL98adOqyXDJJsMakXRbugVNwJLxvcxOqpfHVDD651wS\nchsFlz5uClPNXjYZdMtTWQyDPBFZu3m47AOc8YZjEduGa7ZrJQwqfghDW/dxKFWF\n38nj0gFy0m6DKRMX4vtFIUffa1NLimlLp4z1q13rj/cFg5ifw64\u003d\n\u003dbEca\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84907bbe_ad9dd9ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-08-28T19:24:51Z",
+      "side": 1,
+      "message": "Just rebased. It doesn\u0027t seem to negatively impact my device which has crypto enabled.",
+      "revId": "b8103a2596be998241afc9f11681b3534142c900",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
