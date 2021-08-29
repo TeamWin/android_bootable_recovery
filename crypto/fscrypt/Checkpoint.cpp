@@ -161,18 +161,19 @@ Status cp_commitChanges() {
             << "NOT COMMITTING CHECKPOINT BECAUSE persist.vold.dont_commit_checkpoint IS 1";
         return Status::ok();
     }
-    android::sp<IBootControl> module = IBootControl::getService();
-    if (module) {
-        CommandResult cr;
-        module->markBootSuccessful([&cr](CommandResult result) { cr = result; });
-        if (!cr.success)
-            return error(EINVAL, "Error marking booted successfully: " + std::string(cr.errMsg));
-        LOG(INFO) << "Marked slot as booted successfully.";
-        // Clears the warm reset flag for next reboot.
-        if (!SetProperty("ota.warm_reset", "0")) {
-            LOG(WARNING) << "Failed to reset the warm reset flag";
-        }
-    }
+    // TWRP should not mark errors on slots
+    // android::sp<IBootControl> module = IBootControl::getService();
+    // if (module) {
+    //     CommandResult cr;
+    //     module->markBootSuccessful([&cr](CommandResult result) { cr = result; });
+    //     if (!cr.success)
+    //         return error(EINVAL, "Error marking booted successfully: " + std::string(cr.errMsg));
+    //     LOG(INFO) << "Marked slot as booted successfully.";
+    //     // Clears the warm reset flag for next reboot.
+    //     if (!SetProperty("ota.warm_reset", "0")) {
+    //         LOG(WARNING) << "Failed to reset the warm reset flag";
+    //     }
+    // }
     // Must take action for list of mounted checkpointed things here
     // To do this, we walk the list of mounted file systems.
     // But we also need to get the matching fstab entries to see
@@ -267,7 +268,6 @@ bool cp_needsRollback() {
 }
 
 bool cp_needsCheckpoint() {
-	return true;
     std::lock_guard<std::mutex> lock(isCheckpointingLock);
 
     // Make sure we only return true during boot. See b/138952436 for discussion
