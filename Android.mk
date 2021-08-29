@@ -161,6 +161,10 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     endif
 endif
 
+ifneq ($(TW_FASTBOOT_MODULES),)
+    LOCAL_CFLAGS += -DTW_FASTBOOT_MODULES='"$(TW_FASTBOOT_MODULES)"'
+endif
+
 ifeq ($(TW_USES_VENDOR_LIBS),true)
     LOCAL_CFLAGS += -DUSE_VENDOR_LIBS=1
 endif
