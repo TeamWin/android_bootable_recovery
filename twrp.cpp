@@ -341,6 +341,43 @@ int main(int argc, char **argv) {
 	TWFunc::Clear_Bootloader_Message();
 
 	if (startup.Get_Fastboot_Mode()) {
+#ifdef TW_FASTBOOT_MODULES
+	std::string fstab_filename = "/etc/twrp.fstab";
+	if (!TWFunc::Path_Exists(fstab_filename)) {
+		fstab_filename = "/etc/recovery.fstab";
+	}
+	printf("=> Processing %s\n", fstab_filename.c_str());
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1)) {
+		LOGERR("Failing out of recovery due to problem with fstab.\n");
+		return -1;
+	}
+
+	if (!PartitionManager.Mount_By_Path("/vendor", true)) {
+		LOGERR("Unable to mount vendor partition.\n");
+	} else {
+		LOGINFO("Vendor partition mounted for module loading.\n");
+		vector<string> modules = TWFunc::Split_String(TW_FASTBOOT_MODULES, " ");
+
+		for (size_t i = 0; i < modules.size(); ++i) {
+			std::string command = "lsmod | grep " + modules[i] + " > /dev/null";
+			if (TWFunc::Exec_Cmd(command, false) == 0) {
+				LOGINFO("%s module already loaded.\n", modules[i].c_str());
+				continue;
+			} else {
+				command = "insmod /vendor/lib/modules/" + modules[i] + ".ko";
+				TWFunc::Exec_Cmd(command, false);
+			}
+		}
+
+		if (!PartitionManager.UnMount_By_Path("/vendor", true)) {
+			// PartitionManager failed to unmount vendor, this should not happen,
+			// but in case it does, do a lazy unmount
+			LOGINFO("WARNING: vendor could not be unmounted normally!\n");
+			umount2("/vendor", MNT_DETACH);
+		}
+		PartitionManager.Unmap_Super_Devices();
+	}
+#endif
 		LOGINFO("starting fastboot\n");
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		if (gui_startPage("fastboot", 1, 1) != 0) {
