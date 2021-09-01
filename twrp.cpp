@@ -44,6 +44,7 @@ extern "C" {
 #include "twcommon.h"
 #include "twrp-functions.hpp"
 #include "data.hpp"
+#include "kernel_module_loader.hpp"
 #include "partitions.hpp"
 #ifdef __ANDROID_API_N__
 #include <android-base/strings.h>
@@ -104,6 +105,13 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decryption) {
 	char crash_prop_val[PROPERTY_VALUE_MAX];
 	int crash_counter;
+	std::string cmdline;
+	if (TWFunc::read_file("/proc/cmdline", cmdline) != 0) {
+		LOGINFO("Unable to read cmdline for fastboot mode\n");
+	}
+
+	bool fastboot_mode = cmdline.find("twrpfastboot=1") != std::string::npos;
+
 	property_get("twrp.crash_counter", crash_prop_val, "-1");
 	crash_counter = atoi(crash_prop_val) + 1;
 	snprintf(crash_prop_val, sizeof(crash_prop_val), "%d", crash_counter);
@@ -127,6 +135,11 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return;
 	}
+
+	if (fastboot_mode)
+		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_FASTBOOT_MODE);
+	else
+		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_IN_BOOT_MODE);
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
 #if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
@@ -342,6 +355,7 @@ int main(int argc, char **argv) {
 
 	if (startup.Get_Fastboot_Mode()) {
 		LOGINFO("starting fastboot\n");
+		KernelModuleLoader::Load_Vendor_Modules(FASTBOOTD_MODE);
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		if (gui_startPage("fastboot", 1, 1) != 0) {
 			LOGERR("Failed to start fastbootd page.\n");
