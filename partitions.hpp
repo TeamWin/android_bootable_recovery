@@ -317,7 +317,8 @@ public:
 	~TWPartitionManager() {}
 
 public:
-	int Process_Fstab(string Fstab_Filename, bool Display_Error);             // Parses the fstab and populates the partitions
+	int Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode); // Parses the fstab files
+	void Setup_Fstab_Partitions(bool Display_Error);                          // Populates the partitions
 	int Write_Fstab();                                                        // Creates /etc/fstab file that's used by the command line for mount commands
 	void Decrypt_Data();													  // Decrypt Data if enabled
 	void Output_Partition_Logging();                                          // Outputs partition information to the log
