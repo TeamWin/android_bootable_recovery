@@ -38,6 +38,9 @@
 #include <cctype>
 #include <algorithm>
 #include <selinux/label.h>
+
+#include <android-base/strings.h>
+
 #include "twrp-functions.hpp"
 #include "twcommon.h"
 #include "gui/gui.hpp"
@@ -714,8 +717,10 @@ int TWFunc::copy_file(string src, string dst, int mode) {
 
 	srcfile.close();
 	dstfile.close();
-	if (chmod(dst.c_str(), mode) != 0)
+	if (chmod(dst.c_str(), mode) != 0) {
+		LOGERR("Unable to chmod file: %s\n", dst.c_str());
 		return -1;
+	}
 	return 0;
 }
 
@@ -745,7 +750,10 @@ int TWFunc::read_file(string fn, string& results) {
 	file.open(fn.c_str(), ios::in);
 
 	if (file.is_open()) {
-		file >> results;
+		std::string line;
+		while (std::getline(file, line)) {
+			results += line;
+		}
 		file.close();
 		return 0;
 	}
@@ -782,17 +790,32 @@ int TWFunc::read_file(string fn, uint64_t& results) {
 	return -1;
 }
 
-int TWFunc::write_to_file(const string& fn, const string& line) {
+bool TWFunc::write_to_file(const string& fn, const string& line) {
 	FILE *file;
 	file = fopen(fn.c_str(), "w");
 	if (file != NULL) {
 		fwrite(line.c_str(), line.size(), 1, file);
 		fclose(file);
-		return 0;
+		return true;
 	}
 	LOGINFO("Cannot find file %s\n", fn.c_str());
-	return -1;
+	return false;
 }
+
+bool TWFunc::write_to_file(const string& fn, const std::vector<string> lines) {
+	FILE *file;
+	file = fopen(fn.c_str(), "a+");
+	if (file != NULL) {
+		for (auto&& line: lines) {
+			fwrite(line.c_str(), line.size(), 1, file);
+			fwrite("\n", sizeof(char), 1, file);
+		}
+		fclose(file);
+		return true;
+	}
+	return false;
+}
+
 
 bool TWFunc::Try_Decrypting_Backup(string Restore_Path, string Password) {
 	DIR* d;
