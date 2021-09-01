@@ -44,6 +44,7 @@ extern "C" {
 #include "twcommon.h"
 #include "twrp-functions.hpp"
 #include "data.hpp"
+#include "kernel_module_loader.hpp"
 #include "partitions.hpp"
 #ifdef __ANDROID_API_N__
 #include <android-base/strings.h>
@@ -101,9 +102,39 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 	}
 }
 
+static void process_fastbootd_mode() {
+		LOGINFO("starting fastboot\n");
+		printf("=> Linking mtab\n");
+		symlink("/proc/mounts", "/etc/mtab");
+		std::string fstab_filename = "/etc/twrp.fstab";
+		if (!TWFunc::Path_Exists(fstab_filename)) {
+			fstab_filename = "/etc/recovery.fstab";
+		}
+		printf("=> Processing %s\n", fstab_filename.c_str());
+		if (!PartitionManager.Process_Fstab(fstab_filename, 1, false)) {
+			LOGERR("Failing out of recovery due to problem with fstab.\n");
+			return;
+		}
+		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+		PartitionManager.Setup_Super_Devices();
+		PartitionManager.Prepare_Super_Volume(ven);
+#ifdef TW_LOAD_VENDOR_MODULES
+		KernelModuleLoader::Load_Vendor_Modules(FASTBOOTD_MODE);
+#endif
+		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
+		if (gui_startPage("fastboot", 1, 1) != 0) {
+			LOGERR("Failed to start fastbootd page.\n");
+		}
+}
+
 static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decryption) {
 	char crash_prop_val[PROPERTY_VALUE_MAX];
 	int crash_counter;
+	std::string cmdline;
+	if (TWFunc::read_file("/proc/cmdline", cmdline) != 0) {
+		LOGINFO("Unable to read cmdline for fastboot mode\n");
+	}
+
 	property_get("twrp.crash_counter", crash_prop_val, "-1");
 	crash_counter = atoi(crash_prop_val) + 1;
 	snprintf(crash_prop_val, sizeof(crash_prop_val), "%d", crash_counter);
@@ -123,10 +154,18 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		fstab_filename = "/etc/recovery.fstab";
 	}
 	printf("=> Processing %s\n", fstab_filename.c_str());
-	if (!PartitionManager.Process_Fstab(fstab_filename, 1)) {
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, true)) {
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return;
 	}
+
+#ifdef TW_LOAD_VENDOR_MODULES
+	bool fastboot_mode = cmdline.find("twrpfastboot=1") != std::string::npos;
+	if (fastboot_mode)
+		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_FASTBOOT_MODE);
+	else
+		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_IN_BOOT_MODE);
+#endif
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
 #if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
@@ -340,14 +379,9 @@ int main(int argc, char **argv) {
 	TWFunc::Clear_Bootloader_Message();
 
 	if (startup.Get_Fastboot_Mode()) {
-		LOGINFO("starting fastboot\n");
-		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
-		if (gui_startPage("fastboot", 1, 1) != 0) {
-			LOGERR("Failed to start fastbootd page.\n");
-		}
+		process_fastbootd_mode();
 		delete adb_bu_fifo;
 		TWFunc::Update_Intent_File(startup.Get_Intent());
-
 		reboot();
 		return 0;
 	} else {
@@ -363,7 +397,6 @@ int main(int argc, char **argv) {
 	gui_start();
 	delete adb_bu_fifo;
 	TWFunc::Update_Intent_File(startup.Get_Intent());
-
 	reboot();
 
 	return 0;

@@ -148,12 +148,9 @@ int TWPartitionManager::Set_FDE_Encrypt_Status(void) {
 	return 0;
 }
 
-int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error) {
+int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
 	FILE *fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
-	TWPartition* settings_partition = NULL;
-	TWPartition* andsec_partition = NULL;
-	unsigned int storageid = 1 << 16;	// upper 16 bits are for physical storage device, we pretend to have only one
 	std::map<string, Flags_Map> twrp_flags;
 
 	fstabFile = fopen("/etc/twrp.flags", "rt");
@@ -262,112 +259,122 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error)
 	}
 	LOGINFO("Done processing fstab files\n");
 
-	std::vector<TWPartition*>::iterator iter;
-	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
-		(*iter)->Partition_Post_Processing(Display_Error);
-
-		if ((*iter)->Is_Storage) {
-			++storageid;
-			(*iter)->MTP_Storage_ID = storageid;
-		}
-
-		if (!settings_partition && (*iter)->Is_Settings_Storage && (*iter)->Is_Present)
-			settings_partition = (*iter);
-		else
-			(*iter)->Is_Settings_Storage = false;
-
-		if (!andsec_partition && (*iter)->Has_Android_Secure && (*iter)->Is_Present)
-			andsec_partition = (*iter);
-		else
-			(*iter)->Has_Android_Secure = false;
-
-		if ((*iter)->Is_Super)
-			Prepare_Super_Volume((*iter));
+	if (recovery_mode) {
+		Setup_Fstab_Partitions(Display_Error);
 	}
-
-	//Setup Apex before decryption
-	TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
-	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
-	if (sys) {
-		if (sys->Get_Super_Status()) {
-			sys->Mount(true);
-			if (ven) {
-				ven->Mount(true);
-			}
-#ifdef TW_EXCLUDE_APEX
-			LOGINFO("Apex is disabled in this build\n");
-#else
-			twrpApex apex;
-			if (!apex.loadApexImages()) {
-				LOGERR("Unable to load apex images from %s\n", APEX_DIR);
-				property_set("twrp.apex.loaded", "false");
-			} else {
-				property_set("twrp.apex.loaded", "true");
-			}
-			TWFunc::check_and_run_script("/sbin/resyncapex.sh", "apex");
-#endif
-		}
-	}
-#ifndef USE_VENDOR_LIBS
-	if (ven)
-		ven->UnMount(true);
-	if (sys)
-		sys->UnMount(true);
-#endif
-
-	if (!datamedia && !settings_partition && Find_Partition_By_Path("/sdcard") == NULL && Find_Partition_By_Path("/internal_sd") == NULL && Find_Partition_By_Path("/internal_sdcard") == NULL && Find_Partition_By_Path("/emmc") == NULL) {
-		// Attempt to automatically identify /data/media emulated storage devices
-		TWPartition* Dat = Find_Partition_By_Path("/data");
-		if (Dat) {
-			LOGINFO("Using automatic handling for /data/media emulated storage device.\n");
-			datamedia = true;
-			Dat->Setup_Data_Media();
-			settings_partition = Dat;
-			// Since /data was not considered a storage partition earlier, we still need to assign an MTP ID
-			++storageid;
-			Dat->MTP_Storage_ID = storageid;
-		}
-	}
-	if (!settings_partition) {
-		for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
-			if ((*iter)->Is_Storage) {
-				settings_partition = (*iter);
-				break;
-			}
-		}
-		if (!settings_partition)
-			LOGERR("Unable to locate storage partition for storing settings file.\n");
-	}
-	if (!Write_Fstab()) {
-		if (Display_Error)
-			LOGERR("Error creating fstab\n");
-		else
-			LOGINFO("Error creating fstab\n");
-	}
-
-	if (andsec_partition) {
-		Setup_Android_Secure_Location(andsec_partition);
-	} else if (settings_partition) {
-		Setup_Android_Secure_Location(settings_partition);
-	}
-	if (settings_partition) {
-		Setup_Settings_Storage_Partition(settings_partition);
-	}
-
-#ifdef TW_INCLUDE_CRYPTO
-	DataManager::SetValue(TW_IS_ENCRYPTED, 1);
-	Decrypt_Data();
-#endif
-
-	Update_System_Details();
-	if (Get_Super_Status())
-		Setup_Super_Partition();
-	UnMount_Main_Partitions();
-#ifdef AB_OTA_UPDATER
-	DataManager::SetValue("tw_active_slot", Get_Active_Slot_Display());
-#endif
-	setup_uevent();
 	return true;
+}
+
+void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
+		TWPartition* settings_partition = NULL;
+		TWPartition* andsec_partition = NULL;
+		std::vector<TWPartition*>::iterator iter;
+		unsigned int storageid = 1 << 16;	// upper 16 bits are for physical storage device, we pretend to have only one
+
+		for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
+			(*iter)->Partition_Post_Processing(Display_Error);
+
+			if ((*iter)->Is_Storage) {
+				++storageid;
+				(*iter)->MTP_Storage_ID = storageid;
+			}
+
+			if (!settings_partition && (*iter)->Is_Settings_Storage && (*iter)->Is_Present)
+				settings_partition = (*iter);
+			else
+				(*iter)->Is_Settings_Storage = false;
+
+			if (!andsec_partition && (*iter)->Has_Android_Secure && (*iter)->Is_Present)
+				andsec_partition = (*iter);
+			else
+				(*iter)->Has_Android_Secure = false;
+
+			if ((*iter)->Is_Super)
+				Prepare_Super_Volume((*iter));
+		}
+
+		//Setup Apex before decryption
+		TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
+		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+		if (sys) {
+			if (sys->Get_Super_Status()) {
+				sys->Mount(true);
+				if (ven) {
+					ven->Mount(true);
+				}
+	#ifdef TW_EXCLUDE_APEX
+				LOGINFO("Apex is disabled in this build\n");
+	#else
+				twrpApex apex;
+				if (!apex.loadApexImages()) {
+					LOGERR("Unable to load apex images from %s\n", APEX_DIR);
+					property_set("twrp.apex.loaded", "false");
+				} else {
+					property_set("twrp.apex.loaded", "true");
+				}
+				TWFunc::check_and_run_script("/sbin/resyncapex.sh", "apex");
+	#endif
+			}
+		}
+	#ifndef USE_VENDOR_LIBS
+		if (ven)
+			ven->UnMount(true);
+		if (sys)
+			sys->UnMount(true);
+	#endif
+
+		if (!datamedia && !settings_partition && Find_Partition_By_Path("/sdcard") == NULL && Find_Partition_By_Path("/internal_sd") == NULL && Find_Partition_By_Path("/internal_sdcard") == NULL && Find_Partition_By_Path("/emmc") == NULL) {
+			// Attempt to automatically identify /data/media emulated storage devices
+			TWPartition* Dat = Find_Partition_By_Path("/data");
+			if (Dat) {
+				LOGINFO("Using automatic handling for /data/media emulated storage device.\n");
+				datamedia = true;
+				Dat->Setup_Data_Media();
+				settings_partition = Dat;
+				// Since /data was not considered a storage partition earlier, we still need to assign an MTP ID
+				++storageid;
+				Dat->MTP_Storage_ID = storageid;
+			}
+		}
+		if (!settings_partition) {
+			for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
+				if ((*iter)->Is_Storage) {
+					settings_partition = (*iter);
+					break;
+				}
+			}
+			if (!settings_partition)
+				LOGERR("Unable to locate storage partition for storing settings file.\n");
+		}
+		if (!Write_Fstab()) {
+			if (Display_Error)
+				LOGERR("Error creating fstab\n");
+			else
+				LOGINFO("Error creating fstab\n");
+		}
+
+		if (andsec_partition) {
+			Setup_Android_Secure_Location(andsec_partition);
+		} else if (settings_partition) {
+			Setup_Android_Secure_Location(settings_partition);
+		}
+		if (settings_partition) {
+			Setup_Settings_Storage_Partition(settings_partition);
+		}
+
+	#ifdef TW_INCLUDE_CRYPTO
+		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
+		Decrypt_Data();
+	#endif
+
+		Update_System_Details();
+		if (Get_Super_Status())
+			Setup_Super_Partition();
+		UnMount_Main_Partitions();
+	#ifdef AB_OTA_UPDATER
+		DataManager::SetValue("tw_active_slot", Get_Active_Slot_Display());
+	#endif
+		setup_uevent();
 }
 
 int TWPartitionManager::Write_Fstab(void) {
@@ -629,8 +636,6 @@ int TWPartitionManager::Mount_By_Path(string Path, bool Display_Error) {
 		return ret;
 	} else if (Display_Error) {
 		gui_msg(Msg(msg::kError, "unable_find_part_path=Unable to find partition for path '{1}'")(Local_Path));
-	} else {
-		LOGINFO("Mount: Unable to find partition for path '%s'\n", Local_Path.c_str());
 	}
 	return false;
 }
@@ -2096,7 +2101,7 @@ int TWPartitionManager::Open_Lun_File(string Partition_Path, string Lun_File) {
 	if (!Part->UnMount(true) || !Part->Is_Present)
 		return false;
 
-	if (TWFunc::write_to_file(Lun_File, Part->Actual_Block_Device)) {
+	if (!TWFunc::write_to_file(Lun_File, Part->Actual_Block_Device)) {
 		LOGERR("Unable to write to ums lunfile '%s': (%s)\n", Lun_File.c_str(), strerror(errno));
 		return false;
 	}
@@ -2162,15 +2167,15 @@ error_handle:
 }
 
 int TWPartitionManager::usb_storage_disable(void) {
-	int index, ret;
+	int index, ret = 0;
 	char lun_file[255], ch[2] = {0, 0};
 	string str = ch;
 
 	for (index=0; index<2; index++) {
 		sprintf(lun_file, CUSTOM_LUN_FILE, index);
-		ret = TWFunc::write_to_file(lun_file, str);
-		if (ret < 0) {
+		if (!TWFunc::write_to_file(lun_file, str)) {
 			break;
+			ret = -1;
 		}
 	}
 	Mount_All_Storage();
