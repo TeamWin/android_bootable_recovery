@@ -62,6 +62,7 @@ LOCAL_SRC_FILES := \
     find_file.cpp \
     infomanager.cpp \
     data.cpp \
+    kernel_module_loader.cpp \
     partition.cpp \
     partitionmanager.cpp \
     progresstracking.cpp \
@@ -155,7 +156,10 @@ endif
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     LOCAL_CFLAGS += -DPRODUCT_USE_DYNAMIC_PARTITIONS=1
     TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-impl.recovery android.hardware.health@2.1-service.rc android.hardware.health@2.1.xml
-    TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc 
+    TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc
+    TWRP_REQUIRED_MODULES += libmodprobe
+    LOCAL_C_INCLUDES += system/core/libmodprobe/include/
+    LOCAL_STATIC_LIBRARIES += libmodprobe
     ifeq ($(TW_EXCLUDE_LPDUMP),)
         TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
     endif
@@ -296,6 +300,9 @@ ifeq ($(TW_INCLUDE_L_CRYPTO), true)
 endif
 ifneq ($(TW_ADDITIONAL_APEX_FILES),)
     LOCAL_CFLAGS += -DTW_ADDITIONAL_APEX_FILES=$(TW_ADDITIONAL_APEX_FILES)
+endif
+ifneq ($(TW_LOAD_VENDOR_MODULES),)
+    LOCAL_CFLAGS += -DTW_LOAD_VENDOR_MODULES=$(TW_LOAD_VENDOR_MODULES)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
