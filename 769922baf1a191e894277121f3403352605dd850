@@ -16,6 +16,23 @@
       "message": "is there something wrong with this merge request ?",
       "revId": "769922baf1a191e894277121f3403352605dd850",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49cc9ec_8096d0e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2021-09-03T13:50:25Z",
+      "side": 1,
+      "message": "just tried,the letters aren\u0027t connected anf the language name isn\u0027t shown,I guess minui can\u0027t really handle this, it\u0027s unreadable",
+      "revId": "769922baf1a191e894277121f3403352605dd850",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
