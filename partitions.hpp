@@ -401,8 +401,6 @@ public:
 	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
 	int Set_FDE_Encrypt_Status();                                             // Sets encryption state for FDE devices (ro.crypto.state and ro.crypto.type)
 	void Unlock_Block_Partitions();                                           // Unlock all block devices after update_engine runs
-	bool Unmap_Cow_Devices();
-	bool Remove_Dynamic_Groups();                                             // Remove dynmic groups from super partition
 	bool Unmap_Super_Devices();                                               // Unmap super devices in TWRP
 
 private:
