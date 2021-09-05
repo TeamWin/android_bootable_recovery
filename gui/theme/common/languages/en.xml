@@ -740,7 +740,9 @@
 		<string name="twrp_adbbu_option">--twrp option is required to enable twrp adb backup</string>
 		<string name="partition_not_found">path: {1} not found in partititon list</string>
 		<string name="copy_kernel_log">Copied kernel log to {1}</string>
+		<string name="copy_logcat">Copied logcat to {1}</string>
 		<string name="include_kernel_log">Include Kernel Log</string>
+		<string name="include_logcat">Include Logcat</string>
 		<string name="sha2_chk">Use SHA2 for hashing</string>
 		<string name="unable_set_boot_slot">Error changing bootloader boot slot to {1}</string>
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
@@ -767,7 +769,7 @@
 		<string name="change_twrp_folder_on_process">Changing TWRP folder</string>
 		<string name="change_twrp_folder_after_process">TWRP folder changed to</string>
 		<string name="tw_folder_exists">A folder with that name already exists!</string>
-		<string name="unmap_super_devices">Unmap Super Devices</strings>
+		<string name="unmap_super_devices">Unmap Super Devices</string>
 		<string name="unmap_super_devices_confirm">Unmap all Super Devices?</string>
 		<string name="unmapping_super_devices">Unmapping Super Devices...</string>
 		<string name="unmap_super_devices_complete">Unmapped all Super Devices</string>
