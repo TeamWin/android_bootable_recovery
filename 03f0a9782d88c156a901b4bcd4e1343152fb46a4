@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48e121f_fd14ac49",
+        "filename": "startupArgs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-08T18:30:33Z",
+      "side": 1,
+      "message": "Why not add this as an or (||) argument to the previous else if rather than duplicating the entire section?",
+      "revId": "03f0a9782d88c156a901b4bcd4e1343152fb46a4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
