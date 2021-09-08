@@ -55,7 +55,20 @@ void startupArgs::parse(int *argc, char ***argv) {
 				if (!OpenRecoveryScript::Insert_ORS_Command(ORSCommand))
 					break;
 			}
-		} else if (args[index].find(SEND_INTENT) != std::string::npos) {
+		} 
+		else if (args[index].find(SPECIAL_UPDATE_PACKAGE) != std::string::npos) {
+			std::string::size_type eq_pos = args[index].find("=");
+			std::string arg = args[index].substr(eq_pos + 1, args[index].size());
+			if (arg.size() == 0) {
+				LOGERR("argument error specifying zip file\n");
+			} else {
+				std::string ORSCommand = "install " + arg;
+				SkipDecryption = arg.find("@") == 1;
+				if (!OpenRecoveryScript::Insert_ORS_Command(ORSCommand))
+					break;
+			}
+		}	
+		else if (args[index].find(SEND_INTENT) != std::string::npos) {
 			std::string::size_type eq_pos = args[index].find("=");
 			std::string arg = args[index].substr(eq_pos + 1, args[index].size());
 			if (arg.size() == 0) {
