@@ -136,8 +136,10 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		return;
 	}
 
-	if (fastboot_mode)
+	if (fastboot_mode) {
+		android::base::SetProperty("ro.fastboot.boot", "1");
 		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_FASTBOOT_MODE);
+	}
 	else
 		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_IN_BOOT_MODE);
 
