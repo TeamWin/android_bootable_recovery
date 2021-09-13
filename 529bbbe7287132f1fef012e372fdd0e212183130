@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b3aed25_be2051bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-13T00:49:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t appear to be getting set early enough to work for my scripts. Is there a way to set it earlier? Otherwise I\u0027ll just set it in my script like I was doing previously.",
+      "revId": "529bbbe7287132f1fef012e372fdd0e212183130",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
