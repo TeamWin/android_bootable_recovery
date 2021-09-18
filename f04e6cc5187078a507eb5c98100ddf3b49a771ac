@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "feef904c_6add1597",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-09-18T20:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9152a991_ffa65cec",
+      "revId": "f04e6cc5187078a507eb5c98100ddf3b49a771ac",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f87cb963_0d077327",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-18T15:55:20Z",
       "side": 1,
       "message": "whitespace",
+      "revId": "f04e6cc5187078a507eb5c98100ddf3b49a771ac",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc40b780_b360b87b",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-09-18T20:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f87cb963_0d077327",
       "revId": "f04e6cc5187078a507eb5c98100ddf3b49a771ac",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
