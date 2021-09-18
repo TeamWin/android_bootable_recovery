@@ -3463,24 +3463,3 @@ std::string TWPartition::Get_Display_Name() {
 bool TWPartition::Is_SlotSelect() {
 	return SlotSelect;
 }
-
-bool TWPartition::Check_Pending_Merges() {
-	auto sm = android::snapshot::SnapshotManager::NewForFirstStageMount();
-	if (!sm) {
-		LOGERR("Unable to call snapshot manager\n");
-		return false;
-	}
-
-	auto callback = [&]() -> void {
-		double progress;
-		sm->GetUpdateState(&progress);
-		LOGINFO("waiting for merge to complete: %.2f\n", progress);
-	};
-
-	LOGINFO("checking for merges\n");
-	if (!sm->HandleImminentDataWipe(callback)) {
-		LOGERR("Unable to check merge status\n");
-		return false;
-	}
-	return true;
-}

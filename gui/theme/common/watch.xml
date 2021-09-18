@@ -4414,6 +4414,17 @@
 						<action function="page">confirm_action</action>
 					</actions>
 				</listitem>
+				<listitem name="{@merges_snapshots=Merge Snapshots}">
+					<actions>
+						<action function="set">tw_back=advanced</action>
+						<action function="set">tw_action=mergesnapshots</action>
+						<action function="set">tw_text1={@merge_snapshots_confirm=Merge Snapshots?}</action>
+						<action function="set">tw_action_text1={@merging_snapshots=Merging Snapshots...}</action>
+						<action function="set">tw_complete_text1={@merging_snapshots_complete=Merged Snapshots}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
 			</listbox>
 
 			<button>
