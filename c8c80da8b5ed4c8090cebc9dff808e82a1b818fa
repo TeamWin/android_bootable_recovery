@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "240d6bf1_8cd33f07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "Just some whitespace stuff",
+      "revId": "c8c80da8b5ed4c8090cebc9dff808e82a1b818fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4598fcf_2c86d259",
+        "filename": "Android.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "c8c80da8b5ed4c8090cebc9dff808e82a1b818fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f044974_14a78227",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "c8c80da8b5ed4c8090cebc9dff808e82a1b818fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f532273_ef479e33",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "c8c80da8b5ed4c8090cebc9dff808e82a1b818fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c78bd6d_6bf0a79b",
+        "filename": "twrp-functions.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "Any particular reason why this space was added?",
+      "revId": "c8c80da8b5ed4c8090cebc9dff808e82a1b818fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a386d26_0793339d",
+        "filename": "twrp.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "c8c80da8b5ed4c8090cebc9dff808e82a1b818fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

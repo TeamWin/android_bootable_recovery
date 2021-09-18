@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9152a991_ffa65cec",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "f04e6cc5187078a507eb5c98100ddf3b49a771ac",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f87cb963_0d077327",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T15:55:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "f04e6cc5187078a507eb5c98100ddf3b49a771ac",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
