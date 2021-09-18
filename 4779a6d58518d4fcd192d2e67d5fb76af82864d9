@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78d8adc_034c3196",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-18T20:16:52Z",
+      "side": 1,
+      "message": "Looks good to me, and works for my purposes (although the logging is a bit verbose)",
+      "revId": "4779a6d58518d4fcd192d2e67d5fb76af82864d9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
