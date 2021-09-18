@@ -777,5 +777,9 @@
 		<string name="remove_dynamic_groups">Unmapping Super Devices...</string>
 		<string name="remove_dynamic_groups_complete">Unmapped all Super Devices</string>
 		<string name="mount_vab_partitions">Devices on super may not mount until rebooting recovery.</string>
+		<string name="merges_snapshots">Merge Snapshots</string>
+		<string name="merge_snapshots_confirm">Merge Snapshots?</string>
+		<string name="merging_snapshots">Merging Snapshots...</string>
+		<string name="merging_snapshots_complete">Merged Snapshots</string>
 	</resources>
 </language>

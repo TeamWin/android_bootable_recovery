@@ -208,6 +208,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(enablefastboot);
 		ADD_ACTION(changeterminal);
 		ADD_ACTION(unmapsuperdevices);
+		ADD_ACTION(mergesnapshots);
 
 		// remember actions that run in the caller thread
 		for (mapFunc::const_iterator it = mf.begin(); it != mf.end(); ++it)
@@ -2349,5 +2350,14 @@ int GUIAction::applycustomtwrpfolder(string arg __unused)
 		DataManager::mBackingFile = newFolder + '/' + TW_SETTINGS_FILE;
 	}
 	operation_end((int)!ret);
+	return 0;
+}
+
+int GUIAction::mergesnapshots(string arg __unused) {
+	int op_status = 1;
+	if (PartitionManager.Check_Pending_Merges()) {
+		op_status = 0;
+	}
+	operation_end(op_status);
 	return 0;
 }
