@@ -1593,7 +1593,7 @@ int TWPartitionManager::Format_Data(void) {
 #endif
 			if (metadata != NULL)
 				metadata->Mount(true);
-			if (!dat->Check_Pending_Merges())
+			if (!Check_Pending_Merges())
 				return false;
 		}
 		return dat->Wipe_Encryption();
@@ -3547,6 +3547,28 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 		} else {
 			++iter;
 		}
+	}
+	return true;
+}
+
+
+bool TWPartitionManager::Check_Pending_Merges() {
+	auto sm = android::snapshot::SnapshotManager::NewForFirstStageMount();
+	if (!sm) {
+		LOGERR("Unable to call snapshot manager\n");
+		return false;
+	}
+
+	auto callback = [&]() -> void {
+		double progress;
+		sm->GetUpdateState(&progress);
+		LOGINFO("waiting for merge to complete: %.2f\n", progress);
+	};
+
+	LOGINFO("checking for merges\n");
+	if (!sm->HandleImminentDataWipe(callback)) {
+		LOGERR("Unable to check merge status\n");
+		return false;
 	}
 	return true;
 }
