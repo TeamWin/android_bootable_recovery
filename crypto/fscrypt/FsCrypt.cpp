@@ -294,6 +294,10 @@ static bool get_volume_file_encryption_options(EncryptionOptions* options) {
     return true;
 }
 
+bool is_metadata_wrapped_key_supported() {
+    return GetEntryForMountPoint(&fstab_default, METADATA_MNT_POINT)->fs_mgr_flags.wrapped_key;
+}
+
 static bool read_and_install_user_ce_key(userid_t user_id,
                                          const ::KeyAuthentication& auth) {
     if (s_ce_policies.count(user_id) != 0) return true;
