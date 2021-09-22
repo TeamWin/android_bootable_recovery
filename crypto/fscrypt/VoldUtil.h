@@ -21,3 +21,4 @@
 extern android::fs_mgr::Fstab fstab_default;
 
 #define DATA_MNT_POINT "/data"
+#define METADATA_MNT_POINT "/metadata"
