@@ -227,10 +227,6 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DAB_OTA_UPDATER=1")
 	}
 
-	if getMakeVars(ctx, "TW_SCREEN_BLANK_ON_BOOT") == "true" {
-		cflags = append(cflags, "-DTW_NO_SCREEN_BLANK")
-	}
-
 	return cflags
 }
 
