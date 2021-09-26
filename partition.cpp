@@ -699,18 +699,7 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		int is_device_fbe;
 		DataManager::GetValue(TW_IS_FBE, is_device_fbe);
 		if (!Decrypt_FBE_DE() && is_device_fbe == 1) {
-			char wrappedvalue[PROPERTY_VALUE_MAX];
-			property_get("fbe.data.wrappedkey", wrappedvalue, "");
-			std::string wrappedkeyvalue(wrappedvalue);
-			if (wrappedkeyvalue == "true") {
-				LOGERR("Unable to decrypt FBE device\n");
-			} else {
-				LOGINFO("Trying wrapped key.\n");
-				property_set("fbe.data.wrappedkey", "true");
-				if (!Decrypt_FBE_DE()) {
-					LOGERR("Unable to decrypt FBE device\n");
-				}
-			}
+			LOGERR("Unable to decrypt FBE device\n");
 		}
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	}
@@ -939,16 +928,7 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 			}
 			break;
 		case TWFLAG_WRAPPEDKEY:
-			// Set wrappedkey props to true for data and/or metadata
-			{
-				size_t slash_loc = Mount_Point.find('/');
-				std::string partition = Mount_Point.substr(slash_loc + 1);
-				if (Mount_Point == "/data" || Mount_Point == "/metadata") {
-					std::string wrapped_prop = "fbe." + partition + ".wrappedkey";
-					property_set(wrapped_prop.c_str(), "true");
-					LOGINFO("FBE wrapped key enabled for %s\n", Mount_Point.c_str());
-				}
-			}
+			// no more processing needed. leaving it here in case we want to do something in the future
 			break;
 		case TWFLAG_FLASHIMG:
 			Can_Flash_Img = val;
