@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01c49a30_040f32ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-09-26T21:01:07Z",
+      "side": 1,
+      "message": "This depends on merging the import fixes from lineage/qcom caf.",
+      "revId": "b30ad515c4d69f420565bd57e262d8b9554bdc0d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
