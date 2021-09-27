@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cff3cdf_a4caa17b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-27T19:07:35Z",
+      "side": 1,
+      "message": "This fixes legacy wrappedkey support on my ASUS sm8250 devices. Tested on ROG Phone 3.\nAlso tested on A11 wrappedkey_v0 device (ZenFone 8), and decryption is unaffected.\nAlso tested on non-wrappedkey device (bonito) and decryption is unaffected.\n\nShould be good to go.",
+      "revId": "e70d9d0ddef05c8e91200419488f1bac2cc93055",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
