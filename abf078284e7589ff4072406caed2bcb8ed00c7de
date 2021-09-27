@@ -16,6 +16,24 @@
       "message": "when I build ziptool.recovery it is just a symbolic link:\nlrwxrwxrwx 1 bigbiff bigbiff 7 Sep 26 18:31 out/target/product/instantnoodle/recovery/root/system/bin/unzip -\u003e ziptool\n\nI am not sure exactly what you are trying to do?",
       "revId": "abf078284e7589ff4072406caed2bcb8ed00c7de",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9304c8_4aa763ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2021-09-27T15:04:48Z",
+      "side": 1,
+      "message": "ya thats what is the issue, now unzip is symlink to ziptool, and we were not building the ziptool so I replaced unzip with ziptool.recovery in prebuilt/Android.mk.",
+      "parentUuid": "2f4c29f2_0ad0f228",
+      "revId": "abf078284e7589ff4072406caed2bcb8ed00c7de",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
