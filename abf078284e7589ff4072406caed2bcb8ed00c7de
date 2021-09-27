@@ -36,6 +36,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f88e05_5f8962c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-09-27T20:44:31Z",
+      "side": 1,
+      "message": "ziptool is building for me without any modifications of min-aosp11:\nout/target/product/instantnoodle/recovery/root/system/bin/ziptool\nlrwxrwxrwx 1 bigbiff bigbiff 7 Sep 27 16:23 out/target/product/instantnoodle/recovery/root/system/bin/unzip -\u003e ziptool\n\nfrom this commit a while back https://github.com/TeamWin/android_bootable_recovery/commit/eaac7628145ee6ac45a78c0060eb51344c24a758",
+      "revId": "abf078284e7589ff4072406caed2bcb8ed00c7de",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2afd7703_77f1c63e",
