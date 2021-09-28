@@ -16,6 +16,23 @@
       "message": "This depends on merging the import fixes from lineage/qcom caf.",
       "revId": "b30ad515c4d69f420565bd57e262d8b9554bdc0d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "857c54ea_b4646d16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-09-28T00:32:08Z",
+      "side": 1,
+      "message": "Tested on my wrappedkey_v0 and legacy wrappedkey devices, and decryption still works fine.",
+      "revId": "b30ad515c4d69f420565bd57e262d8b9554bdc0d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
