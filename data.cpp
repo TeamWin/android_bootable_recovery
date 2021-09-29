@@ -1107,7 +1107,7 @@ void DataManager::Output_Version(void)
 	}
 	FILE *fp = fopen(verPath.c_str(), "w");
 	if (fp == NULL) {
-		gui_msg(Msg(msg::kError, "error_opening_strerr=Error opening: '{1}' ({2})")(verPath)(strerror(errno)));
+		LOGINFO("Unable to open: %s. Data may be unmounted. Error: %s\n", verPath.c_str(), strerror(errno));
 		return;
 	}
 	strcpy(version, TW_VERSION_STR);
