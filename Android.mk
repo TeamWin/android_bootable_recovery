@@ -108,6 +108,7 @@ LOCAL_C_INCLUDES += \
     bionic \
     system/extras \
     system/core/adb \
+    system/core/libmodprobe/include \
     system/core/libsparse \
     external/zlib \
     system/core/libziparchive/include \
@@ -158,7 +159,6 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-impl.recovery android.hardware.health@2.1-service.rc android.hardware.health@2.1.xml
     TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc
     TWRP_REQUIRED_MODULES += libmodprobe
-    LOCAL_C_INCLUDES += system/core/libmodprobe/include/
     LOCAL_STATIC_LIBRARIES += libmodprobe
     ifeq ($(TW_EXCLUDE_LPDUMP),)
         TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
