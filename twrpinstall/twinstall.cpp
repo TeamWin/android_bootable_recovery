@@ -244,7 +244,9 @@ static int Run_Update_Binary(const char *path, int* wipe_cache, zip_type ztype) 
 
 int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 	int ret_val, zip_verify = 1, unmount_system = 1, reflashtwrp = 0;
-
+	if (!PartitionManager.Unmap_Super_Devices()) {
+		LOGERR("Unable to unmap dynamic partitions. Continuing to install zip...");
+	}
 	gui_msg(Msg("installing_zip=Installing zip file '{1}'")(path));
 	if (strlen(path) < 9 || strncmp(path, "/sideload", 9) != 0) {
 		string digest_str;
