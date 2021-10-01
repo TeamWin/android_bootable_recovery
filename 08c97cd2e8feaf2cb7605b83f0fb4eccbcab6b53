@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1633124897 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1633124899-B812E529966088BC6EA03AA4387AA140A56BBDE8\n\n0000000000000000000000000000000000000000 08c97cd2e8feaf2cb7605b83f0fb4eccbcab6b53 refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmFXgiEACgkQmmXNJnGK\nTp8NoBAAjzS41GNRT5jxU0qfHaps+4wXFyEM7LRYeCW4PMFyKimkoP6b6s5AU/oq\no0A6ECbSf+xCUFGUcEPEdR7qqr/14myre6fM981bgOiI7pJmRn6kXAeSXQDsHC9V\ndcYDPOTuBjxGpKp4micOd7u5E3yMKAtM+cj1Mg1dQufZln59NeKBVOrSSIv4+y0U\nv2482S0KwmLXMRlgxYkaiplduhqaLQ3lqWUbAa5lF9fu6bgReWH4m/cp8QyLOHxX\no6OiSoSEeJgB65w2L7KWk1sHnhsEf4CU1hRw0LHMuUkcQMFI/+Zad+H5AA0x/Tgx\nqY3kzkQm/ELCpQtqLmy7XSZELJEE8OqeQNSG3Hi5q9FRJPzX9hkFpsfz4hee2QPB\n6eoiUZSbRIQ/6dsGoJm7N4RjC3nWM7Obrz9Pixr6MZ+/bclH56rf+OAHQ2qFjhMA\ne3YTqs4Cu1nY+D+8Wr9T/vrXlAFYOYFDR2XAyrYBWESdcV6cpeY8IsV57qIkGVlB\n+EjZEE/KadpNA5W0xp5l+6PRh2Fv4EcSbWvMpo0o7WkLAKruVb4UBwuO16ciNXqf\nWHCLqvn19Hqx5ygAJqSqYz5XqsejzOxWwBlK4wN1xMgVyjD7UJ4ySqk9zKmNE4IY\nT4OSxDl86yLkkwZB5IY/9RkMj+/lKM1FxUGIq4L3qljBVA2FZ+Q\u003d\n\u003dWidE\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f5320b_a627b629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-01T21:52:58Z",
+      "side": 1,
+      "message": "This works, but now there\u0027s an empty MTP device created when the device isn\u0027t encrypted. For some reason, the datamedia setup won\u0027t take. Any ideas?",
+      "revId": "08c97cd2e8feaf2cb7605b83f0fb4eccbcab6b53",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
