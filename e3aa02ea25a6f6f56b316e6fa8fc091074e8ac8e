@@ -17,6 +17,23 @@
       "message": "Working properly now.",
       "revId": "e3aa02ea25a6f6f56b316e6fa8fc091074e8ac8e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b774d9_f7fc99f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-01T17:59:25Z",
+      "side": 1,
+      "message": "These are the changes that were removed: https://gerrit.twrp.me/c/android_bootable_recovery/+/4359/17..18",
+      "revId": "e3aa02ea25a6f6f56b316e6fa8fc091074e8ac8e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
