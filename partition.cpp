@@ -698,10 +698,14 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		Set_FBE_Status();
 		int is_device_fbe;
 		DataManager::GetValue(TW_IS_FBE, is_device_fbe);
-		if (!Decrypt_FBE_DE() && is_device_fbe == 1) {
-			LOGERR("Unable to decrypt FBE device\n");
+		char crypto_state[255];
+		property_get("ro.crypto.state", crypto_state, "error");
+		if (!Decrypt_FBE_DE() && strcmp(crypto_state, "error") != 0) {
+			if (is_device_fbe == 1)
+				LOGERR("Unable to decrypt FBE device\n");
+		} else {
+			DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 		}
-		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	}
 	if (datamedia && (!Is_Encrypted || (Is_Encrypted && Is_Decrypted))) {
 		Setup_Data_Media();
