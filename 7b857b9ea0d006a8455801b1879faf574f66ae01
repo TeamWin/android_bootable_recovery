@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a22f7a_dbbe810d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2021-10-02T09:03:42Z",
+      "side": 1,
+      "message": "fix the build error \nbootable/recovery/kernel_module_loader.hpp:8:10: fatal error: \u0027modprobe/modprobe.h\u0027 file not found\n\nfor device without PRODUCT_USE_DYNAMIC_PARTITIONS flag",
+      "revId": "7b857b9ea0d006a8455801b1879faf574f66ae01",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
