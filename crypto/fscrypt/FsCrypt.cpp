@@ -233,9 +233,11 @@ static bool IsEmmcStorage(const std::string& blk_device) {
 
 // Retrieve the options to use for encryption policies on the /data filesystem.
 static bool get_data_file_encryption_options(EncryptionOptions* options) {
-    if (!ReadDefaultFstab(&fstab_default)) {
-        PLOG(ERROR) << "Failed to open default fstab";
-        return false;
+    if (fstab_default.empty()) {
+        if (!ReadDefaultFstab(&fstab_default)) {
+            PLOG(ERROR) << "Failed to open default fstab";
+            return false;
+        }
     }
     auto entry = GetEntryForMountPoint(&fstab_default, DATA_MNT_POINT);
     if (entry == nullptr) {
@@ -299,9 +301,11 @@ static bool get_volume_file_encryption_options(EncryptionOptions* options) {
 }
 
 bool is_metadata_wrapped_key_supported() {
-    if (!ReadDefaultFstab(&fstab_default)) {
-        PLOG(ERROR) << "Failed to open default fstab";
-        return false;
+    if (fstab_default.empty()) {
+        if (!ReadDefaultFstab(&fstab_default)) {
+            PLOG(ERROR) << "Failed to open default fstab";
+            return false;
+        }
     }
     return GetEntryForMountPoint(&fstab_default, METADATA_MNT_POINT)->fs_mgr_flags.wrapped_key;
 }
@@ -491,9 +495,11 @@ bool fscrypt_initialize_systemwide_keys() {
 }
 
 bool fscrypt_init_user0() {
-    if (!ReadDefaultFstab(&fstab_default)) {
-        PLOG(ERROR) << "Failed to open default fstab";
-        return -1;
+    if (fstab_default.empty()) {
+        if (!ReadDefaultFstab(&fstab_default)) {
+            PLOG(ERROR) << "Failed to open default fstab";
+            return -1;
+        }
     }
     LOG(INFO) << "fscrypt_init_user0";
     if (fscrypt_is_native()) {

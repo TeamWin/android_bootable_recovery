@@ -97,9 +97,11 @@ static bool mount_via_fs_mgr(const char* mount_point, const char* blk_device) {
         return false;
     }
 
-    if (!ReadDefaultFstab(&fstab_default)) {
-        PLOG(ERROR) << "Failed to open default fstab";
-        return -1;
+    if (fstab_default.empty()) {
+        if (!ReadDefaultFstab(&fstab_default)) {
+            PLOG(ERROR) << "Failed to open default fstab";
+            return -1;
+        }
     }
     auto mount_rc = fs_mgr_do_mount(&fstab_default, const_cast<char*>(mount_point),
                                     const_cast<char*>(blk_device), nullptr,
@@ -284,9 +286,11 @@ bool fscrypt_mount_metadata_encrypted(const std::string& blk_device, const std::
         LOG(ERROR) << "fscrypt_enable_crypto got unexpected starting state: " << encrypted_state;
         return false;
     }
-    if (!ReadDefaultFstab(&fstab_default)) {
-        PLOG(ERROR) << "Failed to open default fstab";
-        return -1;
+    if (fstab_default.empty()) {
+        if (!ReadDefaultFstab(&fstab_default)) {
+            PLOG(ERROR) << "Failed to open default fstab";
+            return -1;
+        }
     }
     auto data_rec = GetEntryForMountPoint(&fstab_default, mount_point);
     if (!data_rec) {
@@ -323,7 +327,6 @@ bool fscrypt_mount_metadata_encrypted(const std::string& blk_device, const std::
         LOG(ERROR) << "Unknown options_format_version: " << options_format_version;
         return false;
     }
-
     auto gen = needs_encrypt ? makeGen(options) : neverGen();
     KeyBuffer key;
     if (!read_key(data_rec->metadata_key_dir, gen, &key)) return false;
