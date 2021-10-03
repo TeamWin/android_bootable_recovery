@@ -76,6 +76,15 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 			version = strings.Split(line, " ")[2]
 		}
 	}
+
+	_props := [3]string{"TW_CUSTOM_BATTERY_POS", "TW_CUSTOM_CLOCK_POS", "TW_CUSTOM_CPU_POS"}
+	props := [3]string{"%indent_right%", "%center_x%", "%indent%"}
+	for i, item := range _props {
+		if getMakeVars(ctx, item) != "" {
+			props[i] = getMakeVars(ctx, item)
+		}
+	}
+
 	_files := [2]string{"splash.xml", "ui.xml"}
 	for _, i := range _files {
 		data, err = ioutil.ReadFile(twRes + i)
@@ -84,6 +93,11 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 			return
 		}
 		newFile := strings.Replace(string(data), "{themeversion}", version, -1)
+		if i == "ui.xml" {
+			newFile = strings.Replace(newFile, "{battery_pos}", props[0], -1)
+			newFile = strings.Replace(newFile, "{clock_pos}", props[1], -1)
+			newFile = strings.Replace(newFile, "{cpu_pos}", props[2], -1)
+		}
 		err = ioutil.WriteFile(twRes + i, []byte(newFile), 0)
 		if err != nil {
 			fmt.Println(err)
