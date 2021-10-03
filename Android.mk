@@ -570,7 +570,13 @@ TW_THEME_VERSION := $(shell grep TW_THEME_VERSION bootable/recovery/variables.h 
 
 LOCAL_POST_INSTALL_CMD += \
     sed -i "s/{themeversion}/$(TW_THEME_VERSION)/" $(TARGET_RECOVERY_ROOT_OUT)/twres/splash.xml; \
-    sed -i "s/{themeversion}/$(TW_THEME_VERSION)/" $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml;
+    sed -i "s/{themeversion}/$(TW_THEME_VERSION)/" $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
+    if [ -n "$(TW_CUSTOM_BATTERY_POS)" ]; then sed -i "s/{battery_pos}/$(TW_CUSTOM_BATTERY_POS)/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
+    else sed -i "s/{battery_pos}/%indent_right%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi; \
+    if [ -n "$(TW_CUSTOM_CLOCK_POS)" ]; then sed -i "s/{clock_pos}/$(TW_CUSTOM_CLOCK_POS)/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
+    else sed -i "s/{clock_pos}/%center_x%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi; \
+    if [ -n "$(TW_CUSTOM_CPU_POS)" ]; then sed -i "s/{cpu_pos}/$(TW_CUSTOM_CPU_POS)/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
+    else sed -i "s/{cpu_pos}/%indent%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi;
 
 include $(BUILD_EXECUTABLE)
 
