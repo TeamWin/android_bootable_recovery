@@ -614,6 +614,7 @@
 		<string name="mtp_already_enabled">MTP already enabled</string>
 		<string name="mtp_fail">Failed to enable MTP</string>
 		<string name="no_mtp">MTP support not included</string>
+		<string name="mtp_base_path_missing">Media storage not found. Unable to enable MTP.</string>
 		<string name="image_flash_start">[IMAGE FLASH STARTED]</string>
 		<string name="img_to_flash">Image to flash: '{1}'</string>
 		<string name="flash_unable_locate">Unable to locate '{1}' partition for flashing.</string>
