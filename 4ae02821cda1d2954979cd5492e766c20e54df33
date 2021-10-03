@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38d92c28_0b37958b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-03T15:57:07Z",
+      "side": 1,
+      "message": "This seems like a good idea, and doesn\u0027t appear to have broken anything for me, so I say mergeit",
+      "revId": "4ae02821cda1d2954979cd5492e766c20e54df33",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
