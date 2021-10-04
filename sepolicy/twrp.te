@@ -4,6 +4,7 @@ recovery_only(`
   permissive logd;
   permissive adbd;
   permissive fastbootd;
+  permissive kernel;
   allow kernel tmpfs:file { read };
   allow kernel recovery:fd { use };
 ')
