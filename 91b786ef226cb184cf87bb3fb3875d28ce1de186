@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c69b5f9_ba3561ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2021-10-04T10:24:29Z",
+      "side": 1,
+      "message": "i see your allow selinux under. \nAnother tips instead of this permissive ?",
+      "revId": "91b786ef226cb184cf87bb3fb3875d28ce1de186",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
