@@ -16,6 +16,23 @@
       "message": "Done but maybe it\u0027s more device specific ?",
       "revId": "9a2d7668875d98f5f207ff2a6ead6c033cf14869",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26d71d60_3c89852f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2021-10-05T22:34:44Z",
+      "side": 1,
+      "message": "So i will add this to the device\u0027s repo ? or it\u0027s seem ok for you ?",
+      "revId": "9a2d7668875d98f5f207ff2a6ead6c033cf14869",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
