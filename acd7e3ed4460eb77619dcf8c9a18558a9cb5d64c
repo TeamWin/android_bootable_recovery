@@ -16,6 +16,23 @@
       "message": "Still getting the message after formatting data:\n\nI:Setup_Data_Partition::Key_Directory::/metadata/vold/metadata_encryption\nE:Unable to decrypt FBE device",
       "revId": "acd7e3ed4460eb77619dcf8c9a18558a9cb5d64c",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c53a0b2_d6be3682",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-05T23:40:44Z",
+      "side": 1,
+      "message": "Before format:\nredfin:/ # getprop ro.crypto.state\nencrypted\n\nAfter format:\nredfin:/ # getprop ro.crypto.state\nencrypted\n\nReboot to recovery after format:\nredfin:/ # getprop ro.crypto.state\nencrypted",
+      "revId": "acd7e3ed4460eb77619dcf8c9a18558a9cb5d64c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
