@@ -33,6 +33,23 @@
       "message": "Before format:\nredfin:/ # getprop ro.crypto.state\nencrypted\n\nAfter format:\nredfin:/ # getprop ro.crypto.state\nencrypted\n\nReboot to recovery after format:\nredfin:/ # getprop ro.crypto.state\nencrypted",
       "revId": "acd7e3ed4460eb77619dcf8c9a18558a9cb5d64c",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da721ea1_e066ed81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-06T01:05:11Z",
+      "side": 1,
+      "message": "If your device shows encrypted without this patch after formatting data, then this patch is working properly.",
+      "revId": "acd7e3ed4460eb77619dcf8c9a18558a9cb5d64c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
