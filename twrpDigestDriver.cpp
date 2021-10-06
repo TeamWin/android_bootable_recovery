@@ -86,6 +86,9 @@ bool twrpDigestDriver::Check_File_Digest(const string& Filename) {
 		return false;
 	}
 	string digest_check = digest->return_digest_string();
+	digest_check = digest_check + "  " + TWFunc::Get_Filename(file_name);
+	LOGINFO("digest_check: %s\n", digest_check.c_str());
+	LOGINFO("digest_str: %s\n", digest_str.c_str());
 	if (digest_check == digest_str) {
 		if (use_sha2)
 			LOGINFO("SHA2 Digest: %s  %s\n", digest_str.c_str(), TWFunc::Get_Filename(Filename).c_str());
