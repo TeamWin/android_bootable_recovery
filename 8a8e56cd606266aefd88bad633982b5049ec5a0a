@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa8e159d_fb5508e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-06T22:03:20Z",
+      "side": 1,
+      "message": "This was fixed in my local device tree:\n\ninit.recovery.device.rc\non property:ro.crypto.state\u003dencrypted \u0026\u0026 property:ro.crypto.type\u003dfile\n    install_keyring",
+      "revId": "8a8e56cd606266aefd88bad633982b5049ec5a0a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
