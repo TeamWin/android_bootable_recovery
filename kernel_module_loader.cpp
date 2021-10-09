@@ -2,7 +2,7 @@
 
 const std::vector<std::string> kernel_modules_requested = TWFunc::split_string(EXPAND(TW_LOAD_VENDOR_MODULES), ' ', true);
 
-bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
+bool KernelModuleLoader::Load_Vendor_Modules() {
     // check /lib/modules (ramdisk vendor_boot)
     // check /lib/modules/N.N (ramdisk vendor_boot)
     // check /lib/modules/N.N-gki (ramdisk vendor_boot)
@@ -35,12 +35,12 @@ bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
     module_dirs.push_back(base_dir + "/" + release[0] + "." + release[1]);
 
     for (auto&& module_dir:module_dirs) {
-        modules_loaded += Try_And_Load_Modules(module_dir);
+        modules_loaded += Try_And_Load_Modules(module_dir, false);
         if (modules_loaded >= expected_module_count) goto exit;
     }
 
     for (auto&& module_dir:vendor_module_dirs) {
-        modules_loaded += Try_And_Load_Modules(module_dir);
+        modules_loaded += Try_And_Load_Modules(module_dir, false);
         if (modules_loaded >= expected_module_count) goto exit;
     }
 
@@ -50,7 +50,7 @@ bool KernelModuleLoader::Load_Vendor_Modules(BOOT_MODE mode) {
     }
 
     for (auto&& module_dir:vendor_module_dirs) {
-        modules_loaded += Try_And_Load_Modules(module_dir);
+        modules_loaded += Try_And_Load_Modules(module_dir, true);
         if (modules_loaded >= expected_module_count) goto exit;
     }
 
@@ -61,19 +61,49 @@ exit:
 	return true;
 }
 
-int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir) {
+int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir, bool vendor_is_mounted) {
         LOGINFO("Checking directory: %s\n", module_dir.c_str());
+        int modules_loaded = 0;
         std::string dest_module_dir;
         dest_module_dir = "/tmp" + module_dir;
         TWFunc::Recursive_Mkdir(dest_module_dir);
         Copy_Modules_To_Tmpfs(module_dir);
-        Write_Module_List(dest_module_dir);
-        Modprobe m({dest_module_dir}, "modules.load.twrp");
-        m.EnableVerbose(true);
-        m.LoadListedModules(false);
-        int modules_loaded = m.GetModuleCount();
-        LOGINFO("Modules Loaded: %d\n", modules_loaded);
+        if (!Write_Module_List(dest_module_dir))
+            return kernel_modules_requested.size();
+        if (!vendor_is_mounted && module_dir == "/vendor/lib/modules") {
+            module_dir = "/lib/modules";
+        }
+        LOGINFO("mounting %s on %s\n", dest_module_dir.c_str(), module_dir.c_str());
+        if (mount(dest_module_dir.c_str(), module_dir.c_str(), "", MS_BIND, NULL) == 0) {
+            Modprobe m({module_dir}, "modules.load.twrp");
+            m.EnableVerbose(true);
+            m.LoadListedModules(false);
+            modules_loaded = m.GetModuleCount();
+            umount2(module_dir.c_str(), MNT_DETACH);
+            LOGINFO("Modules Loaded: %d\n", modules_loaded);
+        }
         return modules_loaded;
+}
+
+std::vector<string> KernelModuleLoader::Skip_Loaded_Kernel_Modules() {
+    std::vector<string> kernel_modules = kernel_modules_requested;
+    std::vector<string> loaded_modules;
+    std::string kernel_module_file = "/proc/modules";
+    if (TWFunc::read_file(kernel_module_file, loaded_modules) < 0)
+        LOGINFO("failed to get loaded kernel modules\n");
+    LOGINFO("number of modules loaded by init: %lu\n", loaded_modules.size());
+    if (loaded_modules.size() == 0)
+        return kernel_modules;
+    for (auto&& module_line:loaded_modules) {
+        auto module = TWFunc::Split_String(module_line, " ")[0];
+        std::string full_module_name = module + ".ko";
+        auto found = std::find(kernel_modules.begin(), kernel_modules.end(), full_module_name);
+        if (found != kernel_modules.end()) {
+            LOGINFO("found module to dedupe: %s\n", (*found).c_str());
+            kernel_modules.erase(found);
+        }
+    }
+    return kernel_modules;
 }
 
 bool KernelModuleLoader::Write_Module_List(std::string module_dir) {
@@ -81,6 +111,11 @@ bool KernelModuleLoader::Write_Module_List(std::string module_dir) {
 	struct dirent* de;
 	std::vector<std::string> kernel_modules;
 	d = opendir(module_dir.c_str());
+    auto deduped_modules = Skip_Loaded_Kernel_Modules();
+    if (deduped_modules.size() == 0) {
+        LOGINFO("Requested modules are loaded\n");
+        return false;
+    }
 	if (d != nullptr) {
 		while ((de = readdir(d)) != nullptr) {
 			std::string kernel_module = de->d_name;
