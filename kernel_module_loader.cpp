@@ -67,7 +67,8 @@ int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir) {
         dest_module_dir = "/tmp" + module_dir;
         TWFunc::Recursive_Mkdir(dest_module_dir);
         Copy_Modules_To_Tmpfs(module_dir);
-        Write_Module_List(dest_module_dir);
+        if (!Write_Module_List(dest_module_dir))
+            return kernel_modules_requested.size();
         Modprobe m({dest_module_dir}, "modules.load.twrp");
         m.EnableVerbose(true);
         m.LoadListedModules(false);
@@ -76,11 +77,37 @@ int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir) {
         return modules_loaded;
 }
 
+std::vector<string> KernelModuleLoader::Skip_Loaded_Kernel_Modules() {
+    std::vector<string> kernel_modules = kernel_modules_requested;
+    std::vector<string> loaded_modules;
+    std::string kernel_module_file = "/proc/modules";
+    if (TWFunc::read_file(kernel_module_file, loaded_modules) < 0)
+        LOGINFO("failed to get loaded kernel modules\n");
+    LOGINFO("number of modules loaded by init: %lu\n", loaded_modules.size());
+    if (loaded_modules.size() == 0)
+        return kernel_modules;
+    for (auto&& module_line:loaded_modules) {
+        auto module = TWFunc::Split_String(module_line, " ")[0];
+        std::string full_module_name = module + ".ko";
+        auto found = std::find(kernel_modules.begin(), kernel_modules.end(), full_module_name);
+        if (found != kernel_modules.end()) {
+            LOGINFO("found module to dedupe: %s\n", (*found).c_str());
+            kernel_modules.erase(found);
+        }
+    }
+    return kernel_modules;
+}
+
 bool KernelModuleLoader::Write_Module_List(std::string module_dir) {
 	DIR* d;
 	struct dirent* de;
 	std::vector<std::string> kernel_modules;
 	d = opendir(module_dir.c_str());
+    auto deduped_modules = Skip_Loaded_Kernel_Modules();
+    if (deduped_modules.size() == 0) {
+        LOGINFO("Requested modules are loaded\n");
+        return false;
+    }
 	if (d != nullptr) {
 		while ((de = readdir(d)) != nullptr) {
 			std::string kernel_module = de->d_name;
