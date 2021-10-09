@@ -709,10 +709,7 @@ int TWFunc::copy_file(string src, string dst, int mode, bool mount_paths) {
 	std::ifstream srcfile(src.c_str(), ios::binary);
 	std::ofstream dstfile(dst.c_str(), ios::binary);
 	dstfile << srcfile.rdbuf();
-	if (!dstfile.bad()) {
-		LOGINFO("Copied file %s to %s\n", src.c_str(), dst.c_str());
-	}
-	else {
+	if (dstfile.bad()) {
 		LOGINFO("Unable to copy file %s to %s\n", src.c_str(), dst.c_str());
 		return -1;
 	}
