@@ -119,8 +119,12 @@ static void process_fastbootd_mode() {
 		PartitionManager.Setup_Super_Devices();
 		PartitionManager.Prepare_Super_Volume(ven);
 #ifdef TW_LOAD_VENDOR_MODULES
-		KernelModuleLoader::Load_Vendor_Modules(FASTBOOTD_MODE);
+		KernelModuleLoader::Load_Vendor_Modules();
+		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
+			PartitionManager.Unmap_Super_Devices();
+		}
 #endif
+
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		if (gui_startPage("fastboot", 1, 1) != 0) {
 			LOGERR("Failed to start fastbootd page.\n");
@@ -162,9 +166,9 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 #ifdef TW_LOAD_VENDOR_MODULES
 	bool fastboot_mode = cmdline.find("twrpfastboot=1") != std::string::npos;
 	if (fastboot_mode)
-		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_FASTBOOT_MODE);
+		KernelModuleLoader::Load_Vendor_Modules();
 	else
-		KernelModuleLoader::Load_Vendor_Modules(RECOVERY_IN_BOOT_MODE);
+		KernelModuleLoader::Load_Vendor_Modules();
 #endif
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
