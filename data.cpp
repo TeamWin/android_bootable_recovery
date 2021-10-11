@@ -1,5 +1,5 @@
 /*
-	Copyright 2012 to 2016 bigbiff/Dees_Troy TeamWin
+	Copyright 2012 to 2021 TeamWin
 	This file is part of TWRP/TeamWin Recovery Project.
 
 	TWRP is free software: you can redistribute it and/or modify
@@ -766,7 +766,7 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(TW_TIME_ZONE_GUISEL, "CST6;CDT,M3.2.0,M11.1.0");
 	mPersist.SetValue(TW_TIME_ZONE_GUIOFFSET, "0");
 	mPersist.SetValue(TW_TIME_ZONE_GUIDST, "1");
-        mPersist.SetValue(TW_AUTO_REFLASHTWRP_VAR, "0");
+	mPersist.SetValue(TW_AUTO_REFLASHTWRP_VAR, "0");
 
 	mData.SetValue(TW_ACTION_BUSY, "0");
 	mData.SetValue("tw_wipe_cache", "0");
@@ -813,6 +813,11 @@ void DataManager::SetDefaultValues()
 	mData.SetValue("tw_sleep", "5");
 	mData.SetValue("tw_enable_fastboot", "0");
 
+
+	if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false))
+		mConst.SetValue("tw_virtual_ab.enabled", "1");
+	else
+		mConst.SetValue("tw_virtual_ab.enabled", "0");
 	// Brightness handling
 	string findbright;
 #ifdef TW_BRIGHTNESS_PATH
