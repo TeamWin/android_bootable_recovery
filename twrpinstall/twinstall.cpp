@@ -346,7 +346,7 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 				PartitionManager.UnMount_By_Path("/vendor", false);
 			if (!system_mount_state)
 				PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
-			if (android::base::GetBoolProperty("ro.virtual_ab.enabled", true)) {
+			if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
 				PartitionManager.Prepare_All_Super_Volumes();
 				gui_warn("mount_vab_partitions=Devices on super may not mount until rebooting recovery.");
 			}
