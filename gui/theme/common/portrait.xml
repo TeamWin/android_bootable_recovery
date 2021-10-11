@@ -3925,6 +3925,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@unmap_super_devices=Unmap Super Devices}">
+					<condition var1="tw_virtual_ab.enabled" op="!=" var2="1"/>
 					<actions>
 						<action function="set">tw_back=advanced</action>
 						<action function="set">tw_action=unmapsuperdevices</action>
@@ -3936,6 +3937,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@merges_snapshots=Merge Snapshots}">
+					<condition var1="tw_virtual_ab.enabled" op="!=" var2="1"/>
 					<actions>
 						<action function="set">tw_back=advanced</action>
 						<action function="set">tw_action=mergesnapshots</action>
@@ -5271,8 +5273,8 @@
 
 			<button style="main_button_half_height">
 				<placement x="%center_x%" y="%row21a_y%"/>
-				<text>{@reboot_btn=Reboot}</text>
-				<action function="page">fastbootreboot</action>
+				<text>{@terminal_btn=Terminal}</text>
+				<action function="page">terminalcommand</action>
 			</button>
 		</page>
 
