@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d9088f_a0360a52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-11T17:05:24Z",
+      "side": 1,
+      "message": "Not working on my virtual AB device. Now the options are missing there too.",
+      "revId": "98c32d599da9ef83c2c087986e6c254eb2be9a74",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
