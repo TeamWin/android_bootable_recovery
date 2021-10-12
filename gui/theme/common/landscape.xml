@@ -2582,7 +2582,7 @@
 
 			<button style="checkbox">
 				<conditions>
-					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+					<condition var1="tw_mount_system_ro" op="=" var2="0"/>
 					<condition var1="tw_is_super" op="=" var2="0"/>
 				</conditions>
 				<placement x="%col1_x_left%" y="%row14_y%" textplacement="6"/>
