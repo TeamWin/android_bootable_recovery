@@ -1225,15 +1225,13 @@ char* PageManager::LoadFileToBuffer(std::string filename, ZipArchiveHandle packa
 	} else {
 		LOGINFO("PageManager::LoadFileToBuffer loading filename: '%s' from zip\n", filename.c_str());
 		ZipEntry binary_entry;
-		if (FindEntry(package, filename, &binary_entry) == 0) {
-		// if (!package->EntryExists(filename)) {
+		if (FindEntry(package, filename, &binary_entry) != 0) {
 			LOGERR("Unable to locate '%s' in zip file\n", filename.c_str());
 			return NULL;
 		}
 
 		// Allocate the buffer for the file
 		len = binary_entry.uncompressed_length;
-		// len = package->GetUncompressedSize(filename);
 		buffer = (char*) malloc(len + 1);
 		if (!buffer)
 			return NULL;
@@ -1241,7 +1239,6 @@ char* PageManager::LoadFileToBuffer(std::string filename, ZipArchiveHandle packa
 		int32_t err =
 			ExtractToMemory(package, &binary_entry, reinterpret_cast<uint8_t*>(buffer), len);
 		if (err != 0) {
-		// if (!package->ExtractToBuffer(filename, (unsigned char*) buffer)) {
 			LOGERR("Unable to extract '%s'\n", filename.c_str());
 			free(buffer);
 			return NULL;
@@ -1311,7 +1308,7 @@ void PageManager::LoadLanguageList(ZipArchiveHandle package) {
 		TWFunc::removeDir(TWRES "customlanguages", true);
 	if (package) {
 		TWFunc::Recursive_Mkdir(TWRES "customlanguages");
-		ExtractPackageRecursive(package, "", TWRES "customlanguages", nullptr, nullptr);
+		ExtractPackageRecursive(package, "/", TWRES "customlanguages", nullptr, nullptr);
 
 		// package->ExtractRecursive("languages", TWRES "customlanguages/");
 		LoadLanguageListDir(TWRES "customlanguages/");
@@ -1374,15 +1371,16 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 		tw_y_offset = 0;
 		tw_w_offset = 0;
 		tw_h_offset = 0;
-		if (!TWFunc::Path_Exists(package))
+		if (!TWFunc::Path_Exists(package)) {
 			return -1;
+		}
 
 		ZipArchiveHandle Zip;
 		int err = OpenArchive(package.c_str(), &Zip);
 
 		if (err != 0)
 			return -1;
-		
+
 		ctx.zip = Zip;
 		mainxmlfilename = "ui.xml";
 		LoadLanguageList(ctx.zip);
