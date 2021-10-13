@@ -58,13 +58,12 @@ int Resource::ExtractResource(ZipArchiveHandle pZip, std::string folderName, std
 
 	std::string src = folderName + "/" + fileName + fileExtn;
 	ZipEntry binary_entry;
-	if (FindEntry(pZip, src, &binary_entry) != 0) {
+	if (FindEntry(pZip, src, &binary_entry) == 0) {
 		android::base::unique_fd fd(
 			open(destFile.c_str(), O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0666));
 		if (fd == -1) {
 			return -1;
 		}
-		// if (!pZip->ExtractEntry(src, destFile, 0666))
 		int32_t err = ExtractEntryToFile(pZip, &binary_entry, fd);
 		if (err != 0)
 			return -1;
