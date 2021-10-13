@@ -85,10 +85,6 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 				DataManager::SetValue("tw_crypto_user_id", "0");
 			if (gui_startPage("decrypt", 1, 1) != 0) {
 				LOGERR("Failed to start decrypt GUI page.\n");
-			} else {
-				// Check for and load custom theme if present
-				TWFunc::check_selinux_support();
-				gui_loadCustomResources();
 			}
 		}
 	} else if (datamedia) {
@@ -217,6 +213,9 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 #endif
 
 	Decrypt_Page(skip_decryption, datamedia);
+	// Check for and load custom theme if present
+	TWFunc::check_selinux_support();
+	gui_loadCustomResources();
 	PartitionManager.Output_Partition_Logging();
 
 	// Fixup the RTC clock on devices which require it
