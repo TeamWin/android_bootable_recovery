@@ -22,7 +22,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
 endif
 LOCAL_STATIC_LIBRARIES += libstdc++
 
-LOCAL_C_INCLUDES += external/libselinux/include
+LOCAL_C_INCLUDES += external/selinux/libselinux/include/selinux
 LOCAL_STATIC_LIBRARIES += libselinux
 
 ifneq ($(RECOVERY_SDCARD_ON_DATA),)
@@ -63,7 +63,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
 endif
 LOCAL_SHARED_LIBRARIES += libstdc++
 
-LOCAL_C_INCLUDES += external/libselinux/include
+LOCAL_C_INCLUDES += external/selinux/libselinux/include/selinux
 LOCAL_SHARED_LIBRARIES += libselinux
 
 ifneq ($(RECOVERY_SDCARD_ON_DATA),)

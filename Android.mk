@@ -115,7 +115,7 @@ LOCAL_C_INCLUDES += \
     external/freetype/include \
     external/boringssl/include \
     external/libcxx/include \
-    external/libselinux/include \
+    external/selinux/libselinux/include/selinux \
     external/libpng \
     $(LOCAL_PATH)/gui/include \
     $(LOCAL_PATH)/recovery_ui/include \
