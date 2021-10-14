@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22438037_3b7dcb1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-14T23:37:43Z",
+      "side": 1,
+      "message": "Comment removed by: bigbiff; Reason: withdrawn",
+      "revId": "7d7b381244bee822837c6fa9b3e50dd48049b01e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc5c59ea_72ca9d63",
