@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1634232237 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1634232237-5705F952E82DCAC633F7DD1A33DE20EF1FD1F09C\n\n0000000000000000000000000000000000000000 692a9e14d88fba806605e5c171837590fc35da52 refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmFoZ60ACgkQmmXNJnGK\nTp8++Q/+M0RJE4XXmmY0U5xu4gFR4pmrjLYY0d8hPfjn2NXFGujpIFp3Nhjz7AVt\nVKumxP/xG1FViYVSfH/7HCHFIHs+h8OIKX7Xo8xT2A7UgTEJPxD88WnCKCRjiO8+\n6tpTcCxSqAgkWrGp2AnXzb0tk3NxKq0Q7FMcBqrUP8ARzLeMmRgT6c8R0M9cEusT\nQ7UvpV2eya3TM5kIem9R2s5dqmotL4x3l3Si/DQcd2nh/6HkgxXGtVHAky9NvevX\nUmLzdxnVjaG5PEKrNwBNvccAjUZl4/ZGv0ixiiiqnhjhKSVqR5QGq5jRYAcHNZjL\nTNbNktJ62LYZ5Q6kSu+gCtEP+zXUQgBcGbgCMi2/WRk3pDLEgWqCrLZf45O4dROF\n/5StxsgiAfGptOXtSjeP+hWyRa8ZBUsR5V3n3Jd35lovp1fov0N2v2CrQ004r/Gu\nANv5Isy6ARihXRq7BtFXas7NuCcXpQzc+yCGDznFiS6mR6J46e7jGG4FrL6OkUP2\neDWf6Te+k6GjwJySTaT2UpFFSfwCespY96Y/cc87yHwvcDZpB8RwTRx/tHdOUMQt\nFGTNO4hFnauNMYH7C4a93Wyu8Bas2kDtNrmaeFPHhVi1LYnJMlWNcD39Kq7iiIAR\nVlyX92iieqypYS+SrbbPao9T7fRLoq1B/MTc0vtZHfz4Ge+vmnQ\u003d\n\u003dVhqh\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f8c0af_a750ad2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-14T17:25:37Z",
+      "side": 1,
+      "message": "Should fix error in recovery log and not require being added to device tree.",
+      "revId": "692a9e14d88fba806605e5c171837590fc35da52",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
