@@ -754,10 +754,9 @@ bool TWPartition::Decrypt_FBE_DE() {
 	ExcludeAll(Mount_Point + "/misc/keystore");
 	ExcludeAll(Mount_Point + "/drm/kek.dat");
 	ExcludeAll(Mount_Point + "/system_de/0/spblob");  // contains data needed to decrypt synthetic password
-	// ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
-	// ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
+	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.password.key");
+	ExcludeAll(Mount_Point + "/system/users/0/gatekeeper.pattern.key");
 	ExcludeAll(Mount_Point + "/cache");
-	ExcludeAll(Mount_Point + "/system/users/0");
 	ExcludeAll(Mount_Point + "/per_boot"); // removed each boot by init
 	ExcludeAll(Mount_Point + "/gsi"); // cow devices
 
