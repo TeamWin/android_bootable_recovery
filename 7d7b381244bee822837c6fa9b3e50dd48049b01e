@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4933b2_adb644a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-15T11:45:12Z",
+      "side": 1,
+      "message": "Pixel 5 works fine with this patchset after a restore.",
+      "parentUuid": "22438037_3b7dcb1a",
+      "revId": "7d7b381244bee822837c6fa9b3e50dd48049b01e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc5c59ea_72ca9d63",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-14T23:34:50Z",
       "side": 1,
       "message": "Please remove this sinces it\u0027s unneeded.",
+      "revId": "7d7b381244bee822837c6fa9b3e50dd48049b01e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f4ebeed_aad5da0d",
+        "filename": "partition.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-15T11:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc5c59ea_72ca9d63",
       "revId": "7d7b381244bee822837c6fa9b3e50dd48049b01e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
