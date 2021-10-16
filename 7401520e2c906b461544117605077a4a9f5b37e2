@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9412ff5c_916c196e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 739
+      },
+      "writtenOn": "2021-10-16T14:05:26Z",
+      "side": 1,
+      "message": "working on OP8 too, just tested restoring data. the issue that device only works ok and \"assume\" the data after a reboot still persist.",
+      "revId": "7401520e2c906b461544117605077a4a9f5b37e2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
