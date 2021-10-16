@@ -900,6 +900,7 @@ void DataManager::SetDefaultValues()
 	mConst.SetValue("tw_has_mtp", "1");
 	mPersist.SetValue("tw_mtp_enabled", "1");
 	mPersist.SetValue("tw_mtp_debug", "0");
+	mData.SetValue("tw_mtp_base_path_missing", "0");
 #else
 	LOGINFO("TW_EXCLUDE_MTP := true\n");
 	mConst.SetValue("tw_has_mtp", "0");

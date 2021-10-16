@@ -2795,6 +2795,7 @@
 				<conditions>
 					<condition var1="tw_has_mtp" var2="1"/>
 					<condition var1="tw_mtp_enabled" var2="0"/>
+					<condition var1="tw_mtp_base_path_missing" op="!=" var2="1"/>
 				</conditions>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@enable_mtp_btn=Enable MTP}</text>
@@ -2805,6 +2806,7 @@
 				<conditions>
 					<condition var1="tw_has_mtp" var2="1"/>
 					<condition var1="tw_mtp_enabled" var2="1"/>
+					<condition var1="tw_mtp_base_path_missing" op="!=" var2="1"/>
 				</conditions>
 				<placement x="%center_x%" y="%row21a_y%"/>
 				<text>{@disable_mtp_btn=Disable MTP}</text>
