@@ -2583,6 +2583,7 @@ bool TWPartitionManager::Enable_MTP(void) {
 #ifdef TW_HAS_MTP
     string mtp_base_path = "/data/media";
     if (!TWFunc::Path_Exists(mtp_base_path)) {
+		DataManager::SetValue("tw_mtp_base_path_missing", 1);
 		gui_msg(Msg(msg::kWarning, "mtp_base_path_missing=Media storage not found. Unable to enable MTP."));
 		return false;
 	}
