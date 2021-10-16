@@ -2581,12 +2581,6 @@ TWPartition *TWPartitionManager::Get_Default_Storage_Partition()
 
 bool TWPartitionManager::Enable_MTP(void) {
 #ifdef TW_HAS_MTP
-    string mtp_base_path = "/data/media";
-    if (!TWFunc::Path_Exists(mtp_base_path)) {
-		gui_msg(Msg(msg::kWarning, "mtp_base_path_missing=Media storage not found. Unable to enable MTP."));
-		return false;
-	}
-
 	if (mtppid) {
 		gui_err("mtp_already_enabled=MTP already enabled");
 		return true;
