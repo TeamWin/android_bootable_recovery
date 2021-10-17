@@ -16,6 +16,23 @@
       "message": "Need this for I001D",
       "revId": "f9686982d620297fa5ee3d958aa4a29f5f4febbd",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f008e714_b1e55040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-17T22:02:32Z",
+      "side": 1,
+      "message": "Works for me",
+      "revId": "f9686982d620297fa5ee3d958aa4a29f5f4febbd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
