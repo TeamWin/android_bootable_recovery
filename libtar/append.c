@@ -172,6 +172,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 				|| strncmp((char *) tar_policy, SYSTEM_DE_FSCRYPT_POLICY, sizeof(SYSTEM_DE_FSCRYPT_POLICY)) == 0) {
 #ifdef USE_FSCRYPT_POLICY_V1
 					memcpy(t->th_buf.fep->master_key_descriptor, tar_policy, FS_KEY_DESCRIPTOR_SIZE);
+					printf("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_descriptor, policy_hex);
 #else
 					memcpy(t->th_buf.fep->master_key_identifier, tar_policy, FSCRYPT_KEY_IDENTIFIER_SIZE);
 					printf("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_identifier, policy_hex);
