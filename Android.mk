@@ -129,7 +129,7 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/minuitwrp/include \
     $(LOCAL_PATH)/twinstall/include
 
-LOCAL_STATIC_LIBRARIES += libguitwrp
+LOCAL_STATIC_LIBRARIES += libguitwrp libmodprobe
 LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
 LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase 
 LOCAL_SHARED_LIBRARIES += libziparchive libselinux libdl_android.bootstrap
@@ -158,8 +158,6 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     LOCAL_CFLAGS += -DPRODUCT_USE_DYNAMIC_PARTITIONS=1
     TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-impl.recovery android.hardware.health@2.1-service.rc android.hardware.health@2.1.xml
     TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc
-    TWRP_REQUIRED_MODULES += libmodprobe
-    LOCAL_STATIC_LIBRARIES += libmodprobe
     ifeq ($(TW_EXCLUDE_LPDUMP),)
         TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
     endif
@@ -429,7 +427,8 @@ TWRP_REQUIRED_MODULES += \
     me.twrp.twrpapp.apk \
     privapp-permissions-twrpapp.xml \
     adbd_system_api_recovery \
-    libsync.recovery
+    libsync.recovery \
+    libmodprobe
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \
