@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <filesystem>
+#include <regex>
 #include <sstream>
 
 #include <sys/types.h>

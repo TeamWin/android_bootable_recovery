@@ -12,12 +12,12 @@ bool twrpApex::loadApexImages() {
 	char* additionalApexFiles = std::strtok(additionalFiles, " ");
 #endif
 
-	apexFiles.push_back(APEX_DIR "/com.android.apex.cts.shim.apex");
-	apexFiles.push_back(APEX_DIR "/com.google.android.tzdata2.apex");
-	apexFiles.push_back(APEX_DIR "/com.android.tzdata.apex");
-	apexFiles.push_back(APEX_DIR "/com.android.art.release.apex");
-	apexFiles.push_back(APEX_DIR "/com.google.android.media.swcodec.apex");
-	apexFiles.push_back(APEX_DIR "/com.android.media.swcodec.apex");
+	apexFiles.push_back(APEX_DIR "/com.android.apex.cts.shim");
+	apexFiles.push_back(APEX_DIR "/com.google.android.tzdata2");
+	apexFiles.push_back(APEX_DIR "/com.android.tzdata");
+	apexFiles.push_back(APEX_DIR "/com.android.art");
+	apexFiles.push_back(APEX_DIR "/com.google.android.media.swcodec");
+	apexFiles.push_back(APEX_DIR "/com.android.media.swcodec");
 
 #ifdef TW_ADDITIONAL_APEX_FILES
 	while(additionalApexFiles) {
@@ -169,7 +169,10 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 	close(loop_fd);
 
 	std::string bind_mount(APEX_BASE);
-	bind_mount = bind_mount + basename(fileToMount.c_str());
+	std::string apex_cleaned_mount = fileToMount;
+	apex_cleaned_mount = std::regex_replace(apex_cleaned_mount, std::regex("\\.apex"), "");
+
+	bind_mount = bind_mount + basename(apex_cleaned_mount.c_str());
 
 	int ret = mkdir(bind_mount.c_str(), 0666);
 	if (ret != 0) {
