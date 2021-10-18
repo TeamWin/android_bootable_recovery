@@ -169,7 +169,12 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 	close(loop_fd);
 
 	std::string bind_mount(APEX_BASE);
-	bind_mount = bind_mount + basename(fileToMount.c_str());
+	std::string apex_cleaned_mount = fileToMount;
+	apex_cleaned_mount = std::regex_replace(apex_cleaned_mount, std::regex("\\.apex"), "");
+	apex_cleaned_mount = std::regex_replace(apex_cleaned_mount, std::regex("\\.current"), "");
+	apex_cleaned_mount = std::regex_replace(apex_cleaned_mount, std::regex("\\.release"), "");
+
+	bind_mount = bind_mount + basename(apex_cleaned_mount.c_str());
 
 	int ret = mkdir(bind_mount.c_str(), 0666);
 	if (ret != 0) {
