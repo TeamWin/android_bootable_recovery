@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "513d2c8a_2a248db9",
+        "filename": "twrp.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-18T14:11:55Z",
+      "side": 1,
+      "message": "Remove this, it\u0027s duplicated.",
+      "revId": "6d46ddb90f6c13b5d135b432ef70fdd4432e9048",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
