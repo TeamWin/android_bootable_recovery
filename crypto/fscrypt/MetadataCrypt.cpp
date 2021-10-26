@@ -174,7 +174,7 @@ static bool read_key(const std::string& metadata_key_dir, const KeyGeneration& g
             unlink(newKeyPath.c_str());
     }
     bool needs_cp = cp_needsCheckpoint();
-    if (!retrieveOrGenerateKey(dir, temp, kEmptyAuthentication, gen, key, true)) return false;
+    if (!retrieveOrGenerateKey(dir, temp, kEmptyAuthentication, gen, key, needs_cp)) return false;
     if (needs_cp && pathExists(newKeyPath)) std::thread(commit_key, dir).detach();
     return true;
 }
