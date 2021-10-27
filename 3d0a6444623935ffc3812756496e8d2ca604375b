@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1635352838 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1635352842-C3C03F026499AA81771B0110B296B05695B7D811\n\n0000000000000000000000000000000000000000 3d0a6444623935ffc3812756496e8d2ca604375b refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmF5gQYACgkQmmXNJnGK\nTp+ZpA/8CR2NpHdvByKvXOAjyNIUMO+qwo3qaRew45tnRkbkDFyvF2GkHAOsCMKS\nSvQcW1Z8tfHsU9Ofw8NF3ciQCvaTqkR+UZUljcXqcvLjWRNF9RIZrlmHtLgEMV6A\nvg5jXDRbAI4gqwqy9M/AHi3r58oRExJqkJ/xFeqmR4Q3jWY5hcn0PZPBoOKgcNWo\nSL5bU4Pfedf42rgfzwSy6XuBkdzgYyYWA9gU9qOujHMspj9qQazOMqsdcqJCBedJ\nXISgerPqpd67B1dOIEa36sOIWtuNfWPGamO3xVbBjrjvZFz7pjQBcCxcsRu6W44y\nRspcwkJmmzqiqo2x5uAVobOvSOaJpVQtjSbe1EPuVHy9hM1ELB6RI5E7yXoCW/QG\nchM6nP+Ge39jiuHeNen0/Mny/u3mFQArzEbuSowdNdqZsQKi8dWF2VGdXQqeEtuC\nkg2pBh+gXa0np+jb4sxTr1KibTbDDHcsEFeVR4tvUVdDZIz2ZCDmlqVwxFuWFoFz\nECdcqXfcoPHvMSO+cnnlux5CaCgNyXSWi9XiIHQMiIdxQdDg8jxTIcA2dgkTOJ7e\nl2pX7/ldWGIPadFKVkD2xZMDA51aIiweaQOZBGf22acgzeVKIYa3CwU4lZWnFcAs\nYwbCss/oMlBIs2fESOlkp+qUD/Rq3Pohf1tMqLBtx5+EHdaD+XE\u003d\n\u003dfLsR\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c8859e_73906bb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-27T16:41:39Z",
+      "side": 1,
+      "message": "Fixes \"Permission denied\" error trying to create backup folder on exFAT USB-OTG.",
+      "revId": "3d0a6444623935ffc3812756496e8d2ca604375b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
