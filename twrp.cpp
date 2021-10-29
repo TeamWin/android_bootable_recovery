@@ -99,6 +99,8 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 
 static void process_fastbootd_mode() {
 		LOGINFO("starting fastboot\n");
+
+#ifdef TW_LOAD_VENDOR_MODULES
 		printf("=> Linking mtab\n");
 		symlink("/proc/mounts", "/etc/mtab");
 		std::string fstab_filename = "/etc/twrp.fstab";
@@ -113,7 +115,6 @@ static void process_fastbootd_mode() {
 		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 		PartitionManager.Setup_Super_Devices();
 		PartitionManager.Prepare_Super_Volume(ven);
-#ifdef TW_LOAD_VENDOR_MODULES
 		KernelModuleLoader::Load_Vendor_Modules();
 		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
 			PartitionManager.Unmap_Super_Devices();
