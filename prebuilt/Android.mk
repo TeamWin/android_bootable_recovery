@@ -580,3 +580,13 @@ ifneq ($(TW_EXCLUDE_BASH), true)
 	include $(BUILD_PHONY_PACKAGE)
 endif
 
+ifeq ($(TW_INCLUDE_PHH_LPTOOLS), true)
+   include $(CLEAR_VARS)
+   LOCAL_MODULE := lptools_static
+   LOCAL_MODULE_STEM := lptools
+   LOCAL_MODULE_TAGS := optional
+   LOCAL_MODULE_CLASS := ETC
+   LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
+   LOCAL_SRC_FILES := $(LOCAL_MODULE)
+   include $(BUILD_PREBUILT)
+endif
