@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d41eea_a291d2de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 651
+      },
+      "writtenOn": "2021-10-29T07:50:28Z",
+      "side": 1,
+      "message": "Fixes fastbootd for me, but my device doesn\u0027t use module loading",
+      "revId": "6da1e723e2724246f70c6b7f6360e6f718d83782",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
