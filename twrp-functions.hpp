@@ -117,6 +117,7 @@ public:
 	static bool Is_TWRP_App_In_System(); // Check if the TWRP app is installed in the system partition
 	static void checkforapp();
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
+	static bool CheckWord(const std::string filename, const std::string search); // Return whether a string is in a file
 #ifdef TW_INCLUDE_CRYPTO
 #ifdef USE_FSCRYPT_POLICY_V1
 	static bool Get_Encryption_Policy(struct fscrypt_policy_v1 &policy, std::string path); // return encryption policy for path

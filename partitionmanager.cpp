@@ -2982,6 +2982,18 @@ bool TWPartitionManager::Decrypt_Adopted() {
 		LOGERR("Cannot decrypt adopted storage because /data will not mount\n");
 		return false;
 	}
+
+  	// check for Android 12 and binary storage.xml
+  	string path = "/data/system/storage.xml";
+  	if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path)) {
+      		bool isText = TWFunc::CheckWord(path, "<?xml version=") && TWFunc::CheckWord(path, "?>") && (TWFunc::CheckWord(path, "userFlags=") || TWFunc::CheckWord(path, "createdMillis=") || TWFunc::CheckWord(path, "lastSeenMillis="));
+      		if (!isText) {
+         		LOGINFO("Android 12+: storage.xml is not plain text. Skipping adopted storage decryption\n");
+         		return false;
+      		}
+  	}
+  	// we can proceed
+
 	LOGINFO("Decrypt adopted storage starting\n");
 	char* xmlFile = PageManager::LoadFileToBuffer("/data/system/storage.xml", NULL);
 	xml_document<> *doc = NULL;
