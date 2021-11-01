@@ -1505,4 +1505,22 @@ string TWFunc::Check_For_TwrpFolder(){
 exit:
 	return TW_DEFAULT_RECOVERY_FOLDER;
 }
+
+bool TWFunc::CheckWord(const std::string filename, const std::string search) {
+	std::string line;
+	ifstream File;
+	File.open(filename);
+	if (File.is_open()) {
+		while (!File.eof()) {
+			std::getline(File, line);
+			if (line.find(search) != string::npos) {
+				File.close();
+				return true;
+			}
+		}
+		File.close();
+	}
+	return false;
+}
+
 #endif // ndef BUILD_TWRPTAR_MAIN

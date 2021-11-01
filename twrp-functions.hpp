@@ -123,6 +123,7 @@ public:
 	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
 	static string Check_For_TwrpFolder();
+	static bool CheckWord(const std::string filename, const std::string search); // Return whether a string is in a file
 
 private:
 	static void Copy_Log(string Source, string Destination);
