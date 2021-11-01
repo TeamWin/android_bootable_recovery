@@ -160,7 +160,9 @@ enum TW_FSTAB_FLAGS {
 	TWFLAG_RESIZE,
 	TWFLAG_KEYDIRECTORY,
 	TWFLAG_WRAPPEDKEY,
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	TWFLAG_ADOPTED_MOUNT_DELAY,
+#endif
 	TWFLAG_DM_USE_ORIGINAL_PATH,
 	TWFLAG_LOGICAL,
 };
@@ -207,7 +209,9 @@ const struct flag_list tw_flags[] = {
 	{ "resize",                 TWFLAG_RESIZE },
 	{ "keydirectory=",          TWFLAG_KEYDIRECTORY },
 	{ "wrappedkey",             TWFLAG_WRAPPEDKEY },
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	{ "adopted_mount_delay=",   TWFLAG_ADOPTED_MOUNT_DELAY },
+#endif
 	{ "dm_use_original_path",   TWFLAG_DM_USE_ORIGINAL_PATH },
 	{ "logical",                TWFLAG_LOGICAL },
 	{ 0,                        0 },
@@ -269,12 +273,14 @@ TWPartition::TWPartition() {
 	MTP_Storage_ID = 0;
 	Can_Flash_Img = false;
 	Mount_Read_Only = false;
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	Is_Adopted_Storage = false;
 	Adopted_GUID = "";
+	Adopted_Mount_Delay = 0;
+#endif
 	SlotSelect = false;
 	Key_Directory = "";
 	Is_Super = false;
-	Adopted_Mount_Delay = 0;
 	Original_Path = "";
 	Use_Original_Path = false;
 }
@@ -996,9 +1002,11 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 		case TWFLAG_ALTDEVICE:
 			Alternate_Block_Device = str;
 			break;
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		case TWFLAG_ADOPTED_MOUNT_DELAY:
 			Adopted_Mount_Delay = atoi(str);
 			break;
+#endif
 		case TWFLAG_KEYDIRECTORY:
 			Key_Directory = str;
 			LOGINFO("setting Key_Directory to: %s\n", Key_Directory.c_str());
@@ -1207,7 +1215,9 @@ void TWPartition::Setup_Data_Media() {
 		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
 		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys");
 		backup_exclusions.add_absolute_dir("/data/cache");
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
+#endif
 		ExcludeAll(Mount_Point + "/system/storage.xml");
 	} else {
 		int i;
@@ -3048,7 +3058,11 @@ void TWPartition::Find_Actual_Block_Device(void) {
 		Is_Present = false;
 		return;
 	}
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	if (Wildcard_Block_Device && !Is_Adopted_Storage) {
+#else
+	if (Wildcard_Block_Device) {
+#endif
 		Is_Present = false;
 		Actual_Block_Device = "";
 		Can_Be_Mounted = false;
@@ -3290,6 +3304,7 @@ int TWPartition::Check_Lifetime_Writes() {
 	return ret;
 }
 
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 int TWPartition::Decrypt_Adopted() {
 #ifdef TW_INCLUDE_CRYPTO
 	int ret = 1;
@@ -3451,6 +3466,7 @@ void TWPartition::Revert_Adopted() {
 	LOGINFO("Revert_Adopted: no crypto support\n");
 #endif
 }
+#endif
 
 void TWPartition::Set_Backup_FileName(string fname) {
 	Backup_FileName = fname;

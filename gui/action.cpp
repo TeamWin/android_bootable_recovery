@@ -1549,7 +1549,9 @@ int GUIAction::decrypt(std::string arg __unused)
 					LOGINFO("Got default contexts and file mode for storage files.\n");
 				}
 			}
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 			PartitionManager.Decrypt_Adopted();
+#endif
 		}
 	}
 

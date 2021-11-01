@@ -25,6 +25,7 @@ cc_library_static {
         "-fno-strict-aliasing", 
         "-Wno-implicit-fallthrough",
         "-D_USE_SYSTEM_ZIPARCHIVE",
+        "-DTW_EXCLUDE_ADOPTABLE_STORAGE",
         "-DTWRES=\"/twres/\""
     ],
     include_dirs: [
