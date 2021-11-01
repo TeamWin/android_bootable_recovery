@@ -106,6 +106,9 @@ endif
 ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
 endif
+ifeq ($(TW_EXCLUDE_ADOPTABLE_STORAGE),true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_ADOPTABLE_STORAGE
+endif
 
 LOCAL_C_INCLUDES += \
     bionic \

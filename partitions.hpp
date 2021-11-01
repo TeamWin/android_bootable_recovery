@@ -157,8 +157,10 @@ public:
 	void Change_Mount_Read_Only(bool new_value);                              // Changes Mount_Read_Only to new_value
 	bool Is_Read_Only();                                                      // Check if system is read-only in TWRP
 	int Check_Lifetime_Writes();
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	int Decrypt_Adopted();
 	void Revert_Adopted();
+#endif
 	void Partition_Post_Processing(bool Display_Error);                       // Apply partition specific settings after fstab processed
 	void Set_Backup_FileName(string fname);                                   // Set Backup_FileName for partition
 	string Get_Backup_Name();                                                 // Get Backup_Name for partition
@@ -172,8 +174,10 @@ public:
 	bool Is_Present;                                                          // Indicates if the partition is currently present as a block device
 	string Crypto_Key_Location;                                               // Location of the crypto key used for decrypting encrypted data partitions
 	unsigned int MTP_Storage_ID;
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	string Adopted_GUID;
 	unsigned int Adopted_Mount_Delay;
+#endif
 
 protected:
 	bool Has_Data_Media;                                                      // Indicates presence of /data/media, may affect wiping and backup methods
@@ -279,8 +283,11 @@ private:
 	bool Ignore_Blkid;                                                        // Ignore blkid results due to superblocks lying to us on certain devices / partitions
 	bool Retain_Layout_Version;                                               // Retains the .layout_version file during a wipe (needed on devices like Sony Xperia T where /data and /data/media are separate partitions)
 	bool Can_Flash_Img;                                                       // Indicates if this partition can have images flashed to it via the GUI
-	bool Mount_Read_Only;                                                     // Only mount this partition as read-only
+	bool Mount_Read_Only;   
+                                                  // Only mount this partition as read-only
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	bool Is_Adopted_Storage;                                                  // Indicates that this partition is for adopted storage (android_expand)
+#endif
 	bool SlotSelect;                                                          // Partition has A/B slots
 	TWExclude backup_exclusions;                                              // Exclusions for file based backups
 	TWExclude wipe_exclusions;                                                // Exclusions for file based wipes (data/media devices only)
@@ -372,7 +379,9 @@ public:
 	void Translate_Partition(const char* path, const char* resource_name, const char* default_value, const char* storage_resource_name, const char* storage_default_value);
 	void Translate_Partition(const char* path, const char* resource_name, const char* default_value, const char* storage_resource_name, const char* storage_default_value, const char* backup_name, const char* backup_default);
 	void Translate_Partition_Display_Names();                                 // Updates display names based on translations
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	bool Decrypt_Adopted();                                                   // Attempt to identy and decrypt any adopted storage partitions
+#endif
 	void Remove_Partition_By_Path(string Path);                               // Removes / erases a partition entry from the partition list
 
 	bool Flash_Image(string& path, string& filename);                         // Flashes an image to a selected partition from the partition list

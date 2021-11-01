@@ -239,6 +239,10 @@ ifeq ($(TW_EXCLUDE_MTP),)
 endif
 endif
 
+ifeq ($(TW_EXCLUDE_ADOPTABLE_STORAGE),true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_ADOPTABLE_STORAGE
+endif
+
 #TWRP Build Flags
 ifeq ($(TW_EXCLUDE_MTP),)
     LOCAL_CFLAGS += -DTW_HAS_MTP

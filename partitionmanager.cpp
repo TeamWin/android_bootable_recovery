@@ -364,10 +364,12 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 			}
 		}
 	}
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted) &&
 	Decrypt_Data->Mount(false)) {
 		Decrypt_Adopted();
 	}
+#endif
 #endif
 	Update_System_Details();
 	UnMount_Main_Partitions();
@@ -481,8 +483,10 @@ void TWPartitionManager::Output_Partition(TWPartition* Part) {
 		printf("Mount_To_Decrypt ");
 	if (Part->Can_Flash_Img)
 		printf("Can_Flash_Img ");
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	if (Part->Is_Adopted_Storage)
 		printf("Is_Adopted_Storage ");
+#endif
 	if (Part->SlotSelect)
 		printf("SlotSelect ");
 	if (Part->Mount_Read_Only)
@@ -2117,8 +2121,10 @@ int TWPartitionManager::Partition_SDCard(void) {
 	// Locate and validate device to partition
 	TWPartition* SDCard = Find_Partition_By_Path(DataManager::GetCurrentStoragePath());
 
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 	if (SDCard->Is_Adopted_Storage)
 		SDCard->Revert_Adopted();
+#endif
 
 	if (SDCard == NULL || !SDCard->Removable || SDCard->Has_Data_Media) {
 		gui_err("partition_sd_locate=Unable to locate device to partition.");
@@ -2777,46 +2783,58 @@ bool TWPartitionManager::Flash_Image(string& path, string& filename) {
 void TWPartitionManager::Translate_Partition(const char* path, const char* resource_name, const char* default_value) {
 	TWPartition* part = PartitionManager.Find_Partition_By_Path(path);
 	if (part) {
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		if (part->Is_Adopted_Storage) {
 			part->Display_Name = part->Display_Name + " - " + gui_lookup("data", "Data");
 			part->Backup_Display_Name = part->Display_Name;
 			part->Storage_Name = part->Storage_Name + " - " + gui_lookup("adopted_storage", "Adopted Storage");
 		} else {
+#endif
 			part->Display_Name = gui_lookup(resource_name, default_value);
 			part->Backup_Display_Name = part->Display_Name;
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		}
+#endif
 	}
 }
 
 void TWPartitionManager::Translate_Partition(const char* path, const char* resource_name, const char* default_value, const char* storage_resource_name, const char* storage_default_value) {
 	TWPartition* part = PartitionManager.Find_Partition_By_Path(path);
 	if (part) {
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		if (part->Is_Adopted_Storage) {
 			part->Backup_Display_Name = part->Display_Name + " - " + gui_lookup("data_backup", "Data (excl. storage)");
 			part->Display_Name = part->Display_Name + " - " + gui_lookup("data", "Data");
 			part->Storage_Name = part->Storage_Name + " - " + gui_lookup("adopted_storage", "Adopted Storage");
 		} else {
+#endif
 			part->Display_Name = gui_lookup(resource_name, default_value);
 			part->Backup_Display_Name = part->Display_Name;
 			if (part->Is_Storage)
 				part->Storage_Name = gui_lookup(storage_resource_name, storage_default_value);
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		}
+#endif
 	}
 }
 
 void TWPartitionManager::Translate_Partition(const char* path, const char* resource_name, const char* default_value, const char* storage_resource_name, const char* storage_default_value, const char* backup_name, const char* backup_default) {
 	TWPartition* part = PartitionManager.Find_Partition_By_Path(path);
 	if (part) {
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		if (part->Is_Adopted_Storage) {
 			part->Backup_Display_Name = part->Display_Name + " - " + gui_lookup(backup_name, backup_default);
 			part->Display_Name = part->Display_Name + " - " + gui_lookup("data", "Data");
 			part->Storage_Name = part->Storage_Name + " - " + gui_lookup("adopted_storage", "Adopted Storage");
 		} else {
+#endif
 			part->Display_Name = gui_lookup(resource_name, default_value);
 			part->Backup_Display_Name = gui_lookup(backup_name, backup_default);
 			if (part->Is_Storage)
 				part->Storage_Name = gui_lookup(storage_resource_name, storage_default_value);
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 		}
+#endif
 	}
 }
 
@@ -2859,6 +2877,7 @@ void TWPartitionManager::Translate_Partition_Display_Names() {
 	DataManager::SetBackupFolder();
 }
 
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 bool TWPartitionManager::Decrypt_Adopted() {
 #ifdef TW_INCLUDE_CRYPTO
 	bool ret = false;
@@ -2957,6 +2976,7 @@ bool TWPartitionManager::Decrypt_Adopted() {
 	return false;
 #endif
 }
+#endif
 
 void TWPartitionManager::Remove_Partition_By_Path(string Path) {
 	std::vector<TWPartition*>::iterator iter;
@@ -3056,10 +3076,14 @@ void TWPartitionManager::Handle_Uevent(const Uevent_Block_Data& uevent_data) {
 					(*iter)->Alternate_Block_Device = (*iter)->Primary_Block_Device;
 					(*iter)->Is_Present = true;
 					LOGINFO("Found a match '%s' '%s'\n", uevent_data.block_device.c_str(), device.c_str());
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 					if (!Decrypt_Adopted()) {
 						LOGINFO("No adopted storage so finding actual block device\n");
+#endif
 						(*iter)->Find_Actual_Block_Device();
+#ifndef TW_EXCLUDE_ADOPTABLE_STORAGE
 					}
+#endif
 					return;
 				} else if (uevent_data.action == "remove") {
 					(*iter)->Is_Present = false;
