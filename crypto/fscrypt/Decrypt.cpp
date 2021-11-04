@@ -1080,15 +1080,21 @@ int Get_Password_Type(const userid_t user_id, std::string& filename) {
 			printf("Failed to Get_Password_Data\n");
 			return 0;
 		}
-		if (pwd.password_type == 1) { // In Android this means pattern
+		// In Android type 1 is pattern
+		// In Android <11 type 2 is PIN or password
+		// In Android 11+ type 3 is PIN and type 4 is password
+		if (pwd.password_type == 2) {
+			printf("password type: password/PIN\n");
+			return 1; // In TWRP this means password or PIN (Android <11)
+		} else if (pwd.password_type == 4) {
+			printf("password type: password\n");
+			return 1; // In TWRP this means password
+		} else if (pwd.password_type == 1) {
 			printf("password type: pattern\n");
 			return 2; // In TWRP this means pattern
-		}
-                // In Android <11 type 2 is PIN or password
-                // In Android 11 type 3 is PIN and type 4 is password
-		else if (pwd.password_type > 1) {
-			printf("password type: pin\n");
-			return 1; // In TWRP this means PIN or password
+		} else if (pwd.password_type == 3) {
+			printf("password type: PIN\n");
+			return 3; // In TWRP this means PIN
 		}
 		printf("using default password\n");
 		return 0; // We'll try the default password
