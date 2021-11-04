@@ -782,5 +782,9 @@
 		<string name="merge_snapshots_confirm">Merge Snapshots?</string>
 		<string name="merging_snapshots">Merging Snapshots...</string>
 		<string name="merging_snapshots_complete">Merged Snapshots</string>
+		<string name="restore_pin">Restore While PIN Enabled?</string>
+		<string name="continue_pin_encrypted">Continue Restore With Pin?</string>
+		<string name="restore_with_pin1">PIN is enabled</string>
+		<string name="restore_with_pin2">PIN should be disabled before restore</string>
 	</resources>
 </language>
