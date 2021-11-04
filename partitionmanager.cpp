@@ -1269,6 +1269,9 @@ int TWPartitionManager::Run_Restore(const string& Restore_Name) {
 	UnMount_Main_Partitions();
 	time(&rStop);
 	gui_msg(Msg(msg::kHighlight, "restore_completed=[RESTORE COMPLETED IN {1} SECONDS]")((int)difftime(rStop,rStart)));
+	TWPartition* Decrypt_Data = Find_Partition_By_Path("/data");
+	if (Decrypt_Data && Decrypt_Data->Is_Encrypted)
+		gui_msg(Msg(msg::kWarning, "reboot_after_restore=It is recommended to reboot Android once after first boot."));
 	DataManager::SetValue("tw_file_progress", "");
 
 	return true;
