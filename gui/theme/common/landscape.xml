@@ -2196,6 +2196,83 @@
 					<action function="overlay">select_storage</action>
 				</actions>
 			</button>
+			<action>
+				<condition var1="tw_crypto_pwtype" op="!=" var2="0"/>
+				<actions>
+					<action function="page">restore_pin</action>
+				</actions>
+			</action>
+
+			<action>
+				<condition var1="tw_restore" op="modified"/>
+				<actions>
+					<action function="readBackup"/>
+					<action function="page">restore_read</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">main</action>
+			</action>
+		</page>
+
+
+		<page name="restore_force">
+			<template name="page"/>
+
+			<action>
+				<conditions>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_multiuser_warning_destination=restore</action>
+					<action function="page">multiuser_warning</action>
+				</actions>
+			</action>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@restore_hdr=Restore}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@restore_sel_store_hdr=Select Backup from %tw_storage_display_name% (%tw_storage_free_size% MB)}</text>
+			</text>
+
+			<template name="sort_options"/>
+
+			<fileselector>
+				<placement x="%col1_x_left%" y="%row1a_y%" w="%content_quarter_width%" h="%fileselector_install_height%"/>
+				<text>{@restore_sel_pack_fs=Select Package to Restore:}</text>
+				<filter folders="1" files="1" nav="0" extn=".ab"/>
+				<path name="tw_backups_folder"/>
+				<data name="tw_restore" default=""/>
+				<selection name="tw_restore_name"/>
+			</fileselector>
+
+			<button style="main_button_half_width_low">
+				<placement x="%col_button_right%" y="%row16a_y%"/>
+				<text>{@select_storage_btn=Select Storage}</text>
+				<actions>
+					<action function="set">tw_back=restore</action>
+					<action function="overlay">select_storage</action>
+				</actions>
+			</button>
+			<action>
+				<condition var1="tw_crypto_pwtype" op="!=" var2="0"/>
+				<actions>
+					<action function="page">restore_pin</action>
+				</actions>
+			</action>
 
 			<action>
 				<condition var1="tw_restore" op="modified"/>
@@ -6045,6 +6122,64 @@ edi				<conditions>
 				<touch key="back"/>
 				<actions>
 					<action function="page">advanced</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="restore_pin">
+			<template name="page"/>
+
+			<text style="text_m_accent">
+				<condition var1="tw_crypto_pwtype" var2="1"/>
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@restore_with_pin1=PIN/Password is enabled}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<condition var1="tw_crypto_pwtype" var2="1"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@restore_with_pin2=PIN/Password should be disabled before restore}</text>
+			</text>
+			<text style="text_l">
+				<condition var1="tw_crypto_pwtype" var2="1"/>
+				<placement x="%center_x%" y="%row2_y%" placement="5"/>
+				<text>{@restore_pin=Restore While PIN/Password Enabled?}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<condition var1="tw_crypto_pwtype" var2="2"/>
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@restore_with_pattern1=Pattern is enabled}</text>
+			</text>
+
+			<text style="text_m_accent">
+				<condition var1="tw_crypto_pwtype" var2="2"/>
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text>{@restore_with_pattern2=Pattern should be disabled before restore}</text>
+			</text>
+
+			<text style="text_l">
+				<condition var1="tw_crypto_pwtype" var2="2"/>
+				<placement x="%center_x%" y="%row2_y%" placement="5"/>
+				<text>{@restore_pattern=Restore While Pattern Enabled?}</text>
+			</text>
+
+			<slider>
+				<text>{@continue_restore_encrypted=Continue Restore?}</text>
+				<actions>
+					<action function="page">restore_force</action>
+				</actions>
+			</slider>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">main</action>
 				</actions>
 			</action>
 		</page>
