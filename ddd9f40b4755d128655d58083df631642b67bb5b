@@ -17,6 +17,23 @@
       "message": "Seems PIN isn\u0027t decrypting using this keyboard, for unknown reason.",
       "revId": "ddd9f40b4755d128655d58083df631642b67bb5b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea8f017_1dff408a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-06T18:41:59Z",
+      "side": 1,
+      "message": "User error. There was an issue in my device tree. This patch is working fine, but it requires the canceldecrypt patch to function correctly",
+      "revId": "ddd9f40b4755d128655d58083df631642b67bb5b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
