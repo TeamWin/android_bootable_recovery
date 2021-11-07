@@ -129,6 +129,7 @@ public:
 	static void List_Mounts(); // List current mounts by the kernel
 	static void Clear_Bootloader_Message(); // Removes the bootloader message from misc for next boot
 	static string Check_For_TwrpFolder(); // Gets user defined path on storage where backups should be stored
+	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
 
 private:
 	static void Copy_Log(string Source, string Destination);
