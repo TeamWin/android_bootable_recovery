@@ -62,6 +62,8 @@ static constexpr size_t STRETCHED_BYTES = 1 << 6;
 
 static constexpr uint32_t AUTH_TIMEOUT = 30;  // Seconds
 
+static const std::string kPkmBlob("pKMblob\x00", 8);
+
 static const char* kCurrentVersion = "1";
 static const char* kRmPath = "/system/bin/rm";
 static const char* kSecdiscardPath = "/system/bin/secdiscard";
@@ -247,6 +249,10 @@ static KeymasterOperation begin(Keymaster& keymaster, const std::string& dir,
     auto kmKeyPath = dir + "/" + kFn_keymaster_key_blob;
     std::string kmKey;
     if (!readFileToString(kmKeyPath, &kmKey)) return KeymasterOperation();
+    // In A12 keymaster_key_blob format changed:
+    // it have useless for us bytes in beginning, so remove them to correctly handle key
+    if (!kmKey.compare(0, kPkmBlob.size(), kPkmBlob))
+        kmKey.erase(0, kPkmBlob.size());
     km::AuthorizationSet inParams(keyParams);
     inParams.append(opParams.begin(), opParams.end());
     for (;;) {
@@ -590,6 +596,10 @@ bool retrieveKey(const std::string& dir, const KeyAuthentication& auth, KeyBuffe
 static bool deleteKey(const std::string& dir) {
     std::string kmKey;
     if (!readFileToString(dir + "/" + kFn_keymaster_key_blob, &kmKey)) return false;
+    // In A12 keymaster_key_blob format changed:
+    // it have useless for us bytes in beginning, so remove them to correctly handle key
+    if (!kmKey.compare(0, kPkmBlob.size(), kPkmBlob))
+        kmKey.erase(0, kPkmBlob.size());
     Keymaster keymaster;
     if (!keymaster) return false;
     if (!keymaster.deleteKey(kmKey)) return false;
