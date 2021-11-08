@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b661e8_0465d923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 691
+      },
+      "writtenOn": "2021-11-08T07:56:57Z",
+      "side": 1,
+      "message": "Bugged the OCD part of me a lot. Anyway, works fine for me.",
+      "revId": "dd81b9a8d7a338fae7fb4208f2c301a0ce966ae5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
