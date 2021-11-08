@@ -69,6 +69,24 @@
       "message": "\u003e Patch Set 2:\n\u003e \n\u003e \u003e Patch Set 2:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e It appears to have been implemented here: https://gerrit.twrp.me/#/c/4621\n\u003e \n\u003e I asked for it to be separated from the A12 decryption, as that portion of the patch doesn\u0027t seem to be working for me, and the xml portion needs to be backported.\n\nHaving the check in a function is a good idea, if that check will be used more than once. The check for the bytes at the beginning, rather than scanning for certain strings is fine if those bytes are always guaranteed to the there (which seems to be the case), but it is neither here nor there in performance terms, since the xml file itself (whether binary or human-readable) is very small (less than 512 bytes).",
       "revId": "ae38722a83a7915f6a77e360b3029dccd5fe1bab",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6803ba25_2911ecc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-08T17:05:50Z",
+      "side": 1,
+      "message": "https://gerrit.twrp.me/c/android_bootable_recovery/+/4621",
+      "parentUuid": "72a633b4_ecf2dc9a",
+      "revId": "ae38722a83a7915f6a77e360b3029dccd5fe1bab",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
