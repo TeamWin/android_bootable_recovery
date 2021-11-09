@@ -132,8 +132,11 @@ func globalFlags(ctx android.BaseContext) []string {
 	var tw_rotation = getMakeVars(ctx, "TW_ROTATION")
 	switch tw_rotation {
 	case "0":
+		fallthrough
 	case "90":
+		fallthrough
 	case "180":
+		fallthrough
 	case "270":
 		cflags = append(cflags, "-DTW_ROTATION="+tw_rotation)
 	default:
