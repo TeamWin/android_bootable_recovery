@@ -4045,7 +4045,7 @@
 		</page>
 
 		<page name="lock">
-			<background color="%semi_transparent%"/>
+			<background color="%background_color%"/>
 
 			<image>
 				<image resource="unlock_icon"/>
