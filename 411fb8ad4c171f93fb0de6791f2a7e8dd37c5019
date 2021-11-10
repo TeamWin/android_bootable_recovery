@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1636411015 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1636411015-627A20199CFE8F355F4A25579B5E4763D1838945\n\n0000000000000000000000000000000000000000 411fb8ad4c171f93fb0de6791f2a7e8dd37c5019 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmGJpocACgkQmmXNJnGK\nTp9F9w/9Hx4rvjCDygZIOlFUUv0ENxPJHAg7wCjfp1p+OWw7hsP0z6Mi8/eFb2Hy\n87qdue6a34fjtlSusa6FGGo250sbzfF3qpNuK6zvDer5azKC0mARAc5anGWCYa7O\niaiDXpQfU4PHV4aTUk/KeHtXqBhYf+WtQsruvWwCi+OINam1JEg38K8iEDneW3bq\nErIVF6ypILJU+1pokJd1A7wqVkRpbyoqSzRacNr3AcUXbCDzTSnB8cE1balQCGpt\nkkfKoyKnTkk4ZzbWD8hya/78wlJtN1FuxGDO6sFWvQqoFEntKBqrPRpfkrLqP/kg\nXA6lZnUAU5qw7Co+AKdzla20gMoadIJtAEp4aqAO3kkkj0gG2feQT9XW0yS/as/Z\nptRtS9Wg+E84mqWV2oPbWX0ATKt6oFyqPw2KUBLLmltMHTavKGrwkFs/SY97dxIE\nwuhfGSVc/Pf5ZHMIXjZTR43pwQPbB3yJmwoSrPQjZKsHkUG/Es/DrBujPkSqeqU0\nIjcAUEHD40HzA8ir3NI1AtSm53I/4GBiaqo/GkALHKs+pBJ1jwUwKoDxxVKxZgar\nkjxAutB6j+fTcUikH6Xq2yfzT9g+i+p3ukpW+zDc7pfxKFCmSabflSjasO77Ew/c\nt/8nWoeFoeOMJIq9BLg9RXb71O3mSKmYS/IWCRvkGJOGhdsNFhM\u003d\n\u003dnpuE\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9da4123d_c64f33ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-10T17:45:32Z",
+      "side": 1,
+      "message": "If this is the preferred format of the patch, I can confirm this is working on my device.",
+      "revId": "411fb8ad4c171f93fb0de6791f2a7e8dd37c5019",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
