@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35e5abe_b0ff29a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-10T22:29:58Z",
+      "side": 1,
+      "message": "I can confirm that this works when no password/PIN/pattern is set, and when PLATFORM_VERSION_LAST_STABLE is set to 127 in the device tree (at least on bonito).",
+      "revId": "55174cb849ba8862b5de09e4d8eae086fb0aa350",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
