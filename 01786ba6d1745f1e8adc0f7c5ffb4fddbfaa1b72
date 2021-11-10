@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da1e0cd_1636ebb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-10T22:28:23Z",
+      "side": 1,
+      "message": "Working now when I include TW_ROTATION in my device tree. Thanks.",
+      "revId": "01786ba6d1745f1e8adc0f7c5ffb4fddbfaa1b72",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
