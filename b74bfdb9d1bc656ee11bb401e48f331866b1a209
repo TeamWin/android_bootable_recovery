@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e635dd18_cd5137d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-10T17:43:59Z",
+      "side": 1,
+      "message": "Is this needed for any other devices? What exactly is this corruption bug?",
+      "revId": "b74bfdb9d1bc656ee11bb401e48f331866b1a209",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
