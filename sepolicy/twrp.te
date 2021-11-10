@@ -4,10 +4,10 @@ recovery_only(`
   permissive logd;
   permissive adbd;
   permissive fastbootd;
+  permissive postinstall;
   allow kernel unlabeled:file rw_file_perms;
   allow kernel tmpfs:file { read };
   allow kernel recovery:fd { use };
   allow unlabeled unlabeled:filesystem associate;
   allow vendor_init rootfs:dir read;
-  allow postinstall tmpfs:file { getattr read execute };
 ')
