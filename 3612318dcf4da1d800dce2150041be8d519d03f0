@@ -17,6 +17,23 @@
       "message": "Backported from android-11 patch. Appears to be working fine on my android-8.1 tree device running Android 12 GSI.",
       "revId": "3612318dcf4da1d800dce2150041be8d519d03f0",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3750446_7cbc5570",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-10T19:13:13Z",
+      "side": 1,
+      "message": "I think we\u0027re using this instead: https://gerrit.twrp.me/c/android_bootable_recovery/+/4625",
+      "revId": "3612318dcf4da1d800dce2150041be8d519d03f0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
