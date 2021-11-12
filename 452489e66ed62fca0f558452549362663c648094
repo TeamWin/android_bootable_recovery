@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69216539_35887563",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 651
+      },
+      "writtenOn": "2021-11-12T14:41:49Z",
+      "side": 1,
+      "message": "This patch fixes OTA installation on my realme 6 Pro with realmeUI 2.0. Most likely this patch is needed for stock roms based on ColorOS 11/12 like realmeUI 2.0/3.0 and maybe for OxygenOS 12 also (if OOS 12 based on COS 12)",
+      "revId": "452489e66ed62fca0f558452549362663c648094",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
