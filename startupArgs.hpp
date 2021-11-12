@@ -33,6 +33,7 @@
 class startupArgs {
 public:
 	static inline std::string const UPDATE_PACKAGE = "--update_package";
+	static inline std::string const SPECIAL_UPDATE_PACKAGE = "--special_update_package";
 	static inline std::string const WIPE_CACHE = "--wipe_cache";
 	static inline std::string const WIPE_DATA = "--wipe_data";
 	static inline std::string const SEND_INTENT = "--send_intent";
