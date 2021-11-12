@@ -16,6 +16,24 @@
       "message": "Is this needed in A11?",
       "revId": "6bcddf625139f0dbacc3c4ef0922b9f6ea5108bb",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64e6295_2cd271d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 651
+      },
+      "writtenOn": "2021-11-12T00:43:11Z",
+      "side": 1,
+      "message": "\u003e Is this needed in A11?\n\nYes, because realmeUI 2 is Android 11 and this patch will be useful in android-11 branch too",
+      "parentUuid": "c36f1e20_dfb2eedf",
+      "revId": "6bcddf625139f0dbacc3c4ef0922b9f6ea5108bb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

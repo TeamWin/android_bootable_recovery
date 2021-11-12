@@ -16,6 +16,24 @@
       "message": "Why not add this as an or (||) argument to the previous else if rather than duplicating the entire section?",
       "revId": "03f0a9782d88c156a901b4bcd4e1343152fb46a4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c29068_f240139e",
+        "filename": "startupArgs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 651
+      },
+      "writtenOn": "2021-11-12T00:43:11Z",
+      "side": 1,
+      "message": "Seems like it should look like this. I apologize for my illiteracy, I just don\u0027t know CC+",
+      "parentUuid": "d48e121f_fd14ac49",
+      "revId": "03f0a9782d88c156a901b4bcd4e1343152fb46a4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
