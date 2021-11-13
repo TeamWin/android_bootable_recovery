@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84aa16a6_10f791bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 651
+      },
+      "writtenOn": "2021-11-13T05:35:59Z",
+      "side": 1,
+      "message": "Now it remains to translate the lines from VAB support commit. Can anyone tell me what \"Unmap Super Devices\" means? Maybe Unmount super (dynamic) partitions?",
+      "revId": "755c4f89b19cbda5418e440f1ba34e4b8ad126f7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
