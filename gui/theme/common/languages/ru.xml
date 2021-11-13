@@ -754,6 +754,7 @@
 		<string name="flash_ab_both_slots">Прошить в оба слота</string>
 		<string name="ozip_decrypt_decryption">Начало расшифровки Ozip...</string>
 		<string name="ozip_decrypt_finish">Расшифровка Ozip завершена!</string>
+<<<<<<< HEAD   (d0b854 Add EROFS to file system check list)
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Включить ADB</string>
 		<string name="enable_fastboot">Включить Fastboot</string>
@@ -765,6 +766,9 @@
 		<string name="rescue_party2"> 2. Форматировать Data и/или</string>
 		<string name="rescue_party3"> 3. Заново установить прошивку.</string>
 		<string name="rescue_party4">Проблема: </string>
+=======
+		<string name="data_media_fbe_msg">TWRP не пересоздаёт /data/media на FBE устройствах. Пожалуйста, перезагрузитесь в систему чтобы создать /data/media</string>
+>>>>>>> CHANGE (0629b1 Update Russian language, sync with en.xml)
 		<string name="restore_system_context">Невозможно получить контекст по умолчанию для {1} -- Android может не загрузиться.</string>
 		<string name="change_twrp_folder_btn">Сменить папку TWRP</string>
 		<string name="change_twrp_folder_on_process">Смена папки TWRP</string>
