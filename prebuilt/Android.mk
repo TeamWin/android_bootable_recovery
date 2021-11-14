@@ -29,7 +29,7 @@ endif
 ifneq ($(wildcard external/unzip/Android.mk),)
 	RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/unzip
 endif
-ifneq ($(wildcard system/core/libziparchive/Android.bp),)
+ifneq ($(wildcard system/libziparchive/Android.bp),)
 	RECOVERY_BINARY_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/system/bin/unzip
 endif
 ifneq ($(wildcard external/one-true-awk/Android.bp),)
