@@ -31,7 +31,7 @@ cc_library_static {
         "bootable/recovery/crypto/scrypt/lib/util",
         "bootable/recovery/otautil/include",
         "bootable/recovery/install/include",
-        "system/core/libziparchive/include",
+        "system/libziparchive/include",
         "bootable/recovery/recovery_ui/include",
         "bootable/recovery/fuse_sideload/include",
         "bootable/recovery/gui/include",
@@ -40,7 +40,8 @@ cc_library_static {
         "bootable/recovery/libpixelflinger/include",
         "bootable/recovery/minuitwrp/include",
         "bionic",
-        "system/core/base/include",
+        "system/libbase/include",
+        "system/core/libcutils/include",
         "system/core/include",
         "external/freetype/include",
         "external/libpng"
