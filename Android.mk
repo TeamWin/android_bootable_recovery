@@ -619,7 +619,6 @@ LOCAL_STATIC_LIBRARIES := \
     libotautil \
     libvintf \
     libcrypto_utils \
-    libcrypto \
     libbase \
     libziparchive \
 
