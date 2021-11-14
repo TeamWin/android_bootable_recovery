@@ -16,6 +16,23 @@
       "message": "Binary File Clone from : http://treble.phh.me/\nSource of lptools : https://github.com/phhusson/device_phh_treble/blob/android-11.0/cmds/lptools.cc",
       "revId": "65fbbe25b81d5cecf9899061c9b811209a98182b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c840c5f_f06c0ecb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-11-14T18:23:56Z",
+      "side": 1,
+      "message": "Can we build it from src?",
+      "revId": "65fbbe25b81d5cecf9899061c9b811209a98182b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
