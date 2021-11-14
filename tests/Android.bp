@@ -168,7 +168,7 @@ cc_test {
     data: [
         "testdata/*",
         ":recovery_image",
-        ":res-testdata",
+        //":res-testdata",
     ],
 }
 
