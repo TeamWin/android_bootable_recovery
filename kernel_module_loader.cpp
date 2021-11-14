@@ -76,7 +76,6 @@ int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir, bool vendor
 		LOGINFO("mounting %s on %s\n", dest_module_dir.c_str(), module_dir.c_str());
 		if (mount(dest_module_dir.c_str(), module_dir.c_str(), "", MS_BIND, NULL) == 0) {
 			Modprobe m({module_dir}, "modules.load.twrp");
-			m.EnableVerbose(true);
 			m.LoadListedModules(false);
 			modules_loaded = m.GetModuleCount();
 			umount2(module_dir.c_str(), MNT_DETACH);
