@@ -27,17 +27,11 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DMSM_BSP")
 	}
 
-	matches, err := filepath.Glob("system/core/adf/Android.*")
-	_ = matches
-	if err == nil {
-		cflags = append(cflags, "-DHAS_ADF")
-	}
-
 	if getMakeVars(ctx, "TW_NEW_ION_HEAP") == "true" {
 		cflags = append(cflags, "-DNEW_ION_HEAP")
 	}
 
-	matches, err = filepath.Glob("external/libdrm/Android.*")
+	matches, err := filepath.Glob("external/libdrm/Android.*")
 	_ = matches
 	if err == nil {
 		cflags = append(cflags, "-DHAS_DRM")
@@ -181,13 +175,8 @@ func globalSrcs(ctx android.BaseContext) []string {
 		srcs = append(srcs, "graphics_overlay.cpp")
 	}
 
-	matches, err := filepath.Glob("system/core/adf/Android.*")
+	matches, err := filepath.Glob("external/libdrm/Android.*")
 	_ = matches
-	if err == nil {
-		srcs = append(srcs, "graphics_adf.cpp")
-	}
-
-	matches, err = filepath.Glob("external/libdrm/Android.*")
 	if err == nil {
 		srcs = append(srcs, "graphics_drm.cpp")
 	}
@@ -229,13 +218,8 @@ func globalIncludes(ctx android.BaseContext) []string {
 func globalStaticLibs(ctx android.BaseContext) []string {
 	var staticLibs []string
 
-	matches, err := filepath.Glob("system/core/adf/Android.*")
+	matches, err := filepath.Glob("external/libdrm/Android.*")
 	_ = matches
-	if err == nil {
-		staticLibs = append(staticLibs, "libadf")
-	}
-
-	matches, err = filepath.Glob("external/libdrm/Android.*")
 	if err == nil {
 		matches, err = filepath.Glob("external/libdrm/Android.common.mk")
 		if err != nil {
