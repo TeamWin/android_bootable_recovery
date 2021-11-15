@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd588ba3_b6ad6b55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-15T17:14:13Z",
+      "side": 1,
+      "message": "I just tested this, and with system mounted, nano still doesn\u0027t work properly. I believe some paths are hardcoded to system/etc, which is why I left the files there. System shouldn\u0027t be mounted when using nano in TWRP.",
+      "revId": "b339e5f381352da294a0abb6c6ebd3ece94e3125",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
