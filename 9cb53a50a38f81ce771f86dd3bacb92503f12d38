@@ -33,6 +33,23 @@
       "message": "This shouldn\u0027t hurt anything either.",
       "revId": "9cb53a50a38f81ce771f86dd3bacb92503f12d38",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5362735_101c1977",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2021-11-15T20:08:57Z",
+      "side": 1,
+      "message": "Maybe it can be improved since devices without a vendor partition, like this, will have errors.\n",
+      "revId": "9cb53a50a38f81ce771f86dd3bacb92503f12d38",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
