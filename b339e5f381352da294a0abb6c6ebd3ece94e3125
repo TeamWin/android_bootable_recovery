@@ -50,6 +50,24 @@
       "message": "This seems fine and is working for me now.",
       "revId": "b339e5f381352da294a0abb6c6ebd3ece94e3125",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe40e69_bf2095ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2021-11-15T18:17:53Z",
+      "side": 1,
+      "message": "That\u0027s nice",
+      "parentUuid": "06b1e52c_d07cd519",
+      "revId": "b339e5f381352da294a0abb6c6ebd3ece94e3125",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
