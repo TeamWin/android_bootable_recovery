@@ -1,0 +1,95 @@
+commit aa7e6532905e51e378ed495fdbf2c6d6a7feace9
+Author: LinkBoi00 <50962670+LinkBoi00@users.noreply.github.com>
+Date:   Tue Nov 16 10:06:28 2021 +0200
+
+    gui: theme: Switch to larger buttons in the reboot menu
+    
+    Since the TWRP app button is gone from the reboot menu,
+    it would make sense to switch back to the larger buttons
+    for the slots and move down the active slot information
+    to fit the screen better
+    
+    Change-Id: Iabf891da8799b063bb4902d583b67f0594b4fc19
+
+ gui/theme/common/portrait.xml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 70f75af82ea30d5925ddcede0d55110e924ac6ac
+Author: LinkBoi00 <50962670+LinkBoi00@users.noreply.github.com>
+Date:   Tue Nov 16 09:22:19 2021 +0200
+
+    gui: theme: Remove the TWRP app button from the reboot menu
+    
+    * The TWRP app button results in a big delay to open the reboot page
+    
+    Change-Id: I7390d5bff2142214dfb3e2aad821859ac03e8c2f
+
+ gui/theme/common/landscape.xml | 18 ------------------
+ gui/theme/common/portrait.xml  | 18 ------------------
+ gui/theme/common/watch.xml     |  7 -------
+ 3 files changed, 43 deletions(-)
+
+commit fe78494974fdb223860a5a0041c503cdc03eac1a
+Author: LinkBoi00 <50962670+LinkBoi00@users.noreply.github.com>
+Date:   Tue Nov 16 08:56:12 2021 +0200
+
+    action: Only unmount /vendor if it actually exists
+    
+    * Since commit 168bc4caaedfdf655a71ba24a1c5a7f2b905a122 the vendor partition gets unmounted prior to switching the slots. However, devices without a vendor partition (e.g. tissot's stock partition table) will have errors since the partition doesn't actually exist
+    * Therefore, it should be only mounted if that partition exists in the partition table
+    
+    Change-Id: Id16ab55e25d05964ca0de1bf218914d66c2b0205
+
+ gui/action.cpp | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+commit 9cb53a50a38f81ce771f86dd3bacb92503f12d38
+Author: Captain Throwback <captainthrowback@hotmail.com>
+Date:   Fri Aug 13 19:49:31 2021 +0300
+
+    action: Unmount vendor partition prior to switching slots
+    
+    On some devices, having the vendor partition mounted makes
+    /vendor unable to be remounted after slot switching is done
+    Automatically unmount vendor partition prior to switching
+    slots to ensure /vendor is mountable afterwards
+    
+    TEST: Mount vendor partition, then switch slots.
+          Vendor partition should be unmounted when
+          switching completes
+    
+    [LinkBoi00] Adapt for android-9.0
+    
+    Change-Id: Iac0a6ec0065256355778d319897f6ee10c8630df
+
+ gui/action.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit d2e0a5bd088d164b447e5040ddeaff14fcb00808
+Author: LinkBoi00 <50962670+LinkBoi00@users.noreply.github.com>
+Date:   Fri Aug 13 14:36:39 2021 +0300
+
+    prebuilt: bash: Copy bash related files to /sbin instead of /system
+    
+    * It seems that when the system partition is mounted, bash cannot access the ramdisk files it needs to
+    * This patch addresses the said issue by moving the files bash needs to /sbin
+    
+    Change-Id: I65788408b2f45b239467613a2c026f2ee410455b
+
+ prebuilt/Android.mk | 24 +++++++-----------------
+ 1 file changed, 7 insertions(+), 17 deletions(-)
+
+commit b339e5f381352da294a0abb6c6ebd3ece94e3125
+Author: LinkBoi00 <50962670+LinkBoi00@users.noreply.github.com>
+Date:   Fri Aug 13 14:01:34 2021 +0300
+
+    nano: Copy nano-related files to /sbin instead of /system
+    
+    * It seems that when the system partition is mounted, nano cannot access the ramdisk files it needs to, and therefore errors (e.g. error opening terminal: pcansi)
+    * This patch addresses the said issue by moving the files nano needs to /sbin
+    
+    Change-Id: I8a19a12a709b5ca20e449810a841ce421c038800
+
+ etc/init.recovery.nano.rc |  2 +-
+ prebuilt/Android.mk       | 15 ++++-----------
+ 2 files changed, 5 insertions(+), 12 deletions(-)
