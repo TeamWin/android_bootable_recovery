@@ -51,6 +51,24 @@
       "parentUuid": "98c55663_e974acf1",
       "revId": "c6d463f75a464ff17d87197cc6d0ac663d83c2e4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9a7ad5_2fc49902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-16T17:46:54Z",
+      "side": 1,
+      "message": "YEs, the relation chain is preserved, so that\u0027s fine. I just mistakenly thought this was making the actual reboot buttons bigger, as I noticed on my 7.1 tree device that there\u0027s a lot of empty space at the bottom of the reboot page. But then I realized that you\u0027re just changing the size of the Slot options. I think I\u0027d actually prefer bigger reboot buttons and leaving the slot buttons at the current size, tbh.",
+      "parentUuid": "f49dda4b_3640f3d4",
+      "revId": "c6d463f75a464ff17d87197cc6d0ac663d83c2e4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
