@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b281d660_670a74eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2021-11-16T08:40:20Z",
+      "side": 1,
+      "message": "Should work like the android-9.0 one",
+      "revId": "79f434efc4b00ad0dfff7f0e30ec5f22ad8a2b4c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
