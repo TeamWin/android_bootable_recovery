@@ -33,6 +33,24 @@
       "message": "Actually it occurs to me this would only affect Portrait, so disregard my previous comment.",
       "revId": "c6d463f75a464ff17d87197cc6d0ac663d83c2e4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49dda4b_3640f3d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2021-11-16T17:32:12Z",
+      "side": 1,
+      "message": "Yup. It\u0027s also meant to be picked after the previous one, not sure if there would be a better way to submit these, so they get merged in that order.",
+      "parentUuid": "98c55663_e974acf1",
+      "revId": "c6d463f75a464ff17d87197cc6d0ac663d83c2e4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
