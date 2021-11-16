@@ -1942,6 +1942,7 @@ int GUIAction::setbootslot(std::string arg)
 {
 	operation_start("Set Boot Slot");
 	if (!simulate) {
+<<<<<<< HEAD   (989dee twrp release: 3.6.0 for a11)
 		if (!PartitionManager.UnMount_By_Path("/vendor", false)) {
 			// PartitionManager failed to unmount /vendor, this should not happen,
 			// but in case it does, do a lazy unmount
@@ -1952,6 +1953,12 @@ int GUIAction::setbootslot(std::string arg)
 			PartitionManager.Set_Active_Slot(arg);
 		}
 	} else {
+=======
+		if (PartitionManager.Find_Partition_By_Path("/vendor"))
+			PartitionManager.UnMount_By_Path("/vendor",true);
+		PartitionManager.Set_Active_Slot(arg);
+	} else
+>>>>>>> CHANGE (ee353e action: Only unmount /vendor if it actually exists)
 		simulate_progress_bar();
 	}
 	operation_end(0);
