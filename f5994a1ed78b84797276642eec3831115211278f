@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d0a4e82_374de84e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2021-11-16T08:21:51Z",
+      "side": 1,
+      "message": "Resolves a comment I had made in the previous patches",
+      "revId": "f5994a1ed78b84797276642eec3831115211278f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
