@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf51c81_95ff9a1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2021-11-16T08:40:48Z",
+      "side": 1,
+      "message": "Part of https://gerrit.twrp.me/c/android_bootable_recovery/+/4715",
+      "revId": "c54a2e67defbeda8c36472be8d34ad5d2af01ca0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
