@@ -1983,14 +1983,14 @@ int GUIAction::setbootslot(std::string arg)
 {
 	operation_start("Set Boot Slot");
 	if (!simulate) {
-		PartitionManager.UnMount_By_Path("/vendor",true);
+		if (PartitionManager.Find_Partition_By_Path("/vendor"))
+			PartitionManager.UnMount_By_Path("/vendor",true);
 		PartitionManager.Set_Active_Slot(arg);
 	} else
 		simulate_progress_bar();
 	operation_end(0);
 	return 0;
 }
-
 int GUIAction::checkforapp(std::string arg __unused)
 {
 	operation_start("Check for TWRP App");
