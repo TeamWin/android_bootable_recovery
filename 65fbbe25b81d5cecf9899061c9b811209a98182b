@@ -50,6 +50,24 @@
       "message": "\u003e Patch Set 3:\n\u003e \n\u003e \u003e Patch Set 3:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e And even better if we can build it dynamic to save space\n\nI failed in my attempt earlier to build it from src ( Still Learning ). I\u0027ll try again.\nI\u0027m not sure what you mean by \"build it dynamic\".",
       "revId": "65fbbe25b81d5cecf9899061c9b811209a98182b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1317e4_9285a424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-19T02:15:16Z",
+      "side": 1,
+      "message": "See here: https://gerrit.twrp.me/c/android_bootable_recovery/+/4735",
+      "parentUuid": "b37c2673_210dfb33",
+      "revId": "65fbbe25b81d5cecf9899061c9b811209a98182b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
