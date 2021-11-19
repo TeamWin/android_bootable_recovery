@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "230f95c2_e0724f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-19T02:17:28Z",
+      "side": 1,
+      "message": "This works. I would separate the source but this makes it easier to maintain (i.e. I don\u0027t have to) as the repo is less than 4MB in size, and it can automatically sync.",
+      "revId": "f3648362d5e6bdffe4968a8e08c3ba512077d4d7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
