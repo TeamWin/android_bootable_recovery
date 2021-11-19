@@ -347,6 +347,12 @@ ifneq ($(TW_EXCLUDE_BASH), true)
     RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/bash
 endif
 
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    ifeq ($(TW_EXCLUDE_LPTOOLS),)
+        RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/lptools
+    endif
+endif
+
 include $(CLEAR_VARS)
 LOCAL_MODULE := relink_libraries
 LOCAL_MODULE_TAGS := optional
