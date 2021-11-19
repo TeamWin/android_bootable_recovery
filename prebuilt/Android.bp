@@ -1,0 +1,5 @@
+soong_namespace {
+    imports: [
+		"external/lptools",
+	],
+}
