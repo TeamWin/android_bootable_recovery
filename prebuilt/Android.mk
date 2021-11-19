@@ -279,6 +279,9 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     ifeq ($(TW_EXCLUDE_LPTOOLS),)
         RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/lptools
     endif
+    ifeq ($(TW_EXCLUDE_LPTOOLS),)
+        RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/lptools
+    endif
 endif
 
 ifneq ($(wildcard system/core/libsparse/Android.*),)
