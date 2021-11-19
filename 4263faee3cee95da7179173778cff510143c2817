@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f54d938_dab02a9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-19T15:25:41Z",
+      "side": 1,
+      "message": "Added repo to minimal manifest, so only a repo sync and the patch is needed now.",
+      "revId": "4263faee3cee95da7179173778cff510143c2817",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
