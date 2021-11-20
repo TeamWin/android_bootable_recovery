@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b5b839a_0b3b9fb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-20T00:27:48Z",
+      "side": 1,
+      "message": "Not too much updated here. So we can retain support for one more release.",
+      "revId": "a8d1ec5d872fa9aa89424e6b6d912cd91e718fec",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
