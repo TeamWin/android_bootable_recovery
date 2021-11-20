@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9EC537C841413911 1637371362 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1637371362-ED882780E7C510E6839809CE5E7AD569CB88483C\n\n0000000000000000000000000000000000000000 7ae713add967c124946829ad2f04298e09bd7b37 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEWol18TdXW9pNdPNmnsU3yEFBOREFAmGYTeIACgkQnsU3yEFB\nORF4Vg/+N+Xlxf8QVXZ6aMD2+7f3S12uVThSv0AjNZr+rkhLssC+RoUf/4RDBgF6\n7iZEfG4EHXaueTPnv7hgnPn51OtvlNsE/j+tTcGhQl11qrEx91pC65cENY/i91/B\nuDmKFRN/eII686fw+IkbA4rA3RrHOJfbxPhOnndCDWVY1ZJtheukZHnryWWEUuRX\njvqK5GmmVuhhLoXNQ/8uqiDZLZ6iZwd4Q+7XcIcJMNSeiKRS55tUABjizrCPJzaG\nz00TLIYw4pUwR9w2v0A0bq8yzl+l668dk0yQUonhz75ShicmgnKVoy7KqwNoMSy+\n4q6YdRRu7e7XEPQjpOAQIOO2JrCXCDE8JehPAfUVUSu2dCO7AOJBWe5kaNRJBj6t\nnnnMaHNGvtnWa0JDurYCdaKo4mdZ/biL4/BSltEJdOX9ix/d4fqPIojFDNxZ6jKk\nKNv1org3qktklfI48JBawiqfZC2k38BLT2djemM9q6CerTTzFPFBxiwwTc0TYq3f\nZiof/2+f0zHAPxFgZCQDgR/KoAyu8Ml2aKz6lOkquJbYr8FaUmBP9UudelXS6XZ3\nh/TXAKuwm/nGia4e9rACinL+BvDOi2R/TKzksbpDWVME/Bx86mAn4qjU7l6s9fD9\nQqrpwzkKI7Qfy46a1i4bA1INfM7JFEceWrtA2OZ+ZScd71/pO2o\u003d\n\u003d15zp\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a35597e_a2598939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-20T01:33:21Z",
+      "side": 1,
+      "message": "This one didn\u0027t error in the older trees, but did in 7.1. Confirmed the build in the older trees is still okay as well.",
+      "revId": "7ae713add967c124946829ad2f04298e09bd7b37",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
