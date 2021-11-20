@@ -100,8 +100,8 @@ bool WipeCache(const std::function<bool()>& confirm_func) {
   // ui->SetBackground(RecoveryUI::ERASING);
   // ui->SetProgressType(RecoveryUI::INDETERMINATE);
 
-  bool success = EraseVolume("/cache", ui, false);
-  ui->Print("Cache wipe %s.\n", success ? "complete" : "failed");
+  bool success = EraseVolume("/cache", nullptr, false);
+  // ui->Print("Cache wipe %s.\n", success ? "complete" : "failed");
   return success;
 }
 
