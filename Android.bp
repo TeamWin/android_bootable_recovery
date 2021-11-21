@@ -91,6 +91,7 @@ cc_library_shared {
         "install/get_args.cpp", 
         "install/install.cpp",
         "install/package.cpp",
+        "install/spl_check.cpp",
         "install/verifier.cpp",
         "install/wipe_data.cpp",
         "install/set_metadata.cpp",
@@ -120,6 +121,7 @@ cc_library_shared {
         "libhidl-gen-utils",
         "librecovery_utils",
         "libc++fs",
+        "libprotobuf-cpp-lite",
         "ota_metadata_proto_cc",
         "update_metadata-protos"
     ],
