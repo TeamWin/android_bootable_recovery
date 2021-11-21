@@ -3574,7 +3574,6 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 				LOGINFO("removing cow partition: %s\n", cow_partition.c_str());
 				destroyed = DestroyLogicalPartition(cow_partition);
 			}
-			rmdir((*iter)->Mount_Point.c_str());
 			iter = Partitions.erase(iter);
 			delete part;
 			if (!destroyed) {
