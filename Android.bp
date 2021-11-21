@@ -119,7 +119,8 @@ cc_library_shared {
         "libvintf", 
         "libhidl-gen-utils",
         "librecovery_utils",
-        "libc++fs"
+        "libc++fs",
+        "update_metadata-protos"
     ],
     required: [
         "init_recovery.rc",
