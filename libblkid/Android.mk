@@ -146,6 +146,7 @@ LOCAL_SRC_FILES = 	src/cache.c \
 			src/superblocks/drbdproxy_datalog.c \
 			src/superblocks/exfat.c \
 			src/superblocks/ext.c \
+			src/superblocks/erofs.c \
 			src/superblocks/f2fs.c \
 			src/superblocks/gfs.c \
 			src/superblocks/hfs.c \
