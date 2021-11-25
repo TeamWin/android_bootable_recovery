@@ -34,6 +34,23 @@
       "parentUuid": "7d657a97_71e6958f",
       "revId": "8a1e5cf3e5e1f1b70ef330cc732eef9ffbfdb249",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402a29db_199b80c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-11-25T15:53:43Z",
+      "side": 1,
+      "message": "OK, I guess I had it backwards. I will abandon and merge the other.",
+      "revId": "8a1e5cf3e5e1f1b70ef330cc732eef9ffbfdb249",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
