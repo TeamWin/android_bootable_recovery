@@ -16,6 +16,24 @@
       "message": "Would you be able to fix the merge conflict?",
       "revId": "8a1e5cf3e5e1f1b70ef330cc732eef9ffbfdb249",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacb4d8d_02cd7e88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 651
+      },
+      "writtenOn": "2021-11-25T15:41:00Z",
+      "side": 1,
+      "message": "But for why do we need this commit? Russian language has already been recently updated in accordance with the latest changes: https://gerrit.twrp.me/c/android_bootable_recovery/+/4670",
+      "parentUuid": "7d657a97_71e6958f",
+      "revId": "8a1e5cf3e5e1f1b70ef330cc732eef9ffbfdb249",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
