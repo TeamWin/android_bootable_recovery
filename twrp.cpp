@@ -365,6 +365,10 @@ int main(int argc, char **argv) {
 	property_set("ro.twrp.boot", "1");
 	property_set("ro.twrp.version", TW_VERSION_STR);
 
+#ifdef TARGET_OTA_ASSERT_DEVICE
+	property_set("ro.twrp.target.devices", TARGET_OTA_ASSERT_DEVICE);
+#endif
+
 	time_t StartupTime = time(NULL);
 	printf("Starting TWRP %s-%s on %s (pid %d)\n", TW_VERSION_STR, TW_GIT_REVISION, ctime(&StartupTime), getpid());
 
