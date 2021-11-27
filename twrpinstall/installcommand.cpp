@@ -133,12 +133,32 @@ static int check_newer_ab_build(ZipArchiveHandle zip)
 
     bool deviceExists = false;
 
+    // twrp.target.devices
+    bool has_target_devices = false;
+    char tw_devices[PROPERTY_VALUE_MAX * 2];
+    property_get("ro.twrp.target.devices", tw_devices, "");
+    std::vector<std::string> TWRP_devices = android::base::Split(tw_devices, ",");
+    if (strlen(tw_devices) > 1) {
+       has_target_devices = true;
+    }
+
     for(const std::string& deviceAssert : assertResults)
     {
         std::string assertName = android::base::Trim(deviceAssert);
         if ((assertName == value || assertName == propmodel || assertName == propname ) && !assertName.empty()) {
             deviceExists = true;
             break;
+        }
+        // twrp.target.devices
+        else if (has_target_devices) {
+           for(const std::string& twrpDevice_x : TWRP_devices) {
+               std::string twrpName = android::base::Trim(twrpDevice_x);
+               if (!twrpName.empty() && !assertName.empty() && assertName == twrpName) {
+            	   deviceExists = true;
+            	   printf("Package is for product %s. The selected TWRP target device is %s\n", pkg_device.c_str(), twrpName.c_str());
+            	   break;
+               }
+           }
         }
     }
 
