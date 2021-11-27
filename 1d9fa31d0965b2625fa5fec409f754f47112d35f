@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ce2e04_cba31522",
+        "filename": "twrp.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 689
+      },
+      "writtenOn": "2021-11-27T20:01:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "160f5aa4_a78f9a17",
+      "revId": "1d9fa31d0965b2625fa5fec409f754f47112d35f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f935c6e_19f665c8",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-11-27T19:51:21Z",
       "side": 1,
       "message": "Whitespace",
+      "revId": "1d9fa31d0965b2625fa5fec409f754f47112d35f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "246add11_add28757",
+        "filename": "twrpinstall/installcommand.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 689
+      },
+      "writtenOn": "2021-11-27T20:01:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f935c6e_19f665c8",
       "revId": "1d9fa31d0965b2625fa5fec409f754f47112d35f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }

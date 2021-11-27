@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b7e65f_5c02d00e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 689
+      },
+      "writtenOn": "2021-11-27T20:01:25Z",
+      "side": 1,
+      "message": "Fixed whitespace issues",
+      "revId": "5538686ee1bbbd8fefefd002e9b254469f4e0ad8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
