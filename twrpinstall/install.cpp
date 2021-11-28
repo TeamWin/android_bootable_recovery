@@ -72,7 +72,7 @@ bool ReadMetadataFromPackage(ZipArchiveHandle zip, std::map<std::string, std::st
 
   static constexpr const char* METADATA_PATH = "META-INF/com/android/metadata";
   std::string path(METADATA_PATH);
-  ZipEntry entry;
+  ZipEntry64 entry;
   if (FindEntry(zip, path, &entry) != 0) {
     LOG(ERROR) << "Failed to find " << METADATA_PATH;
     return false;
@@ -235,7 +235,7 @@ int SetUpAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, int 
   // in the zip file.
   static constexpr const char* AB_OTA_PAYLOAD_PROPERTIES = "payload_properties.txt";
   std::string property_name(AB_OTA_PAYLOAD_PROPERTIES);
-  ZipEntry properties_entry;
+  ZipEntry64 properties_entry;
   if (FindEntry(zip, property_name, &properties_entry) != 0) {
     LOG(ERROR) << "Failed to find " << AB_OTA_PAYLOAD_PROPERTIES;
     return INSTALL_CORRUPT;
@@ -251,7 +251,7 @@ int SetUpAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, int 
 
   static constexpr const char* AB_OTA_PAYLOAD = "payload.bin";
   std::string payload_name(AB_OTA_PAYLOAD);
-  ZipEntry payload_entry;
+  ZipEntry64 payload_entry;
   if (FindEntry(zip, payload_name, &payload_entry) != 0) {
     LOG(ERROR) << "Failed to find " << AB_OTA_PAYLOAD;
     return INSTALL_CORRUPT;
@@ -273,7 +273,7 @@ int SetUpNonAbUpdateCommands(const std::string& package, ZipArchiveHandle zip, i
 
   // In non-A/B updates we extract the update binary from the package.
   std::string binary_name(UPDATE_BINARY_NAME);
-  ZipEntry binary_entry;
+  ZipEntry64 binary_entry;
   if (FindEntry(zip, binary_name, &binary_entry) != 0) {
     LOG(ERROR) << "Failed to find update binary " << UPDATE_BINARY_NAME;
     return INSTALL_CORRUPT;
@@ -390,7 +390,7 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
 
   is_ab = false;
   std::string binary_name(UPDATE_BINARY_NAME);
-  ZipEntry binary_entry;
+  ZipEntry64 binary_entry;
   if (FindEntry(zip, binary_name, &binary_entry) != 0) {
     LOG(ERROR) << "Failed to find update binary " << UPDATE_BINARY_NAME;
     is_ab = true;
@@ -521,7 +521,7 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
 
 //   static constexpr const char* COMPATIBILITY_ZIP_ENTRY = "compatibility.zip";
 //   ZipString compatibility_entry_name(COMPATIBILITY_ZIP_ENTRY);
-//   ZipEntry compatibility_entry;
+//   ZipEntry64 compatibility_entry;
 //   if (FindEntry(package_zip, compatibility_entry_name, &compatibility_entry) != 0) {
 //     LOG(INFO) << "Package doesn't contain " << COMPATIBILITY_ZIP_ENTRY << " entry";
 //     return true;
@@ -555,7 +555,7 @@ static int try_update_binary(const std::string& package, ZipArchiveHandle zip, b
 //   std::unique_ptr<void, decltype(&EndIteration)> guard(cookie, EndIteration);
 
 //   std::vector<std::string> compatibility_info;
-//   ZipEntry info_entry;
+//   ZipEntry64 info_entry;
 //   ZipString info_name;
 //   while (Next(cookie, &info_entry, &info_name) == 0) {
 //     std::string content(info_entry.uncompressed_length, '\0');
