@@ -58,7 +58,7 @@ bool startupArgs::processRecoveryArgs(std::vector<std::string> args, int index) 
 				LOGERR("argument error specifying zip file\n");
 			} else {
 				std::string ORSCommand = "install " + arg;
-				SkipDecryption = arg.find("@") == 1;
+				SkipDecryption = arg.find("@") == 0;
 				if (!OpenRecoveryScript::Insert_ORS_Command(ORSCommand))
 					return false;
 			}
