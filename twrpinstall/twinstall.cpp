@@ -354,7 +354,7 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 		} else {
 			std::string binary_name("ui.xml");
 			ZipEntry64 binary_entry;
-			if (FindEntry(Zip, binary_name, &binary_entry) != 0) {
+			if (FindEntry(Zip, binary_name, &binary_entry) == 0) {
 				LOGINFO("TWRP theme zip\n");
 				ret_val = Install_Theme(path, Zip);
 			} else {
