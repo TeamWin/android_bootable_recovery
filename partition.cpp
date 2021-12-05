@@ -1446,7 +1446,7 @@ bool TWPartition::Is_Mounted(void) {
 	if (!Can_Be_Mounted)
 		return false;
 
-	struct stat st1, st2;
+	struct stat st1, st2, st3;
 	string test_path;
 
 	// Check to see if the mount point directory exists
@@ -1457,8 +1457,15 @@ bool TWPartition::Is_Mounted(void) {
 	test_path = Mount_Point + "/../.";
 	if (stat(test_path.c_str(), &st2) != 0)  return false;
 
-	// Compare the device IDs -- if they match then we're (probably) using tmpfs instead of an actual device
-	int ret = (st1.st_dev != st2.st_dev) ? true : false;
+	// Compare the device IDs on the symbolic link configured bind mount
+	int ret;
+	if (!Symlink_Mount_Point.empty()) {
+		if (stat(Symlink_Mount_Point.c_str(), &st3) != 0) return false;
+		ret = (st1.st_dev != st3.st_dev) ? true: false;
+	} else {
+		// Compare the device IDs -- if they match then we're (probably) using tmpfs instead of an actual device
+		ret = (st1.st_dev != st2.st_dev) ? true : false;
+	}
 	return ret;
 }
 
