@@ -578,6 +578,7 @@ bool retrieveKey(const std::string& dir, const KeyAuthentication& auth, KeyBuffe
     if (!generateAppId(auth, stretching, salt, secdiscardable_hash, &appId)) return false;
     std::string encryptedMessage;
     if (!readFileToString(dir + "/" + kFn_encrypted_key, &encryptedMessage)) return false;
+    LOG(INFO) << "kEmptyAuthentication::" << kEmptyAuthentication.usesKeymaster();
     if (auth.usesKeymaster()) {
         Keymaster keymaster;
         if (!keymaster) return false;
