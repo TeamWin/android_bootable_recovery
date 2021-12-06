@@ -2233,7 +2233,7 @@
 					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
 				</conditions>
 				<actions>
-					<action function="set">tw_multiuser_warning_destination=restore</action>
+					<action function="set">tw_multiuser_warning_destination=restore_force</action>
 					<action function="page">multiuser_warning</action>
 				</actions>
 			</action>
