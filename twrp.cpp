@@ -122,6 +122,9 @@ static void process_fastbootd_mode() {
 #endif
 
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
+		// Check for and run startup script if script exists
+		TWFunc::check_and_run_script("/system/bin/runatboot.sh", "boot");
+		TWFunc::check_and_run_script("/system/bin/postrecoveryboot.sh", "boot");
 		if (gui_startPage("fastboot", 1, 1) != 0) {
 			LOGERR("Failed to start fastbootd page.\n");
 		}
