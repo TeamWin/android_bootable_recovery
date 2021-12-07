@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1638915279 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1638915281-2AD75D5F85AEC11D285303324F057189456F9377\n\n0000000000000000000000000000000000000000 a763dcd474a573ff5d5ef18d3ab1635350387372 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmGv3M8ACgkQmmXNJnGK\nTp9B8A/+Kk8hzn/07eLSAGyqMBjdQv+oPqVRFIIfPOotsYtnDaTpQQLIqOrZZ7M3\nJf/eaOk8mSpl+K9GoXiMOgqmQKXJgZi6NPGta4ktKvO6XWSg/Pd/iJodd0BsHEto\n70Z48mte5CLJb68Gp3PstQi1hnIuc9nBzi7fwaNhW8CtBFtRxBW3NaWE4gcV/go4\nKAVYRWuVzVTxdSD/9VGchSPN73YkV5D1WR7gkRJnxjdu8qD3+MiMpympdhXr1CDw\nKEe75/UCseUr2rvrHFoVxJQ6asmaLb06/t4ZVA5A+PJb+5QzgM3zvwlTqPOStJWN\nwbYeWmc6L0a+uxzTtHhEYSQpmNtY5iUtrM5akPNPN0I3HnzWbZXfW8LsX4v+sDXy\n9QBiJoDJBhnmjHVcyjSVpp9do20PjD7gaK0bBKuPr2gDqR3PONStjZrjDRhx3VyC\nsyaMLInSVpK0VnIRoE0u05zac+An7gNjVlkdp/98f1ThsO7/dCgpAHLv4rKFIvmh\n+ujI0o7V/Mo8C1mj/jAm50CcvNz9kI1jajk/tieaTDqb988O4kSET1aDapJTt80p\nqRs1OTF5LloF9A7n6usj2Sqt7JcNbtHcemOkIiPMlJn9uD5phxB/8tMJWrnvCSXY\nkc7jOoNbuInnInamUan8DgCdqMfPR0RsKd+A146MIxSnI8zUpnE\u003d\n\u003dCl24\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c731e19_89fdf1ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-07T22:32:18Z",
+      "side": 1,
+      "message": "This fixes an issue on my legacy devices where decryption was failing when fastboot booting.",
+      "revId": "a763dcd474a573ff5d5ef18d3ab1635350387372",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
