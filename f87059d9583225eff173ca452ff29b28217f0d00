@@ -18,6 +18,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0175e18b_36eaed47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-12-10T16:24:40Z",
+      "side": 1,
+      "message": "I think we should prefer to use init to run custom operations. I will most likely remove the other runatboot shell scripts before the next release.",
+      "revId": "f87059d9583225eff173ca452ff29b28217f0d00",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ee90b8_e799d623",
