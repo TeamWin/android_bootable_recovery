@@ -50,6 +50,41 @@
       "message": "I think atboot is not required for fastboot.",
       "revId": "f87059d9583225eff173ca452ff29b28217f0d00",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a40633_1babdc85",
+        "filename": "twrp.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-10T20:08:05Z",
+      "side": 1,
+      "message": "I think we want runatboot.sh to be available in either mode, but the below script should be specific to fastboot mode.",
+      "parentUuid": "f5ee90b8_e799d623",
+      "revId": "f87059d9583225eff173ca452ff29b28217f0d00",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02162e86_897dfff1",
+        "filename": "twrp.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-10T20:08:05Z",
+      "side": 1,
+      "message": "Please make this script name unique to fastboot mode (maybe something like postfastboot.sh or similar) and change the \"boot\" to \"fastboot\" and it should be good.",
+      "revId": "f87059d9583225eff173ca452ff29b28217f0d00",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
