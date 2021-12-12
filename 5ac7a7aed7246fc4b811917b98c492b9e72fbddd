@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3afa100_c76bb6c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-12-12T23:37:09Z",
+      "side": 1,
+      "message": "Do not merge until minimal aosp has external/lptools",
+      "revId": "5ac7a7aed7246fc4b811917b98c492b9e72fbddd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
