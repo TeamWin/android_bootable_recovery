@@ -16,6 +16,23 @@
       "message": "This patch fixed recovery crashing when flashing Android 10 OTA package with new version of libziparchive. Because this function was only used for Android 10 OTA package.",
       "revId": "0f0308da967ccebbde420f91bf787b48d6b19f2e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be655123_9b1d0bfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2021-12-12T15:42:53Z",
+      "side": 1,
+      "message": "The code looks good to me; haven\u0027t tested it, though.",
+      "revId": "0f0308da967ccebbde420f91bf787b48d6b19f2e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
