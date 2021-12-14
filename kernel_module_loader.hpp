@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <string>
 #include <vector>
+#include <iterator>
 #include <android-base/strings.h>
 #include <modprobe/modprobe.h>
 #include <sys/mount.h>

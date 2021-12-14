@@ -1,6 +1,17 @@
 #include "kernel_module_loader.hpp"
 
-const std::vector<std::string> kernel_modules_requested = TWFunc::split_string(EXPAND(TW_LOAD_VENDOR_MODULES), ' ', true);
+std::vector<std::string> kernel_prior_modules = TWFunc::split_string(EXPAND(TW_LOAD_PRIOR_MODULES), ' ', true);
+std::vector<std::string> kernel_modules_requested = TWFunc::split_string(EXPAND(TW_LOAD_VENDOR_MODULES), ' ', true);
+
+void UpdateModulesList() {
+	std::vector<string>::iterator iter = kernel_prior_modules.begin();
+	while(iter != kernel_prior_modules.end()) {
+		kernel_modules_requested.erase(std::find(kernel_modules_requested.begin(),
+						kernel_modules_requested.end(), *iter));
+		kernel_modules_requested.insert(kernel_modules_requested.begin(), *iter);
+		iter++;
+	}
+}
 
 bool KernelModuleLoader::Load_Vendor_Modules() {
 	// check /lib/modules (ramdisk vendor_boot)
@@ -11,6 +22,8 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 	// check /vendor/lib/modules/N.N (vendor mounted)
 	// check /vendor/lib/modules/N.N-gki (vendor mounted)
 	int modules_loaded = 0;
+
+	UpdateModulesList();
 
 	LOGINFO("Attempting to load modules\n");
 	std::string vendor_base_dir(VENDOR_MODULE_DIR);
