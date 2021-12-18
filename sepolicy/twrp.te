@@ -5,6 +5,7 @@ recovery_only(`
   permissive adbd;
   permissive fastbootd;
   permissive postinstall;
+  permissive ueventd;
   allow kernel unlabeled:file rw_file_perms;
   allow kernel tmpfs:file { read };
   allow kernel recovery:fd { use };
