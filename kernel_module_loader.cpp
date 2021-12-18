@@ -1,4 +1,5 @@
 #include "kernel_module_loader.hpp"
+#include "common.h"
 
 const std::vector<std::string> kernel_modules_requested = TWFunc::split_string(EXPAND(TW_LOAD_VENDOR_MODULES), ' ', true);
 
@@ -57,6 +58,8 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 exit:
 	if (ven)
 		ven->UnMount(false);
+
+	android::base::SetProperty("twrp.modules.loaded", "true");
 
 	return true;
 }
