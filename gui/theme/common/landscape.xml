@@ -3746,7 +3746,7 @@
 			<listbox style="advanced_listbox">
 				<placement x="%center_x%" y="%row2_y%" w="%content_half_width%" h="%fileselector_install_height%"/>
 				<listitem name="{@change_twrp_folder_btn=Change TWRP folder}">
-					<condition var1="tw_is_encrypted" var2="0"/>
+					<condition var1="tw_is_decrypted" var2="1"/>
 					<action function="page">changeTwrpFolder</action>
 				</listitem>
 				<listitem name="{@decrypt_users=Decrypt Users}">
