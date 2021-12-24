@@ -33,6 +33,7 @@
 #include <logwrap/logwrap.h>
 #include <utils/misc.h>
 #include <fscrypt/fscrypt.h>
+#include "KeyUtil.h"
 
 #include "fscrypt_policy.h"
 
@@ -144,14 +145,22 @@ extern "C" bool fscrypt_policy_set_struct(const char *directory, const struct fs
 #endif
     int fd = open(directory, O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC);
     if (fd == -1) {
-		printf("failed to open %s\n", directory);
+        printf("failed to open %s\n", directory);
         PLOG(ERROR) << "Failed to open directory " << directory;
         return false;
     }
-    if (ioctl(fd, FS_IOC_SET_ENCRYPTION_POLICY, fep)) {
-        PLOG(ERROR) << "Failed to set encryption policy for " << directory;
-        close(fd);
-        return false;
+    if (isFsKeyringSupported()) {
+        if (ioctl(fd, FS_IOC_SET_ENCRYPTION_POLICY, fep)) {
+            PLOG(ERROR) << "Failed to set encryption policy for " << directory;
+            close(fd);
+            return false;
+        }
+    } else {
+        if (ioctl(fd, FS_IOC_SET_ENCRYPTION_POLICY, fep)) {
+            PLOG(ERROR) << "Failed to set encryption policy for " << directory;
+            close(fd);
+            return false;
+        }
     }
     close(fd);
     return true;
@@ -172,19 +181,28 @@ extern "C" bool fscrypt_policy_get_struct(const char *directory, struct fscrypt_
 #else
     memset(fep, 0, sizeof(fscrypt_policy_v2));
 #endif
-
     struct fscrypt_get_policy_ex_arg ex_policy = {0};
-    ex_policy.policy_size = sizeof(ex_policy.policy);
-    if (ioctl(fd, FS_IOC_GET_ENCRYPTION_POLICY_EX, &ex_policy) != 0) {
-        PLOG(ERROR) << "Failed to get encryption policy for " << directory;
-        close(fd);
-        return false;
-    }
+
+    if (isFsKeyringSupported()) {
+        ex_policy.policy_size = sizeof(ex_policy.policy);
+        if (ioctl(fd, FS_IOC_GET_ENCRYPTION_POLICY_EX, &ex_policy) != 0) {
+            PLOG(ERROR) << "Failed to get encryption policy for " << directory;
+            close(fd);
+            return false;
+        }
 #ifdef USE_FSCRYPT_POLICY_V1
-    memcpy(fep, &ex_policy.policy.v1, sizeof(ex_policy.policy.v1));
+        memcpy(fep, &ex_policy.policy.v1, sizeof(ex_policy.policy.v1));
 #else
-    memcpy(fep, &ex_policy.policy.v2, sizeof(ex_policy.policy.v2));
+        memcpy(fep, &ex_policy.policy.v2, sizeof(ex_policy.policy.v2));
 #endif
+    } else {
+        if (ioctl(fd, FS_IOC_GET_ENCRYPTION_POLICY, &ex_policy.policy.v1) != 0) {
+            PLOG(ERROR) << "Failed to get encryption policy for " << directory;
+            close(fd);
+            return false;
+        }
+        memcpy(fep, &ex_policy.policy.v1, sizeof(ex_policy.policy.v1));
+    }
     close(fd);
     return true;
 }
