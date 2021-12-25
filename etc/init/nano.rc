@@ -1,0 +1,6 @@
+<<<<<<< HEAD   (2b4b6f vold_decrypt: only include patch_level functions with libres)
+=======
+on fs
+    export TERMINFO /system/etc/terminfo
+    export TERM bg1.25
+>>>>>>> CHANGE (546ebc Change TWRP nano TERM env variable from pcansi to bg1.25)
