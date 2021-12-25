@@ -63,7 +63,7 @@ extern "C" {
 }
 
 #ifdef TW_INCLUDE_LIBRESETPROP
-    #include <resetprop.h>
+    #include <resetprop.hpp>
 #endif
 
 struct selabel_handle *selinux_handle;
