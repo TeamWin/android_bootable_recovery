@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1bdf70_555daf76",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2021-12-26T02:14:53Z",
+      "side": 1,
+      "message": "sleep(3);\n\nThe firmware load is lagging, there is no battery information after twrp starts the main UI, I set a 3 second delay to let the firmware load complete.",
+      "revId": "58a1cb180d48c464fd575caecfff0eb43fd69395",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
