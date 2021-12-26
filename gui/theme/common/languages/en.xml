@@ -657,6 +657,7 @@
 		<string name="recreate_folder_err">Unable to recreate {1} folder.</string>
 		<string name="img_size_err">Size of image is larger than target device</string>
 		<string name="flashing">Flashing {1}...</string>
+		<string name="decompressing">Decompressing {1}...</string>
 		<string name="backup_folder_set">Backup folder set to '{1}'</string>
 		<string name="locate_backup_err">Unable to locate backup '{1}'</string>
 		<string name="set_restore_opt">Setting restore options: '{1}':</string>

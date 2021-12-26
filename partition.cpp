@@ -3185,7 +3185,9 @@ bool TWPartition::Flash_Image(PartitionSettings *part_settings) {
 		}
 		if (Backup_Method == BM_DD) {
 			if (!part_settings->adbbackup) {
-				if (Is_Sparse_Image(full_filename)) {
+				if (Is_Lz4_Image(full_filename)) {
+					return Flash_Lz4_Image(full_filename);
+				} else if (Is_Sparse_Image(full_filename)) {
 					return Flash_Sparse_Image(full_filename);
 				}
 			}
@@ -3197,6 +3199,51 @@ bool TWPartition::Flash_Image(PartitionSettings *part_settings) {
 
 	LOGERR("Unknown flash method for '%s'\n", Mount_Point.c_str());
 	return false;
+}
+
+bool TWPartition::Is_Lz4_Image(const string& Filename) {
+	uint32_t magic = 0;
+	int fd = open(Filename.c_str(), O_RDONLY);
+	if (fd < 0) {
+		gui_msg(Msg(msg::kError, "error_opening_strerr=Error opening: '{1}' ({2})")(Filename)(strerror(errno)));
+		return false;
+	}
+
+	if (read(fd, &magic, sizeof(magic)) != sizeof(magic)) {
+		gui_msg(Msg(msg::kError, "error_opening_strerr=Error opening: '{1}' ({2})")(Filename)(strerror(errno)));
+		close(fd);
+		return false;
+	}
+	close(fd);
+	if (magic == LZ4_LEGACY_MAGIC || magic == LZ4_1_3_MAGIC || magic == LZ4_1_4_MAGIC)
+		return true;
+	return false;
+}
+
+bool TWPartition::Flash_Lz4_Image(const string& Filename) {
+	bool ret = false;
+	string Command;
+	string Uncompressed_Image = "/tmp/uncompressed.img";
+
+	gui_msg(Msg("decompressing=Decompressing {1}...")(Display_Name));
+
+	Command = "lz4 -df '" + Filename + "' '" + Uncompressed_Image + "'";
+	LOGINFO("Decompress command: '%s'\n", Command.c_str());
+	TWFunc::Exec_Cmd(Command);
+
+	if (Is_Sparse_Image(Uncompressed_Image)) {
+		ret = Flash_Sparse_Image(Uncompressed_Image);
+	} else {
+		gui_msg(Msg("flashing=Flashing {1}...")(Display_Name));
+
+		Command = "lz4 -df '" + Filename + "' '" + Actual_Block_Device + "'";
+		LOGINFO("Flash command: '%s'\n", Command.c_str());
+		TWFunc::Exec_Cmd(Command);
+        	ret = true;
+	}
+
+	TWFunc::Exec_Cmd("rm -rf \"" + Uncompressed_Image + '\"');
+	return ret;
 }
 
 bool TWPartition::Is_Sparse_Image(const string& Filename) {

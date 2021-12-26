@@ -36,6 +36,10 @@
 #define REPACK_ORIG_DIR "/tmp/repackorig/"
 #define REPACK_NEW_DIR "/tmp/repacknew/"
 
+#define LZ4_LEGACY_MAGIC 0x184c2102
+#define LZ4_1_3_MAGIC    0x184c2103
+#define LZ4_1_4_MAGIC    0x184d2204
+
 using namespace std;
 
 // BasePartition is used for overriding so we can run custom, device
@@ -224,6 +228,8 @@ private:
 	bool Find_MTD_Block_Device(string MTD_Name);                              // Finds the mtd block device based on the name from the fstab
 	void Recreate_AndSec_Folder(void);                                        // Recreates the .android_secure folder
 	bool Mount_Storage_Retry(bool Display_Error);                             // Tries multiple times with a half second delay to mount a device in case storage is slow to mount
+	bool Is_Lz4_Image(const string& Filename);                                // Determines if a file is in lz4 image format
+	bool Flash_Lz4_Image(const string& Filename);                             // Flashes a sparse image using liblz4
 	bool Is_Sparse_Image(const string& Filename);                             // Determines if a file is in sparse image format
 	bool Flash_Sparse_Image(const string& Filename);                          // Flashes a sparse image using simg2img
 	bool Flash_Image_FI(const string& Filename, ProgressTracking *progress);  // Flashes an image to the partition using flash_image for mtd nand

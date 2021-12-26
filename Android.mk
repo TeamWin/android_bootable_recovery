@@ -413,6 +413,7 @@ TWRP_REQUIRED_MODULES += \
     fatlabel \
     mkfs.fat \
     permissive.sh \
+    lz4_twrp \
     simg2img_twrp \
     libbootloader_message \
     init.recovery.hlthchrg.rc \
@@ -653,6 +654,7 @@ include $(commands_TWRP_local_path)/injecttwrp/Android.mk \
     $(commands_TWRP_local_path)/minzip/Android.mk \
     $(commands_TWRP_local_path)/dosfstools/Android.mk \
     $(commands_TWRP_local_path)/etc/Android.mk \
+    $(commands_TWRP_local_path)/lz4/Android.mk \
     $(commands_TWRP_local_path)/simg2img/Android.mk \
     $(commands_TWRP_local_path)/adbbu/Android.mk \
     $(commands_TWRP_local_path)/twrpDigest/Android.mk \
