@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e12984_7617aabb",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-12-26T17:05:51Z",
+      "side": 1,
+      "message": "Are there anything we can check for rather than relying on sleep?",
+      "revId": "0a4347e5c1c884f5976529df64adbe5f6eb7fb3f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
