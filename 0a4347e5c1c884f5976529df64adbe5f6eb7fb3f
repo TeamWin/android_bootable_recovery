@@ -16,6 +16,24 @@
       "message": "Are there anything we can check for rather than relying on sleep?",
       "revId": "0a4347e5c1c884f5976529df64adbe5f6eb7fb3f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24cc0c3_c4ae2310",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2021-12-27T01:58:39Z",
+      "side": 1,
+      "message": "wait for /sys/class/power_supply/battery to be created and set a timeout？\ninit.recovery.qcom.rc: wait /sys/class/power_supply/battery",
+      "parentUuid": "73e12984_7617aabb",
+      "revId": "0a4347e5c1c884f5976529df64adbe5f6eb7fb3f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
