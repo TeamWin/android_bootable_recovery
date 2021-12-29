@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0398b1f8_55dd0ff4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-29T16:02:02Z",
+      "side": 1,
+      "message": "This is just to clean up some build log spam that should\u0027ve been done ages ago.",
+      "revId": "740d852518edd73bbd8accd3f857756ed5f0f1ca",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
