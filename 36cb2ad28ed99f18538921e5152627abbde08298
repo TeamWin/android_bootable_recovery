@@ -16,6 +16,24 @@
       "message": "Can you explain what this patch actually fix?\nit break internal storage mounts on Samsung devices.\nPlease revert it or find better solution.",
       "revId": "36cb2ad28ed99f18538921e5152627abbde08298",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1519a822_c9fb8ee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-12-30T13:13:49Z",
+      "side": 1,
+      "message": "Is your device encrypted? This is to prevent bind mounting twice. Can you upload your logs for inspection?",
+      "parentUuid": "3a907ac2_bfb69747",
+      "revId": "36cb2ad28ed99f18538921e5152627abbde08298",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
