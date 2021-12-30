@@ -658,8 +658,6 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 	UnMount(false);
 
 #ifdef TW_INCLUDE_CRYPTO
-	if (datamedia)
-		Setup_Data_Media();
 	Can_Be_Encrypted = true;
 	char crypto_blkdev[255];
 	property_get("ro.crypto.fs_crypto_blkdev", crypto_blkdev, "error");
@@ -667,6 +665,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		Set_FBE_Status();
 		Decrypted_Block_Device = crypto_blkdev;
 		LOGINFO("Data already decrypted, new block device: '%s'\n", crypto_blkdev);
+		if (datamedia)
+			Setup_Data_Media();
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	} else if (!Mount(false)) {
 		if (Is_Present) {
@@ -683,6 +683,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
 					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
 					DataManager::SetValue("tw_crypto_display", "");
+					if (datamedia)
+						Setup_Data_Media();
 				} else {
 					gui_err("mount_data_footer=Could not mount /data and unable to find crypto footer.");
 				}
@@ -705,6 +707,9 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 				LOGERR("Unable to decrypt FBE device\n");
 		} else {
 			DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+			if (datamedia)
+				Setup_Data_Media();
+
 		}
 	}
 	if (datamedia && (!Is_Encrypted || (Is_Encrypted && Is_Decrypted))) {
@@ -1195,7 +1200,8 @@ void TWPartition::Setup_Data_Media() {
 			Make_Dir("/sdcard", false);
 			Symlink_Mount_Point = "/sdcard";
 		}
-		if (Mount(false) && TWFunc::Path_Exists(Mount_Point + "/media/0")) {
+		Mount(false);
+		if (TWFunc::Path_Exists(Mount_Point + "/media/0")) {
 			Storage_Path = Mount_Point + "/media/0";
 			Symlink_Path = Storage_Path;
 			DataManager::SetValue(TW_INTERNAL_PATH, Mount_Point + "/media/0");
@@ -1459,6 +1465,9 @@ bool TWPartition::Is_Mounted(void) {
 
 	// Compare the device IDs -- if they match then we're (probably) using tmpfs instead of an actual device
 	int ret = (st1.st_dev != st2.st_dev) ? true : false;
+	LOGINFO("Is_Mounted::parition: %s\n", Get_Mount_Point().c_str());
+	LOGINFO("Is_Mounted::st1.st_dev: %jd\n", st1.st_dev);
+	LOGINFO("Is_Mounted::st2.st_dev: %jd\n", st2.st_dev);
 	return ret;
 }
 
@@ -1481,6 +1490,7 @@ bool TWPartition::Mount(bool Display_Error) {
 	}
 
 	Find_Actual_Block_Device();
+	LOGINFO("mounting %s\n", Actual_Block_Device.c_str());
 
 	// Check the current file system before mounting
 	Check_FS_Type();
@@ -1605,7 +1615,7 @@ bool TWPartition::Mount(bool Display_Error) {
 	if (Removable)
 		Update_Size(Display_Error);
 
-	if (!Symlink_Mount_Point.empty() && Symlink_Mount_Point != "/sdcard") {
+	if (!Symlink_Mount_Point.empty()) {
 		if (!Bind_Mount(false))
 			return false;
 	}
@@ -1613,6 +1623,7 @@ bool TWPartition::Mount(bool Display_Error) {
 }
 
 bool TWPartition::Bind_Mount(bool Display_Error) {
+	LOGINFO("Attempting to bind mount symlink_mount_point\n");
 	if (TWFunc::Path_Exists(Symlink_Path)) {
 		if (mount(Symlink_Path.c_str(), Symlink_Mount_Point.c_str(), "", MS_BIND, NULL) < 0) {
 			return false;
