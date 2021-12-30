@@ -421,8 +421,12 @@ void TWPartitionManager::Decrypt_Data() {
 	TWPartition* Decrypt_Data = Find_Partition_By_Path("/data");
 	if (Decrypt_Data && Decrypt_Data->Is_Encrypted && !Decrypt_Data->Is_Decrypted) {
 		Set_Crypto_State();
-		if (!Decrypt_Data->Key_Directory.empty() && Mount_By_Path(Decrypt_Data->Key_Directory, false)) {
-		Set_Crypto_Type("file");
+		TWPartition* Key_Directory_Partition = Find_Partition_By_Path(Decrypt_Data->Key_Directory);
+		if (Key_Directory_Partition != nullptr)
+			if (!Key_Directory_Partition->Is_Mounted())
+				Mount_By_Path(Decrypt_Data->Key_Directory, false);
+		if (!Decrypt_Data->Key_Directory.empty()) {
+			Set_Crypto_Type("file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
 			if (fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false)) {
@@ -477,8 +481,7 @@ void TWPartitionManager::Decrypt_Data() {
 			}
 		}
 	}
-	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted) &&
-	Decrypt_Data->Mount(false)) {
+	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted)) {
 		Decrypt_Adopted();
 	}
 #endif
