@@ -477,8 +477,7 @@ void TWPartitionManager::Decrypt_Data() {
 			}
 		}
 	}
-	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted) &&
-	Decrypt_Data->Mount(false)) {
+	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted)) {
 		Decrypt_Adopted();
 	}
 #endif
@@ -1936,8 +1935,13 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 
 	if (DataManager::GetIntValue(TW_IS_FBE)) {
 #ifdef TW_INCLUDE_FBE
-		if (!Mount_By_Path("/data", true)) // /data has to be mounted for FBE
+		TWPartition* dat = Find_Partition_By_Path("/data");
+		if (dat == nullptr)
 			return -1;
+		if (!dat->Is_Mounted()) {
+			if (!dat->Mount(true)) // /data has to be mounted for FBE
+				return -1;
+		}
 
 		bool user_need_decrypt = false;
 		std::vector<users_struct>::iterator iter;
