@@ -51,6 +51,24 @@
       "message": "Encryption disabled\n\nNo sdcard: https://pastebin.com/Mw6au3hW\nWorking sdcard: https://pastebin.com/q4ifNzK9",
       "revId": "36cb2ad28ed99f18538921e5152627abbde08298",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "383e5701_b13e3b68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-12-30T22:04:07Z",
+      "side": 1,
+      "message": "Can you test https://gerrit.twrp.me/c/android_bootable_recovery/+/5041",
+      "parentUuid": "f1c37e64_bc08f632",
+      "revId": "36cb2ad28ed99f18538921e5152627abbde08298",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
