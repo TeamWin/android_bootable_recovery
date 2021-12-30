@@ -477,8 +477,7 @@ void TWPartitionManager::Decrypt_Data() {
 			}
 		}
 	}
-	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted) &&
-	Decrypt_Data->Mount(false)) {
+	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted)) {
 		Decrypt_Adopted();
 	}
 #endif

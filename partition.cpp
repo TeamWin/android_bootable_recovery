@@ -658,8 +658,6 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 	UnMount(false);
 
 #ifdef TW_INCLUDE_CRYPTO
-	if (datamedia)
-		Setup_Data_Media();
 	Can_Be_Encrypted = true;
 	char crypto_blkdev[255];
 	property_get("ro.crypto.fs_crypto_blkdev", crypto_blkdev, "error");
@@ -667,6 +665,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		Set_FBE_Status();
 		Decrypted_Block_Device = crypto_blkdev;
 		LOGINFO("Data already decrypted, new block device: '%s'\n", crypto_blkdev);
+		if (datamedia)
+			Setup_Data_Media();
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	} else if (!Mount(false)) {
 		if (Is_Present) {
@@ -683,6 +683,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
 					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
 					DataManager::SetValue("tw_crypto_display", "");
+					if (datamedia)
+						Setup_Data_Media();
 				} else {
 					gui_err("mount_data_footer=Could not mount /data and unable to find crypto footer.");
 				}
@@ -705,6 +707,9 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 				LOGERR("Unable to decrypt FBE device\n");
 		} else {
 			DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+			if (datamedia)
+				Setup_Data_Media();
+
 		}
 	}
 	if (datamedia && (!Is_Encrypted || (Is_Encrypted && Is_Decrypted))) {
@@ -1605,7 +1610,7 @@ bool TWPartition::Mount(bool Display_Error) {
 	if (Removable)
 		Update_Size(Display_Error);
 
-	if (!Symlink_Mount_Point.empty() && Symlink_Mount_Point != "/sdcard") {
+	if (!Symlink_Mount_Point.empty()) {
 		if (!Bind_Mount(false))
 			return false;
 	}
