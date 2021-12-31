@@ -33,6 +33,9 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 	std::vector<std::string> release = TWFunc::split_string(rls, '.', true);
 	int expected_module_count = kernel_modules_requested.size();
 	module_dirs.push_back(base_dir + "/" + release[0] + "." + release[1]);
+	std::string gki = "/" + release[0] + "." + release[1] + "-gki";
+	module_dirs.push_back(base_dir + gki);
+	vendor_module_dirs.push_back(vendor_base_dir + gki);
 
 	for (auto&& module_dir:module_dirs) {
 		modules_loaded += Try_And_Load_Modules(module_dir, false);
