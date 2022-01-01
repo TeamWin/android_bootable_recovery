@@ -855,20 +855,22 @@ string TWFunc::Get_Current_Date() {
 }
 
 string TWFunc::System_Property_Get(string Prop_Name) {
-	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path());
+	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path(), "");
 }
 
-string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point) {
+string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point, string prop_file_name) {
 	bool mount_state = PartitionManager.Is_Mounted_By_Path(Mount_Point);
 	std::vector<string> buildprop;
 	string propvalue;
 	if (!PartitionManager.Mount_By_Path(Mount_Point, true))
 		return propvalue;
-	string prop_file = Mount_Point + "/build.prop";
-	if (!TWFunc::Path_Exists(prop_file))
-		prop_file = Mount_Point + "/system/build.prop"; // for devices with system as a root file system (e.g. Pixel)
+	string prop_file = Mount_Point + "/system/" + prop_file_name;
+	if (!TWFunc::Path_Exists(prop_file)) {
+		LOGINFO("Unable to locate file: %s\n", prop_file.c_str());
+		return propvalue;
+	}
 	if (TWFunc::read_file(prop_file, buildprop) != 0) {
-		LOGINFO("Unable to open build.prop for getting '%s'.\n", Prop_Name.c_str());
+		LOGINFO("Unable to open %s for getting '%s'.\n", prop_file_name.c_str(), Prop_Name.c_str());
 		DataManager::SetValue(TW_BACKUP_NAME, Get_Current_Date());
 		if (!mount_state)
 			PartitionManager.UnMount_By_Path(Mount_Point, false);
