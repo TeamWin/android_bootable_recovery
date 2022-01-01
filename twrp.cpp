@@ -174,6 +174,12 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	} else {
 		stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
 		string current_prop;
+#ifdef TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS
+		std::vector<std::string> build_prop_list = TWFunc::Split_String(TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS, ";");
+		build_prop_list.insert (build_prop_list.begin(), "build.prop");
+#else
+		std::vector<std::string> build_prop_list = {"build.prop"};
+#endif
 		while (getline(override_props, current_prop, ';')) {
 			string other_prop;
 			if (current_prop.find("=") != string::npos) {
@@ -184,15 +190,19 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 			}
 			other_prop = android::base::Trim(other_prop);
 			current_prop = android::base::Trim(current_prop);
-			string sys_val = TWFunc::System_Property_Get(other_prop, PartitionManager, PartitionManager.Get_Android_Root_Path().c_str());
-			if (!sys_val.empty()) {
-				LOGINFO("Overriding %s with value: \"%s\" from system property %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str());
-				int error = TWFunc::Property_Override(current_prop, sys_val);
-				if (error) {
-					LOGERR("Failed overriding property %s, error_code: %d\n", current_prop.c_str(), error);
+
+			for (size_t i = 0; i < build_prop_list.size(); ++i) {
+				string sys_val = TWFunc::System_Property_Get(other_prop, PartitionManager, PartitionManager.Get_Android_Root_Path().c_str(), build_prop_list[i]);
+				if (!sys_val.empty()) {
+					LOGINFO("Overriding %s with value: \"%s\" from system property %s from %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str(), build_prop_list[i].c_str());
+					int error = TWFunc::Property_Override(current_prop, sys_val);
+					if (error) {
+						LOGERR("Failed overriding property %s, error_code: %d\n", current_prop.c_str(), error);
+					}
+					break;
+				} else {
+					LOGINFO("Not overriding %s with empty value from system property %s from %s\n", current_prop.c_str(), other_prop.c_str(), build_prop_list[i].c_str());
 				}
-			} else {
-				LOGINFO("Not overriding %s with empty value from system property %s\n", current_prop.c_str(), other_prop.c_str());
 			}
 		}
 		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
