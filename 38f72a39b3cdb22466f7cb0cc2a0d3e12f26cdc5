@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf065de4_eb7d2f18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 799
+      },
+      "writtenOn": "2022-01-02T17:16:27Z",
+      "side": 1,
+      "message": "Looking very good, but I have some more minor suggestions for code improvements",
+      "revId": "38f72a39b3cdb22466f7cb0cc2a0d3e12f26cdc5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa9ae2f_5c507918",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 799
+      },
+      "writtenOn": "2022-01-02T17:16:27Z",
+      "side": 1,
+      "message": "Perhaps remove this line?",
+      "revId": "38f72a39b3cdb22466f7cb0cc2a0d3e12f26cdc5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d763996d_a0dd9044",
+        "filename": "twrp.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 799
+      },
+      "writtenOn": "2022-01-02T17:16:27Z",
+      "side": 1,
+      "message": "I would change this part as below. There might be cleaner ways to do it, but I am rusty and ended up googling and testing various alternatives to add to a vector with a debugger. \n\nstd::vector\u003cstd::string\u003e build_prop_list \u003d {\"build.prop\"};\n#ifdef TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS\n\t\tbuild_prop_list.insert(build_prop_list.end(), TWFunc::Split_String(TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS, \";\"));",
+      "revId": "38f72a39b3cdb22466f7cb0cc2a0d3e12f26cdc5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
