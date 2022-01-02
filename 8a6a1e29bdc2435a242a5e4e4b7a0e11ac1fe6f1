@@ -16,6 +16,23 @@
       "message": "Should be good to go now.",
       "revId": "8a6a1e29bdc2435a242a5e4e4b7a0e11ac1fe6f1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1345db54_70172f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 799
+      },
+      "writtenOn": "2022-01-02T18:22:56Z",
+      "side": 1,
+      "message": "Looks good to me. Tested the new flag successfully on my oneplus 8T.",
+      "revId": "8a6a1e29bdc2435a242a5e4e4b7a0e11ac1fe6f1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
