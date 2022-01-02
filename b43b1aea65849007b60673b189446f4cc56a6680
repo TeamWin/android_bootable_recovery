@@ -53,6 +53,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "264bf024_8fc67c0b",
+        "filename": "twrp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-02T16:38:09Z",
+      "side": 1,
+      "message": "I couldn\u0027t figure out a way to create the vector with just build.prop and then add the additional paths to it, so I just create the vector from the flag and then insert build.prop at the beginning. Every other way I tried it caused compiler errors.",
+      "parentUuid": "0d15e001_51e401e4",
+      "revId": "b43b1aea65849007b60673b189446f4cc56a6680",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a5adcb_8fa770f5",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-01-02T15:30:12Z",
       "side": 1,
       "message": "I would put a break statement after the if (error) {} so it break out of the loop if the requested prop is found. This way it won\u0027t have to loop over all the specified prop files for each prop. Unless one prop can be specified in multiple prop files? In that case the specified order for prop files also matters.\n\nIn this case it would make sense to have build.prop at the front of the vector so that is checked first.",
+      "revId": "b43b1aea65849007b60673b189446f4cc56a6680",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1199a6df_d5d5fbe8",
+        "filename": "twrp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-02T16:38:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2a5adcb_8fa770f5",
       "revId": "b43b1aea65849007b60673b189446f4cc56a6680",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
