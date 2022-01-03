@@ -169,42 +169,59 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
 #if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
-	if (!PartitionManager.Mount_By_Path(PartitionManager.Get_Android_Root_Path(), true)) {
-		LOGERR("Unable to mount %s\n", PartitionManager.Get_Android_Root_Path().c_str());
-	} else {
-		stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
-		string current_prop;
-		std::vector<std::string> build_prop_list = {"build.prop"};
-#ifdef TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS
-		std::vector<std::string> additional_build_prop_list = TWFunc::Split_String(TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS, ";");
-		build_prop_list.insert(build_prop_list.end(), additional_build_prop_list.begin(), additional_build_prop_list.end());
-#endif
-		while (getline(override_props, current_prop, ';')) {
-			string other_prop;
-			if (current_prop.find("=") != string::npos) {
-				other_prop = current_prop.substr(current_prop.find("=") + 1);
-				current_prop = current_prop.substr(0, current_prop.find("="));
-			} else {
-				other_prop = current_prop;
-			}
-			other_prop = android::base::Trim(other_prop);
-			current_prop = android::base::Trim(current_prop);
+	stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
+	string current_prop;
 
+	std::vector<std::string> partition_list;
+	partition_list.push_back (PartitionManager.Get_Android_Root_Path().c_str());
+#ifdef TW_OVERRIDE_PROPS_ADDITIONAL_PARTITIONS
+	std::vector<std::string> additional_partition_list = TWFunc::Split_String(TW_OVERRIDE_PROPS_ADDITIONAL_PARTITIONS, " ");
+	partition_list.insert(partition_list.end(), additional_partition_list.begin(), additional_partition_list.end());
+#endif
+	std::vector<std::string> build_prop_list = {"build.prop"};
+#ifdef TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS
+	std::vector<std::string> additional_build_prop_list = TWFunc::Split_String(TW_SYSTEM_BUILD_PROP_ADDITIONAL_PATHS, ";");
+	build_prop_list.insert(build_prop_list.end(), additional_build_prop_list.begin(), additional_build_prop_list.end());
+#endif
+	while (getline(override_props, current_prop, ';')) {
+		string other_prop;
+		if (current_prop.find("=") != string::npos) {
+			other_prop = current_prop.substr(current_prop.find("=") + 1);
+			current_prop = current_prop.substr(0, current_prop.find("="));
+		} else {
+			other_prop = current_prop;
+		}
+		other_prop = android::base::Trim(other_prop);
+		current_prop = android::base::Trim(current_prop);
+
+		for (auto&& partition_mount_point:partition_list) {
 			for (auto&& prop_file:build_prop_list) {
-				string sys_val = TWFunc::System_Property_Get(other_prop, PartitionManager, PartitionManager.Get_Android_Root_Path().c_str(), prop_file);
+				string sys_val = TWFunc::Partition_Property_Get(other_prop, PartitionManager, partition_mount_point.c_str(), prop_file);
 				if (!sys_val.empty()) {
-					LOGINFO("Overriding %s with value: \"%s\" from system property %s from %s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str(), prop_file.c_str());
+					if (partition_mount_point == "/system_root") {
+						LOGINFO("Overriding %s with value: \"%s\" from property %s in system/%s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str(),
+							prop_file.c_str());
+					} else {
+						LOGINFO("Overriding %s with value: \"%s\" from property %s in %s/%s\n", current_prop.c_str(), sys_val.c_str(), other_prop.c_str(),
+							partition_mount_point.c_str(), prop_file.c_str());
+					}
 					int error = TWFunc::Property_Override(current_prop, sys_val);
 					if (error) {
 						LOGERR("Failed overriding property %s, error_code: %d\n", current_prop.c_str(), error);
 					}
-					break;
+					goto exit;
 				} else {
-					LOGINFO("Not overriding %s with empty value from system property %s from %s\n", current_prop.c_str(), other_prop.c_str(), prop_file.c_str());
+					if (partition_mount_point == "/system_root") {
+						LOGINFO("Unable to override property %s: property not found in system/%s\n", current_prop.c_str(), prop_file.c_str());
+					} else {
+						LOGINFO("Unable to override property %s: property not found in %s/%s\n", current_prop.c_str(), partition_mount_point.c_str(), prop_file.c_str());
+					}
 				}
 			}
+			PartitionManager.UnMount_By_Path(partition_mount_point, false);
 		}
-		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), false);
+		exit:
+		continue;
 	}
 #endif
 
