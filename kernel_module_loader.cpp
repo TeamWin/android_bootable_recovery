@@ -83,8 +83,12 @@ int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir, bool vendor
 		}
 		LOGINFO("mounting %s on %s\n", dest_module_dir.c_str(), module_dir.c_str());
 		if (mount(dest_module_dir.c_str(), module_dir.c_str(), "", MS_BIND, NULL) == 0) {
+<<<<<<< HEAD   (4e406a A11: 3.6.1 release)
 			Modprobe m({module_dir}, "modules.load.twrp");
 			m.EnableVerbose(true);
+=======
+			Modprobe m({module_dir}, "modules.load.twrp", false);
+>>>>>>> CHANGE (4b1853 kernel_module_loader: tell libmodprobe to ignore modules.blo)
 			m.LoadListedModules(false);
 			modules_loaded = m.GetModuleCount();
 			umount2(module_dir.c_str(), MNT_DETACH);
