@@ -855,16 +855,21 @@ string TWFunc::Get_Current_Date() {
 }
 
 string TWFunc::System_Property_Get(string Prop_Name) {
-	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path(), "");
+	return Partition_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path(), "");
 }
 
-string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point, string prop_file_name) {
+string TWFunc::Partition_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point, string prop_file_name) {
 	bool mount_state = PartitionManager.Is_Mounted_By_Path(Mount_Point);
 	std::vector<string> buildprop;
 	string propvalue;
+	string prop_file;
 	if (!PartitionManager.Mount_By_Path(Mount_Point, true))
 		return propvalue;
-	string prop_file = Mount_Point + "/system/" + prop_file_name;
+	if (Mount_Point == PartitionManager.Get_Android_Root_Path()) {
+		prop_file = Mount_Point + "/system/" + prop_file_name;
+	} else {
+		prop_file = Mount_Point + "/" + prop_file_name;
+	}
 	if (!TWFunc::Path_Exists(prop_file)) {
 		LOGINFO("Unable to locate file: %s\n", prop_file.c_str());
 		return propvalue;
