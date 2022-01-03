@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472ad64e_c895ea52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2022-01-03T13:55:31Z",
+      "side": 1,
+      "message": "Fixed the commit title and description to better explain the issue and solution.",
+      "revId": "dff5023de3f97b8151d8f99f4ca446ea5ec014e3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
