@@ -33,6 +33,24 @@
       "message": "Along with my original kebab (OnePlus 8T) testing, I have now tested this change on flo (Nexus 7 2013), guacamole (OnePlus 7 Pro) and lemonadep (OnePlus 9 Pro) and on all of these devices pcansi TERM had display and/or scrolling (up, down, left or right) issues, most frequently misaligned text either initially or once scrolled through, but changing TERM to bg1.25 completely resolves them all.\n\nIf there is some deeper issue with TWRP\u0027s embedded Terminal display that this reveals then that is another thing and will have to be looked into later; more important is merging this to fix TWRP\u0027s included nano as it is currently. Thanks!",
       "revId": "274aabf112b83487906db99af8f1249e9147ba18",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f3a2f5_5aa241f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2022-01-03T12:36:54Z",
+      "side": 1,
+      "message": "Did I mention this is all about nano? This is all about nano. :P",
+      "parentUuid": "bb5307fb_bdf1bdae",
+      "revId": "274aabf112b83487906db99af8f1249e9147ba18",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
