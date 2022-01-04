@@ -34,6 +34,23 @@
       "message": "I\u0027m not sure if this is the most efficient way to handle this, but I can confirm that it works in all cases that I tested.",
       "revId": "ceb6c8445abadbe0c9405e3355ece55bf35fc27d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d652554_2bd16ca0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2022-01-04T04:44:38Z",
+      "side": 1,
+      "message": "Could/should this cover /vendor/default.prop as well?",
+      "revId": "ceb6c8445abadbe0c9405e3355ece55bf35fc27d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
