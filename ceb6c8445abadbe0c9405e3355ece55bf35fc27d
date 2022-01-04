@@ -51,6 +51,24 @@
       "message": "Could/should this cover /vendor/default.prop as well?",
       "revId": "ceb6c8445abadbe0c9405e3355ece55bf35fc27d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ac264c_58d8cf0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2022-01-04T05:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d652554_2bd16ca0",
+      "revId": "ceb6c8445abadbe0c9405e3355ece55bf35fc27d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
