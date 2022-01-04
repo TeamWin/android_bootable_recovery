@@ -17,6 +17,23 @@
       "message": "This will allow us to get props from vendor/build.prop if we so desire, for usage in TWRP if needed.",
       "revId": "ceb6c8445abadbe0c9405e3355ece55bf35fc27d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126629d5_77ad9d46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-04T04:26:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is the most efficient way to handle this, but I can confirm that it works in all cases that I tested.",
+      "revId": "ceb6c8445abadbe0c9405e3355ece55bf35fc27d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
