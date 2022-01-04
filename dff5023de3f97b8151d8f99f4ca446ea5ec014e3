@@ -86,6 +86,24 @@
       "message": "Thanks. I was thinking it was a nano configuration update rather than an init rc configuration. ",
       "revId": "dff5023de3f97b8151d8f99f4ca446ea5ec014e3",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e7890a_f49192de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2022-01-04T05:51:18Z",
+      "side": 1,
+      "message": "Well TERM is a global environment variable, but we only started including it and TERMINFO with nano since only it really needs them, so Captain put it in its own nano.rc at the time.\n\nAdjusted the title to make that more clear, regardless.",
+      "parentUuid": "a6a547db_dbbb862c",
+      "revId": "dff5023de3f97b8151d8f99f4ca446ea5ec014e3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
