@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1641427157 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1641427157-884A131DAC0E78D1CC76E2E3D86387DE9475C61D\n\n0000000000000000000000000000000000000000 086358633e68a4ddbd3a4068499cf681dd7ab34d refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmHWMNUACgkQmmXNJnGK\nTp/QGRAAsYXZJnXlMtnfeIHD6qUe/52cQy/cnXUn4bTicHQGDXcXNxpCG1zJgWSd\n0OXaszPGaa3yo76GL0nbWD/DmmfJELOWS5W/9E4t3yAxMnKlLYTjGCNYd79B9TD5\n0ONUVSX4rfvEFheOwu3YR5LKuD7akOLeuBq2gJolG0fvZ8vI2/hv6tZfJ7m4PlZ+\nLu4WCPuD9szmXv9drjOCoz2BLVdhxSRQvjCvIlodaTRMwZdG5ez+0zyzrBs3gKGj\nUH+hp8yz/x94vCq6ZfIDqJiAKXNB8tTiSgoKleO3tuaDh2mQIvfdcrP7JwkzGRAI\nr+aJ/E0H9wUvexljJHaEvd/gbZ4rNShok+gbIlaAsPDyVpTt9KsihQT0dNX7rQUj\naOpFlnWaqX3Fio+7QEpq9/UsK7JrLbcQu324ZMW+qjN3EVixFqrsFGLVu0iuGw0i\n+4jKsk00+9np2NuzEbUESFlAoxs6fncuPrnDOAKVQMG9tl/wZt5xD7k4y9HjvBut\nLwJ9DwC6R0ScI4e8bvBZX9TfaHWHW7Z/eUjnooiDTXvo1SAbIuOdNqrTBmr8SpQT\nxmXVApabpfd3APSVYnlJ5yTjlk/t1XGjVb9fGdRgmnv8/ngHpR6rXyxuuQNgGWYZ\nvIjflFuxvpynd48iPGPvDmpclomZUr7niWcI15rdtDPeXaYWsFo\u003d\n\u003dy+U6\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e64e5f4_e7a2f071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-06T00:00:53Z",
+      "side": 1,
+      "message": "This is a hotfix for a bug in the previous patch that was merged.",
+      "revId": "086358633e68a4ddbd3a4068499cf681dd7ab34d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
