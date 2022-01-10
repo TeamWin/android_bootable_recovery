@@ -2712,7 +2712,7 @@
 			<action>
 				<condition var1="tw_crypto_pwtype" op="!=" var2="0"/>
 				<actions>
-					<action function="page">restore_pin</action>
+					<action function="page">restore_keymaster</action>
 				</actions>
 			</action>
 
@@ -6206,22 +6206,22 @@
 			</action>
 		</page>
 
-		<page name="restore_pin">
+		<page name="restore_keymaster">
 			<template name="page"/>
 			<text style="text_m_accent">
 				<condition var1="tw_crypto_pwtype" var2="1"/>
 				<placement x="%center_x%" y="%row1_y%" placement="5"/>
-				<text>{@restore_with_pin1=PIN/Password is enabled}</text>
+				<text>{@restore_with_pin_password1=PIN/Password is enabled}</text>
 			</text>
 			<text style="text_m_accent">
 				<condition var1="tw_crypto_pwtype" var2="1"/>
 				<placement x="%center_x%" y="%row2_y%" placement="5"/>
-				<text>{@restore_with_pin2=PIN/Password should be disabled before restore}</text>
+				<text>{@restore_with_pin_password2=PIN/Password should be disabled before restore}</text>
 			</text>
 			<text style="text_l">
 				<condition var1="tw_crypto_pwtype" var2="1"/>
 				<placement x="%center_x%" y="%row3_y%" placement="5"/>
-				<text>{@restore_pin=Restore While PIN/Password Enabled?}</text>
+				<text>{@restore_pin_password=Restore While PIN/Password Enabled?}</text>
 			</text>
 			<text style="text_m_accent">
 				<condition var1="tw_crypto_pwtype" var2="2"/>
