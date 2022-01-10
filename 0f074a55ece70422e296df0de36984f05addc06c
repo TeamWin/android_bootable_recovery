@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b1ba6bc_846d4871",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2022-01-10T14:33:20Z",
+      "side": 1,
+      "message": "Works for me to properly mount Internal Storage on /sdcard on TWRP 3.6.0.",
+      "revId": "0f074a55ece70422e296df0de36984f05addc06c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
