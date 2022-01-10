@@ -736,7 +736,6 @@ void TWPartition::Set_FBE_Status() {
 bool TWPartition::Decrypt_FBE_DE() {
 	if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		DataManager::SetValue(TW_IS_FBE, 1);
-		DataManager::SetValue(TW_CRYPTO_PWTYPE, "0"); // Set initial value so that recovery will not be confused when using unencrypted data or failed to decrypt data
 		PartitionManager.Set_Crypto_State();
 		PartitionManager.Set_Crypto_Type("file");
 		LOGINFO("File Based Encryption is present\n");
