@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f409c2_61e5e4b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2022-01-13T09:38:05Z",
+      "side": 1,
+      "message": "fixes sdcard issue on Z01R",
+      "revId": "c66d24c62c535dbcd47b19c8de310e8bdf04fac0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
