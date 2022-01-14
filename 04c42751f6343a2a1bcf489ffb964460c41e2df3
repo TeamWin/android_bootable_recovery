@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f13dac5_60b389c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 135
+      },
+      "writtenOn": "2022-01-14T14:52:06Z",
+      "side": 1,
+      "message": "Solves loading touchscreen kernel modules on Pixel 5a, A12",
+      "revId": "04c42751f6343a2a1bcf489ffb964460c41e2df3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
