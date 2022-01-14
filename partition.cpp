@@ -1206,6 +1206,7 @@ void TWPartition::Setup_Data_Media() {
 		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
 		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys");
 		backup_exclusions.add_absolute_dir("/data/cache");
+        backup_exclusions.add_absolute_dir("/data/misc/apexdata/com.android.art"); // exclude this dir to prevent "error 255" on AOSP Android 12
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/system/storage.xml");
 	} else {
