@@ -164,8 +164,11 @@ bool MtpServer::hasStorage(MtpStorageID id) {
 
 void MtpServer::run() {
 	if (mHandle->start(mPtp)) {
-		MTPE("Failed to start usb driver!");
+		MTPE("Failed to start usb driver!\n");
 		mHandle->close();
+        int controlFd = open(FFS_MTP_EP0, O_RDWR);
+        mHandle = new MtpFfsHandle(controlFd);
+        mHandle->writeDescriptors(mPtp);
 		return;
 	}
 
