@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "857ef021_d9fb86b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 135
+      },
+      "writtenOn": "2022-01-14T15:22:40Z",
+      "side": 1,
+      "message": "On Pixel 5a AOSP A12 without this change I have to toggle MTP disable/enable in Mount after reconnecting USB to get it working again",
+      "revId": "fb5b2d85ce18de46fc8c91e07c3eca2af4fc7ece",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
