@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfc107e_29b07484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 135
+      },
+      "writtenOn": "2022-01-14T15:05:28Z",
+      "side": 1,
+      "message": "This folder and its content is recreated at boot if missing.",
+      "revId": "3df0271ad7eaddf63428fe88c42f86235c05045b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
