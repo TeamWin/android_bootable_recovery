@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfad0ae1_2ee9ba7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 135
+      },
+      "writtenOn": "2022-01-14T17:36:31Z",
+      "side": 1,
+      "message": "Issue seems to be in MtpFfsHandle::waitEvents\nhttps://github.com/TeamWin/android_bootable_recovery/blob/android-11/mtp/ffs/MtpFfsHandle.cpp#L304\nAt USB disconnect MTP FUNCTIONFS_SUSPEND event is present in logcat but MtpFfsHandle is not getting it and fails at USB reconnect.\nThis patch works around the issue but not sure if it\u0027s the best solution or I am missing something...",
+      "revId": "5f927584143618b90bc36910d9315de65edf401e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
