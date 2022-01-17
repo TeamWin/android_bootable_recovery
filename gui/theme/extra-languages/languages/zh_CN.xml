@@ -35,7 +35,7 @@
 		<!-- GUI XML strings -->
 		<string name="twrp_header">Team Win Recovery Project</string>
 		<string name="twrp_watch_header">TWRP %tw_version%</string>
-		<string name="cpu_temp">温度: %tw_cpu_temp% &#xB0;C</string>
+		<string name="cpu_temp">CPU温度: %tw_cpu_temp% &#xB0;C</string>
 		<string name="battery_pct">电量: %tw_battery%</string>
 		<string name="sort_by_name">按名称排序</string>
 		<string name="sort_by_date">按日期排序</string>
@@ -226,6 +226,7 @@
 		<string name="enable_backup_comp_chk">启用压缩</string>
 		<string name="skip_digest_backup_chk" version="2">当备份时跳过生成 Digest</string>
 		<string name="disable_backup_space_chk" version="2">在备份之前禁用剩余空间检查</string>
+		<string name="skip_digest_zip_chk">安装 ZIP 之前跳过 Digest 校验</string>
 		<string name="current_boot_slot">当前槽位: %tw_active_slot%</string>
 		<string name="boot_slot_a">槽位 A</string>
 		<string name="boot_slot_b">槽位 B</string>
@@ -316,6 +317,7 @@
 		<string name="settings_gen_s_hdr">常规</string>
 		<string name="settings_gen_btn">常规</string>
 		<string name="use_rmrf_chk">使用 rm -rf 命令代替格式化</string>
+		<string name="auto_reflashtwrp_chk">刷入 ROM 后自动重装 TWRP</string>
 		<string name="use24clock_chk">使用 24 小时制</string>
 		<string name="rev_navbar_chk">反转底部按钮布局</string>
 		<string name="simact_chk">为测试主题使用模拟操作</string>
@@ -459,6 +461,8 @@
 		<string name="fm_set_perms_hdr">设置权限</string>
 		<string name="fm_perms">权限：</string>
 		<string name="fm_complete">操作完成</string>
+		<string name="fm_open_terminal_btn">在此处打开终端</string>
+		<string name="fm_edit_file">编辑文件</string>
 		<string name="decrypt_data_hdr">解密 Data 分区</string>
 		<string name="decrypt_data_enter_pass">请输入密码。</string>
 		<string name="decrypt_data_failed">密码错误，请重试！</string>
@@ -506,6 +510,11 @@
 		<string name="unpacking_image">正在解包 {1}…</string>
 		<string name="repacking_image">正在打包 {1}…</string>
 		<string name="repack_image_hdr">选择镜像</string>
+		<string name="repack_overwrite_warning">如果设备之前有root权限，现在可能被覆盖，请重新获取root权限。</string>
+		<string name="reflash_twrp">刷入当前的 TWRP</string>
+		<string name="reflash_twrp_confirm">是否刷入当前的 TWRP？</string>
+		<string name="reflashing_twrp">正在刷入 TWRP...</string>
+		<string name="reflash_twrp_complete">TWRP 刷入完成！</string>
 		<string name="fix_recovery_loop">修复 Recovery 无限重启</string>
 		<string name="fix_recovery_loop_confirm">是否修复 Recovery 无限重启？</string>
 		<string name="fixing_recovery_loop">正在修复 Recovery 无限重启…</string>
@@ -729,15 +738,18 @@
 		<string name="adbbackup_control_error">无法写入 adb 控制通道</string>
 		<string name="twrp_adbbu_option">启用 TWRP ADB 备份需使用 --twrp 选项</string>
 		<string name="partition_not_found">分区列表中未发现路径: {1}</string>
-		<string name="copy_kernel_log">已导出内核日志至 {1}</string>
-		<string name="include_kernel_log">包含内核日志</string>
+		<string name="copy_kernel_log">已导出 kernel 日志到 {1}</string>
+		<string name="copy_logcat">已导出 logcat 日志到 {1}</string>
+		<string name="include_kernel_log">包含 Kernel 日志</string>
+		<string name="include_logcat">包含 Logcat 日志</string>
 		<string name="sha2_chk">使用 SHA2 进行散列校验</string>
 		<string name="unable_set_boot_slot">更改 Bootloader 启动槽位至 {1} 错误</string>
 		<string name="unmount_sys_install">在安装 Zip 刷机包之前先解除挂载 System</string>
 		<string name="unmount_system">正在解除挂载 System…</string>
 		<string name="unmount_system_err">解除挂载 System 失败</string>
 		<string name="flash_ab_inactive">正在刷入 A/B Zip 刷机包至非活动槽位: {1}</string>
-		<string name="flash_ab_reboot">如需刷入其它的 Zip 刷机包，请重启 Recovery 切换到新槽位。</string>
+		<string name="flash_ab_reboot">请重启 TWRP 切换到新槽位后，再刷入其它的 ZIP。</string>
+		<string name="flash_ab_both_slots">刷入到2个槽位</string>
 		<string name="ozip_decrypt_decryption">正在解密 Ozip…</string>
 		<string name="ozip_decrypt_finish">Ozip 解密完成！</string>
 		<string name="fastboot_button">Fastboot</string>
@@ -750,5 +762,30 @@
 		<string name="rescue_party2"> 2. 格式化 Data 分区；</string>
 		<string name="rescue_party3"> 3. 重新刷入您的 ROM。</string>
 		<string name="rescue_party4">报告的问题为：</string>
+		<string name="restore_system_context">无法获取 {1} 的默认 context -- Android 可能无法启动。</string>
+		<string name="change_twrp_folder_btn">更改 TWRP 文件夹</string>
+		<string name="change_twrp_folder_on_process">正在更改 TWRP 文件夹</string>
+		<string name="change_twrp_folder_after_process">TWRP文件夹已改为</string>
+		<string name="tw_folder_exists">已存在同名文件夹！</string>
+		<string name="unmap_super_devices">取消 Super Devices 映射</string>
+		<string name="unmap_super_devices_confirm">是否取消所有 Super Devices 映射？</string>
+		<string name="unmapping_super_devices">正在取消映射 Super Devices...</string>
+		<string name="unmap_super_devices_complete">取消所有 Super Devices 映射完成！</string>
+		<string name="merges_snapshots">合并快照</string>
+		<string name="merge_snapshots_confirm">是否合并快照？</string>
+		<string name="merging_snapshots">正在合并快照...</string>
+		<string name="merging_snapshots_complete">合并快照完成！</string>
+		<string name="mount_vab_partitions">在重新启动 TWRP 之前，Super Devices 上的分区可能不会挂载。</string>
+		<string name="restore_pin_password">是否在 PIN码/混合密码 启用时进行恢复？</string>
+		<string name="restore_pattern">是否在 图案密码 启用时恢复？</string>
+		<string name="restore_pin">是否在 PIN码 启用时恢复？</string>
+		<string name="continue_restore_encrypted">是否继续恢复？</string>
+		<string name="restore_with_pin_password1">ROM中的 PIN码/混合密码 已启用</string>
+		<string name="restore_with_pin_password2">恢复前应该在 ROM 中禁用 PIN码/混合密码</string>
+		<string name="restore_with_pin1">ROM中的 PIN码 已启用</string>
+		<string name="restore_with_pin2">恢复前应该在 ROM 中禁用 PIN码</string>
+		<string name="restore_with_pattern1">ROM 中的 图案密码 已启用</string>
+		<string name="restore_with_pattern2">恢复前应该在 ROM 中禁用 图案密码</string>
+		<string name="reboot_after_restore">建议在 Android 首次启动后再重启一次。</string>
 	</resources>
 </language>
