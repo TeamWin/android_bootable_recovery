@@ -269,15 +269,6 @@ func globalSrcs(ctx android.BaseContext) []string {
 	return srcs
 }
 
-func globalIncludes(ctx android.BaseContext) []string {
-	var includes []string
-
-	if getMakeVars(ctx, "TW_INCLUDE_CRYPTO") != "" {
-		includes = append(includes, "bootable/recovery/crypto/fscrypt")
-	}
-	return includes
-}
-
 func libGuiDefaults(ctx android.LoadHookContext) {
 	type props struct {
 		Target struct {
@@ -295,8 +286,6 @@ func libGuiDefaults(ctx android.LoadHookContext) {
 	p.Cflags = globalFlags(ctx)
 	s := globalSrcs(ctx)
 	p.Srcs = s
-	i := globalIncludes(ctx)
-	p.Include_dirs = i
 	ctx.AppendProperties(p)
 	if copyTheme(ctx) == false {
 		os.Exit(-1)
