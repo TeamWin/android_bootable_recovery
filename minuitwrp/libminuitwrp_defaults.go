@@ -190,10 +190,6 @@ func globalSrcs(ctx android.BaseContext) []string {
 func globalIncludes(ctx android.BaseContext) []string {
 	var includes []string
 
-	if getMakeVars(ctx, "TW_INCLUDE_CRYPTO") != "" {
-		includes = append(includes, "bootable/recovery/crypto/fscrypt")
-	}
-
 	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
 		if getMakeVars(ctx, "TARGET_PREBUILT_KERNEL") != "" {
 			includes = append(includes, getMakeVars(ctx, "TARGET_OUT_INTERMEDIATES")+"/KERNEL_OBJ/usr/include")
