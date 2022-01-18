@@ -49,6 +49,8 @@ on init
 
     chown root shell /tmp
     chmod 0775 /tmp
+    mkdir /tmp/misc
+    mkdir /tmp/misc/keystore/
 
     write /proc/sys/kernel/panic_on_oops 1
     write /proc/sys/vm/max_map_count 1000000
