@@ -19,28 +19,21 @@
 
 #include "KeyBuffer.h"
 
+#include <cstdint>
 #include <string>
-
+#include <vector>
 
 // Represents the information needed to decrypt a disk encryption key.
-// If "token" is nonempty, it is passed in as a required Gatekeeper auth token.
-// If "token" and "secret" are nonempty, "secret" is appended to the application-specific
-// binary needed to unlock.
-// If only "secret" is nonempty, it is used to decrypt in a non-Keymaster process.
 class KeyAuthentication {
   public:
-    KeyAuthentication(const std::string& t, const std::string& s) : token{t}, secret{s} {};
+    KeyAuthentication(const std::string& s) : secret{s} {};
 
-    bool usesKeymaster() const { return !token.empty() || secret.empty(); };
+    bool usesKeymaster() const { return secret.empty(); };
 
-    const std::string token;
     const std::string secret;
 };
 
 extern const KeyAuthentication kEmptyAuthentication;
-
-// Checks if path "path" exists.
-bool pathExists(const std::string& path);
 
 bool createSecdiscardable(const std::string& path, std::string* hash);
 bool readSecdiscardable(const std::string& path, std::string* hash);
@@ -54,7 +47,8 @@ bool storeKey(const std::string& dir, const KeyAuthentication& auth, const KeyBu
 // Create a directory at the named path, and store "key" in it as storeKey
 // This version creates the key in "tmp_path" then atomically renames "tmp_path"
 // to "key_path" thereby ensuring that the key is either stored entirely or
-// not at all.
+// not at all.  All the needed files and directories are also fsync'ed to ensure
+// that the key is actually persisted to disk.
 bool storeKeyAtomically(const std::string& key_path, const std::string& tmp_path,
                         const KeyAuthentication& auth, const KeyBuffer& key);
 
@@ -71,5 +65,8 @@ bool runSecdiscardSingle(const std::string& file);
 bool generateWrappedStorageKey(KeyBuffer* key);
 // Export the per-boot boot wrapped storage key using keymaster.
 bool exportWrappedStorageKey(const KeyBuffer& kmKey, KeyBuffer* key);
+
+// Set a seed to be mixed into all key storage encryption keys.
+bool setKeyStorageBindingSeed(const std::vector<uint8_t>& seed);
 
 #endif

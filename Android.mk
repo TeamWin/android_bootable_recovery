@@ -110,6 +110,7 @@ LOCAL_C_INCLUDES += \
     packages/modules/adb \
     system/core/libmodprobe/include \
     system/core/libsparse \
+    system/vold \
     external/zlib \
     system/libziparchive/include \
     external/freetype/include \
@@ -129,7 +130,7 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/minuitwrp/include \
     $(LOCAL_PATH)/twinstall/include
 
-LOCAL_STATIC_LIBRARIES += libguitwrp libmodprobe
+LOCAL_STATIC_LIBRARIES += libguitwrp libmodprobe libvold
 LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
 LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase 
 LOCAL_SHARED_LIBRARIES += libziparchive libselinux libdl_android.bootstrap
@@ -308,14 +309,15 @@ ifneq ($(TW_LOAD_VENDOR_MODULES),)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
-    LOCAL_SHARED_LIBRARIES += libcryptfsfde
-    LOCAL_SHARED_LIBRARIES += libgpt_twrp libstatssocket.recovery
+    LOCAL_SHARED_LIBRARIES += libgpt_twrp
     LOCAL_C_INCLUDES += external/boringssl/src/include bootable/recovery/crypto
     LOCAL_C_INCLUDES += $(commands_TWRP_local_path)/crypto/fscrypt
     TW_INCLUDE_CRYPTO_FBE := true
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE
     LOCAL_SHARED_LIBRARIES += libtwrpfscrypt android.frameworks.stats@1.0 android.hardware.authsecret@1.0 \
-        android.hardware.oemlock@1.0
+        android.hardware.oemlock@1.0 libf2fs_sparseblock libbinder_ndk android.security.maintenance-ndk_platform \
+        android.system.keystore2-V1-ndk_platform libkeyutils liblog
+    LOCAL_STATIC_LIBRARIES += libkeymint_support 
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE_METADATA_DECRYPT
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),false)
@@ -680,7 +682,7 @@ ifneq ($(TW_OZIP_DECRYPT_KEY),)
 endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
-    include $(commands_TWRP_local_path)/crypto/fde/Android.mk
+    # include $(commands_TWRP_local_path)/crypto/fde/Android.mk
     include $(commands_TWRP_local_path)/crypto/scrypt/Android.mk
     ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         include $(commands_TWRP_local_path)/crypto/fscrypt/Android.mk

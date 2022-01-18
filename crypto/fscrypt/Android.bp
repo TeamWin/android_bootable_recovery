@@ -1,0 +1,147 @@
+bootstrap_go_package {
+    name: "soong-twrpfscrypt_defaults",
+    pkgPath: "bootable/recovery/crypto/fscrypt",
+    deps: [
+        "soong",
+        "soong-android",
+        "soong-cc"
+    ],
+    srcs: [
+        "twrpfscrypt_defaults.go",
+        "../../soong/copy.go",
+        "../../soong/makevars.go"
+    ],
+    pluginFor: ["soong_build"]
+}
+
+cc_binary {
+    name: "keystore_auth",
+    include_dirs: [
+        "system/security/keystore/include",
+        "hardware/interfaces/keymaster/4.0/support/include",
+        "hardware/interfaces/keymaster/4.1/support/include"
+    ],
+    srcs: [
+        "keystore_auth.cpp"
+    ],
+    shared_libs: [
+        "android.security.authorization-ndk_platform",
+        "android.hardware.security.keymint-V1-ndk_platform",
+        "android.hardware.keymaster@4.1",
+        "android.system.keystore2-V1-ndk_platform",
+        "libbase",
+        "libbinder",
+        "libbinder_ndk",
+        "libc",
+        "libcrypto",
+        "libhardware",
+        "libhidlbase",
+        "libutils",
+        "liblog"
+    ]
+}
+
+cc_library {
+    name: "libtwrpfscrypt",
+    srcs: [
+        "FsCrypt.cpp",
+        "Decrypt.cpp",
+        "ScryptParameters.cpp",
+        "fscrypt_policy.cpp",
+        "Utils.cpp",
+        "HashPassword.cpp",
+        "KeyUtil.cpp",
+        "Keymaster.cpp",
+        "KeyStorage.cpp",
+        "KeyBuffer.cpp",
+        "Process.cpp",
+        "EncryptInplace.cpp",
+        "Weaver1.cpp",
+        "Checkpoint.cpp",
+        "CryptoType.cpp",
+        "VoldUtil.cpp"
+    ],
+    clang: true,
+    cflags: [
+        "-Wno-unused-variable",
+        "-Wno-sign-compare",
+        "-Wno-unused-parameter",
+        "-Wno-comment",
+        "-Wno-missing-field-initializers",
+        "-DHAVE_LIBKEYUTILS",
+        "-std=gnu++2a",
+        "-Wno-macro-redefined",
+        "-Wno-unused-function",
+        "-fpic"
+    ],
+    shared_libs: [    
+        "android.hardware.boot@1.0",
+        "android.hardware.confirmationui@1.0",
+        "android.hardware.gatekeeper@1.0",
+        "android.hardware.keymaster@3.0",
+        "android.hardware.keymaster@4.0",
+        "android.hardware.keymaster@4.1",
+        "android.hardware.weaver@1.0",
+        "android.security.apc-ndk_platform",
+        "android.system.keystore2-V1-ndk_platform",
+        "android.security.authorization-ndk_platform",
+        "android.security.maintenance-ndk_platform",
+        "libselinux",
+        "libbinder_ndk",
+        "libc",
+        "libc++",
+        "libext4_utils",
+        "libbase",
+        "libcrypto",
+        "libcutils",
+        "libf2fs_sparseblock",
+        "libkeymaster_messages",
+        "libkeymint_support",
+        "libkeystore-attestation-application-id",
+        "libhardware",
+        "libprotobuf-cpp-lite",
+        "libfscrypt",
+        "libhidlbase",
+        "libutils",
+        "libbinder",
+        "libfs_mgr",
+        "libkeymaster4support",
+        "libkeymaster4_1support",
+        "libf2fs_sparseblock",
+        "libkeyutils",
+        "liblog",
+        "libhwbinder",
+        "libchrome",
+        "libbootloader_message"
+    ],
+    static_libs: [
+        "libc++fs",
+        "libscrypt_static",
+        "libvold_binder",
+        "libvold",
+    ],
+    include_dirs: [
+        "system/extras/ext4_utils",
+        "system/extras/ext4_utils/include/ext4_utils",
+        "system/security/keystore/include",
+        "external/scrypt/lib/crypto",
+        "hardware/interfaces/keymaster/4.1/support",
+        "hardware/libhardware/include/hardware",
+        "system/keymaster/include",
+        "system/extras/libfscrypt/include",
+        "system/core/libsysutils/include",
+        "system/core/fs_mgr/libfs_avb/include",
+        "system/core/fs_mgr/include_fstab",
+        "system/core/fs_mgr/include",
+        "system/core/fs_mgr/libdm/include",
+        "system/core/fs_mgr/liblp/include",
+        "system/gsid/include",
+        "system/core/init",
+        "system/vold/model",
+        "system/vold",
+        "system/extras/f2fs_utils",
+        "hardware/interfaces/security/keymint/support/include",
+        "bootable/recovery/bootloader_message/include"
+    ],
+    required: ["keystore_auth", "keystore"]
+}
