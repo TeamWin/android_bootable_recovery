@@ -17,20 +17,10 @@
 #ifndef _ENCRYPT_INPLACE_H
 #define _ENCRYPT_INPLACE_H
 
-#include <sys/types.h>
+#include <stdint.h>
+#include <string>
 
-#define CRYPT_INPLACE_BUFSIZE 4096
-#define CRYPT_SECTOR_SIZE 512
-#define RETRY_MOUNT_ATTEMPTS 10
-#define RETRY_MOUNT_DELAY_SECONDS 1
-
-/* Return values for cryptfs_enable_inplace() */
-#define ENABLE_INPLACE_OK 0
-#define ENABLE_INPLACE_ERR_OTHER (-1)
-#define ENABLE_INPLACE_ERR_DEV (-2) /* crypto_blkdev issue */
-
-int cryptfs_enable_inplace(const char* crypto_blkdev, const char* real_blkdev, off64_t size,
-                           off64_t* size_already_done, off64_t tot_size,
-                           off64_t previously_encrypted_upto, bool set_progress_properties);
+bool encrypt_inplace(const std::string& crypto_blkdev, const std::string& real_blkdev,
+                     uint64_t nr_sec, bool set_progress_properties);
 
 #endif

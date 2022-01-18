@@ -68,16 +68,6 @@ using android::base::Realpath;
 using android::base::StartsWith;
 using android::base::StringPrintf;
 using android::fs_mgr::GetEntryForMountPoint;
-using ::BuildDataPath;
-using ::IsFilesystemSupported;
-using ::kEmptyAuthentication;
-using ::KeyBuffer;
-using ::KeyGeneration;
-using ::retrieveKey;
-using ::retrieveOrGenerateKey;
-using ::SetQuotaInherit;
-using ::SetQuotaProjectId;
-using ::writeStringToFile;
 using namespace android::fscrypt;
 using namespace android::dm;
 
@@ -143,8 +133,9 @@ static std::vector<std::string> get_ce_key_paths(const std::string& directory_pa
             }
             break;
         }
+        if (::IsDotOrDotDot(*entry)) continue;
         if (entry->d_type != DT_DIR || entry->d_name[0] != 'c') {
-            LOG(INFO) << "Skipping non-key " << entry->d_name;
+            LOG(DEBUG) << "Skipping non-key " << entry->d_name;
             continue;
         }
         result.emplace_back(directory_path + "/" + entry->d_name);
@@ -282,10 +273,9 @@ static bool get_volume_file_encryption_options(EncryptionOptions* options) {
     // HEH as default was always a mistake. Use the libfscrypt default (CTS)
     // for devices launching on versions above Android 10.
     auto first_api_level = GetFirstApiLevel();
-    constexpr uint64_t pre_gki_level = 29;
     auto filenames_mode =
             android::base::GetProperty("ro.crypto.volume.filenames_mode",
-                                       first_api_level > pre_gki_level ? "" : "aes-256-heh");
+                                       first_api_level > __ANDROID_API_Q__ ? "" : "aes-256-heh");
     auto options_string = android::base::GetProperty("ro.crypto.volume.options",
                                                      contents_mode + ":" + filenames_mode);
     if (!ParseOptionsForApiLevel(first_api_level, options_string, options)) {
@@ -345,7 +335,6 @@ static bool destroy_dir(const std::string& dir) {
 // NB this assumes that there is only one thread listening for crypt commands, because
 // it creates keys in a fixed location.
 static bool create_and_install_user_keys(userid_t user_id, bool create_ephemeral) {
-    LOG(INFO) << "fscrypt::create_and_install_user_keys";
     EncryptionOptions options;
     if (!get_data_file_encryption_options(&options)) return false;
     KeyBuffer de_key, ce_key;
@@ -372,19 +361,18 @@ static bool create_and_install_user_keys(userid_t user_id, bool create_ephemeral
     EncryptionPolicy de_policy;
     if (!install_storage_key(DATA_MNT_POINT, options, de_key, &de_policy)) return false;
     s_de_policies[user_id] = de_policy;
-    LOG(INFO) << "fscrypt::added de_policy";
     EncryptionPolicy ce_policy;
     if (!install_storage_key(DATA_MNT_POINT, options, ce_key, &ce_policy)) return false;
     s_ce_policies[user_id] = ce_policy;
-    LOG(INFO) << "Created keys for user " << user_id;
+    LOG(DEBUG) << "Created keys for user " << user_id;
     return true;
 }
 
-bool lookup_policy(const std::map<userid_t, EncryptionPolicy>& key_map, userid_t user_id,
+static bool lookup_policy(const std::map<userid_t, EncryptionPolicy>& key_map, userid_t user_id,
                           EncryptionPolicy* policy) {
     auto refi = key_map.find(user_id);
     if (refi == key_map.end()) {
-        LOG(ERROR) << "Cannot find key for " << user_id;
+        LOG(DEBUG) << "Cannot find key for " << user_id;
         return false;
     }
     *policy = refi->second;
@@ -399,7 +387,6 @@ static bool is_numeric(const char* name) {
 }
 
 static bool load_all_de_keys() {
-    LOG(INFO) << "fscrypt::load_all_de_keys";
     EncryptionOptions options;
     if (!get_data_file_encryption_options(&options)) return false;
     auto de_dir = user_key_dir + "/de";
@@ -418,8 +405,9 @@ static bool load_all_de_keys() {
             }
             break;
         }
+        if (IsDotOrDotDot(*entry)) continue;
         if (entry->d_type != DT_DIR || !is_numeric(entry->d_name)) {
-            LOG(INFO) << "Skipping non-de-key " << entry->d_name;
+            LOG(DEBUG) << "Skipping non-de-key " << entry->d_name;
             continue;
         }
         userid_t user_id = std::stoi(entry->d_name);
@@ -429,14 +417,11 @@ static bool load_all_de_keys() {
         EncryptionPolicy de_policy;
         if (!install_storage_key(DATA_MNT_POINT, options, de_key, &de_policy)) return false;
         auto ret = s_de_policies.insert({user_id, de_policy});
-        LOG(INFO) << "fscrypt::load_all_de_keys::s_de_policies::size::" << s_de_policies.size();
         if (!ret.second && ret.first->second != de_policy) {
-            LOG(INFO) << "DE policy for user" << user_id << " changed";
+            LOG(ERROR) << "DE policy for user" << user_id << " changed";
             return false;
         }
-        LOG(INFO) << "Installed de key for user " << user_id;
-        std::string user_prop = "twrp.user." + std::to_string(user_id) + ".decrypt";
-        property_set(user_prop.c_str(), "0");
+        LOG(DEBUG) << "Installed de key for user " << user_id;
     }
     // fscrypt:TODO: go through all DE directories, ensure that all user dirs have the
     // correct policy set on them, and that no rogue ones exist.
@@ -477,7 +462,6 @@ bool fscrypt_initialize_systemwide_keys() {
     if (!::writeStringToFile(options_string, options_filename)) return false;
 
     std::string ref_filename = std::string(DATA_MNT_POINT) + fscrypt_key_ref;
-    de_key_raw_ref = device_policy.key_raw_ref;
     if (!::writeStringToFile(device_policy.key_raw_ref, ref_filename)) return false;
     LOG(INFO) << "Wrote system DE key reference to:" << ref_filename;
 
@@ -490,18 +474,11 @@ bool fscrypt_initialize_systemwide_keys() {
         return false;
     LOG(INFO) << "Wrote per boot key reference to:" << per_boot_ref_filename;
 
-    if (!::FsyncDirectory(device_key_dir)) return false;
     return true;
 }
 
 bool fscrypt_init_user0() {
-    if (fstab_default.empty()) {
-        if (!ReadDefaultFstab(&fstab_default)) {
-            PLOG(ERROR) << "Failed to open default fstab";
-            return -1;
-        }
-    }
-    LOG(INFO) << "fscrypt_init_user0";
+    LOG(DEBUG) << "fscrypt_init_user0";
     if (fscrypt_is_native()) {
         if (!prepare_dir(user_key_dir, 0700, AID_ROOT, AID_ROOT)) return false;
         if (!prepare_dir(user_key_dir + "/ce", 0700, AID_ROOT, AID_ROOT)) return false;
@@ -516,7 +493,6 @@ bool fscrypt_init_user0() {
     // We can only safely prepare DE storage here, since CE keys are probably
     // entangled with user credentials.  The framework will always prepare CE
     // storage once CE keys are installed.
-    LOG(INFO) << "attempting fscrypt_prepare_user_storage";
     if (!fscrypt_prepare_user_storage("", 0, 0, android::os::IVold::STORAGE_FLAG_DE)) {
         LOG(ERROR) << "Failed to prepare user 0 storage";
         return false;
@@ -525,15 +501,13 @@ bool fscrypt_init_user0() {
     // If this is a non-FBE device that recently left an emulated mode,
     // restore user data directories to known-good state.
     if (!fscrypt_is_native() && !fscrypt_is_emulated()) {
-        LOG(INFO) << "unlocking data media";
-        fscrypt_unlock_user_key(0, 0, "!", "!");
+        fscrypt_unlock_user_key(0, 0, "!");
     }
 
     // In some scenarios (e.g. userspace reboot) we might unmount userdata
     // without doing a hard reboot. If CE keys were stored in fs keyring then
     // they will be lost after unmount. Attempt to re-install them.
     if (fscrypt_is_native() && ::isFsKeyringSupported()) {
-        LOG(INFO) << "reloading ce keys";
         if (!try_reload_ce_keys()) return false;
     }
 
@@ -541,9 +515,9 @@ bool fscrypt_init_user0() {
 }
 
 bool fscrypt_vold_create_user_key(userid_t user_id, int serial, bool ephemeral) {
-    LOG(INFO) << "fscrypt_vold_create_user_key for " << user_id << " serial " << serial;
+    LOG(DEBUG) << "fscrypt_vold_create_user_key for " << user_id << " serial " << serial;
     if (!fscrypt_is_native()) {
-        return true; 
+        return true;
     }
     // FIXME test for existence of key that is not loaded yet
     if (s_ce_policies.count(user_id) != 0) {
@@ -592,7 +566,7 @@ static bool evict_ce_key(userid_t user_id) {
 }
 
 bool fscrypt_destroy_user_key(userid_t user_id) {
-    LOG(INFO) << "fscrypt_destroy_user_key(" << user_id << ")";
+    LOG(DEBUG) << "fscrypt_destroy_user_key(" << user_id << ")";
     if (!fscrypt_is_native()) {
         return true;
     }
@@ -662,14 +636,13 @@ static bool parse_hex(const std::string& hex, std::string* result) {
 }
 
 static std::optional<::KeyAuthentication> authentication_from_hex(
-        const std::string& token_hex, const std::string& secret_hex) {
-    std::string token, secret;
-    if (!parse_hex(token_hex, &token)) return std::optional<::KeyAuthentication>();
+        const std::string& secret_hex) {
+    std::string secret;
     if (!parse_hex(secret_hex, &secret)) return std::optional<::KeyAuthentication>();
     if (secret.empty()) {
         return kEmptyAuthentication;
     } else {
-        return ::KeyAuthentication(token, secret);
+        return ::KeyAuthentication(secret);
     }
 }
 
@@ -686,29 +659,23 @@ static bool read_or_create_volkey(const std::string& misc_path, const std::strin
     auto secdiscardable_path = volume_secdiscardable_path(volume_uuid);
     std::string secdiscardable_hash;
     if (::pathExists(secdiscardable_path)) {
-        if (!readSecdiscardable(secdiscardable_path, &secdiscardable_hash))
+        if (!::readSecdiscardable(secdiscardable_path, &secdiscardable_hash))
             return false;
     } else {
-        if (fs_mkdirs(secdiscardable_path.c_str(), 0700) != 0) {
-            PLOG(ERROR) << "Creating directories for: " << secdiscardable_path;
-            return false;
-        }
+        if (!::MkdirsSync(secdiscardable_path, 0700)) return false;
         if (!::createSecdiscardable(secdiscardable_path, &secdiscardable_hash))
             return false;
     }
     auto key_path = volkey_path(misc_path, volume_uuid);
-    if (fs_mkdirs(key_path.c_str(), 0700) != 0) {
-        PLOG(ERROR) << "Creating directories for: " << key_path;
-        return false;
-    }
-    ::KeyAuthentication auth("", secdiscardable_hash);
+    if (!::MkdirsSync(key_path, 0700)) return false;
+    ::KeyAuthentication auth(secdiscardable_hash);
 
     EncryptionOptions options;
     if (!get_volume_file_encryption_options(&options)) return false;
     KeyBuffer key;
     if (!retrieveOrGenerateKey(key_path, key_path + "_tmp", auth, makeGen(options), &key))
         return false;
-    if (!install_storage_key(BuildDataPath(volume_uuid), options, key, policy)) return false;
+    if (!install_storage_key(::BuildDataPath(volume_uuid), options, key, policy)) return false;
     return true;
 }
 
@@ -745,22 +712,18 @@ static bool fscrypt_rewrap_user_key(userid_t user_id, int serial,
     return true;
 }
 
-bool fscrypt_add_user_key_auth(userid_t user_id, int serial, const std::string& token_hex,
-                               const std::string& secret_hex) {
-    LOG(INFO) << "fscrypt_add_user_key_auth " << user_id << " serial=" << serial
-               << " token_present=" << (token_hex != "!");
+bool fscrypt_add_user_key_auth(userid_t user_id, int serial, const std::string& secret_hex) {
+    LOG(DEBUG) << "fscrypt_add_user_key_auth " << user_id << " serial=" << serial;
     if (!fscrypt_is_native()) return true;
-    auto auth = authentication_from_hex(token_hex, secret_hex);
+    auto auth = authentication_from_hex(secret_hex);
     if (!auth) return false;
     return fscrypt_rewrap_user_key(user_id, serial, kEmptyAuthentication, *auth);
 }
 
-bool fscrypt_clear_user_key_auth(userid_t user_id, int serial, const std::string& token_hex,
-                                 const std::string& secret_hex) {
-    LOG(INFO) << "fscrypt_clear_user_key_auth " << user_id << " serial=" << serial
-               << " token_present=" << (token_hex != "!");
+bool fscrypt_clear_user_key_auth(userid_t user_id, int serial, const std::string& secret_hex) {
+    LOG(DEBUG) << "fscrypt_clear_user_key_auth " << user_id << " serial=" << serial;
     if (!fscrypt_is_native()) return true;
-    auto auth = authentication_from_hex(token_hex, secret_hex);
+    auto auth = authentication_from_hex(secret_hex);
     if (!auth) return false;
     return fscrypt_rewrap_user_key(user_id, serial, *auth, kEmptyAuthentication);
 }
@@ -779,17 +742,23 @@ bool fscrypt_fixate_newest_user_key_auth(userid_t user_id) {
     return true;
 }
 
+std::vector<int> fscrypt_get_unlocked_users() {
+    std::vector<int> user_ids;
+    for (const auto& it : s_ce_policies) {
+        user_ids.push_back(it.first);
+    }
+    return user_ids;
+}
+
 // TODO: rename to 'install' for consistency, and take flags to know which keys to install
-bool fscrypt_unlock_user_key(userid_t user_id, int serial, const std::string& token_hex,
-                             const std::string& secret_hex) {
-    LOG(INFO) << "fscrypt_unlock_user_key " << user_id << " serial=" << serial
-               << " token_present=" << (token_hex != "!");
+bool fscrypt_unlock_user_key(userid_t user_id, int serial, const std::string& secret_hex) {
+    LOG(DEBUG) << "fscrypt_unlock_user_key " << user_id << " serial=" << serial;
     if (fscrypt_is_native()) {
         if (s_ce_policies.count(user_id) != 0) {
             LOG(WARNING) << "Tried to unlock already-unlocked key for user " << user_id;
             return true;
         }
-        auto auth = authentication_from_hex(token_hex, secret_hex);
+        auto auth = authentication_from_hex(secret_hex);
         if (!auth) return false;
         if (!read_and_install_user_ce_key(user_id, *auth)) {
             LOG(ERROR) << "Couldn't read key for " << user_id;
@@ -842,7 +811,7 @@ static bool prepare_subdirs(const std::string& action, const std::string& volume
 
 bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_id, int serial,
                                   int flags) {
-    LOG(INFO) << "fscrypt_prepare_user_storage for volume " << escape_empty(volume_uuid)
+    LOG(DEBUG) << "fscrypt_prepare_user_storage for volume " << escape_empty(volume_uuid)
                << ", user " << user_id << ", serial " << serial << ", flags " << flags;
 
     if (flags & android::os::IVold::STORAGE_FLAG_DE) {
@@ -871,6 +840,7 @@ bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             if (!prepare_dir(vendor_de_path, 0771, AID_ROOT, AID_ROOT)) return false;
         }
         if (!prepare_dir(user_de_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;
+
         if (fscrypt_is_native()) {
             EncryptionPolicy de_policy;
             if (volume_uuid.empty()) {
@@ -898,7 +868,15 @@ bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             if (!prepare_dir(misc_ce_path, 01771, AID_SYSTEM, AID_MISC)) return false;
             if (!prepare_dir(vendor_ce_path, 0771, AID_ROOT, AID_ROOT)) return false;
         }
-        if (!prepare_dir(media_ce_path, 0770, AID_MEDIA_RW, AID_MEDIA_RW)) return false;
+        if (!prepare_dir(media_ce_path, 02770, AID_MEDIA_RW, AID_MEDIA_RW)) return false;
+        // On devices without sdcardfs (kernel 5.4+), the path permissions aren't fixed
+        // up automatically; therefore, use a default ACL, to ensure apps with MEDIA_RW
+        // can keep reading external storage; in particular, this allows app cloning
+        // scenarios to work correctly on such devices.
+        int ret = SetDefaultAcl(media_ce_path, 02770, AID_MEDIA_RW, AID_MEDIA_RW, {AID_MEDIA_RW});
+        if (ret != android::OK) {
+            return false;
+        }
 
         if (!prepare_dir(user_ce_path, 0771, AID_SYSTEM, AID_SYSTEM)) return false;
 

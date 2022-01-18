@@ -25,7 +25,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
         LOCAL_SHARED_LIBRARIES += libe4crypt
     endif
     LOCAL_SHARED_LIBRARIES += libselinux libc libc++ libbase libcrypto libcutils libkeymaster_messages libhardware libprotobuf-cpp-lite \
-        android.hardware.keymaster@3.0 libkeystore_binder libhidlbase libutils libbinder
+        android.hardware.keymaster@3.0 libhidlbase libutils libbinder
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
         #9.0 rules
         LOCAL_CFLAGS += -Wno-unused-variable -Wno-sign-compare -Wno-unused-parameter -Wno-comment
@@ -86,7 +86,7 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
         LOCAL_SHARED_LIBRARIES += libe4crypt
     endif
     LOCAL_SHARED_LIBRARIES += libselinux libc libc++ libbase libcrypto libcutils libkeymaster_messages libhardware libprotobuf-cpp-lite \
-    android.hardware.keymaster@3.0 libkeystore_binder libhidlbase libutils libbinder
+    android.hardware.keymaster@3.0 libhidlbase libutils libbinder
     ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
         #9.0 rules
         LOCAL_CFLAGS += -Wno-unused-variable -Wno-sign-compare -Wno-unused-parameter -Wno-comment

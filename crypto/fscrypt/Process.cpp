@@ -39,11 +39,9 @@
 #include <android-base/strings.h>
 
 #include "Process.h"
+#include "Utils.h"
 
 using android::base::StringPrintf;
-
-namespace android {
-namespace vold {
 
 static bool checkMaps(const std::string& path, const std::string& prefix) {
     bool found = false;
@@ -83,7 +81,7 @@ static bool checkSymlink(const std::string& path, const std::string& prefix) {
 }
 
 // TODO: Refactor the code with KillProcessesWithOpenFiles().
-int KillProcessesWithMounts(const std::string& prefix, int signal) {
+int KillProcessesWithTmpfsMounts(const std::string& prefix, int signal) {
     std::unordered_set<pid_t> pids;
 
     auto proc_d = std::unique_ptr<DIR, int (*)(DIR*)>(opendir("/proc"), closedir);
@@ -111,7 +109,8 @@ int KillProcessesWithMounts(const std::string& prefix, int signal) {
         // Check if obb directory is mounted, and get all packages of mounted app data directory.
         mntent* mentry;
         while ((mentry = getmntent(fp.get())) != nullptr) {
-            if (android::base::StartsWith(mentry->mnt_dir, prefix)) {
+            if (mentry->mnt_fsname != nullptr && strncmp(mentry->mnt_fsname, "tmpfs", 5) == 0
+                    && android::base::StartsWith(mentry->mnt_dir, prefix)) {
                 pids.insert(pid);
                 break;
             }
@@ -127,7 +126,7 @@ int KillProcessesWithMounts(const std::string& prefix, int signal) {
     return pids.size();
 }
 
-int KillProcessesWithOpenFiles(const std::string& prefix, int signal) {
+int KillProcessesWithOpenFiles(const std::string& prefix, int signal, bool killFuseDaemon) {
     std::unordered_set<pid_t> pids;
 
     auto proc_d = std::unique_ptr<DIR, int (*)(DIR*)>(opendir("/proc"), closedir);
@@ -164,17 +163,26 @@ int KillProcessesWithOpenFiles(const std::string& prefix, int signal) {
         }
 
         if (found) {
-            pids.insert(pid);
+            if (!IsFuseDaemon(pid) || killFuseDaemon) {
+                pids.insert(pid);
+            } else {
+                LOG(WARNING) << "Found FUSE daemon with open file. Skipping...";
+            }
         }
     }
     if (signal != 0) {
         for (const auto& pid : pids) {
-            LOG(WARNING) << "Sending " << strsignal(signal) << " to " << pid;
+            std::string comm;
+            android::base::ReadFileToString(StringPrintf("/proc/%d/comm", pid), &comm);
+            comm = android::base::Trim(comm);
+
+            std::string exe;
+            android::base::Readlink(StringPrintf("/proc/%d/exe", pid), &exe);
+
+            LOG(WARNING) << "Sending " << strsignal(signal) << " to pid " << pid << " (" << comm
+                         << ", " << exe << ")";
             kill(pid, signal);
         }
     }
     return pids.size();
 }
-
-}  // namespace vold
-}  // namespace android
