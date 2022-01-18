@@ -49,10 +49,9 @@
 #include "gui/gui.hpp"
 #include "adbbu/libtwadbbu.hpp"
 #ifdef TW_INCLUDE_CRYPTO
-	#include "crypto/fde/cryptfs.h"
+	// #include "crypto/fde/cryptfs.h"
+	#include "cryptfs.h"
 	#include "Decrypt.h"
-#else
-	#define CRYPT_FOOTER_OFFSET 0x4000
 #endif
 extern "C" {
 	#include "mtdutils/mtdutils.h"
@@ -74,6 +73,8 @@ extern "C" {
 #endif
 #include <sparse_format.h>
 #include "progresstracking.hpp"
+
+#define CRYPT_FOOTER_OFFSET 0x4000
 
 using namespace std;
 
@@ -674,30 +675,10 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	} else if (!Mount(false)) {
 		if (Is_Present) {
-			if (Key_Directory.empty()) {
-				set_partition_data(Use_Original_Path ? Original_Path.c_str() : Actual_Block_Device.c_str(), Crypto_Key_Location.c_str(),
-				Fstab_File_System.c_str());
-				if (cryptfs_check_footer() == 0) {
-					Is_Encrypted = true;
-					Is_Decrypted = false;
-					Can_Be_Mounted = false;
-					Current_File_System = "emmc";
-					Setup_Image();
-					DataManager::SetValue(TW_CRYPTO_PWTYPE, cryptfs_get_password_type());
-					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
-					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
-					DataManager::SetValue("tw_crypto_display", "");
-					if (datamedia)
-						Setup_Data_Media();
-				} else {
-					gui_err("mount_data_footer=Could not mount /data and unable to find crypto footer.");
-				}
-			} else {
-				Is_Encrypted = true;
-				Is_Decrypted = false;
-				if (datamedia)
-					Setup_Data_Media();
-			}
+			Is_Encrypted = true;
+			Is_Decrypted = false;
+			if (datamedia)
+				Setup_Data_Media();
 		} else if (Key_Directory.empty()) {
 			LOGERR("Primary block device '%s' for mount point '%s' is not present!\n",
 			Primary_Block_Device.c_str(), Mount_Point.c_str());
@@ -771,7 +752,7 @@ bool TWPartition::Decrypt_FBE_DE() {
 	ExcludeAll(Mount_Point + "/gsi"); // cow devices
 
 	int retry_count = 3;
-	while (!Decrypt_DE() && --retry_count)
+	while (!android::keystore::Decrypt_DE() && --retry_count)
 		usleep(2000);
 	if (retry_count > 0) {
 		PartitionManager.Set_Crypto_State();
@@ -779,7 +760,7 @@ bool TWPartition::Decrypt_FBE_DE() {
 		Is_Decrypted = false;
 		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
 		string filename;
-		int pwd_type = Get_Password_Type(0, filename);
+		int pwd_type = android::keystore::Get_Password_Type(0, filename);
 		if (pwd_type < 0) {
 			LOGERR("This TWRP does not have synthetic password decrypt support\n");
 			pwd_type = 0;  // default password
@@ -3400,10 +3381,10 @@ int TWPartition::Decrypt_Adopted() {
 			thekey.append(buf, n);
 		}
 		close(fdkey);
-		unsigned char* key = (unsigned char*) thekey.data();
-		cryptfs_revert_ext_volume(part_guid);
+		// unsigned char* key = (unsigned char*) thekey.data();
+		// cryptfs_revert_ext_volume(part_guid);
 
-		ret = cryptfs_setup_ext_volume(part_guid, Adopted_Block_Device.c_str(), key, thekey.size(), crypto_blkdev);
+		// ret = cryptfs_setup_ext_volume(part_guid, Adopted_Block_Device.c_str(), key, thekey.size(), crypto_blkdev);
 		if (ret == 0) {
 			LOGINFO("adopted storage new block device: '%s'\n", crypto_blkdev);
 			Decrypted_Block_Device = crypto_blkdev;
@@ -3414,7 +3395,7 @@ int TWPartition::Decrypt_Adopted() {
 				LOGERR("Failed to mount decrypted adopted storage device\n");
 				Is_Decrypted = false;
 				Is_Encrypted = false;
-				cryptfs_revert_ext_volume(part_guid);
+				// cryptfs_revert_ext_volume(part_guid);
 				ret = 1;
 			} else {
 				UnMount(false);
@@ -3459,7 +3440,7 @@ void TWPartition::Revert_Adopted() {
 	if (!Adopted_GUID.empty()) {
 		PartitionManager.Remove_MTP_Storage(Mount_Point);
 		UnMount(false);
-		cryptfs_revert_ext_volume(Adopted_GUID.c_str());
+		// cryptfs_revert_ext_volume(Adopted_GUID.c_str());
 		Is_Adopted_Storage = false;
 		Is_Encrypted = false;
 		Is_Decrypted = false;
