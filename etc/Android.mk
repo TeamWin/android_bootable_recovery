@@ -85,6 +85,23 @@ ifneq ($(filter $(AB_OTA_UPDATER) $(PRODUCT_USE_DYNAMIC_PARTITIONS) $(TW_INCLUDE
 
 	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
+
+	include $(CLEAR_VARS)
+	LOCAL_MODULE := keystore2.rc
+	LOCAL_MODULE_TAGS := optional
+	LOCAL_MODULE_CLASS := EXECUTABLES
+	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+
+	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+	include $(BUILD_PREBUILT)
+
+	include $(CLEAR_VARS)
+	LOCAL_MODULE := android.system.keystore2-service.xml
+	LOCAL_MODULE_TAGS := optional
+	LOCAL_MODULE_CLASS := EXECUTABLES
+	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/vintf/manifest
+	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+	include $(BUILD_PREBUILT)
 endif
 
 ifeq ($(AB_OTA_UPDATER),true)
