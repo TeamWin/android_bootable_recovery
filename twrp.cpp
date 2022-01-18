@@ -63,6 +63,10 @@ extern "C" {
 }
 #endif
 
+#ifdef TW_INCLUDE_CRYPTO
+#include "FsCrypt.h"
+#endif
+
 //extern int adb_server_main(int is_daemon, int server_port, int /* reply_fd */);
 
 TWPartitionManager PartitionManager;
@@ -347,6 +351,7 @@ static void reboot() {
 	TWFunc::Update_Log_File();
 	string Reboot_Arg;
 
+	fscrypt_lock_user_key(0);
 	DataManager::GetValue("tw_reboot_arg", Reboot_Arg);
 	if (Reboot_Arg == "recovery")
 		TWFunc::tw_reboot(rb_recovery);
