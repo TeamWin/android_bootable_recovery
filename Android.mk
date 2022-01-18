@@ -305,7 +305,7 @@ endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
     LOCAL_SHARED_LIBRARIES += libcryptfsfde
-    LOCAL_SHARED_LIBRARIES += libgpt_twrp libstatssocket.recovery
+    LOCAL_SHARED_LIBRARIES += libgpt_twrp
     LOCAL_C_INCLUDES += external/boringssl/src/include bootable/recovery/crypto
     LOCAL_C_INCLUDES += $(commands_TWRP_local_path)/crypto/fscrypt
     TW_INCLUDE_CRYPTO_FBE := true

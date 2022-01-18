@@ -26,12 +26,11 @@
 #include <stdio.h>
 #include <string>
 
-#ifdef USE_SECURITY_NAMESPACE
-#include <android/security/keystore/IKeystoreService.h>
-#else
-#include <keystore/IKeystoreService.h>
-#include <keystore/authorization_set.h>
-#endif
+#include <aidl/android/system/keystore2/IKeystoreService.h>
+#include <aidl/android/security/authorization/IKeystoreAuthorization.h>
+#include <android/binder_manager.h>
+#include <keystore/keystore_return_types.h>
+#include <android/hardware/keymaster/4.1/IKeymasterDevice.h>
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
 
@@ -42,7 +41,7 @@
 #endif
 
 using namespace android;
-using android::security::keystore::IKeystoreService;
+using aidl::android::system::keystore2::IKeystoreService;
 
 void create_error_file() {
 	FILE* error_file = fopen("/auth_error", "wb");
@@ -73,28 +72,18 @@ int main() {
 	fread(auth_token , sizeof(uint8_t), size, auth_file);
 	fclose(auth_file);
 	// First get the keystore service
-	sp<IServiceManager> sm = defaultServiceManager();
-	sp<IBinder> binder = sm->getService(String16("android.security.keystore"));
-#ifdef USE_SECURITY_NAMESPACE
-	sp<IKeystoreService> service = interface_cast<IKeystoreService>(binder);
-#else
-	sp<IKeystoreService> service = interface_cast<IKeystoreService>(binder);
-#endif
+	AIBinder* authzAIBinder = AServiceManager_getService("android.security.authorization");
+	::ndk::SpAIBinder binder(authzAIBinder);
+	auto service = aidl::android::security::authorization::IKeystoreAuthorization::fromBinder(binder);
 	if (service == NULL) {
 		printf("error: could not connect to keystore service\n");
 		ALOGE("error: could not connect to keystore service\n");
 		create_error_file();
 		return -2;
 	}
-#ifdef USE_SECURITY_NAMESPACE
-	std::vector<uint8_t> auth_token_vector(&auth_token[0], (&auth_token[0]) + size);
-	int result = 0;
-	auto binder_result = service->addAuthToken(auth_token_vector, &result);
-	if (!binder_result.isOk() || !keystore::KeyStoreServiceReturnCode(result).isOk()) {
-#else
-	::keystore::KeyStoreServiceReturnCode auth_result = service->addAuthToken(auth_token, size);
-	if (!auth_result.isOk()) {
-#endif
+	const ::aidl::android::hardware::security::keymint::HardwareAuthToken token;
+	auto binder_result = service->addAuthToken(token);
+	if (!binder_result.isOk()) {
 		// The keystore checks the uid of the calling process and will return a permission denied on this operation for user 0
 		printf("keystore error adding auth token\n");
 		ALOGE("keystore error adding auth token\n");
@@ -106,3 +95,4 @@ int main() {
 	unlink("/auth_token");
 	return 0;
 }
+	
