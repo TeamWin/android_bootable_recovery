@@ -33,8 +33,7 @@ bool fscrypt_clear_user_key_auth(userid_t user_id, int serial, const std::string
                                  const std::string& secret);
 bool fscrypt_fixate_newest_user_key_auth(userid_t user_id);
 
-bool fscrypt_unlock_user_key(userid_t user_id, int serial, const std::string& token,
-                             const std::string& secret);
+bool fscrypt_unlock_user_key(userid_t user_id, int serial, const std::string& secret);
 bool fscrypt_lock_user_key(userid_t user_id);
 
 bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_id, int serial,
@@ -46,5 +45,5 @@ bool fscrypt_destroy_volume_keys(const std::string& volume_uuid);
 
 bool lookup_key_ref(const std::map<userid_t, android::fscrypt::EncryptionPolicy>& key_map, userid_t user_id,
                            std::string* raw_ref);
-bool lookup_policy(const std::map<userid_t, EncryptionPolicy>& key_map, userid_t user_id,
+static bool lookup_policy(const std::map<userid_t, EncryptionPolicy>& key_map, userid_t user_id,
                           EncryptionPolicy* policy);
