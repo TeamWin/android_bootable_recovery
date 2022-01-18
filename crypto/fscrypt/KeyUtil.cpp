@@ -30,7 +30,6 @@
 #include <android-base/properties.h>
 #include <keyutils.h>
 
-#include <fscrypt_uapi.h>
 #include "FsCrypt.h"
 #include "KeyStorage.h"
 #include "Utils.h"
@@ -57,46 +56,46 @@ bool generateStorageKey(const KeyGeneration& gen, KeyBuffer* key) {
             LOG(ERROR) << "Cannot generate a wrapped key " << gen.keysize << " bytes long";
             return false;
         }
+        LOG(DEBUG) << "Generating wrapped storage key";
         return generateWrappedStorageKey(key);
     } else {
+        LOG(DEBUG) << "Generating standard storage key";
         return randomKey(gen.keysize, key);
     }
 }
 
+static bool isFsKeyringSupportedImpl() {
+    android::base::unique_fd fd(open("/data", O_RDONLY | O_DIRECTORY | O_CLOEXEC));
+
+    // FS_IOC_ADD_ENCRYPTION_KEY with a NULL argument will fail with ENOTTY if
+    // the ioctl isn't supported.  Otherwise it will fail with another error
+    // code such as EFAULT.
+    //
+    // Note that there's no need to check for FS_IOC_REMOVE_ENCRYPTION_KEY,
+    // since it's guaranteed to be available if FS_IOC_ADD_ENCRYPTION_KEY is.
+    // There's also no need to check for support on external volumes separately
+    // from /data, since either the kernel supports the ioctls on all
+    // fscrypt-capable filesystems or it doesn't.
+    errno = 0;
+    (void)ioctl(fd, FS_IOC_ADD_ENCRYPTION_KEY, NULL);
+    if (errno == ENOTTY) {
+        LOG(INFO) << "Kernel doesn't support FS_IOC_ADD_ENCRYPTION_KEY.  Falling back to "
+                     "session keyring";
+        return false;
+    }
+    if (errno != EFAULT) {
+        PLOG(WARNING) << "Unexpected error from FS_IOC_ADD_ENCRYPTION_KEY";
+    }
+    LOG(DEBUG) << "Detected support for FS_IOC_ADD_ENCRYPTION_KEY";
+    android::base::SetProperty("ro.crypto.uses_fs_ioc_add_encryption_key", "true");
+    return true;
+}
+
+
 // Return true if the kernel supports the ioctls to add/remove fscrypt keys
 // directly to/from the filesystem.
 bool isFsKeyringSupported(void) {
-    static bool initialized = false;
-    static bool supported;
-
-    if (!initialized) {
-        android::base::unique_fd fd(open("/data", O_RDONLY | O_DIRECTORY | O_CLOEXEC));
-
-        // FS_IOC_ADD_ENCRYPTION_KEY with a NULL argument will fail with ENOTTY
-        // if the ioctl isn't supported.  Otherwise it will fail with another
-        // error code such as EFAULT.
-        errno = 0;
-        (void)ioctl(fd, FS_IOC_ADD_ENCRYPTION_KEY, NULL);
-        if (errno == ENOTTY) {
-            LOG(INFO) << "Kernel doesn't support FS_IOC_ADD_ENCRYPTION_KEY.  Falling back to "
-                         "session keyring";
-            supported = false;
-        } else {
-            if (errno != EFAULT) {
-                PLOG(WARNING) << "Unexpected error from FS_IOC_ADD_ENCRYPTION_KEY";
-            }
-            LOG(INFO) << "Detected support for FS_IOC_ADD_ENCRYPTION_KEY";
-            supported = true;
-            android::base::SetProperty("ro.crypto.uses_fs_ioc_add_encryption_key", "true");
-        }
-        // There's no need to check for FS_IOC_REMOVE_ENCRYPTION_KEY, since it's
-        // guaranteed to be available if FS_IOC_ADD_ENCRYPTION_KEY is.  There's
-        // also no need to check for support on external volumes separately from
-        // /data, since either the kernel supports the ioctls on all
-        // fscrypt-capable filesystems or it doesn't.
-
-        initialized = true;
-    }
+    static bool supported = isFsKeyringSupportedImpl();
     return supported;
 }
 
@@ -173,7 +172,7 @@ static bool installKeyLegacy(const KeyBuffer& key, const std::string& raw_ref) {
             PLOG(ERROR) << "Failed to insert key into keyring " << device_keyring;
             return false;
         }
-        LOG(INFO) << "Added key " << key_id << " (" << ref << ") to keyring " << device_keyring
+        LOG(DEBUG) << "Added key " << key_id << " (" << ref << ") to keyring " << device_keyring
                    << " in process " << getpid();
     }
     return true;
@@ -201,7 +200,7 @@ static bool installProvisioningKey(const KeyBuffer& key, const std::string& ref,
                     << " into session keyring";
         return false;
     }
-    LOG(INFO) << "Added fscrypt-provisioning key for " << ref << " to session keyring";
+    LOG(DEBUG) << "Added fscrypt-provisioning key for " << ref << " to session keyring";
     return true;
 }
 
@@ -244,8 +243,7 @@ static bool buildKeySpecifier(fscrypt_key_specifier* spec, const EncryptionPolic
 // https://www.kernel.org/doc/html/latest/filesystems/fscrypt.html#fs-ioc-add-encryption-key
 static bool installFsKeyringKey(const std::string& mountpoint, const EncryptionOptions& options,
                                 fscrypt_add_key_arg* arg) {
-    if (options.use_hw_wrapped_key) arg->flags |= FSCRYPT_ADD_KEY_FLAG_WRAPPED;
-
+    if (options.use_hw_wrapped_key) arg->__flags |= __FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED;
     android::base::unique_fd fd(open(mountpoint.c_str(), O_RDONLY | O_DIRECTORY | O_CLOEXEC));
     if (fd == -1) {
         PLOG(ERROR) << "Failed to open " << mountpoint << " to install key";
