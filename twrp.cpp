@@ -67,6 +67,11 @@ extern "C" {
 }
 #endif
 
+#ifdef TW_INCLUDE_CRYPTO
+#include "FsCrypt.h"
+#include "Decrypt.h"
+#endif
+
 //extern int adb_server_main(int is_daemon, int server_port, int /* reply_fd */);
 
 TWPartitionManager PartitionManager;
@@ -141,6 +146,10 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	if (TWFunc::read_file("/proc/cmdline", cmdline) != 0) {
 		LOGINFO("Unable to read cmdline for fastboot mode\n");
 	}
+
+#ifdef TW_INCLUDE_CRYPTO
+	android::keystore::copySqliteDb();
+#endif
 
 	property_get("twrp.crash_counter", crash_prop_val, "-1");
 	crash_counter = atoi(crash_prop_val) + 1;
@@ -251,8 +260,8 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	}
 	LOGINFO("Backup of TWRP ramdisk done.\n");
 #endif
-
 	Decrypt_Page(skip_decryption, datamedia);
+
 	// Check for and load custom theme if present
 	TWFunc::check_selinux_support();
 	gui_loadCustomResources();
@@ -350,7 +359,9 @@ static void reboot() {
 	gui_msg(Msg("rebooting=Rebooting..."));
 	TWFunc::Update_Log_File();
 	string Reboot_Arg;
-
+#ifdef TW_INCLUDE_CRYPTO
+	fscrypt_lock_user_key(0);
+#endif
 	DataManager::GetValue("tw_reboot_arg", Reboot_Arg);
 	if (Reboot_Arg == "recovery")
 		TWFunc::tw_reboot(rb_recovery);
