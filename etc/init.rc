@@ -42,6 +42,8 @@ on init
     mkdir /sdcard
     mkdir /system
     mkdir /data
+    mkdir /data/misc/
+    mkdir /data/misc/keystore/
     symlink /data/cache /cache
     mkdir /sideload
     mkdir /mnt/system
