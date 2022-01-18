@@ -31,7 +31,6 @@
 
 struct DIR;
 
-static const char* kPropFuse = "persist.sys.fuse";
 static const char* kVoldAppDataIsolationEnabled = "persist.sys.vold_app_data_isolation_enabled";
 static const char* kExternalStorageSdcardfs = "external_storage.sdcardfs.enabled";
 
@@ -49,6 +48,9 @@ std::string GetFuseMountPathForUser(userid_t user_id, const std::string& relativ
 android::status_t CreateDeviceNode(const std::string& path, dev_t dev);
 android::status_t DestroyDeviceNode(const std::string& path);
 
+android::status_t SetDefaultAcl(const std::string& path, mode_t mode, uid_t uid, gid_t gid,
+                       std::vector<gid_t> additionalGids);
+
 android::status_t AbortFuseConnections();
 
 int SetQuotaInherit(const std::string& path);
@@ -64,7 +66,8 @@ int PrepareAppDirFromRoot(const std::string& path, const std::string& root, int 
                           bool fixupExisting);
 
 /* fs_prepare_dir wrapper that creates with SELinux context */
-android::status_t PrepareDir(const std::string& path, mode_t mode, uid_t uid, gid_t gid);
+android::status_t PrepareDir(const std::string& path, mode_t mode, uid_t uid, gid_t gid,
+                    unsigned int attrs = 0);
 
 /* Really unmounts the path, killing active processes along the way */
 android::status_t ForceUnmount(const std::string& path);
@@ -72,8 +75,8 @@ android::status_t ForceUnmount(const std::string& path);
 /* Kills any processes using given path */
 android::status_t KillProcessesUsingPath(const std::string& path);
 
-/* Kills any processes using given mount prifix */
-android::status_t KillProcessesWithMountPrefix(const std::string& path);
+/* Kills any processes using given tmpfs mount prifix */
+android::status_t KillProcessesWithTmpfsMountPrefix(const std::string& path);
 
 /* Creates bind mount from source to target */
 android::status_t BindMount(const std::string& source, const std::string& target);
@@ -151,6 +154,8 @@ std::string BuildDataUserDePath(const std::string& volumeUuid, userid_t userid);
 
 dev_t GetDevice(const std::string& path);
 
+bool IsSameFile(const std::string& path1, const std::string& path2);
+
 android::status_t EnsureDirExists(const std::string& path, mode_t mode, uid_t uid, gid_t gid);
 
 android::status_t RestoreconRecursive(const std::string& path);
@@ -164,12 +169,20 @@ bool IsVirtioBlkDevice(unsigned int major);
 android::status_t UnmountTreeWithPrefix(const std::string& prefix);
 android::status_t UnmountTree(const std::string& mountPoint);
 
+bool IsDotOrDotDot(const struct dirent& ent);
+
 android::status_t DeleteDirContentsAndDir(const std::string& pathname);
 android::status_t DeleteDirContents(const std::string& pathname);
 
 android::status_t WaitForFile(const char* filename, std::chrono::nanoseconds timeout);
 
+bool pathExists(const std::string& path);
+
 bool FsyncDirectory(const std::string& dirname);
+
+bool FsyncParentDirectory(const std::string& path);
+
+bool MkdirsSync(const std::string& path, mode_t mode);
 
 bool writeStringToFile(const std::string& payload, const std::string& filename);
 
@@ -184,5 +197,4 @@ android::status_t UnmountUserFuse(userid_t userId, const std::string& absolute_l
                          const std::string& relative_upper_path);
 
 android::status_t PrepareAndroidDirs(const std::string& volumeRoot);
-
 #endif
