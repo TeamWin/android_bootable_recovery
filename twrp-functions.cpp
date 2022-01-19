@@ -1068,6 +1068,12 @@ void TWFunc::Fixup_Time_On_Boot(const string& time_paths /* = "" */)
 	}
 
 	if (!fixed) {
+#ifdef TW_QCOM_ATS_OFFSET
+		offset = (uint64_t) TW_QCOM_ATS_OFFSET;
+		DataManager::SetValue("tw_qcom_ats_offset", (unsigned long long) offset, 1);
+		LOGINFO("TWFunc::Fixup_Time: Setting time offset from TW_QCOM_ATS_OFFSET, offset %llu\n", (unsigned long long) offset);
+	}
+#else
 		// Failed to get offset from ats file, check twrp settings
 		unsigned long long value;
 		if (DataManager::GetValue("tw_qcom_ats_offset", value) < 0) {
@@ -1078,6 +1084,7 @@ void TWFunc::Fixup_Time_On_Boot(const string& time_paths /* = "" */)
 			// Do not consider the settings file as a definitive answer, keep fixed=false so next run will try ats files again
 		}
 	}
+#endif
 
 	gettimeofday(&tv, NULL);
 
