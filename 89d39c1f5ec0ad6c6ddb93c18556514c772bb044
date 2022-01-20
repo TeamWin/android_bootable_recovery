@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e00aeac2_6abda1ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 780
+      },
+      "writtenOn": "2022-01-20T07:54:38Z",
+      "side": 1,
+      "message": "Tested working perfectly in Xiaomi vince",
+      "revId": "89d39c1f5ec0ad6c6ddb93c18556514c772bb044",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
