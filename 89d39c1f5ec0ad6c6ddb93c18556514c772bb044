@@ -50,6 +50,23 @@
       "message": "sirius still can’t mount data. discussing it in zulip with logs",
       "revId": "89d39c1f5ec0ad6c6ddb93c18556514c772bb044",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f29d6e03_3e779385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2022-01-20T16:20:06Z",
+      "side": 1,
+      "message": "Patchset 16 still works for me on a Fold3 (F926B).",
+      "revId": "89d39c1f5ec0ad6c6ddb93c18556514c772bb044",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
