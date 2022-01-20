@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1642701331 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1642701330-F99134387BAD2FEDA270415DA3D08A1220EF340A\n\n0000000000000000000000000000000000000000 8507ace91036b0d26926bb7bb8f82cacec12ddf2 refs/for/android-9.0\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmHpohMACgkQmmXNJnGK\nTp89SRAAurDYbbQTnb9hCYVTKOJq6dsB4VxUa4q26o9jpKonVGqqrIFcqe+bw4CI\nwyphWsGB8QwwU+Big4pyy4DBuQs10km7cPwemH0NPXRVDq72STbIyYyJOrV0YE6j\n+gWWlxc82ehF/Kk8O2OOGR9Z+scnV0W6qSe//wpZhELCNPv9fd8pE8PF8DW8RaAl\nufYsIb3WB1Ax5PP01FrCpggWI6Rd2O5aLR5qpo9rvb4W4lVzRAyqtyookcFmHY1v\ntq8P4BpQXMoYRywUXd98pMBxdNhmSCkHDpXvmnc2tbZXJ+h12t4qXq+5Hcvjchju\n0rURhYR7AvhD0LwaXYDnERT1ITtf9a8AxD1wv6SQSKs5PT0LGlpI34u4kz6BZcLE\ngdsp9lwz1eGXKr2+VG0cwXpz0GytOUPHKYljsUTEiJVbZtx1X0lpqBkjwwTdBlNa\n0Hns7zRUpfET0RTYPhA2rl5YSTwT+qRPG4a5Iztk0AAnSqO/pDexTUOUfD7aKYhT\nNA+PkJ3p4IS5N69J6C2XYo9LBDesAs3SBrP/WhnnJVCe8GKee1XF0bxU1QPSekRB\n12whXtVlBvDbP0/EucnTk50twjWr115+7DAUDOAm7dsedrh5Y9hbqRtx34C8WvjE\nq6yuyfaQ2YY4zLabCFzM18C6Ti/5t07cvwcqYkw+8EYZL3IfcoY\u003d\n\u003dEybI\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d2f9a4_0b5f2f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-20T17:56:36Z",
+      "side": 1,
+      "message": "Updated commit message to describe how to calculate the offset. Also added comments in the code with the same information.",
+      "revId": "8507ace91036b0d26926bb7bb8f82cacec12ddf2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
