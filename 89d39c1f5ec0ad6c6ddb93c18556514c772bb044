@@ -67,6 +67,24 @@
       "message": "Patchset 16 still works for me on a Fold3 (F926B).",
       "revId": "89d39c1f5ec0ad6c6ddb93c18556514c772bb044",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f16642_2a5178e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 825
+      },
+      "writtenOn": "2022-01-20T23:37:45Z",
+      "side": 1,
+      "message": "\u003e Patchset 16 still works for me on a Fold3 (F926B).\n\nWhat issue did you have?",
+      "parentUuid": "f29d6e03_3e779385",
+      "revId": "89d39c1f5ec0ad6c6ddb93c18556514c772bb044",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
