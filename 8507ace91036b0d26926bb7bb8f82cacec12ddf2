@@ -34,6 +34,24 @@
       "message": "I think that, in the twrp-functions.cpp patch, the closing brace on the line before \"#else\" needs to be removed, and the \"#endif\" needs to be moved to before the closing brace that it comes after.",
       "revId": "8507ace91036b0d26926bb7bb8f82cacec12ddf2",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a072188c_8ea7d801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-20T21:44:20Z",
+      "side": 1,
+      "message": "Well, functionally it\u0027s exactly the same, but in order to remove the extra brace, I have adjusted it as you requested.",
+      "parentUuid": "c0bf45e0_d42d5993",
+      "revId": "8507ace91036b0d26926bb7bb8f82cacec12ddf2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
