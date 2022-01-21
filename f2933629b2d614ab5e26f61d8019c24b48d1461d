@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "038bb03c_8bbe7569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 829
+      },
+      "writtenOn": "2022-01-21T21:12:03Z",
+      "side": 1,
+      "message": "I cannot confirm other (KM4 / FBE etc.) encryption method.",
+      "revId": "f2933629b2d614ab5e26f61d8019c24b48d1461d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
