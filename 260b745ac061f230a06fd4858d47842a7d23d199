@@ -33,6 +33,23 @@
       "message": "\u003e Patch Set 5: Code-Review-1\n\u003e \n\u003e Not working for me. Added the flag to my device tree and assert still fails.\n\nPackage is for product I001D but expected ASUS_I001_1\n\nAfter I applied this patch to my device tree:\nhttps://gerrit.twrp.me/c/android_device_asus_I001D/+/4813/1/BoardConfig.mk#123",
       "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdf188db_f3f31324",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2022-01-21T07:51:02Z",
+      "side": 1,
+      "message": "\u003e Patch Set 5:\n\u003e \n\u003e Any update on this?\n\nThe code is correct. Your test seems not. You need to specify all possible valid device code names (as in the example given), but you have only specified one.",
+      "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
