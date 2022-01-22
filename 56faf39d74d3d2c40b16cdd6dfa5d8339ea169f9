@@ -16,6 +16,23 @@
       "message": "Comment removed by: bigbiff; Reason: requested to be deleted",
       "revId": "56faf39d74d3d2c40b16cdd6dfa5d8339ea169f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d92963_143a1528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 825
+      },
+      "writtenOn": "2022-01-22T00:58:11Z",
+      "side": 1,
+      "message": "Guys, now please do real checks and do not put +1 just as a joke and then ignore messages.\nTested on sirius and fixed encrypted storage not mounted.",
+      "revId": "56faf39d74d3d2c40b16cdd6dfa5d8339ea169f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
