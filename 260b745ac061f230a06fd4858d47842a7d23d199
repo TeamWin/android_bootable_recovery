@@ -50,6 +50,24 @@
       "message": "\u003e Patch Set 5:\n\u003e \n\u003e Any update on this?\n\nThe code is correct. Your test seems not. You need to specify all possible valid device code names (as in the example given), but you have only specified one.",
       "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "facad1da_13f1c0cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-23T18:05:15Z",
+      "side": 1,
+      "message": "This isn\u0027t an add-on to the existing code that checks the props for a match to the metadata? This shouldn\u0027t replace that code, it should be an addendum. In that case, I can\u0027t recommend that this be merged. This should be a fallback, imo.",
+      "parentUuid": "bdf188db_f3f31324",
+      "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
