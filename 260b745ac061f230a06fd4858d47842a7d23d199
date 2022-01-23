@@ -86,6 +86,23 @@
       "parentUuid": "facad1da_13f1c0cc",
       "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6cb72e7_73d02795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-01-23T19:14:29Z",
+      "side": 1,
+      "message": "Well it seems this patch is in fact working with that device patch I linked previously. It turns out that I forgot to pick this patch before building and attempting to flash.\n\nMy apologies for the oversight. Adding +1 now.\n\nP.S. It does appear that you don\u0027t have to add all possible combinations to the flag if they\u0027re already covered by the device props that the TWRP code already looks at.",
+      "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
