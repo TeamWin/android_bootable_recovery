@@ -120,6 +120,24 @@
       "message": "Comment removed by: bigbiff; Reason: derp",
       "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393276cc_d0443003",
+        "filename": "twrpinstall/installcommand.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-01-23T23:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ae8e1cd_1b625177",
+      "revId": "260b745ac061f230a06fd4858d47842a7d23d199",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
