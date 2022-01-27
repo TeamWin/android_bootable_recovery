@@ -50,6 +50,23 @@
       "message": "p18 working on the Fold3 still.",
       "revId": "56faf39d74d3d2c40b16cdd6dfa5d8339ea169f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70c2dde9_dbf91b36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-01-27T16:53:09Z",
+      "side": 1,
+      "message": "Patchset 18 fixes the issue on Galaxy A51 too.",
+      "revId": "56faf39d74d3d2c40b16cdd6dfa5d8339ea169f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
