@@ -560,6 +560,12 @@ endif
 
 LOCAL_REQUIRED_MODULES += $(TWRP_REQUIRED_MODULES)
 
+TW_THEME_VERSION := $(shell echo "`grep TW_THEME_VERSION bootable/recovery/variables.h | cut -d ' ' -f 3`")
+
+LOCAL_POST_INSTALL_CMD += \
+    sed -i "s/{themeversion}/$(TW_THEME_VERSION)/" $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)splash.xml; \
+    sed -i "s/{themeversion}/$(TW_THEME_VERSION)/" $(TARGET_RECOVERY_ROOT_OUT)$(TWRES_PATH)ui.xml;
+
 include $(BUILD_EXECUTABLE)
 
 # Symlink for file_contexts
