@@ -33,6 +33,23 @@
       "message": "Tested on Samsung S21 Ultra Exynos and works perfectly with disabled encryption.",
       "revId": "2936a709113303dc0db640d6a4af7911e8f2513a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b949182c_0a0e57e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-02-02T08:41:58Z",
+      "side": 1,
+      "message": "Works fine on Galaxy A51.",
+      "revId": "2936a709113303dc0db640d6a4af7911e8f2513a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
