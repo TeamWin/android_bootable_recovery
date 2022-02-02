@@ -16,6 +16,23 @@
       "message": "Please everyone test and make sure it works for you still.",
       "revId": "2936a709113303dc0db640d6a4af7911e8f2513a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08841bc_7b84364b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2022-02-02T08:30:40Z",
+      "side": 1,
+      "message": "Tested on Samsung S21 Ultra Exynos and works perfectly with disabled encryption.",
+      "revId": "2936a709113303dc0db640d6a4af7911e8f2513a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
