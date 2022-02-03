@@ -243,11 +243,6 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
 			return false;
 		}
-
-		if (TWFunc::Exec_Cmd(command) != 0) {
-			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
-			return false;
-		}
 		DataManager::SetProgress(.75);
 		std::string file = "new-boot.img";
 		DataManager::SetValue("tw_flash_partition", "/boot;");
