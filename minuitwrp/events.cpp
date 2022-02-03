@@ -130,7 +130,7 @@ int write_to_file(const std::string& fn, const std::string& line) {
 		fclose(file);
 		return 0;
 	}
-	LOGI("Cannot find file %s\n", fn.c_str());
+	printf("Cannot find file %s\n", fn.c_str());
 	return -1;
 }
 
@@ -220,7 +220,7 @@ static int vk_init(struct ev *e)
     // Blacklist these "input" devices, use TW_INPUT_BLACKLIST := "accelerometer\x0atest1\x0atest2" using the \x0a as a separator between input devices
     if (strcmp(e->deviceName, "bma250") == 0 || strcmp(e->deviceName, "bma150") == 0)
     {
-        LOGI("Blacklisting input device: %s\n", e->deviceName);
+        printf("Blacklisting input device: %s\n", e->deviceName);
         e->ignored = 1;
     }
 #else
@@ -229,7 +229,7 @@ static int vk_init(struct ev *e)
 
     while (blacklist != NULL) {
         if (strcmp(e->deviceName, blacklist) == 0) {
-            LOGI("Blacklisting input device: %s\n", blacklist);
+            printf("Blacklisting input device: %s\n", blacklist);
             e->ignored = 1;
         }
         blacklist = strtok(NULL, "\n");
@@ -261,7 +261,7 @@ static int vk_init(struct ev *e)
         }
 
         if (e->vk_count % 6) {
-            LOGI("minui: %s is %d %% 6\n", vk_path, e->vk_count % 6);
+            printf("minui: %s is %d %% 6\n", vk_path, e->vk_count % 6);
         }
         e->vk_count /= 6;
         if (e->vk_count <= 0)
@@ -296,7 +296,7 @@ static int vk_init(struct ev *e)
 
         if (strcmp(token[0], "0x01") != 0) {
             /* Java does string compare, so we do too. */
-            LOGI("minui: %s: ignoring unknown virtual key type %s\n", vk_path, token[0]);
+            printf("minui: %s: ignoring unknown virtual key type %s\n", vk_path, token[0]);
             continue;
         }
 
@@ -338,7 +338,7 @@ static void check_mouse(int fd, const char* deviceName)
 	if(!test_bit(BTN_LEFT, bit[EV_KEY]) || !test_bit(BTN_RIGHT, bit[EV_KEY]))
 		return;
 
-	LOGI("Found mouse '%s'\n", deviceName);
+	printf("Found mouse '%s'\n", deviceName);
 	has_mouse = 1;
 }
 
@@ -621,7 +621,7 @@ static int vk_modify(struct ev *e, struct input_event *ev)
             break;
 
 		case ABS_MT_TOOL_TYPE: //37
-            LOGI("EV: %s => EV_ABS ABS_MT_TOOL_TYPE %d\n", e->deviceName, ev->value);
+            printf("EV: %s => EV_ABS ABS_MT_TOOL_TYPE %d\n", e->deviceName, ev->value);
 			return 1;
             break;
 
@@ -799,7 +799,7 @@ int ev_get(struct input_event *ev, int timeout_ms)
         stat("/dev/input", &st);
         if (st.st_mtime > lastInputMTime)
         {
-            LOGI("Reloading input devices\n");
+            printf("Reloading input devices\n");
             ev_exit();
             ev_init();
             lastInputMTime = st.st_mtime;
