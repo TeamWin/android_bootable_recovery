@@ -50,6 +50,23 @@
       "message": "Works fine on Galaxy A51.",
       "revId": "2936a709113303dc0db640d6a4af7911e8f2513a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "867052eb_8246e6c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 224
+      },
+      "writtenOn": "2022-02-03T09:01:43Z",
+      "side": 1,
+      "message": "Still working on Fold3.",
+      "revId": "2936a709113303dc0db640d6a4af7911e8f2513a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
