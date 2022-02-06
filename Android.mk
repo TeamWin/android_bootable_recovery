@@ -565,6 +565,7 @@ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
     TWRP_REQUIRED_MODULES += sload.f2fs \
         libfs_mgr \
         fs_mgr \
+        liblz4 \
         libinit
 endif
 
