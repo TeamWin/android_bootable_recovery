@@ -441,6 +441,7 @@ TWRP_REQUIRED_MODULES += \
     privapp-permissions-twrpapp.xml \
     adbd_system_api_recovery \
     libsync.recovery \
+    libandroidicu.recovery \
     libmodprobe
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
