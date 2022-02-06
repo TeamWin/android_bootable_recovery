@@ -319,8 +319,8 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE
     LOCAL_SHARED_LIBRARIES += libtwrpfscrypt android.frameworks.stats@1.0 android.hardware.authsecret@1.0 \
         android.hardware.oemlock@1.0 libf2fs_sparseblock libbinder_ndk android.security.maintenance-ndk_platform \
-        android.system.keystore2-V1-ndk_platform libkeyutils liblog
-    LOCAL_STATIC_LIBRARIES += libkeymint_support 
+        android.system.keystore2-V1-ndk_platform libkeyutils liblog libcppbor_external libcppcose_rkp
+    LOCAL_STATIC_LIBRARIES += libkeymint_support
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE_METADATA_DECRYPT
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),false)
