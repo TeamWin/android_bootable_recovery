@@ -322,7 +322,9 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         libkeyutils \
         liblog \
         libsqlite.recovery \
-        libkeystoreinfo.recovery
+        libkeystoreinfo.recovery \
+        libcppbor_external \
+        libcppcose_rkp
 
     LOCAL_STATIC_LIBRARIES += libkeymint_support
 
