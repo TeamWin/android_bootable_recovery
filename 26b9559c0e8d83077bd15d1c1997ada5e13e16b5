@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0efdd0fd_5b0d9b60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-02-09T18:56:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t appear to be needed. The issue was having quotes around the input device in BoardConfig. In the new tree, that prevents the input device name from being read properly.",
+      "revId": "26b9559c0e8d83077bd15d1c1997ada5e13e16b5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
