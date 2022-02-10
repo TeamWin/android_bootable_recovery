@@ -703,8 +703,6 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 			Primary_Block_Device.c_str(), Mount_Point.c_str());
 		}
 	} else {
-		if (Is_Mounted())
-			UnMount(true);
 		Set_FBE_Status();
 		int is_device_fbe;
 		DataManager::GetValue(TW_IS_FBE, is_device_fbe);
