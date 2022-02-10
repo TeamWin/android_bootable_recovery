@@ -703,7 +703,9 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 			Primary_Block_Device.c_str(), Mount_Point.c_str());
 		}
 	} else {
-		if (Is_Mounted())
+		LOGINFO("Decrypted Block Device: '%s'\n", Decrypted_Block_Device.c_str());
+		LOGINFO("Actual Block Device: '%s'\n", Actual_Block_Device.c_str());
+		if ((Decrypted_Block_Device == Actual_Block_Device) && Is_Mounted())
 			UnMount(true);
 		Set_FBE_Status();
 		int is_device_fbe;
