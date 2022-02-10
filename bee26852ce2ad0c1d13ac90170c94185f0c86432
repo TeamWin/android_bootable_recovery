@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f413b79_2977980a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-02-10T03:03:52Z",
+      "side": 1,
+      "message": "This fixes the bind mount issue on my ROG Phone II, introduced by the previous sdcard fix patch.",
+      "revId": "bee26852ce2ad0c1d13ac90170c94185f0c86432",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
