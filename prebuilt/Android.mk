@@ -445,8 +445,8 @@ LOCAL_REQUIRED_MODULES += init_second_stage.recovery \
     plat_hardware_contexts \
     vndservice_contexts \
     plat_keystore2_key_contexts \
-    vendor_hwservice_contexts
-
+    vendor_hwservice_contexts \
+    twrp_soong
 include $(BUILD_PHONY_PACKAGE)
 
 # copy license file for OpenAES
