@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1645207018 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1645207017-33BD7732C427EC2CB3C7BAEA48FA51D08CF0D279\n\n0000000000000000000000000000000000000000 fcb99a2cb551623fe54872011a222f0656484b03 refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmIP3eoACgkQmmXNJnGK\nTp+oLg//ZQH4vuB2k3Cgkh6B5H1iPzBig6wk/Ff9ZWTiKdqSQWLz0WAe+mBbH8D5\nykNHnanC255ciZfM3xJvy3RjSnpdTWxEuVWSQQ9IfJydjtlOK3liOAbnEyPl1LGr\noC10lPO9vdmu7cHOtEPFsLVM6IIuxQCsA8YR1y/LF8DiZuVAzgONpuqCVXwORBKP\nBFxqhvFUs6GI415YaaDkQ7KZkqQxlkDy1yFifLXopWDJC3eEBLprc/2w2NtwUPo5\nVJ2vJu3cgUkGuWbKWeQpU8Vib+zjz1ryFUPNKA0EYK6G0W0PufL3SiTJdgYnNxud\nUe9Ou2zbFlHNAIhfskE6YrXAFW/s+lsPAYdoBk1gAUuaP47z9RFsB5SuBWcYactJ\nip4IYEDhG9srap+oGQKw2LG1Ulc9B6q5HBfhF1EIoOiEPVCcaatEFz85m1TNbx06\nqDO96BXSctgx3JdcO0ILUktFSUokA4fvSvxkfs/QeH5IkJoe79MX/JsQ7iztmXCA\nBUyULOiDh4m2A98qRZlKWhk0S/bVSl8HzsVPzoaRgsCIITg+V4PYrG/p17evySxf\nJLHz93u6MpdMzCZQvy1Txp60n2U9ZPaN3rhfPj3rDsL4G2QFRgOR2wD6rLViwT7+\ngtT2X8nImcgaVko06jeuTCapbkevbSl1rEEBPmLCNv641zr96DQ\u003d\n\u003dIMmo\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bbce18a_69e8fd7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-02-18T18:00:53Z",
+      "side": 1,
+      "message": "This seems to fix the dirty building and the need to clobber or remove the out folder before a build. This way, if you build for multiple devices in the same tree, you don\u0027t have to lose the other device builds when building a different device.",
+      "revId": "fcb99a2cb551623fe54872011a222f0656484b03",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
