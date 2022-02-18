@@ -401,7 +401,7 @@ LOCAL_POST_INSTALL_CMD += \
         LOCAL_POST_INSTALL_CMD += \
             && cp $(TARGET_OUT_ETC)/mke2fs.conf $(TARGET_RECOVERY_ROOT_OUT)/system/etc/mke2fs.conf
     endif
-LOCAL_REQUIRED_MODULES += init_second_stage.recovery reboot.recovery plat_service_contexts plat_hardware_contexts vndservice_contexts
+LOCAL_REQUIRED_MODULES += init_second_stage.recovery reboot.recovery plat_service_contexts plat_hardware_contexts vndservice_contexts twrp_soong
 include $(BUILD_PHONY_PACKAGE)
 
 # copy license file for OpenAES
