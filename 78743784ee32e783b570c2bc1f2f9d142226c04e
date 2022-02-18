@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee93327_13cebbac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 495
+      },
+      "writtenOn": "2022-02-18T19:34:28Z",
+      "side": 1,
+      "message": "Maybe we have to merge this attempt with your previous patches.",
+      "revId": "78743784ee32e783b570c2bc1f2f9d142226c04e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
