@@ -17,6 +17,23 @@
       "message": "This is a hack, but it works",
       "revId": "3b63f015f3ac476fbcfd6788772e68df8caee304",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974d25fa_3ece6b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2022-02-19T18:22:31Z",
+      "side": 1,
+      "message": "Seems good to me.",
+      "revId": "3b63f015f3ac476fbcfd6788772e68df8caee304",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
