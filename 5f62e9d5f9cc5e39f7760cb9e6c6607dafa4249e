@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba00050_17e53551",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 709
+      },
+      "writtenOn": "2022-02-23T14:46:31Z",
+      "side": 1,
+      "message": "recovery.img builds successfully. flashing zips not yet tested.",
+      "revId": "5f62e9d5f9cc5e39f7760cb9e6c6607dafa4249e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
