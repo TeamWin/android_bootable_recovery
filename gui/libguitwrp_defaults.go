@@ -183,12 +183,6 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_SCREEN_BLANK_ON_BOOT")
 	}
 
-	if getMakeVars(ctx, "TW_OZIP_DECRYPT_KEY") != "" {
-		cflags = append(cflags, "-DTW_OZIP_DECRYPT_KEY=\""+getMakeVars(ctx, "TW_OZIP_DECRYPT_KEY")+"\"")
-	} else {
-		cflags = append(cflags, "-DTW_OZIP_DECRYPT_KEY=0")
-	}
-
 	if getMakeVars(ctx, "TW_NO_SCREEN_BLANK") != "" {
 		cflags = append(cflags, "-DTW_NO_SCREEN_BLANK")
 	}

@@ -752,8 +752,6 @@
 		<string name="flash_ab_inactive">Прошивка A/B ZIP в неактивный слот: {1}</string>
 		<string name="flash_ab_reboot">Для прошивки дополнительных ZIP перезагрузите рекавери для переключения на обновлённый слот.</string>
 		<string name="flash_ab_both_slots">Прошить в оба слота</string>
-		<string name="ozip_decrypt_decryption">Начало расшифровки Ozip...</string>
-		<string name="ozip_decrypt_finish">Расшифровка Ozip завершена!</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Включить ADB</string>
 		<string name="enable_fastboot">Включить Fastboot</string>

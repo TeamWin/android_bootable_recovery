@@ -735,8 +735,6 @@
 		<string name="flash_ab_inactive">A/B zipbestand wordt geflasht naar inactieve slot: {1}</string>
 		<string name="flash_ab_reboot">Om meer zipbestanden te flashen dient u eerst te herstarten in Recovery om naar de bijgewerkte slot te schakelen.</string>
 		<string name="flash_ab_both_slots">Beide slots flashen</string>
-		<string name="ozip_decrypt_decryption">Ozip-ontsleutelen...</string>
-		<string name="ozip_decrypt_finish">Ozip-ontsleutelen gereed!</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">ADB inschakelen</string>
 		<string name="enable_fastboot">Fastboot inschakelen</string>

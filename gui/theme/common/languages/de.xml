@@ -734,7 +734,5 @@
 		<string name="unmount_system_err">Aushängen der System-Partition fehlgeschlagen</string>
 		<string name="flash_ab_inactive">Einspielen des A/B ZIPs auf den inaktiven Slot: {1}</string>
 		<string name="flash_ab_reboot">Um weitere ZIP-Dateien einzuspielen bitte das Recovery neustartet um auf den geänderten Slot zu wechseln.</string>
-		<string name="ozip_decrypt_decryption">Starte Ozip Entschlüsselung...</string>
-		<string name="ozip_decrypt_finish">Ozip Entschlüsselung abgeschlossen!</string>
 	</resources>
 </language>

@@ -738,8 +738,6 @@
 		<string name="unmount_system_err">解除挂載 System 失敗</string>
 		<string name="flash_ab_inactive">正在刷入 A/B Zip 刷機包至非活動槽位: {1}</string>
 		<string name="flash_ab_reboot">如需刷入其它的 Zip 刷機包，請重新啓動 Recovery 切換到新槽位。</string>
-		<string name="ozip_decrypt_decryption">正在解密 Ozip…</string>
-		<string name="ozip_decrypt_finish">Ozip 解密完成！</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">啓用 ADB</string>
 		<string name="enable_fastboot">啓用 Fastboot</string>

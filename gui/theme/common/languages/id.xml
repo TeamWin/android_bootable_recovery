@@ -741,8 +741,6 @@
 		<string name="flash_ab_inactive">Memflash zip A / B ke slot tidak aktif: {1}</string>
 		<string name="flash_ab_reboot">Untuk memflash zip tambahan, silakan reboot recovery untuk beralih ke slot yang diperbarui.</string>
 		<string name="flash_ab_both_slots">Flash ke kedua slot</string>
-		<string name="ozip_decrypt_decryption">Mulai mendekripsi Ozip ...</string>
-		<string name="ozip_decrypt_finish">Mendeskripsi Ozip selesai!</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Aktifkan ADB</string>
 		<string name="enable_fastboot">Aktifkan Fastboot</string>

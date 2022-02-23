@@ -750,8 +750,6 @@
 		<string name="flash_ab_inactive">正在刷入 A/B Zip 刷机包至非活动槽位: {1}</string>
 		<string name="flash_ab_reboot">请重启 TWRP 切换到新槽位后，再刷入其它的 ZIP。</string>
 		<string name="flash_ab_both_slots">刷入到2个槽位</string>
-		<string name="ozip_decrypt_decryption">正在解密 Ozip…</string>
-		<string name="ozip_decrypt_finish">Ozip 解密完成！</string>
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">启用 ADB</string>
 		<string name="enable_fastboot">启用 Fastboot</string>
