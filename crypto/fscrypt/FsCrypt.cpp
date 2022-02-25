@@ -875,13 +875,18 @@ bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             EncryptionPolicy de_policy;
             if (volume_uuid.empty()) {
                 if (!lookup_policy(s_de_policies, user_id, &de_policy)) return false;
-                if (!EnsurePolicy(de_policy, system_de_path)) return false;
-                if (!EnsurePolicy(de_policy, misc_de_path)) return false;
-                if (!EnsurePolicy(de_policy, vendor_de_path)) return false;
+                if (!EnsurePolicy(de_policy, system_de_path))
+                	LOG(INFO) << "EnsurePolicy returned false for " << system_de_path;
+                if (!EnsurePolicy(de_policy, misc_de_path))
+                	LOG(INFO) << "EnsurePolicy returned false for " << misc_de_path;
+                if (!EnsurePolicy(de_policy, vendor_de_path))
+                	LOG(INFO) << "EnsurePolicy returned false for " << vendor_de_path;
             } else {
                 if (!read_or_create_volkey(misc_de_path, volume_uuid, &de_policy)) return false;
             }
-            if (!EnsurePolicy(de_policy, user_de_path)) return false;
+            if (!EnsurePolicy(de_policy, user_de_path))
+            	LOG(INFO) << "EnsurePolicy returned false for " << user_de_path;
+
         }
     }
 
@@ -906,14 +911,19 @@ bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             EncryptionPolicy ce_policy;
             if (volume_uuid.empty()) {
                 if (!lookup_policy(s_ce_policies, user_id, &ce_policy)) return false;
-                if (!EnsurePolicy(ce_policy, system_ce_path)) return false;
-                if (!EnsurePolicy(ce_policy, misc_ce_path)) return false;
-                if (!EnsurePolicy(ce_policy, vendor_ce_path)) return false;
+                if (!EnsurePolicy(ce_policy, system_ce_path))
+                	LOG(INFO) << "EnsurePolicy returned false for " << system_ce_path;
+                if (!EnsurePolicy(ce_policy, misc_ce_path))
+                	LOG(INFO) << "EnsurePolicy returned false for " << misc_ce_path;
+                if (!EnsurePolicy(ce_policy, vendor_ce_path))
+                	LOG(INFO) << "EnsurePolicy returned false for " << vendor_ce_path;
             } else {
                 if (!read_or_create_volkey(misc_ce_path, volume_uuid, &ce_policy)) return false;
             }
-            if (!EnsurePolicy(ce_policy, media_ce_path)) return false;
-            if (!EnsurePolicy(ce_policy, user_ce_path)) return false;
+            if (!EnsurePolicy(ce_policy, media_ce_path))
+            	LOG(INFO) << "EnsurePolicy returned false for " << media_ce_path;
+            if (!EnsurePolicy(ce_policy, user_ce_path))
+            	LOG(INFO) << "EnsurePolicy returned false for " << user_ce_path;
         }
 
         if (volume_uuid.empty()) {
