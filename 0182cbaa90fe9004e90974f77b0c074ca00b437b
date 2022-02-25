@@ -16,6 +16,23 @@
       "message": "Done.",
       "revId": "0182cbaa90fe9004e90974f77b0c074ca00b437b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28356dd_29b77f1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2022-02-25T16:47:40Z",
+      "side": 1,
+      "message": "\u003e Patch Set 10:\n\u003e \n\u003e Interesting that this only affects the media_ce and user_ce folders. Should be be doing the same for the other folders as well? Or will that cause a different problem. Just wondering if any of those checks are needed in TWRP or not.\n\nThat is what we were discussing on Zulip (ie, whether the EnsurePolicy calls are needed at all).",
+      "revId": "0182cbaa90fe9004e90974f77b0c074ca00b437b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
