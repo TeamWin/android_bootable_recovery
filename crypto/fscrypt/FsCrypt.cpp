@@ -913,7 +913,7 @@ bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
                 if (!read_or_create_volkey(misc_ce_path, volume_uuid, &ce_policy)) return false;
             }
             if (!EnsurePolicy(ce_policy, media_ce_path)) return false;
-            if (!EnsurePolicy(ce_policy, user_ce_path)) return false;
+            if (user_ce_path != "/data/data" && !EnsurePolicy(ce_policy, user_ce_path)) return false;
         }
 
         if (volume_uuid.empty()) {
