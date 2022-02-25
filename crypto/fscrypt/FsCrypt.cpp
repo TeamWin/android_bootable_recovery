@@ -912,8 +912,10 @@ bool fscrypt_prepare_user_storage(const std::string& volume_uuid, userid_t user_
             } else {
                 if (!read_or_create_volkey(misc_ce_path, volume_uuid, &ce_policy)) return false;
             }
-            if (!EnsurePolicy(ce_policy, media_ce_path)) return false;
-            if (!EnsurePolicy(ce_policy, user_ce_path)) return false;
+            if (!EnsurePolicy(ce_policy, media_ce_path))
+            	LOG(INFO) << "EnsurePolicy returned false for " << media_ce_path;
+            if (!EnsurePolicy(ce_policy, user_ce_path))
+            	LOG(INFO) << "EnsurePolicy returned false for " << user_ce_path;
         }
 
         if (volume_uuid.empty()) {
