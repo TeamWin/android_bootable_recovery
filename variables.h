@@ -17,7 +17,11 @@
 #ifndef _VARIABLES_HEADER_
 #define _VARIABLES_HEADER_
 
+<<<<<<< HEAD   (4b1853 kernel_module_loader: tell libmodprobe to ignore modules.blo)
 #define TW_MAIN_VERSION_STR       "3.6.0_12"
+=======
+#define TW_MAIN_VERSION_STR       "3.6.1_11"
+>>>>>>> CHANGE (4e406a A11: 3.6.1 release)
 #define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
 #define TW_SETTINGS_FILE            ".twrps"
 #define TW_RECOVERY_NAME            "TWRP"
