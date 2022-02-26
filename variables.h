@@ -17,7 +17,11 @@
 #ifndef _VARIABLES_HEADER_
 #define _VARIABLES_HEADER_
 
+<<<<<<< HEAD   (db4044 fscrypt_destroy_user_storage: continue when EnsurePolicy ret)
 #define TW_MAIN_VERSION_STR       "3.6.0_12"
+=======
+#define TW_MAIN_VERSION_STR       "3.6.1_11"
+>>>>>>> CHANGE (4e406a A11: 3.6.1 release)
 #define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
 #define TW_SETTINGS_FILE            ".twrps"
 #define TW_RECOVERY_NAME            "TWRP"
