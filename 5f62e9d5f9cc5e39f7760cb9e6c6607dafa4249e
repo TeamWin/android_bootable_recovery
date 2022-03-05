@@ -16,6 +16,23 @@
       "message": "recovery.img builds successfully. flashing zips not yet tested.",
       "revId": "5f62e9d5f9cc5e39f7760cb9e6c6607dafa4249e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "117fb6d8_9e136654",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2022-03-05T04:49:12Z",
+      "side": 1,
+      "message": "Why even remove this, You know that we can downgrade using ozips? also they aren\u0027t sharing for now but maybe they will share the Android 11+ ones soon. Also my device has Android 10 FW but uses TWRP 11, So nuking OZIP decrypt will remove ozip flashing support. ",
+      "revId": "5f62e9d5f9cc5e39f7760cb9e6c6607dafa4249e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
