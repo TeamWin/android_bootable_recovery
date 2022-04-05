@@ -510,7 +510,7 @@ endif
 ifeq ($(BOARD_HAS_NO_REAL_SDCARD),)
     TWRP_REQUIRED_MODULES += sgdisk
 endif
-ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
+ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS),)
     TWRP_REQUIRED_MODULES += openaes openaes_license
 endif
 ifeq ($(TW_INCLUDE_DUMLOCK), true)
