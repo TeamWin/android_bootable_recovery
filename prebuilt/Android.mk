@@ -255,7 +255,7 @@ endif
 ifneq ($(wildcard system/core/libsparse/Android.*),)
     RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libsparse.so
 endif
-ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
+ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS),)
     RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libopenaes.so
 endif
 ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
@@ -405,7 +405,7 @@ LOCAL_REQUIRED_MODULES += init_second_stage.recovery reboot.recovery plat_servic
 include $(BUILD_PHONY_PACKAGE)
 
 # copy license file for OpenAES
-ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
+ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS),)
     include $(CLEAR_VARS)
     LOCAL_MODULE := openaes_license
     LOCAL_MODULE_TAGS := optional
