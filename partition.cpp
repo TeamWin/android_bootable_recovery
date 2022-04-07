@@ -2491,12 +2491,10 @@ bool TWPartition::Wipe_F2FS() {
 	if (!UnMount(true))
 		return false;
 
-	if (TWFunc::Path_Exists("/system/bin/mkfs.f2fs"))
-		f2fs_command = "/system/bin/mkfs.f2fs";
-	else if (TWFunc::Path_Exists("/system/bin/make_f2fs"))
+	if (TWFunc::Path_Exists("/system/bin/make_f2fs"))
 		f2fs_command = "/system/bin/make_f2fs -g android";
 	else {
-		LOGINFO("mkfs.f2fs binary not found, using rm -rf to wipe.\n");
+		LOGINFO("make_f2fs binary not found, using rm -rf to wipe.\n");
 		return Wipe_RMRF();
 	}
 
@@ -2544,7 +2542,7 @@ bool TWPartition::Wipe_F2FS() {
 			Crypto_Key_Location != "footer") {
 		NeedPreserveFooter = false;
 	}
-	LOGINFO("mkfs.f2fs command: %s\n", f2fs_command.c_str());
+	LOGINFO("make_f2fs command: %s\n", f2fs_command.c_str());
 	if (TWFunc::Exec_Cmd(f2fs_command) == 0) {
 		if (NeedPreserveFooter)
 			Wipe_Crypto_Key();
