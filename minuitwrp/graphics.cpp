@@ -203,7 +203,7 @@ void gr_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a
 {
     GGLContext *gl = gr_context;
     GGLint color[4];
-#if defined(RECOVERY_ABGR) || defined(RECOVERY_BGRA)
+#if defined(RECOVERY_ARGB) || defined(RECOVERY_BGRA)
     color[0] = ((b << 8) | r) + 1;
     color[1] = ((g << 8) | g) + 1;
     color[2] = ((r << 8) | b) + 1;

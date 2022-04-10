@@ -224,7 +224,7 @@ int res_create_surface_png(const char* name, gr_surface* pSurface) {
         goto exit;
     }
 
-#if defined(RECOVERY_ABGR) || defined(RECOVERY_BGRA)
+#if defined(RECOVERY_ARGB) || defined(RECOVERY_BGRA)
     png_set_bgr(png_ptr);
 #endif
 
@@ -320,7 +320,7 @@ int res_create_surface_jpg(const char* name, gr_surface* pSurface) {
             unsigned char g = pRow[sx + 1];
             unsigned char b = pRow[sx + 2];
             unsigned char a = 0xff;
-#if defined(RECOVERY_ABGR) || defined(RECOVERY_BGRA)
+#if defined(RECOVERY_ARGB) || defined(RECOVERY_BGRA)
             pRow[dx    ] = b; // r
             pRow[dx + 1] = g; // g
             pRow[dx + 2] = r; // b
