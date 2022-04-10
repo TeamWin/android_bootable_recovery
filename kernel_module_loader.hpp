@@ -12,8 +12,9 @@
 #include "twcommon.h"
 #include "twrp-functions.hpp"
 
-#define VENDOR_MODULE_DIR "/vendor/lib/modules"    // Base path for vendor kernel modules to check by TWRP
-#define VENDOR_BOOT_MODULE_DIR "/lib/modules"      // vendor_boot ramdisk GKI modules to check by TWRP
+#define VENDOR_MODULE_DIR "/vendor/lib/modules"           // Base path for vendor kernel modules to check by TWRP
+#define VENDOR_BOOT_MODULE_DIR "/lib/modules"             // vendor_boot ramdisk GKI modules to check by TWRP
+#define VENDOR_DLKM_MODULE_DIR "/vendor_dlkm/lib/modules" // vendor_dlkm placed modules to check by TWRP
 typedef enum {
 	RECOVERY_FASTBOOT_MODE = 0,
 	RECOVERY_IN_BOOT_MODE,

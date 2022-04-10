@@ -11,15 +11,18 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 	// check /vendor/lib/modules/1.1 (ramdisk prebuilt modules)
 	// check /vendor/lib/modules/N.N (vendor mounted)
 	// check /vendor/lib/modules/N.N-gki (vendor mounted)
+	// check /vendor_dlkm/lib/modules (vendor_dlkm mounted)
 	int modules_loaded = 0;
 
 	LOGINFO("Attempting to load modules\n");
 	std::string vendor_base_dir(VENDOR_MODULE_DIR);
 	std::string base_dir(VENDOR_BOOT_MODULE_DIR);
+	std::string vendor_dlkm_base_dir(VENDOR_DLKM_MODULE_DIR);
 	std::vector<std::string> module_dirs;
 	std::vector<std::string> vendor_module_dirs;
 
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+	TWPartition* ven_dlkm = PartitionManager.Find_Partition_By_Path("/vendor_dlkm");
 	vendor_module_dirs.push_back(VENDOR_MODULE_DIR);
 	vendor_module_dirs.push_back(vendor_base_dir + "/1.1");
 
@@ -52,15 +55,24 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 		LOGINFO("Checking mounted /vendor\n");
 		ven->Mount(true);
 	}
+	if (ven_dlkm) {
+		LOGINFO("Checking mounted /vendor_dlkm\n");
+		ven_dlkm->Mount(true);
+	}
 
 	for (auto&& module_dir:vendor_module_dirs) {
 		modules_loaded += Try_And_Load_Modules(module_dir, true);
 		if (modules_loaded >= expected_module_count) goto exit;
 	}
 
+	modules_loaded += Try_And_Load_Modules(vendor_dlkm_base_dir, true);
+	if (modules_loaded >= expected_module_count) goto exit;
+
 exit:
 	if (ven)
 		ven->UnMount(false);
+	if (ven_dlkm)
+		ven_dlkm->UnMount(false);
 
 	android::base::SetProperty("twrp.modules.loaded", "true");
 
