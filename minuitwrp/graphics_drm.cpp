@@ -16,6 +16,7 @@
 
 #include <drm_fourcc.h>
 #include <fcntl.h>
+#include <poll.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -117,6 +118,7 @@ static int drm_format_to_bpp(uint32_t format) {
         case DRM_FORMAT_ABGR8888:
         case DRM_FORMAT_BGRA8888:
         case DRM_FORMAT_RGBX8888:
+        case DRM_FORMAT_RGBA8888:
         case DRM_FORMAT_BGRX8888:
         case DRM_FORMAT_XBGR8888:
         case DRM_FORMAT_ARGB8888:
@@ -480,18 +482,48 @@ static GRSurface* drm_init(minui_backend* backend __unused) {
     return draw_buf;
 }
 
+static void page_flip_complete(__unused int fd,
+                               __unused unsigned int sequence,
+                               __unused unsigned int tv_sec,
+                               __unused unsigned int tv_usec,
+                               void *user_data) {
+  *static_cast<bool*>(user_data) = false;
+}
+
 static GRSurface* drm_flip(minui_backend* backend __unused) {
-    int ret;
+    bool ongoing_flip = true;
     memcpy(drm_surfaces[current_buffer]->base.data,
             draw_buf->data, draw_buf->height * draw_buf->row_bytes);
 
 
-    ret = drmModePageFlip(drm_fd, main_monitor_crtc->crtc_id,
-                          drm_surfaces[current_buffer]->fb_id, 0, NULL);
-    if (ret < 0) {
-        printf("drmModePageFlip failed ret=%d\n", ret);
-        return NULL;
+    if (drmModePageFlip(drm_fd, main_monitor_crtc->crtc_id,
+                          drm_surfaces[current_buffer]->fb_id, DRM_MODE_PAGE_FLIP_EVENT, &ongoing_flip)) {
+        printf("Failed to drmModePageFlip");
+        return nullptr;
     }
+
+    while (ongoing_flip) {
+        struct pollfd fds = {
+            .fd = drm_fd,
+            .events = POLLIN
+        };
+
+        if (poll(&fds, 1, -1) == -1 || !(fds.revents & POLLIN)) {
+            perror("Failed to poll() on drm fd");
+            break;
+        }
+
+        drmEventContext evctx = {
+            .version = DRM_EVENT_CONTEXT_VERSION,
+            .page_flip_handler = page_flip_complete
+        };
+
+        if (drmHandleEvent(drm_fd, &evctx) != 0) {
+            perror("Failed to drmHandleEvent");
+            break;
+        }
+    }
+
     current_buffer = 1 - current_buffer;
     return draw_buf;
 }
