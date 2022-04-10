@@ -51,7 +51,7 @@ else
 endif
 ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
     ifeq ($(TARGET_CRYPTFS_HW_PATH),)
-        LOCAL_C_INCLUDES += device/qcom/common/cryptfs_hw
+        LOCAL_C_INCLUDES += vendor/qcom/opensource/cryptfs_hw
     else
         LOCAL_C_INCLUDES += $(TARGET_CRYPTFS_HW_PATH)
     endif
@@ -112,7 +112,7 @@ else
 endif
 ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
     ifeq ($(TARGET_CRYPTFS_HW_PATH),)
-        LOCAL_C_INCLUDES += device/qcom/common/cryptfs_hw
+        LOCAL_C_INCLUDES += vendor/qcom/opensource/cryptfs_hw
     else
         LOCAL_C_INCLUDES += $(TARGET_CRYPTFS_HW_PATH)
     endif
