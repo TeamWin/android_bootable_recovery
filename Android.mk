@@ -62,7 +62,6 @@ LOCAL_SRC_FILES := \
     find_file.cpp \
     infomanager.cpp \
     data.cpp \
-    kernel_module_loader.cpp \
     partition.cpp \
     partitionmanager.cpp \
     progresstracking.cpp \
@@ -108,7 +107,6 @@ LOCAL_C_INCLUDES += \
     bionic \
     system/extras \
     system/core/adb \
-    system/core/libmodprobe/include \
     system/core/libsparse \
     external/zlib \
     system/core/libziparchive/include \
@@ -129,7 +127,7 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/minuitwrp/include \
     $(LOCAL_PATH)/twinstall/include
 
-LOCAL_STATIC_LIBRARIES += libguitwrp libmodprobe
+LOCAL_STATIC_LIBRARIES += libguitwrp
 LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
 LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase 
 LOCAL_SHARED_LIBRARIES += libziparchive libselinux libdl_android.bootstrap
@@ -307,6 +305,9 @@ ifneq ($(TW_ADDITIONAL_APEX_FILES),)
     LOCAL_CFLAGS += -DTW_ADDITIONAL_APEX_FILES=$(TW_ADDITIONAL_APEX_FILES)
 endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
+    LOCAL_SRC_FILES += kernel_module_loader.cpp
+    LOCAL_C_INCLUDES += system/core/libmodprobe/include
+    LOCAL_STATIC_LIBRARIES += libmodprobe
     LOCAL_CFLAGS += -DTW_LOAD_VENDOR_MODULES=$(TW_LOAD_VENDOR_MODULES)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
@@ -443,8 +444,7 @@ TWRP_REQUIRED_MODULES += \
     me.twrp.twrpapp.apk \
     privapp-permissions-twrpapp.xml \
     adbd_system_api_recovery \
-    libsync.recovery \
-    libmodprobe
+    libsync.recovery
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \
@@ -553,6 +553,9 @@ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
         libfs_mgr \
         fs_mgr \
         libinit
+endif
+ifneq ($(TW_LOAD_VENDOR_MODULES),)
+    TWRP_REQUIRED_MODULES += libmodprobe
 endif
 
 TWRP_REQUIRED_MODULES += file_contexts_text
