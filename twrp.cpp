@@ -44,7 +44,11 @@ extern "C" {
 #include "twcommon.h"
 #include "twrp-functions.hpp"
 #include "data.hpp"
+
+#ifdef TW_LOAD_VENDOR_MODULES
 #include "kernel_module_loader.hpp"
+#endif
+
 #include "partitions.hpp"
 #ifdef __ANDROID_API_N__
 #include <android-base/strings.h>
