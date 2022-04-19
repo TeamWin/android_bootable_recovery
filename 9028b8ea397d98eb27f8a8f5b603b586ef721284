@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d4bac3_07491ec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 156
+      },
+      "writtenOn": "2022-04-19T02:09:56Z",
+      "side": 1,
+      "message": "Verified building shieldtablet",
+      "revId": "9028b8ea397d98eb27f8a8f5b603b586ef721284",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
