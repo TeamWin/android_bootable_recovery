@@ -34,6 +34,29 @@
       "parentUuid": "b1f09310_27869129",
       "revId": "15a8ccf2a4f872e57c5712240f983a17bc52b958",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c24b6c_ab7ed167",
+        "filename": "prebuilt/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 26
+      },
+      "writtenOn": "2022-04-20T21:24:34Z",
+      "side": 1,
+      "message": "Btw I\u0027m not sure about this at all. In case if someone use different cryptfs_hw sources (idk why), we don\u0027t know where libcryptfs_hw stuff will be copied to... \n\nWhat about to keep all known cases without conditions? This won\u0027t cause an error anyway, but will link libs that are actually present in out",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 112
+      },
+      "revId": "15a8ccf2a4f872e57c5712240f983a17bc52b958",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
