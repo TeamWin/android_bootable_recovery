@@ -16,6 +16,24 @@
       "message": "Is this to support FDE in Android11?",
       "revId": "15a8ccf2a4f872e57c5712240f983a17bc52b958",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009a85a5_086f06e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 26
+      },
+      "writtenOn": "2022-04-20T20:56:48Z",
+      "side": 1,
+      "message": "Partly... at least TWRP will boot. Because without this (or additional relink stuff in device tree) it won\u0027t even boot due to missing libcryptfs_hw.so \u0026 vendor.qti.hardware.cryptfshw@1.0.so dependencies.\n\nIn my case I can actually confirm working FDE decryption in Android 11 tree with qseecomd, keymaster + cryptfshw HIDL service.\n\nHowever, the decryption of the A12 firmware does not seem to work yet... I will look at this later",
+      "parentUuid": "b1f09310_27869129",
+      "revId": "15a8ccf2a4f872e57c5712240f983a17bc52b958",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
