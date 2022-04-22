@@ -16,6 +16,23 @@
       "message": "Issue seems to be in MtpFfsHandle::waitEvents\nhttps://github.com/TeamWin/android_bootable_recovery/blob/android-11/mtp/ffs/MtpFfsHandle.cpp#L304\nAt USB disconnect MTP FUNCTIONFS_SUSPEND event is present in logcat but MtpFfsHandle is not getting it and fails at USB reconnect.\nThis patch works around the issue but not sure if it\u0027s the best solution or I am missing something...",
       "revId": "5f927584143618b90bc36910d9315de65edf401e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e971b834_6ab4b2a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-04-22T15:26:42Z",
+      "side": 1,
+      "message": "Seems I need this on bonito too.",
+      "revId": "5f927584143618b90bc36910d9315de65edf401e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
