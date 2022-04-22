@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e3d989d_4a289507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-04-22T15:27:17Z",
+      "side": 1,
+      "message": "Tested on bonito and fixes the problem.",
+      "revId": "16dbb0f7ccd1bdef186e26d69926e46f0e2480dd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
