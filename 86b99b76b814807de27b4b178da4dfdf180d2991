@@ -1,0 +1,4322 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "609d5bcc_329655c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "Thanks for your work. I\u0027ve done review. Here\u0027s some words you can directly change them by replacing:\n- partition 分區 -\u003e 分割區\n- queue 隊列 -\u003e 佇列\n- command 指令 -\u003e 命令 (Since the word \u0027instruction\u0027 isn\u0027t used here, it\u0027s optional)\nBy the way, if the xml doesn\u0027t differ to much to the ones on branch Android 11 and Android 10, will you consider applying the change to them as well?",
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd754e1c_068bcad0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "佇列才是對的，參見 https://terms.naer.edu.tw/detail/1218302/\n按返回鈕以清除佇列。",
+      "range": {
+        "startLine": 82,
+        "startChar": 32,
+        "endLine": 82,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a172d1c_3b615600",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "佇列：",
+      "range": {
+        "startLine": 90,
+        "startChar": 27,
+        "endLine": 90,
+        "endChar": 30
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58294ee8_bf459b1d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "清除刷機佇列",
+      "range": {
+        "startLine": 94,
+        "startChar": 35,
+        "endLine": 94,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70691da_eeead186",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇目標分割區",
+      "range": {
+        "startLine": 104,
+        "startChar": 36,
+        "endLine": 104,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a07bef5_079fd54a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇要刷入映像的分割區：",
+      "range": {
+        "startLine": 105,
+        "startChar": 36,
+        "endLine": 105,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8209a064_8a310a54",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "目標分割區：",
+      "range": {
+        "startLine": 106,
+        "startChar": 34,
+        "endLine": 106,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef21730b_84f37959",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已刷入映像。",
+      "range": {
+        "startLine": 108,
+        "startChar": 31,
+        "endLine": 108,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7603144d_c5d93e9b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認清除",
+      "range": {
+        "startLine": 114,
+        "startChar": 28,
+        "endLine": 114,
+        "endChar": 36
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfee8e0_58c523ae",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認重新開機",
+      "range": {
+        "startLine": 120,
+        "startChar": 30,
+        "endLine": 120,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74bf836_a6b78b14",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認安裝",
+      "range": {
+        "startLine": 128,
+        "startChar": 38,
+        "endLine": 128,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35bb1f62_3d0edb3e",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認刷入",
+      "range": {
+        "startLine": 133,
+        "startChar": 29,
+        "endLine": 133,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a1d9224_3e277c45",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "這將會清空 Data、Cache 分割區和 Dalvik 快取",
+      "range": {
+        "startLine": 140,
+        "startChar": 32,
+        "endLine": 140,
+        "endChar": 62
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "627b102f_8cf09f6b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "是否清除 Data 分割區加密？",
+      "range": {
+        "startLine": 148,
+        "startChar": 34,
+        "endLine": 148,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2391e1d8_ccebf662",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在格式化 Data 分割區…",
+      "range": {
+        "startLine": 149,
+        "startChar": 33,
+        "endLine": 149,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ffa15e_43f0679d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認格式化",
+      "range": {
+        "startLine": 150,
+        "startChar": 35,
+        "endLine": 150,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff02be4_a2c5a8a0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區",
+      "range": {
+        "startLine": 151,
+        "startChar": 40,
+        "endLine": 151,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fea34d_c0a2ca99",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "恢復出廠設定完成",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 46
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57fe6def_1189293c",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇分割區",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dfbdf4d_7b2dfaa0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "是否清除所選的分割區？",
+      "range": {
+        "startLine": 154,
+        "startChar": 34,
+        "endLine": 154,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b867ebbe_bc5c34ed",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在清除分割區…",
+      "range": {
+        "startLine": 155,
+        "startChar": 29,
+        "endLine": 155,
+        "endChar": 36
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a15a6a46_85ba7aa1",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇要清除的分割區：",
+      "range": {
+        "startLine": 157,
+        "startChar": 31,
+        "endLine": 157,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d79da35_c0c665af",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無效的分割區",
+      "range": {
+        "startLine": 158,
+        "startChar": 34,
+        "endLine": 158,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff246e4_9740bf19",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區",
+      "range": {
+        "startLine": 159,
+        "startChar": 33,
+        "endLine": 159,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d67ee6_29e65e4f",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區",
+      "range": {
+        "startLine": 160,
+        "startChar": 33,
+        "endLine": 160,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4036fa28_f9c6562a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區將會清空您安裝的所有",
+      "range": {
+        "startLine": 161,
+        "startChar": 34,
+        "endLine": 161,
+        "endChar": 55
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da1831a_43013b24",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區將會清空您安裝的所有軟體、備份、圖片、媒體，",
+      "range": {
+        "startLine": 165,
+        "startChar": 34,
+        "endLine": 165,
+        "endChar": 67
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4720248b_8b3765db",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區會清除您的所有軟體",
+      "range": {
+        "startLine": 167,
+        "startChar": 34,
+        "endLine": 167,
+        "endChar": 54
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa698ee_4a15c92a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "備份和媒體資料，此動作無法還原。",
+      "range": {
+        "startLine": 168,
+        "startChar": 34,
+        "endLine": 168,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c462805_f2f11de7",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "格式化 Data 分割區完成",
+      "range": {
+        "startLine": 170,
+        "startChar": 38,
+        "endLine": 170,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123bce53_27afed5c",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割區名稱: %tw_partition_name%",
+      "range": {
+        "startLine": 173,
+        "startChar": 30,
+        "endLine": 173,
+        "endChar": 54
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c706a81c_0b8bf8eb",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "目前：是",
+      "range": {
+        "startLine": 179,
+        "startChar": 34,
+        "endLine": 179,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e869b26_688d4b85",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "目前：否",
+      "range": {
+        "startLine": 180,
+        "startChar": 33,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b76e22f4_d28c5f36",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "調整檔案系統大小",
+      "range": {
+        "startLine": 187,
+        "startChar": 28,
+        "endLine": 187,
+        "endChar": 34
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d3314ad_f0608c4d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "調整大小",
+      "range": {
+        "startLine": 188,
+        "startChar": 30,
+        "endLine": 188,
+        "endChar": 32
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d331dbe_00a8f8cd",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在調整大小…",
+      "range": {
+        "startLine": 190,
+        "startChar": 26,
+        "endLine": 190,
+        "endChar": 31
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea9b250_ea2b1096",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "調整大小完成",
+      "range": {
+        "startLine": 191,
+        "startChar": 33,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d71dd7_687048b4",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿確認以調整大小",
+      "range": {
+        "startLine": 192,
+        "startChar": 30,
+        "endLine": 192,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d93e83_a5996d1d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "調整大小",
+      "range": {
+        "startLine": 193,
+        "startChar": 35,
+        "endLine": 193,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c2cd0f7_a6e36d88",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認修復",
+      "range": {
+        "startLine": 199,
+        "startChar": 30,
+        "endLine": 199,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f2d8f7_ae20684b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "要更改的分割區: %tw_partition_name%",
+      "range": {
+        "startLine": 203,
+        "startChar": 35,
+        "endLine": 203,
+        "endChar": 62
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0676382e_7e53ac8a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割區: %tw_partition_name%\u0026gt;選擇檔案系統",
+      "range": {
+        "startLine": 204,
+        "startChar": 37,
+        "endLine": 204,
+        "endChar": 70
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcea566d_7614fb16",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認更改",
+      "range": {
+        "startLine": 210,
+        "startChar": 33,
+        "endLine": 210,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c7f60a5_9a26a023",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認恢復出廠設定",
+      "range": {
+        "startLine": 214,
+        "startChar": 37,
+        "endLine": 214,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb5e1aa_0556bc7f",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇要備份的分割區：",
+      "range": {
+        "startLine": 222,
+        "startChar": 33,
+        "endLine": 222,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cdb2e68_583f2663",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "目前使用槽位: %tw_active_slot%",
+      "range": {
+        "startLine": 229,
+        "startChar": 35,
+        "endLine": 229,
+        "endChar": 57
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81771311_14ccaea6",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "變更啟動槽位",
+      "range": {
+        "startLine": 232,
+        "startChar": 36,
+        "endLine": 232,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e275023c_ade1bc58",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "重新整理大小",
+      "range": {
+        "startLine": 234,
+        "startChar": 35,
+        "endLine": 234,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa30971a_3e99bcfd",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認備份",
+      "range": {
+        "startLine": 235,
+        "startChar": 30,
+        "endLine": 235,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ee2ff7_dc2af693",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "密碼不相符！",
+      "range": {
+        "startLine": 241,
+        "startChar": 32,
+        "endLine": 241,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76a95d5_c44ce548",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割區：",
+      "range": {
+        "startLine": 242,
+        "startChar": 28,
+        "endLine": 242,
+        "endChar": 31
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc77dee_79f12b33",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認刪除",
+      "range": {
+        "startLine": 259,
+        "startChar": 30,
+        "endLine": 259,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74757914_357a4360",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇要還原的分割區：",
+      "range": {
+        "startLine": 264,
+        "startChar": 34,
+        "endLine": 264,
+        "endChar": 43
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbce31f4_6d8628b3",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "還原完成",
+      "range": {
+        "startLine": 266,
+        "startChar": 34,
+        "endLine": 266,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3eb8c5d_1cd28f45",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認還原",
+      "range": {
+        "startLine": 267,
+        "startChar": 31,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a109654_02d3df24",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "還原",
+      "range": {
+        "startLine": 268,
+        "startChar": 36,
+        "endLine": 268,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce02f351_e3b4d5aa",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認重新命名",
+      "range": {
+        "startLine": 274,
+        "startChar": 33,
+        "endLine": 274,
+        "endChar": 43
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a279807f_815db614",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇要掛載的分割區：",
+      "range": {
+        "startLine": 278,
+        "startChar": 32,
+        "endLine": 278,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b0f6740_20d92fde",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "以唯讀模式掛載 System 分割區",
+      "range": {
+        "startLine": 279,
+        "startChar": 34,
+        "endLine": 279,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de8f9f4_7cc6e314",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "以唯讀模式掛載 System 分割區",
+      "range": {
+        "startLine": 280,
+        "startChar": 36,
+        "endLine": 280,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfab6c75_8d27fa9f",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "電腦上安全地移除裝置！",
+      "range": {
+        "startLine": 288,
+        "startChar": 31,
+        "endLine": 288,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a726d825_39504e13",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認關機",
+      "range": {
+        "startLine": 297,
+        "startChar": 33,
+        "endLine": 297,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a24e47_f9e50375",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "System 分割區未修改",
+      "range": {
+        "startLine": 299,
+        "startChar": 28,
+        "endLine": 299,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfa5e8e_ac706232",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "是否保持 System 分割區唯讀？",
+      "range": {
+        "startLine": 300,
+        "startChar": 29,
+        "endLine": 300,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "259ff6db_e0e77c29",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "TWRP 可以使 System 分割區保持未修改狀態",
+      "range": {
+        "startLine": 301,
+        "startChar": 26,
+        "endLine": 301,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b40858_d9f33920",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "替換 TWRP 並且不能再 Root 您的裝置。",
+      "range": {
+        "startLine": 304,
+        "startChar": 26,
+        "endLine": 304,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831278ca_487e8063",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "安裝刷機包或者透過 adb 操作依然可以",
+      "range": {
+        "startLine": 305,
+        "startChar": 26,
+        "endLine": 305,
+        "endChar": 46
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f2c0d05_7b6939f6",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "修改 System 分割區。",
+      "range": {
+        "startLine": 306,
+        "startChar": 26,
+        "endLine": 306,
+        "endChar": 33
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c519c7_8b422291",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "TWRP 可以使 System 分割區保持未修改狀態，使您更容易獲得官方的更新。",
+      "range": {
+        "startLine": 307,
+        "startChar": 26,
+        "endLine": 307,
+        "endChar": 59
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0399bcf5_05035387",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "TWRP 將無法禁止原廠韌體替換 TWRP，並且不能再 Root 您的裝置。",
+      "range": {
+        "startLine": 308,
+        "startChar": 26,
+        "endLine": 308,
+        "endChar": 63
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a899d352_fd3e25ac",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "安裝刷機包或者透過 adb 操作依然可以修改 System 分割區。",
+      "range": {
+        "startLine": 309,
+        "startChar": 26,
+        "endLine": 309,
+        "endChar": 53
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbed5bfa_952d68f0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "保持唯讀狀態",
+      "range": {
+        "startLine": 311,
+        "startChar": 36,
+        "endLine": 311,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67936e63_1eb7ac20",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以允許修改",
+      "range": {
+        "startLine": 312,
+        "startChar": 33,
+        "endLine": 312,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb641005_bf15b45e",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "使用 rm -rf 命令代替格式化",
+      "range": {
+        "startLine": 318,
+        "startChar": 30,
+        "endLine": 318,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5af27929_70e44423",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "反轉底部導覽列按鈕排列",
+      "range": {
+        "startLine": 320,
+        "startChar": 32,
+        "endLine": 320,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c239dacd_7e7a1e44",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "導覽列按鈕置中",
+      "range": {
+        "startLine": 323,
+        "startChar": 32,
+        "endLine": 323,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e15f3f_edb75aa5",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "導覽列按鈕靠左對齊",
+      "range": {
+        "startLine": 324,
+        "startChar": 32,
+        "endLine": 324,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451efee3_78fdd2db",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "導覽列按鈕靠右對齊",
+      "range": {
+        "startLine": 325,
+        "startChar": 32,
+        "endLine": 325,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "929fbf99_c703f450",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "本裝置已停用震動",
+      "range": {
+        "startLine": 330,
+        "startChar": 36,
+        "endLine": 330,
+        "endChar": 46
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a3644e_06f43f19",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "使用日光節約時間 (DST)",
+      "range": {
+        "startLine": 367,
+        "startChar": 29,
+        "endLine": 367,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89d36e1_65dfb7b2",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "目前時區: %tw_time_zone%",
+      "range": {
+        "startLine": 368,
+        "startChar": 25,
+        "endLine": 368,
+        "endChar": 45
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f49e404_42e909e9",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "目前時區：",
+      "range": {
+        "startLine": 369,
+        "startChar": 27,
+        "endLine": 369,
+        "endChar": 32
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff4a4df_ac4225e8",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "螢幕自動鎖定",
+      "range": {
+        "startLine": 372,
+        "startChar": 45,
+        "endLine": 372,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9632b61_74bbd215",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "啟用螢幕自動鎖定",
+      "range": {
+        "startLine": 373,
+        "startChar": 36,
+        "endLine": 373,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a262eb_c4e60434",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "螢幕自動鎖定時間（秒）：",
+      "range": {
+        "startLine": 374,
+        "startChar": 34,
+        "endLine": 374,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f39170_6e8ae2cb",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "螢幕自動鎖定（0\u003d停用）: %tw_screen_timeout_secs",
+      "range": {
+        "startLine": 375,
+        "startChar": 36,
+        "endLine": 375,
+        "endChar": 71
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d0b056_19be5526",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "螢幕自動鎖定設定不可用",
+      "range": {
+        "startLine": 376,
+        "startChar": 30,
+        "endLine": 376,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae78a9dc_f93bb597",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割 SD 卡",
+      "range": {
+        "startLine": 394,
+        "startChar": 29,
+        "endLine": 394,
+        "endChar": 36
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8940aca9_280bcc3b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "終端機命令",
+      "range": {
+        "startLine": 398,
+        "startChar": 30,
+        "endLine": 398,
+        "endChar": 34
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c3f37b8_a6eaa8b0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "重新載入佈景主題",
+      "range": {
+        "startLine": 399,
+        "startChar": 34,
+        "endLine": 399,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5c13a3_f4fc54a9",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認",
+      "range": {
+        "startLine": 405,
+        "startChar": 34,
+        "endLine": 405,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e66d8cd_c8891c96",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割 SD 卡",
+      "range": {
+        "startLine": 406,
+        "startChar": 29,
+        "endLine": 406,
+        "endChar": 35
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371b4ea3_5c8364fe",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "您必須選擇一個可移動裝置",
+      "range": {
+        "startLine": 407,
+        "startChar": 36,
+        "endLine": 407,
+        "endChar": 48
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830bdea0_eb689fcc",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認分割",
+      "range": {
+        "startLine": 415,
+        "startChar": 31,
+        "endLine": 415,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eddc9f2_71b68d83",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割",
+      "range": {
+        "startLine": 416,
+        "startChar": 33,
+        "endLine": 416,
+        "endChar": 35
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3921fe17_2a4b9290",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在分割 SD 卡",
+      "range": {
+        "startLine": 417,
+        "startChar": 33,
+        "endLine": 417,
+        "endChar": 43
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc117b98_ee72b1f6",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割完成",
+      "range": {
+        "startLine": 419,
+        "startChar": 34,
+        "endLine": 419,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ef9829_24a70e6d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "是否重新刷入 Recovery 至 Boot 分割區？",
+      "range": {
+        "startLine": 426,
+        "startChar": 41,
+        "endLine": 426,
+        "endChar": 67
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431db10a_96af95b2",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在刷入 Recovery 至 Boot 分割區…",
+      "range": {
+        "startLine": 427,
+        "startChar": 36,
+        "endLine": 427,
+        "endChar": 60
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82fcae3c_f35dcb77",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以解鎖",
+      "range": {
+        "startLine": 433,
+        "startChar": 33,
+        "endLine": 433,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69146660_ea8d665e",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "設定權限",
+      "range": {
+        "startLine": 459,
+        "startChar": 34,
+        "endLine": 459,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a21bcae_54122c29",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "權限：",
+      "range": {
+        "startLine": 460,
+        "startChar": 26,
+        "endLine": 460,
+        "endChar": 30
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddbb7abe_74d0564a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "解密 Data 分割區",
+      "range": {
+        "startLine": 462,
+        "startChar": 34,
+        "endLine": 462,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39987cf3_eadc8be9",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "終端機命令",
+      "range": {
+        "startLine": 469,
+        "startChar": 26,
+        "endLine": 469,
+        "endChar": 31
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a487a10f_efd15213",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以開始 Sideload",
+      "range": {
+        "startLine": 476,
+        "startChar": 35,
+        "endLine": 476,
+        "endChar": 50
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a86c00_a0070523",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "注意：罕見情況下需要修復 Context。",
+      "range": {
+        "startLine": 482,
+        "startChar": 36,
+        "endLine": 482,
+        "endChar": 57
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c5602f_d3bbf4a6",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "您的裝置無法正常啟動。",
+      "range": {
+        "startLine": 484,
+        "startChar": 36,
+        "endLine": 484,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d2b4b1_119d2319",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "滑動滑桿以確認修復",
+      "range": {
+        "startLine": 485,
+        "startChar": 39,
+        "endLine": 485,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f97e02df_9c11ba1d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在修補 Kernel…",
+      "range": {
+        "startLine": 513,
+        "startChar": 44,
+        "endLine": 513,
+        "endChar": 59
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e64beb_c7195c63",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "修補 Kernel 時發生錯誤。",
+      "range": {
+        "startLine": 514,
+        "startChar": 47,
+        "endLine": 514,
+        "endChar": 63
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648926e0_f7cacd41",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "備份不包含一些屬於使用者 {1} 的檔案，因為該使用者沒有解密",
+      "range": {
+        "startLine": 518,
+        "startChar": 50,
+        "endLine": 518,
+        "endChar": 81
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e078eb42_48c4706d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "MTP 當機。啟動時不再載入 MTP。",
+      "range": {
+        "startLine": 534,
+        "startChar": 27,
+        "endLine": 534,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb7f587_ea4524ea",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法使用預設密碼來解密，您可能需要格式化 Data 分割區。",
+      "range": {
+        "startLine": 536,
+        "startChar": 35,
+        "endLine": 536,
+        "endChar": 64
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "088982a1_03ce6a13",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在產生 Digest",
+      "range": {
+        "startLine": 537,
+        "startChar": 48,
+        "endLine": 537,
+        "endChar": 59
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5851d842_f3c7883d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "* 正在產生 Digest…",
+      "range": {
+        "startLine": 539,
+        "startChar": 48,
+        "endLine": 539,
+        "endChar": 63
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1772ba68_d39b4bd0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "* 已產生 Digest。",
+      "range": {
+        "startLine": 540,
+        "startChar": 44,
+        "endLine": 540,
+        "endChar": 58
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "713aae02_0fe2ea70",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "（目前日期）",
+      "range": {
+        "startLine": 543,
+        "startChar": 30,
+        "endLine": 543,
+        "endChar": 36
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37d57aa3_0e18c686",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未找到“{1}”分割區。",
+      "range": {
+        "startLine": 545,
+        "startChar": 44,
+        "endLine": 545,
+        "endChar": 55
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94d4d33d_86a4191a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未選擇備份分割區。",
+      "range": {
+        "startLine": 546,
+        "startChar": 39,
+        "endLine": 546,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a5ffe4_79877d52",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "* 備份分割區總數: {1}",
+      "range": {
+        "startLine": 547,
+        "startChar": 41,
+        "endLine": 547,
+        "endChar": 55
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "908a5c5c_0cade6a7",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "* 備份資料總計: {1}MB",
+      "range": {
+        "startLine": 548,
+        "startChar": 35,
+        "endLine": 548,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b21bed0d_e1a73aca",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未找到儲存裝置。",
+      "range": {
+        "startLine": 550,
+        "startChar": 39,
+        "endLine": 550,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748fbd6d_c1b036a7",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在計算還原資訊…",
+      "range": {
+        "startLine": 565,
+        "startChar": 30,
+        "endLine": 565,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e4e80e_dd2150ac",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法還原 {1} -- 已掛載為唯讀分割區。",
+      "range": {
+        "startLine": 566,
+        "startChar": 35,
+        "endLine": 566,
+        "endChar": 54
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af31ddf0_6c628ca2",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未找到“{1}”分割區。",
+      "range": {
+        "startLine": 567,
+        "startChar": 39,
+        "endLine": 567,
+        "endChar": 50
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506835c4_51955160",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未選擇要恢復的分割區。",
+      "range": {
+        "startLine": 568,
+        "startChar": 33,
+        "endLine": 568,
+        "endChar": 43
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bc159e_1dc6f083",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在恢復 {1} 個分割區…",
+      "range": {
+        "startLine": 569,
+        "startChar": 36,
+        "endLine": 569,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206d0497_d302be44",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "還原檔案總計 {1}MB",
+      "range": {
+        "startLine": 570,
+        "startChar": 36,
+        "endLine": 570,
+        "endChar": 48
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97c0d8df_3a53b5dd",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "[還原完成，耗時 {1} 秒]",
+      "range": {
+        "startLine": 572,
+        "startChar": 35,
+        "endLine": 572,
+        "endChar": 50
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e653b41d_4ed48fcb",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "開啟檔案時錯誤：“{1}” ({2})",
+      "range": {
+        "startLine": 574,
+        "startChar": 38,
+        "endLine": 574,
+        "endChar": 54
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cdf0d0_3d39496b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法透過備份名稱來尋找分割區:“{1}”",
+      "range": {
+        "startLine": 575,
+        "startChar": 48,
+        "endLine": 575,
+        "endChar": 67
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9ab040_fed6013f",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "找不到分割區路徑“{1}”",
+      "range": {
+        "startLine": 576,
+        "startChar": 39,
+        "endLine": 576,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bcc47b2_eff3aa2d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在更新分割區資訊…",
+      "range": {
+        "startLine": 577,
+        "startChar": 37,
+        "endLine": 577,
+        "endChar": 46
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8298b19_d843b5fb",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未發現 android secure 分割區。",
+      "range": {
+        "startLine": 583,
+        "startChar": 27,
+        "endLine": 583,
+        "endChar": 49
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b1f99d_b0aa9b7c",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法解密資料",
+      "range": {
+        "startLine": 589,
+        "startChar": 30,
+        "endLine": 589,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b631e250_b668716c",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "成功解密 Data 分割區，新增區塊裝置:“{1}”",
+      "range": {
+        "startLine": 591,
+        "startChar": 37,
+        "endLine": 591,
+        "endChar": 60
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4be653e_73341af2",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已成功解密 Data 分割區",
+      "range": {
+        "startLine": 592,
+        "startChar": 39,
+        "endLine": 592,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f39a0b1_a868bb75",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在對 SD 卡建立分割區…",
+      "range": {
+        "startLine": 594,
+        "startChar": 36,
+        "endLine": 594,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4b7120_32d753e9",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未找到需要分割磁碟區的裝置。",
+      "range": {
+        "startLine": 595,
+        "startChar": 37,
+        "endLine": 595,
+        "endChar": 48
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a95073d2_5cad40fe",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在刪除分割表…",
+      "range": {
+        "startLine": 597,
+        "startChar": 35,
+        "endLine": 597,
+        "endChar": 43
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23eaadcf_4f19cbfe",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法刪除分割表。",
+      "range": {
+        "startLine": 598,
+        "startChar": 32,
+        "endLine": 598,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44a0e9e_440c673e",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在建立 {1} 分割區…",
+      "range": {
+        "startLine": 599,
+        "startChar": 29,
+        "endLine": 599,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0822027_4e6fef90",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法建立 {1} 分割區。",
+      "range": {
+        "startLine": 600,
+        "startChar": 39,
+        "endLine": 600,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccb720d_cec15c8b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "分割完成。",
+      "range": {
+        "startLine": 602,
+        "startChar": 31,
+        "endLine": 602,
+        "endChar": 36
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ec5aea_305e953c",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未找到“{1}”分割區。",
+      "range": {
+        "startLine": 609,
+        "startChar": 37,
+        "endLine": 609,
+        "endChar": 48
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b98b335_e9638bd7",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未選擇刷入分割區。",
+      "range": {
+        "startLine": 610,
+        "startChar": 31,
+        "endLine": 610,
+        "endChar": 39
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aa1f583_465b44fb",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "選擇刷入的分割區太多。",
+      "range": {
+        "startLine": 611,
+        "startChar": 32,
+        "endLine": 611,
+        "endChar": 42
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895d52b2_52ff6e97",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "指定了無效的刷入分割區。",
+      "range": {
+        "startLine": 612,
+        "startChar": 31,
+        "endLine": 612,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77537ff_1763e3ab",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "未找到“{1}”的 Digest 校驗檔案。請取消勾選“啟用 Digest 校驗備份檔案”複選框。",
+      "range": {
+        "startLine": 628,
+        "startChar": 45,
+        "endLine": 628,
+        "endChar": 94
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58340abd_a80f9157",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "Digest 符合“{1}”。",
+      "range": {
+        "startLine": 630,
+        "startChar": 44,
+        "endLine": 630,
+        "endChar": 59
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055c2424_b5980bc8",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "您可能需要重新開機再進入 Recovery 才能使用/data。",
+      "range": {
+        "startLine": 632,
+        "startChar": 33,
+        "endLine": 632,
+        "endChar": 62
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da4ef66_3d56735b",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法清除 {1} 分割區。",
+      "range": {
+        "startLine": 636,
+        "startChar": 29,
+        "endLine": 636,
+        "endChar": 41
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aebda35_576b1982",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在清除 Data 分割區，跳過清除/data/media…",
+      "range": {
+        "startLine": 638,
+        "startChar": 29,
+        "endLine": 638,
+        "endChar": 58
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13dac375_831e43d0",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "備份的 {1} 分割區不包含內建儲存空間上的任何檔案，例如照片或下載的檔案等等。",
+      "range": {
+        "startLine": 640,
+        "startChar": 40,
+        "endLine": 640,
+        "endChar": 79
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6aa1dc_4f539887",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在還原 {1}…",
+      "range": {
+        "startLine": 644,
+        "startChar": 27,
+        "endLine": 644,
+        "endChar": 36
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0c4004_d1521b92",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在還原",
+      "range": {
+        "startLine": 645,
+        "startChar": 31,
+        "endLine": 645,
+        "endChar": 35
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b00ba9_c9f3623d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "映像大小大於目標裝置",
+      "range": {
+        "startLine": 647,
+        "startChar": 30,
+        "endLine": 647,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f026b4_b63b9a55",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "設定還原選項:“{1}”：",
+      "range": {
+        "startLine": 651,
+        "startChar": 33,
+        "endLine": 651,
+        "endChar": 46
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0b3851_d2bb84e7",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已開啟跳過校驗 Digest",
+      "range": {
+        "startLine": 652,
+        "startChar": 47,
+        "endLine": 652,
+        "endChar": 62
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61c66502_6913c5d7",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法使用 OpenRecoveryScript 指令稿還原加密備份。",
+      "range": {
+        "startLine": 653,
+        "startChar": 41,
+        "endLine": 653,
+        "endChar": 74
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00a45bb5_93f4bc93",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "執行命令",
+      "range": {
+        "startLine": 662,
+        "startChar": 33,
+        "endLine": 662,
+        "endChar": 37
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efcdd680_ce8fe72a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "指令稿執行完畢",
+      "range": {
+        "startLine": 667,
+        "startChar": 26,
+        "endLine": 667,
+        "endChar": 32
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da6e0990_d95b7052",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在對 Boot 映像加入 TWRP…",
+      "range": {
+        "startLine": 668,
+        "startChar": 28,
+        "endLine": 668,
+        "endChar": 48
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aeabc2f_02855ce8",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已關閉產生 Digest",
+      "range": {
+        "startLine": 673,
+        "startChar": 40,
+        "endLine": 673,
+        "endChar": 52
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa4ff000_17e06c45",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "執行 Recovery 命令",
+      "range": {
+        "startLine": 676,
+        "startChar": 43,
+        "endLine": 676,
+        "endChar": 57
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5882398b_5a0c701e",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "Recovery 命令執行完成",
+      "range": {
+        "startLine": 677,
+        "startChar": 44,
+        "endLine": 677,
+        "endChar": 59
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d93b34f0_c0015bf2",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "執行 OpenRecoveryScript 指令稿",
+      "range": {
+        "startLine": 678,
+        "startChar": 29,
+        "endLine": 678,
+        "endChar": 53
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47482033_702d1800",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "執行 OpenRecoveryScript 指令稿完成",
+      "range": {
+        "startLine": 679,
+        "startChar": 30,
+        "endLine": 679,
+        "endChar": 56
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d7f5111_c42579cf",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在檢查 Digest 檔案…",
+      "range": {
+        "startLine": 680,
+        "startChar": 46,
+        "endLine": 680,
+        "endChar": 58
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b09e3b_d21c10db",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "Digest 不符合",
+      "range": {
+        "startLine": 688,
+        "startChar": 41,
+        "endLine": 688,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c20754af_65988960",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "{1} 過程結束，訊號: {2}",
+      "range": {
+        "startLine": 690,
+        "startChar": 28,
+        "endLine": 690,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96736e13_cb73df25",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在還原原廠 Boot…",
+      "range": {
+        "startLine": 693,
+        "startChar": 33,
+        "endLine": 693,
+        "endChar": 45
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5d9be3_5cda3bf6",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在執行 {1} 指令稿…",
+      "range": {
+        "startLine": 695,
+        "startChar": 28,
+        "endLine": 695,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19debed8_d1cfee1f",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "重新命名 /system 下原廠 Recovery 的修補，避免原廠韌體替換 TWRP。",
+      "range": {
+        "startLine": 696,
+        "startChar": 30,
+        "endLine": 696,
+        "endChar": 73
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a15cc49_fe10e879",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在嘗試通過命令解密 Data 分割區或使用者資料。",
+      "range": {
+        "startLine": 704,
+        "startChar": 41,
+        "endLine": 704,
+        "endChar": 66
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c1bb79_82fa151a",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已達到佇列上限！",
+      "range": {
+        "startLine": 711,
+        "startChar": 27,
+        "endLine": 711,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d3a0a0_383d643d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已達到佇列下限！",
+      "range": {
+        "startLine": 712,
+        "startChar": 27,
+        "endLine": 712,
+        "endChar": 40
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77a36124_95e0b509",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已將截圖儲存到：{1}",
+      "range": {
+        "startLine": 713,
+        "startChar": 34,
+        "endLine": 713,
+        "endChar": 44
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecf4fb1_cb9d9812",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "此裝置沒有真實的 SD 卡！正在中止！",
+      "range": {
+        "startLine": 722,
+        "startChar": 32,
+        "endLine": 722,
+        "endChar": 51
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769f8f4c_62d3cced",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "自訂佈景主題和 TWRP 版本不符合，正使用預設佈景主題。",
+      "range": {
+        "startLine": 725,
+        "startChar": 31,
+        "endLine": 725,
+        "endChar": 56
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3602d4d1_2d7076b4",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "將 Bootloader 啟動槽位變更為 {1} 時發生錯誤",
+      "range": {
+        "startLine": 735,
+        "startChar": 38,
+        "endLine": 735,
+        "endChar": 64
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "351c4d3e_279df086",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "在安裝 Zip 刷機包之前先解除掛載 System 分割區",
+      "range": {
+        "startLine": 736,
+        "startChar": 37,
+        "endLine": 736,
+        "endChar": 62
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fec4234_f74f168d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在解除掛載 System 分割區…",
+      "range": {
+        "startLine": 737,
+        "startChar": 32,
+        "endLine": 737,
+        "endChar": 46
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c73474d3_0747cf54",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "無法解除掛載 System 分割區",
+      "range": {
+        "startLine": 738,
+        "startChar": 36,
+        "endLine": 738,
+        "endChar": 50
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043563ef_79d91a8d",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "正在將 A/B Zip 刷機包刷入待命槽位: {1}",
+      "range": {
+        "startLine": 739,
+        "startChar": 35,
+        "endLine": 739,
+        "endChar": 62
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50314c31_420a6243",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "已觸發 Android 救援模式！您可以嘗試下面的動作：",
+      "range": {
+        "startLine": 748,
+        "startChar": 31,
+        "endLine": 748,
+        "endChar": 58
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b13b01_57556f70",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "2. 格式化 Data 分割區；",
+      "range": {
+        "startLine": 750,
+        "startChar": 32,
+        "endLine": 750,
+        "endChar": 47
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ab3412_d72e5334",
+        "filename": "gui/theme/extra-languages/languages/zh_TW.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 904
+      },
+      "writtenOn": "2022-04-26T18:58:16Z",
+      "side": 1,
+      "message": "回報的問題為：",
+      "range": {
+        "startLine": 752,
+        "startChar": 31,
+        "endLine": 752,
+        "endChar": 38
+      },
+      "revId": "86b99b76b814807de27b4b178da4dfdf180d2991",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
