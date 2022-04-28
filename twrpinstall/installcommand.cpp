@@ -128,7 +128,7 @@ static int check_newer_ab_build(ZipArchiveHandle zip)
     property_get("ro.product.name", propname, "");
     const std::string& pkg_device = metadata["pre-device"];
 
-    std::vector<std::string> assertResults = android::base::Split(pkg_device, ",");
+    std::vector<std::string> assertResults = android::base::Split(pkg_device, "[,|]");
 
     bool deviceExists = false;
 
@@ -136,7 +136,7 @@ static int check_newer_ab_build(ZipArchiveHandle zip)
     bool has_target_devices = false;
     char tw_devices[PROPERTY_VALUE_MAX * 2];
     property_get("ro.twrp.target.devices", tw_devices, "");
-    std::vector<std::string> TWRP_devices = android::base::Split(tw_devices, ",");
+    std::vector<std::string> TWRP_devices = android::base::Split(tw_devices, "[,|]");
     if (strlen(tw_devices) > 1) {
        has_target_devices = true;
     }
