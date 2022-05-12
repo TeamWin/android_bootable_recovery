@@ -1,0 +1,5 @@
+service boot-hal-1-2 /system/bin/android.hardware.boot@1.2-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
