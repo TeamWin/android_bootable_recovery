@@ -16,6 +16,23 @@
       "message": "Maybe we have to merge this attempt with your previous patches.",
       "revId": "78743784ee32e783b570c2bc1f2f9d142226c04e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eabf3605_7413ab4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-14T16:19:41Z",
+      "side": 1,
+      "message": "Seems good on FDE, and should have no effect of FBE devices",
+      "revId": "78743784ee32e783b570c2bc1f2f9d142226c04e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
