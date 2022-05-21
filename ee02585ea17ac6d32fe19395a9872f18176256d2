@@ -16,6 +16,24 @@
       "message": "The property check is useless. It actually reads \u0027ro.build.version.sdk\u0027 from in-built TWRP props, not from the system.\nFor example I have Android 12 installed with sdk 32. But inside TWRP \u0027getprop\u0027 reports sdk 28 because this line is just backed in the \u0027default.prop\u0027 of TWRP image. So TWRP just hangs on startup splash attempting to read the file.\nAlso the code is poor, it does not perform \u0027Check_Xml_Format\u0027 in this case. I suggest to just get rid of the property check and always perform \u0027Check_Xml_Format\u0027.",
       "revId": "ee02585ea17ac6d32fe19395a9872f18176256d2",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927bd7cc_72ca358d",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2999,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-05-21T15:36:33Z",
+      "side": 1,
+      "message": "Can you push a patchset for review to fix your issue?",
+      "parentUuid": "9bd535ad_79960c70",
+      "revId": "ee02585ea17ac6d32fe19395a9872f18176256d2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
