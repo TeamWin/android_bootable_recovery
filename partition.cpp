@@ -2441,7 +2441,7 @@ bool TWPartition::Wipe_F2FS() {
 	}
 
 	needs_casefold = android::base::GetBoolProperty("external_storage.casefold.enabled", false);
-    needs_projid = android::base::GetBoolProperty("external_storage.projid.enabled", false);
+	needs_projid = android::base::GetBoolProperty("external_storage.projid.enabled", false);
 	unsigned long long dev_sz = TWFunc::IOCTL_Get_Block_Size(Actual_Block_Device.c_str());
 	if (!dev_sz)
 		return false;
@@ -2458,8 +2458,8 @@ bool TWPartition::Wipe_F2FS() {
 
 	f2fs_command += " " + Actual_Block_Device + " " + dev_sz_str;
 
-	if (TWFunc::Path_Exists("/system/bin/sload.f2fs")) {
-		f2fs_command += " && sload.f2fs -t /data " + Actual_Block_Device;
+	if (TWFunc::Path_Exists("/system/bin/sload_f2fs")) {
+		f2fs_command += " && sload_f2fs -t /data " + Actual_Block_Device;
 	}
 
 	/**
