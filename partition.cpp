@@ -2458,8 +2458,8 @@ bool TWPartition::Wipe_F2FS() {
 
 	f2fs_command += " " + Actual_Block_Device + " " + dev_sz_str;
 
-	if (TWFunc::Path_Exists("/system/bin/sload.f2fs")) {
-		f2fs_command += " && sload.f2fs -t /data " + Actual_Block_Device;
+	if (TWFunc::Path_Exists("/system/bin/sload_f2fs")) {
+		f2fs_command += " && sload_f2fs -t /data " + Actual_Block_Device;
 	}
 
 	/**

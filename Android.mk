@@ -550,7 +550,7 @@ ifeq ($(TW_INCLUDE_NTFS_3G),true)
         mkfs.ntfs
 endif
 ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
-    TWRP_REQUIRED_MODULES += sload.f2fs \
+    TWRP_REQUIRED_MODULES += sload_f2fs \
         libfs_mgr \
         fs_mgr \
         libinit
