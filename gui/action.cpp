@@ -1842,9 +1842,9 @@ int GUIAction::flashimage(std::string arg __unused)
 		string current_slot = PartitionManager.Get_Active_Slot_Display();
 		bool pre_op_status = PartitionManager.Flash_Image(path, filename);
 
-		PartitionManager.Set_Active_Slot(current_slot == "A" ? "B" : "A");
+		PartitionManager.Override_Active_Slot(current_slot == "A" ? "B" : "A");
 		op_status = (int) !(pre_op_status && PartitionManager.Flash_Image(path, filename));
-		PartitionManager.Set_Active_Slot(current_slot);
+		PartitionManager.Override_Active_Slot(current_slot);
 
 		DataManager::SetValue("tw_flash_both_slots", 0);
 		flag = false;
