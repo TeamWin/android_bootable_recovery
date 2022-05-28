@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ac4caa_15770bc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-28T17:02:02Z",
+      "side": 1,
+      "message": "Seems fine, I can\u0027t really test, but isn\u0027t hurting anything",
+      "revId": "29a9cb6672876828c20842abec821531ea503bc5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
