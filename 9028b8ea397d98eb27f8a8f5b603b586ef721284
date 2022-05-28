@@ -16,6 +16,23 @@
       "message": "Verified building shieldtablet",
       "revId": "9028b8ea397d98eb27f8a8f5b603b586ef721284",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d3f9dfd_5c13a43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-28T17:00:34Z",
+      "side": 1,
+      "message": "Good to merge, doesn\u0027t seem to affect my devices",
+      "revId": "9028b8ea397d98eb27f8a8f5b603b586ef721284",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
