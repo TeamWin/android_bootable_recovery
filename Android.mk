@@ -572,6 +572,9 @@ endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
     TWRP_REQUIRED_MODULES += libmodprobe
 endif
+ifneq ($(TW_EXCLUDE_PYTHON),true)
+    TWRP_REQUIRED_MODULES += python3_bin python3_lib python3_scripts
+endif
 
 TWRP_REQUIRED_MODULES += file_contexts_text
 
@@ -600,6 +603,20 @@ LOCAL_POST_INSTALL_CMD := \
     $(hide) cp -f $(PRODUCT_OUT)/obj/ETC/file_contexts.bin_intermediates/file_contexts.concat.tmp $(TARGET_RECOVERY_ROOT_OUT)/file_contexts
 
 include $(BUILD_PHONY_PACKAGE)
+
+ifneq ($(TW_EXCLUDE_PYTHON),true)
+    include $(CLEAR_VARS)
+
+    LOCAL_MODULE := python3_scripts
+    LOCAL_MODULE_TAGS := optional
+    LOCAL_MODULE_CLASS := ETC
+    LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+
+    LOCAL_POST_INSTALL_CMD += \
+        mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/etc/python/scripts; \
+        cp -rf $(LOCAL_PATH)/scripts/build/*.py $(TARGET_RECOVERY_ROOT_OUT)/system/etc/python/scripts/;
+    include $(BUILD_PHONY_PACKAGE)
+endif
 
 # recovery-persist (system partition dynamic executable run after /data mounts)
 # ===============================
