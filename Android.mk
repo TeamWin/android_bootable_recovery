@@ -572,6 +572,9 @@ endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
     TWRP_REQUIRED_MODULES += libmodprobe
 endif
+ifneq ($(TW_EXCLUDE_PYTHON),true)
+    TWRP_REQUIRED_MODULES += python3_twrp
+endif
 
 TWRP_REQUIRED_MODULES += file_contexts_text
 
