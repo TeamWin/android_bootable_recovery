@@ -587,6 +587,9 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
     TWRP_REQUIRED_MODULES += sload.f2fs
 endif
 endif
+ifneq ($(TW_EXCLUDE_PYTHON),true)
+    TWRP_REQUIRED_MODULES += python3_twrp
+endif
 
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     TWRP_REQUIRED_MODULES += ld.config.txt
