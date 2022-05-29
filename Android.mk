@@ -144,6 +144,7 @@ ifeq ($(TW_OEM_BUILD),true)
     TW_EXCLUDE_TZDATA := true
     TW_EXCLUDE_NANO := true
     TW_EXCLUDE_BASH := true
+    TW_EXCLUDE_PYTHON := true
 endif
 
 ifeq ($(AB_OTA_UPDATER),true)
@@ -558,6 +559,9 @@ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
 endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
     TWRP_REQUIRED_MODULES += libmodprobe
+endif
+ifneq ($(TW_EXCLUDE_PYTHON),true)
+    TWRP_REQUIRED_MODULES += python3_twrp
 endif
 
 TWRP_REQUIRED_MODULES += file_contexts_text
