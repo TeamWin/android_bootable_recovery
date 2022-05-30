@@ -1,4 +1,56 @@
 {
   "pushCert": "certificate version 0.1\npusher Captain Throwback \u003ccaptainthrowback@hotmail.com\u003e 1653918952 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1653918952-E6037E2D97AD97CFBB698BD17F60A24816CAB3E8\n\n0000000000000000000000000000000000000000 bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQJRBAABCgA7FiEEFeO9BI6C0aqpL/Y30YPAQ33yoAAFAmKUzOgdHGNhcHRhaW50\naHJvd2JhY2tAaG90bWFpbC5jb20ACgkQ0YPAQ33yoADulhAAkj2hUf9KCIRnDFHA\n4QSM8jn1XQwmLVH3FJlQ77j6h/vyPEtsFZ8zz53/vNMXa3c8BDc7oiyvoFDtzTE4\noF4v+EwZTJckMKkaQWcJdYXJP/ibyTjLIeSGXndVZD1sfhgaCLXvZ0t9OSBuXKyP\nXgw9/YJypGzpe4u53wrBRcpiosjO04iaUSoNthijtKb4/Yfw506jfW0Kx/V8Y4qj\nt5yGfyuAAxyrsrSZrAdS1S77ssfTQLhyRKN1C4hyLvQVd/+sHlLkoGQlpfFZPu/e\n5QOa3qtkczAuh7B1g/T/BZvuS4j8B8AFQzwUyirBKPQ1YF7inz0eqmb1xynYdEFO\nRqOO7v/6whU8ySfsQw0Q/CZCgOuKgg+GkthdjILDXExZZfyzccKBP66FciHBSOIz\nKlQetYMVoSqlxXN1OevckYd1j3klKndaMBWvS1DIUCAJw1AGzYZbE0Czy08MOPN2\ny/5rDe9R9rDaDWRTGKaZufPWBwMKU7WVSOtLVaEJhZZxWGxnxiLb5/qFM+vLdxJC\nyOsulwQzwKb6qdLiPmGz1A6R5DMuyQbm8zD+UY4ss6eFy5rWs0gY/MfFYKzFGhXN\nxo2aH1N1VM/Ah0Q89+baPTWsDWnHJpHpHKVE4QVhbA2ywZgLmNBi8B6TFqH2H0kl\nM74DQeOWVh3IhDIadft7Vk9Olso\u003d\n\u003dSQTP\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef89c051_c155f785",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-30T14:32:21Z",
+      "side": 1,
+      "message": "This is working as-is, just had a few thoughts. Nothing major, and really just optional stuff",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c570b5_30160e36",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-30T14:32:21Z",
+      "side": 1,
+      "message": "Rather than setting this path, can we just test whether \"which python\" returns anything? The path doesn\u0027t really matter, because whichever tree it\u0027s built in, the binary will be in PATH. I suppose either way doesn\u0027t matter, and it\u0027s just a matter of opinion. So if you prefer it this way, I guess it\u0027s fine. Just an idea. I just hate assuming where anything is, but it would have to be in one of either place.",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4ce718_ad789c89",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1572,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-30T14:32:21Z",
+      "side": 1,
+      "message": "could we put this in a subfolder in /tmp to keep the files together and keep the folder a bit cleaner? I assume that will require adding a mkdir here. I was thinking putting them in a folder called \"converted_xml\". What do you think?",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
