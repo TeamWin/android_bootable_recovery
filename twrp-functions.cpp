@@ -1555,4 +1555,27 @@ bool TWFunc::Check_Xml_Format(const std::string filename) {
 	return true; // good format, possible to parse
 }
 
+// return true=successful conversion (return the name of the converted file in "result");
+// return false=an error happened (leave "result" alone)
+bool TWFunc::abx_to_xml(const std::string path, std::string &result) {
+	bool res = false;
+	std::string script = "/etc/python/scripts/ccl_abx.py";
+
+	std::string python = "/system/bin/python";
+	if (!Path_Exists(python))
+		python = "/sbin/python";
+
+	if (!TWFunc::Path_Exists(path) || !TWFunc::Path_Exists(python) || !TWFunc::Path_Exists(script))
+		return res;
+
+	std::string fname = TWFunc::Get_Filename(path);
+	std::string tmp_path = "/tmp/" + fname;
+	std::string cmd = python + " " + script + " " + path + " -mr >" + tmp_path;
+	if (TWFunc::Exec_Cmd (cmd, false) == 0 && TWFunc::Path_Exists(tmp_path)) {
+		res = true;
+		result = tmp_path;
+	}
+	return res;
+}
+
 #endif // ndef BUILD_TWRPTAR_MAIN
