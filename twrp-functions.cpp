@@ -1549,8 +1549,13 @@ bool TWFunc::Check_Xml_Format(const std::string filename) {
 		File.get(&buffer[0], buffer.size());
 		File.close();
 		// Android Binary Xml start from these bytes
-		if(!buffer.compare(0, abx_hdr.size(), abx_hdr))
-			return false; // ABX format - requires conversion
+		if(!buffer.compare(0, abx_hdr.size(), abx_hdr)) {
+			if(Path_Exists("/system/bin/python") && Path_Exists("/etc/python/scripts/ccl_abx.py")) {
+				std::string tmp_path = "/tmp";
+				Exec_Cmd("python \"/etc/python/scripts/ccl_abx.py\" \"" + filename + "\" > \"" + tmp_path + filename + "\"");
+				return false; // path will be adjusted based on this return
+			}
+		}
 	}
 	return true; // good format, possible to parse
 }
