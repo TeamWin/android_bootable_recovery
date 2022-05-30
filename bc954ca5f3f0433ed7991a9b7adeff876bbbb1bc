@@ -21,6 +21,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b383d22_e7a633eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2022-05-30T14:46:14Z",
+      "side": 1,
+      "message": "It shouldn\u0027t be anywhere other than /system/bin/ or /sbin/. If it is elsewhere, I would consider that an unnecessary incompatibility.",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5c570b5_30160e36",
         "filename": "twrp-functions.cpp",
         "patchSetId": 2
