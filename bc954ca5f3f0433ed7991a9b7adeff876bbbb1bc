@@ -36,6 +36,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65eafb48_07e06f6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-30T15:33:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b383d22_e7a633eb",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5c570b5_30160e36",
@@ -53,6 +71,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ecd7f46_4c2f3809",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-30T15:33:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a5c570b5_30160e36",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de4ce718_ad789c89",
@@ -66,6 +102,24 @@
       "writtenOn": "2022-05-30T14:32:21Z",
       "side": 1,
       "message": "could we put this in a subfolder in /tmp to keep the files together and keep the folder a bit cleaner? I assume that will require adding a mkdir here. I was thinking putting them in a folder called \"converted_xml\". What do you think?",
+      "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded7741d_def9dca4",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1572,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-05-30T15:33:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de4ce718_ad789c89",
       "revId": "bc954ca5f3f0433ed7991a9b7adeff876bbbb1bc",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
