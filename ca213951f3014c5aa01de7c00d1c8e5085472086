@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd979db_424f008e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 934
+      },
+      "writtenOn": "2022-06-04T18:01:12Z",
+      "side": 1,
+      "message": "https://github.com/TeamWin/android_bootable_recovery/commit/bee26852ce2ad0c1d13ac90170c94185f0c86432\nThis commit seems missed during bringup (for RECOVERY_SDCARD_ON_DATA devices).\nI can confirm decryption works after adding this commit.",
+      "revId": "ca213951f3014c5aa01de7c00d1c8e5085472086",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
