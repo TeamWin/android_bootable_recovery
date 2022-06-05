@@ -4,6 +4,7 @@ import (
 	"android/soong/android"
 	"android/soong/cc"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path"
 	"strconv"
@@ -63,6 +64,31 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 		fileToCopy := recoveryDir + file
 		fileDest := twRes + path.Base(file)
 		copyFile(fileToCopy, fileDest)
+	}
+	data, err := ioutil.ReadFile(recoveryDir + "variables.h")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	version := "0"
+	for _, line := range strings.Split(string(data), "\n") {
+		if strings.Contains(line, "TW_THEME_VERSION") {
+			version = strings.Split(line, " ")[2]
+		}
+	}
+	_files := [2]string{"splash.xml", "ui.xml"}
+	for _, i := range _files {
+		data, err = ioutil.ReadFile(twRes + i)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		newFile := strings.Replace(string(data), "{themeversion}", version, -1)
+		err = ioutil.WriteFile(twRes + i, []byte(newFile), 0)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 	}
 }
 
