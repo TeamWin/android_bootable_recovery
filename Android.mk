@@ -328,6 +328,15 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         LOCAL_STATIC_LIBRARIES += libvolddecrypt
     endif
     endif
+
+    ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
+        ifeq ($(TARGET_CRYPTFS_HW_PATH),)
+            LOCAL_C_INCLUDES += device/qcom/common/cryptfs_hw
+        else
+            LOCAL_C_INCLUDES += $(TARGET_CRYPTFS_HW_PATH)
+        endif
+        LOCAL_SHARED_LIBRARIES += libcryptfs_hw
+    endif
 endif
 WITH_CRYPTO_UTILS := \
     $(if $(wildcard system/core/libcrypto_utils/android_pubkey.c),true)
