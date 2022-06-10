@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6bcce6e_fd939e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-10T05:14:24Z",
+      "side": 1,
+      "message": "copy-pasted from the parent commit of \"fscrypt: wip\"",
+      "revId": "0da1803028caee4fa8c536cacba3173ac6b6c4fa",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
