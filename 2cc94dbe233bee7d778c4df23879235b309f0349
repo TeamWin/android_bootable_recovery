@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17be8aa7_f0ae37f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-10T04:57:57Z",
+      "side": 1,
+      "message": "on some old qcom devices that uses lk bootloader, it couldn\u0027t boot ramdisk that\u0027s bigger than 20MB, even though there\u0027s pretty much space left in the recovery partition",
+      "revId": "2cc94dbe233bee7d778c4df23879235b309f0349",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
