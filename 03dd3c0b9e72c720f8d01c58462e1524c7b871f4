@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62eeb27_eb2c3a4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-10T14:11:18Z",
+      "side": 1,
+      "message": "The following issues occurs before this change:\n1) Unable to Format Data, because it fails to remove dm device\n2) TWRP storage uses /data/media/0/0\n\nTested this change on FBE device too, everything are still fine",
+      "revId": "03dd3c0b9e72c720f8d01c58462e1524c7b871f4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
