@@ -1813,12 +1813,23 @@ void TWPartitionManager::Post_Decrypt(const string& Block_Device) {
 		dat->Current_File_System = dat->Fstab_File_System;  // Needed if we're ignoring blkid because encrypted devices start out as emmc
 
 		sleep(1); // Sleep for a bit so that the device will be ready
-		if (dat->Has_Data_Media && dat->Mount(false) && TWFunc::Path_Exists("/data/media/0")) {
-			dat->Storage_Path = "/data/media/0";
-			dat->Symlink_Path = dat->Storage_Path;
-			DataManager::SetValue("tw_storage_path", "/data/media/0");
-			DataManager::SetValue("tw_settings_path", "/data/media/0");
+
+		// Mount only /data
+		dat->Symlink_Path = ""; // Not to let it to bind mount /data/media again
+		if (!dat->Mount(false)) {
+			LOGERR("Unable to mount /data after decryption");
 		}
+
+		if (dat->Has_Data_Media && TWFunc::Path_Exists("/data/media/0")) {
+			dat->Storage_Path = "/data/media/0";
+		} else {
+			dat->Storage_Path = "/data/media";
+		}
+		dat->Symlink_Path = dat->Storage_Path;
+		DataManager::SetValue("tw_storage_path", dat->Symlink_Path);
+		DataManager::SetValue("tw_settings_path", dat->Symlink_Path);
+		LOGINFO("New storage path after decryption: %s\n", dat->Storage_Path.c_str());
+
 		DataManager::LoadTWRPFolderInfo();
 		Update_System_Details();
 		Output_Partition(dat);
