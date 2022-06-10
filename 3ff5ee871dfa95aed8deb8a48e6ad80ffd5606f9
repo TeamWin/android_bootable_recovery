@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4203af36_c172de1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-06-10T20:13:56Z",
+      "side": 1,
+      "message": "Maybe this should be configurable? Some devices would be way too slow and I think this is why 30 fps was chosen.",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
