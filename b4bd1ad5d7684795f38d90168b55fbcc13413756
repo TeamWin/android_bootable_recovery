@@ -16,6 +16,23 @@
       "message": "copy-pasted from the parent commit of \"fscrypt: wip\", and made a little change.",
       "revId": "b4bd1ad5d7684795f38d90168b55fbcc13413756",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc550f02_2024379b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-10T05:27:19Z",
+      "side": 1,
+      "message": "The whole topic has been tested by me and confirmed that FDE decryption works. Also confirmed that they doesn\u0027t break FBE decryption (either with or without metadata)",
+      "revId": "b4bd1ad5d7684795f38d90168b55fbcc13413756",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
