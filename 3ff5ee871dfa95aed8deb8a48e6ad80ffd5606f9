@@ -87,6 +87,23 @@
       "parentUuid": "ffa765b7_749864dd",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8eda23_fffa05da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 939
+      },
+      "writtenOn": "2022-06-13T06:36:25Z",
+      "side": 1,
+      "message": "Higher refresh rate is a good idea, though ;)\nI will make it configurable in a follow-up commit",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
