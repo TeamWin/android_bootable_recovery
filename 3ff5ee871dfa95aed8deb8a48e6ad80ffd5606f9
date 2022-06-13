@@ -69,6 +69,24 @@
       "parentUuid": "b4cd5faf_3a80fb1e",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4345b3_6252fd60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 939
+      },
+      "writtenOn": "2022-06-13T06:34:54Z",
+      "side": 1,
+      "message": "I don\u0027t think legacy devices can really run A12 because 4.9 kernel (or 4.4 with backports) is the requirement to run A12 (and LineageOS has abandoned twelve-ultralegacy-devices topic). Besides that, the 30fps code is 10 years old, even the weakest device shipped with 4.4 kernel (≈2018) is much more powerful than an average device of that time (I doubt that TWRP GUI has changed much).",
+      "parentUuid": "ffa765b7_749864dd",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
