@@ -122,6 +122,24 @@
       "parentUuid": "da4345b3_6252fd60",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb6b2aa_4885ea3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 939
+      },
+      "writtenOn": "2022-06-13T08:57:32Z",
+      "side": 1,
+      "message": "\u003e They decided to continue supporting these devices on LOS19 which you said they\u0027re \"legacy\"\n\nI don\u0027t call them legacy because they meet the requirements for Android 12 (kernel 4.4 and upper) and they are not too weak for simple 60fps software rendering.",
+      "parentUuid": "f8b7a866_bc496114",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
