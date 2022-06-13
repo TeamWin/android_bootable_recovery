@@ -51,6 +51,24 @@
       "message": "I think it should be configurable too, I want 120fps gaming recovery",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa765b7_749864dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-06-13T01:44:59Z",
+      "side": 1,
+      "message": "There are plenty of legacy devices that can run A12 that don\u0027t support 60fps. Configurable would be excellent, if 60, 90 \u0026 120 fps could be made options with the original 30fps value, it would be excellent.",
+      "parentUuid": "b4cd5faf_3a80fb1e",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
