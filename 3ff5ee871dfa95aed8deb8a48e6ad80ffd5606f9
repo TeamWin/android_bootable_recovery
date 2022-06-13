@@ -140,6 +140,24 @@
       "parentUuid": "f8b7a866_bc496114",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d17e496e_7b75f4a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-13T09:18:05Z",
+      "side": 1,
+      "message": "ok but still, you should make it configurable, and I think you should also keep the default to 30 FPS to be safe for any devices.",
+      "parentUuid": "edb6b2aa_4885ea3e",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
