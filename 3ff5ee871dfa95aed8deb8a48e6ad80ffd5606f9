@@ -104,6 +104,24 @@
       "message": "Higher refresh rate is a good idea, though ;)\nI will make it configurable in a follow-up commit",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b7a866_bc496114",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-13T08:18:22Z",
+      "side": 1,
+      "message": "I disagree with you.\n\nA12 *WORKS FINE* on these devices, and they wouldn\u0027t lag if you don\u0027t ruin them with heavy apps.\n\nLet\u0027s see something from official LOS:\n\nhttps://review.lineageos.org/c/LineageOS/android/+/332006/1/snippets/lineage.xml\n\u003e Only removed SoCs which can\u0027t even run A11 smoothly, but not affecting the others\n\nhttps://review.lineageos.org/c/LineageOS/android/+/321221\n\u003e They decided to continue supporting these devices on LOS19 which you said they\u0027re \"legacy\"\n\nhttps://review.lineageos.org/q/project:LineageOS%252Fandroid_device_fairphone_FP3+branch:lineage-19.1\n\u003e FP3 has MSM8953 and they\u0027re going to get LOS19.1\n\nhttps://review.lineageos.org/c/LineageOS/android/+/332009/1/snippets/lineage.xml\n\u003e Not related, but the legacy soc which was shipped with 4.4 is getting further support",
+      "parentUuid": "da4345b3_6252fd60",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
