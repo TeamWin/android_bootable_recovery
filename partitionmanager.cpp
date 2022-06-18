@@ -492,9 +492,7 @@ void TWPartitionManager::Decrypt_Data() {
 }
 
 void TWPartitionManager::Setup_Settings_Storage_Partition(TWPartition* Part) {
-	DataManager::SetValue("tw_settings_path", Part->Storage_Path);
 	DataManager::SetValue("tw_storage_path", Part->Storage_Path);
-	LOGINFO("Settings storage is '%s'\n", Part->Storage_Path.c_str());
 }
 
 void TWPartitionManager::Setup_Android_Secure_Location(TWPartition* Part) {
@@ -1829,7 +1827,7 @@ void TWPartitionManager::Post_Decrypt(const string& Block_Device) {
 		}
 		dat->Symlink_Path = dat->Storage_Path;
 		DataManager::SetValue("tw_storage_path", dat->Symlink_Path);
-		DataManager::SetValue("tw_settings_path", dat->Symlink_Path);
+		DataManager::SetValue("tw_settings_path", TW_STORAGE_PATH);
 		LOGINFO("New storage path after decryption: %s\n", dat->Storage_Path.c_str());
 
 		DataManager::LoadTWRPFolderInfo();
