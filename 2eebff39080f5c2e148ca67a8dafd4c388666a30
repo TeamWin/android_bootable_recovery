@@ -33,6 +33,23 @@
       "message": "Can you do this in go, like in this commit?\nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/5601\n\nIf you rebase off of that change, it would be great.",
       "revId": "2eebff39080f5c2e148ca67a8dafd4c388666a30",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "743d9f04_7bdd21e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-06-21T03:20:52Z",
+      "side": 1,
+      "message": "Also the flag for custom CPU temp in the commit message doesn\u0027t match what\u0027s in the code. Please update one or the other to be consistent.",
+      "revId": "2eebff39080f5c2e148ca67a8dafd4c388666a30",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
