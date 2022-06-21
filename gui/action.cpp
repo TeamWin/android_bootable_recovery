@@ -1877,6 +1877,9 @@ int GUIAction::mountsystemtoggle(std::string arg)
 {
 	int op_status = 0;
 	bool remount_system = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
+	bool remount_odm = PartitionManager.Is_Mounted_By_Path("/odm");
+	bool remount_product = PartitionManager.Is_Mounted_By_Path("/product");
+	bool remount_system_ext = PartitionManager.Is_Mounted_By_Path("/system_ext");
 	bool remount_vendor = PartitionManager.Is_Mounted_By_Path("/vendor");
 
 	operation_start("Toggle System Mount");
@@ -1899,20 +1902,50 @@ int GUIAction::mountsystemtoggle(std::string arg)
 		} else {
 			op_status = 1; // fail
 		}
-		Part = PartitionManager.Find_Partition_By_Path("/vendor");
+		Part = PartitionManager.Find_Partition_By_Path("/odm");
+                if (Part) {
+                        if (arg == "0") {
+                                Part->Change_Mount_Read_Only(false);
+                        } else {
+                                Part->Change_Mount_Read_Only(true);
+                        }
+                        if (remount_odm) {
+                                Part->Mount(true);
+                        }
+                }
+		Part = PartitionManager.Find_Partition_By_Path("/product");
 		if (Part) {
 			if (arg == "0") {
 				Part->Change_Mount_Read_Only(false);
 			} else {
 				Part->Change_Mount_Read_Only(true);
 			}
-			if (remount_vendor) {
+			if (remount_product) {
 				Part->Mount(true);
 			}
-			op_status = 0; // success
-		} else {
-			op_status = 1; // fail
 		}
+		Part = PartitionManager.Find_Partition_By_Path("/system_ext");
+                if (Part) {
+                        if (arg == "0") {
+                                Part->Change_Mount_Read_Only(false);
+                        } else {
+                                Part->Change_Mount_Read_Only(true);
+                        }
+                        if (remount_system_ext) {
+                                Part->Mount(true);
+                        }
+                }
+		Part = PartitionManager.Find_Partition_By_Path("/vendor");
+                if (Part) {
+                        if (arg == "0") {
+                                Part->Change_Mount_Read_Only(false);
+                        } else {
+                                Part->Change_Mount_Read_Only(true);
+                        }
+                        if (remount_vendor) {
+                                Part->Mount(true);
+                        }
+                }
 	}
 
 	operation_end(op_status);
