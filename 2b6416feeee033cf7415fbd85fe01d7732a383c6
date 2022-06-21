@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee8bdfd_d63c414f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-06-21T03:55:34Z",
+      "side": 1,
+      "message": "Updated the commit message with the proper name of cpu var.",
+      "revId": "2b6416feeee033cf7415fbd85fe01d7732a383c6",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
