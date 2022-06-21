@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b7885d_28a66726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 939
+      },
+      "writtenOn": "2022-06-21T14:24:20Z",
+      "side": 1,
+      "message": "/product and /system_ext now mount in RW mode after confirmation dialog",
+      "revId": "5c9c5a0b1417e75950973c1e1ee40056d743b2b4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
