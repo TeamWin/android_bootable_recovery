@@ -16,6 +16,23 @@
       "message": "Another implementation for the same thing without using the local_post_cmd part is:\nhttps://github.com/Yilliee/android_bootable_recovery/commit/e77260de5a313f71ee61cf30b89af2b8d3fb9937\n\nBoth have been tested with a device utilizing portrait_hdpi theme and give the same result. However these patches haven\u0027t been tested with a device that does not declare the TW_THEME var and requires it to be automatically selected based on screen height/width if that\u0027s still a thing.",
       "revId": "2eebff39080f5c2e148ca67a8dafd4c388666a30",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3513078c_ec34f120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-06-21T03:06:04Z",
+      "side": 1,
+      "message": "Can you do this in go, like in this commit?\nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/5601\n\nIf you rebase off of that change, it would be great.",
+      "revId": "2eebff39080f5c2e148ca67a8dafd4c388666a30",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
