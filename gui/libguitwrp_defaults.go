@@ -150,10 +150,17 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 				}
 			}
 
+			alignProp := "%status_topalign_header_y%"
+			if strings.Trim(getMakeVars(ctx, "TW_STATUS_ICONS_ALIGN"), "\"") == "center" || strings.Trim(getMakeVars(ctx, "TW_STATUS_ICONS_ALIGN"), "\"") == "2" {
+				alignProp = "%status_centeralign_header_y%"
+			} else if strings.Trim(getMakeVars(ctx, "TW_STATUS_ICONS_ALIGN"), "\"") == "bottom" || strings.Trim(getMakeVars(ctx, "TW_STATUS_ICONS_ALIGN"), "\"") == "3" {
+				alignProp = "%status_bottomalign_header_y%"
+			}
 			newFile = strings.Replace(newFile, "{battery_pos}", props[0], -1)
 			newFile = strings.Replace(newFile, "{cpu_pos}", props[1], -1)
 			newFile = strings.Replace(newFile, "{clock_12_pos}", props[2], -1)
 			newFile = strings.Replace(newFile, "{clock_24_pos}", pos_clock_24, -1)
+			newFile = strings.Replace(newFile, "{statusicons_align}", alignProp, -1)
 		}
 		// Custom position for status bar items - end
 

@@ -113,7 +113,10 @@
 		<variable name="btn4_col2_x" value="131"/>
 		<variable name="btn4_col3_x" value="247"/>
 		<variable name="btn4_col4_x" value="363"/>
-		<variable name="row1_header_y" value="2"/>
+		<variable name="status_topalign_header_y" value="2"/>
+		<variable name="status_centeralign_header_y" value="6"/>
+		<variable name="status_bottomalign_header_y" value="12"/>
+		<variable name="row1_header_y" value="{statusicons_align}"/>
 		<variable name="row2_header_y" value="30"/>
 		<variable name="row3_header_y" value="40"/>
 		<variable name="row4_header_y" value="74"/>
