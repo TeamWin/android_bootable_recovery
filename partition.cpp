@@ -474,11 +474,18 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			Make_Dir(PartitionManager.Get_Android_Root_Path(), true);
 		} else if (Mount_Point == "/product") {
 			Display_Name = "Product";
-			Backup_Name = "Product";
+			Backup_Name = Display_Name;
 			Backup_Display_Name = Display_Name;
 			Storage_Name = Display_Name;
 			Can_Be_Backed_Up = Wipe_Available_in_GUI = Is_Super ? false : true;
 			Mount_Read_Only = true;
+		} else if (Mount_Point == "/system_ext") {
+			Display_Name = "System Ext";
+                        Backup_Name = Display_Name;
+                        Backup_Display_Name = Display_Name;
+                        Storage_Name = Display_Name;
+                        Can_Be_Backed_Up = Wipe_Available_in_GUI = Is_Super ? false : true;
+                        Mount_Read_Only = true;
 		} else if (Mount_Point == "/odm") {
 			Display_Name = "ODM";
 			Backup_Name = "ODM";
@@ -530,8 +537,10 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			Can_Be_Backed_Up = true;
 		} else if (Mount_Point == "/vendor") {
 			Display_Name = "Vendor";
+			Backup_Name = Display_Name;
 			Backup_Display_Name = Display_Name;
 			Storage_Name = Display_Name;
+			Can_Be_Backed_Up = Wipe_Available_in_GUI = Is_Super ? false : true;
 			Mount_Read_Only = true;
 		}
 #ifdef TW_EXTERNAL_STORAGE_PATH
