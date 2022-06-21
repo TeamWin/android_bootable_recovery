@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc164f6_8f3f0aef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-06-21T12:35:18Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e What is the default value in this case? Can we have options for top, middle, and bottom?\n\nThe default in this case is Top alligning the icons which is what twrp was doing before.\nThe only option currently is to bottom allign them.\nI\u0027ll add an option to center allign them tommorrow.",
+      "revId": "d23ba3f88bc7e36c588cf938b106663701a0d26b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
