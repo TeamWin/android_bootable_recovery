@@ -16,6 +16,23 @@
       "message": "/product and /system_ext now mount in RW mode after confirmation dialog",
       "revId": "5c9c5a0b1417e75950973c1e1ee40056d743b2b4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa3795e_e6493230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-06-21T15:47:06Z",
+      "side": 1,
+      "message": "Can you add to the commit message why this is needed. And update what flaws were fixed.",
+      "revId": "5c9c5a0b1417e75950973c1e1ee40056d743b2b4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
