@@ -576,7 +576,9 @@ LOCAL_POST_INSTALL_CMD += \
     if [ -n "$(TW_CUSTOM_CLOCK_POS)" ]; then sed -i "s/{clock_pos}/$(TW_CUSTOM_CLOCK_POS)/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
     else sed -i "s/{clock_pos}/%center_x%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi; \
     if [ -n "$(TW_CUSTOM_CPU_POS)" ]; then sed -i "s/{cpu_pos}/$(TW_CUSTOM_CPU_POS)/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
-    else sed -i "s/{cpu_pos}/%indent%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi;
+    else sed -i "s/{cpu_pos}/%indent%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi; \
+    if [ "$(TW_STATUS_ICONS_BOTTOM_ALIGN)" == "true" ]; then sed -i "s/{statusicons_align}/status_bottomalign_header_y/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; \
+    else sed -i "s/{statusicons_align}/%status_topalign_header_y%/"  $(TARGET_RECOVERY_ROOT_OUT)/twres/ui.xml; fi;
 
 include $(BUILD_EXECUTABLE)
 
