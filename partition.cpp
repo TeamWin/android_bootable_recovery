@@ -675,8 +675,7 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 	} else if (!Mount(false)) {
 		if (Is_Present) {
 			if (Key_Directory.empty()) {
-				set_partition_data(Use_Original_Path ? Original_Path.c_str() : Actual_Block_Device.c_str(), Crypto_Key_Location.c_str(),
-				Fstab_File_System.c_str());
+				set_partition_data(Use_Original_Path ? Original_Path.c_str() : Actual_Block_Device.c_str(), Crypto_Key_Location.c_str());
 				if (cryptfs_check_footer() == 0) {
 					Is_Encrypted = true;
 					Is_Decrypted = false;
