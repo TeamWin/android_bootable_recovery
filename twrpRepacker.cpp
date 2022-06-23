@@ -339,24 +339,28 @@ bool twrpRepacker::Flash_Current_Twrp() {
 	if (!TWFunc::Path_Exists("/ramdisk-files.txt")) {
 			LOGERR("can not find ramdisk-files.txt");
 			return false;
-		}
-		Repack_Options_struct Repack_Options;
-		Repack_Options.Disable_Verity = false;
-		Repack_Options.Disable_Force_Encrypt = false;
-		Repack_Options.Type = REPLACE_RAMDISK_UNPACKED;
-		Repack_Options.Backup_First = DataManager::GetIntValue("tw_repack_backup_first") != 0;
-		std::string verifyfiles = "cd / && sha256sum --status -c ramdisk-files.sha256sum";
-		if (TWFunc::Exec_Cmd(verifyfiles) != 0) {
+	}
+	if (PartitionManager.Is_Mounted_By_Path("/vendor") && !PartitionManager.UnMount_By_Path("/vendor", false)) {
+		// Try to force umount /vendor
+		PartitionManager.UnMount_By_Path("/vendor", false, MNT_FORCE|MNT_DETACH);
+	}
+	Repack_Options_struct Repack_Options;
+	Repack_Options.Disable_Verity = false;
+	Repack_Options.Disable_Force_Encrypt = false;
+	Repack_Options.Type = REPLACE_RAMDISK_UNPACKED;
+	Repack_Options.Backup_First = DataManager::GetIntValue("tw_repack_backup_first") != 0;
+	std::string verifyfiles = "cd / && sha256sum --status -c ramdisk-files.sha256sum";
+	if (TWFunc::Exec_Cmd(verifyfiles) != 0) {
 		gui_msg(Msg(msg::kError, "modified_ramdisk_error=ramdisk files have been modified, unable to create ramdisk to flash, fastboot boot twrp and try this option again or use the Install Recovery Ramdisk option."));
-			return false;
-		}
-		std::string command = "cd / && /system/bin/cpio -H newc -o < ramdisk-files.txt > /tmp/currentramdisk.cpio && /system/bin/gzip -f /tmp/currentramdisk.cpio";
-		if (TWFunc::Exec_Cmd(command) != 0) {
-			gui_msg(Msg(msg::kError, "create_ramdisk_error=failed to create ramdisk to flash."));
-			return false;
-		}
-		if (!Repack_Image_And_Flash("/tmp/currentramdisk.cpio.gz", Repack_Options))
-			return false;
-		else
-			return true;
+		return false;
+	}
+	std::string command = "cd / && /system/bin/cpio -H newc -o < ramdisk-files.txt > /tmp/currentramdisk.cpio && /system/bin/gzip -f /tmp/currentramdisk.cpio";
+	if (TWFunc::Exec_Cmd(command) != 0) {
+		gui_msg(Msg(msg::kError, "create_ramdisk_error=failed to create ramdisk to flash."));
+		return false;
+	}
+	if (!Repack_Image_And_Flash("/tmp/currentramdisk.cpio.gz", Repack_Options))
+		return false;
+	else
+		return true;
 }
