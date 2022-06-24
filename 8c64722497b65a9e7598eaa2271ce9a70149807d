@@ -68,6 +68,23 @@
       "message": "\u003e Patch Set 1:\n\u003e \n\u003e \u003e Patch Set 1:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e So there\u0027s another patch coming? Will this one still be needed?\n\nthis one is the last required commit for FDE",
       "revId": "8c64722497b65a9e7598eaa2271ce9a70149807d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d809fd9a_995954c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-06-24T17:06:49Z",
+      "side": 1,
+      "message": "Since you restored the other patch, this one isn\u0027t needed",
+      "revId": "8c64722497b65a9e7598eaa2271ce9a70149807d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
