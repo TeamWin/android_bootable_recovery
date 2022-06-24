@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9e414e_d79a6c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-06-24T10:34:30Z",
+      "side": 1,
+      "message": "Tested with all three cases ( Top, Center and Bottom ) on Galaxy A51 ( portrait_hdpi theme.",
+      "revId": "c323a2a5675d9e0e0baf92fcfafcdf0d73547128",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
