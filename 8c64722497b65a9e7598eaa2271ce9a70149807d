@@ -33,6 +33,24 @@
       "message": "Or does the fscrypt patch need to be rebased to not remove it?",
       "revId": "8c64722497b65a9e7598eaa2271ce9a70149807d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5358b1c_b13e6dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-24T15:11:21Z",
+      "side": 1,
+      "message": "see this comments on this one\n\nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/5632",
+      "parentUuid": "0fdfafd3_158d69c0",
+      "revId": "8c64722497b65a9e7598eaa2271ce9a70149807d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
