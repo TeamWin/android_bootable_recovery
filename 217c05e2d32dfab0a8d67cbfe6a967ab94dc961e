@@ -33,6 +33,29 @@
       "message": "Same thing for two other A-only devices ...",
       "revId": "217c05e2d32dfab0a8d67cbfe6a967ab94dc961e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008e9f00_ea8c907c",
+        "filename": "prebuilt/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2022-06-24T18:31:36Z",
+      "side": 1,
+      "message": "In order to fix the patch for A-only device, this line needs to be activated for A-only devices as well. It can either be moved out of this AB_OTA_UPDATER block, or be copied into an \"else\" statement.",
+      "range": {
+        "startLine": 243,
+        "startChar": 1,
+        "endLine": 243,
+        "endChar": 96
+      },
+      "revId": "217c05e2d32dfab0a8d67cbfe6a967ab94dc961e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
