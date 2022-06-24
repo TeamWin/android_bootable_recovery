@@ -76,7 +76,9 @@ exit:
 
 	android::base::SetProperty("twrp.modules.loaded", "true");
 
-	TWFunc::Wait_For_Battery(3s);
+#ifdef TW_BATTERY_SYSFS_WAIT_SECONDS
+	TWFunc::Wait_For_Battery(std::chrono::seconds(TW_BATTERY_SYSFS_WAIT_SECONDS));
+#endif
 
 	return true;
 }
