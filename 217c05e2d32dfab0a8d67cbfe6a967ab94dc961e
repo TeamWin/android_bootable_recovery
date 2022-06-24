@@ -16,6 +16,23 @@
       "message": "I got a black screen on vayu after applying this patch. I then had to add the lib to PRODUCT_PACKAGES, and use PRODUCT_COPY_FILES to copy it, which then required \nenabling BUILD_BROKEN_DUP_RULES to deal with \"error: overriding commands for target\" problems.",
       "revId": "217c05e2d32dfab0a8d67cbfe6a967ab94dc961e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d5a5546_8c2fdb27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2022-06-24T15:27:32Z",
+      "side": 1,
+      "message": "Same thing for two other A-only devices ...",
+      "revId": "217c05e2d32dfab0a8d67cbfe6a967ab94dc961e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
