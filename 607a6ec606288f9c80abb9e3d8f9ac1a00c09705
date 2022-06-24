@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317d2692_5b962ece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-06-24T10:19:02Z",
+      "side": 1,
+      "message": "The TW_CUSTOM_CPU_TEMP now also handles the position of the twrp version text which is shown when TW_NO_CPU_TEMP is set to true.\nAlso Mohd Faraz\u0027s changes seem to be working perfectly fine.",
+      "revId": "607a6ec606288f9c80abb9e3d8f9ac1a00c09705",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
