@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdfafd3_158d69c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-06-24T15:09:14Z",
+      "side": 1,
+      "message": "The fscrypt patch removes this entire section already:\nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/5405/23/partition.cpp#b679",
+      "revId": "8c64722497b65a9e7598eaa2271ce9a70149807d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
