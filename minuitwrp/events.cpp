@@ -36,7 +36,11 @@
 #include <aidl/android/hardware/vibrator/IVibrator.h>
 #include <android/binder_manager.h>
 using ::aidl::android::hardware::vibrator::IVibrator;
+#ifdef USE_QTI_AIDL_HAPTICS_FQNAME
+static const std::string kVibratorInstance = std::string("android.hardware.vibrator.") + USE_QTI_AIDL_HAPTICS_FQNAME;
+#else
 static const std::string kVibratorInstance = std::string(IVibrator::descriptor) + "/default";
+#endif
 #endif
 
 #include "common.h"
