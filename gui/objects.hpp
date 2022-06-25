@@ -49,6 +49,10 @@ using namespace rapidxml;
 #define TW_H_OFFSET 0
 #endif
 
+#ifndef TW_FRAMERATE
+#define TW_FRAMERATE 30
+#endif
+
 class RenderObject
 {
 public:
