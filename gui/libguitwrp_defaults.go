@@ -217,6 +217,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_H_OFFSET="+getMakeVars(ctx, "TW_H_OFFSET"))
 	}
 
+        if getMakeVars(ctx, "TW_FRAMERATE") != "" {
+                cflags = append(cflags, "-DTW_FRAMERATE="+getMakeVars(ctx, "TW_FRAMERATE"))
+        }
+
 	if getMakeVars(ctx, "TW_ROUND_SCREEN") == "true" {
 		cflags = append(cflags, "-DTW_ROUND_SCREEN")
 	}
