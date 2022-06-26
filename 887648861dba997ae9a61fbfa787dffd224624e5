@@ -16,6 +16,24 @@
       "message": "Why is this needed?",
       "revId": "887648861dba997ae9a61fbfa787dffd224624e5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0a56074_d15e827c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2022-06-26T00:48:30Z",
+      "side": 1,
+      "message": "In Xiaomi sm8350, it takes a certain time to initialize after the charge driver is loaded. sysfs has no battery information during this time.\nAccording to my tests, the previously set time of 3 seconds is too short.\n\nRefer to init.recovery.qcom.rc of miui：\n\non early-init\n    insmod /vendor/lib/modules/q6_pdr_dlkm.ko\n    insmod /vendor/lib/modules/q6_notifier_dlkm.ko\n    insmod /vendor/lib/modules/snd_event_dlkm.ko\n    insmod /vendor/lib/modules/apr_dlkm.ko\n    insmod /vendor/lib/modules/adsp_loader_dlkm.ko\n\non fs\n    wait /dev/block/platform/soc/${ro.boot.bootdevice}\n    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice\n    mkdir /vendor/firmware_mnt\n    mkdir /vendor/firmware\n    mount_all /vendor/etc/charger_fstab.qti --early\n    mount none /vendor/firmware_mnt/image /vendor/firmware bind rec\n    wait /sys/kernel/boot_adsp/boot\n    write /sys/kernel/boot_adsp/boot 1\n    wait /sys/class/power_supply/battery",
+      "parentUuid": "bd1e2ef9_df5afec8",
+      "revId": "887648861dba997ae9a61fbfa787dffd224624e5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
