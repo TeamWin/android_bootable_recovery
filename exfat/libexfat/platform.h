@@ -4,7 +4,7 @@
 	same kernel can use different libc implementations.
 
 	Free exFAT implementation.
-	Copyright (C) 2010-2015  Andrew Nayenko
+	Copyright (C) 2010-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@
 #define EXFAT_LITTLE_ENDIAN LITTLE_ENDIAN
 #define EXFAT_BIG_ENDIAN BIG_ENDIAN
 
-#elif defined(__ANDROID__) || defined(__FreeBSD__) || defined(__DragonFlyBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
+#elif defined(__FreeBSD__) || defined(__DragonFly__) || defined(__NetBSD__) || defined(__OpenBSD__)
 
 #include <sys/endian.h>
 #define exfat_bswap16(x) bswap16(x)
@@ -55,6 +55,16 @@
 #define EXFAT_BYTE_ORDER _BYTE_ORDER
 #define EXFAT_LITTLE_ENDIAN _LITTLE_ENDIAN
 #define EXFAT_BIG_ENDIAN _BIG_ENDIAN
+
+#elif defined(__sun)
+
+#include <endian.h>
+#define exfat_bswap16(x) bswap_16(x)
+#define exfat_bswap32(x) bswap_32(x)
+#define exfat_bswap64(x) bswap_64(x)
+#define EXFAT_BYTE_ORDER __BYTE_ORDER
+#define EXFAT_LITTLE_ENDIAN __LITTLE_ENDIAN
+#define EXFAT_BIG_ENDIAN __BIG_ENDIAN
 
 #else 
 #error Unknown platform

@@ -1,6 +1,6 @@
-.\" Copyright (C) 2011-2015  Andrew Nayenko
+.\" Copyright (C) 2011-2018  Andrew Nayenko
 .\"
-.TH EXFATLABEL 8 "February 2011"
+.TH EXFATLABEL 8 "September 2017"
 .SH NAME
 .B exfatlabel
 \- get or set an exFAT file system label
@@ -22,9 +22,9 @@ If
 .I label
 argument is present,
 .B exfatlabel
-sets the new volume name. Label can be up to 15 characters. This limit is
-shorter if characters beyond Unicode BMP are used because internally label
-is stored in UTF-16.
+sets the new volume name. Empty label ('') removes volume name. Label can be
+up to 15 characters. This limit is shorter if characters beyond Unicode BMP
+are used because internally label is stored in UTF-16.
 
 If
 .I label

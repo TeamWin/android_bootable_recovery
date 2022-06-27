@@ -3,7 +3,7 @@
 	exFAT file system implementation library.
 
 	Free exFAT implementation.
-	Copyright (C) 2010-2015  Andrew Nayenko
+	Copyright (C) 2010-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ void exfat_stat(const struct exfat* ef, const struct exfat_node* node,
 		struct stat* stbuf)
 {
 	memset(stbuf, 0, sizeof(struct stat));
-	if (node->flags & EXFAT_ATTRIB_DIR)
+	if (node->attrib & EXFAT_ATTRIB_DIR)
 		stbuf->st_mode = S_IFDIR | (0777 & ~ef->dmask);
 	else
 		stbuf->st_mode = S_IFREG | (0777 & ~ef->fmask);
@@ -37,8 +37,7 @@ void exfat_stat(const struct exfat* ef, const struct exfat_node* node,
 	stbuf->st_uid = ef->uid;
 	stbuf->st_gid = ef->gid;
 	stbuf->st_size = node->size;
-	stbuf->st_blocks = DIV_ROUND_UP(node->size, CLUSTER_SIZE(*ef->sb)) *
-		CLUSTER_SIZE(*ef->sb) / 512;
+	stbuf->st_blocks = ROUND_UP(node->size, CLUSTER_SIZE(*ef->sb)) / 512;
 	stbuf->st_mtime = node->mtime;
 	stbuf->st_atime = node->atime;
 	/* set ctime to mtime to ensure we don't break programs that rely on ctime
@@ -46,49 +45,52 @@ void exfat_stat(const struct exfat* ef, const struct exfat_node* node,
 	stbuf->st_ctime = node->mtime;
 }
 
-void exfat_get_name(const struct exfat_node* node, char* buffer, size_t n)
+void exfat_get_name(const struct exfat_node* node,
+		char buffer[EXFAT_UTF8_NAME_BUFFER_MAX])
 {
-	if (utf16_to_utf8(buffer, node->name, n, EXFAT_NAME_MAX) != 0)
+	if (exfat_utf16_to_utf8(buffer, node->name, EXFAT_UTF8_NAME_BUFFER_MAX,
+				EXFAT_NAME_MAX) != 0)
 		exfat_bug("failed to convert name to UTF-8");
+}
+
+static uint16_t add_checksum_byte(uint16_t sum, uint8_t byte)
+{
+	return ((sum << 15) | (sum >> 1)) + byte;
+}
+
+static uint16_t add_checksum_bytes(uint16_t sum, const void* buffer, size_t n)
+{
+	size_t i;
+
+	for (i = 0; i < n; i++)
+		sum = add_checksum_byte(sum, ((const uint8_t*) buffer)[i]);
+	return sum;
 }
 
 uint16_t exfat_start_checksum(const struct exfat_entry_meta1* entry)
 {
 	uint16_t sum = 0;
-	int i;
+	size_t i;
 
 	for (i = 0; i < sizeof(struct exfat_entry); i++)
 		if (i != 2 && i != 3) /* skip checksum field itself */
-			sum = ((sum << 15) | (sum >> 1)) + ((const uint8_t*) entry)[i];
+			sum = add_checksum_byte(sum, ((const uint8_t*) entry)[i]);
 	return sum;
 }
 
 uint16_t exfat_add_checksum(const void* entry, uint16_t sum)
 {
-	int i;
-
-	for (i = 0; i < sizeof(struct exfat_entry); i++)
-		sum = ((sum << 15) | (sum >> 1)) + ((const uint8_t*) entry)[i];
-	return sum;
+	return add_checksum_bytes(sum, entry, sizeof(struct exfat_entry));
 }
 
-le16_t exfat_calc_checksum(const struct exfat_entry_meta1* meta1,
-		const struct exfat_entry_meta2* meta2, const le16_t* name)
+le16_t exfat_calc_checksum(const struct exfat_entry* entries, int n)
 {
 	uint16_t checksum;
-	const int name_entries = DIV_ROUND_UP(utf16_length(name), EXFAT_ENAME_MAX);
 	int i;
 
-	checksum = exfat_start_checksum(meta1);
-	checksum = exfat_add_checksum(meta2, checksum);
-	for (i = 0; i < name_entries; i++)
-	{
-		struct exfat_entry_name name_entry = {EXFAT_ENTRY_FILE_NAME, 0};
-		memcpy(name_entry.name, name + i * EXFAT_ENAME_MAX,
-				MIN(EXFAT_ENAME_MAX, EXFAT_NAME_MAX - i * EXFAT_ENAME_MAX) *
-				sizeof(le16_t));
-		checksum = exfat_add_checksum(&name_entry, checksum);
-	}
+	checksum = exfat_start_checksum((const struct exfat_entry_meta1*) entries);
+	for (i = 1; i < n; i++)
+		checksum = exfat_add_checksum(entries + i, checksum);
 	return cpu_to_le16(checksum);
 }
 
@@ -113,10 +115,10 @@ uint32_t exfat_vbr_add_checksum(const void* sector, size_t size, uint32_t sum)
 	return sum;
 }
 
-le16_t exfat_calc_name_hash(const struct exfat* ef, const le16_t* name)
+le16_t exfat_calc_name_hash(const struct exfat* ef, const le16_t* name,
+		size_t length)
 {
 	size_t i;
-	size_t length = utf16_length(name);
 	uint16_t hash = 0;
 
 	for (i = 0; i < length; i++)
@@ -124,8 +126,7 @@ le16_t exfat_calc_name_hash(const struct exfat* ef, const le16_t* name)
 		uint16_t c = le16_to_cpu(name[i]);
 
 		/* convert to upper case */
-		if (c < ef->upcase_chars)
-			c = le16_to_cpu(ef->upcase[c]);
+		c = ef->upcase[c];
 
 		hash = ((hash << 15) | (hash >> 1)) + (c & 0xff);
 		hash = ((hash << 15) | (hash >> 1)) + (c >> 8);
@@ -161,8 +162,8 @@ void exfat_print_info(const struct exfat_super_block* sb,
 		uint32_t free_clusters)
 {
 	struct exfat_human_bytes hb;
-	loff_t total_space = le64_to_cpu(sb->sector_count) * SECTOR_SIZE(*sb);
-	loff_t avail_space = (loff_t) free_clusters * CLUSTER_SIZE(*sb);
+	off_t total_space = le64_to_cpu(sb->sector_count) * SECTOR_SIZE(*sb);
+	off_t avail_space = (off_t) free_clusters * CLUSTER_SIZE(*sb);
 
 	printf("File system version           %hhu.%hhu\n",
 			sb->version.major, sb->version.minor);
@@ -176,4 +177,16 @@ void exfat_print_info(const struct exfat_super_block* sb,
 	printf("Used space           %10"PRIu64" %s\n", hb.value, hb.unit);
 	exfat_humanize_bytes(avail_space, &hb);
 	printf("Available space      %10"PRIu64" %s\n", hb.value, hb.unit);
+}
+
+bool exfat_match_option(const char* options, const char* option_name)
+{
+	const char* p;
+	size_t length = strlen(option_name);
+
+	for (p = strstr(options, option_name); p; p = strstr(p + 1, option_name))
+		if ((p == options || p[-1] == ',') &&
+				(p[length] == ',' || p[length] == '\0'))
+			return true;
+	return false;
 }

@@ -4,7 +4,7 @@
 	showstopper.
 
 	Free exFAT implementation.
-	Copyright (C) 2010-2015  Andrew Nayenko
+	Copyright (C) 2010-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #ifndef COMPILER_H_INCLUDED
 #define COMPILER_H_INCLUDED
 
-#if defined(__STDC_VERSION__) && (__STDC_VERSION__ < 199901L)
+#if __STDC_VERSION__ < 199901L
 #error C99-compliant compiler is required
 #endif
 
@@ -33,6 +33,7 @@
 #define PRINTF __attribute__((format(printf, 1, 2)))
 #define NORETURN __attribute__((noreturn))
 #define PACKED __attribute__((packed))
+#define UNUSED __attribute__((unused))
 #if __has_extension(c_static_assert)
 #define USE_C11_STATIC_ASSERT
 #endif
@@ -42,6 +43,7 @@
 #define PRINTF __attribute__((format(printf, 1, 2)))
 #define NORETURN __attribute__((noreturn))
 #define PACKED __attribute__((packed))
+#define UNUSED __attribute__((unused))
 #if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
 #define USE_C11_STATIC_ASSERT
 #endif
@@ -51,6 +53,7 @@
 #define PRINTF
 #define NORETURN
 #define PACKED
+#define UNUSED
 
 #endif
 

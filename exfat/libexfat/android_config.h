@@ -11,7 +11,7 @@
 #define PACKAGE_NAME "Free exFAT implementation"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Free exFAT implementation 1.2.2"
+#define PACKAGE_STRING "Free exFAT implementation 1.3.0"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "exfat"
@@ -20,10 +20,10 @@
 #define PACKAGE_URL "https://github.com/relan/exfat"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.2.2"
+#define PACKAGE_VERSION "1.3.0"
 
 /* Version number of package */
-#define VERSION "1.2.2"
+#define VERSION "1.3.0"
 
 /* Enable large inode numbers on Mac OS X 10.5.  */
 #ifndef _DARWIN_USE_64_BIT_INODE
