@@ -1,3 +1,52 @@
+1.3.0 (2018-09-15)
+
+* exfatfsck can now repair some errors.
+* Added experimental Android support for exfat-utils [liminghao, LongPingWEI,
+Pablo Mendez Hernandez, Pierre-Hugues Husson].
+* Cleaned up FUSE code preparing for FUSE 3 support.
+* Removed OpenBSD support as it does not handle -o option in fuse_main().
+* Re-introduced FreeBSD support [Oleksii Samorukov].
+* Fixed DragonFly BSD support [Tomohiro Kusumi].
+* dirent->d_type in now filled on readdir() [Mark Browning].
+
+1.2.8 (2018-02-03)
+
+* Fixed new files or directories creation in the root directory: ensure there
+are no 0x00 entries before valid ones; otherwise Windows can corrupt them.
+* Fixed compilation on GNU/HURD platform.
+
+1.2.7 (2017-06-05)
+
+* Fixed handling of two last clusters: operations with files that occupy these
+clusters could fail.
+* Fixed crash when started with stdin, stdout or stderr closed.
+
+1.2.6 (2017-01-28)
+
+* Operations with directories (except initial listing) now make less
+read/write system calls.
+* Fixed handling of files with optional tail entries (0xe0-0xff): videoclip
+files created by Sony cameras were missing.
+* Write operations now correctly return ENOSPC (instead of EIO) when there is
+no free disk space left.
+* Fixed max file name length: it's 255 16-bit code units (not 256).
+
+1.2.5 (2016-12-05)
+
+* Added an option for dumpexfat to show file fragments [Daniel Drake].
+* Fixed crash when directory starts with an invalid cluster.
+* Daylight saving time in now properly reflected in file timestamps.
+
+1.2.4 (2016-06-03)
+
+* Fixed wrong files names hashes when upper case table is compressed.
+* Man pages are now installed by default.
+* Commas and backslashes in device names are now escaped.
+
+1.2.3 (2015-12-19)
+
+* Fixed clusters loss when file renaming replaces target.
+
 1.2.2 (2015-11-09)
 
 * Improved reliability in case of a sudden unplug: FS will be in a clean state

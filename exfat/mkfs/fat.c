@@ -3,7 +3,7 @@
 	File Allocation Table creation code.
 
 	Free exFAT implementation.
-	Copyright (C) 2011-2015  Andrew Nayenko
+	Copyright (C) 2011-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -26,12 +26,12 @@
 #include "rootdir.h"
 #include <unistd.h>
 
-static loff_t fat_alignment(void)
+static off_t fat_alignment(void)
 {
-	return (loff_t) 128 * get_sector_size();
+	return (off_t) 128 * get_sector_size();
 }
 
-static loff_t fat_size(void)
+static off_t fat_size(void)
 {
 	return get_volume_size() / get_cluster_size() * sizeof(cluster_t);
 }

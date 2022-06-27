@@ -3,7 +3,7 @@
 	Definitions of structures and constants used in exFAT file system.
 
 	Free exFAT implementation.
-	Copyright (C) 2010-2015  Andrew Nayenko
+	Copyright (C) 2010-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -78,6 +78,9 @@ STATIC_ASSERT(sizeof(struct exfat_super_block) == 512);
 #define EXFAT_ENTRY_FILE      (0x05 | EXFAT_ENTRY_VALID)
 #define EXFAT_ENTRY_FILE_INFO (0x00 | EXFAT_ENTRY_VALID | EXFAT_ENTRY_CONTINUED)
 #define EXFAT_ENTRY_FILE_NAME (0x01 | EXFAT_ENTRY_VALID | EXFAT_ENTRY_CONTINUED)
+#define EXFAT_ENTRY_FILE_TAIL (0x00 | EXFAT_ENTRY_VALID \
+                                    | EXFAT_ENTRY_CONTINUED \
+                                    | EXFAT_ENTRY_OPTIONAL)
 
 struct exfat_entry					/* common container for all entries */
 {
@@ -98,6 +101,8 @@ struct exfat_entry_bitmap			/* allocated clusters bitmap */
 }
 PACKED;
 STATIC_ASSERT(sizeof(struct exfat_entry_bitmap) == 32);
+
+#define EXFAT_UPCASE_CHARS 0x10000
 
 struct exfat_entry_upcase			/* upper case translation table */
 {
@@ -139,7 +144,8 @@ struct exfat_entry_meta1			/* file or directory info (part 1) */
 	le16_t atime, adate;			/* latest access date and time */
 	uint8_t crtime_cs;				/* creation time in cs (centiseconds) */
 	uint8_t mtime_cs;				/* latest modification time in cs */
-	uint8_t __unknown2[10];
+	uint8_t crtime_tzo, mtime_tzo, atime_tzo;	/* timezone offset encoded */
+	uint8_t __unknown2[7];
 }
 PACKED;
 STATIC_ASSERT(sizeof(struct exfat_entry_meta1) == 32);
