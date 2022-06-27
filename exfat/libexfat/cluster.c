@@ -3,7 +3,7 @@
 	exFAT file system implementation library.
 
 	Free exFAT implementation.
-	Copyright (C) 2010-2015  Andrew Nayenko
+	Copyright (C) 2010-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
 /*
  * Sector to absolute offset.
  */
-static loff_t s2o(const struct exfat* ef, loff_t sector)
+static off_t s2o(const struct exfat* ef, off_t sector)
 {
 	return sector << ef->sb->sector_bits;
 }
@@ -36,18 +36,18 @@ static loff_t s2o(const struct exfat* ef, loff_t sector)
 /*
  * Cluster to sector.
  */
-static loff_t c2s(const struct exfat* ef, cluster_t cluster)
+static off_t c2s(const struct exfat* ef, cluster_t cluster)
 {
 	if (cluster < EXFAT_FIRST_DATA_CLUSTER)
 		exfat_bug("invalid cluster number %u", cluster);
 	return le32_to_cpu(ef->sb->cluster_sector_start) +
-		((loff_t) (cluster - EXFAT_FIRST_DATA_CLUSTER) << ef->sb->spc_bits);
+		((off_t) (cluster - EXFAT_FIRST_DATA_CLUSTER) << ef->sb->spc_bits);
 }
 
 /*
  * Cluster to absolute offset.
  */
-loff_t exfat_c2o(const struct exfat* ef, cluster_t cluster)
+off_t exfat_c2o(const struct exfat* ef, cluster_t cluster)
 {
 	return s2o(ef, c2s(ef, cluster));
 }
@@ -55,7 +55,7 @@ loff_t exfat_c2o(const struct exfat* ef, cluster_t cluster)
 /*
  * Sector to cluster.
  */
-static cluster_t s2c(const struct exfat* ef, loff_t sector)
+static cluster_t s2c(const struct exfat* ef, off_t sector)
 {
 	return ((sector - le32_to_cpu(ef->sb->cluster_sector_start)) >>
 			ef->sb->spc_bits) + EXFAT_FIRST_DATA_CLUSTER;
@@ -67,19 +67,19 @@ static cluster_t s2c(const struct exfat* ef, loff_t sector)
 static uint32_t bytes2clusters(const struct exfat* ef, uint64_t bytes)
 {
 	uint64_t cluster_size = CLUSTER_SIZE(*ef->sb);
-	return (bytes + cluster_size - 1) / cluster_size;
+	return DIV_ROUND_UP(bytes, cluster_size);
 }
 
 cluster_t exfat_next_cluster(const struct exfat* ef,
 		const struct exfat_node* node, cluster_t cluster)
 {
 	le32_t next;
-	loff_t fat_offset;
+	off_t fat_offset;
 
 	if (cluster < EXFAT_FIRST_DATA_CLUSTER)
 		exfat_bug("bad cluster 0x%x", cluster);
 
-	if (IS_CONTIGUOUS(*node))
+	if (node->is_contiguous)
 		return cluster + 1;
 	fat_offset = s2o(ef, le32_to_cpu(ef->sb->fat_sector_start))
 		+ cluster * sizeof(cluster_t);
@@ -103,7 +103,7 @@ cluster_t exfat_advance_cluster(const struct exfat* ef,
 	for (i = node->fptr_index; i < count; i++)
 	{
 		node->fptr_cluster = exfat_next_cluster(ef, node, node->fptr_cluster);
-		if (CLUSTER_INVALID(node->fptr_cluster))
+		if (CLUSTER_INVALID(*ef->sb, node->fptr_cluster))
 			break; /* the caller should handle this and print appropriate 
 			          error message */
 	}
@@ -122,7 +122,7 @@ static cluster_t find_bit_and_set(bitmap_t* bitmap, size_t start, size_t end)
 
 	for (i = start_index; i < end_index; i++)
 	{
-		if (bitmap[i] == ~((bitmap_t) 0))
+		if (bitmap[i] == (bitmap_t) ~((bitmap_t) 0))
 			continue;
 		start_bitindex = MAX(i * sizeof(bitmap_t) * 8, start);
 		end_bitindex = MIN((i + 1) * sizeof(bitmap_t) * 8, end);
@@ -174,7 +174,7 @@ int exfat_flush(struct exfat* ef)
 static bool set_next_cluster(const struct exfat* ef, bool contiguous,
 		cluster_t current, cluster_t next)
 {
-	loff_t fat_offset;
+	off_t fat_offset;
 	le32_t next_le32;
 
 	if (contiguous)
@@ -214,10 +214,8 @@ static cluster_t allocate_cluster(struct exfat* ef, cluster_t hint)
 
 static void free_cluster(struct exfat* ef, cluster_t cluster)
 {
-	if (CLUSTER_INVALID(cluster))
-		exfat_bug("freeing invalid cluster 0x%x", cluster);
 	if (cluster - EXFAT_FIRST_DATA_CLUSTER >= ef->cmap.size)
-		exfat_bug("freeing non-existing cluster 0x%x (0x%x)", cluster,
+		exfat_bug("caller must check cluster validity (%#x, %#x)", cluster,
 				ef->cmap.size);
 
 	BMAP_CLR(ef->cmap.chunk, cluster - EXFAT_FIRST_DATA_CLUSTER);
@@ -252,7 +250,7 @@ static int grow_file(struct exfat* ef, struct exfat_node* node,
 	{
 		/* get the last cluster of the file */
 		previous = exfat_advance_cluster(ef, node, current - 1);
-		if (CLUSTER_INVALID(previous))
+		if (CLUSTER_INVALID(*ef->sb, previous))
 		{
 			exfat_error("invalid cluster 0x%x while growing", previous);
 			return -EIO;
@@ -265,39 +263,39 @@ static int grow_file(struct exfat* ef, struct exfat_node* node,
 		/* file does not have clusters (i.e. is empty), allocate
 		   the first one for it */
 		previous = allocate_cluster(ef, 0);
-		if (CLUSTER_INVALID(previous))
+		if (CLUSTER_INVALID(*ef->sb, previous))
 			return -ENOSPC;
 		node->fptr_cluster = node->start_cluster = previous;
 		allocated = 1;
 		/* file consists of only one cluster, so it's contiguous */
-		node->flags |= EXFAT_ATTRIB_CONTIGUOUS;
+		node->is_contiguous = true;
 	}
 
 	while (allocated < difference)
 	{
 		next = allocate_cluster(ef, previous + 1);
-		if (CLUSTER_INVALID(next))
+		if (CLUSTER_INVALID(*ef->sb, next))
 		{
 			if (allocated != 0)
 				shrink_file(ef, node, current + allocated, allocated);
 			return -ENOSPC;
 		}
-		if (next != previous - 1 && IS_CONTIGUOUS(*node))
+		if (next != previous + 1 && node->is_contiguous)
 		{
 			/* it's a pity, but we are not able to keep the file contiguous
 			   anymore */
 			if (!make_noncontiguous(ef, node->start_cluster, previous))
 				return -EIO;
-			node->flags &= ~EXFAT_ATTRIB_CONTIGUOUS;
-			node->flags |= EXFAT_ATTRIB_DIRTY;
+			node->is_contiguous = false;
+			node->is_dirty = true;
 		}
-		if (!set_next_cluster(ef, IS_CONTIGUOUS(*node), previous, next))
+		if (!set_next_cluster(ef, node->is_contiguous, previous, next))
 			return -EIO;
 		previous = next;
 		allocated++;
 	}
 
-	if (!set_next_cluster(ef, IS_CONTIGUOUS(*node), previous,
+	if (!set_next_cluster(ef, node->is_contiguous, previous,
 			EXFAT_CLUSTER_END))
 		return -EIO;
 	return 0;
@@ -321,13 +319,13 @@ static int shrink_file(struct exfat* ef, struct exfat_node* node,
 	{
 		cluster_t last = exfat_advance_cluster(ef, node,
 				current - difference - 1);
-		if (CLUSTER_INVALID(last))
+		if (CLUSTER_INVALID(*ef->sb, last))
 		{
 			exfat_error("invalid cluster 0x%x while shrinking", last);
 			return -EIO;
 		}
 		previous = exfat_next_cluster(ef, node, last);
-		if (!set_next_cluster(ef, IS_CONTIGUOUS(*node), last,
+		if (!set_next_cluster(ef, node->is_contiguous, last,
 				EXFAT_CLUSTER_END))
 			return -EIO;
 	}
@@ -335,7 +333,7 @@ static int shrink_file(struct exfat* ef, struct exfat_node* node,
 	{
 		previous = node->start_cluster;
 		node->start_cluster = EXFAT_CLUSTER_FREE;
-		node->flags |= EXFAT_ATTRIB_DIRTY;
+		node->is_dirty = true;
 	}
 	node->fptr_index = 0;
 	node->fptr_cluster = node->start_cluster;
@@ -343,14 +341,15 @@ static int shrink_file(struct exfat* ef, struct exfat_node* node,
 	/* free remaining clusters */
 	while (difference--)
 	{
-		if (CLUSTER_INVALID(previous))
+		if (CLUSTER_INVALID(*ef->sb, previous))
 		{
 			exfat_error("invalid cluster 0x%x while freeing after shrink",
 					previous);
 			return -EIO;
 		}
+
 		next = exfat_next_cluster(ef, node, previous);
-		if (!set_next_cluster(ef, IS_CONTIGUOUS(*node), previous,
+		if (!set_next_cluster(ef, node->is_contiguous, previous,
 				EXFAT_CLUSTER_FREE))
 			return -EIO;
 		free_cluster(ef, previous);
@@ -359,7 +358,7 @@ static int shrink_file(struct exfat* ef, struct exfat_node* node,
 	return 0;
 }
 
-static bool erase_raw(struct exfat* ef, size_t size, loff_t offset)
+static bool erase_raw(struct exfat* ef, size_t size, off_t offset)
 {
 	if (exfat_pwrite(ef->dev, ef->zero_cluster, size, offset) < 0)
 	{
@@ -381,7 +380,7 @@ static int erase_range(struct exfat* ef, struct exfat_node* node,
 	cluster_boundary = (begin | (CLUSTER_SIZE(*ef->sb) - 1)) + 1;
 	cluster = exfat_advance_cluster(ef, node,
 			begin / CLUSTER_SIZE(*ef->sb));
-	if (CLUSTER_INVALID(cluster))
+	if (CLUSTER_INVALID(*ef->sb, cluster))
 	{
 		exfat_error("invalid cluster 0x%x while erasing", cluster);
 		return -EIO;
@@ -395,7 +394,7 @@ static int erase_range(struct exfat* ef, struct exfat_node* node,
 	{
 		cluster = exfat_next_cluster(ef, node, cluster);
 		/* the cluster cannot be invalid because we have just allocated it */
-		if (CLUSTER_INVALID(cluster))
+		if (CLUSTER_INVALID(*ef->sb, cluster))
 			exfat_bug("invalid cluster 0x%x after allocation", cluster);
 		if (!erase_raw(ef, CLUSTER_SIZE(*ef->sb), exfat_c2o(ef, cluster)))
 			return -EIO;
@@ -434,7 +433,7 @@ int exfat_truncate(struct exfat* ef, struct exfat_node* node, uint64_t size,
 
 	exfat_update_mtime(node);
 	node->size = size;
-	node->flags |= EXFAT_ATTRIB_DIRTY;
+	node->is_dirty = true;
 	return 0;
 }
 
@@ -472,7 +471,7 @@ static int find_used_clusters(const struct exfat* ef,
 	return 0;
 }
 
-int exfat_find_used_sectors(const struct exfat* ef, loff_t* a, loff_t* b)
+int exfat_find_used_sectors(const struct exfat* ef, off_t* a, off_t* b)
 {
 	cluster_t ca, cb;
 

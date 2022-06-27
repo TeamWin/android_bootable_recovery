@@ -1,26 +1,49 @@
-.\" Copyright (C) 2011-2015  Andrew Nayenko
+.\" Copyright (C) 2011-2018  Andrew Nayenko
 .\"
-.TH EXFATFSCK 8 "February 2011"
+.TH EXFATFSCK 8 "September 2018"
 .SH NAME
 .B exfatfsck
 \- check an exFAT file system
 .SH SYNOPSIS
 .B exfatfsck
 [
-.B \-V
+.B \-a
+|
+.B \-n
+|
+.B \-p
+|
+.B \-y
 ]
 .I device
+.br
+.B exfatfsck
+[
+.B \-V
+]
 
 .SH DESCRIPTION
 .B exfatfsck
-checks an exFAT file system for errors. Note that it cannot repair corrupted
-FS, it just reports found errors.
+checks an exFAT file system for errors. It can repair some of them.
 
 .SH COMMAND LINE OPTIONS
 Command line options available:
 .TP
+.BI \-a
+Automatically repair the file system. No user intervention required.
+.TP
+.BI \-n
+No-operation mode: non-interactively check for errors, but don't write
+anything to the file system.
+.TP
+.BI \-p
+Same as \fB\-a\fR for compatibility with other *fsck.
+.TP
 .BI \-V
 Print version and copyright.
+.TP
+.BI \-y
+Same as \fB\-a\fR for compatibility with other *fsck.
 
 .SH EXIT CODES
 Zero is returned if errors were not found. Any other code means an error.
