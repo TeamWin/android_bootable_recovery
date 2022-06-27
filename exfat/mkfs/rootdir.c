@@ -3,7 +3,7 @@
 	Root directory creation code.
 
 	Free exFAT implementation.
-	Copyright (C) 2011-2015  Andrew Nayenko
+	Copyright (C) 2011-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -26,12 +26,12 @@
 #include "uctc.h"
 #include <string.h>
 
-static loff_t rootdir_alignment(void)
+static off_t rootdir_alignment(void)
 {
 	return get_cluster_size();
 }
 
-static loff_t rootdir_size(void)
+static off_t rootdir_size(void)
 {
 	return get_cluster_size();
 }
@@ -41,12 +41,12 @@ static void init_label_entry(struct exfat_entry_label* label_entry)
 	memset(label_entry, 0, sizeof(struct exfat_entry_label));
 	label_entry->type = EXFAT_ENTRY_LABEL ^ EXFAT_ENTRY_VALID;
 
-	if (utf16_length(get_volume_label()) == 0)
+	if (exfat_utf16_length(get_volume_label()) == 0)
 		return;
 
 	memcpy(label_entry->name, get_volume_label(),
 			EXFAT_ENAME_MAX * sizeof(le16_t));
-	label_entry->length = utf16_length(get_volume_label());
+	label_entry->length = exfat_utf16_length(get_volume_label());
 	label_entry->type |= EXFAT_ENTRY_VALID;
 }
 

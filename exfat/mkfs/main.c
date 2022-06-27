@@ -3,7 +3,7 @@
 	Creates exFAT file system.
 
 	Free exFAT implementation.
-	Copyright (C) 2011-2015  Andrew Nayenko
+	Copyright (C) 2011-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ static struct
 {
 	int sector_bits;
 	int spc_bits;
-	loff_t volume_size;
+	off_t volume_size;
 	le16_t volume_label[EXFAT_ENAME_MAX + 1];
 	uint32_t volume_serial;
 	uint64_t first_sector;
@@ -68,7 +68,7 @@ int get_spc_bits(void)
 	return param.spc_bits;
 }
 
-loff_t get_volume_size(void)
+off_t get_volume_size(void)
 {
 	return param.volume_size;
 }
@@ -98,13 +98,13 @@ int get_cluster_size(void)
 	return get_sector_size() << get_spc_bits();
 }
 
-static int setup_spc_bits(int sector_bits, int user_defined, loff_t volume_size)
+static int setup_spc_bits(int sector_bits, int user_defined, off_t volume_size)
 {
 	int i;
 
 	if (user_defined != -1)
 	{
-		loff_t cluster_size = 1 << sector_bits << user_defined;
+		off_t cluster_size = 1 << sector_bits << user_defined;
 		if (volume_size / cluster_size > EXFAT_LAST_DATA_CLUSTER)
 		{
 			struct exfat_human_bytes chb, vhb;
@@ -121,9 +121,9 @@ static int setup_spc_bits(int sector_bits, int user_defined, loff_t volume_size)
 		return user_defined;
 	}
 
-	if (volume_size < 256ull * 1024 * 1024)
+	if (volume_size < 256LL * 1024 * 1024)
 		return MAX(0, 12 - sector_bits);	/* 4 KB */
-	if (volume_size < 32ull * 1024 * 1024 * 1024)
+	if (volume_size < 32LL * 1024 * 1024 * 1024)
 		return MAX(0, 15 - sector_bits);	/* 32 KB */
 
 	for (i = 17; ; i++)						/* 128 KB or more */
@@ -136,7 +136,7 @@ static int setup_volume_label(le16_t label[EXFAT_ENAME_MAX + 1], const char* s)
 	memset(label, 0, (EXFAT_ENAME_MAX + 1) * sizeof(le16_t));
 	if (s == NULL)
 		return 0;
-	return utf8_to_utf16(label, s, EXFAT_ENAME_MAX, strlen(s));
+	return exfat_utf8_to_utf16(label, s, EXFAT_ENAME_MAX + 1, strlen(s));
 }
 
 static uint32_t setup_volume_serial(uint32_t user_defined)
@@ -178,7 +178,7 @@ static int setup(struct exfat_dev* dev, int sector_bits, int spc_bits,
 
 static int logarithm2(int n)
 {
-	int i;
+	size_t i;
 
 	for (i = 0; i < sizeof(int) * CHAR_BIT - 1; i++)
 		if ((1 << i) == n)
@@ -228,7 +228,7 @@ int main(int argc, char* argv[])
 			}
 			break;
 		case 'V':
-			puts("Copyright (C) 2011-2015  Andrew Nayenko");
+			puts("Copyright (C) 2011-2018  Andrew Nayenko");
 			return 0;
 		default:
 			usage(argv[0]);

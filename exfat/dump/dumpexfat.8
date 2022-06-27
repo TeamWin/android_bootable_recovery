@@ -1,6 +1,6 @@
-.\" Copyright (C) 2011-2015  Andrew Nayenko
+.\" Copyright (C) 2011-2018  Andrew Nayenko
 .\"
-.TH DUMPEXFAT 8 "February 2011"
+.TH DUMPEXFAT 8 "July 2016"
 .SH NAME
 .B dumpexfat
 \- dump exFAT file system
@@ -11,6 +11,10 @@
 ]
 [
 .B \-u
+]
+[
+.B \-f
+.I file
 ]
 [
 .B \-V
@@ -32,6 +36,11 @@ systems.
 .B \-u
 Dump ranges of used sectors starting from 0 and separated with spaces. May be
 useful for backup tools.
+.TP
+.B \-f file
+Print out a list of fragments that compose the given file. Each fragment is
+printed on its own line, as the start offset (in bytes) into the file system,
+and the length (in bytes).
 .TP
 .BI \-V
 Print version and copyright.

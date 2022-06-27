@@ -3,7 +3,7 @@
 	Clusters Bitmap creation code.
 
 	Free exFAT implementation.
-	Copyright (C) 2011-2015  Andrew Nayenko
+	Copyright (C) 2011-2018  Andrew Nayenko
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -27,12 +27,12 @@
 #include <limits.h>
 #include <string.h>
 
-static loff_t cbm_alignment(void)
+static off_t cbm_alignment(void)
 {
 	return get_cluster_size();
 }
 
-static loff_t cbm_size(void)
+static off_t cbm_size(void)
 {
 	return DIV_ROUND_UP(
 			(get_volume_size() - get_position(&cbm)) / get_cluster_size(),
