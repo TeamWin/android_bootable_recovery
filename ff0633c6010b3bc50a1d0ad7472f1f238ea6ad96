@@ -16,6 +16,24 @@
       "message": "Can we set a default of the original value here if the boardvar isn\u0027t set?",
       "revId": "ff0633c6010b3bc50a1d0ad7472f1f238ea6ad96",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79333de_74b168f5",
+        "filename": "Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2022-06-28T14:52:02Z",
+      "side": 1,
+      "message": "I can\u0027t figure out how much the default setting is appropriate. It takes 5 seconds for miui to change after a few months.\nI can set the default to 3 seconds.",
+      "parentUuid": "e2277c5e_95833484",
+      "revId": "ff0633c6010b3bc50a1d0ad7472f1f238ea6ad96",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
