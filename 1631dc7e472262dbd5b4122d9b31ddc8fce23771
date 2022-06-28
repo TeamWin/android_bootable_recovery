@@ -51,6 +51,24 @@
       "message": "There is a merge conflict in this patchset.",
       "revId": "1631dc7e472262dbd5b4122d9b31ddc8fce23771",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "885a47d0_4a94015a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-06-28T17:31:04Z",
+      "side": 1,
+      "message": "Patchset \"fscrypt: wip\" removes a code block which is for handling FDE decryption.\nAfter adding it back, One adaption is required to make the compilation pass.\n\nThis patchset is based on \"fscrypt: wip\" which has to restore the code block, and\nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/5679 just do the adaption. Both of them makes the same effect.\n\nIf the code block still exists, pick the another patchset.",
+      "parentUuid": "36414566_2477e07f",
+      "revId": "1631dc7e472262dbd5b4122d9b31ddc8fce23771",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
