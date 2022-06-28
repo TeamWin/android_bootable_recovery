@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29eebcc3_f5d99864",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1849,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-06-28T16:36:44Z",
+      "side": 1,
+      "message": "Does this patchset convert the actual data xml files to non-binary in place? Does that cause any issues?",
+      "revId": "ed67adac0b478a618f4e52d60378d778420d46c0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
