@@ -257,6 +257,7 @@ private:
 	unsigned long long Restore_Size;                                          // Restore size of the current restore operation
 	bool Can_Be_Encrypted;                                                    // This partition might be encrypted, affects error handling, can only be true if crypto support is compiled in
 	bool Is_Encrypted;                                                        // This partition is thought to be encrypted -- it wouldn't mount for some reason, only avialble with crypto support
+	bool Is_Compressed;                                                       // This partition should be compressed
 	bool Is_Decrypted;                                                        // This partition has successfully been decrypted
 	bool Is_FBE;                                                              // File Based Encryption is present
 	bool Mount_To_Decrypt;                                                    // Mount this partition during decrypt (/vendor, /firmware, etc in case we need proprietary libs or firmware files)
