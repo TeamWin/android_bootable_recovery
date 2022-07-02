@@ -47,6 +47,30 @@
       },
       "revId": "9afc845b5b072ff52793ba4d7e8d71d9310f516c",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b821f4ef_b4b55816",
+        "filename": "twrp.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-07-02T22:49:41Z",
+      "side": 1,
+      "message": "I can confirm that removing this fixes all file permission issues. Please remove with next patch set.",
+      "parentUuid": "baa11a57_f983acb3",
+      "range": {
+        "startLine": 362,
+        "startChar": 1,
+        "endLine": 362,
+        "endChar": 26
+      },
+      "revId": "9afc845b5b072ff52793ba4d7e8d71d9310f516c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
