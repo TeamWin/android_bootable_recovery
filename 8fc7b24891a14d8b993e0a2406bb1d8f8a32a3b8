@@ -16,6 +16,23 @@
       "message": "5677: hanoip: set TARGET_SUPPORTS_64_BIT_APPS :\u003d true | https://gerrit.twrp.me/c/android_device_motorola_hanoip/+/5677",
       "revId": "8fc7b24891a14d8b993e0a2406bb1d8f8a32a3b8",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec82139_f3eb6990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-07-03T18:29:36Z",
+      "side": 1,
+      "message": "Can you explain this revert? This isn\u0027t messing with TARGET_SUPPORTS_64_BIT_APPS as far as I can tell.",
+      "revId": "8fc7b24891a14d8b993e0a2406bb1d8f8a32a3b8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
