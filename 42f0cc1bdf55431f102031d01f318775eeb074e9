@@ -16,6 +16,24 @@
       "message": "\u003e Patch Set 3: Code-Review-1\n\u003e \n\u003e This patch has no effect for me, and since the minimal doesn\u0027t require all dependencies, I don\u0027t see why it should be merged.\n\nit makes sense to ignore such errors in minimal as we ignore missing dependencies because there are stuff we do not track, but why should we keep a dependency that doesn\u0027t exist in our own repos?",
       "revId": "42f0cc1bdf55431f102031d01f318775eeb074e9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2decb3f5_7dfb30a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-07-03T20:46:57Z",
+      "side": 1,
+      "message": "Because the fewer changes made here, the easier future merges are. Until the TWRP source can easily be applied over the AOSP recovery source, then the fewer changes to AOSP recovery files, the better.",
+      "parentUuid": "76e2b051_7505a5a5",
+      "revId": "42f0cc1bdf55431f102031d01f318775eeb074e9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
