@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bafed593_f18c4d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 956
+      },
+      "writtenOn": "2022-07-03T09:35:16Z",
+      "side": 1,
+      "message": "5677: hanoip: set TARGET_SUPPORTS_64_BIT_APPS :\u003d true | https://gerrit.twrp.me/c/android_device_motorola_hanoip/+/5677",
+      "revId": "8fc7b24891a14d8b993e0a2406bb1d8f8a32a3b8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
