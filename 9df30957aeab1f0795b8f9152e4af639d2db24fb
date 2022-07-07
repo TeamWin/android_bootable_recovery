@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ba0db8_c9210073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 800
+      },
+      "writtenOn": "2022-07-07T12:53:53Z",
+      "side": 1,
+      "message": "I tried on Xiaomi Redmi K20 Pro. Worked for me without any issues.",
+      "revId": "9df30957aeab1f0795b8f9152e4af639d2db24fb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
