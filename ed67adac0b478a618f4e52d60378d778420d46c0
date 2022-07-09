@@ -16,6 +16,23 @@
       "message": "Does this patchset convert the actual data xml files to non-binary in place? Does that cause any issues?",
       "revId": "ed67adac0b478a618f4e52d60378d778420d46c0",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035ca920_36c97e08",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2022-07-09T02:21:03Z",
+      "side": 1,
+      "message": "After many days of testing, in miui, the first node is root.\nIs it a feature of abx xml?\nxiaomi:\n\u003croot\u003e\n\t\u003cuser id\u003d\"0\" \u003e\n\t\t\u003cname\u003exxx\u003c/name\u003e\n\t\t\u003crestrictions /\u003e\n\t\t\u003cdevice_policy_local_restrictions /\u003e\n\t\u003c/user\u003e\n\u003c/root\u003e",
+      "revId": "ed67adac0b478a618f4e52d60378d778420d46c0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
