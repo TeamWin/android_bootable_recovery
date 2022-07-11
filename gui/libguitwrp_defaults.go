@@ -76,14 +76,87 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 			version = strings.Split(line, " ")[2]
 		}
 	}
+
+	_props := [3]string{"TW_CUSTOM_BATTERY_POS", "TW_CUSTOM_CPU_POS", "TW_CUSTOM_CLOCK_POS" }
+	props := [3]string{"0", "0", "0"}
+	for i, item := range _props {
+		if getMakeVars(ctx, item) != "" {
+			props[i] = strings.Trim(getMakeVars(ctx, item), "\"")
+		}
+	}
+
 	_files := [2]string{"splash.xml", "ui.xml"}
 	for _, i := range _files {
+		var fontsize int = 0
+		var width int = 0
+
 		data, err = ioutil.ReadFile(twRes + i)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
+
 		newFile := strings.Replace(string(data), "{themeversion}", version, -1)
+
+		// Custom position for status bar items - start
+		if i == "ui.xml" {
+
+			for _, line := range strings.Split(string(data), "\n") {
+		                if strings.Contains(line, "name=\"font_m\"") {
+		                      fontsize, err = strconv.Atoi(strings.Split(line, "\"")[5])
+		                       if err != nil {
+		                               fmt.Println(err)
+		                               return
+		                       }
+				}
+				if strings.Contains(line, "resolution") {
+					width, err = strconv.Atoi(strings.Split(line, "\"")[1])
+					if err != nil {
+						fmt.Println(err)
+						return
+					}
+				}
+		        }
+
+			var cpusize int = (fontsize * 5) + (width/100)
+			var clocksize int = (fontsize * 4) + (width/100)
+			var batterysize int = (fontsize * 6) - (width/100)
+			var pos_clock_24 string = props[2]
+			for j := 0; j < len(props); j++ {
+				if props[j] == "left" {
+					props[j] = strconv.Itoa(width/50)
+					if _props[j] == "TW_CUSTOM_CLOCK_POS" {
+						pos_clock_24 = props[j]
+					}
+				} else if props[j] == "center" {
+					if _props[j] == "TW_CUSTOM_BATTERY_POS" {
+						props[j] = strconv.Itoa( (width/2) - (batterysize*43/100) )
+					} else if _props[j] == "TW_CUSTOM_CLOCK_POS" {
+						pos := (width/2) - (clocksize*45/100)
+						props[j] = strconv.Itoa(pos)
+						pos_clock_24 = strconv.Itoa( pos * 31/30 )
+					} else if _props[j] == "TW_CUSTOM_CPU_POS" {
+						props[j] = strconv.Itoa( (width/2) - (cpusize*41/100) )
+					}
+				} else if props[j] == "right" {
+					if _props[j] == "TW_CUSTOM_BATTERY_POS" {
+						props[j] = strconv.Itoa( width - batterysize )
+					} else if _props[j] == "TW_CUSTOM_CLOCK_POS" {
+						props[j] = strconv.Itoa(width - clocksize)
+						pos_clock_24 = props[j]
+					} else if _props[j] == "TW_CUSTOM_CPU_POS" {
+						props[j] = strconv.Itoa( width - cpusize )
+					}
+				}
+			}
+
+			newFile = strings.Replace(newFile, "{battery_pos}", props[0], -1)
+			newFile = strings.Replace(newFile, "{cpu_pos}", props[1], -1)
+			newFile = strings.Replace(newFile, "{clock_12_pos}", props[2], -1)
+			newFile = strings.Replace(newFile, "{clock_24_pos}", pos_clock_24, -1)
+		}
+		// Custom position for status bar items - end
+
 		err = ioutil.WriteFile(twRes + i, []byte(newFile), 0)
 		if err != nil {
 			fmt.Println(err)
