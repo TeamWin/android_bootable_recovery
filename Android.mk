@@ -430,6 +430,7 @@ LOCAL_C_INCLUDES += system/vold \
 TWRP_REQUIRED_MODULES += \
     relink_libraries \
     relink_binaries \
+    relink_vendor_hw_binaries \
     twrp_ramdisk \
     bc \
     dump_image \
