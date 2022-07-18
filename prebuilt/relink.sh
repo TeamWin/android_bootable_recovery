@@ -12,6 +12,7 @@ process_file()
       src=$2.tmp
     fi
 
+    mkdir -p $1
     cp $src $dst
     if [[ -e $2.tmp ]]; then rm -f $2.tmp; fi
 }
