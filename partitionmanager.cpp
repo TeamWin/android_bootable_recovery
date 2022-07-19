@@ -3585,7 +3585,9 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 		if ((*iter)->Is_Super) {
 			TWPartition *part = *iter;
 			std::string bare_partition_name = Get_Bare_Partition_Name((*iter)->Get_Mount_Point());
-			std::string blk_device_partition = bare_partition_name + PartitionManager.Get_Active_Slot_Suffix();
+			std::string blk_device_partition = bare_partition_name;
+			if (DataManager::GetStrValue(TW_VIRTUAL_AB_ENABLED) == "1")
+				blk_device_partition.append(PartitionManager.Get_Active_Slot_Suffix());
 			(*iter)->UnMount(false);
 			LOGINFO("removing dynamic partition: %s\n", blk_device_partition.c_str());
 			destroyed = DestroyLogicalPartition(blk_device_partition);
