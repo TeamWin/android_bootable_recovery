@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d7adb1_56a433ab",
+        "filename": "gui/theme/portrait_hdpi/ui.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 656
+      },
+      "writtenOn": "2022-07-19T17:44:01Z",
+      "side": 1,
+      "message": "The value of TW_CUSTOM_CPU_POS, TW_CUSTOM_CLOCK_POS, TW_CUSTOM_BATTERY_POS are not getting copied to the ui.xml, they are all 0 in ui.xml\n\ne.g.\nSetting the following in BoardConfig with or without quotes results in the above mention results,\nTW_CUSTOM_CPU_POS :\u003d 10\nTW_CUSTOM_CLOCK_POS :\u003d 300\nTW_CUSTOM_BATTERY_POS :\u003d 600\n\nI tried setting them manually in ui.xml of a build out recovery.img,\nthe tw_cpu_pos_x  \u0026 tw_battery_pos_x works fine, \nbut when i try to set tw_clock_12_pos_x  \u0026 tw_clock_24_pos_x to anything other than 0 and reload theme the clock just move to the most left of the status bar(0 from x axis)",
+      "revId": "dc96496f562d39744d0f2ba9918036865f1211ab",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
