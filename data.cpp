@@ -518,8 +518,10 @@ int DataManager::ShowProgress(float Portion, const float Seconds)
 
 void DataManager::update_tz_environment_variables(void)
 {
-	setenv("TZ", GetStrValue(TW_TIME_ZONE_VAR).c_str(), 1);
+	string TZ = GetStrValue(TW_TIME_ZONE_VAR);
+	setenv("TZ", TZ.c_str(), 1);
 	tzset();
+	property_set("persist.sys.timezone", TZ.c_str());
 }
 
 void DataManager::SetBackupFolder()
