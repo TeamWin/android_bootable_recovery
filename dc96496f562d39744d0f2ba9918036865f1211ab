@@ -16,6 +16,41 @@
       "message": "The value of TW_CUSTOM_CPU_POS, TW_CUSTOM_CLOCK_POS, TW_CUSTOM_BATTERY_POS are not getting copied to the ui.xml, they are all 0 in ui.xml\n\ne.g.\nSetting the following in BoardConfig with or without quotes results in the above mention results,\nTW_CUSTOM_CPU_POS :\u003d 10\nTW_CUSTOM_CLOCK_POS :\u003d 300\nTW_CUSTOM_BATTERY_POS :\u003d 600\n\nI tried setting them manually in ui.xml of a build out recovery.img,\nthe tw_cpu_pos_x  \u0026 tw_battery_pos_x works fine, \nbut when i try to set tw_clock_12_pos_x  \u0026 tw_clock_24_pos_x to anything other than 0 and reload theme the clock just move to the most left of the status bar(0 from x axis)",
       "revId": "dc96496f562d39744d0f2ba9918036865f1211ab",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9846d9_14718c37",
+        "filename": "gui/theme/portrait_hdpi/ui.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-07-20T15:36:59Z",
+      "side": 1,
+      "message": "The patch for vendor_twrp which was required alongside this one has been added to the statusbar-icons-offset topic now.",
+      "parentUuid": "75d7adb1_56a433ab",
+      "revId": "dc96496f562d39744d0f2ba9918036865f1211ab",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "376350e9_90cd33bd",
+        "filename": "gui/theme/portrait_hdpi/ui.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-07-20T15:36:59Z",
+      "side": 1,
+      "message": "Extra \u0027_\u0027",
+      "revId": "dc96496f562d39744d0f2ba9918036865f1211ab",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
