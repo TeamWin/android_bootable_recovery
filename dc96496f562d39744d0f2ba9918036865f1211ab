@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "246490d2_882c7b87",
+        "filename": "gui/theme/portrait_hdpi/ui.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 656
+      },
+      "writtenOn": "2022-07-20T15:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75d7adb1_56a433ab",
+      "revId": "dc96496f562d39744d0f2ba9918036865f1211ab",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "376350e9_90cd33bd",
         "filename": "gui/theme/portrait_hdpi/ui.xml",
         "patchSetId": 8
