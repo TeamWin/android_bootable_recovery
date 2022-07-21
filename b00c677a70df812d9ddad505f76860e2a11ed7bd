@@ -51,6 +51,24 @@
       "parentUuid": "e748bf0f_52046c7b",
       "revId": "b00c677a70df812d9ddad505f76860e2a11ed7bd",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820d95ee_ab594d3f",
+        "filename": "gui/rapidxml.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-07-21T22:11:15Z",
+      "side": 1,
+      "message": "Maybe just \"ABX Format Unsupported by RapidXML\"",
+      "parentUuid": "b1950bb2_7387dbb6",
+      "revId": "b00c677a70df812d9ddad505f76860e2a11ed7bd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
