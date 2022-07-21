@@ -1391,6 +1391,14 @@ namespace rapidxml
             // Parse BOM, if any
             parse_bom<Flags>(text);
             
+            // Abort if it's ABX format
+            if (text[0] == Ch('A') &&
+                text[1] == Ch('B') &&
+                text[2] == Ch('X')) {
+                RAPIDXML_PARSE_ERROR("Unsupported ABX Format", text);
+                return;
+            }
+
             // Parse children
             while (1)
             {
