@@ -16,6 +16,23 @@
       "message": "Steps to reproduce the issue:\n1) Clean flash a ROM\n2) Boot it\n3) Erase super partition\n4) Reboot to TWRP",
       "revId": "b00c677a70df812d9ddad505f76860e2a11ed7bd",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e748bf0f_52046c7b",
+        "filename": "gui/rapidxml.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-07-21T13:40:29Z",
+      "side": 1,
+      "message": "Should this say \"Unsupported XML Format\"? Also could you get rid of the extra whitespace above?",
+      "revId": "b00c677a70df812d9ddad505f76860e2a11ed7bd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
