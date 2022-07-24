@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libtwadbbu
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS = -fno-strict-aliasing -D_LARGFILE_SOURCE #-D_DEBUG_ADB_BACKUP
-LOCAL_C_INCLUDES += bionic external/zlib
+LOCAL_C_INCLUDES += bionic external/zlib-ng
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
     LOCAL_C_INCLUDES += external/stlport/stlport
 endif
@@ -37,7 +37,7 @@ else
     LOCAL_SHARED_LIBRARIES += libc++
 endif
 
-LOCAL_C_INCLUDES += bionic external/zlib
+LOCAL_C_INCLUDES += bionic external/zlib-ng
 LOCAL_CFLAGS:= -c -W
 LOCAL_MODULE:= twrpbu
 LOCAL_MODULE_STEM := bu

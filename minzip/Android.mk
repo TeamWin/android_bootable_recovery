@@ -9,7 +9,7 @@ LOCAL_SRC_FILES := \
 	Zip.c
 
 LOCAL_C_INCLUDES := \
-	external/zlib \
+	external/zlib-ng \
 	external/safe-iop/include
 
 LOCAL_C_INCLUDES += external/libselinux/include
@@ -38,7 +38,7 @@ LOCAL_SRC_FILES := \
 	Zip.c
 
 LOCAL_C_INCLUDES += \
-	external/zlib \
+	external/zlib-ng \
 	external/safe-iop/include
 
 LOCAL_C_INCLUDES += external/libselinux/include
