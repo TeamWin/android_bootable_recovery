@@ -25,7 +25,7 @@ cc_library_shared {
     ],
     include_dirs: [
         "external/libpng",
-        "external/zlib",
+        "external/zlib-ng",
         "system/core/include",
         "external/freetype/include",
         "external/libcxx/include",

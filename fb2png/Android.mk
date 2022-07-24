@@ -47,7 +47,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_C_INCLUDES +=\
     external/libpng\
-    external/zlib
+    external/zlib-ng
 
 LOCAL_CFLAGS += -DANDROID
 LOCAL_STATIC_LIBRARIES := libpng libz
@@ -68,7 +68,7 @@ LOCAL_STATIC_LIBRARIES := libfb2png libpng libz libc
 
 LOCAL_C_INCLUDES +=\
     external/libpng\
-    external/zlib
+    external/zlib-ng
 
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin

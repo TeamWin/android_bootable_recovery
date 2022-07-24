@@ -110,7 +110,7 @@ LOCAL_C_INCLUDES += \
     packages/modules/adb \
     system/core/libsparse \
     system/vold \
-    external/zlib \
+    external/zlib-ng \
     system/libziparchive/include \
     external/freetype/include \
     external/boringssl/include \

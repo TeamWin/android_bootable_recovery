@@ -7,7 +7,7 @@ LOCAL_MODULE := libtar
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := append.c block.c decode.c encode.c extract.c handle.c output.c util.c wrapper.c basename.c strmode.c libtar_hash.c libtar_list.c dirname.c android_utils.c
 LOCAL_C_INCLUDES += $(LOCAL_PATH) \
-                    external/zlib
+                    external/zlib-ng
 LOCAL_SHARED_LIBRARIES += libz libc
 
 LOCAL_C_INCLUDES += external/libselinux/include
@@ -77,7 +77,7 @@ LOCAL_MODULE := libtar_static
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := append.c block.c decode.c encode.c extract.c handle.c output.c util.c wrapper.c basename.c strmode.c libtar_hash.c libtar_list.c dirname.c android_utils.c
 LOCAL_C_INCLUDES += $(LOCAL_PATH) \
-                    external/zlib
+                    external/zlib-ng
 LOCAL_STATIC_LIBRARIES += libz libc
 
 LOCAL_C_INCLUDES += external/libselinux/include
