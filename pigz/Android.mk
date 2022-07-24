@@ -9,7 +9,7 @@ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/bin
 LOCAL_CFLAGS :=
 LOCAL_SRC_FILES = pigz.c yarn.c
 LOCAL_C_INCLUDES += $(LOCAL_PATH) \
-					external/zlib
+					external/zlib-ng
 LOCAL_SHARED_LIBRARIES += libz libc
 
 LOCAL_POST_INSTALL_CMD := \
