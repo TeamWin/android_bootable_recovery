@@ -3427,7 +3427,6 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 
 	twrpPart->Set_Block_Device(fstabEntry.blk_device);
 	twrpPart->Update_Size(true);
-	twrpPart->Change_Mount_Read_Only(true);
 	twrpPart->Set_Can_Be_Backed_Up(false);
 	twrpPart->Set_Can_Be_Wiped(false);
 	LOGINFO("Symlinking %s => /dev/block/bootdevice/by-name/%s \n", fstabEntry.blk_device.c_str(), bare_partition_name.c_str());
