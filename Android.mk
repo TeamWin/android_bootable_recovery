@@ -440,6 +440,9 @@ endif
 ifeq ($(TW_INCLUDE_FASTBOOTD), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_FASTBOOTD
 endif
+ifeq ($(TW_ENABLE_BLKDISCARD), true)
+    LOCAL_CFLAGS += -DTW_ENABLE_BLKDISCARD
+endif
 
 LOCAL_C_INCLUDES += system/vold \
 
