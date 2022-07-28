@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ac24ad_0a19a20e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-07-28T22:32:35Z",
+      "side": 1,
+      "message": "This helps extending EMMC lifetime",
+      "revId": "f3d27006985b38cc8b8140a56e8cb4e630cbe2a2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
