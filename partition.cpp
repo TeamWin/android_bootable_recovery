@@ -472,6 +472,12 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			Can_Be_Backed_Up = false;
 			Can_Be_Wiped = false;
 			Make_Dir(PartitionManager.Get_Android_Root_Path(), true);
+		} else if (Mount_Point == "/system_ext") {
+			Display_Name = "System_EXT";
+			Backup_Name = "System_EXT";
+			Backup_Display_Name = Display_Name;
+			Storage_Name = Display_Name;
+			Can_Be_Backed_Up = Wipe_Available_in_GUI = Is_Super ? false : true;
 		} else if (Mount_Point == "/product") {
 			Display_Name = "Product";
 			Backup_Name = "Product";
