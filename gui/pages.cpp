@@ -39,7 +39,7 @@
 #include <string>
 #include <algorithm>
 
-
+#include <cutils/properties.h>
 #include <ziparchive/zip_archive.h>
 #include "ZipUtil.h"
 
@@ -1338,8 +1338,9 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 	std::string mainxmlfilename = package;
 	char* languageFile = NULL;
 	char* baseLanguageFile = NULL;
+	char propval[PROPERTY_VALUE_MAX];
 	PageSet* pageSet = NULL;
-	int ret;
+	int propval_int, ret;
 
 	mReloadTheme = false;
 	mStartPage = startpage;
@@ -1356,6 +1357,26 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 		tw_y_offset = TW_Y_OFFSET;
 		tw_w_offset = TW_W_OFFSET;
 		tw_h_offset = TW_H_OFFSET;
+		property_get("twrp.gui.offset.x", propval, "");
+		if (strlen(propval) > 0) {
+			propval_int = std::atoi(propval);
+			tw_x_offset = propval_int;
+		}
+		property_get("twrp.gui.offset.y", propval, "");
+		if (strlen(propval) > 0) {
+			propval_int = std::atoi(propval);
+			tw_y_offset = propval_int;
+		}
+		property_get("twrp.gui.offset.w", propval, "");
+		if (strlen(propval) > 0) {
+			propval_int = std::atoi(propval);
+			tw_w_offset = propval_int;
+		}
+		property_get("twrp.gui.offset.h", propval, "");
+		if (strlen(propval) > 0) {
+			propval_int = std::atoi(propval);
+			tw_h_offset = propval_int;
+		}
 		if (name != "splash") {
 			LoadLanguageList(NULL);
 			languageFile = LoadFileToBuffer(TWRES "languages/en.xml", NULL);
