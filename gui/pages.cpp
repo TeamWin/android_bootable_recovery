@@ -39,7 +39,7 @@
 #include <string>
 #include <algorithm>
 
-
+#include <cutils/properties.h>
 #include <ziparchive/zip_archive.h>
 #include "ZipUtil.h"
 
@@ -1338,6 +1338,7 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 	std::string mainxmlfilename = package;
 	char* languageFile = NULL;
 	char* baseLanguageFile = NULL;
+	char propval[PROPERTY_VALUE_MAX];
 	PageSet* pageSet = NULL;
 	int ret;
 
@@ -1356,6 +1357,20 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 		tw_y_offset = TW_Y_OFFSET;
 		tw_w_offset = TW_W_OFFSET;
 		tw_h_offset = TW_H_OFFSET;
+
+		property_get("twrp.gui.offset.x", propval, "");
+		if (strlen(propval) > 0)
+			tw_x_offset = std::atoi(propval);
+		property_get("twrp.gui.offset.y", propval, "");
+		if (strlen(propval) > 0)
+			tw_y_offset = std::atoi(propval);
+		property_get("twrp.gui.offset.w", propval, "");
+		if (strlen(propval) > 0)
+			tw_w_offset = std::atoi(propval);
+		property_get("twrp.gui.offset.h", propval, "");
+		if (strlen(propval) > 0)
+			tw_h_offset = std::atoi(propval);
+
 		if (name != "splash") {
 			LoadLanguageList(NULL);
 			languageFile = LoadFileToBuffer(TWRES "languages/en.xml", NULL);
