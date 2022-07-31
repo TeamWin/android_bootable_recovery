@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79052558_b502b402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-07-31T19:34:35Z",
+      "side": 1,
+      "message": "Are these patches able to be cherry-picked to android-11?",
+      "revId": "4232174ca8c38b6250be5ceb50fdf11b35330f19",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
