@@ -16,6 +16,24 @@
       "message": "Only libtar uses this flag now. Not the recovery binary.",
       "revId": "696133290991f0ba0c1d30229d9a8cc8494ee87a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163edf58_3787e941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2022-08-01T18:33:18Z",
+      "side": 1,
+      "message": "This commit is not required if it will not be used in the future.\nhttps://github.com/TeamWin/android_bootable_recovery/blob/05ca8766bff3e0cb22e1d69be56fa8d9f1d9ef19/twrp-functions.cpp#L1414",
+      "parentUuid": "70333aea_3b65f16b",
+      "revId": "696133290991f0ba0c1d30229d9a8cc8494ee87a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
