@@ -339,6 +339,12 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         endif
         LOCAL_SHARED_LIBRARIES += libcryptfs_hw
     endif
+
+    ifeq ($(TW_USE_FSCRYPT_POLICY),1)
+        LOCAL_CFLAGS += -DUSE_FSCRYPT_POLICY_V1
+    else
+        LOCAL_CFLAGS += -DUSE_FSCRYPT_POLICY_V2
+    endif
 endif
 WITH_CRYPTO_UTILS := \
     $(if $(wildcard system/core/libcrypto_utils/android_pubkey.c),true)
