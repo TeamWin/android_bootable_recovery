@@ -16,6 +16,23 @@
       "message": "Tested on S22 Ultra snapdragon",
       "revId": "61c4f4980e0e7a407f6d7c5eaafed0287f7a8cc4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f2104f3_8d94c512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-01T22:35:42Z",
+      "side": 1,
+      "message": "Can you provide the logcat and recovery.log for when this fails?",
+      "revId": "61c4f4980e0e7a407f6d7c5eaafed0287f7a8cc4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
