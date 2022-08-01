@@ -33,6 +33,24 @@
       "message": "Can you provide the logcat and recovery.log for when this fails?",
       "revId": "61c4f4980e0e7a407f6d7c5eaafed0287f7a8cc4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83acd37_c6621c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2022-08-01T22:44:30Z",
+      "side": 1,
+      "message": "I:addFile \u0027/data/fonts/files/BtR95nEBwYr_nxBdahznIA\u003d\u003d/NotoColorEmoji.ttf\u0027 including root: 1\n  \u003d\u003d\u003e set selinux context: u:object_r:font_data_file:s0\nI:Error adding file \u0027/data/fonts/files/BtR95nEBwYr_nxBdahznIA\u003d\u003d/NotoColorEmoji.ttf\u0027 to \u0027/data/media/0/TWRP/BACKUPS/SM-S908B/2022-07-31--21-55-23_SP1A210812016S908BXXU2AVF5/data.f2fs.win010\u0027\nError creating backup.\nI:ERROR tarList for thread ID 0\nError creating backup.\nI:InfoManager saving \u0027/data/media/0/TWRP/BACKUPS/SM-S908B/2022-07-31--21-55-23_SP1A210812016S908BXXU2AVF5/data.info\u0027\ncreateTarFork() process ended with ERROR: 255\nBackup Failed. Cleaning Backup Folder.",
+      "parentUuid": "3f2104f3_8d94c512",
+      "revId": "61c4f4980e0e7a407f6d7c5eaafed0287f7a8cc4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
