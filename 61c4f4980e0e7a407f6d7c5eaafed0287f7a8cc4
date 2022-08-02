@@ -86,6 +86,24 @@
       "message": "Merge conflict",
       "revId": "61c4f4980e0e7a407f6d7c5eaafed0287f7a8cc4",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7c962a_440e459b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2022-08-02T00:04:47Z",
+      "side": 1,
+      "message": "https://gist.githubusercontent.com/mohammad92/db0fe543c794751dc624510be8c18e0e/raw/cf8d727030af8cea31a0b0d2ed30d25f0348f5ac/recovery.log",
+      "parentUuid": "e8966259_67284b87",
+      "revId": "61c4f4980e0e7a407f6d7c5eaafed0287f7a8cc4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
