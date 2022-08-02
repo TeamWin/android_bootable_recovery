@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ae3baa_a5b5017e",
+        "filename": "partition.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-02T23:32:57Z",
+      "side": 1,
+      "message": "I feel like it would be better to return directly rather than using a goto to short circuit the return. Does anyone have comments?",
+      "revId": "daa4c55407609e63d589ab870c987e1160ddf799",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
