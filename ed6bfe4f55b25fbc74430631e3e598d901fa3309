@@ -16,6 +16,24 @@
       "message": "What is the best way to test this? What error does it fix?",
       "revId": "ed6bfe4f55b25fbc74430631e3e598d901fa3309",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db5686ae_646b5338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2022-08-02T23:54:45Z",
+      "side": 1,
+      "message": "In FBE, the system update will write the decrypted data of the zip file to blocks and create a /cache/recovery/block.map file and provide it to RECOVERY.\nRECOVERY creates a file by calling MapFile(path) after judging that the index position 0 of the filename array is the \u0027@\u0027 character. The zip file does not need to be decrypted at this point.\nSo SkipDecryption \u003d arg.find(\"@\") \u003d\u003d 1; is a logical error: https://github.com/TeamWin/android_bootable_recovery/blob/701e9abe26353f143287897942e367f8245c6f54/otautil/sysutil.cpp#L191",
+      "parentUuid": "2f465dd1_e0a1426b",
+      "revId": "ed6bfe4f55b25fbc74430631e3e598d901fa3309",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
