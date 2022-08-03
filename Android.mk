@@ -180,7 +180,6 @@ ifeq ($(TW_OEM_BUILD),true)
     TW_EXCLUDE_TZDATA := true
     TW_EXCLUDE_NANO := true
     TW_EXCLUDE_BASH := true
-    TW_EXCLUDE_PYTHON := true
 endif
 
 ifeq ($(TARGET_USERIMAGES_USE_EXT4), true)
@@ -587,6 +586,7 @@ endif
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 28; echo $$?),0)
     TWRP_REQUIRED_MODULES += sload.f2fs
 endif
+<<<<<<< HEAD   (046beb extra-languages: zh_TW.xml: Update Chinese(Tranditional) Tra)
 endif
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     TWRP_REQUIRED_MODULES += ld.config.txt
@@ -597,6 +597,10 @@ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26; echo $$?),0)
     ifneq ($(TW_EXCLUDE_PYTHON),true)
         TWRP_REQUIRED_MODULES += python3_twrp
     endif
+=======
+ifeq ($(TW_INCLUDE_PYTHON),true)
+    TWRP_REQUIRED_MODULES += python3_twrp
+>>>>>>> CHANGE (1f7900 python: do not include by default)
 endif
 
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 25; echo $$?),0)
