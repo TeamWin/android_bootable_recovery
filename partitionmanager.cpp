@@ -1857,10 +1857,21 @@ void TWPartitionManager::Parse_Users() {
 
 			// Attempt to get name of user. Fallback to user ID if this fails.
 			std::string path = "/data/system/users/" + to_string(userId) + ".xml";
+			int converted = 0;
 			if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path)) {
-				if(!TWFunc::Check_Xml_Format(path))
-					user.userName = to_string(userId);
+				if (!TWFunc::Check_Xml_Format(path)) {
+					string oldpath = path;
+					if (TWFunc::abx_to_xml(oldpath, path)) {
+						converted = 1;
+						LOGINFO("Android 12+: '%s' has been converted into plain text xml (for user %s).\n", oldpath.c_str(), user.userId.c_str());
+					}
+					else
+						converted = -1;
+				}
 			}
+
+			if (converted < 0)
+				user.userName = to_string(userId);
 			else {
 				char* userFile = PageManager::LoadFileToBuffer(path, NULL);
 				if (userFile == NULL) {
@@ -3017,16 +3028,22 @@ bool TWPartitionManager::Decrypt_Adopted() {
 	}
 
 	// In Android 12 xml format changed. Previously it was human-readable format with xml tags
-	// now it's ABX (Android Binary Xml). Sadly, rapidxml can't parse it, so check xml format firstly
+	// now it's ABX (Android Binary Xml). Sadly, rapidxml can't parse it, so check xml format first, and convert it if necessary
 	std::string path = "/data/system/storage.xml";
 	if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path))
 		if(!TWFunc::Check_Xml_Format(path)) {
-			LOGINFO("Android 12+: storage.xml is in ABX format. Skipping adopted storage decryption\n");
-			return false;
+         		std::string oldpath = path;
+         		if (TWFunc::abx_to_xml(oldpath, path)) {
+         			LOGINFO("Android 12+: '%s' has been converted into plain text xml (%s).\n", oldpath.c_str(), path.c_str());
+         		}
+         		else {
+         			LOGINFO("Android 12+: '%s' is binary. Skipping adopted storage decryption.\n", path.c_str());
+         			return false;
+         		}
 		}
 
 	LOGINFO("Decrypt adopted storage starting\n");
-	char* xmlFile = PageManager::LoadFileToBuffer("/data/system/storage.xml", NULL);
+	char* xmlFile = PageManager::LoadFileToBuffer(path, NULL);
 	xml_document<> *doc = NULL;
 	xml_node<>* volumes = NULL;
 	string Primary_Storage_UUID = "";
