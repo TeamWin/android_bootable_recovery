@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62b25e5a_d7e38d3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-03T23:16:21Z",
+      "side": 1,
+      "message": "OK, i will leave this patch until I merge my fscrypt patchset.",
+      "revId": "e7ddc2b84f0f41c77493dbd1e449f8ad6abf6566",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
