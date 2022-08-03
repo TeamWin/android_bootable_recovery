@@ -241,8 +241,8 @@ func globalSharedLibs(ctx android.BaseContext) []string {
 	}
 
 	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS") == "true" {
-		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V1-ndk_platform")
-		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V1-cpp")
+		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V2-ndk_platform")
+		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V2-cpp")
 	}
 
 	if getMakeVars(ctx, "TW_INCLUDE_JPEG") != "" {
