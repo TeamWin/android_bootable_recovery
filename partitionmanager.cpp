@@ -1856,7 +1856,14 @@ void TWPartitionManager::Parse_Users() {
 			user.userId = to_string(userId);
 
 			// Attempt to get name of user. Fallback to user ID if this fails.
-			char* userFile = PageManager::LoadFileToBuffer("/data/system/users/" + to_string(userId) + ".xml", NULL);
+			std::string path = "/data/system/users/" + to_string(userId) + ".xml";
+			if (!TWFunc::Check_Xml_Format(path)) {
+				string oldpath = path;
+				if (TWFunc::abx_to_xml(oldpath, path)) {
+					LOGINFO("Android 12+: '%s' has been converted into plain text xml (for user %s).\n", oldpath.c_str(), user.userId.c_str());
+				}
+			}
+			char* userFile = PageManager::LoadFileToBuffer(path, NULL);
 			if (userFile == NULL) {
 				user.userName = to_string(userId);
 			}
@@ -3006,8 +3013,17 @@ bool TWPartitionManager::Decrypt_Adopted() {
 		LOGERR("Cannot decrypt adopted storage because /data will not mount\n");
 		return false;
 	}
+
+	std::string path = "/data/system/storage.xml";
+	if (!TWFunc::Check_Xml_Format(path)) {
+		std::string oldpath = path;
+		if (TWFunc::abx_to_xml(oldpath, path)) {
+			LOGINFO("Android 12+: '%s' has been converted into plain text xml (%s).\n", oldpath.c_str(), path.c_str());
+		}
+	}
+
 	LOGINFO("Decrypt adopted storage starting\n");
-	char* xmlFile = PageManager::LoadFileToBuffer("/data/system/storage.xml", NULL);
+	char* xmlFile = PageManager::LoadFileToBuffer(path, NULL);
 	xml_document<> *doc = NULL;
 	xml_node<>* volumes = NULL;
 	string Primary_Storage_UUID = "";
