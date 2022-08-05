@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19093be1_33e36cca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-08-05T11:56:33Z",
+      "side": 1,
+      "message": "The values are based upon the portrait themes so they might be slightly off for other themes.",
+      "revId": "eff42ddd3eae95bbf647626f362df90627b5c039",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
