@@ -16,6 +16,24 @@
       "message": "I feel like it would be better to return directly rather than using a goto to short circuit the return. Does anyone have comments?",
       "revId": "daa4c55407609e63d589ab870c987e1160ddf799",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c18a83b4_7afa9289",
+        "filename": "partition.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-08-05T14:16:46Z",
+      "side": 1,
+      "message": "This would leave the partition read-only, even if it was read-write. because Mount_Read_Only flag doesn\u0027t get restored",
+      "parentUuid": "60ae3baa_a5b5017e",
+      "revId": "daa4c55407609e63d589ab870c987e1160ddf799",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
