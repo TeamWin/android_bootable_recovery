@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4796096_526f90de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2022-08-05T11:54:06Z",
+      "side": 1,
+      "message": "No problems reported since last patchset (10) was uploaded.",
+      "revId": "285b35239aa36a8aee69e09bb28864430614b587",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
