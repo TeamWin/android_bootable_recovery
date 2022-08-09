@@ -33,6 +33,7 @@
 #include <zlib.h>
 #include <sstream>
 #include <android-base/properties.h>
+#include <android-base/strings.h>
 #include <libsnapshot/snapshot.h>
 
 #include "cutils/properties.h"
@@ -1247,6 +1248,19 @@ void TWPartition::Setup_Data_Media() {
 		backup_exclusions.add_absolute_dir("/data/extm"); //exclude this dir to prevent "error 255" on MIUI
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/system/storage.xml");
+
+		// board-customisable exclusions
+		#ifdef TW_BACKUP_EXCLUSIONS
+			std::vector<std::string> user_extra_exclusions = TWFunc::Split_String(TW_BACKUP_EXCLUSIONS, ",");
+			std::string s1;
+			for (const std::string& extra_x : user_extra_exclusions) {
+				s1 = android::base::Trim(extra_x);
+				if (!s1.empty()) {
+					backup_exclusions.add_absolute_dir(s1);
+					LOGINFO("Adding user-defined path '%s' to the backup exclusions\n", s1.c_str());
+				}
+			}
+		#endif
 	} else {
 		int i;
 		string path;
