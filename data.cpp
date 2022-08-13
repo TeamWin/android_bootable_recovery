@@ -719,6 +719,10 @@ void DataManager::SetDefaultValues()
 	printf("TW_HAS_EDL_MODE := true\n");
 	mConst.SetValue(TW_EDL_MODE, "1");
 #endif
+#ifdef TW_INCLUDE_FASTBOOTD
+	printf("TW_INCLUDE_FASTBOOTD := true\n");
+	mConst.SetValue(TW_FASTBOOT_MODE, "1");
+#endif
 #ifdef PRODUCT_USE_DYNAMIC_PARTITIONS
 	printf("PRODUCT_USE_DYNAMIC_PARTITIONS := true\n");
 	mConst.SetValue(TW_FASTBOOT_MODE, "1");
