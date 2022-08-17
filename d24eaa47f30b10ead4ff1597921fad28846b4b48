@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e1edd69_cbfc8e72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2022-08-17T09:43:13Z",
+      "side": 1,
+      "message": "Tested on S22 Ultra snapdragon",
+      "revId": "d24eaa47f30b10ead4ff1597921fad28846b4b48",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
