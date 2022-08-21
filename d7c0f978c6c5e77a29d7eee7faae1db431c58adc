@@ -16,6 +16,23 @@
       "message": "Can we add this to system as well, needed for older devices like S9\nCan_Be_Backed_Up \u003d Wipe_Available_in_GUI \u003d Is_Super ? false : true;",
       "revId": "d7c0f978c6c5e77a29d7eee7faae1db431c58adc",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e54b911d_7d63c73f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-21T21:06:35Z",
+      "side": 1,
+      "message": "Merge conflict",
+      "revId": "d7c0f978c6c5e77a29d7eee7faae1db431c58adc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
