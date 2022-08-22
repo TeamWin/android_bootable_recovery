@@ -16,6 +16,24 @@
       "message": "Can you submit the external package to minimal aosp12.1?",
       "revId": "362919afb1fa2909330491f9ac814ca12ce43a8f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2b37d1f_1dfc6867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-08-22T16:27:12Z",
+      "side": 1,
+      "message": "Done.\nhttps://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/pull/20",
+      "parentUuid": "6b441cff_6e34c0d7",
+      "revId": "362919afb1fa2909330491f9ac814ca12ce43a8f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
