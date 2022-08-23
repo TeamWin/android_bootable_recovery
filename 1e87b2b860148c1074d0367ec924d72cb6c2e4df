@@ -16,6 +16,23 @@
       "message": "Hello!\nIn that commit I\u0027ve updated the Polish translation with missing strings and fixed one incorrect syntax in existing translation. Can you checkout my changes?",
       "revId": "1e87b2b860148c1074d0367ec924d72cb6c2e4df",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed076664_b16b09c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-23T19:38:44Z",
+      "side": 1,
+      "message": "Can you fix the following issues too?\n\nbigbiff@nas:/builds2/min-aosp12.1/bootable/recovery/gui/theme/common/languages$ python2 ../../../../scripts/language_helper.py -o pl.xml\nComparing en.xml and pl.xml\n\nPolish\nEnglish has version 2 but Polish has version 1 for \u0027disable_backup_space_chk\u0027\nEnglish has version 2 but Polish has version 1 for \u0027copying_log\u0027\nEnglish has version 2 but Polish has version 1 for \u0027copy_log_complete\u0027\n\u0027backup_storage_warning\u0027 present in English and not in Polish\nEnglish has version 2 but Polish has version 1 for \u0027decrypt_cmd\u0027\nEnglish has version 2 but Polish has version 1 for \u0027install_reboot\u0027",
+      "revId": "1e87b2b860148c1074d0367ec924d72cb6c2e4df",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
