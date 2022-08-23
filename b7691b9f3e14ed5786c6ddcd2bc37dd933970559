@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0df0d95_35de9a04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-23T18:23:53Z",
+      "side": 1,
+      "message": "Prefer to use this patchset https://gerrit.twrp.me/c/android_bootable_recovery/+/5781",
+      "revId": "b7691b9f3e14ed5786c6ddcd2bc37dd933970559",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
