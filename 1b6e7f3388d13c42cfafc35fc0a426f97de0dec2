@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ffca816_bd6fc2e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-23T18:25:42Z",
+      "side": 1,
+      "message": "Prefer to use BOARD variables merges in previous patchsets.",
+      "revId": "1b6e7f3388d13c42cfafc35fc0a426f97de0dec2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
