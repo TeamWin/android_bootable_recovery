@@ -16,6 +16,24 @@
       "message": "Can you update the following issues too?\nbigbiff@nas:/builds2/min-aosp12.1/bootable/recovery/gui/theme/common/languages$ python2 ../../../../scripts/language_helper.py -o pl.xml\nComparing en.xml and pl.xml\n\nPolish\nEnglish has version 2 but Polish has version 1 for \u0027disable_backup_space_chk\u0027\nEnglish has version 2 but Polish has version 1 for \u0027copying_log\u0027\nEnglish has version 2 but Polish has version 1 for \u0027copy_log_complete\u0027\n\u0027backup_storage_warning\u0027 present in English and not in Polish\nEnglish has version 2 but Polish has version 1 for \u0027decrypt_cmd\u0027\nEnglish has version 2 but Polish has version 1 for \u0027install_reboot\u0027",
       "revId": "48f647e62115359466b488771c5696aa1b2463a1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eef8749_d9e438fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 987
+      },
+      "writtenOn": "2022-08-23T21:15:50Z",
+      "side": 1,
+      "message": "Done in patchset 2 (added same changes for A11 as well).",
+      "parentUuid": "fc178aea_0eb8f783",
+      "revId": "48f647e62115359466b488771c5696aa1b2463a1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
