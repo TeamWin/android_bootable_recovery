@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45b7705d_5369209e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 987
+      },
+      "writtenOn": "2022-08-23T18:58:37Z",
+      "side": 1,
+      "message": "Hello!\nIn that commit I\u0027ve updated the Polish translation with missing strings and fixed one incorrect syntax in existing translation. Can you checkout my changes?",
+      "revId": "1e87b2b860148c1074d0367ec924d72cb6c2e4df",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
