@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91edc54_792ed2a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 987
+      },
+      "writtenOn": "2022-08-23T21:16:52Z",
+      "side": 1,
+      "message": "Edited patchset, same changes as on A12.1 tree.",
+      "revId": "93786b36334b5d14198f7bdc32b40effe2501443",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
