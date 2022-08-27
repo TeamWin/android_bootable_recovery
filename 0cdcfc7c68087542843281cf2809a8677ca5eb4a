@@ -87,6 +87,24 @@
       "parentUuid": "a955b766_cbd10773",
       "revId": "0cdcfc7c68087542843281cf2809a8677ca5eb4a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "062c5f88_f9b10e92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2022-08-27T13:27:34Z",
+      "side": 1,
+      "message": "Some old QCOM devices got kernel version upgrade, If the currently used target-level doesn\u0027t cover the new kernel version, Device maintainers would have to shift to higher target-level, thus it\u0027ll generate a new compatibility.zip which is incompatible with recoveries on older target-levels, This thing would also help in this case",
+      "parentUuid": "d7b586d8_38a7bea7",
+      "revId": "0cdcfc7c68087542843281cf2809a8677ca5eb4a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
