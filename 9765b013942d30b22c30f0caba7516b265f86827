@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44450885_0d3fb876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-28T17:20:56Z",
+      "side": 1,
+      "message": "Could you post any properties that you have set with the word virtual in it? I am curious if their are any shared property with ab devices.",
+      "revId": "9765b013942d30b22c30f0caba7516b265f86827",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
