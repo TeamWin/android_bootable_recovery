@@ -1388,9 +1388,6 @@ namespace rapidxml
             this->remove_all_nodes();
             this->remove_all_attributes();
             
-            // Parse BOM, if any
-            parse_bom<Flags>(text);
-
             // Abort if it's ABX format
             if (text[0] == Ch('A') &&
                 text[1] == Ch('B') &&
@@ -1398,6 +1395,9 @@ namespace rapidxml
                 RAPIDXML_PARSE_ERROR("ABX Format Unsupported by RapidXML", text);
                 return;
             }
+
+            // Parse BOM, if any
+            parse_bom<Flags>(text);
 
             // Parse children
             while (1)
