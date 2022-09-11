@@ -38,7 +38,7 @@
 
 #include <string>
 #include <algorithm>
-
+#include <fstream>
 
 #include <ziparchive/zip_archive.h>
 #include "ZipUtil.h"
@@ -1245,6 +1245,50 @@ char* PageManager::LoadFileToBuffer(std::string filename, ZipArchiveHandle packa
 	// NULL-terminate the string
 	buffer[len] = 0x00;
 	return buffer;
+}
+
+std::vector<char> PageManager::LoadFileToStdVector(std::string filename, ZipArchiveHandle package) {
+	std::vector<char> out;
+	size_t len;
+
+	if (!package) {
+		// We can try to load the XML directly...
+		LOGINFO("PageManager::LoadFileToStdVector loading filename: '%s' directly\n", filename.c_str());
+
+		struct stat st;
+		if (stat(filename.c_str(),&st) != 0) {
+			// This isn't always an error, sometimes we request files that don't exist.
+			return out;
+		}
+
+		len = (size_t)st.st_size;
+
+		// open the file
+		std::ifstream file(filename, std::ios_base::in | std::ios_base::binary);
+
+		if(!file) {
+			LOGERR("PageManager::LoadFileToStdVector failed to open '%s' - (%s)\n", filename.c_str(), strerror(errno));
+			return out;
+		}
+
+		// read the file to the vector of chars
+		size_t cnt = 0;
+    	char c;
+		while(cnt < len) {
+        	file.get(c);
+        	out.push_back(c);
+        	cnt++;
+    	}
+
+		// file.close();
+	} else {
+		LOGERR("PageManager::LoadFileToStdVector is not supported for ZIP archives, falling back to PageManager::LoadFileToBuffer\n");
+		char* buf = PageManager::LoadFileToBuffer(filename, package);
+		if(buf)
+			out.insert(out.begin(), buf, buf + strlen(buf));
+	}
+
+	return out;
 }
 
 void PageManager::LoadLanguageListDir(string dir) {
