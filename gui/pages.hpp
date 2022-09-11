@@ -156,6 +156,7 @@ class PageManager
 public:
 	// Used by GUI
 	static char* LoadFileToBuffer(std::string filename, ZipArchiveHandle package);
+	static std::vector<char> LoadFileToStdVector(std::string filename, ZipArchiveHandle package);
 	static void LoadLanguageList(ZipArchiveHandle package);
 	static void LoadLanguage(std::string filename);
 	static int LoadPackage(std::string name, std::string package, std::string startpage);

@@ -95,6 +95,7 @@ extern "C" {
 #ifdef TW_INCLUDE_CRYPTO
 // #include "crypto/fde/cryptfs.h"
 #include "gui/rapidxml.hpp"
+#include "gui/abx_decoder.hpp"
 #include "gui/pages.hpp"
 #ifdef TW_INCLUDE_FBE
 #include "Decrypt.h"
@@ -1859,19 +1860,24 @@ void TWPartitionManager::Parse_Users() {
 
 			// Attempt to get name of user. Fallback to user ID if this fails.
 			std::string path = "/data/system/users/" + to_string(userId) + ".xml";
-			if (!TWFunc::Check_Xml_Format(path)) {
-				string oldpath = path;
-				if (TWFunc::abx_to_xml(oldpath, path)) {
-					LOGINFO("Android 12+: '%s' has been converted into plain text xml (for user %s).\n", oldpath.c_str(), user.userId.c_str());
-				}
-			}
-			char* userFile = PageManager::LoadFileToBuffer(path, NULL);
-			if (userFile == NULL) {
+			std::vector<char> userFile = PageManager::LoadFileToStdVector(path, NULL);
+			if (userFile.size() < 1) {
 				user.userName = to_string(userId);
 			}
 			else {
+            	AbxDecoder decoder(userFile);
+				if(decoder.isAbx()) {
+					std::string* out = decoder.getDecodedOutput();
+					if(out) {
+						userFile.clear();
+						userFile.assign(out->begin(), out->end());
+					} else {
+						LOGERR("ABX DECODE FAILED");
+						return;
+					}
+				}
 				xml_document<> *userXml = new xml_document<>();
-				userXml->parse<0>(userFile);
+				userXml->parse<0>(reinterpret_cast<char*>(userFile.data()));
 				xml_node<>* userNode = userXml->first_node("user");
 				if (userNode == nullptr) {
 					user.userName = to_string(userId);
@@ -3017,22 +3023,27 @@ bool TWPartitionManager::Decrypt_Adopted() {
 	}
 
 	std::string path = "/data/system/storage.xml";
-	if (!TWFunc::Check_Xml_Format(path)) {
-		std::string oldpath = path;
-		if (TWFunc::abx_to_xml(oldpath, path)) {
-			LOGINFO("Android 12+: '%s' has been converted into plain text xml (%s).\n", oldpath.c_str(), path.c_str());
+	std::vector<char> xmlFile = PageManager::LoadFileToStdVector(path, NULL);
+	AbxDecoder decoder(xmlFile);
+	if(decoder.isAbx()) {
+		std::string* out = decoder.getDecodedOutput();
+		if(out) {
+			xmlFile.clear();
+			xmlFile.assign(out->begin(), out->end());
+		} else {
+			LOGERR("ABX DECODE FAILED");
+			return false;
 		}
 	}
 
 	LOGINFO("Decrypt adopted storage starting\n");
-	char* xmlFile = PageManager::LoadFileToBuffer(path, NULL);
 	xml_document<> *doc = NULL;
 	xml_node<>* volumes = NULL;
 	string Primary_Storage_UUID = "";
-	if (xmlFile != NULL) {
+	if (xmlFile.size() > 0) {
 		LOGINFO("successfully loaded storage.xml\n");
 		doc = new xml_document<>();
-		doc->parse<0>(xmlFile);
+		doc->parse<0>(reinterpret_cast<char*>(xmlFile.data()));
 		volumes = doc->first_node("volumes");
 		if (volumes) {
 			xml_attribute<>* psuuid = volumes->first_attribute("primaryStorageUuid");
@@ -3104,10 +3115,9 @@ bool TWPartitionManager::Decrypt_Adopted() {
 			}
 		}
 	}
-	if (xmlFile) {
+	if (xmlFile.size() > 0) {
 		doc->clear();
 		delete doc;
-		free(xmlFile);
 	}
 	return ret;
 #else
