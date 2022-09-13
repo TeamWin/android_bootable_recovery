@@ -33,6 +33,23 @@
       "message": "You\u0027re bundling prebuilt Python to recovery for current implementation and it can\u0027t fit into small recovery partitions, also it\u0027s simple and works good than current one.",
       "revId": "f1bf0e639eaf8620a31e312b1c5f4658b71d1499",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc764bcc_16d516ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 998
+      },
+      "writtenOn": "2022-09-13T12:43:42Z",
+      "side": 1,
+      "message": "https://gerrit.twrp.me/c/android_bootable_recovery/+/5779 I didn\u0027t see that implementation sorry ... closing",
+      "revId": "f1bf0e639eaf8620a31e312b1c5f4658b71d1499",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
