@@ -251,6 +251,7 @@ func copyTheme(ctx android.BaseContext) bool {
 		if android.ExistentPathForSource(ctx, defaultTheme).Valid() {
 			fullDefaultThemePath := fmt.Sprintf("gui/theme/%s/ui.xml", theme)
 			files = append(files, fullDefaultThemePath)
+			fmt.Printf("files: %s", files)
 		} else {
 			printThemeWarning(theme)
 			return false
