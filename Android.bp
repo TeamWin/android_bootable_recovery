@@ -137,3 +137,4 @@ prebuilt_etc {
     sub_dir: "init/hw",
     recovery: true,
 }
+

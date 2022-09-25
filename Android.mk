@@ -15,33 +15,6 @@
 LOCAL_PATH := $(call my-dir)
 commands_TWRP_local_path := $(LOCAL_PATH)
 
-ifneq ($(project-path-for),)
-    ifeq ($(LOCAL_PATH),$(call project-path-for,recovery))
-        PROJECT_PATH_AGREES := true
-        BOARD_VENDOR_SEPOLICY_DIRS += $(call project-path-for,recovery)/sepolicy
-    endif
-else
-    $(warning BOARD_VENDOR_SEPOLICY_DIRS: $(LOCAL_PATH))
-    ifeq ($(LOCAL_PATH),bootable/recovery)
-        PROJECT_PATH_AGREES := true
-        BOARD_VENDOR_SEPOLICY_DIRS += bootable/recovery/sepolicy
-        $(warning BOARD_VENDOR_SEPOLICY_DIRS2: $(BOARD_VENDOR_SEPOLICY_DIRS))
-    else
-        ifeq ($(LOCAL_PATH),bootable/recovery-twrp)
-            ifeq ($(RECOVERY_VARIANT),twrp)
-                PROJECT_PATH_AGREES := true
-                BOARD_VENDOR_SEPOLICY_DIRS += bootable/recovery-twrp/sepolicy
-            endif
-        endif
-    endif
-endif
-
-ifeq ($(PROJECT_PATH_AGREES),true)
-
-ifeq ($(CM_PLATFORM_SDK_VERSION),)
-    CM_PLATFORM_SDK_VERSION := 0
-endif
-
 include $(CLEAR_VARS)
 
 TARGET_RECOVERY_GUI := true
