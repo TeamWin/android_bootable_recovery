@@ -2235,6 +2235,11 @@ bool TWPartition::Wipe_EXTFS(string File_System) {
 	string size_str = dout;
 	string Command;
 
+	//Optional Data UnMount
+	#ifdef TW_OPTIONAL_PARTITION_UNMOUNT
+		TWFunc::Exec_Cmd("umount " + Actual_Block_Device, false);
+	#endif
+
 	gui_msg(Msg("formatting_using=Formatting {1} using {2}...")(Display_Name)("mke2fs"));
 
 	// Execute mke2fs to create empty ext4 filesystem
