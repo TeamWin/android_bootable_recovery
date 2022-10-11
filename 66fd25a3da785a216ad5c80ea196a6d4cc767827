@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692f0e10_cc7e65a4",
+        "filename": "gui/blanktimer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-11T22:58:59Z",
+      "side": 0,
+      "message": "Can getBrightness return a default?",
+      "revId": "66fd25a3da785a216ad5c80ea196a6d4cc767827",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
