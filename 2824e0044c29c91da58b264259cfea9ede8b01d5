@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "888a172e_88e8160d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014
+      },
+      "writtenOn": "2022-10-15T18:28:10Z",
+      "side": 1,
+      "message": "Was about to independently submit this same change. Whether AOSP or LineageOS they both use the name: `liblpdump_interface-cpp.so`",
+      "revId": "2824e0044c29c91da58b264259cfea9ede8b01d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
