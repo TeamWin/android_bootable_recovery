@@ -1418,7 +1418,7 @@ string TWFunc::Check_For_TwrpFolder() {
 	DIR* d;
 	struct dirent* de;
 
-	if (DataManager::GetIntValue(TW_IS_ENCRYPTED)) {
+	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) && DataManager::GetIntValue(TW_CRYPTO_PWTYPE)) {
 		goto exit;
 	}
 
