@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150c6ab0_36fcf9e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "Please remove extraneous whitespace. I did not mark them all.\nPlease fix \nComparing en.xml and cz.xml\n\nb\u0027\\xc4\\x8ce\\xc5\\xa1tina\u0027\nEnglish has version 2 but b\u0027\\xc4\\x8ce\\xc5\\xa1tina\u0027 has version 1 for \u0027disable_backup_space_chk\u0027\n\nPlease replicate changes to other branches.\nPlease cherry-pick to android-9.0 branch.",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7ca797_1db504d6",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove space",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7960aa8e_e3016f50",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428cb429_8f9fa151",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tab",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f58e9b8_97425177",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tab",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb4b1459_164673e6",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b470b5_cb3540de",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc1041c_1a21cb7e",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tab",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a4a9075_b94b785f",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6f8814_86ab3f68",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tab",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83777dc4_8c350d3a",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tabs",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f38d6cf2_3d11317c",
+        "filename": "gui/theme/common/languages/cz.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-10-24T23:49:38Z",
+      "side": 1,
+      "message": "remove tab",
+      "revId": "86286591b28adeafc6f2a6414980ad4566af7496",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
