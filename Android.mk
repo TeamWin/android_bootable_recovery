@@ -130,8 +130,8 @@ LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/twinstall/include
 
 LOCAL_STATIC_LIBRARIES += libguitwrp libvold
-LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu 
-LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase 
+LOCAL_SHARED_LIBRARIES += libz libc libcutils libstdc++ libtar libblkid libminuitwrp libmtdutils libtwadbbu
+LOCAL_SHARED_LIBRARIES += libbootloader_message libcrecovery libtwrpdigest libc++ libaosprecovery libcrypto libbase
 LOCAL_SHARED_LIBRARIES += libziparchive libselinux libdl_android.bootstrap
 
 ifneq ($(wildcard system/core/libsparse/Android.mk),)
@@ -439,6 +439,10 @@ ifeq ($(TW_INCLUDE_FASTBOOTD), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_FASTBOOTD
 endif
 
+ifeq ($(TW_OPTIONAL_PARTITION_UNMOUNT), true)
+    LOCAL_CFLAGS += -DTW_OPTIONAL_PARTITION_UNMOUNT
+endif
+
 LOCAL_C_INCLUDES += system/vold \
 
 TWRP_REQUIRED_MODULES += \
@@ -626,9 +630,9 @@ include $(BUILD_PHONY_PACKAGE)
 # ===============================
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
-    recovery-persist.cpp 
+    recovery-persist.cpp
 LOCAL_MODULE := recovery-persist
-LOCAL_SHARED_LIBRARIES := liblog libbase 
+LOCAL_SHARED_LIBRARIES := liblog libbase
 LOCAL_STATIC_LIBRARIES := libotautil librecovery_utils
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/otautil/include
 LOCAL_C_INCLUDES += system/core/libstats/include
