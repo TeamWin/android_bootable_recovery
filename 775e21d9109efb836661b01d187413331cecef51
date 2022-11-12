@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1668275406 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1668275406-C6A4EBDC21787F7AE1796A5B5714AF256B32C881\n\n0000000000000000000000000000000000000000 775e21d9109efb836661b01d187413331cecef51 refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmNv3M4ACgkQH1oT9zX3\nIyI30xAAoZ5hzUlxqYviNFawbW2pugiW4QC5plbhmvHK1xl6HCW8cyQHbMCmV9RK\nCdhsjMfUieg0H6ZbPGk+utmYREgUxHMpm3bqFVKy6d0y4vGEkaJvH8Y5rkAfm899\nSTv+RCcEeOo/aNxVYeXvZ240KiHLNnypbV4PyBp69AmoCthkVWzjFMNpgR/9lWcY\n9As38Bj5FBY5HWbb9HZd2J5prOnBaSJXiSgdN43hJwK8qW/yP3biDCQttyrQUXdE\naQEdvTLcs4AsA6gThJNKfqoO1eMG5OsIJEW8wqsL3tNVUMWJdTL1um5G3M0wZcs0\n7CSGF6xd8X1DuWvGDHxDneRjYaqGoSE19ENbWuCKPI6TetDYGhUH8ZdaYAFc2ev4\nxYgEOaPu2bHKGKCwtTAW/VKoIAQktlBTcW4HtElZKHmGyF5myVpRF+i9TegQllsa\nPFiONDb5N/r3XG8ovZUH7kDDtMDJhP8umuTmYu1Iuotfg0qP2c7WLSQ7cMRqt8bP\nXsKSXH785kTqNBNY98pLureOmZh1B+Ao90G6CQZw3sJHakkgYpsmrK6SRIhuOGRs\nMLXghkFgZxTZNfpGTwPyC3xMSjdanjmJiGV+F79pWUsQ1/uVaCykoWHdIT9oteC0\n0Fb9ZO0yJQwg4s4y44WORbObETeh1G8UsST4ziZhPvd7p9t7hNM\u003d\n\u003dQw+O\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d4058d_ad5629ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2022-11-12T18:41:02Z",
+      "side": 1,
+      "message": "This is needed for the service to run in 12.1 and for TWRP to boot and decryption to work on my GKI device that shipped with Android 12. It shouldn\u0027t affect anything else negatively, as only newer devices are using this service. ",
+      "revId": "775e21d9109efb836661b01d187413331cecef51",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
