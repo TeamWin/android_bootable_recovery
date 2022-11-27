@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b736a08_5ee2bb7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2022-11-27T17:05:04Z",
+      "side": 1,
+      "message": "This patch must be used with https://gerrit.twrp.me/c/android_bootable_recovery/+/6120 for correct operation. It was tested on OP5.",
+      "revId": "d29506a7a752f451481ff23998982ba52fdad841",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
