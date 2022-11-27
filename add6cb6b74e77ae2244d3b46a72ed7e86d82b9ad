@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b45a1eb_676204ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2022-11-27T17:01:43Z",
+      "side": 1,
+      "message": "Fix tested on OP5 and no new issues were generated.",
+      "revId": "add6cb6b74e77ae2244d3b46a72ed7e86d82b9ad",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
