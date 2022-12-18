@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5a528f_ad08729f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1033
+      },
+      "writtenOn": "2022-12-18T22:04:43Z",
+      "side": 1,
+      "message": "There is an issue with theming. Changing twrp breaks theming, presumably in all branches (android 9 for sure since I have problem on it). The problem, as far as I have researched, is in file \"gui.cpp\" located inside folder \"android_bootable_recovery/gui/\" on github. I am referring to lines 819 (presumably) and 853 of gui.cpp. The folder location that is appended to \"theme_path\" variable is \"/TWRP/theme/ui.zip\" which breaks the purpose of changing the recovery folder. Kindly look into this.",
+      "revId": "d48bae2caac7a8c529e81be8085fe861ced89cff",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
