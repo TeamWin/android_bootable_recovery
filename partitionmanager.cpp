@@ -3464,12 +3464,7 @@ void TWPartitionManager::Setup_Super_Partition() {
 }
 
 bool TWPartitionManager::Get_Super_Status() {
-	std::string fastboot_mode = android::base::GetProperty("sys.usb.config", "");
-	if (fastboot_mode == "fastboot") {
-		return false;
-	}
-	else
-		return access(Get_Super_Partition().c_str(), F_OK) == 0;
+	return access(Get_Super_Partition().c_str(), F_OK) == 0;
 }
 
 bool TWPartitionManager::Recreate_Logs_Dir() {
