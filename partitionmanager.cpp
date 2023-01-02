@@ -301,8 +301,8 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 			else
 				(*iter)->Has_Android_Secure = false;
 
-			if ((*iter)->Is_Super)
-				Prepare_Super_Volume((*iter));
+			if ((*iter)->Is_Super && !Prepare_Super_Volume(*iter))
+				Partitions.erase(iter--);
 		}
 
 		Unlock_Block_Partitions();
@@ -3444,6 +3444,7 @@ bool TWPartitionManager::Prepare_All_Super_Volumes() {
 		if ((*iter)->Is_Super) {
 			if (!Prepare_Super_Volume(*iter)) {
 				status = false;
+				Partitions.erase(iter--);
 			}
 			PartitionManager.Output_Partition(*iter);
 		}
