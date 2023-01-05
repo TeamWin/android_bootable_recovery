@@ -16,6 +16,24 @@
       "message": "Breaks Lockscreen decryption.",
       "revId": "9b628c4f3368c8ef23a17d27af3786ad45ac05ce",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f72165_c3eb3276",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-05T07:54:11Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "d9e6fe7d_62011a03",
+      "revId": "9b628c4f3368c8ef23a17d27af3786ad45ac05ce",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
