@@ -11,12 +11,6 @@ func globalFlags(ctx android.BaseContext) []string {
 	if getMakeVars(ctx, "AB_OTA_UPDATER") == "true" {
 		cflags = append(cflags, "-DAB_OTA_UPDATER=1")
 	}
-
-	if getMakeVars(ctx, "TW_USE_FSCRYPT_POLICY") == "1" {
-		cflags = append(cflags, "-DUSE_FSCRYPT_POLICY_V1")
-	} else {
-		cflags = append(cflags, "-DUSE_FSCRYPT_POLICY_V2")
-	}
 	return cflags
 }
 
