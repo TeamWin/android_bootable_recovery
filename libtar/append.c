@@ -142,41 +142,34 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 			free(t->th_buf.fep);
 			t->th_buf.fep = NULL;
 		}
-#ifdef USE_FSCRYPT_POLICY_V1
-		t->th_buf.fep = (struct fscrypt_policy_v1 *)malloc(sizeof(struct fscrypt_policy_v1));
-#else
-		t->th_buf.fep = (struct fscrypt_policy_v2 *)malloc(sizeof(struct fscrypt_policy_v2));
-#endif
+		t->th_buf.fep = (fscrypt_policy *)malloc(sizeof(fscrypt_policy));
 		if (!t->th_buf.fep) {
 			LOG("malloc fs_encryption_policy\n");
 			return -1;
 		}
 
 		if (fscrypt_policy_get_struct(realname, t->th_buf.fep)) {
-#ifdef USE_FSCRYPT_POLICY_V1
-			uint8_t tar_policy[FS_KEY_DESCRIPTOR_SIZE];
-			char policy_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
-#else
-			uint8_t tar_policy[FSCRYPT_KEY_IDENTIFIER_SIZE];
-			char policy_hex[FSCRYPT_KEY_IDENTIFIER_HEX_SIZE];
+			uint8_t size, hex_size, *descriptor;
+			size = get_policy_size(t->th_buf.fep, false);
+			hex_size = get_policy_size(t->th_buf.fep, true);
+			descriptor = get_policy_descriptor(t->th_buf.fep);
+			char user_ce[4], user_de[4], system_de[4];
+			sprintf(user_ce,"%u%s", t->th_buf.fep->version, USER_CE_FSCRYPT_POLICY);
+			sprintf(user_de,"%u%s", t->th_buf.fep->version, USER_DE_FSCRYPT_POLICY);
+			sprintf(system_de,"%u%s", t->th_buf.fep->version, SYSTEM_DE_FSCRYPT_POLICY);
+#ifdef DEBUG
+			LOG("version: %u\n", t->th_buf.fep->version);
 #endif
+			uint8_t tar_policy[size];
+			char policy_hex[hex_size];
 			memset(tar_policy, 0, sizeof(tar_policy));
-#ifdef USE_FSCRYPT_POLICY_V1
-			bytes_to_hex(t->th_buf.fep->master_key_descriptor, FS_KEY_DESCRIPTOR_SIZE, policy_hex);
-#else
-			bytes_to_hex(t->th_buf.fep->master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
-#endif
+			bytes_to_hex(descriptor, size, policy_hex);
 			if (lookup_ref_key(t->th_buf.fep,  &tar_policy[0])) {
-				if (strncmp((char *) tar_policy, USER_CE_FSCRYPT_POLICY, sizeof(USER_CE_FSCRYPT_POLICY) - 1) == 0 
-				|| strncmp((char *) tar_policy, USER_DE_FSCRYPT_POLICY, sizeof(USER_DE_FSCRYPT_POLICY) - 1) == 0 
-				|| strncmp((char *) tar_policy, SYSTEM_DE_FSCRYPT_POLICY, sizeof(SYSTEM_DE_FSCRYPT_POLICY)) == 0) {
-#ifdef USE_FSCRYPT_POLICY_V1
-					memcpy(t->th_buf.fep->master_key_descriptor, tar_policy, FS_KEY_DESCRIPTOR_SIZE);
-					LOG("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_descriptor, policy_hex);
-#else
-					memcpy(t->th_buf.fep->master_key_identifier, tar_policy, FSCRYPT_KEY_IDENTIFIER_SIZE);
-					LOG("found fscrypt policy '%s' - '%s' - '%s'\n", realname, t->th_buf.fep->master_key_identifier, policy_hex);
-#endif
+				if (strncmp((char *) tar_policy, user_ce, sizeof(user_ce) - 1) == 0 
+				|| strncmp((char *) tar_policy, user_de, sizeof(user_de) - 1) == 0 
+				|| strncmp((char *) tar_policy, system_de, sizeof(system_de)) == 0) {
+					memcpy(descriptor, tar_policy, size);
+					LOG("found fscrypt policy '%s' - '%s' - '%s'\n", realname, descriptor, policy_hex);
 				} else {
 					LOG("failed to match fscrypt tar policy for '%s' - '%s'\n", realname, policy_hex);
 					free(t->th_buf.fep);

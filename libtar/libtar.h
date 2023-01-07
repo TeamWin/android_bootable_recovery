@@ -71,11 +71,7 @@ struct tar_header
 	char *gnu_longlink;
 	char *selinux_context;
 #ifdef USE_FSCRYPT
-#ifdef USE_FSCRYPT_POLICY_V1
-	struct fscrypt_policy_v1 *fep;
-#else
-	struct fscrypt_policy_v2  *fep;
-#endif
+	fscrypt_policy  *fep;
 #endif
 	int has_cap_data;
 	struct vfs_cap_data cap_data;

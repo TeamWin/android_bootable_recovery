@@ -557,44 +557,26 @@ tar_extract_dir(TAR *t, const char *realname)
 #ifdef USE_FSCRYPT
 	if(t->th_buf.fep != NULL)
 	{
-#ifdef USE_FSCRYPT_POLICY_V1
-		char policy_hex[FS_KEY_DESCRIPTOR_SIZE_HEX];
-#else
-		char policy_hex[FSCRYPT_KEY_IDENTIFIER_HEX_SIZE];
-#endif
+		uint8_t hex_size, size, *descriptor;
+		hex_size = get_policy_size(t->th_buf.fep, true);
+		size = get_policy_size(t->th_buf.fep, false);
+		descriptor = get_policy_descriptor(t->th_buf.fep);
+		char policy_hex[hex_size];
 #ifdef DEBUG
-#ifdef USE_FSCRYPT_POLICY_V1
-		bytes_to_hex(t->th_buf.fep->master_key_descriptor, FS_KEY_DESCRIPTOR_SIZE, policy_hex);
-#else
-		bytes_to_hex(t->th_buf.fep->master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
-#endif
+		bytes_to_hex(descriptor, size, policy_hex);
 		LOG("tar_extract_dir(): restoring fscrypt policy %s to dir %s\n", (char *)policy_hex, realname);
 #endif
 		bool policy_lookup_error = false;
-#ifdef USE_FSCRYPT_POLICY_V1
-		uint8_t binary_policy[FS_KEY_DESCRIPTOR_SIZE];
-		memset(&binary_policy, 0, FS_KEY_DESCRIPTOR_SIZE);
-#else
-		uint8_t binary_policy[FSCRYPT_KEY_IDENTIFIER_SIZE];
-		memset(&binary_policy, 0, FSCRYPT_KEY_IDENTIFIER_SIZE);
-#endif
+		uint8_t binary_policy[size];
+		memset(&binary_policy, 0, size);
 
-#ifdef USE_FSCRYPT_POLICY_V1
-		if (!lookup_ref_tar(t->th_buf.fep->master_key_descriptor, &binary_policy[0])) {
-			LOG("error looking up fscrypt policy for '%s' - %s\n", realname, t->th_buf.fep->master_key_descriptor);
+		if (!lookup_ref_tar(t->th_buf.fep, &binary_policy[0])) {
+			LOG("error looking up fscrypt policy for '%s' - %s\n", realname, descriptor);
 			policy_lookup_error = true;
 		}
-		memcpy(&t->th_buf.fep->master_key_descriptor, binary_policy, FS_KEY_DESCRIPTOR_SIZE);
-		bytes_to_hex(t->th_buf.fep->master_key_descriptor, FS_KEY_DESCRIPTOR_SIZE, policy_hex);
-#else
-		if (!lookup_ref_tar(t->th_buf.fep->master_key_identifier, &binary_policy[0])) {
-			LOG("error looking up fscrypt policy for '%s' - %s\n", realname, t->th_buf.fep->master_key_identifier);
-			policy_lookup_error = true;
-		}
-		memcpy(&t->th_buf.fep->master_key_identifier, binary_policy, FSCRYPT_KEY_IDENTIFIER_SIZE);
-		bytes_to_hex(t->th_buf.fep->master_key_identifier, FSCRYPT_KEY_IDENTIFIER_SIZE, policy_hex);
-#endif
-		if (!policy_lookup_error) 
+		memcpy(descriptor, binary_policy, size);
+		bytes_to_hex(descriptor, size, policy_hex);
+		if (!policy_lookup_error)
 		{
 			LOG("attempting to restore policy: %s\n", policy_hex);
 			if (!fscrypt_policy_set_struct(realname, t->th_buf.fep))
