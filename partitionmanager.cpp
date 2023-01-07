@@ -311,25 +311,25 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 		TWPartition* sys = PartitionManager.Find_Partition_By_Path(PartitionManager.Get_Android_Root_Path());
 		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 		if (sys) {
-			if (sys->Get_Super_Status()) {
+			if (sys->Get_Super_Status())
 				sys->Mount(true);
-				if (ven) {
-					ven->Mount(true);
-				}
-	#ifdef TW_EXCLUDE_APEX
-				LOGINFO("Apex is disabled in this build\n");
-	#else
-				twrpApex apex;
-				if (!apex.loadApexImages()) {
-					LOGERR("Unable to load apex images from %s\n", APEX_DIR);
-					property_set("twrp.apex.loaded", "false");
-				} else {
-					property_set("twrp.apex.loaded", "true");
-				}
-				TWFunc::check_and_run_script("/sbin/resyncapex.sh", "apex");
-	#endif
-			}
 		}
+		if (ven)
+			ven->Mount(true);
+
+	#ifdef TW_EXCLUDE_APEX
+		LOGINFO("Apex is disabled in this build\n");
+	#else
+		twrpApex apex;
+		if (!apex.loadApexImages()) {
+			LOGERR("Unable to load apex images from %s\n", APEX_DIR);
+			property_set("twrp.apex.loaded", "false");
+		} else {
+			property_set("twrp.apex.loaded", "true");
+		}
+		TWFunc::check_and_run_script("/sbin/resyncapex.sh", "apex");
+	#endif
+
 	#ifndef USE_VENDOR_LIBS
 		if (ven)
 			ven->UnMount(true);
