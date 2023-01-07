@@ -45,6 +45,8 @@ extern "C"
 #define TH_EXT_TYPE		'x'
 #define TH_POL_TYPE_DO_NOT_USE		'p'
 
+#define LOG(...) printf("libtar: " __VA_ARGS__)
+
 /* our version of the tar header structure */
 struct tar_header
 {
@@ -69,11 +71,7 @@ struct tar_header
 	char *gnu_longlink;
 	char *selinux_context;
 #ifdef USE_FSCRYPT
-#ifdef USE_FSCRYPT_POLICY_V1
-	struct fscrypt_policy_v1 *fep;
-#else
-	struct fscrypt_policy_v2  *fep;
-#endif
+	fscrypt_policy  *fep;
 #endif
 	int has_cap_data;
 	struct vfs_cap_data cap_data;
