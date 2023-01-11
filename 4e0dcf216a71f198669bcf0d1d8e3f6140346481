@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb3ac94_02cac7dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-01-11T22:56:03Z",
+      "side": 1,
+      "message": "Thanks for the catch. My keyboard was misbehaving.",
+      "revId": "4e0dcf216a71f198669bcf0d1d8e3f6140346481",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

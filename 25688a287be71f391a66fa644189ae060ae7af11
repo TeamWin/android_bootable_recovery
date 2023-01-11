@@ -34,6 +34,24 @@
       "message": "typo?",
       "revId": "25688a287be71f391a66fa644189ae060ae7af11",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb32922_51ac81f3",
+        "filename": "gui/theme/common/landscape.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-01-11T22:56:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4289e9bf_113522e0",
+      "revId": "25688a287be71f391a66fa644189ae060ae7af11",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
