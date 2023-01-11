@@ -17,6 +17,23 @@
       "message": "Confirmed working on ROG II. Also confirmed that without this flag the option appears as usual.",
       "revId": "25688a287be71f391a66fa644189ae060ae7af11",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4289e9bf_113522e0",
+        "filename": "gui/theme/common/landscape.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-11T20:37:05Z",
+      "side": 1,
+      "message": "typo?",
+      "revId": "25688a287be71f391a66fa644189ae060ae7af11",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
