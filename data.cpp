@@ -771,6 +771,11 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(TW_TIME_ZONE_GUIOFFSET, "0");
 	mPersist.SetValue(TW_TIME_ZONE_GUIDST, "1");
 	mPersist.SetValue(TW_AUTO_REFLASHTWRP_VAR, "0");
+#ifdef TW_NO_FLASH_CURRENT_TWRP
+	mConst.SetValue("tw_no_flash_current_twrp", "1");
+#else
+	mConst.SetValue("tw_no_flash_current_twrp", "0");
+#endif
 
 	mData.SetValue(TW_ACTION_BUSY, "0");
 	mData.SetValue("tw_wipe_cache", "0");
