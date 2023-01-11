@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1673463058 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1673463058-D4D58B503593AE71F0F77286743B78A378B6BAC2\n\n0000000000000000000000000000000000000000 25688a287be71f391a66fa644189ae060ae7af11 refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmO/BRIACgkQH1oT9zX3\nIyJm9Q//ZU88wJbpZX5PAkkAXgbEf++eW9WIEkAv0AwJGvzPZEEFVli/y35nnw0g\nkYD/9xUM//RG4qfjDTjsZliq0d9YqveurgE+Uk0ggdnMe9a4k+jeEkG+3UJmVcWO\nuK8PVOsFKwxZl0CfpxyujgO1hsKApqtwtCeFjBSHGc4xhoUYfhkc/Nk6XA3AdRmk\nJFOS4jBsX7ArxsgIPRFw22UTcS/86GRhX1DDdnWj3P3yP14qhKg207jyqbReSvXt\nq3zdlwV0g6ZGSvKyz5Rxcz/TmtJBcRW2jf70F4Qv5Ki3GzBw2OjOvJap3yH9zWXz\nERkWSihrnVyxSgzzIFmeDDv9FXYYSfw1LHcbBNzwNB+MoY1N3MS91TBHrsCJIOm7\nRgr1zQdna/WmNX2XUeo4zGuximTiTx+ZsQsxlc5izqxzKbUCZIeb5DH71aqW//4r\nr0Hp5zLZrf/vzS5x0HLy5psHDHAzxkch+wKvU/4iuGasWQENarTr0JGWYWwFlwFb\nceQonNtAbmiaivBvMxjC+aDNjkcjwd1cOmoEB7Dz8BObmS7ItYSFt2OY6VEWbcvY\nl8WTT1+XfA//5e5mxp3fvC+Rw+Lmg0lGUszxxlgSoFooFeAy/elNBgR4Tr0c0Ylc\nBfmU5s6iViW1hDFzLiFQq3+k1ujZ1757ZqoI0Fj+fhEXpmcu1i8\u003d\n\u003dEl1f\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea2caa8_942f9cbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-01-11T18:54:03Z",
+      "side": 1,
+      "message": "Confirmed working on ROG II. Also confirmed that without this flag the option appears as usual.",
+      "revId": "25688a287be71f391a66fa644189ae060ae7af11",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
