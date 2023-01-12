@@ -34,6 +34,24 @@
       "parentUuid": "64cb6bd4_e3334c18",
       "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802bba03_e0838788",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-01-12T21:41:30Z",
+      "side": 1,
+      "message": "Lol, so in that case, the best thing would be to ask the official maintainer of the device @BlackMesa123, because from what I saw in his last post on xda, the device tree needs to be updated.\nhttps://forum.xda-developers.com/t/recovery-official-twrp-3-3-1-0-for-galaxy-a8-2018.3818201/post-87618347",
+      "parentUuid": "a0e34970_142bf5b0",
+      "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
