@@ -16,6 +16,23 @@
       "message": "I don\u0027t know if you can test it on branch 12.1, it worked fine for me, if not I did a cherry-pick for branch 9.0",
       "revId": "c2182880d3ea9a7687b2ab5f6dc171730a65dc55",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200e5678_195e8157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1033
+      },
+      "writtenOn": "2023-01-12T20:43:33Z",
+      "side": 1,
+      "message": "Sorry mate, I am no developer and don\u0027t know how to compile twrp for my device (jackpotlte). I only have basic knowledge of c++ due to which I was able to identify the problem code snippet(after searching for days). If you can, may be, compile one for me to test, I will be happy to test it. Sorry for the inconvenience.",
+      "revId": "c2182880d3ea9a7687b2ab5f6dc171730a65dc55",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
