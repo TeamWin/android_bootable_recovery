@@ -16,6 +16,24 @@
       "message": "I was wondering if you can test on branch 12.1 so I cherry-picked the patch for 9.\nCould you test if the theme remains after changing the folder?",
       "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e34970_142bf5b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1033
+      },
+      "writtenOn": "2023-01-12T20:38:32Z",
+      "side": 1,
+      "message": "Sorry mate, I am no developer and don\u0027t know how to compile twrp for my device (jackpotlte). I only have basic knowledge of c++ due to which I was able to identify the problem code snippet(after searching for days). If you can, may be, compile one for me to test, I will be happy to test it. Sorry for the inconvenience.",
+      "parentUuid": "64cb6bd4_e3334c18",
+      "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
