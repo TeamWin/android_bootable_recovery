@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64cb6bd4_e3334c18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-01-12T19:43:12Z",
+      "side": 1,
+      "message": "I was wondering if you can test on branch 12.1 so I cherry-picked the patch for 9.\nCould you test if the theme remains after changing the folder?",
+      "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
