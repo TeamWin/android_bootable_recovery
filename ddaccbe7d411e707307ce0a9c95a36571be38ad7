@@ -52,6 +52,24 @@
       "parentUuid": "a0e34970_142bf5b0",
       "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db28432_9770a8c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1033
+      },
+      "writtenOn": "2023-01-13T11:02:38Z",
+      "side": 1,
+      "message": "Yeah, I asked him to look into it since the release of 3.7.0 and he is working on it. The reason I mentioned the issue here is because this issue is common in twrp branches 9.0-12.1 (didn\u0027t check 13) which means it is not device specific.\nIf you have checked it and it works for you, then it will likely work in all branches. That is why I added bigbiff and captainthrowback here so they can verify this on their end since this problem breaks the purpose of the \"ChangeTWRPFolder\" feature and the feature itself is important because certain shit apps (won\u0027t name them) have started to detect root using folder names.",
+      "parentUuid": "802bba03_e0838788",
+      "revId": "ddaccbe7d411e707307ce0a9c95a36571be38ad7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
