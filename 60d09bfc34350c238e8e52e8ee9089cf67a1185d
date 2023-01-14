@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "424dd719_9a533e18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-14T15:33:10Z",
+      "side": 1,
+      "message": "I feel like you need to get to the root of what is keeping your partition filesystem open for reading which causes it to not be unmounted rather than doing it this way.",
+      "revId": "60d09bfc34350c238e8e52e8ee9089cf67a1185d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
