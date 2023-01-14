@@ -51,6 +51,24 @@
       "message": "I believe this was fixed in this patch: https://gerrit.twrp.me/c/android_bootable_recovery/+/6246",
       "revId": "d48bae2caac7a8c529e81be8085fe861ced89cff",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d68300_1d8c4ac3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-01-14T16:41:45Z",
+      "side": 1,
+      "message": "It\u0027s actually a different problem, some people prefer to use devices without encryption using for example the \"universal-dm-verity-forceencrypt-disk-quota-disabler\". And when the device is unencrypted, TWRP, from branch 10 and higher, doesn\u0027t keep the folder change correctly after boot, creating a new TWRP folder. Here is a log with this issue https://forum.xda-developers.com/t/recovery-twrp-official-unofficial-v3-7-0-a12-cheeseburger-dumpling-25-12-2022.4351795/post-87548731, the user also made a video showing what happens https://www.youtube.com/watch?v\u003dySeaNqLYp8M",
+      "parentUuid": "cfad2909_52dacec6",
+      "revId": "d48bae2caac7a8c529e81be8085fe861ced89cff",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
