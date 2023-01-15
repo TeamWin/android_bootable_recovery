@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a08abbf_e34e5acb",
+        "filename": "libtar/append.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Small issue, can we use uint_8t? This is a Linux specific type.",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595dd3d9_04b26d39",
+        "filename": "libtar/append.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Can we name this similar to other sources: descriptor?",
+      "range": {
+        "startLine": 155,
+        "startChar": 3,
+        "endLine": 155,
+        "endChar": 14
+      },
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b29f9de_64f86949",
+        "filename": "libtar/append.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Can this be ifdefed in the debug macro?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbeb41d_76acf465",
+        "filename": "libtar/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Can we use a portable type here?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8063efcc_1cb772ea",
+        "filename": "libtar/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Can this be wrapped in the debug macro?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b99809b_9cf4adc9",
+        "filename": "libtar/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Can we use a portable type here?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "252beaba_e08c0285",
+        "filename": "libtar/extract.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-01-15T21:37:32Z",
+      "side": 1,
+      "message": "Can we use a portable type here?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
