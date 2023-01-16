@@ -72,7 +72,7 @@ th_read_internal(TAR *t)
 	int num_zero_blocks = 0;
 
 #ifdef DEBUG
-	printf("==> th_read_internal(TAR=\"%s\")\n", t->pathname);
+	LOG("==> th_read_internal(TAR=\"%s\")\n", t->pathname);
 #endif
 
 	while ((i = tar_block_read(t, &(t->th_buf))) == T_BLOCKSIZE)
@@ -93,7 +93,7 @@ th_read_internal(TAR *t)
 		    && strncmp(t->th_buf.magic, TMAGIC, TMAGLEN - 1) != 0)
 		{
 #ifdef DEBUG
-			puts("!!! unknown magic value in tar header");
+			LOG("!!! unknown magic value in tar header");
 #endif
 			return -2;
 		}
@@ -102,7 +102,7 @@ th_read_internal(TAR *t)
 		    && strncmp(t->th_buf.version, TVERSION, TVERSLEN) != 0)
 		{
 #ifdef DEBUG
-			puts("!!! unknown version value in tar header");
+			LOG("!!! unknown version value in tar header");
 #endif
 			return -2;
 		}
@@ -112,7 +112,7 @@ th_read_internal(TAR *t)
 		    && !th_crc_ok(t))
 		{
 #ifdef DEBUG
-			puts("!!! tar header checksum error");
+			LOG("!!! tar header checksum error");
 #endif
 			return -2;
 		}
@@ -121,7 +121,7 @@ th_read_internal(TAR *t)
 	}
 
 #ifdef DEBUG
-	printf("<== th_read_internal(): returning %d\n", i);
+	LOG("<== th_read_internal(): returning %d\n", i);
 #endif
 	return i;
 }
@@ -136,7 +136,7 @@ th_read(TAR *t)
 	char *ptr;
 
 #ifdef DEBUG
-	printf("==> th_read(t=0x%p)\n", (void *)t);
+	LOG("==> th_read(t=0x%p)\n", (void *)t);
 #endif
 
 	if (t->th_buf.gnu_longname != NULL)
@@ -183,7 +183,7 @@ th_read(TAR *t)
 			return -1;
 		}
 #ifdef DEBUG
-		printf("    th_read(): GNU long linkname detected "
+		LOG("    th_read(): GNU long linkname detected "
 		       "(%zu bytes, %zu blocks)\n", sz, blocks);
 #endif
 		t->th_buf.gnu_longlink = (char *)malloc(blocks * T_BLOCKSIZE);
@@ -194,7 +194,7 @@ th_read(TAR *t)
 		     j++, ptr += T_BLOCKSIZE)
 		{
 #ifdef DEBUG
-			printf("    th_read(): reading long linkname "
+			LOG("    th_read(): reading long linkname "
 			       "(%zu blocks left, ptr == %p)\n", blocks-j, (void *) ptr);
 #endif
 			i = tar_block_read(t, ptr);
@@ -205,11 +205,11 @@ th_read(TAR *t)
 				return -1;
 			}
 #ifdef DEBUG
-			printf("    th_read(): read block == \"%s\"\n", ptr);
+			LOG("    th_read(): read block == \"%s\"\n", ptr);
 #endif
 		}
 #ifdef DEBUG
-		printf("    th_read(): t->th_buf.gnu_longlink == \"%s\"\n",
+		LOG("    th_read(): t->th_buf.gnu_longlink == \"%s\"\n",
 		       t->th_buf.gnu_longlink);
 #endif
 
@@ -233,7 +233,7 @@ th_read(TAR *t)
 			return -1;
 		}
 #ifdef DEBUG
-		printf("    th_read(): GNU long filename detected "
+		LOG("    th_read(): GNU long filename detected "
 		       "(%zu bytes, %zu blocks)\n", sz, blocks);
 #endif
 		t->th_buf.gnu_longname = (char *)malloc(blocks * T_BLOCKSIZE);
@@ -244,7 +244,7 @@ th_read(TAR *t)
 		     j++, ptr += T_BLOCKSIZE)
 		{
 #ifdef DEBUG
-			printf("    th_read(): reading long filename "
+			LOG("    th_read(): reading long filename "
 			       "(%zu blocks left, ptr == %p)\n", blocks-j, (void *) ptr);
 #endif
 			i = tar_block_read(t, ptr);
@@ -255,11 +255,11 @@ th_read(TAR *t)
 				return -1;
 			}
 #ifdef DEBUG
-			printf("    th_read(): read block == \"%s\"\n", ptr);
+			LOG("    th_read(): read block == \"%s\"\n", ptr);
 #endif
 		}
 #ifdef DEBUG
-		printf("    th_read(): t->th_buf.gnu_longname == \"%s\"\n",
+		LOG("    th_read(): t->th_buf.gnu_longname == \"%s\"\n",
 		       t->th_buf.gnu_longname);
 #endif
 
@@ -280,7 +280,7 @@ th_read(TAR *t)
 		if(sz >= T_BLOCKSIZE) // Not supported
 		{
 #ifdef DEBUG
-			printf("    th_read(): Extended header is too long!\n");
+			LOG("    th_read(): Extended header is too long!\n");
 #endif
 		}
 		else
@@ -306,7 +306,7 @@ th_read(TAR *t)
 				memcpy(&t->th_buf.cap_data, start, sizeof(struct vfs_cap_data));
 				t->th_buf.has_cap_data = 1;
 #ifdef DEBUG
-				printf("    th_read(): Posix capabilities detected\n");
+				LOG("    th_read(): Posix capabilities detected\n");
 #endif
 			} // end posix capabilities
 			// selinux contexts
@@ -319,7 +319,7 @@ th_read(TAR *t)
 				{
 					t->th_buf.selinux_context = strndup(start, end-start);
 #ifdef DEBUG
-					printf("    th_read(): SELinux context xattr detected: %s\n", t->th_buf.selinux_context);
+					LOG("    th_read(): SELinux context xattr detected: %s\n", t->th_buf.selinux_context);
 #endif
 				}
 			} // end selinux contexts
@@ -329,7 +329,7 @@ th_read(TAR *t)
 			{
 				t->th_buf.has_user_default = 1;
 #ifdef DEBUG
-				printf("    th_read(): android user.default xattr detected\n");
+				LOG("    th_read(): android user.default xattr detected\n");
 #endif
 			} // end android user.default xattr
 			// android user.inode_cache xattr
@@ -338,7 +338,7 @@ th_read(TAR *t)
 			{
 				t->th_buf.has_user_cache = 1;
 #ifdef DEBUG
-				printf("    th_read(): android user.inode_cache xattr detected\n");
+				LOG("    th_read(): android user.inode_cache xattr detected\n");
 #endif
 			} // end android user.inode_cache xattr
 			// android user.inode_code_cache xattr
@@ -347,7 +347,7 @@ th_read(TAR *t)
 			{
 				t->th_buf.has_user_code_cache = 1;
 #ifdef DEBUG
-				printf("    th_read(): android user.inode_code_cache xattr detected\n");
+				LOG("    th_read(): android user.inode_code_cache xattr detected\n");
 #endif
 			} // end android user.inode_code_cache xattr
 
@@ -356,7 +356,7 @@ th_read(TAR *t)
 			if (start && start+FSCRYPT_TAG_LEN < buf+len) {
 				t->th_buf.fep = (fscrypt_policy*)malloc(sizeof(fscrypt_policy));
 				if (!t->th_buf.fep) {
-					printf("malloc failed for fscrypt policy\n");
+					LOG("malloc failed for fscrypt policy\n");
 					return -1;
 				}
 				start += FSCRYPT_TAG_LEN;
@@ -367,11 +367,11 @@ th_read(TAR *t)
 					memcpy(get_policy(t->th_buf.fep), start, fscrypt_policy_size(t->th_buf.fep));
 #ifdef DEBUG
 					LOG("version: %u\n", version);
-					printf("    th_read(): FSCrypt policy detected: %s\n", get_policy_content(t->th_buf.fep));
+					LOG("    th_read(): FSCrypt policy detected: %s\n", get_policy_content(t->th_buf.fep));
 #endif
 				}
 				else {
-					printf("     invalid fscrypt header found\n");
+					LOG("     invalid fscrypt header found\n");
 				}
 			}
 #endif // USE_FSCRYPT
@@ -446,14 +446,14 @@ th_write(TAR *t)
 	char buf[T_BLOCKSIZE];
 
 #ifdef DEBUG
-	printf("==> th_write(TAR=\"%s\")\n", t->pathname);
+	LOG("==> th_write(TAR=\"%s\")\n", t->pathname);
 	th_print(t);
 #endif
 
 	if ((t->options & TAR_GNU) && t->th_buf.gnu_longlink != NULL)
 	{
 #ifdef DEBUG
-		printf("th_write(): using gnu_longlink (\"%s\")\n",
+		LOG("th_write(): using gnu_longlink (\"%s\")\n",
 		       t->th_buf.gnu_longlink);
 #endif
 		/* save old size and type */
@@ -504,7 +504,7 @@ th_write(TAR *t)
 	if ((t->options & TAR_GNU) && t->th_buf.gnu_longname != NULL)
 	{
 #ifdef DEBUG
-		printf("th_write(): using gnu_longname (\"%s\")\n",
+		LOG("th_write(): using gnu_longname (\"%s\")\n",
 		       t->th_buf.gnu_longname);
 #endif
 		/* save old size and type */
@@ -558,7 +558,7 @@ th_write(TAR *t)
 	if((t->options & TAR_STORE_SELINUX) && t->th_buf.selinux_context != NULL)
 	{
 #ifdef DEBUG
-		printf("th_write(): using selinux_context (\"%s\")\n",
+		LOG("th_write(): using selinux_context (\"%s\")\n",
 		       t->th_buf.selinux_context);
 #endif
 		/* setup size - EXT header has format "*size of this whole tag as ascii numbers* *space* *content* *newline* */
@@ -582,7 +582,7 @@ th_write(TAR *t)
 		size = fscrypt_policy_size(t->th_buf.fep);
 		descriptor = get_policy_descriptor(t->th_buf.fep);
 #ifdef DEBUG
-		printf("th_write(): using fscrypt_policy %s\n", descriptor);
+		LOG("th_write(): using fscrypt_policy %s\n", descriptor);
 #endif
 		sz = FSCRYPT_TAG_LEN + size + 1 + 3  +    1;
 		if(sz >= 100) // another ascci digit for size
@@ -609,7 +609,7 @@ th_write(TAR *t)
 	if((t->options & TAR_STORE_POSIX_CAP) && t->th_buf.has_cap_data)
 	{
 #ifdef DEBUG
-		printf("th_write(): has a posix capability\n");
+		LOG("th_write(): has a posix capability\n");
 #endif
 		sz = CAPABILITIES_TAG_LEN + sizeof(struct vfs_cap_data) + 3 + 1;
 
@@ -636,7 +636,7 @@ th_write(TAR *t)
 	{
 		if (t->th_buf.has_user_default) {
 #ifdef DEBUG
-			printf("th_write(): has android user.default xattr\n");
+			LOG("th_write(): has android user.default xattr\n");
 #endif
 			sz = ANDROID_USER_DEFAULT_TAG_LEN + 3 + 1;
 
@@ -657,7 +657,7 @@ th_write(TAR *t)
 		}
 		if (t->th_buf.has_user_cache) {
 #ifdef DEBUG
-			printf("th_write(): has android user.inode_cache xattr\n");
+			LOG("th_write(): has android user.inode_cache xattr\n");
 #endif
 			sz = ANDROID_USER_CACHE_TAG_LEN + 3 + 1;
 
@@ -678,7 +678,7 @@ th_write(TAR *t)
 		}
 		if (t->th_buf.has_user_code_cache) {
 #ifdef DEBUG
-			printf("th_write(): has android user.inode_code_cache xattr\n");
+			LOG("th_write(): has android user.inode_code_cache xattr\n");
 #endif
 			sz = ANDROID_USER_CODE_CACHE_TAG_LEN + 3 + 1;
 
@@ -717,7 +717,7 @@ th_write(TAR *t)
 	}
 
 #ifdef DEBUG
-	puts("th_write(): returning 0");
+	LOG("th_write(): returning 0");
 #endif
 	return 0;
 }
