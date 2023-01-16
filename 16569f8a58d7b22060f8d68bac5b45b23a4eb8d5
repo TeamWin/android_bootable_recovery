@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4fa68b_64b67191",
+        "filename": "libtar/append.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a08abbf_e34e5acb",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "595dd3d9_04b26d39",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-01-15T21:37:32Z",
       "side": 1,
       "message": "Can we name this similar to other sources: descriptor?",
+      "range": {
+        "startLine": 155,
+        "startChar": 3,
+        "endLine": 155,
+        "endChar": 14
+      },
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53db18e3_996db0ae",
+        "filename": "libtar/append.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "595dd3d9_04b26d39",
       "range": {
         "startLine": 155,
         "startChar": 3,
@@ -58,6 +100,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f57c6a_b73c0ada",
+        "filename": "libtar/append.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b29f9de_64f86949",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dbeb41d_76acf465",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-01-15T21:37:32Z",
       "side": 1,
       "message": "Can we use a portable type here?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c677e268_c817a854",
+        "filename": "libtar/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dbeb41d_76acf465",
       "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
@@ -92,6 +170,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b1189ee_7250fd2c",
+        "filename": "libtar/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8063efcc_1cb772ea",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b99809b_9cf4adc9",
@@ -109,6 +205,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b16b432_a48ae846",
+        "filename": "libtar/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b99809b_9cf4adc9",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "252beaba_e08c0285",
@@ -122,6 +236,24 @@
       "writtenOn": "2023-01-15T21:37:32Z",
       "side": 1,
       "message": "Can we use a portable type here?",
+      "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3473279f_ecb48855",
+        "filename": "libtar/extract.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-01-16T15:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "252beaba_e08c0285",
       "revId": "16569f8a58d7b22060f8d68bac5b45b23a4eb8d5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
