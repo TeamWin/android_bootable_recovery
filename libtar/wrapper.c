@@ -61,14 +61,14 @@ tar_extract_all(TAR *t, char *prefix, const int *progress_fd)
 	int i;
 
 #ifdef DEBUG
-	printf("==> tar_extract_all(TAR *t, \"%s\")\n",
+	LOG("==> tar_extract_all(TAR *t, \"%s\")\n",
 	       (prefix ? prefix : "(null)"));
 #endif
 
 	while ((i = th_read(t)) == 0)
 	{
 #ifdef DEBUG
-		puts("    tar_extract_all(): calling th_get_pathname()");
+		LOG("    tar_extract_all(): calling th_get_pathname()");
 #endif
 		filename = th_get_pathname(t);
 		if (t->options & TAR_VERBOSE)
@@ -78,7 +78,7 @@ tar_extract_all(TAR *t, char *prefix, const int *progress_fd)
 		else
 			strlcpy(buf, filename, sizeof(buf));
 #ifdef DEBUG
-		printf("    tar_extract_all(): calling tar_extract_file(t, "
+		LOG("    tar_extract_all(): calling tar_extract_file(t, "
 		       "\"%s\")\n", buf);
 #endif
 		if (tar_extract_file(t, buf, prefix, progress_fd) != 0)
@@ -99,7 +99,7 @@ tar_append_tree(TAR *t, char *realdir, char *savedir)
 	struct stat s;
 
 #ifdef DEBUG
-	printf("==> tar_append_tree(0x%lx, \"%s\", \"%s\")\n",
+	LOG("==> tar_append_tree(0x%lx, \"%s\", \"%s\")\n",
 	       t, realdir, (savedir ? savedir : "[NULL]"));
 #endif
 
@@ -107,7 +107,7 @@ tar_append_tree(TAR *t, char *realdir, char *savedir)
 		return -1;
 
 #ifdef DEBUG
-	puts("    tar_append_tree(): done with tar_append_file()...");
+	LOG("    tar_append_tree(): done with tar_append_file()...");
 #endif
 
 	dp = opendir(realdir);
@@ -160,21 +160,21 @@ tar_find(TAR *t, char *searchstr)
 	char *filename;
 	int i, entryfound = 0;
 #ifdef DEBUG
-	printf("==> tar_find(0x%lx, %s)\n", (long unsigned int)t, searchstr);
+	LOG("==> tar_find(0x%lx, %s)\n", (long unsigned int)t, searchstr);
 #endif
 	while ((i = th_read(t)) == 0) {
 		filename = th_get_pathname(t);
 		if (fnmatch(searchstr, filename, FNM_FILE_NAME | FNM_PERIOD) == 0) {
 			entryfound++;
 #ifdef DEBUG
-			printf("Found matching entry: %s\n", filename);
+			LOG("Found matching entry: %s\n", filename);
 #endif
 			break;
 		}
 	}
 #ifdef DEBUG
 	if (!entryfound)
-		printf("No matching entry found.\n");
+		LOG("No matching entry found.\n");
 #endif
 
 	return entryfound;

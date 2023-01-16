@@ -122,7 +122,7 @@ libtar_hash_next(libtar_hash_t *h,
 			    libtar_hashptr_t *hp)
 {
 #ifdef DS_DEBUG
-	printf("==> libtar_hash_next(h=0x%lx, hp={%d,0x%lx})\n",
+	LOG("==> libtar_hash_next(h=0x%lx, hp={%d,0x%lx})\n",
 	       h, hp->bucket, hp->node);
 #endif
 
@@ -130,7 +130,7 @@ libtar_hash_next(libtar_hash_t *h,
 	    libtar_list_next(h->table[hp->bucket], &(hp->node)) != 0)
 	{
 #ifdef DS_DEBUG
-		printf("    libtar_hash_next(): found additional "
+		LOG("    libtar_hash_next(): found additional "
 		       "data in current bucket (%d), returing 1\n",
 		       hp->bucket);
 #endif
@@ -138,14 +138,14 @@ libtar_hash_next(libtar_hash_t *h,
 	}
 
 #ifdef DS_DEBUG
-	printf("    libtar_hash_next(): done with bucket %d\n",
+	LOG("    libtar_hash_next(): done with bucket %d\n",
 	       hp->bucket);
 #endif
 
 	for (hp->bucket++; hp->bucket < h->numbuckets; hp->bucket++)
 	{
 #ifdef DS_DEBUG
-		printf("    libtar_hash_next(): "
+		LOG("    libtar_hash_next(): "
 		       "checking bucket %d\n", hp->bucket);
 #endif
 		hp->node = NULL;
@@ -154,7 +154,7 @@ libtar_hash_next(libtar_hash_t *h,
 		    				&(hp->node)) != 0)
 		{
 #ifdef DS_DEBUG
-			printf("    libtar_hash_next(): "
+			LOG("    libtar_hash_next(): "
 			       "found data in bucket %d, returing 1\n",
 			       hp->bucket);
 #endif
@@ -165,7 +165,7 @@ libtar_hash_next(libtar_hash_t *h,
 	if (hp->bucket == h->numbuckets)
 	{
 #ifdef DS_DEBUG
-		printf("    libtar_hash_next(): hash pointer "
+		LOG("    libtar_hash_next(): hash pointer "
 		       "wrapped to 0\n");
 #endif
 		hp->bucket = -1;
@@ -173,7 +173,7 @@ libtar_hash_next(libtar_hash_t *h,
 	}
 
 #ifdef DS_DEBUG
-	printf("<== libtar_hash_next(): no more data, "
+	LOG("<== libtar_hash_next(): no more data, "
 	       "returning 0\n");
 #endif
 	return 0;
@@ -269,7 +269,7 @@ libtar_hash_getkey(libtar_hash_t *h,
 			      libtar_matchfunc_t matchfunc)
 {
 #ifdef DS_DEBUG
-	printf("==> libtar_hash_getkey(h=0x%lx, hp={%d,0x%lx}, "
+	LOG("==> libtar_hash_getkey(h=0x%lx, hp={%d,0x%lx}, "
 	       "key=0x%lx, matchfunc=0x%lx)\n",
 	       h, hp->bucket, hp->node, key, matchfunc);
 #endif
@@ -278,7 +278,7 @@ libtar_hash_getkey(libtar_hash_t *h,
 	{
 		hp->bucket = (*(h->hashfunc))(key, h->numbuckets);
 #ifdef DS_DEBUG
-		printf("    libtar_hash_getkey(): hp->bucket "
+		LOG("    libtar_hash_getkey(): hp->bucket "
 		       "set to %d\n", hp->bucket);
 #endif
 	}
@@ -286,7 +286,7 @@ libtar_hash_getkey(libtar_hash_t *h,
 	if (h->table[hp->bucket] == NULL)
 	{
 #ifdef DS_DEBUG
-		printf("    libtar_hash_getkey(): no list "
+		LOG("    libtar_hash_getkey(): no list "
 		       "for bucket %d, returning 0\n", hp->bucket);
 #endif
 		hp->bucket = -1;
@@ -294,7 +294,7 @@ libtar_hash_getkey(libtar_hash_t *h,
 	}
 
 #ifdef DS_DEBUG
-	printf("<== libtar_hash_getkey(): "
+	LOG("<== libtar_hash_getkey(): "
 	       "returning libtar_list_search()\n");
 #endif
 	return libtar_list_search(h->table[hp->bucket], &(hp->node),
@@ -314,25 +314,25 @@ libtar_hash_add(libtar_hash_t *h, void *data)
 	int bucket, i;
 
 #ifdef DS_DEBUG
-	printf("==> libtar_hash_add(h=0x%lx, data=0x%lx)\n",
+	LOG("==> libtar_hash_add(h=0x%lx, data=0x%lx)\n",
 	       h, data);
 #endif
 
 	bucket = (*(h->hashfunc))(data, h->numbuckets);
 #ifdef DS_DEBUG
-	printf("    libtar_hash_add(): inserting in bucket %d\n",
+	LOG("    libtar_hash_add(): inserting in bucket %d\n",
 	       bucket);
 #endif
 	if (h->table[bucket] == NULL)
 	{
 #ifdef DS_DEBUG
-		printf("    libtar_hash_add(): creating new list\n");
+		LOG("    libtar_hash_add(): creating new list\n");
 #endif
 		h->table[bucket] = libtar_list_new(LIST_QUEUE, NULL);
 	}
 
 #ifdef DS_DEBUG
-	printf("<== libtar_hash_add(): "
+	LOG("<== libtar_hash_add(): "
 	       "returning libtar_list_add()\n");
 #endif
 	i = libtar_list_add(h->table[bucket], data);

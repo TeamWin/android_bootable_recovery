@@ -78,7 +78,7 @@ static int get_path_inode(const char* path, ino_t *inode) {
 	struct stat buf;
 	memset(&buf, 0, sizeof(buf));
 	if (stat(path, &buf) != 0) {
-		printf("failed to stat %s\n", path);
+		LOG("failed to stat %s\n", path);
 		return -1;
 	}
 	*inode = buf.st_ino;
@@ -97,7 +97,7 @@ int write_path_inode(const char* parent, const char* name, const char* inode_xat
 	snprintf(path, PATH_MAX, "%s/%s", parent, name);
 
 	if (mkdirhier(path) == -1) {
-		printf("failed to mkdirhier for %s\n", path);
+		LOG("failed to mkdirhier for %s\n", path);
 		return -1;
 	}
 
@@ -114,9 +114,9 @@ int write_path_inode(const char* parent, const char* name, const char* inode_xat
 	}
 
 	inode_raw = inode;
-	printf("setting %s on %s pointing to %s\n", inode_xattr, parent, path);
+	LOG("setting %s on %s pointing to %s\n", inode_xattr, parent, path);
 	if (setxattr(parent, inode_xattr, &inode_raw, sizeof(inode_raw), 0) != 0 && errno != EOPNOTSUPP) {
-		printf("Failed to write xattr %s at %s (%s)\n", inode_xattr, parent, strerror(errno));
+		LOG("Failed to write xattr %s at %s (%s)\n", inode_xattr, parent, strerror(errno));
 		return -1;
 	}
 	return 0;

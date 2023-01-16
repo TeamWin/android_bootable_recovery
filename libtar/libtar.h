@@ -45,6 +45,8 @@ extern "C"
 #define TH_EXT_TYPE		'x'
 #define TH_POL_TYPE_DO_NOT_USE		'p'
 
+#define LOG(...) printf("libtar: " __VA_ARGS__)
+
 /* our version of the tar header structure */
 struct tar_header
 {
