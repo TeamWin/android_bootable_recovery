@@ -56,7 +56,7 @@ libtar_list_new(int flags, libtar_cmpfunc_t cmpfunc)
 	libtar_list_t *newlist;
 
 #ifdef DS_DEBUG
-	printf("in libtar_list_new(%d, 0x%lx)\n", flags, cmpfunc);
+	LOG("in libtar_list_new(%d, 0x%lx)\n", flags, cmpfunc);
 #endif
 
 	if (flags != LIST_USERFUNC
@@ -155,7 +155,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 	libtar_listptr_t n, m;
 
 #ifdef DS_DEBUG
-	printf("==> libtar_list_add(\"%s\")\n", (char *)data);
+	LOG("==> libtar_list_add(\"%s\")\n", (char *)data);
 #endif
 
 	n = (libtar_listptr_t)malloc(sizeof(struct libtar_node));
@@ -165,7 +165,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 	l->nents++;
 
 #ifdef DS_DEBUG
-	printf("    libtar_list_add(): allocated data\n");
+	LOG("    libtar_list_add(): allocated data\n");
 #endif
 
 	/* if the list is empty */
@@ -174,14 +174,14 @@ libtar_list_add(libtar_list_t *l, void *data)
 		l->last = l->first = n;
 		n->next = n->prev = NULL;
 #ifdef DS_DEBUG
-		printf("<== libtar_list_add(): list was empty; "
+		LOG("<== libtar_list_add(): list was empty; "
 		       "added first element and returning 0\n");
 #endif
 		return 0;
 	}
 
 #ifdef DS_DEBUG
-	printf("    libtar_list_add(): list not empty\n");
+	LOG("    libtar_list_add(): list not empty\n");
 #endif
 
 	if (l->flags == LIST_STACK)
@@ -192,7 +192,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 			l->first->prev = n;
 		l->first = n;
 #ifdef DS_DEBUG
-		printf("<== libtar_list_add(): LIST_STACK set; "
+		LOG("<== libtar_list_add(): LIST_STACK set; "
 		       "added in front\n");
 #endif
 		return 0;
@@ -206,7 +206,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 			l->last->next = n;
 		l->last = n;
 #ifdef DS_DEBUG
-		printf("<== libtar_list_add(): LIST_QUEUE set; "
+		LOG("<== libtar_list_add(): LIST_QUEUE set; "
 		       "added at end\n");
 #endif
 		return 0;
@@ -220,7 +220,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 			** insert data before it
 			*/
 #ifdef DS_DEBUG
-			printf("    libtar_list_add(): gotcha..."
+			LOG("    libtar_list_add(): gotcha..."
 			       "inserting data\n");
 #endif
 			if (m == l->first)
@@ -230,7 +230,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 				m->prev = n;
 				n->next = m;
 #ifdef DS_DEBUG
-				printf("<== libtar_list_add(): "
+				LOG("<== libtar_list_add(): "
 				       "added first, returning 0\n");
 #endif
 				return 0;
@@ -240,14 +240,14 @@ libtar_list_add(libtar_list_t *l, void *data)
 			m->prev = n;
 			n->next = m;
 #ifdef DS_DEBUG
-			printf("<== libtar_list_add(): added middle,"
+			LOG("<== libtar_list_add(): added middle,"
 			       " returning 0\n");
 #endif
 			return 0;
 		}
 
 #ifdef DS_DEBUG
-	printf("    libtar_list_add(): new data larger than current "
+	LOG("    libtar_list_add(): new data larger than current "
 	       "list elements\n");
 #endif
 
@@ -257,7 +257,7 @@ libtar_list_add(libtar_list_t *l, void *data)
 	l->last = n;
 	n->next = NULL;
 #ifdef DS_DEBUG
-	printf("<== libtar_list_add(): added end, returning 0\n");
+	LOG("<== libtar_list_add(): added end, returning 0\n");
 #endif
 	return 0;
 }
@@ -273,7 +273,7 @@ libtar_list_del(libtar_list_t *l, libtar_listptr_t *n)
 	libtar_listptr_t m;
 
 #ifdef DS_DEBUG
-	printf("==> libtar_list_del()\n");
+	LOG("==> libtar_list_del()\n");
 #endif
 
 	l->nents--;
@@ -384,7 +384,7 @@ libtar_list_search(libtar_list_t *l,
 			      libtar_matchfunc_t matchfunc)
 {
 #ifdef DS_DEBUG
-	printf("==> libtar_list_search(l=0x%lx, n=0x%lx, \"%s\")\n",
+	LOG("==> libtar_list_search(l=0x%lx, n=0x%lx, \"%s\")\n",
 	       l, n, (char *)data);
 #endif
 
@@ -399,14 +399,14 @@ libtar_list_search(libtar_list_t *l,
 	for (; *n != NULL; *n = (*n)->next)
 	{
 #ifdef DS_DEBUG
-		printf("checking against \"%s\"\n", (char *)(*n)->data);
+		LOG("checking against \"%s\"\n", (char *)(*n)->data);
 #endif
 		if ((*(matchfunc))(data, (*n)->data) != 0)
 			return 1;
 	}
 
 #ifdef DS_DEBUG
-	printf("no matches found\n");
+	LOG("no matches found\n");
 #endif
 	return 0;
 }
@@ -426,7 +426,7 @@ libtar_list_dup(libtar_list_t *l)
 		libtar_list_add(newlist, n->data);
 
 #ifdef DS_DEBUG
-	printf("returning from libtar_list_dup()\n");
+	LOG("returning from libtar_list_dup()\n");
 #endif
 	return newlist;
 }

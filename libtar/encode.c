@@ -76,7 +76,7 @@ th_set_path(TAR *t, const char *pathname)
 	size_t pathname_len = strlen(pathname);
 
 #ifdef DEBUG
-	printf("in th_set_path(th, pathname=\"%s\")\n", pathname);
+	LOG("in th_set_path(th, pathname=\"%s\")\n", pathname);
 #endif
 
 	if (t->th_buf.gnu_longname != NULL)
@@ -106,7 +106,7 @@ th_set_path(TAR *t, const char *pathname)
 		tmp = strchr(&(pathname[pathname_len - T_NAMELEN]), '/');
 		if (tmp == NULL)
 		{
-			printf("!!! '/' not found in \"%s\"\n", pathname);
+			LOG("!!! '/' not found in \"%s\"\n", pathname);
 			return;
 		}
 		snprintf(tail_path, T_NAMELEN + 1, "%s%s", &tmp[1], suffix);
@@ -128,7 +128,7 @@ th_set_path(TAR *t, const char *pathname)
 	}
 
 #ifdef DEBUG
-	puts("returning from th_set_path()...");
+	LOG("returning from th_set_path()...");
 #endif
 }
 
@@ -138,7 +138,7 @@ void
 th_set_link(TAR *t, const char *linkname)
 {
 #ifdef DEBUG
-	printf("==> th_set_link(th, linkname=\"%s\")\n", linkname);
+	LOG("==> th_set_link(th, linkname=\"%s\")\n", linkname);
 #endif
 
 	if (strlen(linkname) >= T_NAMELEN && (t->options & TAR_GNU))
@@ -169,7 +169,7 @@ void
 th_set_device(TAR *t, dev_t device)
 {
 #ifdef DEBUG
-	printf("th_set_device(): major = %d, minor = %d\n",
+	LOG("th_set_device(): major = %d, minor = %d\n",
 	       major(device), minor(device));
 #endif
 	int_to_oct(major(device), t->th_buf.devmajor, 8);
