@@ -3431,6 +3431,7 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 	if (access(("/dev/block/bootdevice/by-name/" + bare_partition_name).c_str(), F_OK) == -1) {
 		LOGINFO("Symlinking %s => /dev/block/bootdevice/by-name/%s \n", fstabEntry.blk_device.c_str(), bare_partition_name.c_str());
 		symlink(fstabEntry.blk_device.c_str(), ("/dev/block/bootdevice/by-name/" + bare_partition_name).c_str());
+		property_set("twrp.super.symlinks_created", "true");
 	}
 
     return true;
