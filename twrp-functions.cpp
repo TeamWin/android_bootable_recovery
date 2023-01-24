@@ -25,6 +25,7 @@
 #include <time.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <fstab/fstab.h>
 #include <sys/mount.h>
 #include <sys/reboot.h>
 #include <sys/sendfile.h>
@@ -47,6 +48,7 @@
 #include "abx-functions.hpp"
 #include "twcommon.h"
 #include "gui/gui.hpp"
+#include <fs_mgr_priv_boot_config.h>
 #ifndef BUILD_TWRPTAR_MAIN
 #include "data.hpp"
 #include "partitions.hpp"
@@ -1398,7 +1400,15 @@ int TWFunc::Property_Override(string Prop_Name, string Prop_Value) {
 #ifdef TW_INCLUDE_LIBRESETPROP
     return setprop(Prop_Name.c_str(), Prop_Value.c_str(), false);
 #else
-    return -2;
+    return NOT_AVAILABLE;
+#endif
+}
+
+int TWFunc::Delete_Property(string Prop_Name) {
+#ifdef TW_INCLUDE_LIBRESETPROP
+    return delprop(Prop_Name.c_str(), false);
+#else
+    return NOT_AVAILABLE;
 #endif
 }
 
@@ -1555,6 +1565,83 @@ bool TWFunc::abx_to_xml(const std::string path, std::string &result) {
 	outfile.close();
 
 	return res;
+}
+
+std::string GetFstabPath() {
+	for (const char* prop : {"fstab_suffix", "hardware", "hardware.platform"}) {
+		std::string suffix;
+
+		if (!fs_mgr_get_boot_config(prop, &suffix)) continue;
+
+		for (const char* prefix : {// late-boot/post-boot locations
+			"/odm/etc/fstab.", "/vendor/etc/fstab.",
+			// early boot locations
+			"/system/etc/fstab.", "/first_stage_ramdisk/system/etc/fstab.",
+			"/fstab.", "/first_stage_ramdisk/fstab."}) {
+				std::string fstab_path = prefix + suffix;
+				LOGINFO("%s: %s\n", __func__, fstab_path.c_str());
+				if (access(fstab_path.c_str(), F_OK) == 0) return fstab_path;
+		}
+	}
+
+	return "";
+}
+
+bool TWFunc::Find_Fstab(string &fstab) {
+	fstab = GetFstabPath();
+	if (fstab == "") return false;
+	return true;
+}
+
+bool TWFunc::Get_Service_From(TWPartition *Partition, std::string Service, std::string &Res) {
+	Partition->Mount(true);
+	std::string Path = Partition->Get_Mount_Point() + "/etc/init/";
+	std::string Name;
+	std::vector<std::string> Data;
+	bool Found = false, ret = false;
+	DIR* dir;
+	struct dirent* der;
+	dir = opendir(Path.c_str());
+	while ((der = readdir(dir)) != NULL)
+	{
+		Name = der->d_name;
+		if (Name.find(Service) != string::npos) {
+			Found = true;
+			Path += Name;
+			break;
+		}
+	}
+	closedir(dir);
+
+	if (!Found) {
+		LOGINFO("Unable to locate service RC\n");
+		goto finish;
+	}
+
+	if (read_file(Path, Data) != 0) {
+		LOGINFO("Unable to read file '%s'\n", Path.c_str());
+		goto finish;
+	}
+
+	for (int index = 0; index < Data.size(); index++) {
+		Name = Data.at(index);
+		if (Name.find("service") != string::npos) {
+			Res = Name.substr(Name.find_last_of('/')+1);
+			ret = true;
+			goto finish;
+		}
+	}
+
+finish:
+	Partition->UnMount(true);
+	return ret;
+}
+
+std::string TWFunc::Get_Version_From_Service(std::string name) {
+	int start, end;
+	start = name.find('@') + 1;
+	end = name.find("-") - start;
+	return name.substr(start, end);
 }
 
 #endif // ndef BUILD_TWRPTAR_MAIN

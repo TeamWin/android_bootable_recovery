@@ -36,6 +36,8 @@
 #define REPACK_ORIG_DIR "/tmp/repackorig/"
 #define REPACK_NEW_DIR "/tmp/repacknew/"
 
+#define NOT_AVAILABLE -2
+
 using namespace std;
 
 // BasePartition is used for overriding so we can run custom, device
