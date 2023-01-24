@@ -25,6 +25,7 @@
 #include <time.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <fstab/fstab.h>
 #include <sys/mount.h>
 #include <sys/reboot.h>
 #include <sys/sendfile.h>
@@ -47,6 +48,7 @@
 #include "abx-functions.hpp"
 #include "twcommon.h"
 #include "gui/gui.hpp"
+#include <fs_mgr_priv_boot_config.h>
 #ifndef BUILD_TWRPTAR_MAIN
 #include "data.hpp"
 #include "partitions.hpp"
@@ -1555,6 +1557,32 @@ bool TWFunc::abx_to_xml(const std::string path, std::string &result) {
 	outfile.close();
 
 	return res;
+}
+
+std::string GetFstabPath() {
+	for (const char* prop : {"fstab_suffix", "hardware", "hardware.platform"}) {
+		std::string suffix;
+
+		if (!fs_mgr_get_boot_config(prop, &suffix)) continue;
+
+		for (const char* prefix : {// late-boot/post-boot locations
+			"/odm/etc/fstab.", "/vendor/etc/fstab.",
+			// early boot locations
+			"/system/etc/fstab.", "/first_stage_ramdisk/system/etc/fstab.",
+			"/fstab.", "/first_stage_ramdisk/fstab."}) {
+				std::string fstab_path = prefix + suffix;
+				LOGINFO("%s: %s\n", __func__, fstab_path.c_str());
+				if (access(fstab_path.c_str(), F_OK) == 0) return fstab_path;
+		}
+	}
+
+	return "";
+}
+
+bool TWFunc::Find_Fstab(string &fstab) {
+	fstab = GetFstabPath();
+	if (fstab == "") return false;
+	return true;
 }
 
 #endif // ndef BUILD_TWRPTAR_MAIN
