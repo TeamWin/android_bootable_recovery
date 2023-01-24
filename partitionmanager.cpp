@@ -125,6 +125,8 @@ using android::fs_mgr::MetadataBuilder;
 extern bool datamedia;
 std::vector<users_struct> Users_List;
 
+std::string additional_fstab = "/etc/additional.fstab";
+
 TWPartitionManager::TWPartitionManager(void) {
 	mtp_was_enabled = false;
 	mtp_write_fd = -1;
@@ -160,12 +162,39 @@ int TWPartitionManager::Set_Crypto_Type(const char* crypto_type) {
 	return 0;
 }
 
+void inline RESET(std::string prop, std::string def, TWPartition *ven, TWPartition *odm) {
+	if (odm) {
+		TWFunc::Property_Override(prop, TWFunc::Partition_Property_Get(prop, PartitionManager, "/odm/etc", "build.prop"));
+		if (android::base::GetProperty(prop, "") != "") {
+			LOGINFO("Setting '%s' to '%s' from /odm/etc/build.prop\n", prop.c_str(), android::base::GetProperty(prop, "").c_str());
+		}
+	}
+	if (ven) {
+		TWFunc::Property_Override(prop, TWFunc::Partition_Property_Get(prop, PartitionManager, "/vendor", "build.prop"));
+		if (android::base::GetProperty(prop, "") != "") {
+			LOGINFO("Setting '%s' to '%s' from /vendor/build.prop\n", prop.c_str(), android::base::GetProperty(prop, "").c_str());
+		}
+	}
+	if (android::base::GetProperty(prop, "") == "" && !def.empty()) {
+		TWFunc::Property_Override(prop, def);
+		LOGINFO("Setting '%s' to default value (%s)\n", prop.c_str(), android::base::GetProperty(prop, "").c_str());
+	}
+	if (android::base::GetProperty(prop, "") == "" && def.empty()) {
+		TWFunc::Property_Override(prop, def);
+		LOGINFO("Unsetting '%s'\n", prop.c_str());
+	}
+}
+
 int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
 	FILE *fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
+	bool parse_userdata = false;
 	std::map<string, Flags_Map> twrp_flags;
 
 	fstabFile = fopen("/etc/twrp.flags", "rt");
+	if (Get_Super_Status()) {
+		Setup_Super_Devices();
+	}
 	if (fstabFile != NULL) {
 		LOGINFO("Reading /etc/twrp.flags\n");
 		while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
@@ -221,9 +250,11 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 		}
 		fclose(fstabFile);
 	}
-
+TWPartition *data = NULL;
+TWPartition *meta = NULL;
+parse:
 	fstabFile = fopen(Fstab_Filename.c_str(), "rt");
-	if (fstabFile == NULL) {
+	if (!parse_userdata && fstabFile == NULL) {
 		LOGERR("Critical Error: Unable to open fstab at '%s'.\n", Fstab_Filename.c_str());
 		return false;
 	} else
@@ -236,21 +267,41 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 		if (fstab_line[0] == '#')
 			continue;
 
+		if (parse_userdata) {
+			if (strstr(fstab_line, "/metadata") && !strstr(fstab_line, "/data")) {
+				Partitions.erase(std::find(Partitions.begin(), Partitions.end(), meta));
+				delete meta;
+			} else if (strstr(fstab_line, "/data")) {
+				Partitions.erase(std::find(Partitions.begin(), Partitions.end(), data));
+				delete data;
+			} else {
+				continue;
+			}
+		}
+
+
 		size_t line_size = strlen(fstab_line);
 		if (fstab_line[line_size - 1] != '\n')
 			fstab_line[line_size] = '\n';
 
 		TWPartition* partition = new TWPartition();
-		if (partition->Process_Fstab_Line(fstab_line, Display_Error, &twrp_flags))
+		if (partition->Process_Fstab_Line(fstab_line, Display_Error, parse_userdata ? NULL : &twrp_flags)) {
+			if (partition->Mount_Point == "/data") data = partition;
+			if (partition->Mount_Point == "/metadata") meta = partition;
+			if (partition->Is_Super && !Prepare_Super_Volume(partition)) {
+				goto clear;
+			}
 			Partitions.push_back(partition);
+		}
 		else
+clear:
 			delete partition;
 
 		memset(fstab_line, 0, sizeof(fstab_line));
 	}
 	fclose(fstabFile);
 
-	if (twrp_flags.size() > 0) {
+	if (!parse_userdata && twrp_flags.size() > 0) {
 		LOGINFO("Processing remaining twrp.flags\n");
 		// Add any items from twrp.flags that did not exist in the recovery.fstab
 		for (std::map<string, Flags_Map>::iterator mapit=twrp_flags.begin(); mapit!=twrp_flags.end(); mapit++) {
@@ -266,9 +317,35 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 			mapit->second.fstab_line = NULL;
 		}
 	}
-	if (Get_Super_Status()) {
-		Setup_Super_Devices();
+	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
+	if (!parse_userdata) {
+
+		if (ven) ven->Mount(true);
+		if (odm) odm->Mount(true);
+		if (TWFunc::Find_Fstab(Fstab_Filename)) {
+			string service;
+			LOGINFO("Fstab: %s\n", Fstab_Filename.c_str());
+			TWFunc::copy_file(Fstab_Filename, additional_fstab, 0600, false);
+			Fstab_Filename = additional_fstab;
+			property_set("fstab.additional", "1");
+			TWFunc::Get_Service_From(ven, "keymaster", service);
+			LOGINFO("KEYMASTER: '%s' \n", TWFunc::Get_Version_From_Service(service).c_str());
+			property_set("keymaster_ver", TWFunc::Get_Version_From_Service(service).c_str());
+			parse_userdata = true;
+			RESET("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
+			RESET("ro.crypto.volume.metadata.method", "", ven, odm);
+			RESET("ro.crypto.volume.options", "", ven, odm);
+			RESET("external_storage.projid.enabled", "", ven, odm);
+			RESET("external_storage.casefold.enabled", "", ven, odm);
+			RESET("external_storage.sdcardfs.enabled", "", ven, odm);
+			goto parse;
+		} else {
+			LOGINFO("Unable to parse vendor fstab\n");
+		}
 	}
+	if (ven) ven->UnMount(true);
+	if (odm) odm->UnMount(true);
 	LOGINFO("Done processing fstab files\n");
 
 	if (recovery_mode) {
@@ -433,7 +510,7 @@ void TWPartitionManager::Decrypt_Data() {
 			Set_Crypto_Type("file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 #ifdef USE_FSCRYPT
-			if (android::vold::fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false, false, Decrypt_Data->Current_File_System)) {
+			if (android::vold::fscrypt_mount_metadata_encrypted(Decrypt_Data->Actual_Block_Device, Decrypt_Data->Mount_Point, false, false, Decrypt_Data->Current_File_System, TWFunc::Path_Exists(additional_fstab) ? additional_fstab : "")) {
 				std::string crypto_blkdev = android::base::GetProperty("ro.crypto.fs_crypto_blkdev", "error");
 				Decrypt_Data->Decrypted_Block_Device = crypto_blkdev;
 				LOGINFO("Successfully decrypted metadata encrypted data partition with new block device: '%s'\n", crypto_blkdev.c_str());
