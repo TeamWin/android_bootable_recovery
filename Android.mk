@@ -87,6 +87,7 @@ LOCAL_C_INCLUDES += \
     system/core/fs_mgr/include/ \
     system/core/fs_mgr/libdm/include/ \
     system/core/fs_mgr/liblp/include/ \
+    system/core/fs_mgr/ \
     system/gsid/include/ \
     system/core/init/ \
     system/extras/ext4_utils/include \
@@ -337,7 +338,6 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE_METADATA_DECRYPT
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),false)
-		TW_INCLUDE_LIBRESETPROP := true
         LOCAL_CFLAGS += -DTW_CRYPTO_USE_SYSTEM_VOLD
         LOCAL_STATIC_LIBRARIES += libvolddecrypt
     endif
@@ -351,6 +351,7 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         endif
         LOCAL_SHARED_LIBRARIES += libcryptfs_hw
     endif
+    TW_INCLUDE_LIBRESETPROP := true
 endif
 WITH_CRYPTO_UTILS := \
     $(if $(wildcard system/core/libcrypto_utils/android_pubkey.c),true)
@@ -508,6 +509,11 @@ endif
 ifeq ($(TW_INCLUDE_RESETPROP), true)
 TWRP_REQUIRED_MODULES += \
     resetprop
+endif
+
+ifeq ($(TW_INCLUDE_LIBRESETPROP), true)
+TWRP_REQUIRED_MODULES += \
+    libresetprop
 endif
 
 TWRP_REQUIRED_MODULES += \

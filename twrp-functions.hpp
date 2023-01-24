@@ -119,10 +119,14 @@ public:
 	static bool Is_TWRP_App_In_System(); // Check if the TWRP app is installed in the system partition
 	static void checkforapp();
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
+	static int Delete_Property(string Prop_Name); // Delete properties (non-persistent properties only)
 	static void List_Mounts(); // List current mounts by the kernel
 	static void Clear_Bootloader_Message(); // Removes the bootloader message from misc for next boot
 	static string Check_For_TwrpFolder(); // Gets user defined path on storage where backups should be stored
 	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
+	static bool Find_Fstab(string &fstab);
+	static bool Get_Service_From(TWPartition *Partition, std::string Service, std::string &Ret);
+	static std::string Get_Version_From_Service(std::string name);
 
 	static bool abx_to_xml(const std::string path, std::string &result); // could we convert abx to xml (if so, return the full path to the converted file)
 private:
