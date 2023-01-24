@@ -87,6 +87,7 @@ LOCAL_C_INCLUDES += \
     system/core/fs_mgr/include/ \
     system/core/fs_mgr/libdm/include/ \
     system/core/fs_mgr/liblp/include/ \
+    system/core/fs_mgr/ \
     system/gsid/include/ \
     system/core/init/ \
     system/extras/ext4_utils/include \
@@ -507,7 +508,7 @@ endif
 
 ifeq ($(TW_INCLUDE_RESETPROP), true)
 TWRP_REQUIRED_MODULES += \
-    resetprop
+    resetprop.recovery
 endif
 
 TWRP_REQUIRED_MODULES += \
