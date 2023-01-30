@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570d1820_64107b07",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-01-30T15:09:41Z",
+      "side": 1,
+      "message": "This should just say \"Setting\" not \"Settings\"",
+      "revId": "6741228d948e3b1fc1e4baee6e61a208316fc03d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
