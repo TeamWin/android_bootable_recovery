@@ -34,6 +34,7 @@
 #include <dirent.h>
 #include <private/android_filesystem_config.h>
 #include <android-base/properties.h>
+#include <fstream>
 
 #include <string>
 #include <sstream>
@@ -2347,6 +2348,10 @@ int GUIAction::applycustomtwrpfolder(string arg __unused)
 	if (ret) {
 		DataManager::SetValue(TW_RECOVERY_FOLDER_VAR, '/' + arg);
 		DataManager::SetValue(TW_BACKUPS_FOLDER_VAR, newBackupFolder);
+		//Creates an empty file that marks which folder is TWRP with the renamed new name, after reboot.
+		string path= newFolder + "/.twrpcf";
+		std::ofstream twrpcf(path);
+		twrpcf.close();
 	}
 	operation_end((int)!ret);
 	return 0;

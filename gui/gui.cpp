@@ -799,7 +799,7 @@ extern "C" int gui_loadResources(void)
 	{
 		std::string theme_path;
 
-		theme_path = DataManager::GetSettingsStoragePath();
+		theme_path = DataManager::GetCurrentStoragePath();
 		if (!PartitionManager.Mount_Settings_Storage(false))
 		{
 			int retry_count = 5;
@@ -849,7 +849,7 @@ extern "C" int gui_loadCustomResources(void)
 		return -1;
 	}
 
-	std::string theme_path = DataManager::GetSettingsStoragePath();
+	std::string theme_path = DataManager::GetCurrentStoragePath();
 	theme_path += TWFunc::Check_For_TwrpFolder() + "/theme/ui.zip";
 	// Check for a custom theme
 	if (TWFunc::Path_Exists(theme_path)) {

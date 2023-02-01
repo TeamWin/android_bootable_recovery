@@ -1505,7 +1505,7 @@ int PageManager::RunReload() {
 		return 0;
 
 	mReloadTheme = false;
-	theme_path = DataManager::GetSettingsStoragePath();
+	theme_path = DataManager::GetCurrentStoragePath();
 	if (PartitionManager.Mount_By_Path(theme_path.c_str(), 1) < 0) {
 		LOGERR("Unable to mount %s during gui_reload_theme function.\n", theme_path.c_str());
 		ret_val = 1;
