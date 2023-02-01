@@ -1439,7 +1439,7 @@ string TWFunc::Check_For_TwrpFolder() {
 			type = Get_D_Type_From_Stat(fullPath);
 		}
 
-		if (type == DT_DIR && Path_Exists(fullPath + '/' + TW_SETTINGS_FILE)) {
+		if (type == DT_DIR && Path_Exists(fullPath + "/.twrpcf")) {
 			if ('/' + name == TW_DEFAULT_RECOVERY_FOLDER) {
 				oldFolder = name;
 			} else {
@@ -1452,6 +1452,9 @@ string TWFunc::Check_For_TwrpFolder() {
 
 	if (oldFolder == "" && customTWRPFolders.empty()) {
 		LOGINFO("No recovery folder found. Using default folder.\n");
+		//Creates the TWRP folder if it does not exist on the device and if the folder has not been changed to a new name
+		mainPath += TW_DEFAULT_RECOVERY_FOLDER;
+		mkdir(mainPath.c_str(), 0777);
 		goto exit;
 	} else if (customTWRPFolders.empty()) {
 		LOGINFO("No custom recovery folder found. Using TWRP as default.\n");
