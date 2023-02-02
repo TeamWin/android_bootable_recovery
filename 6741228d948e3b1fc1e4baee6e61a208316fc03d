@@ -16,6 +16,24 @@
       "message": "This should just say \"Setting\" not \"Settings\"",
       "revId": "6741228d948e3b1fc1e4baee6e61a208316fc03d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e82b092_13dd1184",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-02-02T15:08:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "570d1820_64107b07",
+      "revId": "6741228d948e3b1fc1e4baee6e61a208316fc03d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
