@@ -117,8 +117,12 @@ static void process_fastbootd_mode() {
 			return;
 		}
 		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+		TWPartition* ven_dlkm = PartitionManager.Find_Partition_By_Path("/vendor_dlkm");
 		PartitionManager.Setup_Super_Devices();
-		PartitionManager.Prepare_Super_Volume(ven);
+		if(ven)
+			PartitionManager.Prepare_Super_Volume(ven);
+		if(ven_dlkm)
+			PartitionManager.Prepare_Super_Volume(ven_dlkm);
 		KernelModuleLoader::Load_Vendor_Modules();
 		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
 			PartitionManager.Unmap_Super_Devices();
