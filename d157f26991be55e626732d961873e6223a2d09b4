@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1676046599 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1676046599-0EE44D260D775D0AB72C93E4CA40B0307D7F2B79\n\n0000000000000000000000000000000000000000 d157f26991be55e626732d961873e6223a2d09b4 refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmPmcQcACgkQH1oT9zX3\nIyI16RAAj3E/snS5ZK8njy59pAesgBc+jvah9Isy8OGqesNctI8DNttHJ2NQtwjU\nKcWS5+w1fYmwJGxZxAs75Y7JYO7zl59fACqhuLOJr0M9oEQ43AS5NVvwqS10rQTw\nIfGPqT7S7a38vZFkTiNCWplAA2B3+UMzh1fWJ+nDk8ilWwjT7rU4a+jKH1t/Hwrj\nVqeHShhy+GPOGD4r25jXF0M/A4gsEFOGgPNKxkxKdUzr0W29aJMpAdQfP4nSvSnd\nn46Btbz5jBi75ewxu7SQyS031Ar4zl7TyI0WV9xV6KPjg3wuUR3Wpvz4csHIoeUP\nNNR0XP5bbD5MS0JULiAdxaobck4jjPxpN4ihoPkBMngID/SVyH/1DKD0sgVlvhqq\nltZpEn3TxcIXaCvSy4ggeLPjhHM/v7ubDhj1u4K4RTHIwcsisekkPKkJbjQUu9tI\nUUbwC0hUskAKk1KY7stQmbZIqNY9iJJj9lE6uik1J6sAgje1xfCW1E++SeM1S/ze\ndl2pMVZj18OQCrEZPeJjUkofWaA48k5vMiDaiQKTQL9MjQqFDXRH1jkFiH9ClI/b\nmDGVX1sC8NWSkKfBd+OlYXDpr+9gADtwWz8z2jXirS4Ggwc5NzwDGx8UN4xTPnzy\nRlju2V1s+QFm+AtiF9p24ySTt9nfhwz9yQ7icEp6vV7SPrfYXyQ\u003d\n\u003d/JAv\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee88a0e6_a8cb745f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-02-10T16:31:41Z",
+      "side": 1,
+      "message": "This code is dead and is overdue for removal.",
+      "revId": "d157f26991be55e626732d961873e6223a2d09b4",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
