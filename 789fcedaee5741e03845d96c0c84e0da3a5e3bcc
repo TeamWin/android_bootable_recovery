@@ -18,6 +18,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a10293_408bb45b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2023-02-22T03:04:26Z",
+      "side": 1,
+      "message": "helps on caprip (Moto G30)",
+      "revId": "789fcedaee5741e03845d96c0c84e0da3a5e3bcc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94e2b548_ccaacb46",
