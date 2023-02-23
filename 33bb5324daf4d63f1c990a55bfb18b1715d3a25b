@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf279bb_0abea85e",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-23T01:27:25Z",
+      "side": 1,
+      "message": "Since this isn\u0027t part of the class, should this function be somewhere else? Why call it RESET? Maybe Reset_Prop_From_Partition?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3d309c_be9845ed",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-23T01:27:25Z",
+      "side": 1,
+      "message": "Can we set this somewhere as a constant instead of a magic number?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a23eca_f62f275d",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-23T01:27:25Z",
+      "side": 1,
+      "message": "Can we set this somewhere as a constant instead of a magic number?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c19026_a6fb44c9",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-23T01:27:25Z",
+      "side": 1,
+      "message": "Indentation should be fixed.",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67149e02_66fab60e",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-23T01:27:25Z",
+      "side": 1,
+      "message": "Can we define this as a constant?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e15df3_fdaac2a6",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-23T01:27:25Z",
+      "side": 1,
+      "message": "Can this be defined as a local variable for easy modification later?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
