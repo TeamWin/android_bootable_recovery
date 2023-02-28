@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f148355f_09186100",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-02-28T00:02:06Z",
+      "side": 1,
+      "message": "I don\u0027t have any major issues with this but what about calling the build variable something like:\n\nTW_PREPARE_DATA_MEDIA_EARLY",
+      "revId": "fdcdb28de21c2c832a5a842621b41445aa335390",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
