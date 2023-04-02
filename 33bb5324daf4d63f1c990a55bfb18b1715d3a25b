@@ -18,6 +18,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48dd9133_8abcb997",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-04-02T10:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bf279bb_0abea85e",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb3d309c_be9845ed",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-23T01:27:25Z",
       "side": 1,
       "message": "Can we set this somewhere as a constant instead of a magic number?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03483fc2_e3c19b5d",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-04-02T10:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb3d309c_be9845ed",
       "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
@@ -52,6 +88,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd372e51_66be179e",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-04-02T10:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a23eca_f62f275d",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91c19026_a6fb44c9",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-23T01:27:25Z",
       "side": 1,
       "message": "Indentation should be fixed.",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f908c23d_aee7f654",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-04-02T10:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91c19026_a6fb44c9",
       "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
@@ -86,6 +158,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a841a3c_011db68c",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-04-02T10:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67149e02_66fab60e",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5e15df3_fdaac2a6",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-02-23T01:27:25Z",
       "side": 1,
       "message": "Can this be defined as a local variable for easy modification later?",
+      "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e25a31_4ddb28bd",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-04-02T10:47:21Z",
+      "side": 1,
+      "message": "these are defined by google all possible existance of the fstab. I don\u0027t think this needed to be changed",
+      "parentUuid": "a5e15df3_fdaac2a6",
       "revId": "33bb5324daf4d63f1c990a55bfb18b1715d3a25b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
