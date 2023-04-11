@@ -82,6 +82,7 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	tar_dev_t *td = NULL;
 	tar_ino_t *ti = NULL;
 	char path[MAXPATHLEN];
+	int filefd;
 
 #ifdef DEBUG
 	LOG("==> tar_append_file(TAR=0x%p (\"%s\"), realname=\"%s\", "
@@ -303,6 +304,20 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	if (t->options & TAR_VERBOSE)
 		LOG("%s\n", th_get_pathname(t));
 
+#if defined(O_BINARY)
+        filefd = open(realname, O_RDONLY|O_BINARY);
+#else
+        filefd = open(realname, O_RDONLY);
+#endif
+        if (filefd == -1)
+        {
+                if (errno == ENOKEY) {
+                        LOG("Required key not available, skipping file\n");
+			close(filefd);
+			return 0;
+                }
+        }
+	close(filefd);
 #ifdef DEBUG
 	LOG("tar_append_file(): writing header");
 #endif

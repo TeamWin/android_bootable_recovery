@@ -719,7 +719,7 @@ th_write(TAR *t)
 	}
 
 #ifdef DEBUG
-	LOG("th_write(): returning 0");
+	LOG("th_write(): returning 0\n");
 #endif
 	return 0;
 }
