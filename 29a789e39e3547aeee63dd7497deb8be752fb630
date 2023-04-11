@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65986b5_3c3f1647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-04-11T09:28:07Z",
+      "side": 1,
+      "message": "The original default seems obsolete (possibly from a long gone era), and does not exist on any device I have seen in the past few years.",
+      "revId": "29a789e39e3547aeee63dd7497deb8be752fb630",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
