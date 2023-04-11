@@ -369,6 +369,11 @@ tar_append_regfile(TAR *t, const char *realname)
 #ifdef DEBUG
 		perror("open()");
 #endif
+		if (errno == ENOKEY) {
+			LOG("Required key not available, skipping file\n");
+			rv = 0;
+			goto fail;
+		}
 		return -1;
 	}
 
