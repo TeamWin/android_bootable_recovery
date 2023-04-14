@@ -16,6 +16,23 @@
       "message": "The original default seems obsolete (possibly from a long gone era), and does not exist on any device I have seen in the past few years.",
       "revId": "29a789e39e3547aeee63dd7497deb8be752fb630",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a210c988_d75b8d58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-04-14T09:12:48Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e \u003e Patch Set 1: Code-Review+1\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e I think the old default lun would still be relevant for legacy devices that don\u0027t use configfs. Can we use an ifdef here that sets the new default only if configfs is used? I\u0027m not sure if there\u0027s a build time flag for this or not. If not, this change probably does still make sense in newer trees since most devices probably use configfs, but I do know that some legacy devices may be getting built in this branch\n\nThe worst that can happen is that these legacy devices (how many of them are using the 12.1 manifest?) will now get the log spam (about the lun file not being found) that all non-legacy devices have been getting for the past 3 years or so.",
+      "revId": "29a789e39e3547aeee63dd7497deb8be752fb630",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
