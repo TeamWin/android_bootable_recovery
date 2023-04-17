@@ -33,6 +33,23 @@
       "message": "After the encrypted device is successfully decrypted, it may be necessary to call:\nDataManager::SetBackupFolder();\n\nhttps://github.com/TeamWin/android_bootable_recovery/blob/9fb13afad8331481b4a516ee32620ca49f6c833a/gui/action.cpp#L1539\n\nThis is how it works for me, maybe there is a better way...",
       "revId": "cec41fd8a398e27d686a1209d2a6e6758eec8478",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00dc9c91_034f851c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-04-17T23:34:18Z",
+      "side": 1,
+      "message": "Please address comments.",
+      "revId": "cec41fd8a398e27d686a1209d2a6e6758eec8478",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
