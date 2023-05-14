@@ -67,6 +67,24 @@
       "message": "custom themes are working fine on fleur",
       "revId": "cec41fd8a398e27d686a1209d2a6e6758eec8478",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e79afa84_557d6c40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-05-14T13:39:27Z",
+      "side": 1,
+      "message": "Well, on my device, the function is called after decryption without the insertion of any extra lines, perhaps you need that commit https://gerrit.twrp.me/c/android_bootable_recovery/+/6363/1..2 which, at least until now, had not been fully merged.",
+      "parentUuid": "ab0e76e5_147f86eb",
+      "revId": "cec41fd8a398e27d686a1209d2a6e6758eec8478",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
