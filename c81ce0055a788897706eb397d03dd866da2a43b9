@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28a4d1c_6bc4798f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115
+      },
+      "writtenOn": "2023-05-29T20:27:34Z",
+      "side": 1,
+      "message": "This is an old abandoned change of mine from https://gerrit.omnirom.org/c/android_bootable_recovery/+/35694\nIt should be also cherry-picked to older active branches like the Android 11 and Android 9 branch. Should I push those seperately?",
+      "revId": "c81ce0055a788897706eb397d03dd866da2a43b9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
