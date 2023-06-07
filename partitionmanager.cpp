@@ -380,8 +380,10 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 	#endif
 
 		Update_System_Details();
+	#ifndef PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 		if (Get_Super_Status())
 			Setup_Super_Partition();
+	#endif
 		UnMount_Main_Partitions();
 	#ifdef AB_OTA_UPDATER
 		DataManager::SetValue("tw_active_slot", Get_Active_Slot_Display());
