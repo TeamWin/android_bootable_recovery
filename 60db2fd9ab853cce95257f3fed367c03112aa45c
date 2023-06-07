@@ -33,6 +33,23 @@
       "message": "Also does this need to be on a12.1 devices?",
       "revId": "60db2fd9ab853cce95257f3fed367c03112aa45c",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c129b52_5b2e4498",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 370
+      },
+      "writtenOn": "2023-06-07T00:57:15Z",
+      "side": 1,
+      "message": "The prop is set by the build flag PRODUCT_RETROFIT_DYNAMIC_PARTITIONS, so it would make sense to use that instead I suppose.\n\nAs for android-12 I believe the issue would be the same, but I haven\u0027t checked.\n\nIdeally TWRP would detect the sub_partitions and add them automatically similar to what I described in the commit message, but that could be added in another patch, as for now it\u0027s simpler to just disable it.",
+      "revId": "60db2fd9ab853cce95257f3fed367c03112aa45c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
