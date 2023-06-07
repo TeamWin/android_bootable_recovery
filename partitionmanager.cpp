@@ -3484,7 +3484,10 @@ void TWPartitionManager::Setup_Super_Partition() {
 	superPartition->Is_Present = true;
 	superPartition->Is_SubPartition = false;
 	superPartition->Setup_Image();
-	Add_Partition(superPartition);
+	char dynamic_retrofit[PROPERTY_VALUE_MAX];
+	property_get("ro.boot.dynamic_partitions_retrofit", dynamic_retrofit, "error");
+	if (strcmp(dynamic_retrofit, "error") == 0)
+		Add_Partition(superPartition);
 	PartitionManager.Output_Partition(superPartition);
 }
 
