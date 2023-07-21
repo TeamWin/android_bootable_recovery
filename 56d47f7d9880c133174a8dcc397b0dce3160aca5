@@ -16,6 +16,24 @@
       "message": "Is this still needed?",
       "revId": "56d47f7d9880c133174a8dcc397b0dce3160aca5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7235d2af_92938315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1028
+      },
+      "writtenOn": "2023-07-21T18:50:15Z",
+      "side": 1,
+      "message": "I will test if the other module loading patch solves this issue during the weekend. For bare functionality, it isn\u0027t necessary, but it is needed for battery statats and vibration.",
+      "parentUuid": "07dee350_fd5f7c64",
+      "revId": "56d47f7d9880c133174a8dcc397b0dce3160aca5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
