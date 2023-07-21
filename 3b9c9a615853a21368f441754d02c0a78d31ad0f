@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2438f9aa_1c5a64e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-07-21T15:45:52Z",
+      "side": 1,
+      "message": "Seems fine to me. Doesn\u0027t break anything on my devices. Others should test, though.",
+      "revId": "3b9c9a615853a21368f441754d02c0a78d31ad0f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
