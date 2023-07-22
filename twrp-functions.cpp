@@ -57,6 +57,10 @@
 #include "cutils/properties.h"
 #include "cutils/android_reboot.h"
 #include <sys/reboot.h>
+#ifdef TW_INCLUDE_CRYPTO
+#include "gui/rapidxml.hpp"
+#include "gui/pages.hpp"
+#endif
 #endif // ndef BUILD_TWRPTAR_MAIN
 #ifndef TW_EXCLUDE_ENCRYPTED_BACKUPS
 	#include "openaes/inc/oaes_lib.h"
@@ -1584,55 +1588,67 @@ bool TWFunc::Find_Fstab(string &fstab) {
 	return true;
 }
 
-bool TWFunc::Get_Service_From(TWPartition *Partition, std::string Service, std::string &Res) {
-	Partition->Mount(true);
-	std::string Path = Partition->Get_Mount_Point() + "/etc/init/";
-	std::string Name;
-	std::vector<std::string> Data;
-	bool Found = false, ret = false;
-	DIR* dir;
-	struct dirent* der;
-	dir = opendir(Path.c_str());
-	while ((der = readdir(dir)) != NULL)
-	{
-		Name = der->d_name;
-		if (Name.find(Service) != string::npos) {
-			Found = true;
-			Path += Name;
-			break;
+static inline std::string Get_Version_From_FQ(std::string name) {
+	int start, end;
+	start = name.find('@') + 1;
+	end = name.find(":") - start;
+	return name.substr(start, end);
+}
+
+bool TWFunc::Get_Service_From(std::string partition, std::string service, std::string &res, bool alreadyMounted) {
+	std::string path = partition + "/etc/vintf/manifest.xml";
+	TWPartition* part = PartitionManager.Find_Partition_By_Path(partition);
+	bool mounted = false, ret = false;
+	std::string name;
+	std::vector<std::string> data;
+	// For ramdisk first
+	if (alreadyMounted) part->UnMount(true);
+process:
+	char* manifest = PageManager::LoadFileToBuffer(path, NULL);
+	if (manifest == NULL && !mounted) {
+		LOGINFO("Unable to find the manifest in the ramdisk, mounting the partition\n");
+		if (part) {
+			part->Mount(true);
+			mounted = true;
+			goto process;
 		}
-	}
-	closedir(dir);
-
-	if (!Found) {
-		LOGINFO("Unable to locate service RC\n");
-		goto finish;
-	}
-
-	if (read_file(Path, Data) != 0) {
-		LOGINFO("Unable to read file '%s'\n", Path.c_str());
-		goto finish;
-	}
-
-	for (int index = 0; index < Data.size(); index++) {
-		Name = Data.at(index);
-		if (Name.find("service") != string::npos) {
-			Res = Name.substr(Name.find_last_of('/')+1);
-			ret = true;
-			goto finish;
+	} else {
+		xml_document<>* vintfManifest = new xml_document<>();
+		vintfManifest->parse<0>(manifest);
+		xml_node<> * manifestNode = vintfManifest->first_node("manifest");
+		std::string version;
+		if (manifestNode) {
+			for (xml_node<>* child = manifestNode->first_node(); child; child = child->next_sibling()) {
+				std::string type = child->name();
+				if (type == "hal") {
+					xml_node<>* nameNode = child->first_node("name");
+					type = nameNode->value();
+					if (type == service) {
+						xml_node<> *versionNode = child->first_node("version");
+						if (versionNode != nullptr) {
+							LOGINFO("VERSION, %s\n", versionNode->value());
+						} else {
+							versionNode = child->first_node("fqname");
+							if (versionNode == nullptr) goto finish;
+								LOGINFO("VERISON, %s\n", versionNode->value());
+						}
+						version = versionNode->value();
+						if (version.find('@') == std::string::npos) {
+							res = version;
+						} else {
+							res = Get_Version_From_FQ(version);
+						}
+						LOGINFO("VERSION: %s\n", res.c_str());
+					}
+				}
+			}
 		}
 	}
 
 finish:
-	Partition->UnMount(true);
+	if (alreadyMounted)
+		part->Mount(true);
 	return ret;
-}
-
-std::string TWFunc::Get_Version_From_Service(std::string name) {
-	int start, end;
-	start = name.find('@') + 1;
-	end = name.find("-") - start;
-	return name.substr(start, end);
 }
 
 #endif // ndef BUILD_TWRPTAR_MAIN
