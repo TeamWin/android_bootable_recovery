@@ -204,6 +204,124 @@ void inline Reset_Prop_From_Partition(std::string prop, std::string def, TWParti
 	}
 }
 
+#ifdef TW_LEGACY_PROCESS_FSTAB
+int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
+	FILE *fstabFile;
+	char fstab_line[MAX_FSTAB_LINE_LENGTH];
+	std::map<string, Flags_Map> twrp_flags;
+
+	fstabFile = fopen("/etc/twrp.flags", "rt");
+	if (fstabFile != NULL) {
+		LOGINFO("Reading /etc/twrp.flags\n");
+		while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
+			size_t line_size = strlen(fstab_line);
+			if (fstab_line[line_size - 1] != '\n')
+				fstab_line[line_size] = '\n';
+			Flags_Map line_flags;
+			line_flags.Primary_Block_Device = "";
+			line_flags.Alternate_Block_Device = "";
+			line_flags.fstab_line = (char*)malloc(MAX_FSTAB_LINE_LENGTH);
+			if (!line_flags.fstab_line) {
+				LOGERR("malloc error on line_flags.fstab_line\n");
+				return false;
+			}
+			memcpy(line_flags.fstab_line, fstab_line, MAX_FSTAB_LINE_LENGTH);
+			bool found_separator = false;
+			char *fs_loc = NULL;
+			char *block_loc = NULL;
+			char *flags_loc = NULL;
+			size_t index, item_index = 0;
+			for (index = 0; index < line_size; index++) {
+				if (fstab_line[index] <= 32) {
+					fstab_line[index] = '\0';
+					found_separator = true;
+				} else if (found_separator) {
+					if (item_index == 0) {
+						fs_loc = fstab_line + index;
+					} else if (item_index == 1) {
+						block_loc = fstab_line + index;
+					} else if (item_index > 1) {
+						char *ptr = fstab_line + index;
+						if (*ptr == '/') {
+							line_flags.Alternate_Block_Device = ptr;
+						} else if (strlen(ptr) > strlen("flags=") && strncmp(ptr, "flags=", strlen("flags=")) == 0) {
+							flags_loc = ptr;
+							// Once we find the flags=, we're done scanning the line
+							break;
+						}
+					}
+					found_separator = false;
+					item_index++;
+				}
+			}
+			if (block_loc)
+				line_flags.Primary_Block_Device = block_loc;
+			if (fs_loc)
+				line_flags.File_System = fs_loc;
+			if (flags_loc)
+				line_flags.Flags = flags_loc;
+			string Mount_Point = fstab_line;
+			twrp_flags[Mount_Point] = line_flags;
+			memset(fstab_line, 0, sizeof(fstab_line));
+		}
+		fclose(fstabFile);
+	}
+
+	fstabFile = fopen(Fstab_Filename.c_str(), "rt");
+	if (fstabFile == NULL) {
+		LOGERR("Critical Error: Unable to open fstab at '%s'.\n", Fstab_Filename.c_str());
+		return false;
+	} else
+		LOGINFO("Reading %s\n", Fstab_Filename.c_str());
+
+	while (fgets(fstab_line, sizeof(fstab_line), fstabFile) != NULL) {
+		if (strstr(fstab_line, "swap"))
+			continue; // Skip swap in recovery
+
+		if (fstab_line[0] == '#')
+			continue;
+
+		size_t line_size = strlen(fstab_line);
+		if (fstab_line[line_size - 1] != '\n')
+			fstab_line[line_size] = '\n';
+
+		TWPartition* partition = new TWPartition();
+		if (partition->Process_Fstab_Line(fstab_line, Display_Error, &twrp_flags))
+			Partitions.push_back(partition);
+		else
+			delete partition;
+
+		memset(fstab_line, 0, sizeof(fstab_line));
+	}
+	fclose(fstabFile);
+
+	if (twrp_flags.size() > 0) {
+		LOGINFO("Processing remaining twrp.flags\n");
+		// Add any items from twrp.flags that did not exist in the recovery.fstab
+		for (std::map<string, Flags_Map>::iterator mapit=twrp_flags.begin(); mapit!=twrp_flags.end(); mapit++) {
+			if (Find_Partition_By_Path(mapit->first) == NULL) {
+				TWPartition* partition = new TWPartition();
+				if (partition->Process_Fstab_Line(mapit->second.fstab_line, Display_Error, NULL))
+					Partitions.push_back(partition);
+				else
+					delete partition;
+			}
+			if (mapit->second.fstab_line)
+				free(mapit->second.fstab_line);
+			mapit->second.fstab_line = NULL;
+		}
+	}
+	if (Get_Super_Status()) {
+		Setup_Super_Devices();
+	}
+	LOGINFO("Done processing fstab files\n");
+
+	if (recovery_mode) {
+		Setup_Fstab_Partitions(Display_Error);
+	}
+	return true;
+}
+#else // TW_LEGACY_PROCESS_FSTAB
 int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
 	FILE *fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
@@ -378,6 +496,7 @@ clear:
 	}
 	return true;
 }
+#endif // TW_LEGACY_PROCESS_FSTAB
 
 void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 		TWPartition* settings_partition = NULL;
