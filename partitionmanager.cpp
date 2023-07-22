@@ -342,6 +342,8 @@ clear:
 			mapit->second.fstab_line = NULL;
 		}
 	}
+#ifdef TW_FORCE_USE_RECOVERY_FSTAB
+#else
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
 	if (!parse_userdata) {
@@ -371,6 +373,7 @@ clear:
 	}
 	if (ven) ven->UnMount(true);
 	if (odm) odm->UnMount(true);
+#endif
 	LOGINFO("Done processing fstab files\n");
 
 	if (recovery_mode) {
