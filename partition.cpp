@@ -2245,12 +2245,22 @@ bool TWPartition::Wipe_EXTFS(string File_System) {
 	//string size_str =to_string(dev_sz / 4096);
 	string size_str = dout;
 	string Command;
+	string CommandUmount;
 
 	gui_msg(Msg("formatting_using=Formatting {1} using {2}...")(Display_Name)("mke2fs"));
 
 	// Execute mke2fs to create empty ext4 filesystem
 	Command = "mke2fs -t " + File_System + " -b 4096 " + Actual_Block_Device + " " + size_str;
 	LOGINFO("mke2fs command: %s\n", Command.c_str());
+	if (Display_Name == "Data") {
+		if (TWFunc::Path_Exists("/sdcard/TWRP")) {
+			CommandUmount = "umount /sdcard";
+			ret = TWFunc::Exec_Cmd(CommandUmount);
+			if (ret) {
+				return true;
+			}
+ 		}
+	}
 	ret = TWFunc::Exec_Cmd(Command);
 	if (ret) {
 		gui_msg(Msg(msg::kError, "unable_to_wipe=Unable to wipe {1}.")(Display_Name));
