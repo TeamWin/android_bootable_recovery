@@ -541,6 +541,18 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			Display_Name = "Vendor";
 			Backup_Display_Name = Display_Name;
 			Storage_Name = Display_Name;
+		} else if (Mount_Point == "/metadata") {
+			Display_Name = "Metadata";
+			Backup_Display_Name = Display_Name;
+			Storage_Name = Display_Name;
+		} else if (Mount_Point == "/odm_dlkm") {
+			Display_Name = "ODM DLKM";
+			Backup_Display_Name = Display_Name;
+			Storage_Name = Display_Name;
+		} else if (Mount_Point == "/vendor_dlkm") {
+			Display_Name = "Vendor DLKM";
+			Backup_Display_Name = Display_Name;
+			Storage_Name = Display_Name;
 		}
 #ifdef TW_EXTERNAL_STORAGE_PATH
 		if (Mount_Point == EXPAND(TW_EXTERNAL_STORAGE_PATH)) {
@@ -574,6 +586,11 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 		Setup_Image();
 		if (Mount_Point == "/boot") {
 			Display_Name = "Boot";
+			Backup_Display_Name = Display_Name;
+			Can_Be_Backed_Up = true;
+			Can_Flash_Img = true;
+		} else if (Mount_Point == "/init_boot") {
+			Display_Name = "Init Boot";
 			Backup_Display_Name = Display_Name;
 			Can_Be_Backed_Up = true;
 			Can_Flash_Img = true;
