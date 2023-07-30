@@ -69,6 +69,23 @@
       "parentUuid": "912ab896_cd55e2fb",
       "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b435328f_29e56d1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-07-30T20:28:57Z",
+      "side": 1,
+      "message": "On all my devices running A13 (and there are many of them) /data/gsi/ just has empty sub-directories, and there has never been a problem with /data/gsi in terms of backup and restore. So this does not affect all devices.",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
