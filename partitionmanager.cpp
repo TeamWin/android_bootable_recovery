@@ -345,9 +345,14 @@ clear:
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
 	if (!parse_userdata) {
-
-		if (ven) ven->Mount(Display_Error);
-		if (odm) odm->Mount(Display_Error);
+		if (ven) {
+			ven->Mount_Read_Only_Temporary = true;
+			ven->Mount(Display_Error);
+		}
+		if (odm) {
+			odm->Mount_Read_Only_Temporary = true;
+			odm->Mount(Display_Error);
+		}
 		if (TWFunc::Find_Fstab(Fstab_Filename)) {
 			string service;
 			LOGINFO("Fstab: %s\n", Fstab_Filename.c_str());
@@ -369,8 +374,14 @@ clear:
 			LOGINFO("Unable to parse vendor fstab\n");
 		}
 	}
-	if (ven) ven->UnMount(Display_Error);
-	if (odm) odm->UnMount(Display_Error);
+	if (ven) {
+		ven->UnMount(Display_Error);
+		ven->Mount_Read_Only_Temporary = false;
+	}
+	if (odm) {
+		odm->UnMount(Display_Error);
+		odm->Mount_Read_Only_Temporary = false;
+	}
 	LOGINFO("Done processing fstab files\n");
 
 	return true;
