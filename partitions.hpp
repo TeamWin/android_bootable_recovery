@@ -280,6 +280,7 @@ private:
 	bool Ignore_Blkid;                                                        // Ignore blkid results due to superblocks lying to us on certain devices / partitions
 	bool Can_Flash_Img;                                                       // Indicates if this partition can have images flashed to it via the GUI
 	bool Mount_Read_Only;                                                     // Only mount this partition as read-only
+	bool Mount_Read_Only_Temporary;                                           // Only mount this partition as read-only temporarily. When it's true, Mount_Read_Only is ignored.
 	bool Is_Adopted_Storage;                                                  // Indicates that this partition is for adopted storage (android_expand)
 	bool SlotSelect;                                                          // Partition has A/B slots
 	TWExclude backup_exclusions;                                              // Exclusions for file based backups
