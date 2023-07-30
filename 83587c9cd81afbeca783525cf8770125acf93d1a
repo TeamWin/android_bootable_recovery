@@ -51,6 +51,24 @@
       "message": "Why are we excluding this directory and are all devices affected by having this restored?",
       "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8767a99_948768c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-07-30T16:58:24Z",
+      "side": 1,
+      "message": "reason is written on code comment",
+      "parentUuid": "912ab896_cd55e2fb",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
