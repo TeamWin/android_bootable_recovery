@@ -497,7 +497,7 @@ int TWPartitionManager::Write_Fstab(void) {
 	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
 		if ((*iter)->Can_Be_Mounted) {
 			Line = (*iter)->Actual_Block_Device + " " + (*iter)->Mount_Point + " " + (*iter)->Current_File_System +
-				((*iter)->Mount_Read_Only ? " ro " : " rw ") + "0 0\n";
+				((*iter)->Is_Read_Only() ? " ro " : " rw ") + "0 0\n";
 			fputs(Line.c_str(), fp);
 		}
 		// Handle subpartition tracking
@@ -1296,7 +1296,7 @@ int TWPartitionManager::Run_Restore(const string& Restore_Name) {
 			restore_path = Restore_List.substr(start_pos, end_pos - start_pos);
 			part_settings.Part = Find_Partition_By_Path(restore_path);
 			if (part_settings.Part != NULL) {
-				if (part_settings.Part->Mount_Read_Only) {
+				if (part_settings.Part->Is_Read_Only()) {
 					gui_msg(Msg(msg::kError, "restore_read_only=Cannot restore {1} -- mounted read only.")(part_settings.Part->Backup_Display_Name));
 					return false;
 				}
