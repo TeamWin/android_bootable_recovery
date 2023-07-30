@@ -277,6 +277,7 @@ TWPartition::TWPartition() {
 	MTP_Storage_ID = 0;
 	Can_Flash_Img = false;
 	Mount_Read_Only = false;
+	Mount_Read_Only_Temporary = false;
 	Is_Adopted_Storage = false;
 	Adopted_GUID = "";
 	SlotSelect = false;
@@ -1605,7 +1606,7 @@ bool TWPartition::Mount(bool Display_Error) {
 		else if (TWFunc::Path_Exists("/system/bin/mount.ntfs"))
 			Ntfsmount_Binary = "mount.ntfs";
 
-		if (Mount_Read_Only)
+		if (Is_Read_Only())
 			cmd = "/system/bin/" + Ntfsmount_Binary + " -o ro " + Actual_Block_Device + " " + Mount_Point;
 		else
 			cmd = "/system/bin/" + Ntfsmount_Binary + " " + Actual_Block_Device + " " + Mount_Point;
@@ -1621,13 +1622,13 @@ bool TWPartition::Mount(bool Display_Error) {
 			Current_File_System = "tntfs";
 	}
 
-	if (Mount_Read_Only)
+	if (Is_Read_Only())
 		flags |= MS_RDONLY;
 
 	if (Fstab_File_System == "yaffs2") {
 		// mount an MTD partition as a YAFFS2 filesystem.
 		flags = MS_NOATIME | MS_NODEV | MS_NODIRATIME;
-		if (Mount_Read_Only)
+		if (Is_Read_Only())
 			flags |= MS_RDONLY;
 		if (mount(Actual_Block_Device.c_str(), Mount_Point.c_str(), Fstab_File_System.c_str(), flags, NULL) < 0) {
 			if (mount(Actual_Block_Device.c_str(), Mount_Point.c_str(), Fstab_File_System.c_str(), flags | MS_RDONLY, NULL) < 0) {
@@ -1877,7 +1878,7 @@ bool TWPartition::Wipe_Data_Cache(void) {
 }
 
 bool TWPartition::Can_Repair() {
-	if (Mount_Read_Only)
+	if (Is_Read_Only())
 		return false;
 	if (Current_File_System == "vfat" && TWFunc::Path_Exists("/system/bin/fsck.fat"))
 		return true;
@@ -1999,7 +2000,7 @@ bool TWPartition::Repair() {
 }
 
 bool TWPartition::Can_Resize() {
-	if (Mount_Read_Only)
+	if (Is_Read_Only())
 		return false;
 	if ((Current_File_System == "ext2" || Current_File_System == "ext3" || Current_File_System == "ext4") && TWFunc::Path_Exists("/system/bin/resize2fs"))
 		return true;
@@ -2990,7 +2991,7 @@ bool TWPartition::Restore_Tar(PartitionSettings *part_settings) {
 		}
 	}
 #endif
-	if (Mount_Read_Only || Mount_Flags & MS_RDONLY)
+	if (Is_Read_Only() || Mount_Flags & MS_RDONLY)
 		// Remount as read only when restoration is complete
 		ReMount(true);
 
@@ -3027,15 +3028,14 @@ bool TWPartition::Restore_Image(PartitionSettings *part_settings) {
 }
 
 bool TWPartition::Update_Size(bool Display_Error) {
-	bool ret = false, Was_Already_Mounted = false, ro = false;
+	bool ret = false, Was_Already_Mounted = false;
 
 	Find_Actual_Block_Device();
 
 	if (Actual_Block_Device.empty())
 		return false;
 
-	ro = Mount_Read_Only;
-	Mount_Read_Only = true;
+	Mount_Read_Only_Temporary = true;
 
 	if (!Can_Be_Mounted && !Is_Encrypted) {
 		if (TWFunc::Path_Exists(Actual_Block_Device) && Find_Partition_Size()) {
@@ -3087,10 +3087,10 @@ bool TWPartition::Update_Size(bool Display_Error) {
 	if (!Was_Already_Mounted)
 		UnMount(false);
 success:
-	Mount_Read_Only = ro;
+	Mount_Read_Only_Temporary = false;
 	return true;
 fail:
-	Mount_Read_Only = ro;
+	Mount_Read_Only_Temporary = false;
 	return false;
 }
 
@@ -3360,14 +3360,15 @@ void TWPartition::Change_Mount_Read_Only(bool new_value) {
 }
 
 bool TWPartition::Is_Read_Only() {
-	return Mount_Read_Only;
+	if (Mount_Read_Only_Temporary)
+		LOGINFO("Partition '%s' is currently read-only temporarily.\n", Mount_Point.c_str());
+	return Mount_Read_Only || Mount_Read_Only_Temporary;
 }
 
 int TWPartition::Check_Lifetime_Writes() {
-	bool original_read_only = Mount_Read_Only;
 	int ret = 1;
 
-	Mount_Read_Only = true;
+	Mount_Read_Only_Temporary = true;
 	if (Mount(false)) {
 		Find_Actual_Block_Device();
 		string temp = Actual_Block_Device;
@@ -3391,7 +3392,7 @@ int TWPartition::Check_Lifetime_Writes() {
 	} else {
 		LOGINFO("Check_Lifetime_Writes failed to mount '%s'\n", Mount_Point.c_str());
 	}
-	Mount_Read_Only = original_read_only;
+	Mount_Read_Only_Temporary = false;
 	return ret;
 }
 
