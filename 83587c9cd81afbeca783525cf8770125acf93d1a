@@ -16,6 +16,24 @@
       "message": "Why not just use TW_BACKUP_EXCLUSIONS for this?",
       "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe5f166_c225057a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-07-30T13:01:47Z",
+      "side": 1,
+      "message": "DSU is a common thing nowadays",
+      "parentUuid": "cbe4b417_8a3391e3",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
