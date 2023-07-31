@@ -138,6 +138,23 @@
       "message": "Hmmm ... I have just made and restored a backup with DSU and a GSI installed. There is no problem at all. Both standard ROM and dynamic GSI boot and run okay. The metadata partition (image) was included in the backup and restore. Perhaps this is just a matter of ensuring that the backup includes /metadata ?",
       "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1222a821_687927e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-07-31T11:15:23Z",
+      "side": 1,
+      "message": "Ok, I take that back. The restoration doesn\u0027t work if you flash another ROM, and then come back to the previous ROM. It only works if you stay on the same ROM.",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
