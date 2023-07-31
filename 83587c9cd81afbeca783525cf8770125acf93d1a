@@ -86,6 +86,24 @@
       "message": "On all my devices running A13 (and there are many of them) /data/gsi/ just has empty sub-directories, and there has never been a problem with /data/gsi in terms of backup and restore. So this does not affect all devices.",
       "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1d8336_aa93c963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-07-31T04:44:33Z",
+      "side": 1,
+      "message": "Files below would appear after DSU installation:\n- /data/gsi/dsu/system_gsi.img\n- /data/gsi/dsu/system_gsi.img.0000\n- /data/gsi/dsu/userdata_gsi.img\n- /data/gsi/dsu/userdata_gsi.img.0000\n\nTo install DSU, the device requires dynamic partitions and /metadata partition",
+      "parentUuid": "b435328f_29e56d1f",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
