@@ -233,6 +233,28 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 		if (fstab_line[0] == '#')
 			continue;
 
+<<<<<<< HEAD   (a37df7 MTP: enable new cancel behavior in short packet handling)
+=======
+		if (parse_userdata) {
+			if (strstr(fstab_line, "/metadata") && !strstr(fstab_line, "/data")) {
+				if (meta) {
+					Partitions.erase(std::find(Partitions.begin(), Partitions.end(), meta));
+					delete meta;
+					meta = NULL;
+				}
+			} else if (strstr(fstab_line, "/data")) {
+				if (data) {
+					Partitions.erase(std::find(Partitions.begin(), Partitions.end(), data));
+					delete data;
+					data = NULL;
+				}
+			} else {
+				continue;
+			}
+		}
+
+
+>>>>>>> CHANGE (01ac77 Fix bug: "decryption: Fetch file encryption from applied fst)
 		size_t line_size = strlen(fstab_line);
 		if (fstab_line[line_size - 1] != '\n')
 			fstab_line[line_size] = '\n';
