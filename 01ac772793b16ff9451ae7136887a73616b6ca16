@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33cd71c_e8e5ac9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-08-03T19:57:49Z",
+      "side": 1,
+      "message": "This patch is required for preventing bootloops under MIUI 14.",
+      "revId": "01ac772793b16ff9451ae7136887a73616b6ca16",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
