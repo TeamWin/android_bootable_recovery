@@ -155,6 +155,41 @@
       "message": "Ok, I take that back. The restoration doesn\u0027t work if you flash another ROM, and then come back to the previous ROM. It only works if you stay on the same ROM.",
       "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "287c8754_9aaee92c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-08-03T11:07:21Z",
+      "side": 1,
+      "message": "Needed if the user installs DSU and GSIs",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82877f3_01b372f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-08-03T11:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64868af9_b9727c54",
+      "revId": "83587c9cd81afbeca783525cf8770125acf93d1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
