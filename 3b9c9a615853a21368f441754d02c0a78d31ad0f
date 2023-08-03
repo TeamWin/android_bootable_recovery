@@ -16,6 +16,23 @@
       "message": "Seems fine to me. Doesn\u0027t break anything on my devices. Others should test, though.",
       "revId": "3b9c9a615853a21368f441754d02c0a78d31ad0f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0b3693_a9753252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1028
+      },
+      "writtenOn": "2023-08-03T19:46:29Z",
+      "side": 1,
+      "message": "For OP9 I still have to load msm_drm manually during init. If loaded too late with this PR, it breaks encryption. So nothing breaks, and modules are now also loaded from vendor_dlkm in fastbootD.",
+      "revId": "3b9c9a615853a21368f441754d02c0a78d31ad0f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
