@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b154cb4_fa2e4726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2023-08-05T10:14:02Z",
+      "side": 1,
+      "message": "working on Asus Zenfone9",
+      "revId": "d521ac9596351678283c4dfe994270f48b57c142",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
