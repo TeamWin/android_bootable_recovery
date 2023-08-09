@@ -33,6 +33,24 @@
       "message": "Shouldn\u0027t these be added and not be replacing the v1 libs?",
       "revId": "d521ac9596351678283c4dfe994270f48b57c142",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0e0d20_725ac5e6",
+        "filename": "minuitwrp/libminuitwrp_defaults.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2023-08-09T15:17:07Z",
+      "side": 1,
+      "message": "i think the v1 depend of v2 so v1 is always build with v2.\n\nJust in the futur (twrp a13 ?), we need to rm the platform name \nGoogle do it now \nhttps://github.com/omnirom/android_device_asus_zenfone9/commit/1a1cce1dbd6952db11aea5281c495ea8804bf828",
+      "parentUuid": "81ed3d34_7bc96441",
+      "revId": "d521ac9596351678283c4dfe994270f48b57c142",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
