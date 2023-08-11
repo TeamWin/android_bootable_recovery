@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b1de77_444185c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-11T02:16:13Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem to affect anything negatively if the flag isn\u0027t used, so I\u0027m okay with it.",
+      "revId": "17dde962864b7a17f9eec5a06a87ecb2c9f08908",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
