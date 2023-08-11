@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14c71174_1597e353",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-11T02:11:33Z",
+      "side": 1,
+      "message": "Need this for working battery in fastbootd on ZenFone 9. Can be used by other devices as well.",
+      "revId": "3da917601087450cf00da8538dc386e2caf33db8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
