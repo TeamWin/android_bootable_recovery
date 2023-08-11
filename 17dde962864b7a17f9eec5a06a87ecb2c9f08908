@@ -16,6 +16,23 @@
       "message": "Doesn\u0027t seem to affect anything negatively if the flag isn\u0027t used, so I\u0027m okay with it.",
       "revId": "17dde962864b7a17f9eec5a06a87ecb2c9f08908",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc90516_6cc92551",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-08-11T23:57:02Z",
+      "side": 1,
+      "message": "Is this needed because we set flags for encryption that breaks MTK?",
+      "revId": "17dde962864b7a17f9eec5a06a87ecb2c9f08908",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
