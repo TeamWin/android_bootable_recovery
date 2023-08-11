@@ -34,6 +34,23 @@
       "parentUuid": "07dee350_fd5f7c64",
       "revId": "56d47f7d9880c133174a8dcc397b0dce3160aca5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "676ad4d7_6ef56ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-11T02:19:09Z",
+      "side": 1,
+      "message": "I believe with the other recent change, this would need to be greatly rebased. THis has been superseded by: https://gerrit.twrp.me/c/android_bootable_recovery/+/6565\n\n@der_akinator please confirm if the above patch fills your needs.",
+      "revId": "56d47f7d9880c133174a8dcc397b0dce3160aca5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
