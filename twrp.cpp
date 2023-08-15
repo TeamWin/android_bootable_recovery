@@ -378,6 +378,10 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+
+	printf("Starting the UI...\n");
+	gui_init();
+
 	startupArgs startup;
 	startup.parse(&argc, &argv);
 	printf("=> Linking mtab\n");
@@ -399,9 +403,6 @@ int main(int argc, char **argv) {
 		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor_dlkm"));
 	KernelModuleLoader::Load_Vendor_Modules();
 #endif
-
-	printf("Starting the UI...\n");
-	gui_init();
 
 	// Load up all the resources
 	gui_loadResources();
