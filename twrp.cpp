@@ -417,6 +417,32 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+<<<<<<< HEAD   (c9a28c fscrypt ENOKEY: ignore error and continue)
+=======
+	startupArgs startup;
+	startup.parse(&argc, &argv);
+	printf("=> Linking mtab\n");
+	symlink("/proc/mounts", "/etc/mtab");
+	std::string fstab_filename = "/etc/twrp.fstab";
+	if (!TWFunc::Path_Exists(fstab_filename)) {
+		fstab_filename = "/etc/recovery.fstab";
+	}
+	printf("=> Processing %s\n", fstab_filename.c_str());
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, !startup.Get_Fastboot_Mode())) {
+		LOGERR("Failing out of recovery due to problem with fstab.\n");
+		return -1;
+	}
+
+#ifdef TW_LOAD_VENDOR_MODULES
+	if (startup.Get_Fastboot_Mode()) {
+		android::base::SetProperty("ro.boot.fastboot", "1");
+		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor"));
+		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor_dlkm"));
+	}
+	KernelModuleLoader::Load_Vendor_Modules();
+#endif
+
+>>>>>>> CHANGE (56f748 twrp.cpp: Add braces for fastboot mode)
 	printf("Starting the UI...\n");
 	gui_init();
 
