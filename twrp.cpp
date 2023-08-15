@@ -380,6 +380,13 @@ int main(int argc, char **argv) {
 	DataManager::SetDefaultValues();
 	startupArgs startup;
 	startup.parse(&argc, &argv);
+
+	// If not in fastbootd, start GUI here so the TWRP splash appears
+	if (!startup.Get_Fastboot_Mode()) {
+		printf("Starting the UI...\n");
+		gui_init();
+	}
+
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
@@ -404,8 +411,11 @@ int main(int argc, char **argv) {
 	KernelModuleLoader::Load_Vendor_Modules();
 #endif
 
-	printf("Starting the UI...\n");
-	gui_init();
+	// If in fastbootd, start GUI here
+	if (startup.Get_Fastboot_Mode()) {
+		printf("Starting the UI...\n");
+		gui_init();
+	}
 
 	// Load up all the resources
 	gui_loadResources();
