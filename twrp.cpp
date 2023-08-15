@@ -378,6 +378,7 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+
 	startupArgs startup;
 	startup.parse(&argc, &argv);
 	printf("=> Linking mtab\n");
@@ -387,6 +388,10 @@ int main(int argc, char **argv) {
 		fstab_filename = "/etc/recovery.fstab";
 	}
 	printf("=> Processing %s\n", fstab_filename.c_str());
+
+	printf("Starting the UI...\n");
+	gui_init();
+
 	if (!PartitionManager.Process_Fstab(fstab_filename, 1, !startup.Get_Fastboot_Mode())) {
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return -1;
@@ -403,9 +408,6 @@ int main(int argc, char **argv) {
 	}
 	KernelModuleLoader::Load_Vendor_Modules();
 #endif
-
-	printf("Starting the UI...\n");
-	gui_init();
 
 	// Load up all the resources
 	gui_loadResources();
