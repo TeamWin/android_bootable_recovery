@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c52718_bf44fc41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 823
+      },
+      "writtenOn": "2023-08-16T18:56:29Z",
+      "side": 1,
+      "message": "It works fine on my OnePlus 9RT",
+      "revId": "0a461ac13c64e2483255b1b4751eb535288b6167",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
