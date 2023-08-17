@@ -395,7 +395,7 @@ int main(int argc, char **argv) {
 #ifdef TW_LOAD_VENDOR_MODULES
 	if (startup.Get_Fastboot_Mode()) {
 		TWPartition* ven_dlkm = PartitionManager.Find_Partition_By_Path("/vendor_dlkm");
-		android::base::SetProperty("ro.boot.fastboot", "1");
+		android::base::SetProperty("ro.twrp.fastbootd", "1");
 		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor"));
 		if(ven_dlkm) {
 			PartitionManager.Prepare_Super_Volume(ven_dlkm);
