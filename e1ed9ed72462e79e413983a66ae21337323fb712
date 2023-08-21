@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ba0816_6d0844cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2023-08-21T18:56:24Z",
+      "side": 1,
+      "message": "tested and working on zenfone7, 8 and 9",
+      "revId": "e1ed9ed72462e79e413983a66ae21337323fb712",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
