@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1692675897 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1692675897-76607538416CD9A35CCBB863CCF46203ACC31A12\n\n0000000000000000000000000000000000000000 e4a93d150137260277587cf35258f5f511fed008 refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmTkLzkACgkQH1oT9zX3\nIyLIcw/+PD+cz2lqZ/CDTCDA/WR8Ywnxt4YvyZ00s+gRC6F+ssuD/ZZA9FoKokzy\n0xPCRDrNSSgSinarmvop1ec8lCnrdZKv+QbWbtML8QM3DdW4aGQPrdkMFEVMtq45\n2w/RdfIItzvEHP7/DG1WRh9KzE3Ik4Cf6XOZeMXa3J+yIUYcz7T8a9aY8yTHBdpV\neGLp4Uw8fZ6Bz1vFLPERrfjGl+8wyBGIuHl4AIX9AdvhAeolNdUO86CfyYi5XS39\nN1dF7VuaR1Dj0WMzkOWfq/8/C5IFnUKZngwMvQSIDsEwALj74zPpGalgIg4Saboq\nJXEu+3SP66QdPdeDD9mBwbB7SKzaUM5UTfp+Cf9rx4r+kt2VTDnIzss7VMHcKnVG\nG6AY3AZdTMb2axaMzD6eveSGTuYSipnr9QltXxmZ0Gt9UkLesORbrVbGIki3ThcF\nwKkIZfdlUnFfXiANUCVlbT4RpBTPRaOTTXX+OEACK/JKorCY4NKgs26Dp33spZT7\n1Lr6W8T85XqfMKcc/YzYXNAQOegWME+ql45otHyuXQaXWgLd+kosqD8cuRUCq9y6\nLM1upf+U8U+fOt+HIjOGA1jj3BnRXEh4puXjcsRpFRjcqMV6xfetzdiSGwO1D2uL\nZrSAVNwyrori+FhFebn7mwyXdejSZzSt6k+zOTRm0xJHE7wr3Qg\u003d\n\u003do/Na\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6def71ca_9b46072c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-22T03:45:42Z",
+      "side": 1,
+      "message": "Currently breaks fastbootd",
+      "revId": "e4a93d150137260277587cf35258f5f511fed008",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
