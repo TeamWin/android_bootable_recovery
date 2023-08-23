@@ -17,6 +17,23 @@
       "message": "Works fine on my devices. Fastbootd issue was in the device tree and unrelated.",
       "revId": "7a092a4ba8bcb68d74b70e5a9415725618d6331a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f115176_d5fb85c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-08-23T08:29:41Z",
+      "side": 1,
+      "message": "Works fine here.",
+      "revId": "7a092a4ba8bcb68d74b70e5a9415725618d6331a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
