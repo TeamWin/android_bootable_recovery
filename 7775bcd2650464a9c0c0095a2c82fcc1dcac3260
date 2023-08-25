@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfcf03c0_72e68aee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 910
+      },
+      "writtenOn": "2023-08-25T07:29:26Z",
+      "side": 1,
+      "message": "Please, add this into source, fixes Samsung fb ",
+      "revId": "7775bcd2650464a9c0c0095a2c82fcc1dcac3260",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
