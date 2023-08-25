@@ -33,6 +33,23 @@
       "message": "Tested on Galaxy S21 series (Exynos 2100), this works.",
       "revId": "7775bcd2650464a9c0c0095a2c82fcc1dcac3260",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc58bee_404a81b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150
+      },
+      "writtenOn": "2023-08-25T07:54:00Z",
+      "side": 1,
+      "message": "Tested on Galaxy S21 series (Exynos 2100), this works.",
+      "revId": "7775bcd2650464a9c0c0095a2c82fcc1dcac3260",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
