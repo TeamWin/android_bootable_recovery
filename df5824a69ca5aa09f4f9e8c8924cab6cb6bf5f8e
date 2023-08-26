@@ -69,6 +69,23 @@
       "parentUuid": "289b5080_1904d1e7",
       "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41466d44_26980ec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-26T17:01:29Z",
+      "side": 1,
+      "message": "Here are logs from fastbootd, if they help:\nfastbootd recovery log: https://katb.in/twrpfastbootd\nfastbootd logcat: https://katb.in/twrpfastbootdlogcat",
+      "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
