@@ -48,10 +48,6 @@ extern "C" {
 #include "twrp-functions.hpp"
 #include "data.hpp"
 
-#ifdef TW_LOAD_VENDOR_MODULES
-#include "kernel_module_loader.hpp"
-#endif
-
 #include "partitions.hpp"
 #ifdef __ANDROID_API_N__
 #include <android-base/strings.h>
@@ -391,6 +387,7 @@ int main(int argc, char **argv) {
 	DataManager::SetDefaultValues();
 	startupArgs startup;
 	startup.parse(&argc, &argv);
+	android::base::SetProperty(TW_FASTBOOT_MODE_PROP, startup.Get_Fastboot_Mode() ? "1" : "0");
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
@@ -406,13 +403,11 @@ int main(int argc, char **argv) {
 #ifdef TW_LOAD_VENDOR_MODULES
 	if (startup.Get_Fastboot_Mode()) {
 		TWPartition* ven_dlkm = PartitionManager.Find_Partition_By_Path("/vendor_dlkm");
-		android::base::SetProperty("ro.twrp.fastbootd", "1");
 		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor"));
 		if(ven_dlkm) {
 			PartitionManager.Prepare_Super_Volume(ven_dlkm);
 		}
 	}
-	KernelModuleLoader::Load_Vendor_Modules();
 #endif
 
 	printf("Starting the UI...\n");
