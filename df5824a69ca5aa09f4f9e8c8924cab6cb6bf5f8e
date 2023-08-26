@@ -16,6 +16,41 @@
       "message": "While this fixes the delay I was seeing with the battery displaying when fastboot booting an image or when recovery was installed to the device, now I get no battery showing up in fastbootd. Can this be fixed?",
       "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289b5080_1904d1e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-26T16:56:14Z",
+      "side": 1,
+      "message": "Correction - now I have the delay in the battery showing in fastbootd instead. I just confirmed that if I wait a bit, it does finally show up. It would be preferred for there to be no delay in any case, if possible. I suppose it\u0027s better to have the delay in fastbootd than in recovery mode if that has to be the case, since there aren\u0027t really any functions needed by fastboot that are affected by the delayed load. But previously there was no delay in showing battery in fastbootd, so it must be possible.",
+      "parentUuid": "4f7b1ebe_223fed3a",
+      "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b23140_9e7f0553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-26T16:56:14Z",
+      "side": 1,
+      "message": "tb",
+      "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
