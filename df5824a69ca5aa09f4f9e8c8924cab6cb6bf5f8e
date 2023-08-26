@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7b1ebe_223fed3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-26T16:49:28Z",
+      "side": 1,
+      "message": "While this fixes the delay I was seeing with the battery displaying when fastboot booting an image or when recovery was installed to the device, now I get no battery showing up in fastbootd. Can this be fixed?",
+      "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
