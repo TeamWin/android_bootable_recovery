@@ -122,6 +122,24 @@
       "parentUuid": "41466d44_26980ec8",
       "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a69462_28874ea9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-08-27T02:23:30Z",
+      "side": 1,
+      "message": "Working on my ZenFome 8, except now in fastbootd I have a \"Failed to unmount /vendor\" error in the console. On my ZenFone 9, I once again have battery delay when booting into TWRP, even though data is unaccessible (which allowed it to show up immediately before). I didn\u0027t test patch set 1 on this device, though, so I\u0027m not sure if it\u0027s related to your last change (I suspect not, since your last change only appeared to affect fastbootd). Could the fact that data is inaccessible be the problem? It wasn\u0027t before. Logs below.\n\nZenFone 8 (fastbootd):\nhttps://katb.in/zf8fastbootd\nhttps://katb.in/zf8logcat\n\nZenFone 9:\nhttps://katb.in/zf9log\nhttps://katb.in/zf9logcat",
+      "parentUuid": "d67f2adb_828b6f89",
+      "revId": "df5824a69ca5aa09f4f9e8c8924cab6cb6bf5f8e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
