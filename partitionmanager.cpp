@@ -263,8 +263,37 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 			mapit->second.fstab_line = NULL;
 		}
 	}
+<<<<<<< HEAD   (f00e0b lpdump and lptools: make opt-in instead of opt-out)
 	if (Get_Super_Status()) {
 		Setup_Super_Devices();
+=======
+	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
+	if (!parse_userdata) {
+
+		if (ven) ven->Mount(true);
+		if (odm) odm->Mount(true);
+		if (TWFunc::Find_Fstab(Fstab_Filename)) {
+			string service;
+			LOGINFO("Fstab: %s\n", Fstab_Filename.c_str());
+			TWFunc::copy_file(Fstab_Filename, additional_fstab, 0600, false);
+			Fstab_Filename = additional_fstab;
+			property_set("fstab.additional", "1");
+			TWFunc::Get_Service_From(ven, "keymaster", service);
+			LOGINFO("Keymaster version: '%s'\n", TWFunc::Get_Version_From_Service(service).c_str());
+			property_set("keymaster_ver", TWFunc::Get_Version_From_Service(service).c_str());
+			parse_userdata = true;
+			Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
+			Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
+			Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
+			Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
+			Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
+			Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
+			goto parse;
+		} else {
+			LOGINFO("Unable to parse vendor fstab\n");
+		}
+>>>>>>> CHANGE (500c3d partitionmanager: add missing newline)
 	}
 	LOGINFO("Done processing fstab files\n");
 
@@ -463,6 +492,26 @@ void TWPartitionManager::Decrypt_Data() {
 					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
 				}
 			}
+<<<<<<< HEAD   (f00e0b lpdump and lptools: make opt-in instead of opt-out)
+=======
+		} else {
+			LOGINFO("FBE setup failed. Trying FDE...\n");
+			Set_Crypto_State();
+			Set_Crypto_Type("block");
+			int password_type = cryptfs_get_password_type();
+			if (password_type == CRYPT_TYPE_DEFAULT) {
+				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
+				if (Decrypt_Device("default_password") == 0) {
+					gui_msg("decrypt_success=Successfully decrypted with default password.");
+					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+				} else {
+					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
+				}
+			} else {
+				DataManager::SetValue("TW_CRYPTO_TYPE", password_type);
+				DataManager::SetValue("tw_crypto_pwtype_0", password_type);
+			}
+>>>>>>> CHANGE (500c3d partitionmanager: add missing newline)
 		}
 	}
 	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted)) {
