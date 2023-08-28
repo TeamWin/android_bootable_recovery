@@ -417,6 +417,35 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+<<<<<<< HEAD   (f00e0b lpdump and lptools: make opt-in instead of opt-out)
+=======
+	startupArgs startup;
+	startup.parse(&argc, &argv);
+	printf("=> Linking mtab\n");
+	symlink("/proc/mounts", "/etc/mtab");
+	std::string fstab_filename = "/etc/twrp.fstab";
+	if (!TWFunc::Path_Exists(fstab_filename)) {
+		fstab_filename = "/etc/recovery.fstab";
+	}
+	printf("=> Processing %s\n", fstab_filename.c_str());
+	if (!PartitionManager.Process_Fstab(fstab_filename, 1, !startup.Get_Fastboot_Mode())) {
+		LOGERR("Failing out of recovery due to problem with fstab.\n");
+		return -1;
+	}
+
+#ifdef TW_LOAD_VENDOR_MODULES
+	if (startup.Get_Fastboot_Mode()) {
+		TWPartition* ven_dlkm = PartitionManager.Find_Partition_By_Path("/vendor_dlkm");
+		android::base::SetProperty("ro.twrp.fastbootd", "1");
+		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor"));
+		if(ven_dlkm) {
+			PartitionManager.Prepare_Super_Volume(ven_dlkm);
+		}
+	}
+	KernelModuleLoader::Load_Vendor_Modules();
+#endif
+
+>>>>>>> CHANGE (e7b5ad Revert "twrp.cpp: move up gui_init in startup process")
 	printf("Starting the UI...\n");
 	gui_init();
 
