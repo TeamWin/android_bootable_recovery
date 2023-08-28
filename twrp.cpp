@@ -379,6 +379,9 @@ int main(int argc, char **argv) {
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
 
+	// Load up all the resources
+	gui_loadResources();
+
 	// Show TWRP splash here
 	printf("Starting the UI...\n");
 	gui_init();
@@ -408,9 +411,6 @@ int main(int argc, char **argv) {
 	}
 	KernelModuleLoader::Load_Vendor_Modules();
 #endif
-
-	// Load up all the resources
-	gui_loadResources();
 
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	TWFunc::Clear_Bootloader_Message();
