@@ -566,7 +566,7 @@ void TWPartitionManager::Decrypt_Data() {
 				}
 			}
 		} else {
-			LOGINFO("FBE setup failed. Trying FDE...");
+			LOGINFO("FBE setup failed. Trying FDE...\n");
 			Set_Crypto_State();
 			Set_Crypto_Type("block");
 			int password_type = cryptfs_get_password_type();
