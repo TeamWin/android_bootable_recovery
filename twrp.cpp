@@ -407,6 +407,8 @@ int main(int argc, char **argv) {
 	printf("Starting the UI...\n");
 	gui_init();
 
+	if (!startup.Get_Fastboot_Mode()) PartitionManager.Setup_Fstab_Partitions(true);
+
 	// Load up all the resources
 	gui_loadResources();
 
