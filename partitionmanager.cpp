@@ -263,14 +263,45 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 			mapit->second.fstab_line = NULL;
 		}
 	}
+<<<<<<< HEAD   (f00e0b lpdump and lptools: make opt-in instead of opt-out)
 	if (Get_Super_Status()) {
 		Setup_Super_Devices();
+=======
+	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
+	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
+	if (!parse_userdata) {
+
+		if (ven) ven->Mount(Display_Error);
+		if (odm) odm->Mount(Display_Error);
+		if (TWFunc::Find_Fstab(Fstab_Filename)) {
+			string service;
+			LOGINFO("Fstab: %s\n", Fstab_Filename.c_str());
+			TWFunc::copy_file(Fstab_Filename, additional_fstab, 0600, false);
+			Fstab_Filename = additional_fstab;
+			property_set("fstab.additional", "1");
+			TWFunc::Get_Service_From(ven, "keymaster", service);
+			LOGINFO("Keymaster version: '%s'\n", TWFunc::Get_Version_From_Service(service).c_str());
+			property_set("keymaster_ver", TWFunc::Get_Version_From_Service(service).c_str());
+			parse_userdata = true;
+			Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
+			Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
+			Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
+			Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
+			Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
+			Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
+			goto parse;
+		} else {
+			LOGINFO("Unable to parse vendor fstab\n");
+		}
+>>>>>>> CHANGE (ec3704 twrp.cpp: Split up Partition Setup)
 	}
+<<<<<<< HEAD   (f00e0b lpdump and lptools: make opt-in instead of opt-out)
+=======
+	if (ven) ven->UnMount(Display_Error);
+	if (odm) odm->UnMount(Display_Error);
+>>>>>>> CHANGE (ec3704 twrp.cpp: Split up Partition Setup)
 	LOGINFO("Done processing fstab files\n");
 
-	if (recovery_mode) {
-		Setup_Fstab_Partitions(Display_Error);
-	}
 	return true;
 }
 
@@ -309,9 +340,9 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 		TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 		if (sys) {
 			if (sys->Get_Super_Status()) {
-				sys->Mount(true);
+				sys->Mount(Display_Error);
 				if (ven) {
-					ven->Mount(true);
+					ven->Mount(Display_Error);
 				}
 	#ifdef TW_EXCLUDE_APEX
 				LOGINFO("Apex is disabled in this build\n");
@@ -329,9 +360,9 @@ void TWPartitionManager::Setup_Fstab_Partitions(bool Display_Error) {
 		}
 	#ifndef USE_VENDOR_LIBS
 		if (ven)
-			ven->UnMount(true);
+			ven->UnMount(Display_Error);
 		if (sys)
-			sys->UnMount(true);
+			sys->UnMount(Display_Error);
 	#endif
 
 		if (!datamedia && !settings_partition && Find_Partition_By_Path("/sdcard") == NULL && Find_Partition_By_Path("/internal_sd") == NULL && Find_Partition_By_Path("/internal_sdcard") == NULL && Find_Partition_By_Path("/emmc") == NULL) {
