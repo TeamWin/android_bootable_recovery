@@ -424,18 +424,6 @@ bool TWFunc::Wait_For_File(const string& path, std::chrono::nanoseconds timeout)
 	return false;
 }
 
-bool TWFunc::Wait_For_Battery(std::chrono::nanoseconds timeout) {
-	std::string battery_path;
-#ifdef TW_CUSTOM_BATTERY_PATH
-	battery_path = EXPAND(TW_CUSTOM_BATTERY_PATH);
-#else
-	battery_path = "/sys/class/power_supply/battery";
-#endif
-	if (!battery_path.empty()) return TWFunc::Wait_For_File(battery_path, timeout);
-
-	return false;
-}
-
 #ifndef BUILD_TWRPTAR_MAIN
 
 // Returns "/path" from a full /path/to/file.name
