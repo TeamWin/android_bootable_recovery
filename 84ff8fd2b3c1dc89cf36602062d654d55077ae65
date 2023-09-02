@@ -16,6 +16,24 @@
       "message": "Try this patch over the splitting patch and check your issue resolves or not",
       "revId": "84ff8fd2b3c1dc89cf36602062d654d55077ae65",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "551b604a_5ab24b64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-09-02T22:24:35Z",
+      "side": 1,
+      "message": "Battery shows up immediately on my ZenFone 9 now. Testing on ZenFone 8 and ROG 3 now to see if it negatively affects legacy devices",
+      "parentUuid": "0a02e1c0_469ab5ac",
+      "revId": "84ff8fd2b3c1dc89cf36602062d654d55077ae65",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
