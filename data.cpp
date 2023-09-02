@@ -36,6 +36,7 @@
 #include "set_metadata.h"
 #include "gui/gui.hpp"
 #include "infomanager.hpp"
+#include "recovery_utils/battery_utils.h"
 
 #define DEVID_MAX 64
 #define HWID_MAX 32
@@ -1041,7 +1042,7 @@ int DataManager::GetMagicValue(const string& varName, string& value)
 		gettimeofday(&curTime, NULL);
 		if (curTime.tv_sec > nextSecCheck)
 		{
-			char cap_s[4];
+/*			char cap_s[4];
 #ifdef TW_CUSTOM_BATTERY_PATH
 			string capacity_file = EXPAND(TW_CUSTOM_BATTERY_PATH);
 			capacity_file += "/capacity";
@@ -1070,7 +1071,14 @@ int DataManager::GetMagicValue(const string& varName, string& value)
 					charging = '+';
 				else
 					charging = ' ';
+			}*/
+			auto battery_info = GetBatteryInfo();
+			if (battery_info.charging) {
+				charging = '+';
+			} else {
+				charging = ' ';
 			}
+			lastVal = battery_info.capacity;
 			nextSecCheck = curTime.tv_sec + 60;
 		}
 
