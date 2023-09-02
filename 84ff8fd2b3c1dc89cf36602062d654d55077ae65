@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a02e1c0_469ab5ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-09-02T20:36:34Z",
+      "side": 1,
+      "message": "Try this patch over the splitting patch and check your issue resolves or not",
+      "revId": "84ff8fd2b3c1dc89cf36602062d654d55077ae65",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
