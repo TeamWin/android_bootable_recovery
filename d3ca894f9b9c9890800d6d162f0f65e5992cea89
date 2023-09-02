@@ -16,6 +16,23 @@
       "message": "working on zf8 and zf9",
       "revId": "d3ca894f9b9c9890800d6d162f0f65e5992cea89",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23097219_ed5ddcc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-09-02T17:53:15Z",
+      "side": 1,
+      "message": "It seems that on my ZenFone 9, where my data is currently inaccessible, that running Load_Vendor_Modules prior to Setup_Fstab_Partitions causes the delay in the battery showing on boot. If I move the Setup_Fstab_Partitions back up to the end of Process_Fstab, then battery shows up immediately when I get to the TWRP Home page. My assumption is that this is related to the attempted decryption of data that fails because my data can\u0027t be mounted. Is there a way to fix this?",
+      "revId": "d3ca894f9b9c9890800d6d162f0f65e5992cea89",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
