@@ -86,6 +86,24 @@
       "message": "yep nice, after adding it, the \"+\" shows on the fly now, even on fastbootd :)",
       "revId": "5f7f4e338be70b6ada67d99f52298d3893c49b42",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0deca945_5765559a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-09-03T18:22:34Z",
+      "side": 1,
+      "message": "try now",
+      "parentUuid": "8ade2310_c98c670b",
+      "revId": "5f7f4e338be70b6ada67d99f52298d3893c49b42",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
