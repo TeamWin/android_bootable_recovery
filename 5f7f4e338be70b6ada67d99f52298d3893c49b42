@@ -52,6 +52,23 @@
       "parentUuid": "a3540785_219c41fb",
       "revId": "5f7f4e338be70b6ada67d99f52298d3893c49b42",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4161905_42aa2dcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2023-09-03T17:32:22Z",
+      "side": 1,
+      "message": "yep, missing the \"+\"",
+      "revId": "5f7f4e338be70b6ada67d99f52298d3893c49b42",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
