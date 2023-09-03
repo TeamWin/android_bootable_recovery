@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c58c0e2c_97bc720e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-09-03T20:33:28Z",
+      "side": 1,
+      "message": "Working fine now along with health services patch for battery",
+      "revId": "4362b15f370f19254b8094355b3d3abd6e0602ca",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
