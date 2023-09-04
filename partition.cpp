@@ -355,6 +355,7 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			// File System
 			Fstab_File_System = ptr;
 			Current_File_System = ptr;
+			LOGINFO("%s file system: %s\n", Mount_Point.c_str(), Fstab_File_System.c_str());
 			item_index++;
 		} else if (item_index == block_device_index) {
 			// Primary Block Device
