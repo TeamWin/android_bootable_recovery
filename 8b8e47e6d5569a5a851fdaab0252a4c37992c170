@@ -69,6 +69,24 @@
       "message": "As I said, I didn\u0027t investigate it too deeply. The decryption fails, and the patch to use the older code solves the problem. If the device had been one that you could \"fastboot boot\" a recovery on, and that didn\u0027t hard-brick so easily, I would have investigated it further.",
       "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef91675_c56ab610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-09-06T18:08:33Z",
+      "side": 1,
+      "message": "if you could allow me to link with fstab and log, may be I could investigate it. As just adding a bunch of code with macro definition isn\u0027t a good idea",
+      "parentUuid": "f1e5981f_5240a5aa",
+      "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
