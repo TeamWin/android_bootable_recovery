@@ -953,6 +953,7 @@ void DataManager::SetDefaultValues()
 	mData.SetValue("tw_is_slot_part", "0");
 
 	mData.SetValue("tw_enable_adb_backup", "0");
+	mData.SetValue(TW_AUTO_RUN_ORS_VAR, "1");
 
 	if (TWFunc::Path_Exists("/system/bin/logcat"))
 		mConst.SetValue("tw_logcat_exists", "1");
