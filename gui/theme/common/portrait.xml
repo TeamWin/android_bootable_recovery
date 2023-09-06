@@ -3478,6 +3478,9 @@
 					</conditions>
 					<data variable="tw_auto_reflashtwrp"/>
 				</listitem>
+				<listitem name="{@auto_run_ors_chk=Automatically Run OpenRecoveryScript Without confirmation}">
+					<data variable="tw_auto_run_ors"/>
+				</listitem>
 			</listbox>
 
 			<button style="main_button_half_height">
