@@ -149,6 +149,7 @@
 #define TW_IS_SUPER                 "tw_is_super"
 #define TW_VIRTUAL_AB_ENABLED       "tw_virtual_ab.enabled"
 #define TW_AUTO_REFLASHTWRP_VAR     "tw_auto_reflashtwrp"
+#define TW_ORS_CONFIRM_PROMPT_VAR   "tw_ors_confirm_prompt"
 
 // BUILD PROPS
 #define TW_FASTBOOT_MODE_PROP         "ro.twrp.fastbootd"
@@ -159,8 +160,9 @@
 // version 2 requires theme to handle power button as action togglebacklight
 // version 4 adds listbox support to reboot page
 // version 5 adds File Manager options, nano & Flash Current TWRP
-// version 6 adds support for vendor_ab and recovery_ab, remove htcdumlock & Unmap Super Devices for A devices
-#define TW_THEME_VERSION 6
+// version 6 adds support for vendor_ab and recovery_ab, remove htcdumlock, Unmap Super Devices for A-only devices
+// version 7 adds ORS confirmation prompt
+#define TW_THEME_VERSION 7
 
 // Also used:
 //   tw_boot_is_mountable

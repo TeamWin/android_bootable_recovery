@@ -969,6 +969,8 @@ void DataManager::SetDefaultValues()
 	mConst.SetValue("tw_include_nano", "0");
 #endif
 
+	mPersist.SetValue(TW_ORS_CONFIRM_PROMPT_VAR, "0");
+
 	mData.SetValue("tw_flash_both_slots", "0");
 	mData.SetValue("tw_is_slot_part", "0");
 
