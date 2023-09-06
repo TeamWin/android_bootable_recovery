@@ -3851,6 +3851,9 @@
 					</conditions>
 					<data variable="tw_auto_reflashtwrp"/>
 				</listitem>
+				<listitem name="{@ors_confirm_prompt=Ask for confirmation before running ORS}">
+					<data variable="tw_ors_confirm_prompt"/>
+				</listitem>
 			</listbox>
 
 			<action>
