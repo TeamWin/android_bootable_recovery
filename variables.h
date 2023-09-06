@@ -149,6 +149,7 @@
 #define TW_IS_SUPER                 "tw_is_super"
 #define TW_VIRTUAL_AB_ENABLED       "tw_virtual_ab.enabled"
 #define TW_AUTO_REFLASHTWRP_VAR     "tw_auto_reflashtwrp"
+#define TW_ORS_CONFIRM_PROMPT_VAR   "tw_ors_confirm_prompt"
 
 // BUILD PROPS
 #define TW_FASTBOOT_MODE_PROP         "ro.twrp.fastbootd"

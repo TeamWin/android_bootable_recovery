@@ -827,6 +827,64 @@
 			</action>
 		</page>
 
+		<page name="confirm_ors">
+			<template name="page"/>
+
+			<text style="text_l">
+				<placement x="%col1_x_header%" y="%row3_header_y%"/>
+				<text>{@confirm_action=Confirm Action}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%col1_x_header%" y="%row4_header_y%"/>
+				<text/>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%center_x%" y="%row2_y%" placement="5"/>
+				<text>%tw_text1%</text>
+			</text>
+
+			<text style="text_m_accent">
+				<placement x="%center_x%" y="%row3_y%" placement="5"/>
+				<text>%tw_text2%</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%center_x%" y="%row4_y%" placement="5"/>
+				<text>%tw_text3%</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%center_x%" y="%row5_y%" placement="5"/>
+				<text>%tw_text4%</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%center_x%" y="%row7_y%" placement="5"/>
+				<text>{@back_cancel=Press back button to cancel.}</text>
+			</text>
+
+			<slider style="slider_centered">
+				<text>%tw_slider_text%</text>
+				<action function="page">action_page</action>
+			</slider>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">tw_clear_destination=%tw_back%</action>
+					<action fucntion="set">tw_gui_done=1</action>
+					<action function="page">clear_vars</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">main</action>
+			</action>
+		</page>
+
 		<page name="confirm_action">
 			<template name="page"/>
 
@@ -3302,6 +3360,9 @@
 						<condition var1="tw_is_vendor_boot_header_v3" var2="0"/>
 					</conditions>
 					<data variable="tw_auto_reflashtwrp"/>
+				</listitem>
+				<listitem name="{@ors_confirm_prompt=Ask for confirmation before running ORS}">
+					<data variable="tw_ors_confirm_prompt"/>
 				</listitem>
 			</listbox>
 
