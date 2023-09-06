@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this is a good idea. From what I can see, it seems that it will break long-established code for automated/unattended scripting, for an unknown number of users, as it will require manual confirmation of every openrecovery script. Why would one want to do that?",
       "revId": "f5bb5d65cae7696cd70f8e8d2b2c10f6a6eb6a11",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9be3a8e2_98620683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-09-06T22:01:34Z",
+      "side": 1,
+      "message": "obviously it will not untill you turned it off from the settings, by default it is without confirmation.",
+      "parentUuid": "c5451223_8ffa5b13",
+      "revId": "f5bb5d65cae7696cd70f8e8d2b2c10f6a6eb6a11",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
