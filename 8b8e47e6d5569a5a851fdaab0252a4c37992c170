@@ -52,6 +52,23 @@
       "parentUuid": "4af25da6_3ba1b633",
       "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e5981f_5240a5aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-06T17:36:41Z",
+      "side": 1,
+      "message": "As I said, I didn\u0027t investigate it too deeply. The decryption fails, and the patch to use the older code solves the problem. If the device had been one that you could \"fastboot boot\" a recovery on, and that didn\u0027t hard-brick so easily, I would have investigated it further.",
+      "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
