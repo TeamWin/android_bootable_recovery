@@ -623,6 +623,7 @@ int OpenRecoveryScript::Backup_Command(string Options) {
 void OpenRecoveryScript::Run_OpenRecoveryScript(void) {
 	DataManager::SetValue("tw_back", "main");
 	DataManager::SetValue("tw_action", "openrecoveryscript");
+	DataManager::SetValue("tw_text1", "OpenRecoveryScript")
 	DataManager::SetValue("tw_action_param", "");
 	DataManager::SetValue("tw_has_action2", "0");
 	DataManager::SetValue("tw_action2", "");
@@ -637,7 +638,7 @@ void OpenRecoveryScript::Run_OpenRecoveryScript(void) {
 	DataManager::SetValue("tw_action_text2", "");
 	DataManager::SetValue("tw_has_cancel", 0);
 	DataManager::SetValue("tw_show_reboot", 0);
-	if (gui_startPage("action_page", 0, 1) != 0) {
+	if (gui_startPage("confirm_action", 0, 1) != 0) {
 		LOGERR("Failed to load OpenRecoveryScript GUI page.\n");
 	}
 }
