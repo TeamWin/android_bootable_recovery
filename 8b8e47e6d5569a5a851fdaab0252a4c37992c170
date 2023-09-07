@@ -122,6 +122,23 @@
       "parentUuid": "44a36b23_299ca75c",
       "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd646cbf_fae874b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-07T08:58:53Z",
+      "side": 1,
+      "message": "See DM on Zulip",
+      "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
