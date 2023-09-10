@@ -345,7 +345,6 @@ clear:
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
 	if (!parse_userdata) {
-
 		if (ven) ven->Mount(Display_Error);
 		if (odm) odm->Mount(Display_Error);
 		if (TWFunc::Find_Fstab(Fstab_Filename)) {
@@ -364,13 +363,16 @@ clear:
 			Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
 			Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
 			Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
+
+			if (ven) ven->UnMount(Display_Error);
+			if (odm) odm->UnMount(Display_Error);
 			goto parse;
 		} else {
+			if (ven) ven->UnMount(Display_Error);
+			if (odm) odm->UnMount(Display_Error);
 			LOGINFO("Unable to parse vendor fstab\n");
 		}
 	}
-	if (ven) ven->UnMount(Display_Error);
-	if (odm) odm->UnMount(Display_Error);
 	LOGINFO("Done processing fstab files\n");
 
 	return true;
