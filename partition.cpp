@@ -1222,6 +1222,13 @@ void TWPartition::Setup_File_System(bool Display_Error) {
 
 	// Make the mount point folder if it doesn't exist
 	Make_Dir(Mount_Point, Display_Error);
+	if (Mount_Point == "/data") {
+		if (char* Fs_Type = blkid_get_tag_value(nullptr, "TYPE", Actual_Block_Device.c_str())) {
+			LOGINFO("Detected FS for Data %s: %s\n", Actual_Block_Device.c_str() , Fs_Type);
+			Fstab_File_System = Current_File_System = std::string(Fs_Type);
+			free(Fs_Type);
+		}
+	}
 	Backup_Method = BM_FILES;
 }
 
