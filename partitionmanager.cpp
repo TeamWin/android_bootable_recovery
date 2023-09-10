@@ -366,13 +366,17 @@ clear:
 				Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
 				Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
 				Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
+
+				// unmount vendor & odm asap
+				if (ven) ven->UnMount(Display_Error);
+				if (odm) odm->UnMount(Display_Error);
 				goto parse;
 			} else {
+				if (ven) ven->UnMount(Display_Error);
+				if (odm) odm->UnMount(Display_Error);
 				LOGINFO("Unable to parse vendor fstab\n");
 			}
 		}
-		if (ven) ven->UnMount(Display_Error);
-		if (odm) odm->UnMount(Display_Error);
 	} else {
 		LOGINFO("Skipping Additional Fstab Processing\n");
 		property_set("fstab.additional", "0");
