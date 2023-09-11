@@ -16,6 +16,23 @@
       "message": "check for your mtk bug",
       "revId": "e1e6141d7b3a2fb5f7a75711992b7e9d2b48b696",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24da50fe_71aaa7ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-09-11T15:03:10Z",
+      "side": 1,
+      "message": "Is this patch intended to supersede this one? https://gerrit.twrp.me/c/android_bootable_recovery/+/6730?usp\u003dsearch",
+      "revId": "e1e6141d7b3a2fb5f7a75711992b7e9d2b48b696",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
