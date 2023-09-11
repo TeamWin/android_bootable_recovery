@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0e7e8e_dde07814",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-09-11T16:29:28Z",
+      "side": 1,
+      "message": "A couple of things:\n\nI believe this should be an opt-in option, not opt-out, as it\u0027s currently presented. The option should be \"Ask for confirmation before running ORS\" or something like that, and should be unchecked by default.\n\nAlso, the text on my device goes off the screen because it\u0027s too long, and there\u0027s no horizontal scroll bar, so it can\u0027t fully be read.\n\nSee here: https://www.dropbox.com/scl/fi/1tnkoebjix2rh786o0oqx/Screenshot_2023-09-11-12-20-17.png?rlkey\u003diul7tkv07fak6juhdx8jpxc78\u0026dl\u003d0",
+      "revId": "b86e17bace63768ccbaeb01129bb8b56bdde27a3",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
