@@ -141,7 +141,14 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	}
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
-#if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
+#if defined(TW_INCLUDE_LIBRESETPROP)
+	std::vector<std::string> build_date_props = {"ro.build.date.utc", "ro.bootimage.build.date.utc", "ro.vendor.build.date.utc", "ro.system.build.date.utc", "ro.system_ext.build.date.utc", "ro.product.build.date.utc", "ro.odm.build.date.utc"};
+	std::string val = "0";
+	for (auto prop : build_date_props) {
+		TWFunc::Property_Override(prop, val);
+		LOGINFO("Overriding %s with value: \"%s\"\n", prop.c_str(), val.c_str());
+	}
+#if defined(TW_OVERRIDE_SYSTEM_PROPS)
 	stringstream override_props(EXPAND(TW_OVERRIDE_SYSTEM_PROPS));
 	string current_prop;
 
@@ -199,7 +206,8 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		exit:
 		continue;
 	}
-#endif
+#endif // defined(TW_OVERRIDE_SYSTEM_PROPS)
+#endif // defined(TW_INCLUDE_LIBRESETPROP)
 
 	// Check for and run startup script if script exists
 	TWFunc::check_and_run_script("/system/bin/runatboot.sh", "boot");
