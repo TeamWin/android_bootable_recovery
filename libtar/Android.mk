@@ -40,7 +40,7 @@ ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         libkeystore-attestation-application-id \
         libhardware \
         libprotobuf-cpp-lite \
-        libfscrypt \
+        libfscrypttwrp \
         libhidlbase \
         libutils \
         libbinder \
