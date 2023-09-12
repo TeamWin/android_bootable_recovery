@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1693856987 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1693856987-C5B8EE193542847CE28C0AC048581B8A346A180F\n\n0000000000000000000000000000000000000000 11dbcae230be29a7fad621366b98ff5816e953ec refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmT2NNsACgkQH1oT9zX3\nIyJXrQ//Y/gXOlv6Mwz8IRD+zEC0ttzdGdZ5RGve6AivOJisRtJWqXHOOdGOKPJT\nxJbZEynM7IyImJZxejGf5FOOlc0xRxjxo0Qh7uKeBAVrIhPP8PGSfYsb6e37eGWB\nKuHVCZe5YnMWBeyJWOXx3/175XX+4/sPB+IbqaRp3yPmcDAGHBxnVmdea5n3GLwf\nbhUeKzSNz62/DGty4M8Kzs/2Ui1Dq4EXcNfk28ZJ+zcs2BXaS3fz9N3dnMXOCp8b\nPPs5nFY0hyP6xAet3ruhFKW0FccJGxmzWG9sOLlolcXBGlxgH1UOf2zYOSRlofPc\nUjMXIVmM19c7qEhBRGL0OD5bWbbz5bz+/vYcZ0ppfn73mGhdrZ6IkYPtHTe+yj6o\nu8sg7ckvtRnHR2Yldykt6dALdh4RStx+Achui1naOcdsSwdzlOw9JMOMELxId0YX\nZZteSHkaxuw2BgK8kt9/pUyeaQrnfLh/M021Y+RYdCuGW/8FsYoSP8TgBrgTI9sd\n0SMrvmihQQBDVltuVNYyn91OcxaauHEZnd3/wuVcCxhA+26GflsOdJ+Hw300WNMd\nhDrwxrBw1dulbs/gwDJbkjBsopgbhiEBVrfMgSKkkBwyVLqi0dRw3hS1DCWAe8y7\nymur85wKHTlZYtQd6WWuvGwHcBpJWR97Wtudj7XkDyzw7I9RTTs\u003d\n\u003dzivW\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061ef38d_a4af5974",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-09-12T19:41:40Z",
+      "side": 1,
+      "message": "It works perfectly on the OnePlus 5 with retrofit dynamic partitions",
+      "revId": "11dbcae230be29a7fad621366b98ff5816e953ec",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
