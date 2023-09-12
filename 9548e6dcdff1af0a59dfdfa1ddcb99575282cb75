@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d8d3223_74ba6f48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-12T19:59:29Z",
+      "side": 1,
+      "message": "The patch works.",
+      "revId": "9548e6dcdff1af0a59dfdfa1ddcb99575282cb75",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a0fc47_176b44ce",
+        "filename": "Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-12T19:59:29Z",
+      "side": 1,
+      "message": "Had to add \"LOCAL_CFLAGS +\u003d -Wno-unused-label\" here",
+      "range": {
+        "startLine": 321,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 49
+      },
+      "revId": "9548e6dcdff1af0a59dfdfa1ddcb99575282cb75",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
