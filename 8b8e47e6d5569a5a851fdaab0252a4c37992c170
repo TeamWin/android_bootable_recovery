@@ -139,6 +139,24 @@
       "message": "See DM on Zulip",
       "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eeb4784_07ca9825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-09-12T19:17:29Z",
+      "side": 1,
+      "message": "Check this patch if it works for you",
+      "parentUuid": "dd646cbf_fae874b5",
+      "revId": "8b8e47e6d5569a5a851fdaab0252a4c37992c170",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
