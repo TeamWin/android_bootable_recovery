@@ -2280,7 +2280,11 @@ bool TWPartition::Wipe_EXTFS(string File_System) {
 	gui_msg(Msg("formatting_using=Formatting {1} using {2}...")(Display_Name)("mke2fs"));
 
 	// Execute mke2fs to create empty ext4 filesystem
-	Command = "mke2fs -t " + File_System + " -b 4096 -I 512 " + Actual_Block_Device + " " + size_str;
+	Command = "mke2fs -t " + File_System + " -b 4096 -I 512";
+	if (Mount_Options.find("metadata_csum") != string::npos) {
+		Command += " -O metadata_csum,64bit,extent";
+	}
+	Command += " " + Actual_Block_Device + " " + size_str;
 	LOGINFO("mke2fs command: %s\n", Command.c_str());
 	ret = TWFunc::Exec_Cmd(Command);
 	if (ret) {
