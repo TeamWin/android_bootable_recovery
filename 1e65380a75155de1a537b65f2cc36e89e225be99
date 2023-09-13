@@ -16,6 +16,24 @@
       "message": "Do all A12/A13 ROMs on all devices support this?",
       "revId": "1e65380a75155de1a537b65f2cc36e89e225be99",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46a48690_244f0cde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-09-13T17:32:40Z",
+      "side": 1,
+      "message": "umm, actually i\u0027m not 100% sure though\n\nbut this is the default in AOSP recovery\nand there\u0027re quite many AOSP recovery users\nand I didn\u0027t see anyone complain about it\nso I\u0027m assuming it\u0027s fine\n\nto be 100% safe, I can keep it conditional",
+      "parentUuid": "4b2341e3_fa4c2c36",
+      "revId": "1e65380a75155de1a537b65f2cc36e89e225be99",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
