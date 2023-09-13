@@ -289,6 +289,7 @@ private:
 	string Original_Path;
 	bool Use_Original_Path;
 	bool Needs_Fs_Compress;
+	bool Needs_Metadata_Csum;
 
 	struct partition_fs_flags_struct {                                        // This struct is used to store mount flags and options for different file systems for the same partition
 		string File_System;

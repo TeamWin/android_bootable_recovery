@@ -168,6 +168,7 @@ enum TW_FSTAB_FLAGS {
 	TWFLAG_DM_USE_ORIGINAL_PATH,
 	TWFLAG_FS_COMPRESS,
 	TWFLAG_LOGICAL,
+	TWFLAG_METADATA_CSUM,
 };
 
 /* Flags without a trailing '=' are considered dual format flags and can be
@@ -218,6 +219,7 @@ const struct flag_list tw_flags[] = {
 	{ "dm_use_original_path",   TWFLAG_DM_USE_ORIGINAL_PATH },
 	{ "fscompress",             TWFLAG_FS_COMPRESS },
 	{ "logical",                TWFLAG_LOGICAL },
+	{ "metadata_csum",          TWFLAG_METADATA_CSUM },
 	{ 0,                        0 },
 };
 
@@ -286,6 +288,7 @@ TWPartition::TWPartition() {
 	Original_Path = "";
 	Use_Original_Path = false;
 	Needs_Fs_Compress = false;
+	Needs_Metadata_Csum = false;
 }
 
 TWPartition::~TWPartition(void) {
@@ -1079,6 +1082,9 @@ void TWPartition::Apply_TW_Flag(const unsigned flag, const char* str, const bool
 			#else
 				LOGINFO("Ignoring the 'fscompress' fstab flag\n");
 			#endif
+			break;
+		case TWFLAG_METADATA_CSUM:
+			Needs_Metadata_Csum = true;
 			break;
 		default:
 			// Should not get here
@@ -2290,7 +2296,11 @@ bool TWPartition::Wipe_EXTFS(string File_System) {
 	gui_msg(Msg("formatting_using=Formatting {1} using {2}...")(Display_Name)("mke2fs"));
 
 	// Execute mke2fs to create empty ext4 filesystem
-	Command = "mke2fs -t " + File_System + " -b 4096 -I 512 " + Actual_Block_Device + " " + size_str;
+	Command = "mke2fs -t " + File_System + " -b 4096 -I 512";
+	if (Needs_Metadata_Csum) {
+		Command += " -O metadata_csum,64bit,extent";
+	}
+	Command += " " + Actual_Block_Device + " " + size_str;
 	LOGINFO("mke2fs command: %s\n", Command.c_str());
 	ret = TWFunc::Exec_Cmd(Command);
 	if (ret) {
