@@ -1142,7 +1142,7 @@ void DataManager::ReadSettingsFile(void)
 	memset(mkdir_path, 0, sizeof(mkdir_path));
 	memset(settings_file, 0, sizeof(settings_file));
 	sprintf(mkdir_path, "%s%s", GetSettingsStoragePath().c_str(), GetStrValue(TW_RECOVERY_NAME).c_str());
-	sprintf(settings_file, "%s/%s", mkdir_path, TW_SETTINGS_FILE);
+	sprintf(settings_file, "%s%s", mkdir_path, TW_SETTINGS_FILE);
 
 	if (!PartitionManager.Mount_Settings_Storage(false))
 	{
