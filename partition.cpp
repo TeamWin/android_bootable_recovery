@@ -2508,7 +2508,10 @@ bool TWPartition::Wipe_F2FS() {
 		return false;
 	}
 
-	needs_casefold = android::base::GetBoolProperty("external_storage.casefold.enabled", false);
+	if (Mount_Point == "/data") {
+		needs_casefold = android::base::GetBoolProperty("external_storage.casefold.enabled", false);
+	}
+
 	unsigned long long dev_sz = TWFunc::IOCTL_Get_Block_Size(Actual_Block_Device.c_str());
 	if (!dev_sz)
 		return false;
