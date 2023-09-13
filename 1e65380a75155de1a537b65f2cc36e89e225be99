@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2341e3_fa4c2c36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-13T16:45:10Z",
+      "side": 1,
+      "message": "Do all A12/A13 ROMs on all devices support this?",
+      "revId": "1e65380a75155de1a537b65f2cc36e89e225be99",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
