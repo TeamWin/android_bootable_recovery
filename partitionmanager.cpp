@@ -213,7 +213,6 @@ void inline Process_ResetProps(TWPartition *ven, TWPartition *odm) {
 	Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
 	Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
 	Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
-	Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
 	Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
 	Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
 }
