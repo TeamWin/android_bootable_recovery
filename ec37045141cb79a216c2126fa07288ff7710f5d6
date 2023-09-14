@@ -16,6 +16,24 @@
       "message": "this is from another merged change, so amend and remove it",
       "revId": "ec37045141cb79a216c2126fa07288ff7710f5d6",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d0a369e_8602908d",
+        "filename": "data.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2023-09-14T18:51:28Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b9ca5dcf_9c092d64",
+      "revId": "ec37045141cb79a216c2126fa07288ff7710f5d6",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
