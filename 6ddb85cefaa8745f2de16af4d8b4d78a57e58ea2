@@ -16,6 +16,23 @@
       "message": "Merge conflicts when cherry-picking",
       "revId": "6ddb85cefaa8745f2de16af4d8b4d78a57e58ea2",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22d4d4b5_b05d207c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-15T17:03:35Z",
+      "side": 1,
+      "message": "After resolving the merge conflicts, the patch works okay.",
+      "revId": "6ddb85cefaa8745f2de16af4d8b4d78a57e58ea2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
