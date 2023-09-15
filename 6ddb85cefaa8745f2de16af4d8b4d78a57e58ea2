@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c78ff2_eb28f225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-09-15T16:26:00Z",
+      "side": 1,
+      "message": "Merge conflicts when cherry-picking",
+      "revId": "6ddb85cefaa8745f2de16af4d8b4d78a57e58ea2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
