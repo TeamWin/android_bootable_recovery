@@ -175,6 +175,23 @@
       "message": "Any update on this?",
       "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e606e26_bf88a347",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 144
+      },
+      "writtenOn": "2023-09-16T20:17:44Z",
+      "side": 1,
+      "message": "we can abandon this since similar commit is merged",
+      "revId": "3ff5ee871dfa95aed8deb8a48e6ad80ffd5606f9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
