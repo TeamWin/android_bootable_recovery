@@ -146,31 +146,31 @@ ifeq ($(AB_OTA_UPDATER),true)
 	include $(BUILD_PREBUILT)
 endif
 
+include $(CLEAR_VARS)
+LOCAL_MODULE := android.hardware.health@2.1-service.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := android.hardware.health@2.1.xml
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/vendor/etc/vintf/manifest
+LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := android.hardware.health@2.0-service.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
-	include $(CLEAR_VARS)
-	LOCAL_MODULE := android.hardware.health@2.1-service.rc
-	LOCAL_MODULE_TAGS := optional
-	LOCAL_MODULE_CLASS := EXECUTABLES
-	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
-	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
-	include $(BUILD_PREBUILT)
-
-	include $(CLEAR_VARS)
-	LOCAL_MODULE := android.hardware.health@2.1.xml
-	LOCAL_MODULE_TAGS := optional
-	LOCAL_MODULE_CLASS := EXECUTABLES
-	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/vendor/etc/vintf/manifest
-	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
-	include $(BUILD_PREBUILT)
-
-	include $(CLEAR_VARS)
-	LOCAL_MODULE := android.hardware.health@2.0-service.rc
-	LOCAL_MODULE_TAGS := optional
-	LOCAL_MODULE_CLASS := EXECUTABLES
-	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
-	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
-	include $(BUILD_PREBUILT)
-
 	include $(CLEAR_VARS)
 	LOCAL_MODULE := lpdumpd.rc
 	LOCAL_MODULE_TAGS := optional
