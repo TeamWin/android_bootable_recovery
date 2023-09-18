@@ -19,7 +19,7 @@ libminuitwrp_defaults {
 
 cc_library_shared {
     name: "libminuitwrp",
-    defaults: ["libminuitwrp_defaults"],
+    defaults: ["libminuitwrp_defaults", "twrp_defaults"],
     cflags: [
         "-DTWRES=\"/twres/\""
     ],
