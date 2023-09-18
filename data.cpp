@@ -36,7 +36,6 @@
 #include "set_metadata.h"
 #include "gui/gui.hpp"
 #include "infomanager.hpp"
-#include "recovery_utils/battery_utils.h"
 
 #define DEVID_MAX 64
 #define HWID_MAX 32
@@ -1030,30 +1029,6 @@ int DataManager::GetMagicValue(const string& varName, string& value)
 			cpuSecCheck = curTime.tv_sec + 5;
 		}
 		value = TWFunc::to_string(convert_temp);
-		return 0;
-	}
-	else if (varName == "tw_battery")
-	{
-		char tmp[16];
-		static char charging = ' ';
-		static int lastVal = -1;
-		static time_t nextSecCheck = 0;
-		struct timeval curTime;
-		gettimeofday(&curTime, NULL);
-		if (curTime.tv_sec > nextSecCheck)
-		{
-			auto battery_info = GetBatteryInfo();
-			if (battery_info.charging) {
-				charging = '+';
-			} else {
-				charging = ' ';
-			}
-			lastVal = battery_info.capacity;
-			nextSecCheck = curTime.tv_sec + 1;
-		}
-
-		sprintf(tmp, "%i%%%c", lastVal, charging);
-		value = tmp;
 		return 0;
 	}
 	return -1;

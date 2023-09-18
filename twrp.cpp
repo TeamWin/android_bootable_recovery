@@ -24,6 +24,9 @@
 #include <time.h>
 #include <unistd.h>
 #include <signal.h>
+#include <thread>
+#include <chrono>
+#include "recovery_utils/battery_utils.h"
 #include "gui/twmsg.h"
 
 #include "cutils/properties.h"
@@ -419,6 +422,32 @@ int main(int argc, char **argv) {
 
 	// Load up all the resources
 	gui_loadResources();
+
+	std::string value;
+	static char charging = ' ';
+	static int lastVal = -1;
+
+	// Function to monitor battery in the background
+	auto monitorBatteryInBackground = [&]() {
+		while (true) {
+			auto battery_info = GetBatteryInfo();
+			if (battery_info.charging) {
+				charging = '+';
+			} else {
+				charging = ' ';
+			}
+			lastVal = battery_info.capacity;
+			// Format the value based on the background updates
+			value = std::to_string(lastVal) + "%" + charging;
+			DataManager::SetValue("tw_battery", value);
+
+			// Sleep for a specified interval (e.g., 1 second) before checking again
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+		}
+	};
+
+	// Create a thread for battery monitoring
+	static std::thread battery_monitor(monitorBatteryInBackground);
 
 	twrpAdbBuFifo *adb_bu_fifo = new twrpAdbBuFifo();
 	TWFunc::Clear_Bootloader_Message();
