@@ -1037,21 +1037,26 @@ int DataManager::GetMagicValue(const string& varName, string& value)
 		char tmp[16];
 		static char charging = ' ';
 		static int lastVal = -1;
-		static time_t nextSecCheck = 0;
-		struct timeval curTime;
-		gettimeofday(&curTime, NULL);
-		if (curTime.tv_sec > nextSecCheck)
-		{
-			auto battery_info = GetBatteryInfo();
-			if (battery_info.charging) {
-				charging = '+';
-			} else {
-				charging = ' ';
-			}
-			lastVal = battery_info.capacity;
-			nextSecCheck = curTime.tv_sec + 1;
-		}
 
+		// Function to monitor battery in the background
+		auto monitorBatteryInBackground = [&]() {
+			while (true) {
+				auto battery_info = GetBatteryInfo();
+				if (battery_info.charging) {
+					charging = '+';
+				} else {
+					charging = ' ';
+				}
+				lastVal = battery_info.capacity;
+				// Sleep for a specified interval (e.g., 1 second) before checking again
+				std::this_thread::sleep_for(std::chrono::seconds(1));
+			}
+		};
+
+		// Create a thread for battery monitoring
+		static std::thread battery_monitor(monitorBatteryInBackground);
+
+		// Format the value based on the background updates
 		sprintf(tmp, "%i%%%c", lastVal, charging);
 		value = tmp;
 		return 0;

@@ -158,8 +158,6 @@ endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     LOCAL_CFLAGS += -DPRODUCT_USE_DYNAMIC_PARTITIONS=1
-    TWRP_REQUIRED_MODULES += android.hardware.health@2.1-service android.hardware.health@2.1-impl.recovery android.hardware.health@2.1-service.rc android.hardware.health@2.1.xml
-    TWRP_REQUIRED_MODULES += android.hardware.health@2.0-service android.hardware.health@2.0-impl.recovery android.hardware.health@2.0-service.rc
     ifeq ($(TW_EXCLUDE_LPDUMP),)
         TWRP_REQUIRED_MODULES += lpdump lpdumpd.rc
     endif
@@ -478,7 +476,14 @@ TWRP_REQUIRED_MODULES += \
     privapp-permissions-twrpapp.xml \
     adbd_system_api_recovery \
     libsync.recovery \
-    libandroidicu.recovery
+    libandroidicu.recovery \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl.recovery \
+    android.hardware.health@2.1-service.rc \
+    android.hardware.health@2.1.xml \
+    android.hardware.health@2.0-service \
+    android.hardware.health@2.0-impl.recovery \
+    android.hardware.health@2.0-service.rc
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \
