@@ -11,66 +11,10 @@ import (
 func globalFlags(ctx android.BaseContext) []string {
 	var cflags []string
 
-	if getMakeVars(ctx, "TW_SUPPORT_INPUT_1_2_HAPTICS") == "true" {
-		cflags = append(cflags, "-DUSE_QTI_HAPTICS")
-	}
-
-	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS") == "true" {
-		cflags = append(cflags, "-DUSE_QTI_AIDL_HAPTICS")
-	}
-
-	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME") != "" {
-		cflags = append(cflags, "-DUSE_QTI_AIDL_HAPTICS_FQNAME="+getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME"))
-	}
-
-	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF") == "true" {
-		cflags = append(cflags, "-DUSE_QTI_AIDL_HAPTICS_FIX_OFF")
-	}
-
-	if getMakeVars(ctx, "TW_USE_SAMSUNG_HAPTICS") == "true" {
-                cflags = append(cflags, "-DUSE_SAMSUNG_HAPTICS")
-        }
-
-	if getMakeVars(ctx, "TW_TARGET_USES_QCOM_BSP") == "true" {
-		cflags = append(cflags, "-DMSM_BSP")
-	}
-
-	if getMakeVars(ctx, "TW_NEW_ION_HEAP") == "true" {
-		cflags = append(cflags, "-DNEW_ION_HEAP")
-	}
-
 	matches, err := filepath.Glob("external/libdrm/Android.*")
 	_ = matches
 	if err == nil {
 		cflags = append(cflags, "-DHAS_DRM")
-	}
-
-	if getMakeVars(ctx, "TW_INCLUDE_JPEG") != "" {
-		cflags = append(cflags, "-DTW_INCLUDE_JPEG")
-	}
-
-	if getMakeVars(ctx, "RECOVERY_TOUCHSCREEN_SWAP_XY") == "true" {
-		cflags = append(cflags, "-DRECOVERY_TOUCHSCREEN_SWAP_XY")
-	}
-
-	if getMakeVars(ctx, "RECOVERY_TOUCHSCREEN_FLIP_X") == "true" {
-		cflags = append(cflags, "-DRECOVERY_TOUCHSCREEN_FLIP_X")
-	}
-
-	if getMakeVars(ctx, "RECOVERY_TOUCHSCREEN_FLIP_Y") == "true" {
-		cflags = append(cflags, "-DRECOVERY_TOUCHSCREEN_FLIP_Y")
-	}
-
-	if getMakeVars(ctx, "RECOVERY_GRAPHICS_FORCE_USE_LINELENGTH") == "true" {
-		cflags = append(cflags, "-DRECOVERY_GRAPHICS_FORCE_USE_LINELENGTH")
-	}
-
-	if getMakeVars(ctx, "RECOVERY_GRAPHICS_FORCE_SINGLE_BUFFER") == "true" {
-		cflags = append(cflags, "-DRECOVERY_GRAPHICS_FORCE_SINGLE_BUFFER")
-	}
-
-	if getMakeVars(ctx, "TWRP_EVENT_LOGGING") == "true" {
-		cflags = append(cflags, "-D_EVENT_LOGGING")
 	}
 
 	var pixelFormat = strings.Replace(getMakeVars(ctx, "TARGET_RECOVERY_FORCE_PIXEL_FORMAT"), "\"", "", -1)
@@ -117,20 +61,6 @@ func globalFlags(ctx android.BaseContext) []string {
 		break
 	}
 
-	if getMakeVars(ctx, "TARGET_RECOVERY_OVERSCAN_PERCENT") != "" {
-		cflags = append(cflags, "-DOVERSCAN_PERCENT="+getMakeVars(ctx, "TARGET_RECOVERY_OVERSCAN_PERCENT"))
-	} else {
-		cflags = append(cflags, "-DOVERSCAN_PERCENT=0")
-	}
-
-	if getMakeVars(ctx, "TW_SCREEN_BLANK_ON_BOOT") == "true" {
-		cflags = append(cflags, "-DTW_SCREEN_BLANK_ON_BOOT")
-	}
-
-	if getMakeVars(ctx, "TW_FBIOPAN") == "true" {
-		cflags = append(cflags, "-DTW_FBIOPAN")
-	}
-
 	var tw_rotation = getMakeVars(ctx, "TW_ROTATION")
 	switch tw_rotation {
 	case "0":
@@ -148,31 +78,6 @@ func globalFlags(ctx android.BaseContext) []string {
 			cflags = append(cflags, "-DTW_ROTATION=0")
 		}
 	}
-
-	if getMakeVars(ctx, "TW_IGNORE_MAJOR_AXIS_0") == "true" {
-		cflags = append(cflags, "-DTW_IGNORE_MAJOR_AXIS_0")
-	}
-
-	if getMakeVars(ctx, "TW_IGNORE_MT_POSITION_0") == "true" {
-		cflags = append(cflags, "-DTW_IGNORE_MT_POSITION_0")
-	}
-
-	if getMakeVars(ctx, "TW_IGNORE_ABS_MT_TRACKING_ID") == "true" {
-		cflags = append(cflags, "-DTW_IGNORE_ABS_MT_TRACKING_ID")
-	}
-
-	if getMakeVars(ctx, "TW_INPUT_BLACKLIST") != "" {
-		cflags = append(cflags, "-DTW_INPUT_BLACKLIST="+getMakeVars(ctx, "TW_INPUT_BLACKLIST"))
-	}
-
-	if getMakeVars(ctx, "TW_WHITELIST_INPUT") != "" {
-		cflags = append(cflags, "-DWHITELIST_INPUT="+getMakeVars(ctx, "TW_WHITELIST_INPUT"))
-	}
-
-	if getMakeVars(ctx, "TW_HAPTICS_TSPDRV") == "true" {
-		cflags = append(cflags, "-DTW_HAPTICS_TSPDRV")
-	}
-
 	return cflags
 }
 
