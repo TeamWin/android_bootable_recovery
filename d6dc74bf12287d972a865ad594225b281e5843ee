@@ -16,6 +16,24 @@
       "message": "What does this fix in the terminal?",
       "revId": "d6dc74bf12287d972a865ad594225b281e5843ee",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12dc76f_db9d18a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2023-09-19T02:31:55Z",
+      "side": 1,
+      "message": "The time zone set in twrp does not take effect in the terminal: GMT-09:00\n1.adb shell\n2.touch test\n3.ls -al\n-rw-r--r-- 1 root root 0 2023-09-19 02:21 test\n\nAfter using this patch:\n-rw-r--r-- 1 root root 0 2023-09-18 17:21 test",
+      "parentUuid": "02b1d1b9_09fb547e",
+      "revId": "d6dc74bf12287d972a865ad594225b281e5843ee",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
