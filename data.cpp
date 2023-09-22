@@ -1049,7 +1049,7 @@ int DataManager::GetMagicValue(const string& varName, string& value)
 				charging = ' ';
 			}
 			lastVal = battery_info.capacity;
-			nextSecCheck = curTime.tv_sec + 1;
+			nextSecCheck = curTime.tv_sec + 30;
 		}
 
 		sprintf(tmp, "%i%%%c", lastVal, charging);
