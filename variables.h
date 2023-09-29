@@ -150,6 +150,10 @@
 #define TW_VIRTUAL_AB_ENABLED       "tw_virtual_ab.enabled"
 #define TW_AUTO_REFLASHTWRP_VAR     "tw_auto_reflashtwrp"
 
+
+// BUILD PROPS
+#define TW_READ_ADDITIONAL_FSTAB_PROP "ro.tw.addition_fstab"
+#define TW_KEYMASTER_VERSION_PROP     "keymaster_ver"
 // Theme versioning
 // version 2 requires theme to handle power button as action togglebacklight
 // version 4 adds listbox support to reboot page
