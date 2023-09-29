@@ -438,6 +438,9 @@ endif
 ifeq ($(TW_INCLUDE_FASTBOOTD), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_FASTBOOTD
 endif
+ifeq ($(TW_FORCE_KEYMASTER_VER), true)
+    LOCAL_CFLAGS += -DTW_FORCE_KEYMASTER_VER
+endif
 
 LOCAL_C_INCLUDES += system/vold \
 
