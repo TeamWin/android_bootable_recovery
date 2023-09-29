@@ -121,8 +121,7 @@ public:
 	static string Check_For_TwrpFolder(); // Gets user defined path on storage where backups should be stored
 	static bool Check_Xml_Format(const std::string filename); // Return whether a xml is in plain xml or ABX format
 	static bool Find_Fstab(string &fstab);
-	static bool Get_Service_From(TWPartition *Partition, std::string Service, std::string &Ret);
-	static std::string Get_Version_From_Service(std::string name);
+	static bool Get_Service_From(std::string partition, std::string service, std::string &ret);
 
 	static bool abx_to_xml(const std::string path, std::string &result); // could we convert abx to xml (if so, return the full path to the converted file)
 private:
