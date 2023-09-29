@@ -153,6 +153,7 @@
 // BUILD PROPS
 #define TW_FASTBOOT_MODE_PROP         "ro.twrp.fastbootd"
 #define TW_MODULES_MOUNTED_PROP       "twrp.modules.loaded"     // property for successfully mounted modules
+#define TW_KEYMASTER_VERSION_PROP     "keymaster_ver"
 
 // Theme versioning
 // version 2 requires theme to handle power button as action togglebacklight
