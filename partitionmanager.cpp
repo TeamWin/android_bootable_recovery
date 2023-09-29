@@ -208,6 +208,62 @@ void inline Reset_Prop_From_Partition(std::string prop, std::string def, TWParti
 	}
 }
 
+void inline Process_ResetProps(TWPartition *ven, TWPartition *odm) {
+	// Reset the crypto volume props according to os.
+	Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
+	Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
+	Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
+	Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
+	Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
+	Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
+}
+
+static inline std::string KM_Ver_From_Manifest(std::string ver) {
+	TWFunc::Get_Service_From_Manifest("/vendor", "android.hardware.keymaster", ver);
+	if (strstr(ver.c_str(), "4")) {
+		ver = "4.x";
+	}
+	return ver;
+}
+
+void inline Process_Keymaster_Version(TWPartition *ven, bool Display_Error) {
+	// Fetch the Keymaster Service version to be started
+	std::string version;
+#ifndef TW_FORCE_KEYMASTER_VER
+	version = KM_Ver_From_Manifest(version);
+
+	/* If we are unable to get the version from device vendor then
+		* set the version from the keymaster_ver prop if set
+		*/
+	if (version.empty()) {
+		// unmount partition(s)
+		if (ven) ven->UnMount(Display_Error);
+
+		// Use keymaster_ver prop set from device tree (if exists)
+		version = android::base::GetProperty(TW_KEYMASTER_VERSION_PROP, version);
+		if (version.empty()) {
+			LOGINFO("Keymaster_Ver::Unable to find vendor manifest on the device, and no default value set. Checking the ramdisk manifest\n");
+			version = KM_Ver_From_Manifest(version);
+		} else {
+			LOGINFO("Keymaster_Ver::Unable to find vendor manifest on the device. Setting to default value.\n");
+		}
+	} else {
+		if (ven) ven->UnMount(Display_Error);
+	}
+#else
+	if (ven) ven->UnMount(Display_Error);
+
+	version = android::base::GetProperty(TW_KEYMASTER_VERSION_PROP, version);
+	if (version.empty()) {
+		LOGINFO("Keymaster_Ver::Force Keymaster_Ver flag found, but keymaster_ver prop not set.\n");
+	} else {
+		LOGINFO("Keymaster_Ver::Force Keymaster_Ver flag found.\n");
+	}
+#endif
+	LOGINFO("Keymaster_Ver::Using keymaster version '%s' for decryption\n", version.c_str());
+	android::base::SetProperty(TW_KEYMASTER_VERSION_PROP, version.c_str());
+}
+
 int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error, bool recovery_mode) {
 	FILE *fstabFile;
 	char fstab_line[MAX_FSTAB_LINE_LENGTH];
@@ -275,7 +331,9 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 	}
 	TWPartition *data = NULL;
 	TWPartition *meta = NULL;
+#ifndef TW_SKIP_ADDITIONAL_FSTAB
 parse:
+#endif
 	fstabFile = fopen(Fstab_Filename.c_str(), "rt");
 	if (!parse_userdata && fstabFile == NULL) {
 		LOGERR("Critical Error: Unable to open fstab at '%s'.\n", Fstab_Filename.c_str());
@@ -356,34 +414,32 @@ clear:
 	if (recovery_mode && !parse_userdata) {
 		if (ven) ven->Mount(Display_Error);
 		if (odm) odm->Mount(Display_Error);
+
+		Process_ResetProps(ven, odm);
+		parse_userdata = true;
+
+#ifndef TW_SKIP_ADDITIONAL_FSTAB
+		// Now Fetch the additional fstab
 		if (TWFunc::Find_Fstab(Fstab_Filename)) {
-			string service;
 			LOGINFO("Fstab: %s\n", Fstab_Filename.c_str());
 			TWFunc::copy_file(Fstab_Filename, additional_fstab, 0600, false);
 			Fstab_Filename = additional_fstab;
 			property_set("fstab.additional", "1");
-			TWFunc::Get_Service_From(ven, "keymaster", service);
-			LOGINFO("Keymaster version: '%s'\n", TWFunc::Get_Version_From_Service(service).c_str());
-			property_set("keymaster_ver", TWFunc::Get_Version_From_Service(service).c_str());
-			parse_userdata = true;
-			Reset_Prop_From_Partition("ro.crypto.dm_default_key.options_format.version", "", ven, odm);
-			Reset_Prop_From_Partition("ro.crypto.volume.metadata.method", "", ven, odm);
-			Reset_Prop_From_Partition("ro.crypto.volume.options", "", ven, odm);
-			Reset_Prop_From_Partition("external_storage.projid.enabled", "", ven, odm);
-			Reset_Prop_From_Partition("external_storage.casefold.enabled", "", ven, odm);
-			Reset_Prop_From_Partition("external_storage.sdcardfs.enabled", "", ven, odm);
-
-			if (ven) ven->UnMount(Display_Error);
-			if (odm) odm->UnMount(Display_Error);
 			goto parse;
 		} else {
-			if (ven) ven->UnMount(Display_Error);
-			if (odm) odm->UnMount(Display_Error);
 			LOGINFO("Unable to parse vendor fstab\n");
 		}
 	}
 	LOGINFO("Done processing fstab files\n");
+#else
+		LOGINFO("Skipping Additional Fstab Processing\n");
+		property_set("fstab.additional", "0");
+	}
+#endif
 
+	Process_Keymaster_Version(ven, false);
+	if (ven) ven->UnMount(Display_Error);
+	if (odm) odm->UnMount(Display_Error);
 	return true;
 }
 

@@ -57,6 +57,10 @@
 #include "cutils/properties.h"
 #include "cutils/android_reboot.h"
 #include <sys/reboot.h>
+#ifdef TW_INCLUDE_CRYPTO
+#include "gui/rapidxml.hpp"
+#include "gui/pages.hpp"
+#endif
 #endif // ndef BUILD_TWRPTAR_MAIN
 #ifndef TW_EXCLUDE_ENCRYPTED_BACKUPS
 	#include "openaes/inc/oaes_lib.h"
@@ -1584,55 +1588,73 @@ bool TWFunc::Find_Fstab(string &fstab) {
 	return true;
 }
 
-bool TWFunc::Get_Service_From(TWPartition *Partition, std::string Service, std::string &Res) {
-	Partition->Mount(true);
-	std::string Path = Partition->Get_Mount_Point() + "/etc/init/";
-	std::string Name;
-	std::vector<std::string> Data;
-	bool Found = false, ret = false;
-	DIR* dir;
-	struct dirent* der;
-	dir = opendir(Path.c_str());
-	while ((der = readdir(dir)) != NULL)
-	{
-		Name = der->d_name;
-		if (Name.find(Service) != string::npos) {
-			Found = true;
-			Path += Name;
-			break;
-		}
-	}
-	closedir(dir);
-
-	if (!Found) {
-		LOGINFO("Unable to locate service RC\n");
-		goto finish;
-	}
-
-	if (read_file(Path, Data) != 0) {
-		LOGINFO("Unable to read file '%s'\n", Path.c_str());
-		goto finish;
-	}
-
-	for (int index = 0; index < Data.size(); index++) {
-		Name = Data.at(index);
-		if (Name.find("service") != string::npos) {
-			Res = Name.substr(Name.find_last_of('/')+1);
-			ret = true;
-			goto finish;
-		}
-	}
-
-finish:
-	Partition->UnMount(true);
-	return ret;
-}
-
-std::string TWFunc::Get_Version_From_Service(std::string name) {
+static inline std::string Get_Version_From_FQ(std::string name) {
 	int start, end;
 	start = name.find('@') + 1;
-	end = name.find("-") - start;
+	end = name.find(":") - start;
 	return name.substr(start, end);
+}
+
+bool TWFunc::Get_Service_From_Manifest(std::string basepath, std::string service, std::string &res) {
+	std::string manifestpath, filename, platform;
+	manifestpath = basepath + "/etc/vintf/";
+	bool ret = false;
+
+	// Prefer using ro.boot.product.vendor.sku property, following AOSP VintfObject::fetchVendorHalManifest
+	// If not set, also try ro.board.platform.
+	platform = android::base::GetProperty("ro.boot.product.vendor.sku", "");
+	if (platform.empty()) {
+		LOGINFO("Property ro.boot.product.vendor.sku not found, trying to get vintf manifest file name from ro.board.platform\n");
+		platform = android::base::GetProperty("ro.board.platform", "");
+	}
+
+	// Let's find the service xml if exists
+	Exec_Cmd("find " + manifestpath + "manifest/ -type f -name *" + service + "*", filename, false);
+	if (filename.empty()) {
+		LOGINFO("Separate manifest doesn't exist for '%s'\n", service.c_str());
+		// Look for manifest_PLATFORM.xml
+		filename = manifestpath + "manifest_" + platform + ".xml";
+		if (!Path_Exists(filename)) {
+			// Use legacy manifest path if platform manifest is not found.
+			LOGINFO("%s not found. Using default path for manifest.xml\n", filename.c_str());
+			filename = manifestpath + "manifest.xml";
+		}
+	}
+	if (Path_Exists(filename)) {
+		char* manifest = PageManager::LoadFileToBuffer(filename, NULL);
+		LOGINFO("Looking for '%s' service in manifest\n", service.c_str());
+		xml_document<>* vintfManifest = new xml_document<>();
+		vintfManifest->parse<0>(manifest);
+		xml_node<>* manifestNode = vintfManifest->first_node("manifest");
+		std::string version;
+		if (manifestNode) {
+			for (xml_node<>* child = manifestNode->first_node(); child; child = child->next_sibling()) {
+				std::string type = child->name();
+				if (type == "hal") {
+					xml_node<>* nameNode = child->first_node("name");
+					type = nameNode->value();
+					if (type == service) {
+						xml_node<> *versionNode = child->first_node("version");
+						if (versionNode != nullptr) {
+							LOGINFO("Found version in manifest: %s\n", versionNode->value());
+						} else {
+							versionNode = child->first_node("fqname");
+							if (versionNode == nullptr) return ret;
+							LOGINFO("Found fqname in manifest: %s\n", versionNode->value());
+						}
+						version = versionNode->value();
+						if (version.find('@') == std::string::npos) {
+							res = version;
+						} else {
+							res = Get_Version_From_FQ(version);
+						}
+						ret = true;
+					}
+				}
+			}
+		}
+	}
+	return ret;
 }
 
 #endif // ndef BUILD_TWRPTAR_MAIN
