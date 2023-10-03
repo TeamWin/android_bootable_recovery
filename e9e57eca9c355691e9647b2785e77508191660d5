@@ -52,6 +52,24 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87aad8a0_56e8fb37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-10-03T15:34:40Z",
+      "side": 1,
+      "message": "Afaik you can still use flags even if makefile is deprecated. Blueprint files can also use them, as do go files. Our entire source uses makefiles so if they need to be changed, this one item won\u0027t be a big deal. That\u0027s okay; I\u0027ll make the change if you don\u0027t want to do it.",
+      "parentUuid": "adfd7f67_a52d5b93",
+      "revId": "e9e57eca9c355691e9647b2785e77508191660d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e0be6fb_10db7e67",
