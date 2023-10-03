@@ -35,6 +35,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adfd7f67_a52d5b93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-10-03T15:11:19Z",
+      "side": 1,
+      "message": "I would prefer to use property instead of flag, as makefile getting deprecated and in the end we need to move to it.",
+      "revId": "e9e57eca9c355691e9647b2785e77508191660d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e0be6fb_10db7e67",
