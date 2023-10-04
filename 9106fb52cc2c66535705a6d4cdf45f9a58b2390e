@@ -21,6 +21,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51a2c1ec_28f7ba4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2023-10-04T17:07:16Z",
+      "side": 1,
+      "message": "this is set by bootloader and kernel",
+      "parentUuid": "180bca62_f57d9c7c",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf7ed00_92a4686e",
         "filename": "twrp-functions.cpp",
         "patchSetId": 32
