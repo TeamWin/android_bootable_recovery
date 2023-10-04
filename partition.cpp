@@ -2192,6 +2192,7 @@ bool TWPartition::Wipe_Encryption() {
 	}
 exit:
 	delete base_partition;
+	TWFunc::check_and_run_script("/system/bin/formatdata.sh", "Format Data Script");
 	return ret;
 }
 
