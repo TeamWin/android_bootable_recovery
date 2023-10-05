@@ -16,6 +16,24 @@
       "message": "You could wrap the ifdef around the call to the function and remove it from the function itself.",
       "revId": "f5cb54e1d12b5c254a8143b9efa40f064ea89090",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52551658_391b800a",
+        "filename": "partition.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2722,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-05T00:31:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5f1c99dc_f9a3123c",
+      "revId": "f5cb54e1d12b5c254a8143b9efa40f064ea89090",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
