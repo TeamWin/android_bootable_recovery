@@ -39,6 +39,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "082b7d83_effb2b0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-10-05T02:03:36Z",
+      "side": 1,
+      "message": "It\u0027s not. As @Luca Weiss pointed out, there are a qcv script and rc file which set that prop.",
+      "parentUuid": "51a2c1ec_28f7ba4e",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf7ed00_92a4686e",
         "filename": "twrp-functions.cpp",
         "patchSetId": 32
