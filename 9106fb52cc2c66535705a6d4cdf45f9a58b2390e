@@ -140,6 +140,29 @@
       "parentUuid": "8e10d1ef_3caebce3",
       "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa4d97b_53f8c442",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-10-05T09:13:12Z",
+      "side": 1,
+      "message": "Change to:\nplatform \u003d android::base::GetProperty(\"ro.boot.product.vendor.sku\", android::base::GetProperty(\"ro.board.platform\", \"\"));",
+      "range": {
+        "startLine": 1599,
+        "startChar": 36,
+        "endLine": 1599,
+        "endChar": 100
+      },
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
