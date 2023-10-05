@@ -105,6 +105,24 @@
       "parentUuid": "7cf7ed00_92a4686e",
       "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae1a662_86f0a2a4",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 241
+      },
+      "writtenOn": "2023-10-05T07:28:24Z",
+      "side": 1,
+      "message": "No, not unless included in TWRP. On my vendor partition (Fairphone 5) manifest_lahaina.xml contains\n```\n    \u003chal format\u003d\"hidl\"\u003e\n        \u003cname\u003eandroid.hardware.keymaster\u003c/name\u003e\n        \u003ctransport\u003ehwbinder\u003c/transport\u003e\n        \u003cfqname\u003e@4.0::IKeymasterDevice/strongbox\u003c/fqname\u003e\n        \u003cfqname\u003e@4.1::IKeymasterDevice/default\u003c/fqname\u003e\n    \u003c/hal\u003e\n```\nwhile the correct manifest_yupik.xml contains\n```\n    \u003chal format\u003d\"hidl\"\u003e\n        \u003cname\u003eandroid.hardware.keymaster\u003c/name\u003e\n        \u003ctransport\u003ehwbinder\u003c/transport\u003e\n        \u003cfqname\u003e@4.1::IKeymasterDevice/default\u003c/fqname\u003e\n    \u003c/hal\u003e\n```\nThen TWRP picks `@4.0::IKeymasterDevice/strongbox` for keymaster but this is not available on my device, only the 4.1 default one.\n\nI\u0027d argue that at least `ro.boot.product.vendor.sku` should be considered before falling back to `ro.board.platform` (and then also printing a warning that this might be potentially incorrect). Then devices can set this prop in their vendor.prop instead of needing to use `TW_FORCE_KEYMASTER_VER` + `keymaster_ver` property, as is the case on my device right now.",
+      "parentUuid": "8e10d1ef_3caebce3",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
