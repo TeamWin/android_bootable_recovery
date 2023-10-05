@@ -74,6 +74,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "382798ab_747584cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-10-05T08:05:03Z",
+      "side": 1,
+      "message": "Have you tested this out by amending the function to retrieve the prop?",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf7ed00_92a4686e",
         "filename": "twrp-functions.cpp",
         "patchSetId": 32
