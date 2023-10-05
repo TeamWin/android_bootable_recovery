@@ -89,6 +89,60 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "651ddcbd_25aa315b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 241
+      },
+      "writtenOn": "2023-10-05T11:06:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "382798ab_747584cb",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f48ed5_80061d01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 241
+      },
+      "writtenOn": "2023-10-05T11:06:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "082b7d83_effb2b0c",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5143b6bf_4e9d91ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 241
+      },
+      "writtenOn": "2023-10-05T11:06:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be8a7be5_ce4d5e11",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cf7ed00_92a4686e",
@@ -155,6 +209,48 @@
       "writtenOn": "2023-10-05T09:13:12Z",
       "side": 1,
       "message": "Change to:\nplatform \u003d android::base::GetProperty(\"ro.boot.product.vendor.sku\", android::base::GetProperty(\"ro.board.platform\", \"\"));",
+      "range": {
+        "startLine": 1599,
+        "startChar": 36,
+        "endLine": 1599,
+        "endChar": 100
+      },
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e490c157_26736c76",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 241
+      },
+      "writtenOn": "2023-10-05T11:06:01Z",
+      "side": 1,
+      "message": "Pushed patch set 33 to address this.",
+      "parentUuid": "2ae1a662_86f0a2a4",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc23b00e_1aeddbe5",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 241
+      },
+      "writtenOn": "2023-10-05T11:06:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa4d97b_53f8c442",
       "range": {
         "startLine": 1599,
         "startChar": 36,
