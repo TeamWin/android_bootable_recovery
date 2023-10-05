@@ -52,6 +52,24 @@
       "message": "Any reason you\u0027re using ro.board.platform here instead of what AOSP uses (ro.boot.product.vendor.sku)? https://cs.android.com/android/platform/superproject/+/main:system/libvintf/VintfObject.cpp;l\u003d383-400?q\u003d%22%2Fetc%2Fvintf%2F%22\u0026start\u003d21\n\nOn my device (Fairphone 5) ro.board.platform\u003dlahaina but it really needs the \u0027yupik\u0027 file, not lahaina one. On Android init.qti.qcv.sh+init.qti.qcv.rc set ro.boot.product.vendor.sku\u003dyupik so that it uses the correct manifest file.",
       "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e10d1ef_3caebce3",
+        "filename": "twrp-functions.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-10-05T02:02:24Z",
+      "side": 1,
+      "message": "Those files don\u0027t get run in TWRP, do they? So that prop won\u0027t exist in TWRP. I checked on my device and I do see that a different manifest file would be used based on that prop, but the keymaster version in both is the same, so it doesn\u0027t really matter. Are they the same on your device? You have to remember that everything that gets run in Android doesn\u0027t necessarily get run in TWRP.",
+      "parentUuid": "7cf7ed00_92a4686e",
+      "revId": "9106fb52cc2c66535705a6d4cdf45f9a58b2390e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
