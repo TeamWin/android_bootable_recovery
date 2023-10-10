@@ -33,6 +33,24 @@
       "message": "I\u0027ve just come across a much bigger issue when looking at my bonito tree. While the default keymaster version is 4.0, the device uses 4.1-citadel as well. So with mixed versions, keymaster_ver will always be incorrect in once instance or the other. I think that makes the keymaster detection unreliable in such cases, meaning there needs to be a way to not use it at all on some devices. This will need to be investigated further.",
       "revId": "8b18aa8614879270be37bce582b984566063077b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6837970e_a5011147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-10-10T17:54:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "83595f3e_d2068889",
+      "revId": "8b18aa8614879270be37bce582b984566063077b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

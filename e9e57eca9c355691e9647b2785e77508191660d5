@@ -103,6 +103,24 @@
       "message": "When we are keymaster_ver, then why we need to use force macro?\nInstead of using macro we can add the force prop just like addition_fstab prop. That would be more sensible.",
       "revId": "e9e57eca9c355691e9647b2785e77508191660d5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0f6fd2_6489f738",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-10-10T17:54:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4e0be6fb_10db7e67",
+      "revId": "e9e57eca9c355691e9647b2785e77508191660d5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
