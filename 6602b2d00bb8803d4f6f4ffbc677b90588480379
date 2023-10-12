@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1696960382 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1696960381-E5B0B766086D11CC4C88D4BF6E232432938EE7A5\n\n0000000000000000000000000000000000000000 6602b2d00bb8803d4f6f4ffbc677b90588480379 refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmUlj34ACgkQH1oT9zX3\nIyJwyw/8CKp6J30ztLtpB7e4NVfRzHz8AGJYNNgWxeN9pMejvBEZ7pdd8stwcAN2\nzpbj+onoE5oU7NlOe5jOnM27+6v7m3yxjXspD27HRl5I9wnbelikCUVEFQ4CbQFP\n6DDDrWm/ng6MRjSOSJ3afXbEAGTJItEk/SGZNXbdOBn8NmLRGBI1nMlyJ6lzyf1M\naQJNHOCU8zSPDm7/sJk9Y8WwUU7aHKaMhT3OGldzgN1qF/TN5Up6vrzTnQnzl6QB\nUofnWgqgQmaI+CyMQ1iZkfrrykv7vGig5kUdX40IBsz7/QrFFxZdLMRB0d/njVa5\nm/VB3vH/ueCrtU5wW6gbhR9eP2UERbQLz8UWcsfW8RcBgH+jPpW1RepQTrAmCnMQ\nF5XD9JlhNo4yEptMZ2KIp9jAxYwm5DQqtIs1ovDeqaudcEyuHVvlM9lzmZxR4lz3\nmo/h/9ZJedNLf8kVj1sphSQnAbG7JZnUplFiD3ysBOV0So2pkPNUkqHbD5WMynoN\nhWvL5ZwTm8BednBRD2UT26yqwpt3QIozAjSe8ZCMKvXFSFoXUYhmRadGKV52iZ+A\nNKgt3+Mh6CEfJYIcf83sCFeqORYuDDLBS2XB0BipALhpXtdyLVeNsDUJQ+ptlXLx\nCkjxKFnaUniUsESG7ZrZWJKl6p2PfYY5Hnk6LJGAS/F3hiWMXC8\u003d\n\u003dp7kw\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd4f2434_bff2744b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-10-12T09:22:36Z",
+      "side": 1,
+      "message": "Perhaps something like \"postformatdata.sh\" should be used instead?",
+      "revId": "6602b2d00bb8803d4f6f4ffbc677b90588480379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
