@@ -17,6 +17,23 @@
       "message": "Perhaps something like \"postformatdata.sh\" should be used instead?",
       "revId": "6602b2d00bb8803d4f6f4ffbc677b90588480379",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "665f60f8_ac084ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-10-15T06:30:39Z",
+      "side": 1,
+      "message": "Because the name explains what the script is for (just like runatboot.sh or postrecoveryboot.sh).",
+      "revId": "6602b2d00bb8803d4f6f4ffbc677b90588480379",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
