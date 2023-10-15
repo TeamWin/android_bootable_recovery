@@ -33,6 +33,24 @@
       "message": "On my device, it only works if the filesystem field in twrp.flags is set to \"exfat\". If set to \"auto\" or \"vfat\", as is usual, the Micro SD card will not mount successfully, and in such case, the recovery log is filled with these errors:\n\nI:cmd: /system/bin/exfat-fuse -o big_writes,max_read\u003d131072,max_write\u003d131072 /dev/block/mmcblk1p1 /sdcard1\nfuse: mountpoint is not empty\nfuse: if you are sure this is safe, use the \u0027nonempty\u0027 mount option\nI:exfat-fuse failed to mount with result \u0027FUSE exfat 1.3.0\n\u0027, trying vfat\nI:Unable to mount \u0027/sdcard1\u0027\nI:Actual block device: \u0027/dev/block/mmcblk1p1\u0027, current file system: \u0027vfat\u0027",
       "revId": "21ad1dd99e83e3c8172542a2770ef1c7c2866248",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34f9263_6ef90a8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2023-10-15T12:07:50Z",
+      "side": 1,
+      "message": "This problem doesn\u0027t seem to be related to exfat-fuse:\nhttps://github.com/TeamWin/android_bootable_recovery/blob/7669320c931f991c908e240638091d259304d636/fuse/mount_util.c#L320",
+      "parentUuid": "231fe86a_b0d26107",
+      "revId": "21ad1dd99e83e3c8172542a2770ef1c7c2866248",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
