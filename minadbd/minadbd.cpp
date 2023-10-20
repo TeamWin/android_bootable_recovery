@@ -66,7 +66,6 @@ int main(int argc, char** argv) {
   auth_required = false;
   socket_access_allowed = false;
 
-  init_transport_registration();
   usb_init();
 
     //VLOG(ADB) << "Event loop starting";
