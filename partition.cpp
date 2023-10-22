@@ -1279,6 +1279,8 @@ void TWPartition::Setup_Data_Media() {
 		}
 		DataManager::SetValue("tw_has_internal", 1);
 		DataManager::SetValue("tw_has_data_media", 1);
+		//Devices without encryption do not run the Post_Decrypt function so the "data/recovery" folder was not being created on these devices
+		DataManager::SetValue("tw_settings_path", TW_STORAGE_PATH);
 		backup_exclusions.add_absolute_dir("/data/data/com.google.android.music/files");
 		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
 		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys");
