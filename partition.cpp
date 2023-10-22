@@ -1275,6 +1275,8 @@ void TWPartition::Setup_Data_Media() {
 			Storage_Path = Mount_Point + "/media/0";
 			Symlink_Path = Storage_Path;
 			DataManager::SetValue(TW_INTERNAL_PATH, Mount_Point + "/media/0");
+			//Devices without encryption do not run the Post_Decrypt function so the "data/recovery" folder was not being created on these devices
+			DataManager::SetValue("tw_settings_path", Mount_Point + "/recovery");
 			UnMount(true);
 		}
 		DataManager::SetValue("tw_has_internal", 1);
