@@ -1452,9 +1452,11 @@ string TWFunc::Check_For_TwrpFolder() {
 
 	if (oldFolder == "" && customTWRPFolders.empty()) {
 		LOGINFO("No recovery folder found. Using default folder.\n");
-		//Creates the TWRP folder if it does not exist on the device and if the folder has not been changed to a new name
-		mainPath += TW_DEFAULT_RECOVERY_FOLDER;
-		mkdir(mainPath.c_str(), 0777);
+		TWPartition* SDCard = PartitionManager.Find_Partition_By_Path(DataManager::GetCurrentStoragePath());
+		if (SDCard->Mount(true)) {
+			mainPath += TW_DEFAULT_RECOVERY_FOLDER;
+			mkdir(mainPath.c_str(), 0777);
+		}
 		goto exit;
 	} else if (customTWRPFolders.empty()) {
 		LOGINFO("No custom recovery folder found. Using TWRP as default.\n");
