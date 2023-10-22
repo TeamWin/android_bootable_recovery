@@ -1140,5 +1140,5 @@ void DataManager::Vibrate(const string& varName)
 void DataManager::LoadTWRPFolderInfo(void)
 {
 	SetValue(TW_RECOVERY_FOLDER_VAR, TWFunc::Check_For_TwrpFolder());
-	mBackingFile = GetSettingsStoragePath() + GetStrValue(TW_RECOVERY_NAME) + '/' + TW_SETTINGS_FILE;
+	mBackingFile = GetSettingsStoragePath() + GetStrValue(TW_RECOVERY_NAME) + TW_SETTINGS_FILE;
 }
