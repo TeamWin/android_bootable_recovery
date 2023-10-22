@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1697930988 -0400\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1697930988-7A7C8ADE3E31426549B85B1D7B8BC23F9A3A1833\n\n0000000000000000000000000000000000000000 3d5c1a32bfe0f4ef05912570285eab236c5e445f refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmU0XuwACgkQH1oT9zX3\nIyL6FRAAgEFhE2FTHqGEU2KK8wi6SRw1VsFgGnPevypqzSbKpPpFAbH0HFWxWO2e\nFQVrWzRIbjtUawUiXpxPO1nTLuoX/CVkgjzd1W4BKK0Riq8IzNK1MlFoH1LifsS9\nIYplqNBHHnUEAxiRMAPmSWiYGR508O0gHCKAV8KFDccRoMfpcTtPDWy7U6Pdf7EX\nH5ZRsBiGhQRaQ5ZIUeqjLCih65goCM2eH9rAWLlIEQdh2r1PVy1JbuszQ57HNqhd\nByebnN0JxXoXpSLT+mwy/7vqjlmzJRsDl6D5iXTr0MT0KzBlNSVKPbKehXs+q/ae\neAd/+TdTnB85hC+XsvsxL2EpMh5/2xd66VkSti9Ow0qfskq0b3nHqtozflZ22FyP\nBfmpeU6PiJ/+W/JFzK4iIBrY2FCmJZsv1J1zHOOu46GlYp82PMCPlSSJVxWeBAEV\nmURudNfK/hS8+GjdCyPKPqTLJ3/vRGRPea5Tqk9E7xKbsA9ZLtZF7tSjs3HX27Nz\naY26XMr8SQ/AGcE5KGxTeySGtq9iHySXiakQ6HZoXD4RbALtuQhHMxnmoWXTKtkv\nV3iZyqoEo/EmM9cRMcSlYGVn8V+WwyS5/Sr3hQZolus2/wq7eZXa5e9LT1J0IBvw\n3qI/Q2J5oUh9nLOTDfx1o0wT0oMjRa0VCA01p9WbyVbejtcfdT0\u003d\n\u003dADdn\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbbcab88_dd8c3092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-10-22T00:07:19Z",
+      "side": 1,
+      "message": "So I updated the patch based on the feedback I provided, and it works fine, except for one annoying side effect:\n\nIf you cancel the ORS using the Back button, it goes to the main menu (fine). However, when you go to reboot the device, when you select any option, it drops you back to the main menu (but only once). After that, you can reboot normally. It\u0027s as if that confirmation page never fully goes away, until that first reboot attempt. I haven\u0027t figured out any way around it to this point.\n\nAny suggestions?",
+      "revId": "3d5c1a32bfe0f4ef05912570285eab236c5e445f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
