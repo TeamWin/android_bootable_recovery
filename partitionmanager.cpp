@@ -3102,8 +3102,6 @@ bool TWPartitionManager::Decrypt_Adopted() {
 		}
 	}
 
-	//Devices without encryption do not run the Post_Decrypt function so the "data/recovery" folder was not being created on these devices
-	DataManager::SetValue("tw_settings_path", TW_STORAGE_PATH);
 	LOGINFO("Decrypt adopted storage starting\n");
 	char* xmlFile = PageManager::LoadFileToBuffer(path, NULL);
 	xml_document<> *doc = NULL;
