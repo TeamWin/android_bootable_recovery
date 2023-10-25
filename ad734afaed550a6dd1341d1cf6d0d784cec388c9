@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aabbe837_ab0c4750",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1180
+      },
+      "writtenOn": "2023-10-25T13:25:06Z",
+      "side": 1,
+      "message": "nice , works for me on my exynos device with fbe",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
