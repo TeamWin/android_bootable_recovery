@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebc8799_b1c1ce48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115
+      },
+      "writtenOn": "2023-10-28T15:53:10Z",
+      "side": 1,
+      "message": "Seems to have been fixed by an other change, abadoning.",
+      "revId": "25cc1378b2e0f1e277da213407a88b6efaf5a2cb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
