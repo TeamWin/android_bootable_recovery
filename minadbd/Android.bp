@@ -99,7 +99,7 @@ cc_binary {
     ],
 
     shared_libs: [
-        "android.hardware.health-V2-ndk", // from librecovery_utils
+        "android.hardware.health-V3-ndk", // from librecovery_utils
         "libbase",
         "libcrypto",
     ],
@@ -132,7 +132,7 @@ cc_test {
     ],
 
     static_libs: [
-        "android.hardware.health-V2-ndk", // from librecovery_utils
+        "android.hardware.health-V3-ndk", // from librecovery_utils
         "libminadbd_services",
         "libfusesideload",
         "librecovery_utils",
