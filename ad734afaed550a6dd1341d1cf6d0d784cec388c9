@@ -50,6 +50,24 @@
       "message": "With this change, on sdm660 with disabled crypto support, settings are saved.\n\nBut : \n- if internal SD is the selected storage before booting to recovery, i can select external SD and use it.\n\n- if external SD is the selected storage before booting to recovery, external sdcard can\u0027t be mounted.\nIn dmesg : \n[   83.959657] FAT-fs (mmcblk1p1): bogus number of reserved sectors\n[   83.959668] FAT-fs (mmcblk1p1): Can\u0027t find a valid FAT filesystem\n\nIn fstab external sd fs is set to \"auto\".\nhttps://github.com/pix106/android_device_xiaomi_clover/blob/fox_12.1-4.19/recovery/root/system/etc/twrp.flags#L36",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5de57af6_84e0e236",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1200
+      },
+      "writtenOn": "2023-11-20T05:41:20Z",
+      "side": 1,
+      "message": "\u003e With this change, on sdm660 with disabled crypto support, settings are saved.\n\u003e \n\u003e But : \n\u003e - if internal SD is the selected storage before booting to recovery, i can select external SD and use it.\n\u003e \n\u003e - if external SD is the selected storage before booting to recovery, external sdcard can\u0027t be mounted.\n\u003e In dmesg : \n\u003e [   83.959657] FAT-fs (mmcblk1p1): bogus number of reserved sectors\n\u003e [   83.959668] FAT-fs (mmcblk1p1): Can\u0027t find a valid FAT filesystem\n\u003e \n\u003e In fstab external sd fs is set to \"auto\".\n\u003e https://github.com/pix106/android_device_xiaomi_clover/blob/fox_12.1-4.19/recovery/root/system/etc/twrp.flags#L36\n\nIn /tmp/recovery.log : \n\nI:Unable to mount \u0027/sdcard1\u0027\nI:Unable to mount \u0027/sdcard1\u0027\nI:Actual block device: \u0027/dev/block/mmcblk1p1\u0027, current file system: \u0027vfat\u0027\nI:cmd: /system/bin/exfat-fuse -o big_writes,max_read\u003d131072,max_write\u003d131072 /dev/block/mmcblk1p1 /sdcard1\nfuse: mountpoint is not empty\nfuse: if you are sure this is safe, use the \u0027nonempty\u0027 mount option",
+      "parentUuid": "8bf2b8ed_0b2ffc77",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
