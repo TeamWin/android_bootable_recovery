@@ -33,6 +33,23 @@
       "message": "This seems important.",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf2b8ed_0b2ffc77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1200
+      },
+      "writtenOn": "2023-11-20T05:34:43Z",
+      "side": 1,
+      "message": "With this change, on sdm660 with disabled crypto support, settings are saved.\n\nBut : \n- if internal SD is the selected storage before booting to recovery, i can select external SD and use it.\n\n- if external SD is the selected storage before booting to recovery, external sdcard can\u0027t be mounted.\nIn dmesg : \n[   83.959657] FAT-fs (mmcblk1p1): bogus number of reserved sectors\n[   83.959668] FAT-fs (mmcblk1p1): Can\u0027t find a valid FAT filesystem\n\nIn fstab external sd fs is set to \"auto\".\nhttps://github.com/pix106/android_device_xiaomi_clover/blob/fox_12.1-4.19/recovery/root/system/etc/twrp.flags#L36",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
