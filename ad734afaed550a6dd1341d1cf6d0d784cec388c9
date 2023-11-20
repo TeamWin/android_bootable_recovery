@@ -85,6 +85,24 @@
       "message": "\u003e Does it work if fstab filesystem is set to vfat?\n\nNope, exact same issue.",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c3e6497_e74ac5b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-11-20T11:09:33Z",
+      "side": 1,
+      "message": "Are you sure it\u0027s this patch causing these errors? Because there\u0027s no change in the mounting of any partition in it. After identifying this error, did you try building again without the \"TW_INCLUDE_CRYPTO\" flag and without this patch?",
+      "parentUuid": "5de57af6_84e0e236",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
