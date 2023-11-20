@@ -157,6 +157,23 @@
       "parentUuid": "379f32fb_cf38c0fb",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fef53c9_1171c711",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1200
+      },
+      "writtenOn": "2023-11-20T19:56:06Z",
+      "side": 1,
+      "message": "I checked again without any patch, and with this patch only, and confirm it _triggers_ this issue when external SD is the already selected storage while booting recovery. \n\nIssue does not occur when Internal SD is the already selected storage while booting recovery ; it that case external sd is mounted ok.\n\n\n\u003e fuse: mountpoint is not empty\n\u003e fuse: if you are sure this is safe, use the \u0027nonempty\u0027 mount option\n\nIn External sd mount point (/sdcard1 here), there\u0027s only an empty TWRP directory.\nDeleting it makes external sd mountable again.\n\nSo i guess /sdcard1/TWRP is created sooner than without the patch, or it is created but it should not.\n\nMaybe some adaptations and/or conditional tests could be added to https://github.com/TeamWin/android_bootable_recovery/blob/android-12.1/twrp-functions.cpp#L1414 but i don\u0027t think i can suggest more as i don\u0027t know TWRP code structure and logic... maybe i already crossed my ignorance line a few lines ago :)",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
