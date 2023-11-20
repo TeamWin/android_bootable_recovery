@@ -121,6 +121,42 @@
       "parentUuid": "c71f2ab6_9ae4c15e",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "786a3d43_c152905f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1200
+      },
+      "writtenOn": "2023-11-20T15:30:51Z",
+      "side": 1,
+      "message": "yes, removing this patch, and no other, fixes the issue in my builds",
+      "parentUuid": "5c3e6497_e74ac5b9",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40874c0_eaa59d95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1200
+      },
+      "writtenOn": "2023-11-20T15:30:51Z",
+      "side": 1,
+      "message": "yes, but i had this issue with this patch way before using exfat 1.3.0 patch.\n\nI\u0027ve had this issue since the day after it was pushed here, but did not report before because of gerrit asking too much permissions when joining (i posted it in zulip yesterday, bigbiff fixed gerrit config)",
+      "parentUuid": "379f32fb_cf38c0fb",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
