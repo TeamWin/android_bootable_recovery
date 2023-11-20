@@ -103,6 +103,24 @@
       "parentUuid": "5de57af6_84e0e236",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "379f32fb_cf38c0fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-11-20T14:28:30Z",
+      "side": 1,
+      "message": "Do you have any other patch from Gerrit included locally? Like perhaps the updated exfat patch? That one is known to cause issues with exfat-fuse.",
+      "parentUuid": "c71f2ab6_9ae4c15e",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
