@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae823091_628621dc",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-11-21T12:23:57Z",
+      "side": 1,
+      "message": "The function returns here, meaning that the patch never gets to run.",
+      "range": {
+        "startLine": 1712,
+        "startChar": 2,
+        "endLine": 1712,
+        "endChar": 31
+      },
+      "revId": "e7d97b89ee19df776507734961a53ad216d980ba",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
