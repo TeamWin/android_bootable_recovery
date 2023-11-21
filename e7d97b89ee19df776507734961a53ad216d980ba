@@ -22,6 +22,30 @@
       },
       "revId": "e7d97b89ee19df776507734961a53ad216d980ba",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00bbc16b_d12d8cde",
+        "filename": "partitionmanager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-11-21T19:57:52Z",
+      "side": 1,
+      "message": "Good catch. Moved it to the Wipe_Encryption function instead so it should now get properly done at the end of the wipe. Please confirm.",
+      "parentUuid": "ae823091_628621dc",
+      "range": {
+        "startLine": 1712,
+        "startChar": 2,
+        "endLine": 1712,
+        "endChar": 31
+      },
+      "revId": "e7d97b89ee19df776507734961a53ad216d980ba",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
