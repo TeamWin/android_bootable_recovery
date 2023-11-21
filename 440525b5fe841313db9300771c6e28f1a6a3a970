@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1700500659 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1700500659-5868EA4C913BE79F621635C0025252DD33A979E0\n\n0000000000000000000000000000000000000000 440525b5fe841313db9300771c6e28f1a6a3a970 refs/for/android-12.1%l\u003dCode-Review+1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmVblLMACgkQH1oT9zX3\nIyKsJg//RLWNs2yL5NkAJRCt4SoVYsM7odl0TOWGq8W5wEln3WzguSkDKGvx9xxe\nDC09GyN2uxRYBRGlgD8otGf9fdD4e2Ttk68+MVvLY4IngT9sLaaGyWQP1dM8AJ84\nNwtIV6Hic4GL53gYNcPKwh5HxmahIh2Eo0ESamwVmh/MneZTH/BsMLsoDXDg8k8W\nSooeSvG+R5gmUeJFc21L0wo70GoAXEttSSegd1SqlegABfcoqKNR0l+OVo9hn67d\nOqdnAYI/1Q3nZBD+1jQ5UGN3jzXGmCm1JbCOnvDPU2qn0LAWOfc6vxbYBNHSLdIg\nfPkESkZgnPdesaov6hcrppnfBkVxPLa3FA72qHHvwirwU+I1EEGDkmHZLi88U7ov\nY6vVhBBEM7erlQ2ZZvkk9yA3ca5sAY5N7Ye5N5qUMNKC4TrorOQy0444rFMvF60J\nMVBmjebYRfD54ML9j+1/NpbimDTUi2Knp7w/SElQpmRNrBCp3dFjI1GBugx7k0SW\nyGaZGdmuug0DR9o/mBUhsuL9pf9IzLzlMalWPotbwCIMPsEb3DlXqmHpS0vhuAlI\n5e0K4JCjpFiY6YWiMX0L8wbzcJ0gUBeYKZbomgCymHnozriBnn7nYDZ7Roeq9ZsJ\noUxZbIfeQf2d5WBq6jlZSQKv0L7Juxo32oEEtu6thnom/9d1Eew\u003d\n\u003dFXMt\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0625b2d8_fc0f83ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 706
+      },
+      "writtenOn": "2023-11-21T10:02:25Z",
+      "side": 1,
+      "message": "Working fine in my Moto G52.",
+      "revId": "440525b5fe841313db9300771c6e28f1a6a3a970",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
