@@ -228,6 +228,24 @@
       "parentUuid": "d16a4ec4_328ae8f5",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9983b642_4d6c7b34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-11-22T00:45:09Z",
+      "side": 1,
+      "message": "@Pix106 Investigating more calmly, I’m understanding that the error is not caused by this patch, the patch is just showing that there is a issue. Explaining: Without the patch, you can’t save your settings and if you select the external card when you reboot to recovery, the settings won’t be saved and the internal storage will be always selected, right? Then you can select the external card, but resbooting will always be this way, the sdcard1 is only mounted after the reboot.\n\nWith this patch, the selection of the external card will be maintained and then when you reboot it presents the mounting problem. To be sure of this, you mention that you only have the TWRP folder created, but what if you include other files and create new folders before the reboot and only delete the TWRP folder when you reboot, can you mount the external card? If you haven’t done this test, please do.\n\nBecause as my USB storage has a similar operation and with this patch doesn\u0027t present any mounting problem, having several other folders included, including TWRP, everything leads me to believe that the error is either in the mounting of the external sdcard, or in your own setup (device or SDcard or both). Either way, I could be wrong, so ideally other people who have devices with external SDcard and who have TW_INCLUDE_CRYPTO set could test with and without this patch to see if they have the same problem.",
+      "parentUuid": "a2cf46e4_b258bc5f",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
