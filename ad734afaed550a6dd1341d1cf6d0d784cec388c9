@@ -246,6 +246,24 @@
       "parentUuid": "a2cf46e4_b258bc5f",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c949eb_a1692b59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 336
+      },
+      "writtenOn": "2023-11-22T10:03:30Z",
+      "side": 1,
+      "message": "I might add that I have already seen a similar problem. This problem occurred on my device after this commit - \nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/6289\nPerhaps this happens when an empty file is created on an external card, and then the recovery simply cannot mount it. I did not analyze this commit, it is not particularly necessary, it does not affect the work in any way, so I simply did not apply it.",
+      "parentUuid": "9983b642_4d6c7b34",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
