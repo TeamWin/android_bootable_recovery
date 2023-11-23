@@ -73,6 +73,12 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 
 		case FASTBOOTD_MODE:
 		case RECOVERY_IN_BOOT_MODE:
+#ifdef TW_LOAD_VENDOR_BOOT_MODULES
+			for (auto&& module_dir:module_dirs) {
+				modules_loaded += Try_And_Load_Modules(module_dir, false);
+				if (modules_loaded >= expected_module_count) goto exit;
+			}
+#endif
 			/* In both mode vendor_boot or vendor modules are used
 			 * Because Ramdisk is flashed in both.
 			 */
