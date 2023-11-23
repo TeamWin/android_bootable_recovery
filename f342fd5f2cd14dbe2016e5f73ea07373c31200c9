@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1700754945 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1700754945-AB3F3D65462DBF0C6EA85DD0A8BEC4D517077343\n\n0000000000000000000000000000000000000000 f342fd5f2cd14dbe2016e5f73ea07373c31200c9 refs/for/android-12.1%l\u003dCode-Review+1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmVfdgEACgkQH1oT9zX3\nIyI9Ow/9EuogWDtHl6crPClTDymrR8jIc7i/SmTlSMSJpyxt08Fdwg863v0asRNs\nW0j69Gvh9U911mHThFSuu9S0CncTFbxN0HRwUroMH5rzgeVBGcDv/Y0Ba2pEbwJr\n78UjGrw3GJJ50KHd7iJiW0btS9N0AQ7V4/hMcYO0dx2XFWta19I2/BVphAzLbeNL\nsAe+M+D5dBdY7RD7LXKy+H3mlyPdQU41P1ItkwOvkSGVA6DbCIqHuZkPKQ4Pm+tD\n7LzfJx8o+RwvIwoRrbBoFzjPP8ZAmB7lTNGx/FKJSYdTRsn9wZHOrtP3ZkzMru9u\n6cOl1agGvzOap3/BUUdJF6Ngg+ABHC+AumBQMV4mJx+kyYClDX9uuQZkn9/G/cao\n5CxMq5Ezgi/kx+i3NjWE2fTwFT6fOXKHX0VpuFhSXDU2XzTZ/JFkFb+Gq0uAbkd9\nGPAb1pzsT93Sn+oSqKMwLRaJVH21J6BPICdSseAphLjP6u+K3JJjLmT0GVYl05Kl\n2mbSISCxhpkT/zs3De6k4DXyimPirZMoo29eRgM8Vulg9NpfK0E1+38ZYXeAP6bA\nj+m/HQ/UAfhXti8ksZbaF/QbHyLgkuT1l8d0+xROdxd687ORS+16S0yXJDb0bhJA\n74Lr9huouIWDfqQPnfdymIRcHuci41bNetU65FGgY67qtZXjsk8\u003d\n\u003dVhsF\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "156a9fd1_5ba4177c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-11-23T16:00:09Z",
+      "side": 1,
+      "message": "Thanks for all of the help and feedback @DarthJabba9. I\u0027m still a noob when it comes to coding so I wasn\u0027t fully understanding what was going on. I think the last version should only work when the Format Data is successful, and will then only run when the Format_Data function is called.",
+      "revId": "f342fd5f2cd14dbe2016e5f73ea07373c31200c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
