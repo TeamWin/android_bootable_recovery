@@ -34,6 +34,23 @@
       "message": "I didn\u0027t suggest moving the script call to before the call to Wipe_Encryption(). It would be exactly where it was before. The problem was not its location. The problem was the \"return\" at the call to Wipe_Encryption (ie, \"return dat-\u003eWipe_Encryption()\"). At that point, the function \"returns\" (ie, exits) immediately Wipe_Encryption runs. So, processing never gets to the point of the script call. So, removing the \"return\" at that point allows processing to continue after wiping instead of just exiting.\n\nMoving the script call to Wipe_Encryption itself should work. But do you really want it to run every time Wipe_Encryption is called, no matter where it is called from?",
       "revId": "b8b074bd6990dabf33f6723805c9dc2e827ed1eb",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ce938c4_9998f1e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-11-23T08:05:30Z",
+      "side": 1,
+      "message": "It works with the latest patch. \n\nThe script always runs, whether or not the data format is successful. If this is the desired behaviour, that is fine. Otherwise you may wish to make the running of the script conditional:\n\"if (ret) \nTWFunc::check_and_run_script(\"/system/bin/formatdata.sh\", \"Format Data Script\");\"",
+      "revId": "b8b074bd6990dabf33f6723805c9dc2e827ed1eb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
