@@ -79,6 +79,11 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 			break;
 	}
 
+	for (auto&& module_dir:module_dirs) {
+		modules_loaded += Try_And_Load_Modules(module_dir, false);
+		if (modules_loaded >= expected_module_count) goto exit;
+	}
+
 	if (ven) {
 		LOGINFO("Checking mounted /vendor\n");
 		ven->Mount(true);
