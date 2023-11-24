@@ -372,6 +372,24 @@
       "parentUuid": "37e2b4d8_38d0a48b",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "338041c6_e5411f69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 336
+      },
+      "writtenOn": "2023-11-24T11:08:53Z",
+      "side": 1,
+      "message": "https://github.com/brigudav/android_device_xiaomi_surya_twrp/actions\nCompilation takes place on the server. Loads all the latest changes, and I also add patches from here. Regarding the problem - your patch is now working and the external card is being mounted. The settings begin to load if you change the twrp folder to your own. The question can be closed. Thanks for corrections.",
+      "parentUuid": "29e23d80_ade91c46",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
