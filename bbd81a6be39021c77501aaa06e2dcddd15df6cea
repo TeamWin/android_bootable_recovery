@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e9f4e2_d757c45c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-11-24T20:00:15Z",
+      "side": 1,
+      "message": "I managed to find the extra slash and was also able to simulate the issue. Can you try this new patch?",
+      "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
