@@ -318,6 +318,24 @@
       "parentUuid": "242279bb_4a5826ee",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762dadb0_7e49a1e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 336
+      },
+      "writtenOn": "2023-11-24T10:37:46Z",
+      "side": 1,
+      "message": "Here is part of the log:\nI:No recovery folder found. Using default folder.\nI:InfoManager saving \u0027/data/recovery//.twrps\u0027\nI:Saved settings file values to \u0027/data/recovery//.twrps\u0027\nI:Attempt to load settings from settings file...\nI:InfoManager loading from \u0027/data/recovery/.twrps\u0027.\nI:No recovery folder found. Using default folder.\nI:InfoManager saving \u0027/data/recovery/.twrps\u0027\nI:Saved settings file values to \u0027/data/recovery/.twrps\u0027\nPerhaps this is due to the extra slash-\nhttps://github.com/brigudav/bootable_recovery_twrp/commit/1ac60d551ed155e31c902283b43150b676bfc1d0\nTry to fix this too",
+      "parentUuid": "8035200c_ef2f42d9",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
