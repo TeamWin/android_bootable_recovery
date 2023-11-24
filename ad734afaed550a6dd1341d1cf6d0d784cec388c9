@@ -354,6 +354,24 @@
       "parentUuid": "8035200c_ef2f42d9",
       "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e23d80_ade91c46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-11-24T10:56:25Z",
+      "side": 1,
+      "message": "Weird, I don\u0027t see that extra slash in my logs. Are you using the latest patch (5) and the Teamwin bootable/recovery repo?",
+      "parentUuid": "37e2b4d8_38d0a48b",
+      "revId": "ad734afaed550a6dd1341d1cf6d0d784cec388c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
