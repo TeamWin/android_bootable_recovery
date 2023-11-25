@@ -51,6 +51,24 @@
       "message": "Do we need this comment? I am not sure if it serves a purpose as long as it\u0027s in the commit message.",
       "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba831c4_09cb95c0",
+        "filename": "partition.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2023-11-25T19:23:58Z",
+      "side": 1,
+      "message": "Ok, comments removed",
+      "parentUuid": "f9b26ff4_3abe24bc",
+      "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
