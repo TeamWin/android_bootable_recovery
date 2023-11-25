@@ -34,6 +34,23 @@
       "parentUuid": "82e9f4e2_d757c45c",
       "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b26ff4_3abe24bc",
+        "filename": "partition.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-11-25T18:48:11Z",
+      "side": 1,
+      "message": "Do we need this comment? I am not sure if it serves a purpose as long as it\u0027s in the commit message.",
+      "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
