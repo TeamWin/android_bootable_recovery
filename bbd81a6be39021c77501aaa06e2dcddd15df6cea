@@ -16,6 +16,24 @@
       "message": "I managed to find the extra slash and was also able to simulate the issue. Can you try this new patch?",
       "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a8b67c_3864856a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 336
+      },
+      "writtenOn": "2023-11-25T04:02:41Z",
+      "side": 1,
+      "message": "Now everything is fine. The settings are saved and applied after reboot.",
+      "parentUuid": "82e9f4e2_d757c45c",
+      "revId": "bbd81a6be39021c77501aaa06e2dcddd15df6cea",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
