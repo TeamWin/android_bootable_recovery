@@ -108,11 +108,9 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 static void process_fastbootd_mode() {
 		LOGINFO("starting fastboot\n");
 
-#ifdef TW_LOAD_VENDOR_MODULES
-		if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
+		if (android::base::GetBoolProperty("ro.boot.dynamic_partitions", false)) {
 			PartitionManager.Unmap_Super_Devices();
 		}
-#endif
 
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		// Check for and run startup script if script exists
