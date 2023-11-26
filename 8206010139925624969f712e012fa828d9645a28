@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34249a20_352b584d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 823
+      },
+      "writtenOn": "2023-11-26T13:47:09Z",
+      "side": 1,
+      "message": "Tested on my OnePlus 8, and flash logical image fine in fastbootd",
+      "revId": "8206010139925624969f712e012fa828d9645a28",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
