@@ -17,6 +17,23 @@
       "message": "Thanks for all of the help and feedback @DarthJabba9. I\u0027m still a noob when it comes to coding so I wasn\u0027t fully understanding what was going on. I think the last version should only work when the Format Data is successful, and will then only run when the Format_Data function is called.",
       "revId": "f342fd5f2cd14dbe2016e5f73ea07373c31200c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9337ec5a_986223e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-11-27T07:53:01Z",
+      "side": 1,
+      "message": "The latest patchset looks good to me, although I haven\u0027t tested it yet.",
+      "revId": "f342fd5f2cd14dbe2016e5f73ea07373c31200c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
