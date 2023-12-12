@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cde3359_2a972d37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2023-12-12T14:25:13Z",
+      "side": 1,
+      "message": "Perhaps you might want to make this optional (opt-in via a flag).",
+      "revId": "0dbf56f243b5bfb1588e6be6ecd58346b29bfc26",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
