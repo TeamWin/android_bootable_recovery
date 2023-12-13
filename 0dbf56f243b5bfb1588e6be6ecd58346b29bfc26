@@ -16,6 +16,23 @@
       "message": "Perhaps you might want to make this optional (opt-in via a flag).",
       "revId": "0dbf56f243b5bfb1588e6be6ecd58346b29bfc26",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4349abed_c771debf",
+        "filename": "kernel_module_loader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1028
+      },
+      "writtenOn": "2023-12-13T15:58:07Z",
+      "side": 1,
+      "message": "Maybe move this block into the RECOVERY_IN_BOOT_MODE switch block above. Since loading from /lib/modules (vendor_boot) isn\u0027t necessary when booting from fastboot, it would be cleaner but isn\u0027t technically required.",
+      "revId": "0dbf56f243b5bfb1588e6be6ecd58346b29bfc26",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
