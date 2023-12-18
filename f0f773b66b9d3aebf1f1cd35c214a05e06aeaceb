@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e76e34f_1d48d462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2023-12-18T16:51:24Z",
+      "side": 1,
+      "message": "Please mention the required BoardConfig flag in the commit message.",
+      "revId": "f0f773b66b9d3aebf1f1cd35c214a05e06aeaceb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
