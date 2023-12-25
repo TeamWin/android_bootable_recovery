@@ -34,10 +34,10 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/param.h>
+#include <basename.h>
 
 char *
-openbsd_basename(path)
-	const char *path;
+openbsd_basename(const char* path)
 {
 	static char bname[MAXPATHLEN];
 	register const char *endp, *startp;
