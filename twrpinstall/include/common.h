@@ -34,7 +34,6 @@ extern "C" {
 #define LOGD(...) do {} while (0)
 #endif
 
-#define STRINGIFY(x...) #x
 #define EXPAND(x) STRINGIFY(x)
 
 // Not using the command-line defined macro here because this header could be included by

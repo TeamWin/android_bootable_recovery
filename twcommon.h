@@ -34,7 +34,7 @@ extern "C" {
 #define gui_print(...) printf( __VA_ARGS__ )
 #endif
 
-#define STRINGIFY(x...) #x
+#define STRINGIFY(...) __VA__ARGS__
 #define EXPAND(x) STRINGIFY(x)
 
 #ifdef __cplusplus
