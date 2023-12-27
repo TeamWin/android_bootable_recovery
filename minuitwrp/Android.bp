@@ -29,6 +29,7 @@ cc_library_shared {
         "system/core/include",
         "external/freetype/include",
         "external/libcxx/include",
+        "bootable/recovery",
         "bootable/recovery/twrpinstall/include",
         "bootable/recovery/libpixelflinger/include",
         "bootable/recovery/minuitwrp/include",
