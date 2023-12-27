@@ -493,7 +493,7 @@ TWRP_REQUIRED_MODULES += \
     android.hardware.health@2.1.xml \
     android.hardware.health@2.0-service \
     android.hardware.health@2.0-impl.recovery \
-    android.hardware.health@2.0-service.rc
+    android.hardware.health@2.0-service.rc \
     libadbd.recovery \
     libadbd_services.recovery
 
