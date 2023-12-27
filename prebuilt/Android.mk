@@ -530,7 +530,7 @@ ifneq ($(TW_EXCLUDE_TZDATA), true)
 
     LOCAL_POST_INSTALL_CMD += \
         mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/usr/share/zoneinfo; \
-        cp -f $(TARGET_OUT)/usr/share/zoneinfo/tzdata $(TARGET_RECOVERY_ROOT_OUT)/system/usr/share/zoneinfo/;
+        cp -f $(OUT_DIR)/soong/workspace/system/timezone/output_data/iana/tzdata $(TARGET_RECOVERY_ROOT_OUT)/system/usr/share/zoneinfo/;
     include $(BUILD_PHONY_PACKAGE)
 endif
 
