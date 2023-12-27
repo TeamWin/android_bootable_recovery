@@ -28,6 +28,7 @@
 #include <cutils/properties.h>
 
 #include "common.h"
+#include "twcommon.h"
 #include "installcommand.h"
 #include <ziparchive/zip_archive.h>
 #include "twinstall/install.h"

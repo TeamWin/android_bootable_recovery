@@ -50,6 +50,7 @@ static std::atomic_int vib_on_count = 0;
 #endif
 
 #include "common.h"
+#include "twcommon.h"
 
 #include "minuitwrp/minui.h"
 
