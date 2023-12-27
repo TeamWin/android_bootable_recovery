@@ -1,5 +1,5 @@
 /*
-    Copyright 2017 TeamWin
+    Copyright 2024 TeamWin
     This file is part of TWRP/TeamWin Recovery Project.
 
     TWRP is free software: you can redistribute it and/or modify
@@ -34,7 +34,7 @@ extern "C" {
 #define gui_print(...) printf( __VA_ARGS__ )
 #endif
 
-#define STRINGIFY(x...) #x
+#define STRINGIFY(...) #__VA_ARGS__
 #define EXPAND(x) STRINGIFY(x)
 
 #ifdef __cplusplus
