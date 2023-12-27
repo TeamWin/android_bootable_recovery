@@ -31,13 +31,13 @@
 //static char rcsid[] = "$OpenBSD: dirname.c,v 1.4 1999/05/30 17:10:30 espie Exp $";
 #endif /* not lint */
 
+#include <dirname.h>
 #include <errno.h>
 #include <string.h>
 #include <sys/param.h>
 
 char *
-openbsd_dirname(path)
-	const char *path;
+openbsd_dirname(const char* path)
 {
 	static char bname[MAXPATHLEN];
 	register const char *endp;
