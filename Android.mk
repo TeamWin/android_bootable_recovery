@@ -487,18 +487,15 @@ TWRP_REQUIRED_MODULES += \
     adbd_system_api_recovery \
     libsync.recovery \
     libandroidicu.recovery \
-<<<<<<< HEAD   (49551a Merge remote-tracking branch 'teamwin/android-12.1' into HEA)
     android.hardware.health@2.1-service \
     android.hardware.health@2.1-impl.recovery \
     android.hardware.health@2.1-service.rc \
     android.hardware.health@2.1.xml \
     android.hardware.health@2.0-service \
     android.hardware.health@2.0-impl.recovery \
-    android.hardware.health@2.0-service.rc
-=======
+    android.hardware.health@2.0-service.rc \
     libadbd.recovery \
     libadbd_services.recovery
->>>>>>> CHANGE (81adf2 adbd: move prebuilt to recovery available)
 
 ifneq ($(TW_EXCLUDE_TZDATA), true)
 TWRP_REQUIRED_MODULES += \
