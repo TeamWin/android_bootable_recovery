@@ -655,7 +655,7 @@ int gr_init() {
   return gr_init(default_backends);
 }
 
-int gr_init(std::initializer_list<GraphicsBackend> backends) {
+int gr_init(__attribute__((unused)) std::initializer_list<GraphicsBackend> backends) {
   // pixel_format needs to be set before loading any resources or initializing backends.
   std::string format = android::base::GetProperty("ro.minui.pixel_format", "");
   if (format == "ABGR_8888") {
