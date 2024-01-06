@@ -207,6 +207,7 @@ void ev_iterate_available_keys(const std::function<void(int)>& f);
 int ev_wait(int timeout);
 
 int ev_get_input(int fd, uint32_t epevents, input_event* ev);
++int ev_sync_sw_state(const ev_set_sw_callback& set_sw_cb);
 void ev_dispatch();
 int ev_get_epollfd();
 
