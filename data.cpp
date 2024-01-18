@@ -805,6 +805,11 @@ void DataManager::SetDefaultValues()
 #else
 	mConst.SetValue("tw_uses_initramfs", "0");
 #endif
+#if defined BOARD_USES_RECOVERY_AS_BOOT || defined BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT
+	mConst.SetValue("tw_has_dedicated_recovery", "0");
+#else
+	mConst.SetValue("tw_has_dedicated_recovery", "1");
+#endif
 #ifdef TW_NO_SCREEN_TIMEOUT
 	mConst.SetValue("tw_screen_timeout_secs", "0");
 	mConst.SetValue("tw_no_screen_timeout", "1");
