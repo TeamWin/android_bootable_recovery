@@ -110,20 +110,50 @@ std::string twrpRepacker::Unpack_Image(const std::string& Source_Path, const std
 	return ramdisk_format;
 }
 
-bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const struct Repack_Options_struct& Repack_Options) {
-	bool recompress = false;
+static bool is_AB_for_repacker() {
+	std::string slot = android::base::GetProperty("ro.boot.slot_suffix", "");
+	if (slot.empty())
+		slot = android::base::GetProperty("ro.boot.slot", "");
+	return !slot.empty();
+}
 
+bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const struct Repack_Options_struct& Repack_Options) {
 	if (!TWFunc::Path_Exists("/system/bin/magiskboot")) {
 		LOGERR("Image repacking tool not present in this TWRP build!");
 		return false;
 	}
+
+	bool recompress = false;
+	bool is_vendor_boot = false;
+	bool is_vendor_boot_v4 = false;
+	std::string dest_partition = "/boot";
+
+	#ifdef BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT
+		dest_partition = "/vendor_boot";
+		is_vendor_boot = true;
+		#ifdef BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT_V4
+		is_vendor_boot_v4 = true;
+		LOGINFO("Vendor_boot with v4 header\n");
+		#endif
+	#else
+		// we shouldn't reach here, because of the code in twrpRepacker::Flash_Current_Twrp(); but if we do, then handle it
+		if (PartitionManager.Find_Partition_By_Path("/recovery") && is_AB_for_repacker()) {
+			dest_partition = "/recovery";
+		}
+	#endif
+
+	if (is_vendor_boot || is_vendor_boot_v4) {
+		// placeholder for any specific vendor_boot stuff;
+		// in the meantime, stop the compiler's complaints about unused variables
+	}
+
 	DataManager::SetProgress(0);
 	PartitionManager.Update_System_Details();
-	TWPartition* part = PartitionManager.Find_Partition_By_Path("/boot");
+	TWPartition* part = PartitionManager.Find_Partition_By_Path(dest_partition);
 	if (part)
 		gui_msg(Msg("unpacking_image=Unpacking {1}...")(part->Get_Display_Name()));
 	else {
-		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/boot"));
+		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")(dest_partition.c_str()));
 		return false;
 	}
 	if (!Backup_Image_For_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
@@ -201,7 +231,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 
 	DataManager::SetProgress(.75);
 	std::string file = "new-boot.img";
-	DataManager::SetValue("tw_flash_partition", "/boot;");
+	DataManager::SetValue("tw_flash_partition", dest_partition + ";");
 	if (!PartitionManager.Flash_Image(path, file)) {
 		LOGINFO("Error flashing new image\n");
 		return false;
@@ -246,7 +276,7 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 			}
 			DataManager::SetProgress(.75);
 			std::string file = "new-boot.img";
-			DataManager::SetValue("tw_flash_partition", "/boot;");
+			DataManager::SetValue("tw_flash_partition", dest_partition + ";");
 			if (!PartitionManager.Flash_Image(path, file)) {
 				LOGINFO("Error flashing new image\n");
 				return false;
@@ -256,21 +286,62 @@ bool twrpRepacker::Repack_Image_And_Flash(const std::string& Target_Image, const
 		}
 	}
 	TWFunc::removeDir(REPACK_NEW_DIR, false);
-	gui_msg(Msg(msg::kWarning, "repack_overwrite_warning=If device was previously rooted, then root has been overwritten and will need to be reinstalled."));
+	if (dest_partition == "/boot")
+		gui_msg(Msg(msg::kWarning, "repack_overwrite_warning=If device was previously rooted, then root has been overwritten and will need to be reinstalled."));
 	string Current_Slot = PartitionManager.Get_Active_Slot_Display();
-		if (Current_Slot == "A")
-			PartitionManager.Override_Active_Slot("B");
-		else
-			PartitionManager.Override_Active_Slot("A");
+	if (Current_Slot == "A")
+		PartitionManager.Override_Active_Slot("B");
+	else
+		PartitionManager.Override_Active_Slot("A");
 	return true;
 }
 
 bool twrpRepacker::Flash_Current_Twrp() {
-if (!TWFunc::Path_Exists("/ramdisk-files.txt")) {
+	#ifdef BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT_V4
+		// don't proceed with vendor_boot + v4 header - until code to handle it is produced
+		LOGERR("Vendor_boot recovery with v4 header. Quitting.\n");
+		return false;
+	#endif
+
+	// A/B with dedicated recovery partition
+	std::string slot = android::base::GetProperty("ro.boot.slot_suffix", "");
+	if (slot.empty())
+		slot = android::base::GetProperty("ro.boot.slot", "");
+	if (!slot.empty() && PartitionManager.Find_Partition_By_Path("/recovery")) {
+		std::string root,src, dest;
+		std::string dest_partition = "/recovery";
+		root = "/dev/block/bootdevice/by-name" + dest_partition;
+		if (slot == "_a" || slot == "a") {
+			src = root + "_a";
+			dest= root + "_b";
+		}
+		else {
+			src = root + "_b";
+			dest= root + "_a";
+		}
+		PartitionManager.Unlock_Block_Partitions();
+
+		// only copy the relevant active slot to the inactive slot, on the basis that the recovery currently running
+		// in the active slot can simply be copied over to the inactive slot, so that both have the same recovery image
+		std::string command = "dd bs=1048576 if=" + src + " of=" + dest;
+		LOGINFO("Command=%s\n", command.c_str());
+
+		if (TWFunc::Exec_Cmd(command) != 0) {
+			LOGERR("Failed to flash the %s image\n", dest_partition.c_str());
+			return false;
+		}
+		else {
+			gui_print("Finished flashing the %s image\n", dest_partition.c_str());
+			return true;
+		}
+		// if we reach here, something is awry - bale out
+		return false;
+	}
+
+	if (!TWFunc::Path_Exists("/ramdisk-files.txt")) {
 			LOGERR("can not find ramdisk-files.txt");
 			return false;
 		}
-		PartitionManager.Unlock_Block_Partitions();
 		Repack_Options_struct Repack_Options;
 		Repack_Options.Disable_Verity = false;
 		Repack_Options.Disable_Force_Encrypt = false;
@@ -288,6 +359,6 @@ if (!TWFunc::Path_Exists("/ramdisk-files.txt")) {
 		}
 		if (!Repack_Image_And_Flash("/tmp/currentramdisk.cpio.gz", Repack_Options))
 			return false;
-       else
-       return true;
+		else
+			return true;
 }
