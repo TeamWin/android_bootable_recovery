@@ -2689,7 +2689,15 @@ void TWPartitionManager::Get_Partition_List(string ListType, std::vector<Partiti
 			}
 		}
 		if (DataManager::GetIntValue("tw_has_repack_tools") != 0 && DataManager::GetIntValue("tw_has_boot_slots") != 0) {
-			TWPartition* boot = Find_Partition_By_Path("/boot");
+			std::string dest_partition = "/boot";
+			#ifdef BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT
+				dest_partition = "/vendor_boot";
+			#else
+				if (PartitionManager.Find_Partition_By_Path("/recovery"))
+					dest_partition = "/recovery";
+			#endif
+
+			TWPartition* boot = Find_Partition_By_Path(dest_partition);
 			if (boot) {
 				// Allow flashing kernels and ramdisks
 				struct PartitionList repack_ramdisk;
@@ -2697,6 +2705,7 @@ void TWPartitionManager::Get_Partition_List(string ListType, std::vector<Partiti
 				repack_ramdisk.Mount_Point = "/repack_ramdisk";
 				repack_ramdisk.selected = 0;
 				Partition_List->push_back(repack_ramdisk);
+				LOGINFO("Install Recovery Ramdisk: target partition=%s\n", dest_partition.c_str());
 				/*struct PartitionList repack_kernel; For now let's leave repacking kernels under advanced only
 				repack_kernel.Display_Name = gui_lookup("install_kernel", "Install Kernel");
 				repack_kernel.Mount_Point = "/repack_kernel";
