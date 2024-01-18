@@ -800,6 +800,9 @@ void DataManager::SetDefaultValues()
 #else
 	mPersist.SetValue(TW_UNMOUNT_SYSTEM, "1");
 #endif
+#if defined BOARD_USES_RECOVERY_AS_BOOT || defined BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT
+	mConst.SetValue("tw_has_dedicated_recovery", "0");
+#endif
 #if defined BOARD_USES_RECOVERY_AS_BOOT && defined BOARD_BUILD_SYSTEM_ROOT_IMAGE
 	mConst.SetValue("tw_uses_initramfs", "1");
 #else

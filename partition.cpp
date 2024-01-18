@@ -597,6 +597,7 @@ bool TWPartition::Process_Fstab_Line(const char *fstab_line, bool Display_Error,
 			Display_Name = "Recovery";
 			Backup_Display_Name = Display_Name;
 			Can_Flash_Img = true;
+			DataManager::SetValue("tw_has_dedicated_recovery", 1);
 		} else if (Mount_Point == "/system_image") {
 			Display_Name = "System Image";
 			Backup_Display_Name = Display_Name;
