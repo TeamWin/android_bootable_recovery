@@ -17,6 +17,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DHAS_DRM")
 	}
 
+	if getMakeVars(ctx, "TW_MAX_BRIGHTNESS") != "" {
+		cflags = append(cflags, "-DTW_MAX_BRIGHTNESS=1024")
+	}
+
 	var pixelFormat = strings.Replace(getMakeVars(ctx, "TARGET_RECOVERY_FORCE_PIXEL_FORMAT"), "\"", "", -1)
 
 	switch pixelFormat {
