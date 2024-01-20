@@ -34,6 +34,23 @@
       "message": "Also works for me on A/B device with dedicated recovery partition.",
       "revId": "fb72e11311879679e86396a4ca093df7343437eb",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5340160_8f08f190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-01-20T19:34:27Z",
+      "side": 1,
+      "message": "Confirmed \"Flash Current TWRP\" still works fine on recovery-as-boot device. Someone else will need to check on a vendor_boot header v3 device.",
+      "revId": "fb72e11311879679e86396a4ca093df7343437eb",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
