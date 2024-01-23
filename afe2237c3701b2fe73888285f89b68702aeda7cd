@@ -17,6 +17,23 @@
       "message": "#WorksForMe",
       "revId": "afe2237c3701b2fe73888285f89b68702aeda7cd",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d1ed9f7_90de7ee4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2024-01-23T22:36:55Z",
+      "side": 1,
+      "message": "Works here (vendor_boot hdr v3 not tested)",
+      "revId": "afe2237c3701b2fe73888285f89b68702aeda7cd",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
