@@ -33,6 +33,24 @@
       "message": "What about this code?\nhttps://github.com/TeamWin/android_bootable_recovery/blob/7499a0fae6120cc39f54b37bf1f889f67d7772d0/data.cpp#L852-L871",
       "revId": "548d4d225db8254b9ceffc17b6296d7a1d6066c2",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d736aea9_53306e0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2024-01-23T00:07:53Z",
+      "side": 1,
+      "message": "I will need to look at patching libminuitwrp for TW_MAX_BRIGHTNESS and I will probably abandon the vendor and this patchset.",
+      "parentUuid": "9314b8c2_74db8b2c",
+      "revId": "548d4d225db8254b9ceffc17b6296d7a1d6066c2",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
