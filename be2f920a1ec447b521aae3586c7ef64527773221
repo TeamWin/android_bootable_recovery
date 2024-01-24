@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1706131326 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1706131326-A31106D16E8781F40716D048F2D2714F610D2B17\n\n0000000000000000000000000000000000000000 be2f920a1ec447b521aae3586c7ef64527773221 refs/for/android-12.1%l\u003dCode-Review+1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmWxf34ACgkQH1oT9zX3\nIyJCqw//fgxZAuLOo8n/arcFbENFozd0EYYLweEvVuh4tENDFh33Iosx7dmxU6LZ\nqs1AcA8qkg9O0JliinNksYHIYOLVTEArUoa4BAulIHGYhEXMgRn+0Ir1iZ8lKnfB\nNExKxzZBj0eNGsg/9MG7gU5e1DrEBSO2K0Eg0bOVE3DEa9swOkXRrTPAxaS1Epdd\nMIMln0rX6nx12Af2bEmFBc+MAVEoKJSi53G5mNoK+3fzmdiPHUA+yQgA+LwcR2x2\nW/kTohRmzPgayXVTSI8scc/vxfz8UWLB/Vr6+54r5sh2UiQsVgZKGkdnMGcveST1\nFfrts16Ctfkmi9lCH5usMjGSyGJoF9JpIPn22+8meqeNZg7kLAa5ktmio+0rvI/f\ny1XgMYweZZ8xYcuWcliIGT+B+qA9Dn3UUq+jCbEioato5z0u+RzMfFyWg2cvhgHr\nN3A164XF+GGy7ARVi+6hv1PenrWSrDf8z36wa5NhseYz3olq0CKpWKjY+sSaZwiN\npI8P8GFr3nSmRLp80Gjax5SeThjXI/+n7V/bIL4PoyB7PvuncTS5Hj8kPrCi3ZPF\ngRrO6v3KeLIc+8eHylaU5JuheykOlW0Ybs5Gfohze4qgaQnjK2iWV1VATRlqxtIw\n7kq1Y5YPpeu4qQcCgnmWMmj44UOE5T40bho3F846PfzDyXKZFpo\u003d\n\u003dc+Jm\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72ca4081_d3531e17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-01-24T21:24:23Z",
+      "side": 1,
+      "message": "Rebased over the twrpRepacker patch. Both can be included for the next release.",
+      "revId": "be2f920a1ec447b521aae3586c7ef64527773221",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
