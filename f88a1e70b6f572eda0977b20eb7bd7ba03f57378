@@ -17,6 +17,23 @@
       "message": "If someone can test on vendor_boot with header v3, it would be nice, but otherwise, I think we can merge, as it works fine on recovery-as-boot and AB w/dedicated recovery partition now.",
       "revId": "f88a1e70b6f572eda0977b20eb7bd7ba03f57378",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222fbd6d_d89cbc9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2024-01-25T07:34:49Z",
+      "side": 1,
+      "message": "Looks good to me, let me check on vili",
+      "revId": "f88a1e70b6f572eda0977b20eb7bd7ba03f57378",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
