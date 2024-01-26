@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 1F5A13F735F72322 1706243700 -0500\npushee ssh://gerrit.twrp.me:29418/android_bootable_recovery\nnonce 1706243700-58239D335F495A346C1C1A1DDFB4376CFCF773E7\n\n0000000000000000000000000000000000000000 79ea3be574da81e6796e010ec177d52806a12c8d refs/for/android-12.1\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEE8Y8VaNp/zKXnXxPsH1oT9zX3IyIFAmWzNnQACgkQH1oT9zX3\nIyJgXg//dHPn8fP5nJU3+bWr3rlSdzUZhcdhXBRtMB93YDSJhMH2pVTGddOANDPJ\nN4qYAYmF7s0Uyq20nwQqmRTUWNZnEZ1fcya7XWv5wK/P+UxiLvI7f+Pxg1AVAzkQ\nQ11ZW2gTMmxRVMb+95YbaXP1ytc4E6IGBEnseLTTr55cDcNgRhBm6LjLVW3LtE+s\nKEiAE9rxsQGSEdbySyrVeZvdrsuAka6wswO/Y36acse3eW2YIHfwoMLJvq+HTu6H\n4nI5l9uBGS2org50TS/TLlNosmgUrX2Kazgxe76mcXwq3cCXWS3ejjrtezPdLYNs\nObeKqYqnYqGgLnCnKDEW2UbOSMbT5Yw4U5m5BmZ8iMuosuRdkuGmcolRV7SDXhsb\n0t7RUvpO9HM4FskWwIA6wmnQqaWnru3JrAjHaWA7nhXejAIed8iquRrfAHxACQC5\n1t1iZaAkiGEh8Ys2XH4KGO197Ni9j8QfsrsbmjrM734Ck/OxYqlFDmiZdTmhTkDe\nuOYwRDdWQTVO6/tYopR6U187LFJRFtniKK4CSLCUMc4+fGrDu87+McIjLNQ1V9jl\nXq9Ktr18IVnVk3Jh1MXED3AB5t91fRHGu65AJEEX56S4MZkEimxtQ238qWA3tn+n\nys7ECg1aCSJuzpRZc88NAsK7lxgzlNb0idS0DDr1InAROUCOP/A\u003d\n\u003dHtpj\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd258b1_9a911ab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1028
+      },
+      "writtenOn": "2024-01-26T14:10:19Z",
+      "side": 1,
+      "message": "Works on lemonadep with recovery-as-boot v3 images.",
+      "revId": "79ea3be574da81e6796e010ec177d52806a12c8d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }
