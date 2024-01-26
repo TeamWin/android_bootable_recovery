@@ -372,6 +372,10 @@ ifneq ($(TW_SECONDARY_BRIGHTNESS_PATH),)
 endif
 ifneq ($(TW_MAX_BRIGHTNESS),)
 	LOCAL_CFLAGS += -DTW_MAX_BRIGHTNESS=$(TW_MAX_BRIGHTNESS)
+else
+    ifeq ($(filter $(TW_NO_SCREEN_BLANK) $(TW_BRIGHTNESS_PATH),),)
+        $(call pretty-error,TW_MAX_BRIGHTNESS must be defined if using TW_NO_SCREEN_BLANK or TW_BRIGHTNESS_PATH. Please update your device tree to include this flag with the correct value from your device.)
+    endif
 endif
 ifneq ($(TW_DEFAULT_BRIGHTNESS),)
 	LOCAL_CFLAGS += -DTW_DEFAULT_BRIGHTNESS=$(TW_DEFAULT_BRIGHTNESS)
