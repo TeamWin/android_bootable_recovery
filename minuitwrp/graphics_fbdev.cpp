@@ -65,7 +65,6 @@ static void fbdev_blank(minui_backend* backend __unused, bool blank)
     int fd;
     char brightness[4];
     snprintf(brightness, 4, "%03d", TW_MAX_BRIGHTNESS/2);
-
     fd = open(TW_BRIGHTNESS_PATH, O_RDWR);
     if (fd < 0) {
         perror("cannot open LCD backlight");
