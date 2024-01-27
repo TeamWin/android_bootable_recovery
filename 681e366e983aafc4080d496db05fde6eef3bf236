@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "030f4acb_2b8725c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2024-01-27T17:41:14Z",
+      "side": 1,
+      "message": "Can we make the unmount command a partitionmanager function?",
+      "revId": "681e366e983aafc4080d496db05fde6eef3bf236",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
