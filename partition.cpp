@@ -1275,7 +1275,9 @@ void TWPartition::Setup_Data_Media() {
 			Storage_Path = Mount_Point + "/media/0";
 			Symlink_Path = Storage_Path;
 			DataManager::SetValue(TW_INTERNAL_PATH, Mount_Point + "/media/0");
-			DataManager::SetValue("tw_settings_path", TW_STORAGE_PATH);
+			#ifndef TW_INCLUDE_CRYPTO
+				DataManager::SetValue("tw_settings_path", TW_STORAGE_PATH);
+			#endif
 			UnMount(true);
 		}
 		DataManager::SetValue("tw_has_internal", 1);
