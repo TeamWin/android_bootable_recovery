@@ -1948,7 +1948,7 @@ int GUIAction::setbootslot(std::string arg)
 				// PartitionManager failed to unmount /vendor, this should not happen,
 				// but in case it does, do a lazy unmount
 				LOGINFO("WARNING: vendor partition could not be unmounted normally!\n");
-				umount2("/vendor", MNT_DETACH);
+				PartitionManager.UnMount_By_Path("/vendor", false, MNT_DETACH);
 			}
 		}
 		PartitionManager.Set_Active_Slot(arg);
