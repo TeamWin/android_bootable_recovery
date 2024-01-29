@@ -808,7 +808,7 @@ int TWPartitionManager::Mount_By_Path(string Path, bool Display_Error) {
 	return false;
 }
 
-int TWPartitionManager::UnMount_By_Path(string Path, bool Display_Error) {
+int TWPartitionManager::UnMount_By_Path(string Path, bool Display_Error, int flags) {
 	std::vector<TWPartition*>::iterator iter;
 	int ret = false;
 	bool found = false;
@@ -817,10 +817,10 @@ int TWPartitionManager::UnMount_By_Path(string Path, bool Display_Error) {
 	// Iterate through all partitions
 	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
 		if ((*iter)->Mount_Point == Local_Path || (!(*iter)->Symlink_Mount_Point.empty() && (*iter)->Symlink_Mount_Point == Local_Path)) {
-			ret = (*iter)->UnMount(Display_Error);
+			ret = (*iter)->UnMount(Display_Error, flags);
 			found = true;
 		} else if ((*iter)->Is_SubPartition && (*iter)->SubPartition_Of == Local_Path) {
-			(*iter)->UnMount(Display_Error);
+			(*iter)->UnMount(Display_Error, flags);
 		}
 	}
 	if (found) {
