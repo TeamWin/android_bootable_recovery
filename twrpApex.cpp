@@ -190,5 +190,5 @@ bool twrpApex::loadApexImage(std::string fileToMount, size_t loop_device_number)
 }
 
 bool twrpApex::Unmount() {
-	return (umount2(APEX_BASE, MNT_DETACH) == 0);
+	return (PartitionManager.UnMount_By_Path(APEX_BASE, false, MNT_DETACH) == 0);
 }
