@@ -106,7 +106,7 @@ exit:
 	if (ven)
 		ven->UnMount(false);
 	if (ven_dlkm)
-		ven_dlkm->UnMount(false);
+		ven_dlkm->UnMount(false, MNT_DETACH);
 
 	android::base::SetProperty(TW_MODULES_MOUNTED_PROP, "true");
 
@@ -130,7 +130,7 @@ int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir, bool vendor
 			Modprobe m({module_dir}, "modules.load.twrp", false);
 			m.LoadListedModules(false);
 			modules_loaded = m.GetModuleCount();
-			umount2(module_dir.c_str(), MNT_DETACH);
+			PartitionManager.UnMount_By_Path(module_dir.c_str(), false, MNT_DETACH);
 			LOGINFO("Modules Loaded: %d\n", modules_loaded);
 		}
 		return modules_loaded;
