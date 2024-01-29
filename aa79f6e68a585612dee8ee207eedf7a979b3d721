@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7efa91f_614a189d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-01-29T16:49:29Z",
+      "side": 1,
+      "message": "Seems fine. Fastbootd is no longer broken by this change.",
+      "revId": "aa79f6e68a585612dee8ee207eedf7a979b3d721",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
