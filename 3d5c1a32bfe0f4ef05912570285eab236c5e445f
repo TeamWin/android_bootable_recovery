@@ -17,6 +17,24 @@
       "message": "So I updated the patch based on the feedback I provided, and it works fine, except for one annoying side effect:\n\nIf you cancel the ORS using the Back button, it goes to the main menu (fine). However, when you go to reboot the device, when you select any option, it drops you back to the main menu (but only once). After that, you can reboot normally. It\u0027s as if that confirmation page never fully goes away, until that first reboot attempt. I haven\u0027t figured out any way around it to this point.\n\nAny suggestions?",
       "revId": "3d5c1a32bfe0f4ef05912570285eab236c5e445f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe229bb_59f43d0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-01-30T00:54:53Z",
+      "side": 1,
+      "message": "Can anyone help with this issue? It would be nice to get it merged for the update...",
+      "parentUuid": "bbbcab88_dd8c3092",
+      "revId": "3d5c1a32bfe0f4ef05912570285eab236c5e445f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
