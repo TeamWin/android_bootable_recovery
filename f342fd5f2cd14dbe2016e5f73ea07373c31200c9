@@ -34,6 +34,23 @@
       "message": "The latest patchset looks good to me, although I haven\u0027t tested it yet.",
       "revId": "f342fd5f2cd14dbe2016e5f73ea07373c31200c9",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da92375_51b78778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-01-30T00:52:52Z",
+      "side": 1,
+      "message": "Any update on merging this?",
+      "revId": "f342fd5f2cd14dbe2016e5f73ea07373c31200c9",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
