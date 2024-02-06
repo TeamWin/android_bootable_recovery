@@ -384,7 +384,8 @@ ifneq ($(TW_MAX_BRIGHTNESS),)
 	LOCAL_CFLAGS += -DTW_MAX_BRIGHTNESS=$(TW_MAX_BRIGHTNESS)
 else
     ifneq ($(TW_NO_SCREEN_BLANK),)
-        $(call pretty-error,TW_MAX_BRIGHTNESS must be defined if using TW_NO_SCREEN_BLANK. Please update your device tree to include this flag with the correct value from your device.)
+        TW_MAX_BRIGHTNESS ?= 1023
+        $(call pretty-warning,TW_MAX_BRIGHTNESS must be defined if using TW_NO_SCREEN_BLANK. Setting to default value: $(TW_MAX_BRIGHTNESS). If you would like to use a different value then please update your device tree with the correct value from your device.)
     endif
 endif
 ifneq ($(TW_DEFAULT_BRIGHTNESS),)
