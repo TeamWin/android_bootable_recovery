@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "866a7410_8ab0e144",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-02-06T00:04:54Z",
+      "side": 1,
+      "message": "Fixes coral build and still allows brightness path to parse commas. Should be good to merge.",
+      "revId": "2385f3acd933d40987b8f097cff5ddd0b053882e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
