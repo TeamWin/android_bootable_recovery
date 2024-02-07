@@ -438,7 +438,8 @@ clear:
 #endif
 
 	if (odm) odm->UnMount(Display_Error);
-	Process_Keymaster_Version(ven, false);
+	if (recovery_mode)
+		Process_Keymaster_Version(ven, false);
 	if (ven) ven->UnMount(Display_Error);
 	return true;
 }
@@ -3739,7 +3740,7 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 			TWPartition *part = *iter;
 			std::string bare_partition_name = Get_Bare_Partition_Name((*iter)->Get_Mount_Point());
 			std::string blk_device_partition = bare_partition_name;
-			if (DataManager::GetStrValue(TW_VIRTUAL_AB_ENABLED) == "1")
+			if (DataManager::GetStrValue("tw_has_boot_slots") == "1")
 				blk_device_partition.append(PartitionManager.Get_Active_Slot_Suffix());
 			(*iter)->UnMount(false);
 			LOGINFO("removing dynamic partition: %s\n", blk_device_partition.c_str());
