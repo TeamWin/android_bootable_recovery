@@ -101,12 +101,17 @@ std::string twrpRepacker::Unpack_Image(const std::string& Source_Path, const std
 		gui_msg(Msg(msg::kError, "unpack_error=Error unpacking image."));
 		return std::string();
 	}
-	size_t pos = magisk_unpack_output.find(txt_to_find) + txt_to_find.size();
-	std::string ramdisk_format = magisk_unpack_output.substr(pos, magisk_unpack_output.size() - 1);
-	ramdisk_format.erase(std::remove(ramdisk_format.begin(), ramdisk_format.end(), '['), ramdisk_format.end());
-	ramdisk_format.erase(std::remove(ramdisk_format.begin(), ramdisk_format.end(), ']'), ramdisk_format.end());
-	ramdisk_format.erase(std::remove(ramdisk_format.begin(), ramdisk_format.end(), ' '), ramdisk_format.end());
-	ramdisk_format.erase(std::remove(ramdisk_format.begin(), ramdisk_format.end(), '\n'), ramdisk_format.end());
+	std::string ramdisk_format;
+	auto pos = magisk_unpack_output.find(txt_to_find);
+	if (pos != std::string::npos) {
+		auto start = magisk_unpack_output.find('[', pos + txt_to_find.size());
+			if (start != std::string::npos) {
+				auto end = magisk_unpack_output.find(']', start);
+				if (end != std::string::npos) {
+					ramdisk_format = std::move(magisk_unpack_output.substr(start + 1, end - start - 1));
+				}
+		}
+	}
 	return ramdisk_format;
 }
 
