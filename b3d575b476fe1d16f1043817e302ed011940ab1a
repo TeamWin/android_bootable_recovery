@@ -16,6 +16,24 @@
       "message": "What exactly does this fix?",
       "revId": "b3d575b476fe1d16f1043817e302ed011940ab1a",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c04e50_938d2374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2024-02-10T12:57:47Z",
+      "side": 1,
+      "message": "Incorrect results in new version of magiskboot:\nramdisk_format\u003dgzipunexpectedASN.1DERtag:expectedSEQUENCE,gotAPPLICATION1(primitive)VBMETA",
+      "parentUuid": "5b11c29f_3bd7c776",
+      "revId": "b3d575b476fe1d16f1043817e302ed011940ab1a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
