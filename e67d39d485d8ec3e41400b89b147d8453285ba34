@@ -16,6 +16,24 @@
       "message": "I get this:\n\nRAMDISK_FMT     [lz4_legacy]\nunknown/unsupported ASN.1 DER tag: 0x00",
       "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff1e48a7_c4779640",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-02-11T00:35:44Z",
+      "side": 1,
+      "message": "Is that with the patch or without it?",
+      "parentUuid": "45d120cc_0f92274b",
+      "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
