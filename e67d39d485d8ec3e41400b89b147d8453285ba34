@@ -34,6 +34,23 @@
       "parentUuid": "45d120cc_0f92274b",
       "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3442a3fc_5172d078",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2024-02-11T07:29:15Z",
+      "side": 1,
+      "message": "With the patch.",
+      "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
