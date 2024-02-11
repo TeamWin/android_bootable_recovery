@@ -159,7 +159,8 @@
 // version 2 requires theme to handle power button as action togglebacklight
 // version 4 adds listbox support to reboot page
 // version 5 adds File Manager options, nano & Flash Current TWRP
-#define TW_THEME_VERSION 5
+// version 6 adds support for vendor_ab and recovery_ab, remove htcdumlock & Unmap Super Devices for A devices
+#define TW_THEME_VERSION 6
 
 // Also used:
 //   tw_boot_is_mountable
