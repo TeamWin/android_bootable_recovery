@@ -51,6 +51,24 @@
       "message": "With the patch.",
       "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b242e15d_759c37cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 783
+      },
+      "writtenOn": "2024-02-11T12:59:06Z",
+      "side": 1,
+      "message": "Is there a bug in this patch? I\u0027ve provided a test example.\n\n#include \u003cstdio.h\u003e\n#include \u003calgorithm\u003e\n#include \u003cstring\u003e\n\nusing namespace std;\n\nint main(int argc, char *argv[]) {\n\tstd::string magisk_unpack_output \u003d \"\"\n\t\t\"Parsing boot image: [recovery.img]\\n\"\n\t\t\"HEADER_VER      [4]\\n\"\n\t\t\"KERNEL_SZ       [0]\\n\"\n\t\t\"RAMDISK_SZ      [25648818]\\n\"\n\t\t\"PAGESIZE        [4096]\\n\"\n\t\t\"CMDLINE         []\\n\"\n\t\t\"RAMDISK_FMT     [lz4_legacy]\\n\"\n\t\t\"unexpected ASN.1 DER tag: expected SEQUENCE, got APPLICATION [1] (primitive)\\n\"\n\t\t\"VBMETA\\n\";\n\tstd::string txt_to_find \u003d \"RAMDISK_FMT\";\n\tstd::string ramdisk_format;\n\tauto pos \u003d magisk_unpack_output.find(txt_to_find);\n\tif (pos !\u003d std::string::npos) {\n\t\tauto start \u003d magisk_unpack_output.find(\u0027[\u0027, pos + txt_to_find.size());\n\t\t\tif (start !\u003d std::string::npos) {\n\t\t\t\tauto end \u003d magisk_unpack_output.find(\u0027]\u0027, start);\n\t\t\t\tif (end !\u003d std::string::npos) {\n\t\t\t\t\tramdisk_format \u003d std::move(magisk_unpack_output.substr(start + 1, end - start - 1));\n\t\t\t\t}\n\t\t}\n\t}\n\tprintf(\"ramdisk_format\u003d%s\\n\", ramdisk_format.c_str());\n\treturn 0;\n}\n\nclang -o example example.cpp -lstdc++ -std\u003dc++20",
+      "parentUuid": "3442a3fc_5172d078",
+      "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
