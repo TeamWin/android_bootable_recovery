@@ -104,6 +104,23 @@
       "parentUuid": "83799b37_9679bc17",
       "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc336092_1a129b49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2024-02-13T16:54:21Z",
+      "side": 1,
+      "message": "magisk_unpack_output\u003dParsing boot image: [/tmp/repackorig/boot.img]\nHEADER_VER      [3]\nKERNEL_SZ       [46622736]\nRAMDISK_SZ      [33292193]\nOS_VERSION      [14.0.0]\nOS_PATCH_LEVEL  [2023-12]\nPAGESIZE        [4096]\nCMDLINE         []\nKERNEL_FMT      [raw]\nRAMDISK_FMT     [lz4_legacy]\nunknown/unsupported ASN.1 DER tag: 0x00",
+      "revId": "e67d39d485d8ec3e41400b89b147d8453285ba34",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
