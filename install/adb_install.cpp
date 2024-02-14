@@ -95,7 +95,7 @@ static auto AdbInstallPackageHandler(InstallResult* result) {
   // because the minadbd service has already issued an install command. FUSE_SIDELOAD_HOST_PATHNAME
   // will start to exist once the host connects and starts serving a package. Poll for its
   // appearance. (Note that inotify doesn't work with FUSE.)
-  auto ui = device->GetUI();
+  //auto ui = device->GetUI();
   constexpr int ADB_INSTALL_TIMEOUT = 15;
   bool should_continue = true;
   *result = INSTALL_ERROR;

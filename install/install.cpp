@@ -364,11 +364,11 @@ static void log_max_temperature(int* max_temperature, const std::atomic<bool>& l
   }
 }
 
-static bool PerformPowerwashIfRequired(ZipArchiveHandle zip, Device *device) {
+static bool PerformPowerwashIfRequired(ZipArchiveHandle zip) {
   const auto payload_properties = ExtractPayloadProperties(zip);
   if (payload_properties.find("POWERWASH=1") != std::string::npos) {
     LOG(INFO) << "Payload properties has POWERWASH=1, wiping userdata...";
-    return WipeData(device);
+    return WipeData(nullptr);
   }
   return true;
 }
@@ -392,11 +392,11 @@ static InstallResult TryUpdateBinary(Package* package, bool* wipe_cache,
         package->GetPackageSize() < MEMORY_PACKAGE_LIMIT) {
       std::vector<uint8_t> content(package->GetPackageSize());
       if (package->ReadFullyAtOffset(content.data(), content.size(), 0)) {
-        auto memory_package = Package::CreateMemoryPackage(std::move(content), {});
-        return WipeAbDevice(device, memory_package.get()) ? INSTALL_SUCCESS : INSTALL_ERROR;
+        auto memory_package = Package::CreateMemoryPackage(std::move(content));
+        return WipeAbDevice(memory_package.get()) ? INSTALL_SUCCESS : INSTALL_ERROR;
       }
     }
-    return WipeAbDevice(device, package) ? INSTALL_SUCCESS : INSTALL_ERROR;
+    return WipeAbDevice(package) ? INSTALL_SUCCESS : INSTALL_ERROR;
   }
   bool device_supports_ab = android::base::GetBoolProperty("ro.build.ab_update", false);
   bool ab_device_supports_nonab =
@@ -585,7 +585,7 @@ static InstallResult TryUpdateBinary(Package* package, bool* wipe_cache,
     LOG(FATAL) << "Invalid status code " << status;
   }
   if (package_is_ab) {
-    PerformPowerwashIfRequired(zip, device);
+    PerformPowerwashIfRequired(zip);
   }
 
   return INSTALL_SUCCESS;
