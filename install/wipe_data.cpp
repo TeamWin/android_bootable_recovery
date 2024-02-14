@@ -36,7 +36,7 @@ constexpr const char* CACHE_ROOT = "/cache";
 constexpr const char* DATA_ROOT = "/data";
 constexpr const char* METADATA_ROOT = "/metadata";
 
-static bool EraseVolume(const char* volume, RecoveryUI* ui) {
+static bool EraseVolume(const char* volume) {
   bool is_cache = (strcmp(volume, CACHE_ROOT) == 0);
 
   // ui->SetBackground(RecoveryUI::ERASING);
@@ -77,12 +77,12 @@ bool WipeCache(const std::function<bool()>& confirm_func) {
   // ui->SetBackground(RecoveryUI::ERASING);
   // ui->SetProgressType(RecoveryUI::INDETERMINATE);
 
-  bool success = EraseVolume("/cache", false);
+  bool success = EraseVolume("/cache");
   // ui->Print("Cache wipe %s.\n", success ? "complete" : "failed");
   return success;
 }
 
-bool WipeData(Device* device, bool convert_fbe) {
+bool WipeData(Device* device) {
   // RecoveryUI* ui = device->GetUI();
   // ui->Print("\n-- Wiping data...\n");
   // ui->SetBackground(RecoveryUI::ERASING);
@@ -104,10 +104,10 @@ bool WipeData(Device* device, bool convert_fbe) {
       success &= EraseVolume(METADATA_ROOT);
     }
   }
-  ui->Print("Resetting memtag message...\n");
+  //ui->Print("Resetting memtag message...\n");
   std::string err;
   if (!WriteMiscMemtagMessage({}, &err)) {
-    ui->Print("Failed to reset memtag message: %s\n", err.c_str());
+    //ui->Print("Failed to reset memtag message: %s\n", err.c_str());
     success = false;
   }
   if (success) {
