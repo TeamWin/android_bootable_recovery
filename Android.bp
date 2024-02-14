@@ -91,6 +91,7 @@ cc_library_shared {
         "install/install.cpp",
         "install/spl_check.cpp",
         "install/wipe_data.cpp",
+        "install/wipe_device.cpp",
         "install/set_metadata.cpp",
         "install/ZipUtil.cpp"
     ],
