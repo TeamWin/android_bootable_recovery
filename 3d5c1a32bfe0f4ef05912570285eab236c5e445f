@@ -107,6 +107,24 @@
       "parentUuid": "e9dfd2b2_f6ea82d0",
       "revId": "3d5c1a32bfe0f4ef05912570285eab236c5e445f",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1980dd43_82a0bcf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2024-02-15T20:14:50Z",
+      "side": 1,
+      "message": "https://katb.in/orslog\n\nThere\u0027s the recovery log. I don\u0027t think any other log will be useful to you since this seems to strictly be a theming issue with TWRP. But I can provide other logs if you\u0027d like, just specify what.",
+      "parentUuid": "83c38363_ecdbc52b",
+      "revId": "3d5c1a32bfe0f4ef05912570285eab236c5e445f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
