@@ -51,6 +51,24 @@
       "message": "I\u0027m just wondering why this patch is needed, since currently projID will automatically be enabled if the installed ROM supports it, or if it is enabled in the device tree (eg, when inheriting from product/emulated_storage.mk).",
       "revId": "1e65380a75155de1a537b65f2cc36e89e225be99",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b48a816_b198e0fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 939
+      },
+      "writtenOn": "2024-02-25T14:20:09Z",
+      "side": 1,
+      "message": "1. As this is default AOSP behaviour, there is no reason to not follow it.\n2. Newer f2fs-tools already enable project_quota by default (android-14.0.0 branches already include this change). From mkfs.f2fs man page:\n```\n-g default-options\n\n    Use a default set of options. The following values are supported:\n\n    android\n\n        Use default options for Android having \"-d1 -f -w 4096 -R 0:0 -O encrypt -O project_quota,extra_attr,{quota} -O verity\".\n```\n3. If we can simply the logic without harming anything, what\u0027s wrong with it?",
+      "parentUuid": "ff9eb789_bff58be8",
+      "revId": "1e65380a75155de1a537b65f2cc36e89e225be99",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
