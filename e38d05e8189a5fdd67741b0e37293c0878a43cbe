@@ -16,6 +16,23 @@
       "message": "Actually, the external_storage.projid.enabled property doesn\u0027t even do anything any more.\n\nhttps://github.com/LineageOS/android_system_core/commit/bc9b847e0fe95662e1569f863ebcd059dbf6348f",
       "revId": "e38d05e8189a5fdd67741b0e37293c0878a43cbe",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0125caad_74db55e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2024-02-27T08:14:21Z",
+      "side": 1,
+      "message": "Fair enough for A14. Do we know for sure that this will not have a negative impact on A12 and A13 ROMs?",
+      "revId": "e38d05e8189a5fdd67741b0e37293c0878a43cbe",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
