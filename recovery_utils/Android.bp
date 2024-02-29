@@ -47,6 +47,7 @@ cc_defaults {
         "libfstab",
         "libhealthhalutils",
         "libhealthshim",
+        "libsnapshot",
     ],
 }
 
