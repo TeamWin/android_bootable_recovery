@@ -80,7 +80,7 @@ else
 endif
 
 LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall libminadbd_services libinit libsnapshot_nobinder update_metadata-protos librecovery_utils libhealthhalutils
-LOCAL_SHARED_LIBRARIES += libfs_mgr libhardware android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.boot@1.2 libprotobuf-cpp-lite liblp libutils libhidlbase android.hardware.health@2.0
+LOCAL_SHARED_LIBRARIES += libfs_mgr libhardware android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.boot@1.2 libprotobuf-cpp-lite liblp libutils libhidlbase android.hardware.health@2.0 android.hardware.health-V2-ndk libbinder libbinder_ndk
 LOCAL_C_INCLUDES += \
     system/core/fs_mgr/libfs_avb/include/ \
     system/core/fs_mgr/include_fstab/ \
@@ -323,7 +323,7 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_FBE
     LOCAL_SHARED_LIBRARIES += android.frameworks.stats@1.0 android.hardware.authsecret@1.0 \
 	android.security.authorization-ndk_platform \
-        android.hardware.oemlock@1.0 libf2fs_sparseblock libbinder libbinder_ndk \
+        android.hardware.oemlock@1.0 libf2fs_sparseblock \
         libandroidicu.recovery \
         android.hardware.gatekeeper@1.0 \
         android.hardware.weaver@1.0 \
