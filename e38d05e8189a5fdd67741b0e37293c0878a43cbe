@@ -33,6 +33,24 @@
       "message": "Fair enough for A14. Do we know for sure that this will not have a negative impact on A12 and A13 ROMs?",
       "revId": "e38d05e8189a5fdd67741b0e37293c0878a43cbe",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23631c05_bd546171",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 939
+      },
+      "writtenOn": "2024-03-03T06:05:48Z",
+      "side": 1,
+      "message": "The commit linked in this commit\u0027s message belongs to AOSP 13 so no breakage is expected there. And anyway, if userspace doesn\u0027t [try to] use these FS features, then they do nothing as well.",
+      "parentUuid": "0125caad_74db55e9",
+      "revId": "e38d05e8189a5fdd67741b0e37293c0878a43cbe",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
