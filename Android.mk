@@ -85,6 +85,7 @@ LOCAL_STATIC_LIBRARIES += libavb \
                           libinit \
                           libminadbd_services \
                           librecovery_utils \
+                          libsnapshot \
                           libsnapshot_nobinder \
                           libtwrpinstall \
                           update_metadata-protos
