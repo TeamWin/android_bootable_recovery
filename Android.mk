@@ -79,8 +79,29 @@ else
     LOCAL_CFLAGS += -DTW_EXCLUDE_APEX
 endif
 
-LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall libminadbd_services libinit libsnapshot_nobinder update_metadata-protos librecovery_utils libhealthhalutils
-LOCAL_SHARED_LIBRARIES += libfs_mgr libhardware android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.boot@1.2 libprotobuf-cpp-lite liblp libutils libhidlbase android.hardware.health@2.0 android.hardware.health-V2-ndk libbinder libbinder_ndk
+LOCAL_STATIC_LIBRARIES += libavb \
+                          libhealthhalutils \
+                          libhealthshim \
+                          libinit \
+                          libminadbd_services \
+                          librecovery_utils \
+                          libsnapshot_nobinder \
+                          libtwrpinstall \
+                          update_metadata-protos
+
+LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
+                          android.hardware.boot@1.1 \
+                          android.hardware.boot@1.2 \
+                          android.hardware.health@2.0 \
+                          android.hardware.health-V2-ndk \
+                          libbinder \
+                          libbinder_ndk \
+                          libfs_mgr \
+                          libhardware \
+                          libhidlbase \
+                          liblp \
+                          libprotobuf-cpp-lite \
+                          libutils
 LOCAL_C_INCLUDES += \
     system/core/fs_mgr/libfs_avb/include/ \
     system/core/fs_mgr/include_fstab/ \
