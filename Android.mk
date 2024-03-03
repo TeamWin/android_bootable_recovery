@@ -94,6 +94,7 @@ LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
                           android.hardware.boot@1.1 \
                           android.hardware.boot@1.2 \
                           android.hardware.health@2.0 \
+                          android.hardware.health@2.1 \
                           android.hardware.health-V2-ndk \
                           libbinder \
                           libbinder_ndk \
