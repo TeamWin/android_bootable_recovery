@@ -105,6 +105,7 @@ LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
                           libhidlbase \
                           liblog \
                           liblp \
+                          liblz4 \
                           libprotobuf-cpp-lite \
                           libutils
 LOCAL_C_INCLUDES += \
