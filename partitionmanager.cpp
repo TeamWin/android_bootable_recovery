@@ -405,10 +405,6 @@ clear:
 		}
 	}
 
-#ifdef TW_LOAD_VENDOR_MODULES
-	KernelModuleLoader::Load_Vendor_Modules();
-#endif
-
 	TWPartition* ven = PartitionManager.Find_Partition_By_Path("/vendor");
 	TWPartition* odm = PartitionManager.Find_Partition_By_Path("/odm");
 	if (recovery_mode && !parse_userdata) {
@@ -435,6 +431,10 @@ clear:
 		LOGINFO("Skipping Additional Fstab Processing\n");
 		property_set("fstab.additional", "0");
 	}
+#endif
+
+#ifdef TW_LOAD_VENDOR_MODULES
+	KernelModuleLoader::Load_Vendor_Modules();
 #endif
 
 	if (odm) odm->UnMount(Display_Error);
