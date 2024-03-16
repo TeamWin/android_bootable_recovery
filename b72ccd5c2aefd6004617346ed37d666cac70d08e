@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60a63d8_ad4f4168",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 823
+      },
+      "writtenOn": "2024-03-16T11:44:13Z",
+      "side": 1,
+      "message": "The adsp_loader_dlkm now load correctly on my OnePlus 11 \u0026 OnePlus Ace 2 Pro",
+      "revId": "b72ccd5c2aefd6004617346ed37d666cac70d08e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
