@@ -244,8 +244,6 @@ void inline Process_Keymaster_Version(TWPartition *ven, bool Display_Error) {
 		if (version.empty()) {
 			LOGINFO("Keymaster_Ver::Unable to find vendor manifest on the device, and no default value set. Checking the ramdisk manifest\n");
 			version = KM_Ver_From_Manifest(version);
-		} else {
-			LOGINFO("Keymaster_Ver::Unable to find vendor manifest on the device. Setting to default value.\n");
 		}
 	} else {
 		if (ven) ven->UnMount(Display_Error);
@@ -260,6 +258,10 @@ void inline Process_Keymaster_Version(TWPartition *ven, bool Display_Error) {
 		LOGINFO("Keymaster_Ver::Force Keymaster_Ver flag found.\n");
 	}
 #endif
+	if (version.empty()) {
+		LOGINFO("Keymaster_Ver::Unable to set keymaster version from device or manifests. Setting to default value.\n");
+		version = "4.x";
+	}
 	LOGINFO("Keymaster_Ver::Using keymaster version '%s' for decryption\n", version.c_str());
 	android::base::SetProperty(TW_KEYMASTER_VERSION_PROP, version.c_str());
 }

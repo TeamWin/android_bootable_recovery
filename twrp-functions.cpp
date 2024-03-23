@@ -1620,6 +1620,10 @@ bool TWFunc::Get_Service_From_Manifest(std::string basepath, std::string service
 			// Use legacy manifest path if platform manifest is not found.
 			LOGINFO("%s not found. Using default path for manifest.xml\n", filename.c_str());
 			filename = manifestpath + "manifest.xml";
+			if (!Path_Exists(filename)) {
+				LOGINFO("%s not found. Unable to locate vendor manifest.\n", filename.c_str());
+				return ret;
+			}
 		}
 	}
 	if (Path_Exists(filename)) {
