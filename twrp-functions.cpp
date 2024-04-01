@@ -1659,4 +1659,23 @@ bool TWFunc::Get_Service_From_Manifest(std::string basepath, std::string service
 	return ret;
 }
 
+std::string TWFunc::File_Property_Get(const std::string File_Path, const std::string Prop_Name) {
+	std::vector <string> buildprop;
+	std::string propname, propvalue;
+	if (TWFunc::read_file(File_Path, buildprop) != 0) {
+		return propvalue;
+	}
+	int line_count = buildprop.size();
+	int index;
+	size_t start_pos = 0, end_pos;
+	for (index = 0; index < line_count; index++) {
+		end_pos = buildprop.at(index).find("=", start_pos);
+		propname = buildprop.at(index).substr(start_pos, end_pos);
+		if (propname == Prop_Name) {
+			propvalue = buildprop.at(index).substr(end_pos + 1, buildprop.at(index).size());
+			return propvalue;
+		}
+	}
+	return propvalue;
+}
 #endif // ndef BUILD_TWRPTAR_MAIN

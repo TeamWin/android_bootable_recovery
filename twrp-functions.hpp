@@ -124,6 +124,7 @@ public:
 	static bool Get_Service_From_Manifest(std::string basepath, std::string service, std::string &ret);
 
 	static bool abx_to_xml(const std::string path, std::string &result); // could we convert abx to xml (if so, return the full path to the converted file)
+	static std::string File_Property_Get(const std::string File_Path, const std::string Prop_Name); // Returns specified property value from the file
 private:
 	static void Copy_Log(string Source, string Destination);
 

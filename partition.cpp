@@ -2732,6 +2732,14 @@ bool TWPartition::Backup_Tar(PartitionSettings *part_settings, pid_t *tar_fork_p
 				backup_exclusions.add_absolute_dir("/data/user/" + (*iter).userId);
 			}
 		}
+		std::string runtime_props = (DataManager::GetSettingsStoragePath() + "/" + RUNTIME_PROPS_FILE);
+		if (TWFunc::Path_Exists (runtime_props)) {
+			std::vector <std::string> exclusions = android::base::Split(TWFunc::File_Property_Get(runtime_props, "backup_exclusions"), "[,|;]");
+			for (const auto prop: exclusions) {
+				gui_print(" * Excluding %s\n", prop.c_str());
+				backup_exclusions.add_absolute_dir(prop);
+			}
+		}
 	}
 	tar.part_settings = part_settings;
 	tar.backup_exclusions = &backup_exclusions;

@@ -185,4 +185,5 @@
 #define SCRIPT_FILE_TMP "/tmp/openrecoveryscript"
 #define TMP_LOG_FILE "/tmp/recovery.log"
 
+#define RUNTIME_PROPS_FILE "runtime.prop"
 #endif  // _VARIABLES_HEADER_
