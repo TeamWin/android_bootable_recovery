@@ -464,6 +464,9 @@ endif
 ifeq ($(TW_FORCE_KEYMASTER_VER), true)
     LOCAL_CFLAGS += -DTW_FORCE_KEYMASTER_VER
 endif
+ifeq ($(TW_SKIP_GET_FOLDER_SIZE), true)
+    LOCAL_CFLAGS += -DTW_SKIP_GET_FOLDER_SIZE
+endif
 
 LOCAL_C_INCLUDES += system/vold \
 
