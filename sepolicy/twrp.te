@@ -9,6 +9,7 @@ recovery_only(`
   allow kernel unlabeled:file rw_file_perms;
   allow kernel tmpfs:file { read };
   allow kernel recovery:fd { use };
+  allow kernel adb_data_file:file { read write };
   allow unlabeled unlabeled:filesystem associate;
   allow vendor_init rootfs:dir read;
 ')
