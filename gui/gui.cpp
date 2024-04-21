@@ -804,7 +804,7 @@ extern "C" int gui_loadResources(void)
 	{
 		std::string theme_path;
 
-		theme_path = DataManager::GetCurrentStoragePath();
+		theme_path = DataManager::GetSettingsStoragePath();
 		if (!PartitionManager.Mount_Settings_Storage(false))
 		{
 			int retry_count = 5;
@@ -821,7 +821,7 @@ extern "C" int gui_loadResources(void)
 			}
 		}
 
-		theme_path += TWFunc::Check_For_TwrpFolder() + "/theme/ui.zip";
+		theme_path += "theme/ui.zip";
 		if (check || PageManager::LoadPackage("TWRP", theme_path, "main"))
 		{
 #endif // ifndef TW_OEM_BUILD
@@ -854,8 +854,8 @@ extern "C" int gui_loadCustomResources(void)
 		return -1;
 	}
 
-	std::string theme_path = DataManager::GetCurrentStoragePath();
-	theme_path += TWFunc::Check_For_TwrpFolder() + "/theme/ui.zip";
+	std::string theme_path = DataManager::GetSettingsStoragePath();
+	theme_path += "theme/ui.zip";
 	// Check for a custom theme
 	if (TWFunc::Path_Exists(theme_path)) {
 		// There is a custom theme, try to load it

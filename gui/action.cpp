@@ -169,6 +169,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(key);
 		ADD_ACTION(page);
 		ADD_ACTION(reload);
+		ADD_ACTION(savesettings);
 		ADD_ACTION(readBackup);
 		ADD_ACTION(set);
 		ADD_ACTION(clear);
@@ -593,6 +594,13 @@ int GUIAction::reload(std::string arg __unused)
 	// to prevent crashing which could occur when we start deleting
 	// GUI resources in the action thread while we attempt to render
 	// with those same resources in another thread.
+	return 0;
+}
+
+int GUIAction::savesettings(std::string arg __unused)
+{
+	DataManager::Flush();
+	//This action will serve to save the settings each time it is called.
 	return 0;
 }
 

@@ -81,7 +81,7 @@ static int Install_Theme(const char* path, ZipArchiveHandle Zip) {
 	if (!PartitionManager.Mount_Settings_Storage(true))
 		return INSTALL_ERROR;
 	string theme_path = DataManager::GetSettingsStoragePath();
-	theme_path += "/TWRP/theme";
+	theme_path += "theme";
 	if (!TWFunc::Path_Exists(theme_path)) {
 		if (!TWFunc::Recursive_Mkdir(theme_path)) {
 			return INSTALL_ERROR;
