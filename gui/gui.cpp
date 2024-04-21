@@ -805,16 +805,16 @@ extern "C" int gui_loadResources(void)
 		std::string theme_path;
 
 		theme_path = DataManager::GetCurrentStoragePath();
-		if (!PartitionManager.Mount_Settings_Storage(false))
+		if (!PartitionManager.Mount_Current_Storage(false))
 		{
 			int retry_count = 5;
-			while (retry_count > 0 && !PartitionManager.Mount_Settings_Storage(false))
+			while (retry_count > 0 && !PartitionManager.Mount_Current_Storage(false))
 			{
 				usleep(500000);
 				retry_count--;
 			}
 
-			if (!PartitionManager.Mount_Settings_Storage(true))
+			if (!PartitionManager.Mount_Current_Storage(true))
 			{
 				LOGINFO("Unable to mount %s during GUI startup.\n", theme_path.c_str());
 				check = 1;
@@ -849,13 +849,13 @@ error:
 extern "C" int gui_loadCustomResources(void)
 {
 #ifndef TW_OEM_BUILD
-	if (!PartitionManager.Mount_Settings_Storage(false)) {
+	if (!PartitionManager.Mount_Current_Storage(false)) {
 		LOGINFO("Unable to mount settings storage during GUI startup.\n");
 		return -1;
 	}
 
 	std::string theme_path = DataManager::GetCurrentStoragePath();
-	theme_path += TWFunc::Check_For_TwrpFolder() + "/theme/ui.zip";
+	theme_path += DataManager::GetStrValue(TW_RECOVERY_FOLDER_VAR) + "/theme/ui.zip";
 	// Check for a custom theme
 	if (TWFunc::Path_Exists(theme_path)) {
 		// There is a custom theme, try to load it
