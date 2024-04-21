@@ -310,6 +310,7 @@ protected:
 	int key(std::string arg);
 	int page(std::string arg);
 	int reload(std::string arg);
+	int savesettings(std::string arg);
 	int readBackup(std::string arg);
 	int set(std::string arg);
 	int clear(std::string arg);
