@@ -1306,7 +1306,7 @@ void PageManager::LoadLanguageList(ZipArchiveHandle package) {
 		TWFunc::removeDir(TWRES "customlanguages", true);
 	if (package) {
 		TWFunc::Recursive_Mkdir(TWRES "customlanguages");
-		ExtractPackageRecursive(package, "/", TWRES "customlanguages", nullptr, nullptr);
+		ExtractPackageRecursive(package, "languages/", TWRES "customlanguages/", nullptr, nullptr);
 
 		// package->ExtractRecursive("languages", TWRES "customlanguages/");
 		LoadLanguageListDir(TWRES "customlanguages/");
@@ -1504,6 +1504,9 @@ int PageManager::RunReload() {
 	if (!mReloadTheme)
 		return 0;
 
+	// Save current settings first
+	DataManager::Flush();
+
 	mReloadTheme = false;
 	theme_path = DataManager::GetCurrentStoragePath();
 	if (PartitionManager.Mount_By_Path(theme_path.c_str(), 1) < 0) {
@@ -1511,7 +1514,7 @@ int PageManager::RunReload() {
 		ret_val = 1;
 	}
 
-	theme_path += "/TWRP/theme/ui.zip";
+	theme_path += TWFunc::Check_For_TwrpFolder() + "/theme/ui.zip";
 	if (ret_val != 0 || ReloadPackage("TWRP", theme_path) != 0)
 	{
 		// Loading the custom theme failed - try loading the stock theme
