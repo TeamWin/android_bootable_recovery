@@ -17,6 +17,24 @@
       "message": "This path shouldn\u0027t be hard-coded since the recovery folder can be changed. Can you please also update this?",
       "revId": "0daa795d6d80b4471f0294b17f59328a088b26f1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60ea6f5_5d4a0f4d",
+        "filename": "twrpinstall/twinstall.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 751
+      },
+      "writtenOn": "2024-04-23T02:50:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d3f897c_c116e1b0",
+      "revId": "0daa795d6d80b4471f0294b17f59328a088b26f1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
