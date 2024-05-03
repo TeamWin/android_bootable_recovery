@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b4880d3_7c10f04c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2024-05-03T22:47:09Z",
+      "side": 1,
+      "message": "identical to https://gerrit.twrp.me/c/android_bootable_recovery/+/7066\n\nabandon one of the two",
+      "revId": "d08e3ffaa1e5037665007c030f2c2303cc7de6e6",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
