@@ -150,7 +150,7 @@ func globalSharedLibs(ctx android.BaseContext) []string {
 	}
 
 	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS") == "true" {
-		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V2-ndk_platform")
+		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V2-ndk")
 		sharedLibs = append(sharedLibs, "android.hardware.vibrator-V2-cpp")
 	}
 
