@@ -16,6 +16,23 @@
       "message": "I think this commit message should be updated, as zip is already included by default if it exists in the tree (which it will now by default since it was forked and added to the minimal manifest). So the commit message should actually be to allow excluding zip, because it will now always be included.",
       "revId": "322239812c8f0218b8028b3a241904a706a853a1",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e19f54fc_938bd610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2024-05-11T15:33:33Z",
+      "side": 1,
+      "message": "In that case, the patch could be simplified and reduced to merely adding the exclusion flag.",
+      "revId": "322239812c8f0218b8028b3a241904a706a853a1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
