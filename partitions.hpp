@@ -367,6 +367,7 @@ public:
 	int Fstab_Processed();                                                    // Indicates if the fstab has been processed or not
 	void Output_Storage_Fstab();                                              // Creates a /cache/recovery/storage.fstab file with a list of all potential storage locations for app use
 	bool Enable_MTP();                                                        // Enables MTP
+	bool Configure_USB();																											// Configures the USB settings for MTP
 	void Add_All_MTP_Storage();                                               // Adds all storage objects for MTP
 	bool Disable_MTP();                                                       // Disables MTP
 	bool Add_MTP_Storage(string Mount_Point);                                 // Adds or removes an MTP Storage partition
