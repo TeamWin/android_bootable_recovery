@@ -67,6 +67,7 @@
 #include "twrp-functions.hpp"
 #include "fixContexts.hpp"
 #include "exclude.hpp"
+#include "find_file.hpp"
 #include "set_metadata.h"
 #include "tw_atomic.hpp"
 #include "gui/gui.hpp"
@@ -2780,23 +2781,17 @@ bool TWPartitionManager::Enable_MTP(void) {
 
 	if (pipe(mtppipe) < 0) {
 		LOGERR("Error creating MTP pipe\n");
+		DataManager::SetValue("tw_mtp_enabled", 0);
 		return false;
 	}
 
-	char old_value[PROPERTY_VALUE_MAX];
-	property_get("sys.usb.config", old_value, "");
-	if (strcmp(old_value, "mtp,adb") != 0) {
-		char vendor[PROPERTY_VALUE_MAX];
-		char product[PROPERTY_VALUE_MAX];
-		property_set("sys.usb.config", "none");
-		property_get("usb.vendor", vendor, "18D1");
-		property_get("usb.product.mtpadb", product, "4EE2");
-		string vendorstr = vendor;
-		string productstr = product;
-		TWFunc::write_to_file("/sys/class/android_usb/android0/idVendor", vendorstr);
-		TWFunc::write_to_file("/sys/class/android_usb/android0/idProduct", productstr);
-		property_set("sys.usb.config", "mtp,adb");
+	if (!Configure_USB()) {
+		close(mtppipe[0]);
+		close(mtppipe[1]);
+		DataManager::SetValue("tw_mtp_enabled", 0);
+		return false;
 	}
+
 	/* To enable MTP debug, use the twrp command line feature:
 	 * twrp set tw_mtp_debug 1
 	 */
@@ -2811,14 +2806,53 @@ bool TWPartitionManager::Enable_MTP(void) {
 	} else {
 		close(mtppipe[0]);
 		close(mtppipe[1]);
+		DataManager::SetValue("tw_mtp_enabled", 0);  
 		gui_err("mtp_fail=Failed to enable MTP");
 		return false;
 	}
 #else
 	gui_err("no_mtp=MTP support not included");
-#endif
 	DataManager::SetValue("tw_mtp_enabled", 0);
 	return false;
+#endif
+}
+
+bool TWPartitionManager::Configure_USB() {
+#ifdef TW_HAS_MTP
+	char old_value[PROPERTY_VALUE_MAX];
+	property_get("sys.usb.config", old_value, "");
+	if (strcmp(old_value, "mtp,adb") != 0) {
+		char vendor[PROPERTY_VALUE_MAX];
+		char product[PROPERTY_VALUE_MAX];
+		property_set("sys.usb.config", "none");
+		property_get("usb.vendor", vendor, "18D1");
+		property_get("usb.product.mtpadb", product, "4EE2");
+		string vendorstr = vendor;
+		string productstr = product;
+
+		// Use Find to locate idVendor and idProduct
+		string vendor_path = Find_File::Find("idVendor", "/config/usb_gadget/g1");
+		if (vendor_path.empty()) vendor_path = Find_File::Find("idVendor", "/sys/class/android_usb/android0");
+
+		string product_path = Find_File::Find("idProduct", "/config/usb_gadget/g1");
+		if (product_path.empty()) product_path = Find_File::Find("idProduct", "/sys/class/android_usb/android0");
+
+		if (!vendor_path.empty() && !product_path.empty()) {
+			LOGINFO("Found idVendor file at '%s'\n", vendor_path.c_str());
+			LOGINFO("Found idProduct file at '%s'\n", product_path.c_str());
+			TWFunc::write_to_file(vendor_path, vendorstr);
+			TWFunc::write_to_file(product_path, productstr);
+			property_set("sys.usb.config", "mtp,adb");
+			return true;
+		} else {
+			LOGINFO("Unable to locate idVendor or idProduct file\n");
+			return false;
+		}
+	}
+	return false;
+#else
+	return false;
+#endif
 }
 
 void TWPartitionManager::Add_All_MTP_Storage(void) {
@@ -2849,8 +2883,20 @@ bool TWPartitionManager::Disable_MTP(void) {
 		property_get("usb.product.adb", product, "D001");
 		string vendorstr = vendor;
 		string productstr = product;
-		TWFunc::write_to_file("/sys/class/android_usb/android0/idVendor", vendorstr);
-		TWFunc::write_to_file("/sys/class/android_usb/android0/idProduct", productstr);
+		string vendor_path = Find_File::Find("idVendor", "/config/usb_gadget/g1");
+		if (vendor_path.empty()) vendor_path = Find_File::Find("idVendor", "/sys/class/android_usb/android0");
+
+		string product_path = Find_File::Find("idProduct", "/config/usb_gadget/g1");
+		if (product_path.empty()) product_path = Find_File::Find("idProduct", "/sys/class/android_usb/android0");
+
+		if (!vendor_path.empty() && !product_path.empty()) {
+			LOGINFO("Found idVendor file at '%s'\n", vendor_path.c_str());
+			LOGINFO("Found idProduct file at '%s'\n", product_path.c_str());
+			TWFunc::write_to_file(vendor_path, vendorstr);
+			TWFunc::write_to_file(product_path, productstr);
+		} else {
+			LOGINFO("Unable to locate idVendor or idProduct file\n");
+		}
 		usleep(2000);
 	}
 #ifdef TW_HAS_MTP
