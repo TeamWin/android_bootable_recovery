@@ -24,6 +24,8 @@
 #include <cctype>
 #include <cutils/properties.h>
 #include <unistd.h>
+#include <array>
+#include <regex>
 
 #include "variables.h"
 #include "data.hpp"
@@ -36,6 +38,7 @@
 #include "set_metadata.h"
 #include "gui/gui.hpp"
 #include "infomanager.hpp"
+#include "gui/pages.hpp"
 
 #define DEVID_MAX 64
 #define HWID_MAX 32
@@ -1162,4 +1165,123 @@ void DataManager::LoadTWRPFolderInfo(void)
 {
 	SetValue(TW_RECOVERY_FOLDER_VAR, TWFunc::Check_For_TwrpFolder());
 	mBackingFile = GetSettingsStoragePath() + GetStrValue(TW_RECOVERY_NAME) + TW_SETTINGS_FILE;
+}
+
+void DataManager::CustomPositionStatusBar()
+{
+	string twRes = "/twres/";
+	std::array<std::string, 2> files = {"splash.xml", "ui.xml"};
+	std::array<std::string, 3> props_keys = {"TW_CUSTOM_BATTERY_POS", "TW_CUSTOM_CPU_POS", "TW_CUSTOM_CLOCK_POS"};
+	std::array<std::string, 3> props = {"0", "0", "0"};
+
+	for (size_t i = 0; i < props_keys.size(); ++i) {
+		string makeVarValue;
+		if (props_keys[i] == "TW_CUSTOM_BATTERY_POS") {
+			makeVarValue = EXPAND(TW_CUSTOM_BATTERY_POS);
+		} else if (props_keys[i] == "TW_CUSTOM_CPU_POS") {
+			makeVarValue = EXPAND(TW_CUSTOM_CPU_POS);
+		} else if (props_keys[i] == "TW_CUSTOM_CLOCK_POS") {
+			makeVarValue = EXPAND(TW_CUSTOM_CLOCK_POS);
+		}
+		if (!makeVarValue.empty()) {
+			props[i] = makeVarValue;
+		}
+	}
+
+	for (const auto& file : files) {
+		int fontsize = 0;
+		int width = 0;
+		int top_align = 0;
+		int center_align = 0;
+		int bottom_align = 0;
+
+		string filePath = twRes + file;
+		FILE *fp = fopen(filePath.c_str(), "r");
+		if (fp == NULL) {
+			LOGINFO("Unable to open %s\n", filePath.c_str());
+			continue;
+		}
+
+		char buffer[256];
+		regex font_m_regex(R"(name=\"font_m\".*size=\"(\d+))");
+		regex resolution_regex(R"(resolution width=\"(\d+))");
+		regex top_align_regex(R"(name=\"status_topalign_header_y\" value=\"(\d+))");
+		regex center_align_regex(R"(name=\"status_centeralign_header_y\" value=\"(\d+))");
+		regex bottom_align_regex(R"(name=\"status_bottomalign_header_y\" value=\"(\d+))");
+		smatch match;
+
+		while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+			string line = buffer;
+			if (regex_search(line, match, font_m_regex)) {
+				fontsize = stoi(match[1]);
+			}
+			if (regex_search(line, match, resolution_regex)) {
+				width = stoi(match[1]);
+			}
+			if (regex_search(line, match, top_align_regex)) {
+				top_align = stoi(match[1]);
+			}
+			if (regex_search(line, match, center_align_regex)) {
+				center_align = stoi(match[1]);
+			}
+			if (regex_search(line, match, bottom_align_regex)) {
+				bottom_align = stoi(match[1]);
+			}
+		}
+		fclose(fp);
+
+		// If we are processing "ui.xml", adjust the positions
+		if (file == "ui.xml") {
+			int cpusize = (fontsize * 5) + (width / 100);
+			int clocksize = (fontsize * 4) + (width / 100);
+			int batterysize = (fontsize * 6) - (width / 100);
+			string pos_clock_24 = props[2];
+			string alignProp = std::to_string(top_align);
+
+			for (size_t j = 0; j < props.size(); ++j) {
+				if (!props_keys[j].empty()) {
+					if (props[j] == "left") {
+						props[j] = std::to_string(width / 50);
+						if (props_keys[j] == "TW_CUSTOM_CLOCK_POS") {
+							pos_clock_24 = props[j];
+						}
+					} else if (props[j] == "center") {
+						if (props_keys[j] == "TW_CUSTOM_BATTERY_POS") {
+							props[j] = std::to_string((width / 2) - (batterysize * 43 / 100));
+						} else if (props_keys[j] == "TW_CUSTOM_CLOCK_POS") {
+							int pos = (width / 2) - (clocksize * 45 / 100);
+							props[j] = std::to_string(pos);
+							pos_clock_24 = std::to_string(pos * 31 / 30);
+						} else if (props_keys[j] == "TW_CUSTOM_CPU_POS") {
+							props[j] = std::to_string((width / 2) - (cpusize * 41 / 100));
+						}
+					} else if (props[j] == "right") {
+						if (props_keys[j] == "TW_CUSTOM_BATTERY_POS") {
+							props[j] = std::to_string(width - batterysize);
+						} else if (props_keys[j] == "TW_CUSTOM_CLOCK_POS") {
+							props[j] = std::to_string(width - clocksize);
+							pos_clock_24 = props[j];
+						} else if (props_keys[j] == "TW_CUSTOM_CPU_POS") {
+							props[j] = std::to_string(width - cpusize);
+						}
+					}
+				}
+				string tw_statusicons_align = EXPAND(TW_STATUS_ICONS_ALIGN);
+				if (tw_statusicons_align == "center" || tw_statusicons_align == "2") {
+					alignProp = std::to_string(center_align);
+				} else if (tw_statusicons_align == "bottom" || tw_statusicons_align == "3") {
+					alignProp = std::to_string(bottom_align);
+				}
+			}
+
+			// Set the actual variables with the calculated positions
+			SetValue("battery_pos", props[0]);
+			SetValue("cpu_pos", props[1]);
+			SetValue("clock_12_pos", props[2]);
+			SetValue("clock_24_pos", pos_clock_24);
+			SetValue("statusicons_align", alignProp);
+
+			PageManager::RequestReload();
+		}
+	}
 }

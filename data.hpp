@@ -60,6 +60,7 @@ public:
 	static void SetDefaultValues();
 	static void Output_Version(void); // Outputs the version to a file in the TWRP folder
 	static void ReadSettingsFile(void);
+	static void CustomPositionStatusBar();
 
 	static string GetCurrentStoragePath(void);
 	static string GetSettingsStoragePath(void);

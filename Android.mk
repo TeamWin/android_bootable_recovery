@@ -79,6 +79,19 @@ else
     LOCAL_CFLAGS += -DTW_EXCLUDE_APEX
 endif
 
+ifneq ($(TW_CUSTOM_CPU_POS),)
+	LOCAL_CFLAGS += -DTW_CUSTOM_CPU_POS=$(TW_CUSTOM_CPU_POS)
+endif
+ifneq ($(TW_CUSTOM_CLOCK_POS),)
+	LOCAL_CFLAGS += -DTW_CUSTOM_CLOCK_POS=$(TW_CUSTOM_CLOCK_POS)
+endif
+ifneq ($(TW_CUSTOM_BATTERY_POS),)
+	LOCAL_CFLAGS += -DTW_CUSTOM_BATTERY_POS=$(TW_CUSTOM_BATTERY_POS)
+endif
+ifneq ($(TW_STATUS_ICONS_ALIGN),)
+	LOCAL_CFLAGS += -DTW_STATUS_ICONS_ALIGN=$(TW_STATUS_ICONS_ALIGN)
+endif
+
 LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall libminadbd_services libinit libsnapshot_nobinder update_metadata-protos librecovery_utils libhealthhalutils
 LOCAL_SHARED_LIBRARIES += libfs_mgr libhardware android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.boot@1.2 libprotobuf-cpp-lite liblp libutils libhidlbase android.hardware.health@2.0
 LOCAL_C_INCLUDES += \

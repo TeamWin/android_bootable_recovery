@@ -786,6 +786,7 @@ extern "C" int gui_init(void)
 
 extern "C" int gui_loadResources(void)
 {
+	DataManager::CustomPositionStatusBar();
 #ifndef TW_OEM_BUILD
 	int check = 0;
 	DataManager::GetValue(TW_IS_ENCRYPTED, check);

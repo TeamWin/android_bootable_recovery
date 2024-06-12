@@ -185,4 +185,17 @@
 #define SCRIPT_FILE_TMP "/tmp/openrecoveryscript"
 #define TMP_LOG_FILE "/tmp/recovery.log"
 
+
+#ifndef TW_CUSTOM_BATTERY_POS
+#define TW_CUSTOM_BATTERY_POS 0
+#endif
+
+#ifndef TW_CUSTOM_CPU_POS
+#define TW_CUSTOM_CPU_POS 0
+#endif
+
+#ifndef TW_CUSTOM_CLOCK_POS
+#define TW_CUSTOM_CLOCK_POS 0
+#endif
+
 #endif  // _VARIABLES_HEADER_
