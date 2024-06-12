@@ -1365,10 +1365,10 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 	else
 	{
 		LOGINFO("Loading zip theme\n");
-		tw_x_offset = 0;
-		tw_y_offset = 0;
-		tw_w_offset = 0;
-		tw_h_offset = 0;
+		tw_x_offset = TW_X_OFFSET;
+		tw_y_offset = TW_Y_OFFSET;
+		tw_w_offset = TW_W_OFFSET;
+		tw_h_offset = TW_H_OFFSET;
 		if (!TWFunc::Path_Exists(package)) {
 			return -1;
 		}
