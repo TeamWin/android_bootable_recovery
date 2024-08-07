@@ -1873,6 +1873,33 @@ bool TWPartition::Repair() {
 		Find_Actual_Block_Device();
 		command = "/sbin/fsck.f2fs " + Actual_Block_Device;
 		LOGINFO("Repair command: %s\n", command.c_str());
+                // try to unbind /sdcard if it is still bind-mounted
+                if (Mount_Point == "/data" && !Symlink_Mount_Point.empty()) {
+                    scan_mounted_volumes();
+                    const MountedVolume * sdcard_mounted = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+
+                    if (sdcard_mounted != nullptr){
+                        LOGINFO("bind-unmounting %s before f2fs data repair ...\n", Symlink_Mount_Point.c_str());
+                        umount(Symlink_Mount_Point.c_str());
+                        usleep(32768);
+                        scan_mounted_volumes();
+                        sdcard_mounted = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+
+                        if (sdcard_mounted != nullptr){
+                            LOGINFO("regular unmount of %s was not possible, trying exec_cmd now.\n", Symlink_Mount_Point.c_str());
+                            string ucommand = "umount " + Symlink_Mount_Point;
+                            TWFunc::Exec_Cmd(ucommand);
+                            usleep(32768);
+                            scan_mounted_volumes();
+                            sdcard_mounted = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+                            if (sdcard_mounted != nullptr) {
+                                LOGERR("Aborted: unmounting %s is not possible!\n", Symlink_Mount_Point.c_str());
+                                return false;
+                            }
+                        }
+                    }
+                }
+
 		if (TWFunc::Exec_Cmd(command) == 0) {
 			gui_msg("done=Done.");
 			return true;
@@ -2446,6 +2473,32 @@ bool TWPartition::Wipe_F2FS() {
 			command += " " + Actual_Block_Device;
 		}
 		LOGINFO("mkfs.f2fs command: %s\n", command.c_str());
+                // try to unbind /sdcard if it is still bind-mounted
+                if (Mount_Point == "/data" && !Symlink_Mount_Point.empty()) {
+                    scan_mounted_volumes();
+                    const MountedVolume * sdcard_mounted = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+
+                    if (sdcard_mounted != nullptr){
+                        LOGINFO("bind-unmounting %s before f2fs data format ...\n", Symlink_Mount_Point.c_str());
+                        umount(Symlink_Mount_Point.c_str());
+                        usleep(32768);
+                        scan_mounted_volumes();
+                        sdcard_mounted = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+
+                        if (sdcard_mounted != nullptr){
+                            LOGINFO("regular unmount of %s was not possible, trying exec_cmd now.\n", Symlink_Mount_Point.c_str());
+                            string ucommand = "umount " + Symlink_Mount_Point;
+                            TWFunc::Exec_Cmd(ucommand);
+                            usleep(32768);
+                            scan_mounted_volumes();
+                            sdcard_mounted = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+                            if (sdcard_mounted != nullptr) {
+                                LOGERR("Aborted: unmounting %s is not possible!\n", Symlink_Mount_Point.c_str());
+                                return false;
+                            }
+                        }
+                    }
+                }
 		if (TWFunc::Exec_Cmd(command) == 0) {
 			if (NeedPreserveFooter)
 				Wipe_Crypto_Key();
