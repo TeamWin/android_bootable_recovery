@@ -445,6 +445,9 @@ endif
 ifeq ($(TW_EXCLUDE_NANO), true)
     LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
 endif
+ifeq ($(TW_UNBIND_SDCARD_F2FS), true)
+    LOCAL_CFLAGS += -DTW_UNBIND_SDCARD_F2FS
+endif
 
 TWRP_REQUIRED_MODULES += \
     dump_image \
