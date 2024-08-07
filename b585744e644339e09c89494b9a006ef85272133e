@@ -16,6 +16,24 @@
       "message": "conflicting with:\n- https://gerrit.twrp.me/c/android_bootable_recovery/+/5917\n- https://gerrit.twrp.me/c/android_bootable_recovery/+/6120/2\n\nmain patch:\n- https://gitlab.com/OrangeFox/bootable/Recovery/-/commit/81fd28bfc2f86d720ccf9daaa22c550bd5d3f550#13b5c1f9e911ab86da69fafe4fd05e5583608266_2544_2556.patch",
       "revId": "b585744e644339e09c89494b9a006ef85272133e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a4b1e2_ce653812",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 48
+      },
+      "writtenOn": "2024-08-07T15:44:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "856f1aa6_7bc66fe4",
+      "revId": "b585744e644339e09c89494b9a006ef85272133e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
