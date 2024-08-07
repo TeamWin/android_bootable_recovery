@@ -1873,6 +1873,15 @@ bool TWPartition::Repair() {
 		Find_Actual_Block_Device();
 		command = "/sbin/fsck.f2fs " + Actual_Block_Device;
 		LOGINFO("Repair command: %s\n", command.c_str());
+#ifdef TW_UNBIND_SDCARD_F2FS
+                // try to unbind /sdcard if it is still bind-mounted
+                if (Mount_Point == "/data") {
+                    LOGINFO("bind-unmounting /sdcard before f2fs data repair...\n");
+                    usleep(32768);
+                    TWFunc::Exec_Cmd("umount /sdcard");
+                    usleep(32768);
+                }
+#endif
 		if (TWFunc::Exec_Cmd(command) == 0) {
 			gui_msg("done=Done.");
 			return true;
@@ -2446,6 +2455,15 @@ bool TWPartition::Wipe_F2FS() {
 			command += " " + Actual_Block_Device;
 		}
 		LOGINFO("mkfs.f2fs command: %s\n", command.c_str());
+#ifdef TW_UNBIND_SDCARD_F2FS
+                // try to unbind /sdcard if it is still bind-mounted
+                if (Mount_Point == "/data") {
+                    LOGINFO("bind-unmounting /sdcard before f2fs data format...\n");
+                    usleep(32768);
+                    TWFunc::Exec_Cmd("umount /sdcard");
+                    usleep(32768);
+                }
+#endif
 		if (TWFunc::Exec_Cmd(command) == 0) {
 			if (NeedPreserveFooter)
 				Wipe_Crypto_Key();
