@@ -89,14 +89,15 @@ LOCAL_STATIC_LIBRARIES += libavb \
                           libsnapshot_cow \
                           libsnapshot_nobinder \
                           libtwrpinstall \
-                          update_metadata-protos
+                          update_metadata-protos \
+                          android.hardware.health-translate-ndk \
+                          android.hardware.health-V2-ndk
 
 LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
                           android.hardware.boot@1.1 \
                           android.hardware.boot@1.2 \
                           android.hardware.health@2.0 \
                           android.hardware.health@2.1 \
-                          android.hardware.health-translate-ndk \
                           libbinder \
                           libbinder_ndk \
                           libboot_control_client \
@@ -565,7 +566,6 @@ TWRP_REQUIRED_MODULES += \
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
     vold_prepare_subdirs \
-    task_recovery_profiles.json \
     fscryptpolicyget.recovery \
     keystore_auth \
     keystore2 \
