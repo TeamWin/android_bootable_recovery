@@ -108,6 +108,7 @@ cc_binary {
         "libminadbd_services",
         "libfusesideload",
         "librecovery_utils",
+        "libsnapshot",
     ],
 
     required: [
