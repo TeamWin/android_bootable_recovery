@@ -15,27 +15,6 @@
 LOCAL_PATH := $(call my-dir)
 commands_TWRP_local_path := $(LOCAL_PATH)
 
-ifneq ($(project-path-for),)
-    ifeq ($(LOCAL_PATH),$(call project-path-for,recovery))
-        PROJECT_PATH_AGREES := true
-        BOARD_SEPOLICY_DIRS += $(call project-path-for,recovery)/sepolicy
-    endif
-else
-    ifeq ($(LOCAL_PATH),bootable/recovery)
-        PROJECT_PATH_AGREES := true
-        BOARD_SEPOLICY_DIRS += bootable/recovery/sepolicy
-    else
-        ifeq ($(LOCAL_PATH),bootable/recovery-twrp)
-            ifeq ($(RECOVERY_VARIANT),twrp)
-                PROJECT_PATH_AGREES := true
-                BOARD_SEPOLICY_DIRS += bootable/recovery-twrp/sepolicy
-            endif
-        endif
-    endif
-endif
-
-ifeq ($(PROJECT_PATH_AGREES),true)
-
 ifeq ($(CM_PLATFORM_SDK_VERSION),)
     CM_PLATFORM_SDK_VERSION := 0
 endif
@@ -790,8 +769,6 @@ endif
 # FB2PNG
 ifeq ($(TW_INCLUDE_FB2PNG), true)
     include $(commands_TWRP_local_path)/fb2png/Android.mk
-endif
-
 endif
 
 commands_TWRP_local_path :=
