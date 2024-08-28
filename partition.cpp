@@ -1457,6 +1457,17 @@ bool TWPartition::Is_Mounted(void) {
 	test_path = Mount_Point + "/../.";
 	if (stat(test_path.c_str(), &st2) != 0)  return false;
 
+        // Check to see if a symlink mount point exists and is mounted
+        if (!Symlink_Mount_Point.empty()) {
+            scan_mounted_volumes();
+            const MountedVolume * sml = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
+            //if (sml != nullptr)  return true;
+            if (sml != nullptr) {
+                LOGINFO("bind mount exists: '%s'\n", Symlink_Mount_Point.c_str());
+                return true;
+            }
+        }
+
 	// Compare the device IDs -- if they match then we're (probably) using tmpfs instead of an actual device
 	int ret = (st1.st_dev != st2.st_dev) ? true : false;
 
@@ -1634,8 +1645,11 @@ bool TWPartition::UnMount(bool Display_Error) {
 		if (Is_Storage && MTP_Storage_ID > 0)
 			PartitionManager.Remove_MTP_Storage(MTP_Storage_ID);
 
-		if (!Symlink_Mount_Point.empty())
+               if (!Symlink_Mount_Point.empty()) {
+                        LOGINFO("trying to unmount bind mount: '%s'\n", Symlink_Mount_Point.c_str());
 			umount(Symlink_Mount_Point.c_str());
+                        LOGINFO("unmounted bind mount: '%s'\n", Symlink_Mount_Point.c_str());
+                }
 
 		umount(Mount_Point.c_str());
 		if (Is_Mounted()) {
@@ -1648,6 +1662,7 @@ bool TWPartition::UnMount(bool Display_Error) {
 			return true;
 		}
 	} else {
+                LOGINFO("sfX: Partition '%s' is not mounted?!\n", Mount_Point.c_str());
 		return true;
 	}
 }
