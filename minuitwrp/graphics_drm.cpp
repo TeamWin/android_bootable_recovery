@@ -97,11 +97,11 @@ static drmModeConnector *main_monitor_connector;
 
 static int drm_fd = -1;
 
-bool current_blank_state = true;
-int fb_prop_id;
-struct Crtc crtc_res;
-struct Connector conn_res;
-struct Plane plane_res[NUM_PLANES];
+static bool current_blank_state = true;
+static int fb_prop_id;
+static struct Crtc crtc_res;
+static struct Connector conn_res;
+static struct Plane plane_res[NUM_PLANES];
 
 enum screen_side{Left, Right};
 
@@ -809,42 +809,10 @@ static GRSurface* drm_init(minui_backend* backend __unused) {
   return draw_buf;
 }
 
-static void page_flip_complete(__unused int fd,
-                               __unused unsigned int sequence,
-                               __unused unsigned int tv_sec,
-                               __unused unsigned int tv_usec,
-                               void *user_data) {
-  *static_cast<bool*>(user_data) = false;
-}
-
 static GRSurface* drm_flip(minui_backend* backend __unused) {
-    bool ongoing_flip = true;
     memcpy(drm_surfaces[current_buffer]->base.data,
             draw_buf->data, draw_buf->height * draw_buf->row_bytes);
     update_plane_fb();
-
-    while (ongoing_flip) {
-        struct pollfd fds = {
-            .fd = drm_fd,
-            .events = POLLIN
-        };
-
-        if (poll(&fds, 1, -1) == -1 || !(fds.revents & POLLIN)) {
-            perror("Failed to poll() on drm fd");
-            break;
-        }
-
-        drmEventContext evctx = {
-            .version = DRM_EVENT_CONTEXT_VERSION,
-            .page_flip_handler = page_flip_complete
-        };
-
-        if (drmHandleEvent(drm_fd, &evctx) != 0) {
-            perror("Failed to drmHandleEvent");
-            break;
-        }
-    }
-
     current_buffer = 1 - current_buffer;
     return draw_buf;
 }
