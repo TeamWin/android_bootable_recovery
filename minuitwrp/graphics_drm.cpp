@@ -380,8 +380,10 @@ static void drm_blank(minui_backend* backend __unused, bool blank) {
     ret = drmModeAtomicCommit(drm_fd, atomic_req, DRM_MODE_ATOMIC_ALLOW_MODESET, NULL);
 
   if (!ret) {
-    printf("Atomic Commit failed, rc = %d\n", ret);
+    printf("Atomic Commit succeed");
     current_blank_state = blank;
+  } else {
+    printf("Atomic Commit failed, rc = %d\n", ret);
   }
 
   drmModeAtomicFree(atomic_req);
@@ -660,7 +662,7 @@ static void disable_non_main_crtcs(int fd,
     }
     drmModeFreeCrtc(crtc);
   }
-  if (!drmModeAtomicCommit(drm_fd, atomic_req,DRM_MODE_ATOMIC_ALLOW_MODESET, NULL))
+  if (drmModeAtomicCommit(drm_fd, atomic_req,DRM_MODE_ATOMIC_ALLOW_MODESET, NULL))
     printf("Atomic Commit failed in DisableNonMainCrtcs\n");
 
   drmModeAtomicFree(atomic_req);
