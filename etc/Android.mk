@@ -86,6 +86,15 @@ ifneq ($(filter $(AB_OTA_UPDATER) $(PRODUCT_USE_DYNAMIC_PARTITIONS) $(TW_INCLUDE
 	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
 
+        include $(CLEAR_VARS)
+        LOCAL_MODULE := servicemanager.rc
+        LOCAL_MODULE_TAGS := optional
+        LOCAL_MODULE_CLASS := EXECUTABLES
+        LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
+
+        LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
+        include $(BUILD_PREBUILT)
+
 	include $(CLEAR_VARS)
 	LOCAL_MODULE := keystore2.rc
 	LOCAL_MODULE_TAGS := optional
@@ -178,19 +187,6 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
 	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
 	LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
-endif
-
-ifneq ($(TW_INCLUDE_CRYPTO),)
-	ifneq ($(TW_INCLUDE_CRYPTO_FBE),)
-		include $(CLEAR_VARS)
-		LOCAL_MODULE := servicemanager.rc
-		LOCAL_MODULE_TAGS := optional
-		LOCAL_MODULE_CLASS := EXECUTABLES
-		LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/init
-
-		LOCAL_SRC_FILES := init/$(LOCAL_MODULE)
-		include $(BUILD_PREBUILT)
-	endif
 endif
 
 ifeq ($(TWRP_INCLUDE_LOGCAT), true)
