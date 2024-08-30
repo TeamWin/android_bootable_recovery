@@ -541,7 +541,10 @@ TWRP_REQUIRED_MODULES += \
     hwservicemanager \
     hwservicemanager.rc \
     vndservicemanager \
-    vndservicemanager.rc
+    vndservicemanager.rc \
+    plat_service_contexts \
+    servicemanager \
+    servicemanager.rc
 
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
@@ -553,13 +556,6 @@ TWRP_REQUIRED_MODULES += \
     android.system.keystore2-service.xml \
     keystore2.rc \
     plat_keystore2_key_contexts
-
-    ifneq ($(TW_INCLUDE_CRYPTO_FBE),)
-    TWRP_REQUIRED_MODULES += \
-        plat_service_contexts \
-        servicemanager \
-        servicemanager.rc
-    endif
 endif
 
 ifneq ($(wildcard external/zip/Android.mk),)
