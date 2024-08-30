@@ -15,6 +15,12 @@ on early-init
     # Copy prebuilt ld.config.txt into linkerconfig directory
     copy /system/etc/ld.config.txt /linkerconfig/ld.config.txt
     chmod 444 /linkerconfig/ld.config.txt
+    mkdir /system/bin/bootstrap
+    symlink /system/bin/linker64 /system/bin/bootstrap/linker64
+    symlink /system/bin/linker /system/bin/bootstrap/linker
+    symlink /system/bin/linker /system/bin/bootstrap/linker_asan
+    symlink /system/bin/linker64 /system/bin/bootstrap/linker_asan64
+    symlink /system/bin/linker64 /system/bin/bootstrap/linker_hwasan64
 
     start ueventd
 
