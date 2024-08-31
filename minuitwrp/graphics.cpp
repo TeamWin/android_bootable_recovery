@@ -380,12 +380,6 @@ int gr_init(void)
     }
 #endif
 
-#ifdef MSM_BSP
-	printf("Skipping adf graphics because TW_TARGET_USES_QCOM_BSP := true\n");
-#else
-    printf("Skipping adf graphics -- not present in build tree\n");
-#endif
-
 #ifdef HAS_DRM
     if (!gr_backend || !gr_draw) {
         gr_backend = open_drm();
