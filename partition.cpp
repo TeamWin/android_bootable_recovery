@@ -703,31 +703,31 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 		#endif
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 	} else if (!Mount(false)) {
-		if (Is_Present) {
-			if (Key_Directory.empty()) {
-				set_partition_data(Use_Original_Path ? Original_Path.c_str() : Actual_Block_Device.c_str(), Crypto_Key_Location.c_str());
-				if (cryptfs_check_footer() == 0) {
-					Is_Encrypted = true;
-					Is_Decrypted = false;
-					Can_Be_Mounted = false;
-					Current_File_System = "emmc";
-					Setup_Image();
-					DataManager::SetValue(TW_CRYPTO_PWTYPE, cryptfs_get_password_type());
-					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
-					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
-					DataManager::SetValue("tw_crypto_display", "");
-					if (datamedia)
-						Setup_Data_Media();
-				} else {
-					gui_err("mount_data_footer=Could not mount /data and unable to find crypto footer.");
-				}
-			} else {
+//		if (Is_Present) {
+//			if (Key_Directory.empty()) {
+//				set_partition_data(Use_Original_Path ? Original_Path.c_str() : Actual_Block_Device.c_str(), Crypto_Key_Location.c_str());
+//				if (cryptfs_check_footer() == 0) {
+//					Is_Encrypted = true;
+//					Is_Decrypted = false;
+//					Can_Be_Mounted = false;
+//					Current_File_System = "emmc";
+//					Setup_Image();
+//					DataManager::SetValue(TW_CRYPTO_PWTYPE, cryptfs_get_password_type());
+//					DataManager::SetValue("tw_crypto_pwtype_0", cryptfs_get_password_type());
+//					DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
+//					DataManager::SetValue("tw_crypto_display", "");
+//					if (datamedia)
+//						Setup_Data_Media();
+//				} else {
+//					gui_err("mount_data_footer=Could not mount /data and unable to find crypto footer.");
+//				}
+//			} else {
 				Is_Encrypted = true;
 				Is_Decrypted = false;
 				if (datamedia)
 					Setup_Data_Media();
-			}
-		} else if (Key_Directory.empty()) {
+//			}
+		 if (Key_Directory.empty()) {
 			LOGERR("Primary block device '%s' for mount point '%s' is not present!\n",
 			Primary_Block_Device.c_str(), Mount_Point.c_str());
 		}
@@ -2153,9 +2153,9 @@ bool TWPartition::Wipe_Encryption() {
 	if (!UnMount(true))
 		return false;
 	if (Is_Decrypted && !Decrypted_Block_Device.empty()) {
-		if (delete_crypto_blk_dev((char*)("userdata")) != 0) {
-			LOGERR("Error deleting crypto block device, continuing anyway.\n");
-		}
+//		if (delete_crypto_blk_dev((char*)("userdata")) != 0) {
+//			LOGERR("Error deleting crypto block device, continuing anyway.\n");
+//		}
 	}
 #endif
 	Has_Data_Media = false;
