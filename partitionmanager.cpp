@@ -631,21 +631,21 @@ void TWPartitionManager::Decrypt_Data() {
 			}
 		} else {
 			LOGINFO("FBE setup failed. Trying FDE...\n");
-			Set_Crypto_State();
-			Set_Crypto_Type("block");
-			int password_type = cryptfs_get_password_type();
-			if (password_type == CRYPT_TYPE_DEFAULT) {
-				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
-				if (Decrypt_Device("default_password") == 0) {
-					gui_msg("decrypt_success=Successfully decrypted with default password.");
-					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
-				} else {
-					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
-				}
-			} else {
-				DataManager::SetValue("TW_CRYPTO_TYPE", password_type);
-				DataManager::SetValue("tw_crypto_pwtype_0", password_type);
-			}
+// 			Set_Crypto_State();
+//			Set_Crypto_Type("block");
+//			int password_type = cryptfs_get_password_type();
+//			if (password_type == CRYPT_TYPE_DEFAULT) {
+//				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
+//				if (Decrypt_Device("default_password") == 0) {
+//					gui_msg("decrypt_success=Successfully decrypted with default password.");
+//					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
+//				} else {
+//					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
+//				}
+//			} else {
+//				DataManager::SetValue("TW_CRYPTO_TYPE", password_type);
+//				DataManager::SetValue("tw_crypto_pwtype_0", password_type);
+//			}
 		}
 	}
 	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted)) {
@@ -2185,8 +2185,8 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 		// Child process
 		char cPassword[255];
 		strcpy(cPassword, Password.c_str());
-		int ret = cryptfs_check_passwd(cPassword);
-		exit(ret);
+//		int ret = cryptfs_check_passwd(cPassword);
+		exit(0);
 	} else {
 		// Parent
 		int status;
