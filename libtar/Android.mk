@@ -18,6 +18,8 @@ ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
     LOCAL_SHARED_LIBRARIES +=  \
         android.hardware.boot@1.0 \
         android.hardware.confirmationui@1.0 \
+        lib_android_keymaster_keymint_utils \
+        android.hardware.gatekeeper-V1-ndk \
         android.hardware.gatekeeper@1.0 \
         android.hardware.keymaster@3.0 \
         android.hardware.keymaster@4.0 \
