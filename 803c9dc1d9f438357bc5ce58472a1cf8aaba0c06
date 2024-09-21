@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058122a9_18dd04cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2024-09-21T20:51:47Z",
+      "side": 1,
+      "message": "Temporary while vold and libfscrypt changes are done",
+      "revId": "803c9dc1d9f438357bc5ce58472a1cf8aaba0c06",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
