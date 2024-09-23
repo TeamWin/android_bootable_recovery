@@ -3761,6 +3761,25 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 			++iter;
 		}
 	}
+
+	const std::string block_path = "/dev/block/mapper/";
+	DIR* d = opendir(block_path.c_str());
+	if (d != NULL) {
+		struct dirent* de;
+		while ((de = readdir(d)) != NULL) {
+			std::string partition = de->d_name;
+			LOGINFO("partition: %s \n", partition.c_str());
+			if((strcmp(partition.c_str(),"userdata") != 0) && (strcmp(partition.c_str(),".") != 0) && (strcmp(partition.c_str(),"..") != 0) && (strcmp(partition.c_str(),"by-uuid") != 0)){
+				LOGINFO("removing dynamic partition: %s\n", partition.c_str());
+				destroyed = DestroyLogicalPartition(partition);
+				if (!destroyed) {
+					closedir(d);
+					return false;
+				}
+			}
+                }
+	closedir(d);
+	}
 	return true;
 }
 
