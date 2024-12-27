@@ -51,6 +51,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <android-base/properties.h>
+
+#include <array>
+#include <map>
 #include <string>
 #include <drm_fourcc.h>
 #include <xf86drm.h>
@@ -73,10 +77,93 @@ struct drm_surface {
 #define NUM_PLANES 4
 #define DEFAULT_NUM_LMS 2
 
+#define SPR_INIT_PARAM_SIZE_1 4
+#define SPR_INIT_PARAM_SIZE_2 5
+#define SPR_INIT_PARAM_SIZE_3 16
+#define SPR_INIT_PARAM_SIZE_4 24
+#define SPR_INIT_PARAM_SIZE_5 32
+#define SPR_INIT_PARAM_SIZE_6 7
+enum class SPRPackType {
+  kPentile,
+  kRGBW,
+  kYYGW,
+  kYYGM,
+  kDelta3,
+  kMax = 0xFF,
+};
+enum class SPRFilterType {
+  kPixelDrop,
+  kBilinear,
+  kFourTap,
+  kAdaptive,
+  k2DAvg,
+  kMax = 0xFF,
+};
+enum class SPRAdaptiveModeType {
+  kYYGM,
+  kYYGW,
+  kMax = 0xFF,
+};
+static const std::map<SPRPackType, uint32_t> kDefaultColorPhaseIncrement = {
+  { { { SPRPackType::kPentile }, { 8 } },
+    { { SPRPackType::kYYGM }, { 6 } },
+    { { SPRPackType::kYYGW }, { 6 } },
+    { { SPRPackType::kDelta3 }, { 6 } },
+    { { SPRPackType::kRGBW }, { 8 } } }
+};
+static const std::map<SPRPackType, uint32_t> kDefaultColorPhaseRepeat = {
+  { { { SPRPackType::kPentile }, { 2 } },
+    { { SPRPackType::kYYGM }, { 2 } },
+    { { SPRPackType::kYYGW }, { 2 } },
+    { { SPRPackType::kDelta3 }, { 2 } },
+    { { SPRPackType::kRGBW }, { 2 } } }
+};
+static const std::map<SPRPackType, std::array<uint16_t, SPR_INIT_PARAM_SIZE_1>> kDecimationRatioMap{
+  {
+      { { SPRPackType::kPentile }, { 1, 0, 1, 0 } },
+      { { SPRPackType::kYYGM }, { 2, 2, 2, 0 } },
+      { { SPRPackType::kYYGW }, { 2, 2, 2, 0 } },
+      { { SPRPackType::kRGBW }, { 1, 1, 1, 1 } },
+  }
+};
+static const std::map<SPRFilterType, std::array<int16_t, SPR_INIT_PARAM_SIZE_3>>
+    kDefaultFilterCoeffsMap{
+      { { { SPRFilterType::kPixelDrop }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
+        { { SPRFilterType::kBilinear },
+          { 0, 512, 0, 0, -33, 443, 110, -8, -23, 279, 279, -23, -8, 110, 443, -33 } },
+        { { SPRFilterType::kFourTap },
+          { 128, 256, 128, 0, 86, 241, 164, 21, 52, 204, 204, 52, 21, 164, 241, 86 } },
+        { { SPRFilterType::kAdaptive },
+          { 0, 256, 256, 0, 0, 256, 256, 0, 0, 256, 256, 0, 0, 256, 256, 0 } } }
+    };
+static const std::map<SPRPackType, std::array<int16_t, SPR_INIT_PARAM_SIZE_4>>
+    kDefaultColorPhaseMap{
+      { { { SPRPackType::kPentile },
+          { -2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
+        { { SPRPackType::kYYGM },
+          { -3, 0, 0, 0, 0, 0, -1, 2, 1, 1, 0, 0, 1, -2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 } },
+        { { SPRPackType::kYYGW },
+          { -4, 2, 0, 0, 0, -1, 2, 2, 0, -1, -1, -1, 2, 2, -1, -1, -1, 2, 0, 0, 0, 0, 0, 0 } },
+        { { SPRPackType::kDelta3 },
+          { -3, 0, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
+        { { SPRPackType::kRGBW },
+          { -4, 0, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, -4, 0, 0, 0, 0, 2, -2, 0, 0, 0, 0 } } }
+    };
+static const std::array<uint16_t, SPR_INIT_PARAM_SIZE_1> kDefaultRGBWGains = { 1024, 1024, 1024,
+                                                                               341 };
+static const std::array<uint16_t, SPR_INIT_PARAM_SIZE_1> kDefaultOPRGains = { 341, 341, 341, 0 };
+static const std::array<uint16_t, SPR_INIT_PARAM_SIZE_2> kDefaultAdaptiveStrengths = { 0, 4, 8, 12,
+                                                                                       16 };
+static const std::array<uint16_t, SPR_INIT_PARAM_SIZE_5> kDefaultOPROffsets = {
+  0,    132,  264,  396,  529,  661,  793,  925,  1057, 1189, 1321, 1453, 1586, 1718, 1850, 1982,
+  2114, 2246, 2378, 2510, 2643, 2775, 2907, 3039, 3171, 3303, 3435, 3567, 3700, 3832, 3964, 4095
+};
+
 struct Crtc {
   drmModeObjectProperties *props;
   drmModePropertyRes **props_info;
   uint32_t mode_blob_id;
+  uint32_t spr_blob_id;
 };
 
 struct Connector {
@@ -90,6 +177,50 @@ struct Plane {
   drmModePropertyRes ** props_info;
 };
 
+struct drm_msm_spr_init_cfg {
+  __u64 flags;
+  __u16 cfg0;
+  __u16 cfg1;
+  __u16 cfg2;
+  __u16 cfg3;
+  __u16 cfg4;
+  __u16 cfg5;
+  __u16 cfg6;
+  __u16 cfg7;
+  __u16 cfg8;
+  __u16 cfg9;
+  __u32 cfg10;
+  __u16 cfg11[SPR_INIT_PARAM_SIZE_1];
+  __u16 cfg12[SPR_INIT_PARAM_SIZE_1];
+  __u16 cfg13[SPR_INIT_PARAM_SIZE_1];
+  __u16 cfg14[SPR_INIT_PARAM_SIZE_2];
+  __u16 cfg15[SPR_INIT_PARAM_SIZE_5];
+  int cfg16[SPR_INIT_PARAM_SIZE_3];
+  int cfg17[SPR_INIT_PARAM_SIZE_4];
+};
+struct drm_msm_spr_init_cfg_v2 {
+  __u64 flags;
+  __u16 cfg0;
+  __u16 cfg1;
+  __u16 cfg2;
+  __u16 cfg3;
+  __u16 cfg4;
+  __u16 cfg5;
+  __u16 cfg6;
+  __u16 cfg7;
+  __u16 cfg8;
+  __u16 cfg9;
+  __u32 cfg10;
+  __u16 cfg11[SPR_INIT_PARAM_SIZE_1];
+  __u16 cfg12[SPR_INIT_PARAM_SIZE_1];
+  __u16 cfg13[SPR_INIT_PARAM_SIZE_1];
+  __u16 cfg14[SPR_INIT_PARAM_SIZE_2];
+  __u16 cfg15[SPR_INIT_PARAM_SIZE_5];
+  int cfg16[SPR_INIT_PARAM_SIZE_3];
+  int cfg17[SPR_INIT_PARAM_SIZE_4];
+  __u16 cfg18_en;
+  __u8 cfg18[SPR_INIT_PARAM_SIZE_6];
+};
 
 static drm_surface *drm_surfaces[2];
 static int current_buffer;
@@ -106,6 +237,8 @@ static struct Crtc crtc_res;
 static struct Connector conn_res;
 static struct Plane plane_res[NUM_PLANES];
 static uint32_t number_of_lms = DEFAULT_NUM_LMS;
+static uint32_t spr_enabled;
+static std::string spr_prop_name;
 
 #define find_prop_id(_res, type, Type, obj_id, prop_name, prop_id)    \
   do {                                                                \
@@ -232,7 +365,97 @@ static int atomic_add_prop_to_plane(Plane *plane_res, drmModeAtomicReq *req,
   return 0;
 }
 
+static int SetupSprBlobV1(int fd, uint32_t* blob_id) {
+  SPRPackType pack_type = SPRPackType::kPentile;
+  SPRFilterType filter_type = SPRFilterType::kFourTap;
+  SPRAdaptiveModeType adpative_mode = SPRAdaptiveModeType::kYYGM;
 
+  drm_msm_spr_init_cfg spr_init_cfg;
+  spr_init_cfg.cfg0 = 1;
+  spr_init_cfg.cfg1 = 1;
+  spr_init_cfg.cfg2 = 1;
+  spr_init_cfg.cfg3 = 0;
+  spr_init_cfg.flags = 0;
+  spr_init_cfg.cfg4 = (pack_type == SPRPackType::kRGBW);
+  spr_init_cfg.cfg5 = kDefaultColorPhaseIncrement.at(pack_type);
+  spr_init_cfg.cfg6 = kDefaultColorPhaseRepeat.at(pack_type);
+  spr_init_cfg.cfg7 = static_cast<uint16_t>(filter_type);
+  spr_init_cfg.cfg8 = static_cast<uint16_t>(adpative_mode);
+  if (pack_type == SPRPackType::kRGBW) {
+    spr_init_cfg.cfg9 = 512;
+    std::copy(kDefaultRGBWGains.begin(), kDefaultRGBWGains.end(), spr_init_cfg.cfg11);
+  }
+  spr_init_cfg.cfg10 = 0;
+  std::copy(kDecimationRatioMap.at(pack_type).begin(), kDecimationRatioMap.at(pack_type).end(),
+            spr_init_cfg.cfg11);
+  std::copy(kDefaultOPRGains.begin(), kDefaultOPRGains.end(), spr_init_cfg.cfg13);
+  std::copy(kDefaultAdaptiveStrengths.begin(), kDefaultAdaptiveStrengths.end(), spr_init_cfg.cfg14);
+  std::copy(kDefaultOPROffsets.begin(), kDefaultOPROffsets.end(), spr_init_cfg.cfg15);
+  std::copy(kDefaultFilterCoeffsMap.at(filter_type).begin(),
+            kDefaultFilterCoeffsMap.at(filter_type).end(), spr_init_cfg.cfg16);
+  std::copy(kDefaultColorPhaseMap.at(pack_type).begin(), kDefaultColorPhaseMap.at(pack_type).end(),
+            spr_init_cfg.cfg17);
+
+  if (drmModeCreatePropertyBlob(fd, &spr_init_cfg, sizeof(drm_msm_spr_init_cfg), blob_id)) {
+    printf("failed to create spr blob\n");
+    return -EINVAL;
+  }
+
+  return 0;
+}
+
+static int SetupSprBlobV2(int fd, uint32_t* blob_id) {
+  SPRPackType pack_type = SPRPackType::kPentile;
+  SPRFilterType filter_type = SPRFilterType::kFourTap;
+  SPRAdaptiveModeType adpative_mode = SPRAdaptiveModeType::kYYGM;
+
+  drm_msm_spr_init_cfg_v2 spr_init_cfg_v2;
+  spr_init_cfg_v2.cfg0 = 1;
+  spr_init_cfg_v2.cfg1 = 1;
+  spr_init_cfg_v2.cfg2 = 1;
+  spr_init_cfg_v2.cfg3 = 0;
+  spr_init_cfg_v2.flags = 0;
+  spr_init_cfg_v2.cfg4 = (pack_type == SPRPackType::kRGBW);
+  spr_init_cfg_v2.cfg5 = kDefaultColorPhaseIncrement.at(pack_type);
+  spr_init_cfg_v2.cfg6 = kDefaultColorPhaseRepeat.at(pack_type);
+  spr_init_cfg_v2.cfg7 = static_cast<uint16_t>(filter_type);
+  spr_init_cfg_v2.cfg8 = static_cast<uint16_t>(adpative_mode);
+  if (pack_type == SPRPackType::kRGBW) {
+    spr_init_cfg_v2.cfg9 = 512;
+    std::copy(kDefaultRGBWGains.begin(), kDefaultRGBWGains.end(), spr_init_cfg_v2.cfg11);
+  }
+  spr_init_cfg_v2.cfg10 = 0;
+  std::copy(kDecimationRatioMap.at(pack_type).begin(), kDecimationRatioMap.at(pack_type).end(),
+            spr_init_cfg_v2.cfg11);
+  std::copy(kDefaultOPRGains.begin(), kDefaultOPRGains.end(), spr_init_cfg_v2.cfg13);
+  std::copy(kDefaultAdaptiveStrengths.begin(), kDefaultAdaptiveStrengths.end(),
+            spr_init_cfg_v2.cfg14);
+  std::copy(kDefaultOPROffsets.begin(), kDefaultOPROffsets.end(), spr_init_cfg_v2.cfg15);
+  std::copy(kDefaultFilterCoeffsMap.at(filter_type).begin(),
+            kDefaultFilterCoeffsMap.at(filter_type).end(), spr_init_cfg_v2.cfg16);
+  std::copy(kDefaultColorPhaseMap.at(pack_type).begin(), kDefaultColorPhaseMap.at(pack_type).end(),
+            spr_init_cfg_v2.cfg17);
+
+  if (drmModeCreatePropertyBlob(fd, &spr_init_cfg_v2, sizeof(drm_msm_spr_init_cfg_v2), blob_id)) {
+    printf("failed to create spr blob\n");
+    return -EINVAL;
+  }
+
+  return 0;
+}
+
+static int SetupSprBlob(int fd, const std::string& prop_name, uint32_t* blob_id) {
+  int ret = 0;
+  if (prop_name == "SDE_SPR_INIT_CFG_V1") {
+    ret = SetupSprBlobV1(fd, blob_id);
+  } else if (prop_name == "SDE_SPR_INIT_CFG_V2") {
+    ret = SetupSprBlobV2(fd, blob_id);
+  } else {
+    ret = -ENOENT;
+  }
+
+  return ret;
+}
 
 static int atomic_populate_plane(int plane, drmModeAtomicReqPtr atomic_req) {
   uint32_t src_x, src_y, src_w, src_h;
@@ -310,6 +533,9 @@ static int teardown_pipeline(drmModeAtomicReqPtr atomic_req) {
   add_prop(&conn_res, connector, Connector, main_monitor_connector->connector_id, "CRTC_ID", 0);
   add_prop(&crtc_res, crtc, Crtc, main_monitor_crtc->crtc_id, "MODE_ID", 0);
   add_prop(&crtc_res, crtc, Crtc, main_monitor_crtc->crtc_id, "ACTIVE", 0);
+  if (spr_enabled) {
+    add_prop(&crtc_res, crtc, Crtc, main_monitor_crtc->crtc_id, spr_prop_name.c_str(), 0);
+  }
 
   for(i = 0; i < number_of_lms; i++) {
     ret = atomic_add_prop_to_plane(plane_res, atomic_req,
@@ -341,6 +567,10 @@ static int setup_pipeline(drmModeAtomicReqPtr atomic_req) {
          "CRTC_ID", main_monitor_crtc->crtc_id);
     add_prop(&crtc_res, crtc, Crtc, main_monitor_crtc->crtc_id, "MODE_ID", crtc_res.mode_blob_id);
     add_prop(&crtc_res, crtc, Crtc, main_monitor_crtc->crtc_id, "ACTIVE", 1);
+    if (spr_enabled) {
+      add_prop(&crtc_res, crtc, Crtc, main_monitor_crtc->crtc_id, spr_prop_name.c_str(),
+           crtc_res.spr_blob_id);
+    }
   }
 
   /* Setup planes */
@@ -704,6 +934,7 @@ static void update_plane_fb() {
 static GRSurface* drm_init(minui_backend* backend __unused) {
   drmModeRes* res = nullptr;
 
+  spr_enabled = android::base::GetIntProperty("vendor.display.enable_spr", 0);
   /* Consider DRM devices in order. */
   for (int i = 0; i < DRM_MAX_MINOR; i++) {
     char* dev_name;
@@ -829,9 +1060,15 @@ static GRSurface* drm_init(minui_backend* backend __unused) {
   if (!crtc_res.props_info)
     return NULL;
   else
-    for (int j = 0; j < (int)crtc_res.props->count_props; ++j)
+    for (int j = 0; j < (int)crtc_res.props->count_props; ++j) {
       crtc_res.props_info[j] = drmModeGetProperty(drm_fd,
                                    crtc_res.props->props[j]);
+      /* Get spr property name */
+      if (!strcmp(crtc_res.props_info[j]->name, "SDE_SPR_INIT_CFG_V1") ||
+          !strcmp(crtc_res.props_info[j]->name, "SDE_SPR_INIT_CFG_V2")) {
+        spr_prop_name = crtc_res.props_info[j]->name;
+      }
+    }
 
   /* Set connector resources */
   conn_res.props = drmModeObjectGetProperties(drm_fd,
@@ -884,6 +1121,13 @@ static GRSurface* drm_init(minui_backend* backend __unused) {
 
   drmModeFreePlaneResources(plane_options);
   plane_options = NULL;
+
+  /* Setup spr blob id if enabled */
+  if (spr_enabled) {
+    if (SetupSprBlob(drm_fd, spr_prop_name, &crtc_res.spr_blob_id)) {
+      return NULL;
+    }
+  }
 
   /* Setup pipe and blob_id */
   if (drmModeCreatePropertyBlob(drm_fd, &main_monitor_crtc->mode, sizeof(drmModeModeInfo),
