@@ -1461,7 +1461,7 @@ bool TWPartition::Is_Mounted(void) {
         if (!Symlink_Mount_Point.empty()) {
             scan_mounted_volumes();
             const MountedVolume * sml = find_mounted_volume_by_mount_point(Symlink_Mount_Point.c_str());
-            if (sml != nullptr) {
+            if (sml != NULL) {
                 return true;
             }
         }
