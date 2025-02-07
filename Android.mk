@@ -68,16 +68,17 @@ LOCAL_STATIC_LIBRARIES += libavb \
                           libsnapshot_cow \
                           libsnapshot_nobinder \
                           libtwrpinstall \
-                          update_metadata-protos \
                           android.hardware.health-translate-ndk \
                           android.hardware.health-V2-ndk
+                          libzstd \
+                          update_metadata-protos
 
 LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
                           android.hardware.boot@1.1 \
                           android.hardware.boot@1.2 \
                           android.hardware.health@2.0 \
                           android.hardware.health@2.1 \
-                          android.hardware.health-V2-ndk \
+                          android.hardware.health-V3-ndk \
                           android.hardware.health-translate-ndk \
                           libbinder \
                           libbinder_ndk \
@@ -354,6 +355,8 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         android.frameworks.stats@1.0 \
         android.security.maintenance-ndk_platform \
         android.system.keystore2-V1-ndk_platform \
+        android.security.maintenance-ndk \
+        android.system.keystore2-V4-ndk \
         libkeyutils \
         liblog \
         libsqlite.recovery \
