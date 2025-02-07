@@ -29,6 +29,10 @@ ifeq ($(TW_INCLUDE_CRYPTO_FBE), true)
         android.system.keystore2-V1-ndk_platform \
         android.security.authorization-ndk_platform \
         android.security.maintenance-ndk_platform \
+        android.security.apc-ndk \
+        android.system.keystore2-V4-ndk \
+        android.security.authorization-ndk \
+        android.security.maintenance-ndk \
         libselinux \
         libbinder_ndk \
         libext4_utils \
