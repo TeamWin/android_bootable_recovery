@@ -48,7 +48,7 @@
 #include "abx-functions.hpp"
 #include "twcommon.h"
 #include "gui/gui.hpp"
-#include <fs_mgr_priv_boot_config.h>
+#include <fs_mgr_priv.h>
 #ifndef BUILD_TWRPTAR_MAIN
 #include "data.hpp"
 #include "partitions.hpp"
