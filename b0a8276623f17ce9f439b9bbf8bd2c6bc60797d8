@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36401a7a_b52046fd",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2025-02-25T21:11:22Z",
+      "side": 1,
+      "message": "unrelated changes, and we need to switch to V3, as https://gerrit.twrp.me/c/android_bootable_recovery/+/7897",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "b0a8276623f17ce9f439b9bbf8bd2c6bc60797d8",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
