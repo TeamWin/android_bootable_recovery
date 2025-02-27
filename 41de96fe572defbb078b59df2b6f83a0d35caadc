@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c978ea6c_63237c9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2025-02-27T20:03:16Z",
+      "side": 1,
+      "message": "just realized this is a revert of https://gerrit.twrp.me/c/android_bootable_recovery/+/7064\nwhich doesn\u0027t work anymore, abandon both",
+      "revId": "41de96fe572defbb078b59df2b6f83a0d35caadc",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
