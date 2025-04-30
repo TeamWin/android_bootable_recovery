@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7624d02a_89c9408d",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1485
+      },
+      "writtenOn": "2025-04-30T18:38:34Z",
+      "side": 1,
+      "message": "Missing separator.",
+      "revId": "3864c0f327ebcb6ed817750e56fb75febb908cb5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
