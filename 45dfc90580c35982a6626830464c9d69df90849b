@@ -16,6 +16,23 @@
       "message": "Fixed.",
       "revId": "45dfc90580c35982a6626830464c9d69df90849b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b29d89f_31d68dd8",
+        "filename": "gui/theme/common/languages/sl.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-14T22:36:25Z",
+      "side": 1,
+      "message": "Missing \u003e in start tag. Please check the schema for this file.",
+      "revId": "45dfc90580c35982a6626830464c9d69df90849b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
