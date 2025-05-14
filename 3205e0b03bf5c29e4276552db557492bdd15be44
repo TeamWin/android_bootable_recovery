@@ -33,6 +33,24 @@
       "message": "missing end tag \u003e",
       "revId": "3205e0b03bf5c29e4276552db557492bdd15be44",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02c292d_68f29509",
+        "filename": "gui/theme/common/languages/sl.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1486
+      },
+      "writtenOn": "2025-05-14T09:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78c55871_7dadd984",
+      "revId": "3205e0b03bf5c29e4276552db557492bdd15be44",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
