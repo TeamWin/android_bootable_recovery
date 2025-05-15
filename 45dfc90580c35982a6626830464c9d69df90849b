@@ -33,6 +33,24 @@
       "message": "Missing \u003e in start tag. Please check the schema for this file.",
       "revId": "45dfc90580c35982a6626830464c9d69df90849b",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a31ab9_6d6562be",
+        "filename": "gui/theme/common/languages/sl.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1486
+      },
+      "writtenOn": "2025-05-15T08:15:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b29d89f_31d68dd8",
+      "revId": "45dfc90580c35982a6626830464c9d69df90849b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
