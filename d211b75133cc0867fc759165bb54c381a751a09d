@@ -16,6 +16,23 @@
       "message": "Syntax was checked and fixed.",
       "revId": "d211b75133cc0867fc759165bb54c381a751a09d",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16b529fe_236dd105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-17T19:52:16Z",
+      "side": 1,
+      "message": "Thanks for the update, would you be able update the version for the follow fields?\n\nComparing en.xml and sl.xml\n\nb\u0027Slovenian\u0027\nEnglish has version 2 but b\u0027Slovenian\u0027 has version 1 for \u0027disable_backup_space_chk\u0027\nEnglish has version 2 but b\u0027Slovenian\u0027 has version 1 for \u0027copying_log\u0027\nEnglish has version 2 but b\u0027Slovenian\u0027 has version 1 for \u0027copy_log_complete\u0027\nEnglish has version 2 but b\u0027Slovenian\u0027 has version 1 for \u0027decrypt_cmd\u0027",
+      "revId": "d211b75133cc0867fc759165bb54c381a751a09d",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
