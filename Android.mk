@@ -553,7 +553,7 @@ TWRP_REQUIRED_MODULES += \
 ifneq ($(TW_INCLUDE_CRYPTO),)
 TWRP_REQUIRED_MODULES += \
     vold_prepare_subdirs \
-    task_recovery_profiles.json \
+    task_profiles.json \
     fscryptpolicyget.recovery \
     keystore_auth \
     keystore2 \
