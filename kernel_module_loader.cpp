@@ -74,7 +74,7 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 		case FASTBOOTD_MODE:
 		case RECOVERY_IN_BOOT_MODE:
 #ifdef TW_LOAD_VENDOR_BOOT_MODULES
-			for (auto&& module_dir:module_dirs) {
+			for (auto&& module_dir:vendor_module_dirs) {
 				modules_loaded += Try_And_Load_Modules(module_dir, false);
 				if (modules_loaded >= expected_module_count) goto exit;
 			}
@@ -85,10 +85,12 @@ bool KernelModuleLoader::Load_Vendor_Modules() {
 			break;
 	}
 
+#ifndef TW_LOAD_VENDOR_BOOT_MODULES
 	if (ven) {
 		LOGINFO("Checking mounted /vendor\n");
 		ven->Mount(true);
 	}
+#endif
 	if (ven_dlkm) {
 		LOGINFO("Checking mounted /vendor_dlkm\n");
 		ven_dlkm->Mount(true);
@@ -115,25 +117,37 @@ exit:
 
 int KernelModuleLoader::Try_And_Load_Modules(std::string module_dir, bool vendor_is_mounted) {
 		LOGINFO("Checking directory: %s\n", module_dir.c_str());
-		int modules_loaded = 0;
 		std::string dest_module_dir;
+		int modules_loaded = 0;
+#ifndef TW_LOAD_VENDOR_BOOT_MODULES
 		dest_module_dir = "/tmp" + module_dir;
 		TWFunc::Recursive_Mkdir(dest_module_dir);
 		Copy_Modules_To_Tmpfs(module_dir);
-		if (!Write_Module_List(dest_module_dir))
-			return kernel_modules_requested.size();
 		if (!vendor_is_mounted && module_dir == "/vendor/lib/modules") {
 			module_dir = "/lib/modules";
 		}
 		LOGINFO("mounting %s on %s\n", dest_module_dir.c_str(), module_dir.c_str());
 		if (mount(dest_module_dir.c_str(), module_dir.c_str(), "", MS_BIND, NULL) == 0) {
-			Modprobe m({module_dir}, "modules.load.twrp", false);
-			m.LoadListedModules(false);
-			modules_loaded = m.GetModuleCount();
-			umount2(module_dir.c_str(), MNT_DETACH);
-			LOGINFO("Modules Loaded: %d\n", modules_loaded);
+			if (!Write_Module_List(dest_module_dir))
+				return kernel_modules_requested.size();
+			modules_loaded = Load_Modules_By_Init(module_dir);
 		}
+#else
+		if (!Write_Module_List(module_dir))
+			return kernel_modules_requested.size();
+		modules_loaded = Load_Modules_By_Init(module_dir);
+#endif
 		return modules_loaded;
+}
+
+int KernelModuleLoader::Load_Modules_By_Init(std::string module_dir) {
+	int modules_loaded = 0;
+	Modprobe m({module_dir}, "modules.load.twrp", false);
+	m.LoadListedModules(false);
+	modules_loaded = m.GetModuleCount();
+	umount2(module_dir.c_str(), MNT_DETACH);
+	LOGINFO("Modules Loaded: %d\n", modules_loaded);
+	return modules_loaded;
 }
 
 std::vector<string> KernelModuleLoader::Skip_Loaded_Kernel_Modules() {
@@ -161,6 +175,7 @@ bool KernelModuleLoader::Write_Module_List(std::string module_dir) {
 	DIR* d;
 	struct dirent* de;
 	std::vector<std::string> kernel_modules;
+	LOGINFO("writing to module_dir: %s\n", module_dir.c_str());
 	d = opendir(module_dir.c_str());
 	auto deduped_modules = Skip_Loaded_Kernel_Modules();
 	if (deduped_modules.size() == 0) {
@@ -207,7 +222,7 @@ bool KernelModuleLoader::Copy_Modules_To_Tmpfs(std::string module_dir) {
 		}
 		closedir(d);
 	} else {
-		LOGINFO("Unable to open module directory: %s. Skipping\n", module_dir.c_str());
+		LOGINFO("Unable to open module directory: %s: %s. Skipping\n", strerror(errno), module_dir.c_str());
 		return false;
 	}
 	return true;
