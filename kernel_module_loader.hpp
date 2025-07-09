@@ -14,7 +14,7 @@
 #include "twrp-functions.hpp"
 
 #define VENDOR_MODULE_DIR "/vendor/lib/modules"           // Base path for vendor kernel modules to check by TWRP
-#define VENDOR_BOOT_MODULE_DIR "/lib/modules"             // vendor_boot ramdisk GKI modules to check by TWRP
+#define VENDOR_BOOT_MODULE_DIR "/vendor/lib/modules"      // vendor_boot ramdisk GKI modules to check by TWRP
 #define VENDOR_DLKM_MODULE_DIR "/vendor_dlkm/lib/modules" // vendor_dlkm placed modules to check by TWRP
 typedef enum {
 	RECOVERY_FASTBOOT_MODE = 0,
@@ -33,6 +33,7 @@ private:
 	static bool Copy_Modules_To_Tmpfs(std::string module_dir); // Copy modules to ramdisk for loading
 	static std::vector<string> Skip_Loaded_Kernel_Modules(); // return list of loaded kernel modules already done by init
 	static BOOT_MODE Get_Boot_Mode(); // For getting the current boot mode
+	static int Load_Modules_By_Init(std::string module_dir); // actually load modules and get number of modules loaded
 };
 
 #endif // _KERNELMODULELOADER_HPP

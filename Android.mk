@@ -315,6 +315,7 @@ ifneq ($(TW_ADDITIONAL_APEX_FILES),)
     LOCAL_CFLAGS += -DTW_ADDITIONAL_APEX_FILES=$(TW_ADDITIONAL_APEX_FILES)
 endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
+ifneq ($(TW_LOAD_VENDOR_BOOT_MODULES),)
     LOCAL_SRC_FILES += kernel_module_loader.cpp
     LOCAL_C_INCLUDES += system/core/libmodprobe/include
     LOCAL_STATIC_LIBRARIES += libmodprobe
@@ -322,9 +323,10 @@ ifneq ($(TW_LOAD_VENDOR_MODULES),)
     ifeq ($(TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI),true)
         LOCAL_CFLAGS += -DTW_LOAD_VENDOR_MODULES_EXCLUDE_GKI
     endif
-    ifeq ($(TW_LOAD_VENDOR_BOOT_MODULES),true)
-        LOCAL_CFLAGS += -DTW_LOAD_VENDOR_BOOT_MODULES
-    endif
+endif
+endif
+ifneq ($(TW_LOAD_VENDOR_BOOT_MODULES),)
+    LOCAL_CFLAGS += -DTW_LOAD_VENDOR_BOOT_MODULES=$(TW_LOAD_VENDOR_BOOT_MODULES)
 endif
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     LOCAL_CFLAGS += -DTW_INCLUDE_CRYPTO -DUSE_FSCRYPT -Wno-macro-redefined
@@ -620,7 +622,9 @@ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
         libinit
 endif
 ifneq ($(TW_LOAD_VENDOR_MODULES),)
+ifneq ($(TW_LOAD_VENDOR_BOOT_MODULES),)
     TWRP_REQUIRED_MODULES += libmodprobe
+endif
 endif
 ifeq ($(TW_INCLUDE_PYTHON),true)
     TWRP_REQUIRED_MODULES += python3_twrp
