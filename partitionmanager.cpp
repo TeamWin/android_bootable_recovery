@@ -75,7 +75,7 @@
 #include "twrpRepacker.hpp"
 #include "adbbu/libtwadbbu.hpp"
 
-#ifdef TW_LOAD_VENDOR_MODULES
+#if defined(TW_LOAD_VENDOR_MODULES) || defined(TW_LOAD_VENDOR_BOOT_MODULES)
 #include "kernel_module_loader.hpp"
 #endif
 
@@ -404,8 +404,8 @@ clear:
 			mapit->second.fstab_line = NULL;
 		}
 	}
-
-#ifdef TW_LOAD_VENDOR_MODULES
+#if defined(TW_LOAD_VENDOR_MODULES) || defined(TW_LOAD_VENDOR_BOOT_MODULES)
+	LOGINFO("TW_LOAD_VENDOR_BOOT_MODULES");
 	KernelModuleLoader::Load_Vendor_Modules();
 #endif
 
