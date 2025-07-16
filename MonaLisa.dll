@@ -21,7 +21,7 @@ RECOVERY_BINARY_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/system/bin/sh
 LOCAL_POST_INSTALL_CMD += $(hide) if [ -e "$(TARGET_RECOVERY_ROOT_OUT)/system/bin/egrep" ]; then \
 							rm $(TARGET_RECOVERY_ROOT_OUT)/system/bin/egrep; fi; ln -s $(TARGET_RECOVERY_ROOT_OUT)/system/bin/grep $(TARGET_RECOVERY_ROOT_OUT)/system/bin/egrep; \
 							if [ -e "$(TARGET_RECOVERY_ROOT_OUT)/system/bin/fgrep" ]; then \
-							rm $(TARGET_RECOVERY_ROOT_OUT)/system/bin/fgrep; fi; ln -s $(TARGET_RECOVERY_ROOT_OUT)/system/bin/grep $(TARGET_RECOVERY_ROOT_OUT)/system/bin/fgrep;
+							rm $(TARGET_RECOVERY_ROOT_OUT)/system/bin/fgrep; fi; ln -s $(TARGET_RECOVERY_ROOT_OUT)/system/bin/grep $(TARGET_RECOVERY_ROOT_OUT)/system/bin/fgrep; \
 
 ifneq ($(wildcard external/zip/Android.mk),)
 	RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/zip
@@ -459,7 +459,13 @@ LOCAL_POST_INSTALL_CMD += \
     cp $(TARGET_OUT_VENDOR_ETC)/selinux/vndservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/vendor/etc/selinux/vndservice_contexts && \
     cp $(TARGET_OUT_VENDOR_ETC)/selinux/vendor_hwservice_contexts $(TARGET_RECOVERY_ROOT_OUT)/vendor/etc/selinux/vendor_hwservice_contexts && \
     cp $(TARGET_OUT_ETC)/selinux/plat_keystore2_key_contexts $(TARGET_RECOVERY_ROOT_OUT)/system/etc/selinux/plat_keystore2_key_contexts && \
-    cp $(TARGET_OUT_ETC)/task_profiles.json $(TARGET_RECOVERY_ROOT_OUT)/system/etc/task_profiles/task_profiles_30.json
+    cp $(TARGET_OUT_ETC)/task_profiles.json $(TARGET_RECOVERY_ROOT_OUT)/system/etc/task_profiles/task_profiles_30.json && \
+    mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system/bin/bootstrap && \
+    ln -sf /system/bin/linker64 $(TARGET_RECOVERY_ROOT_OUT)/system/bin/bootstrap/linker64 && \
+    ln -sf /system/bin/linker64 $(TARGET_RECOVERY_ROOT_OUT)/system/bin/bootstrap/linker_asan64 && \
+    ln -sf /system/bin/linker64 $(TARGET_RECOVERY_ROOT_OUT)/system/bin/bootstrap/hw_san64 && \
+    ln -sf /system/bin/linker $(TARGET_RECOVERY_ROOT_OUT)/system/bin/bootstrap/linker && \
+    ln -sf /system/bin/linker $(TARGET_RECOVERY_ROOT_OUT)/system/bin/bootstrap/linker_asan
     ifeq ($(TARGET_USES_MKE2FS), true)
         LOCAL_POST_INSTALL_CMD += \
             && cp $(TARGET_OUT_ETC)/mke2fs.conf $(TARGET_RECOVERY_ROOT_OUT)/system/etc/mke2fs.conf
