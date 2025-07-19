@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eab6162_9969ddad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-07-19T21:24:24Z",
+      "side": 1,
+      "message": "Prefer to build out ramdisk in prebuilt/Android.mk",
+      "revId": "0718a4d0a0426a72685ea2ee6f211334888a0a28",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
