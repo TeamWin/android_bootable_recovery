@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "210e63ca_be84f4d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-08-31T21:00:17Z",
+      "side": 1,
+      "message": "Could this be a setting by the user in the settings screen to allow the user to set whether they want this to happen?",
+      "revId": "e9108514066e146dd406c6827f0845ccdaddde79",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
