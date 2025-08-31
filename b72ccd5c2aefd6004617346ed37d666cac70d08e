@@ -16,6 +16,23 @@
       "message": "The adsp_loader_dlkm now load correctly on my OnePlus 11 \u0026 OnePlus Ace 2 Pro",
       "revId": "b72ccd5c2aefd6004617346ed37d666cac70d08e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3051a21_5e630f83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-08-31T19:50:35Z",
+      "side": 1,
+      "message": "This overwrites the ability to load modules from the ramdisk. Perhaps there is another way?",
+      "revId": "b72ccd5c2aefd6004617346ed37d666cac70d08e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
