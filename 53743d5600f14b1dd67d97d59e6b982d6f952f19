@@ -17,6 +17,23 @@
       "message": "Is this still a problem?",
       "revId": "53743d5600f14b1dd67d97d59e6b982d6f952f19",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f9e1ff_a75feb56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2025-09-01T09:16:44Z",
+      "side": 1,
+      "message": "Yes, I believe the problem still exists (https://kernelsu.org/guide/faq.html#why-is-there-a-huge-1-tb-file)",
+      "revId": "53743d5600f14b1dd67d97d59e6b982d6f952f19",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }
