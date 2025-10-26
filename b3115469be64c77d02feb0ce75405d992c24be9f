@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b371690d_26bffe7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608
+      },
+      "writtenOn": "2025-10-26T12:02:45Z",
+      "side": 1,
+      "message": "Hello, if I understand the Gerrit TWRP history correctly I need to ask a reviewer to look through my patch before it can be merged. Since you\u0027ve reviewed Czech, Polish and Slovenian translation patches before, can you please see if my Ukrainian updates are acceptable?",
+      "revId": "b3115469be64c77d02feb0ce75405d992c24be9f",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
