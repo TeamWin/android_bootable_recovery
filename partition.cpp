@@ -2564,6 +2564,16 @@ bool TWPartition::Wipe_F2FS() {
 			Crypto_Key_Location != "footer") {
 		NeedPreserveFooter = false;
 	}
+
+	#ifdef TW_USE_DMCTL
+	if (TWFunc::Path_Exists("/dev/block/mapper/userdata")) {
+		LOGINFO("Running dmctl before formatting...\n");
+		TWFunc::Exec_Cmd("dmctl delete userdata", false);
+		usleep(32768);
+	} else
+		LOGINFO("No need to run dmctl...\n");
+	#endif
+
 	LOGINFO("make_f2fs command: %s\n", f2fs_command.c_str());
 	if (TWFunc::Exec_Cmd(f2fs_command) == 0) {
 		if (NeedPreserveFooter)

@@ -635,6 +635,15 @@ endif
 ifeq ($(TW_INCLUDE_PYTHON),true)
     TWRP_REQUIRED_MODULES += python3_twrp
 endif
+ifeq ($(TW_USE_DMCTL),true)
+    LOCAL_CFLAGS += -DTW_USE_DMCTL
+    TWRP_REQUIRED_MODULES += \
+       dmctl \
+       dmuserd
+    RECOVERY_BINARY_SOURCE_FILES += \
+       $(TARGET_OUT_EXECUTABLES)/dmctl \
+       $(TARGET_OUT_EXECUTABLES)/dmuserd
+endif
 
 TWRP_REQUIRED_MODULES += file_contexts_text
 
