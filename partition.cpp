@@ -2570,8 +2570,7 @@ bool TWPartition::Wipe_F2FS() {
 		LOGINFO("Running dmctl before formatting...\n");
 		TWFunc::Exec_Cmd("dmctl delete userdata", false);
 		usleep(32768);
-	} else
-		LOGINFO("No need to run dmctl...\n");
+	}
 	#endif
 
 	LOGINFO("make_f2fs command: %s\n", f2fs_command.c_str());
