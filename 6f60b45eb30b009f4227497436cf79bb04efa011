@@ -18,6 +18,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9551694b_ecd916aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2026-01-19T20:22:31Z",
+      "side": 1,
+      "message": "Done - in a new commit",
+      "revId": "6f60b45eb30b009f4227497436cf79bb04efa011",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbde3751_58689b0d",
