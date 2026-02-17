@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f520c42_a21a5a05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684
+      },
+      "writtenOn": "2026-02-17T05:00:19Z",
+      "side": 1,
+      "message": "git clone \"https://gerrit.twrp.me/android_bootable_recovery\" \u0026\u0026 (cd \"android_bootable_recovery\" \u0026\u0026 mkdir -p `git rev-parse --git-dir`/hooks/ \u0026\u0026 curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://gerrit.twrp.me/tools/hooks/commit-msg \u0026\u0026 chmod +x `git rev-parse --git-dir`/hooks/commit-msg)\ngit clone \"https://gerrit.twrp.me/android_bootable_recovery\" \u0026\u0026 (cd \"android_bootable_recovery\" \u0026\u0026 mkdir -p `git rev-parse --git-dir`/hooks/ \u0026\u0026 curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://gerrit.twrp.me/tools/hooks/commit-msg \u0026\u0026 chmod +x `git rev-parse --git-dir`/hooks/commit-msg)",
+      "revId": "426b747737e7ce9e9e17da5b4d2ba883f296aec7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ],
   "submitRequirementResults": []
 }
