@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a8bc2b_002afe5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684
+      },
+      "writtenOn": "2026-02-17T05:01:02Z",
+      "side": 1,
+      "message": "Support excluding zip from TWRP builds\n\nUse \u0027TW_EXCLUDE_ZIP :\u003d true\u0027 to activate the exclusion\n\nIt will be excluded by default if \u0027TW_OEM_BUILD :\u003d true\u0027 is set\n\nChange-Id: I970343e3342a6bfa6c5a5684a8934f1ffa2af78b",
+      "revId": "5c3d206a5eeb3d446bcda8248a405a4b278bab5c",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ],
   "submitRequirementResults": []
 }
