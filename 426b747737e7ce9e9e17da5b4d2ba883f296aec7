@@ -16,6 +16,23 @@
       "message": "git clone \"https://gerrit.twrp.me/android_bootable_recovery\" \u0026\u0026 (cd \"android_bootable_recovery\" \u0026\u0026 mkdir -p `git rev-parse --git-dir`/hooks/ \u0026\u0026 curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://gerrit.twrp.me/tools/hooks/commit-msg \u0026\u0026 chmod +x `git rev-parse --git-dir`/hooks/commit-msg)\ngit clone \"https://gerrit.twrp.me/android_bootable_recovery\" \u0026\u0026 (cd \"android_bootable_recovery\" \u0026\u0026 mkdir -p `git rev-parse --git-dir`/hooks/ \u0026\u0026 curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://gerrit.twrp.me/tools/hooks/commit-msg \u0026\u0026 chmod +x `git rev-parse --git-dir`/hooks/commit-msg)",
       "revId": "426b747737e7ce9e9e17da5b4d2ba883f296aec7",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7cc3d38_caa1b1a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684
+      },
+      "writtenOn": "2026-02-17T05:07:35Z",
+      "side": 1,
+      "message": "ifneq ($(TW_EXCLUDE_TZDATA), true)\nTWRP_REQUIRED_MODULES +\u003d \\\n    tzdata_twrp\nendif\n\nifneq ($(TW_EXCLUDE_NANO), true)\nTWRP_REQUIRED_MODULES +\u003d \\\n    nano_twrp \\\n    nano.rc\nendif\n\nifneq ($(TW_EXCLUDE_BASH), true)\n    ifneq ($(wildcard external/bash/.),)\n    TWRP_REQUIRED_MODULES +\u003d \\\n        bash_twrp\n    endif\nendif\n\nifeq ($(TW_INCLUDE_REPACKTOOLS), true)\nTWRP_REQUIRED_MODULES +\u003d \\\n    magiskboot\nendif\n\nifeq ($(TW_INCLUDE_RESETPROP), true)\nTWRP_REQUIRED_MODULES +\u003d \\\n    resetprop\nendif\n\nifeq ($(TW_INCLUDE_LIBRESETPROP), true)\nTWRP_REQUIRED_MODULES +\u003d \\\n    libresetprop\nendif\n\nTWRP_REQUIRED_MODULES +\u003d \\\n    hwservicemanager \\\n    hwservicemanager.rc \\\n    vndservicemanager \\\n    vndservicemanager.rc \\\n    plat_service_contexts \\\n    servicemanager \\\n    servicemanager.rc\n\nifneq ($(TW_INCLUDE_CRYPTO),)\nTWRP_REQUIRED_MODULES +\u003d \\\n    vold_prepare_subdirs \\\n    task_profiles.json \\\n    fscryptpolicyget.recovery \\\n    keystore_auth \\\n    keystore2 \\\n    android.system.keystore2-service.xml \\\n    keystore2.rc \\\n    plat_keystore2_key_contexts\nendif\n\nifneq ($(wildcard external/zip/Android.mk),)\nifneq ($(TW_EXCLUDE_ZIP), true)\n    TWRP_REQUIRED_MODULES +\u003d zip\nendif\nendif\nifneq ($(wildcard external/unzip/Android.mk),)\n    TWRP_REQUIRED_MODULES +\u003d unzip\nendif\n\nifneq ($(TW_NO_EXFAT), true)\n    TWRP_REQUIRED_MODULES +\u003d mkexfatfs fsckexfat\n    ifneq ($(TW_NO_EXFAT_FUSE), true)\n        TWRP_REQUIRED_MODULES +\u003d exfat-fuse\n    endif",
+      "revId": "426b747737e7ce9e9e17da5b4d2ba883f296aec7",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ],
   "submitRequirementResults": []
