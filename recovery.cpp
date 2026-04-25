@@ -164,7 +164,7 @@ static bool yes_no(Device* device, const char* question1, const char* question2)
 
   size_t chosen_item = device->GetUI()->ShowMenu(
       headers, items, 0, true,
-      std::bind(&Device::HandleMenuKey, device, std::placeholders::_1, std::placeholders::_2));
+      [device](int key, bool visible) { return device->HandleMenuKey(key, visible); });
   return (chosen_item == 1);
 }
 
@@ -174,7 +174,7 @@ static bool ask_to_wipe_data(Device* device) {
 
   size_t chosen_item = device->GetUI()->ShowPromptWipeDataConfirmationMenu(
       headers, items,
-      std::bind(&Device::HandleMenuKey, device, std::placeholders::_1, std::placeholders::_2));
+      [device](int key, bool visible) { return device->HandleMenuKey(key, visible); });
 
   return (chosen_item == 1);
 }
@@ -196,7 +196,7 @@ static InstallResult prompt_and_wipe_data(Device* device) {
   for (;;) {
     size_t chosen_item = device->GetUI()->ShowPromptWipeDataMenu(
         wipe_data_menu_headers, wipe_data_menu_items,
-        std::bind(&Device::HandleMenuKey, device, std::placeholders::_1, std::placeholders::_2));
+        [device](int key, bool visible) { return device->HandleMenuKey(key, visible); });
     // If ShowMenu() returned RecoveryUI::KeyError::INTERRUPTED, WaitKey() was interrupted.
     if (chosen_item == static_cast<size_t>(RecoveryUI::KeyError::INTERRUPTED)) {
       return INSTALL_KEY_INTERRUPTED;
@@ -255,7 +255,7 @@ static void choose_recovery_file(Device* device) {
   while (true) {
     chosen_item = device->GetUI()->ShowMenu(
         headers, entries, chosen_item, true,
-        std::bind(&Device::HandleMenuKey, device, std::placeholders::_1, std::placeholders::_2));
+        [device](int key, bool visible) { return device->HandleMenuKey(key, visible); });
 
     // Handle WaitKey() interrupt.
     if (chosen_item == static_cast<size_t>(RecoveryUI::KeyError::INTERRUPTED)) {
@@ -349,7 +349,7 @@ static bool AskToReboot(Device* device, Device::BuiltinAction chosen_action) {
 
   size_t chosen_item = device->GetUI()->ShowMenu(
       headers, items, 0, true /* menu_only */,
-      std::bind(&Device::HandleMenuKey, device, std::placeholders::_1, std::placeholders::_2));
+      [device](int key, bool visible) { return device->HandleMenuKey(key, visible); });
 
   return (chosen_item == 1);
 }
@@ -392,7 +392,7 @@ static Device::BuiltinAction PromptAndWait(Device* device, InstallResult status)
 
     size_t chosen_item = ui->ShowMenu(
         headers, device->GetMenuItems(), 0, false,
-        std::bind(&Device::HandleMenuKey, device, std::placeholders::_1, std::placeholders::_2));
+        [device](int key, bool visible) { return device->HandleMenuKey(key, visible); });
     // Handle Interrupt key
     if (chosen_item == static_cast<size_t>(RecoveryUI::KeyError::INTERRUPTED)) {
       return Device::KEY_INTERRUPTED;
@@ -755,7 +755,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
         status = InstallWithFuseFromPath(update_package, ui);
       } else if (auto memory_package = Package::CreateMemoryPackage(
                      update_package,
-                     std::bind(&RecoveryUI::SetProgress, ui, std::placeholders::_1));
+                     [ui](float progress) { return ui->SetProgress(progress); });
                  memory_package != nullptr) {
         status = InstallPackage(memory_package.get(), update_package, should_wipe_cache,
                                 retry_count, ui);
