@@ -2582,6 +2582,8 @@ void TWPartitionManager::Get_Partition_List(string ListType, std::vector<Partiti
 		string Current_Storage = DataManager::GetCurrentStoragePath();
 		for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
 			if ((*iter)->Is_Storage) {
+				if (!(*iter)->Sysfs_Entry.empty() && !(*iter)->Is_SubPartition)
+					continue;
 				struct PartitionList part;
 				sprintf(free_space, "%llu", (*iter)->Free / 1024 / 1024);
 				part.Display_Name = (*iter)->Storage_Name + " (";
@@ -3155,6 +3157,8 @@ void TWPartitionManager::Translate_Partition_Display_Names() {
 	std::vector<TWPartition*>::iterator sysfs;
 	for (sysfs = Partitions.begin(); sysfs != Partitions.end(); sysfs++) {
 		if (!(*sysfs)->Sysfs_Entry.empty()) {
+			if ((*sysfs)->Mount_Point == "/usb-otg" || (*sysfs)->Mount_Point == "/external_sd")
+				continue;
 			Translate_Partition((*sysfs)->Mount_Point.c_str(), "autostorage", "Storage", "autostorage", "Storage");
 		}
 	}

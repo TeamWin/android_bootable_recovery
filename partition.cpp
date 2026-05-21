@@ -3154,9 +3154,13 @@ bool TWPartition::Find_Wildcard_Block_Devices(const string& Device) {
 		sprintf(buffer, "%s %s-%i auto defaults defaults", item.c_str(), Mount_Point.c_str(), ++mount_point_index);
 		part->Process_Fstab_Line(buffer, false, NULL);
 		char display[MAX_FSTAB_LINE_LENGTH];
-		sprintf(display, "%s %i", Storage_Name.c_str(), mount_point_index);
+		if (Mount_Point == "/usb-otg" && mount_point_index == 1)
+			sprintf(display, "%s", Storage_Name.c_str());
+		else
+			sprintf(display, "%s %i", Storage_Name.c_str(), mount_point_index);
 		part->Storage_Name = display;
 		part->Display_Name = display;
+		part->Backup_Display_Name = display;
 		part->Primary_Block_Device = item;
 		part->Wildcard_Block_Device = false;
 		part->Is_SubPartition = true;
