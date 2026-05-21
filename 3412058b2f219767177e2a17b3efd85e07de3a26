@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72fa13d5_7bcbc070",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 903
+      },
+      "writtenOn": "2026-05-21T08:25:38Z",
+      "side": 1,
+      "message": "The device tree explicitly names OTG in recovery.fstab:\n\n  /devices/platform/mt_usb* /usb-otg auto ... display\u003d\"USB OTG\",storagename\u003d\"USB OTG\"\n\n  But TWRP handles sysfs wildcard storage in two stages. It first creates a parent entry like /usb-\n  otg, then discovers real block-device children such as /usb-otg-1 for /dev/block/sda1.\n\n  The original code did not preserve the explicit USB OTG name correctly when creating that child\n  entry. After that, Translate_Partition_Display_Names() treated it like generic removable storage\n  and renamed it back into the generic Storage naming scheme.\n\n  That caused the behavior you saw:\n\n  - Select Storage showed Storage (XXXMB) instead of USB OTG (XXXMB).\n  - Mount did not directly show a useful USB OTG mount item until selecting storage.\n  - The storage picker also showed parent placeholder entries like Storage (0MB) / Internal Storage\n    (0MB).\n\n  So the source code was not globally broken, but it was too generic for this fstab/sysfs case. The\n  fix preserves explicit labels like USB OTG and Micro SDCard for sysfs-discovered child partitions,\n  while still allowing Translate_Partition_Display_Names() to rename truly generic storage entries.",
+      "revId": "3412058b2f219767177e2a17b3efd85e07de3a26",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
