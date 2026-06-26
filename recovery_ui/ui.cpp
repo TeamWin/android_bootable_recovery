@@ -441,16 +441,16 @@ static void SamsungTSPTouchFix() {
 void RecoveryUI::SetScreensaverState(ScreensaverState state) {
   switch (state) {
     case ScreensaverState::NORMAL:
-  if (android::base::WriteStringToFile(std::to_string(brightness_normal_value_),
-                                       brightness_file_)) {
-    screensaver_state_ = ScreensaverState::NORMAL;
-    LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
-              << "%)";
-    SamsungTSPTouchFix();
-  } else {
-    LOG(WARNING) << "Unable to set brightness to normal";
-  }
-  break;
+      if (android::base::WriteStringToFile(std::to_string(brightness_normal_value_),
+                                           brightness_file_)) {
+        screensaver_state_ = ScreensaverState::NORMAL;
+        LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
+                  << "%)";
+        SamsungTSPTouchFix();
+      } else {
+        LOG(WARNING) << "Unable to set brightness to normal";
+      }
+      break;
     case ScreensaverState::DIMMED:
       if (android::base::WriteStringToFile(std::to_string(brightness_dimmed_value_),
                                            brightness_file_)) {
