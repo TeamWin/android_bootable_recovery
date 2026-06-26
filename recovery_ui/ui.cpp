@@ -422,15 +422,19 @@ void RecoveryUI::EnqueueKey(int key_code) {
 void RecoveryUI::SetScreensaverState(ScreensaverState state) {
   switch (state) {
     case ScreensaverState::NORMAL:
-      if (android::base::WriteStringToFile(std::to_string(brightness_normal_value_),
-                                           brightness_file_)) {
-        screensaver_state_ = ScreensaverState::NORMAL;
-        LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
-                  << "%)";
-      } else {
-        LOG(WARNING) << "Unable to set brightness to normal";
-      }
-      break;
+  if (android::base::WriteStringToFile(std::to_string(brightness_normal_value_),
+                                       brightness_file_)) {
+    screensaver_state_ = ScreensaverState::NORMAL;
+    LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
+              << "%)";
+    // Fix Synaptics TCM touch after screen wake
+    system("echo incell_power_control,0 > /sys/class/sec/tsp/cmd 2>/dev/null;"
+           "echo incell_power_control,1 > /sys/class/sec/tsp/cmd 2>/dev/null;"
+           "echo fw_update > /sys/class/sec/tsp/cmd 2>/dev/null");
+  } else {
+    LOG(WARNING) << "Unable to set brightness to normal";
+  }
+  break;
     case ScreensaverState::DIMMED:
       if (android::base::WriteStringToFile(std::to_string(brightness_dimmed_value_),
                                            brightness_file_)) {
