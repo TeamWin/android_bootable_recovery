@@ -419,6 +419,25 @@ void RecoveryUI::EnqueueKey(int key_code) {
   }
 }
 
+// Samsung TSP touch fix for incell panels that lose touch after screen wake.
+// Checks fw_update result: if OK the TSP is healthy, if not runs full power cycle.
+// No-op on non-Samsung devices as /sys/class/sec/tsp/cmd will not exist.
+static void SamsungTSPTouchFix() {
+  const char* tsp_cmd = "/sys/class/sec/tsp/cmd";
+  const char* tsp_result = "/sys/class/sec/tsp/cmd_result";
+  if (access(tsp_cmd, W_OK) != 0) return;
+
+  android::base::WriteStringToFile("fw_update", tsp_cmd);
+  std::string result;
+  android::base::ReadFileToString(tsp_result, &result);
+
+  if (result.find("OK") == std::string::npos) {
+    android::base::WriteStringToFile("incell_power_control,0", tsp_cmd);
+    android::base::WriteStringToFile("incell_power_control,1", tsp_cmd);
+    android::base::WriteStringToFile("fw_update", tsp_cmd);
+  }
+}
+
 void RecoveryUI::SetScreensaverState(ScreensaverState state) {
   switch (state) {
     case ScreensaverState::NORMAL:
@@ -427,10 +446,7 @@ void RecoveryUI::SetScreensaverState(ScreensaverState state) {
     screensaver_state_ = ScreensaverState::NORMAL;
     LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
               << "%)";
-    // Fix Synaptics TCM touch after screen wake
-    system("echo incell_power_control,0 > /sys/class/sec/tsp/cmd 2>/dev/null;"
-           "echo incell_power_control,1 > /sys/class/sec/tsp/cmd 2>/dev/null;"
-           "echo fw_update > /sys/class/sec/tsp/cmd 2>/dev/null");
+    SamsungTSPTouchFix();
   } else {
     LOG(WARNING) << "Unable to set brightness to normal";
   }
