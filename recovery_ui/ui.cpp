@@ -419,6 +419,24 @@ void RecoveryUI::EnqueueKey(int key_code) {
   }
 }
 
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+static void SamsungTSPTouchFix() {
+  const char* tsp_cmd = "/sys/class/sec/tsp/cmd";
+  const char* tsp_result = "/sys/class/sec/tsp/cmd_result";
+  if (access(tsp_cmd, W_OK) != 0) return;
+
+  android::base::WriteStringToFile("fw_update", tsp_cmd);
+  std::string result;
+  android::base::ReadFileToString(tsp_result, &result);
+
+  if (result.find("OK") == std::string::npos) {
+    android::base::WriteStringToFile("incell_power_control,0", tsp_cmd);
+    android::base::WriteStringToFile("incell_power_control,1", tsp_cmd);
+    android::base::WriteStringToFile("fw_update", tsp_cmd);
+  }
+}
+#endif
+
 void RecoveryUI::SetScreensaverState(ScreensaverState state) {
   switch (state) {
     case ScreensaverState::NORMAL:
@@ -427,6 +445,9 @@ void RecoveryUI::SetScreensaverState(ScreensaverState state) {
         screensaver_state_ = ScreensaverState::NORMAL;
         LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
                   << "%)";
+        #ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+        SamsungTSPTouchFix();
+        #endif
       } else {
         LOG(WARNING) << "Unable to set brightness to normal";
       }
