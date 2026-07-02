@@ -90,6 +90,12 @@ RecoveryUI::~RecoveryUI() {
   if (input_thread_.joinable()) {
     input_thread_.join();
   }
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  tsp_watchdog_stopped_ = true;
+  if (tsp_watchdog_thread_.joinable()) {
+    tsp_watchdog_thread_.join();
+  }
+#endif
 }
 
 void RecoveryUI::OnKeyDetected(int key_code) {
@@ -187,7 +193,16 @@ bool RecoveryUI::Init(const std::string& /* locale */) {
       }
     }
   });
-
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  // Watchdog thread to recover Samsung TSP touch after random mid-session failures.
+  tsp_watchdog_stopped_ = false;
+  tsp_watchdog_thread_ = std::thread([this]() {
+    while (!this->tsp_watchdog_stopped_) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      SamsungTSPTouchFix();
+    }
+  });
+#endif
   return true;
 }
 
