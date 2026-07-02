@@ -90,6 +90,12 @@ RecoveryUI::~RecoveryUI() {
   if (input_thread_.joinable()) {
     input_thread_.join();
   }
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  tsp_watchdog_stopped_ = true;
+  if (tsp_watchdog_thread_.joinable()) {
+    tsp_watchdog_thread_.join();
+  }
+#endif
 }
 
 void RecoveryUI::OnKeyDetected(int key_code) {
@@ -187,10 +193,18 @@ bool RecoveryUI::Init(const std::string& /* locale */) {
       }
     }
   });
-
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  // Watchdog thread to recover Samsung TSP touch after random mid-session failures.
+  tsp_watchdog_stopped_ = false;
+  tsp_watchdog_thread_ = std::thread([this]() {
+    while (!this->tsp_watchdog_stopped_) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      SamsungTSPTouchFix();
+    }
+  });
+#endif
   return true;
 }
-
 void RecoveryUI::OnTouchDetected(int dx, int dy) {
   enum SwipeDirection { UP, DOWN, RIGHT, LEFT } direction;
 
@@ -430,11 +444,13 @@ static void SamsungTSPTouchFix() {
   const char* tsp_result = "/sys/class/sec/tsp/cmd_result";
   if (access(tsp_cmd, W_OK) != 0) return;
 
-  android::base::WriteStringToFile("fw_update", tsp_cmd);
+  // Check connection first - only intervene if TSP reports failure
+  android::base::WriteStringToFile("check_connection", tsp_cmd);
   std::string result;
   android::base::ReadFileToString(tsp_result, &result);
 
-  if (result.find("OK") == std::string::npos) {
+  if (result.find("NG") != std::string::npos) {
+    // TSP is dead - full power cycle sequence
     android::base::WriteStringToFile("incell_power_control,0", tsp_cmd);
     android::base::WriteStringToFile("incell_power_control,1", tsp_cmd);
     android::base::WriteStringToFile("fw_update", tsp_cmd);
