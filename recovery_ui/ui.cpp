@@ -36,6 +36,7 @@
 #include <android-base/parseint.h>
 #include <android-base/properties.h>
 #include <android-base/strings.h>
+#include <android-base/stringprintf.h>
 
 #include "minui/minui.h"
 #include "otautil/sysutil.h"
@@ -90,6 +91,12 @@ RecoveryUI::~RecoveryUI() {
   if (input_thread_.joinable()) {
     input_thread_.join();
   }
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  tsp_watchdog_stopped_ = true;
+  if (tsp_watchdog_thread_.joinable()) {
+    tsp_watchdog_thread_.join();
+  }
+#endif
 }
 
 void RecoveryUI::OnKeyDetected(int key_code) {
@@ -187,10 +194,20 @@ bool RecoveryUI::Init(const std::string& /* locale */) {
       }
     }
   });
-
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  // Watchdog thread to recover Samsung TSP touch after random mid-session failures.
+  tsp_watchdog_stopped_ = false;
+  tsp_watchdog_thread_ = std::thread([this]() {
+    // Wait for TSP to fully initialise before monitoring
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+    while (!this->tsp_watchdog_stopped_) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      SamsungTSPTouchFix();
+    }
+  });
+#endif
   return true;
 }
-
 void RecoveryUI::OnTouchDetected(int dx, int dy) {
   enum SwipeDirection { UP, DOWN, RIGHT, LEFT } direction;
 
@@ -425,20 +442,60 @@ void RecoveryUI::EnqueueKey(int key_code) {
 }
 
 #ifdef TW_SAMSUNG_TSP_TOUCH_FIX
-static void SamsungTSPTouchFix() {
-  const char* tsp_cmd = "/sys/class/sec/tsp/cmd";
-  const char* tsp_result = "/sys/class/sec/tsp/cmd_result";
-  if (access(tsp_cmd, W_OK) != 0) return;
+static void SamsungTSPTouchFixWorker() {
+    const char* tsp_cmd = "/sys/class/sec/tsp/cmd";
+    const char* touch_node = "/dev/input/event3"; //  VERIFIED touch node
+    const char* brightness_node = "/sys/class/backlight/panel/brightness";
+    
+    // 1. Wait up to 5 seconds on first boot for sysfs nodes to register
+    int retry = 10;
+    while (access(tsp_cmd, W_OK) != 0 && retry-- > 0) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
+    if (access(tsp_cmd, W_OK) != 0) return; 
 
-  android::base::WriteStringToFile("fw_update", tsp_cmd);
-  std::string result;
-  android::base::ReadFileToString(tsp_result, &result);
+    bool screen_was_off = false;
 
-  if (result.find("OK") == std::string::npos) {
-    android::base::WriteStringToFile("incell_power_control,0", tsp_cmd);
-    android::base::WriteStringToFile("incell_power_control,1", tsp_cmd);
-    android::base::WriteStringToFile("fw_update", tsp_cmd);
-  }
+    // 2. Continuous Monitoring Loop (Fixes infinite wake cycles)
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+        // Read current brightness safely
+        std::string brightness_str;
+        int current_brightness = 200; 
+        if (android::base::ReadFileToString(brightness_node, &brightness_str)) {
+            try {
+                current_brightness = std::stoi(android::base::Trim(brightness_str));
+            } catch (...) {}
+        }
+
+        if (current_brightness == 0) {
+            screen_was_off = true;
+            continue; // Screen is asleep; pause execution
+        }
+
+        // 3.  RELIABLE HEALTH CHECK CONDITIONS:
+        // Trigger reset if: Screen just woke up OR event3 vanished entirely
+        if (screen_was_off || access(touch_node, F_OK) != 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+            // Hard pulse the hardware
+            android::base::WriteStringToFile("incell_power_control,0", tsp_cmd);
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            android::base::WriteStringToFile("incell_power_control,1", tsp_cmd);
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+            android::base::WriteStringToFile("fw_update", tsp_cmd);
+
+            screen_was_off = false; 
+        }
+    }
+}
+
+// 4.  BACKGROUND ENTRY HOOK
+// Call this function once from main() inside bootable/recovery/recovery.cpp
+void StartSamsungTSPTouchFix() {
+    std::thread fix_thread(SamsungTSPTouchFixWorker);
+    fix_thread.detach(); // Detaches the thread to live parallel to recovery UI
 }
 #endif
 
