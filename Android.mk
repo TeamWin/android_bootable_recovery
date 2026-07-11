@@ -269,6 +269,9 @@ endif
 ifeq ($(TW_NO_BATT_PERCENT), true)
     LOCAL_CFLAGS += -DTW_NO_BATT_PERCENT
 endif
+ifeq ($(TW_REMOVE_BATTERY_TEXT), true)
+    LOCAL_CFLAGS += -DTW_REMOVE_BATTERY_TEXT
+endif
 ifeq ($(TW_NO_CPU_TEMP), true)
     LOCAL_CFLAGS += -DTW_NO_CPU_TEMP
 endif
