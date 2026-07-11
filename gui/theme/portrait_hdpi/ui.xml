@@ -299,6 +299,20 @@
 					<condition var1="tw_battery" op="&gt;" var2="0"/>
 					<condition var1="tw_battery" op="&lt;" var2="101"/>
 					<condition var1="tw_battery_pos_x" var2="0"/>
+					<condition var1="tw_remove_battery_text" var2="1"/>
+				</conditions>
+				<font resource="font_m"/>
+				<placement x="%indent_right%" y="%row1_header_y%" placement="1"/>
+				<text>%tw_battery%</text>
+			</text>
+
+			<text color="%text_color%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+					<condition var1="tw_battery_pos_x" var2="0"/>
+					<condition var1="tw_remove_battery_text" op="!=" var2="1"/>
 				</conditions>
 				<font resource="font_m"/>
 				<placement x="%indent_right%" y="%row1_header_y%" placement="1"/>
@@ -345,6 +359,20 @@
 					<condition var1="tw_battery" op="&gt;" var2="0"/>
 					<condition var1="tw_battery" op="&lt;" var2="101"/>
 					<condition var1="tw_battery_pos_x" op="!=" var2="0"/>
+					<condition var1="tw_remove_battery_text" var2="1"/>
+				</conditions>
+				<font resource="font_m"/>
+				<placement x="%tw_battery_pos_x%" y="%row1_header_y%"/>
+				<text>%tw_battery%</text>
+			</text>
+
+			<text color="%text_color%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+					<condition var1="tw_battery_pos_x" op="!=" var2="0"/>
+					<condition var1="tw_remove_battery_text" op="!=" var2="1"/>
 				</conditions>
 				<font resource="font_m"/>
 				<placement x="%tw_battery_pos_x%" y="%row1_header_y%"/>

@@ -647,6 +647,12 @@ void DataManager::SetDefaultValues()
 #else
 	mConst.SetValue(TW_NO_BATTERY_PERCENT, "0");
 #endif
+#ifdef TW_REMOVE_BATTERY_TEXT
+    printf("TW_REMOVE_BATTERY_TEXT := true\n");
+    mConst.SetValue("tw_remove_battery_text", "1");
+#else
+    mConst.SetValue("tw_remove_battery_text", "0");
+#endif
 #ifdef TW_NO_CPU_TEMP
 	printf("TW_NO_CPU_TEMP := true\n");
 	mConst.SetValue("tw_no_cpu_temp", "1");
