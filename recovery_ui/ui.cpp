@@ -16,8 +16,10 @@
 
 #include "recovery_ui/ui.h"
 
+#include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <linux/input.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,6 +38,7 @@
 #include <android-base/parseint.h>
 #include <android-base/properties.h>
 #include <android-base/strings.h>
+#include <android-base/stringprintf.h>
 
 #include "minui/minui.h"
 #include "otautil/sysutil.h"
@@ -90,6 +93,12 @@ RecoveryUI::~RecoveryUI() {
   if (input_thread_.joinable()) {
     input_thread_.join();
   }
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  tsp_watchdog_stopped_ = true;
+  if (tsp_watchdog_thread_.joinable()) {
+    tsp_watchdog_thread_.join();
+  }
+#endif
 }
 
 void RecoveryUI::OnKeyDetected(int key_code) {
@@ -187,7 +196,17 @@ bool RecoveryUI::Init(const std::string& /* locale */) {
       }
     }
   });
-
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  // Watchdog thread to recover Samsung TSP touch after random mid-session failures.
+  tsp_watchdog_stopped_ = false;
+  tsp_start_time = std::chrono::steady_clock::now();
+  tsp_watchdog_thread_ = std::thread([this]() {
+    while (!this->tsp_watchdog_stopped_) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      SamsungTSPTouchFix();
+    }
+  });
+#endif
   return true;
 }
 
@@ -424,6 +443,51 @@ void RecoveryUI::EnqueueKey(int key_code) {
   }
 }
 
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+static bool SamsungTSPInputExists() {
+  // Scan /dev/input/ for sec_touchscreen by name rather than hardcoding event number
+  DIR* dir = opendir("/dev/input");
+  if (!dir) return false;
+  struct dirent* entry;
+  bool found = false;
+  while ((entry = readdir(dir)) != nullptr) {
+    if (strncmp(entry->d_name, "event", 5) != 0) continue;
+    std::string path = std::string("/dev/input/") + entry->d_name;
+    int fd = open(path.c_str(), O_RDONLY | O_NONBLOCK);
+    if (fd < 0) continue;
+    char name[256] = { 0 };
+    if (ioctl(fd, EVIOCGNAME(sizeof(name)), name) >= 0) {
+      if (strcmp(name, "sec_touchscreen") == 0) {
+        found = true;
+      }
+    }
+    close(fd);
+    if (found) break;
+  }
+  closedir(dir);
+  return found;
+}
+
+static std::chrono::steady_clock::time_point tsp_start_time;
+
+static void SamsungTSPTouchFix() {
+  const char* tsp_cmd = "/sys/class/sec/tsp/cmd";
+  if (access(tsp_cmd, W_OK) != 0) return;
+
+  // Don't intervene during startup - TSP needs time to initialise
+  auto elapsed = std::chrono::steady_clock::now() - tsp_start_time;
+  if (elapsed < std::chrono::seconds(10)) return;
+
+  // If sec_touchscreen input device is present, touch is working fine
+  if (SamsungTSPInputExists()) return;
+
+  // Input device gone - full power cycle sequence to recover TSP
+  android::base::WriteStringToFile("incell_power_control,0", tsp_cmd);
+  android::base::WriteStringToFile("incell_power_control,1", tsp_cmd);
+  android::base::WriteStringToFile("fw_update", tsp_cmd);
+}
+#endif
+
 void RecoveryUI::SetScreensaverState(ScreensaverState state) {
   switch (state) {
     case ScreensaverState::NORMAL:
@@ -432,6 +496,9 @@ void RecoveryUI::SetScreensaverState(ScreensaverState state) {
         screensaver_state_ = ScreensaverState::NORMAL;
         LOG(INFO) << "Brightness: " << brightness_normal_value_ << " (" << brightness_normal_
                   << "%)";
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+        SamsungTSPTouchFix();
+#endif
       } else {
         LOG(WARNING) << "Unable to set brightness to normal";
       }

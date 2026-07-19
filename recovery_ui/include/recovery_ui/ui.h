@@ -267,7 +267,11 @@ class RecoveryUI {
 
   std::thread input_thread_;
   std::atomic<bool> input_thread_stopped_{ false };
-
+#ifdef TW_SAMSUNG_TSP_TOUCH_FIX
+  std::thread tsp_watchdog_thread_;
+  std::atomic<bool> tsp_watchdog_stopped_{ true };
+#endif
+  
   ScreensaverState screensaver_state_;
 
   // The following two contain the absolute values computed from brightness_normal_ and
