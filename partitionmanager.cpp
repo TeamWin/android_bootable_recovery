@@ -97,17 +97,12 @@ extern "C" {
 }
 
 #ifdef TW_INCLUDE_CRYPTO
-// #include "crypto/fde/cryptfs.h"
 #include "gui/rapidxml.hpp"
 #include "gui/pages.hpp"
 #ifdef TW_INCLUDE_FBE
 #include "Decrypt.h"
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
-	#ifdef USE_FSCRYPT
-	#include "cryptfs.h"
-	#include "fscrypt-common.h"
 	#include "MetadataCrypt.h"
-	#endif
 #endif
 #endif
 #endif
@@ -632,9 +627,6 @@ void TWPartitionManager::Decrypt_Data() {
 			LOGINFO("FBE setup failed. Trying FDE...\n");
 			Set_Crypto_State();
 			Set_Crypto_Type("block");
-			int password_type = cryptfs_get_password_type();
-			if (password_type == CRYPT_TYPE_DEFAULT) {
-				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
 				if (Decrypt_Device("default_password") == 0) {
 					gui_msg("decrypt_success=Successfully decrypted with default password.");
 					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
@@ -2178,13 +2170,10 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 	int pwret = -1;
 	pid_t pid = fork();
 	if (pid < 0) {
-		LOGERR("fork failed\n");
-		return -1;
 	} else if (pid == 0) {
 		// Child process
 		char cPassword[255];
 		strcpy(cPassword, Password.c_str());
-		int ret = cryptfs_check_passwd(cPassword);
 		exit(ret);
 	} else {
 		// Parent
