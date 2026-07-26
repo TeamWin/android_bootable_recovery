@@ -792,38 +792,17 @@ bool TWPartition::Decrypt_FBE_DE() {
 	ExcludeAll(Mount_Point + "/per_boot"); // removed each boot by init
 	ExcludeAll(Mount_Point + "/gsi"); // cow devices
 
-	int retry_count = 3;
-	while (!android::keystore::Decrypt_DE() && --retry_count)
-		usleep(2000);
-	if (retry_count > 0) {
-		PartitionManager.Set_Crypto_State();
-		Is_Encrypted = true;
-		Is_Decrypted = false;
-		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
-		string filename;
-		int pwd_type = android::keystore::Get_Password_Type(0, filename);
-		if (pwd_type < 0) {
-			LOGERR("This TWRP does not have synthetic password decrypt support\n");
-			pwd_type = 0;  // default password
-		}
-		PartitionManager.Parse_Users();  // after load_all_de_keys() to parse_users
-		std::vector<users_struct>::iterator iter;
-		std::vector<users_struct>* userList = PartitionManager.Get_Users_List();
-		for (iter = userList->begin(); iter != userList->end(); iter++) {
-			if (atoi((*iter).userId.c_str()) != 0) {
-				ExcludeAll(Mount_Point + "/system_de/" + (*iter).userId + "/spblob");
-				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.password.key");
-				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/gatekeeper.pattern.key");
-				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db");
-				ExcludeAll(Mount_Point + "/system/users/" + (*iter).userId + "/locksettings.db-wal");
-			}
-		}
-		DataManager::SetValue(TW_CRYPTO_PWTYPE, pwd_type);
-		DataManager::SetValue("tw_crypto_pwtype_0", pwd_type);
-		DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
-		DataManager::SetValue("tw_crypto_display", "");
-		return true;
-	}
+		// In TWRP 14.1, decryption is handled by the Decrypt class via user input.
+	// We just set the state here to indicate FBE is present.
+	PartitionManager.Set_Crypto_State();
+	Is_Encrypted = true;
+	Is_Decrypted = false;
+	DataManager::SetValue(TW_IS_ENCRYPTED, 1);
+	DataManager::SetValue(TW_CRYPTO_PWTYPE, 0);
+	DataManager::SetValue("tw_crypto_pwtype_0", 0);
+	DataManager::SetValue(TW_CRYPTO_PASSWORD, "");
+	DataManager::SetValue("tw_crypto_display", "");
+	return true;
 #else
 		LOGERR("FBE found but FBE support not present in TWRP\n");
 #endif
