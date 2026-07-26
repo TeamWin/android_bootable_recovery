@@ -136,22 +136,21 @@ tar_append_file(TAR *t, const char *realname, const char *savename)
 	}
 
 #ifdef USE_FSCRYPT
-	if (TH_ISDIR(t) && t->options & TAR_STORE_FSCRYPT_POL)
+if (TH_ISDIR(t) && t->options & TAR_STORE_FSCRYPT_POL)
+{
+	if (t->th_buf.fep != NULL)
 	{
-		if (t->th_buf.fep != NULL)
-		{
-			free(t->th_buf.fep);
-			t->th_buf.fep = NULL;
-		}
-		t->th_buf.fep = (fscrypt_policy *)malloc(sizeof(fscrypt_policy));
-		if (!t->th_buf.fep) {
-			LOG("malloc fs_encryption_policy\n");
-			return -1;
-		}
-
-		if (fscrypt_policy_get_struct(realname, t->th_buf.fep)) {
+		free(t->th_buf.fep);
+		t->th_buf.fep = NULL;
+	}
+	t->th_buf.fep = (libtar_fscrypt_policy_t *)malloc(sizeof(libtar_fscrypt_policy_t));
+	if (!t->th_buf.fep) {
+		LOG("malloc fs_encryption_policy\n");
+		return -1;
+	}
+	if (fscrypt_policy_get_struct(realname, t->th_buf.fep)) {
 			uint8_t size, hex_size, *descriptor;
-			size = get_policy_size(t->th_buf.fep, false);
+  			size = get_policy_size(t->th_buf.fep, false);
 			hex_size = get_policy_size(t->th_buf.fep, true);
 			descriptor = get_policy_descriptor(t->th_buf.fep);
 			char user_ce[4], user_de[4], system_de[4];
