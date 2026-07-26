@@ -48,6 +48,21 @@ extern "C"
 #define LOG(...) printf("libtar: " __VA_ARGS__)
 
 /* our version of the tar header structure */
+#ifdef USE_FSCRYPT
+#include <linux/fscrypt.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
+
+static inline void* get_policy(struct fscrypt_policy_v1 *p) { return p; }
+static inline size_t fscrypt_policy_size(struct fscrypt_policy_v1 *p) { (void)p; return sizeof(struct fscrypt_policy_v1); }
+static inline void* get_policy_descriptor(struct fscrypt_policy_v1 *p) { return p ? (void*)p->master_key_descriptor : NULL; }
+static inline void get_policy_content(struct fscrypt_policy_v1 *p, char *content) {
+    if (p) snprintf(content, 50, "v1: %02x%02x%02x%02x%02x%02x%02x%02x", p->master_key_descriptor[0], p->master_key_descriptor[1], p->master_key_descriptor[2], p->master_key_descriptor[3], p->master_key_descriptor[4], p->master_key_descriptor[5], p->master_key_descriptor[6], p->master_key_descriptor[7]);
+    else snprintf(content, 50, "null");
+}
+#endif
+
 struct tar_header
 {
 	char name[100];
@@ -71,8 +86,9 @@ struct tar_header
 	char *gnu_longlink;
 	char *selinux_context;
 #ifdef USE_FSCRYPT
-	fscrypt_policy  *fep;
+    struct fscrypt_policy_v1 *fep;
 #endif
+{
 	int has_cap_data;
 	struct vfs_cap_data cap_data;
 	int has_user_default;
