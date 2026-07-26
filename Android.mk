@@ -80,6 +80,7 @@ LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
                           libbinder \
                           libbinder_ndk \
                           libboot_control_client \
+                          libsysutils \
                           libfs_mgr \
                           libhardware \
                           libhidlbase \
@@ -369,9 +370,6 @@ ifeq ($(TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID), true)
 endif
 ifeq ($(TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID), true)
     LOCAL_CFLAGS += -DTW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID
-endif
-ifeq ($(TW_SAMSUNG_TSP_TOUCH_FIX),true)
-    LOCAL_CFLAGS += -DTW_SAMSUNG_TSP_TOUCH_FIX
 endif
 ifneq ($(TW_BRIGHTNESS_PATH),)
 	LOCAL_CFLAGS += -DTW_BRIGHTNESS_PATH=$(TW_BRIGHTNESS_PATH)
