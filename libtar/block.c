@@ -354,8 +354,7 @@ th_read(TAR *t)
 #ifdef USE_FSCRYPT
 			start = strstr(buf, FSCRYPT_TAG);
 			if (start && start+FSCRYPT_TAG_LEN < buf+len) {
-				t->th_buf.fep = (fscrypt_policy*)malloc(sizeof(fscrypt_policy));
-				if (!t->th_buf.fep) {
+                        t->th_buf.fep = (struct fscrypt_policy_v1 *)malloc(sizeof(struct fscrypt_policy_v1));				if (!t->th_buf.fep) {
 					LOG("malloc failed for fscrypt policy\n");
 					return -1;
 				}
