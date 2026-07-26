@@ -570,7 +570,7 @@ tar_extract_dir(TAR *t, const char *realname)
 		uint8_t binary_policy[size];
 		memset(&binary_policy, 0, size);
 
-		if (!lookup_ref_tar(t->th_buf.fep, &binary_policy[0])) {
+		if (!lookup_ref_tar(descriptor, &binary_policy[0])) {
 			LOG("error looking up fscrypt policy for '%s' - %s\n", realname, descriptor);
 			policy_lookup_error = true;
 		}

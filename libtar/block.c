@@ -354,7 +354,7 @@ th_read(TAR *t)
 #ifdef USE_FSCRYPT
 			start = strstr(buf, FSCRYPT_TAG);
 			if (start && start+FSCRYPT_TAG_LEN < buf+len) {
-				t->th_buf.fep = (fscrypt_policy*)malloc(sizeof(fscrypt_policy));
+                        t->th_buf.fep = (libtar_fscrypt_policy_t *)malloc(sizeof(libtar_fscrypt_policy_t));
 				if (!t->th_buf.fep) {
 					LOG("malloc failed for fscrypt policy\n");
 					return -1;
@@ -362,7 +362,7 @@ th_read(TAR *t)
 				start += FSCRYPT_TAG_LEN;
 				if (*start == '0') {
 					start++;
-					memcpy(get_policy(t->th_buf.fep), start, fscrypt_policy_size(t->th_buf.fep));
+					memcpy(get_policy_descriptor(t->th_buf.fep), start, get_policy_size(t->th_buf.fep, false));
 #ifdef DEBUG
 					uint8_t version;
 					char content[50];
@@ -581,7 +581,7 @@ th_write(TAR *t)
 		/* setup size - EXT header has format "*size of this whole tag as ascii numbers* *space* *version code* *content* *newline* */
 		//                                                       size   newline
 		uint8_t size, *descriptor;
-		size = fscrypt_policy_size(t->th_buf.fep);
+		size = get_policy_size(t->th_buf.fep, false);
 		descriptor = get_policy_descriptor(t->th_buf.fep);
 #ifdef DEBUG
 		LOG("th_write(): using fscrypt_policy %s\n", descriptor);
@@ -601,7 +601,7 @@ th_write(TAR *t)
 			total_sz += sz;
 
 		snprintf(ptr, T_BLOCKSIZE, "%d "FSCRYPT_TAG"0", (int)sz);
-		memcpy(ptr + sz - size - 1, get_policy(t->th_buf.fep), size);
+		memcpy(ptr + sz - size - 1, get_policy_descriptor(t->th_buf.fep), size);
 		char *nlptr = ptr + sz - 1;
 		*nlptr = '\n';
 		ptr += sz;
