@@ -22,6 +22,7 @@
 
 #ifdef USE_FSCRYPT
 #include "fscrypt_policy.h"
+#include "fscrypt_policy_compat.h"
 #endif
 
 #ifdef __cplusplus
@@ -71,7 +72,7 @@ struct tar_header
 	char *gnu_longlink;
 	char *selinux_context;
 #ifdef USE_FSCRYPT
-	fscrypt_policy  *fep;
+	libtar_fscrypt_policy_t  *fep;
 #endif
 	int has_cap_data;
 	struct vfs_cap_data cap_data;
