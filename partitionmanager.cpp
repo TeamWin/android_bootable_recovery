@@ -629,22 +629,11 @@ void TWPartitionManager::Decrypt_Data() {
 				}
 			}
 		} else {
-			LOGINFO("FBE setup failed. Trying FDE...\n");
-			Set_Crypto_State();
-			Set_Crypto_Type("block");
-			int password_type = cryptfs_get_password_type();
-			if (password_type == CRYPT_TYPE_DEFAULT) {
-				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
-				if (Decrypt_Device("default_password") == 0) {
-					gui_msg("decrypt_success=Successfully decrypted with default password.");
-					DataManager::SetValue(TW_IS_ENCRYPTED, 0);
-				} else {
-					gui_err("unable_to_decrypt=Unable to decrypt with default password.");
-				}
-			} else {
-				DataManager::SetValue("TW_CRYPTO_TYPE", password_type);
-				DataManager::SetValue("tw_crypto_pwtype_0", password_type);
-			}
+			// Legacy FDE fallback removed; FDE was deprecated as of Android 10
+			// (see AOSP system/vold commit 0803ba0). This device is FBE-only,
+			// so a failed FBE setup has no legacy fallback path.
+			LOGERR("FBE setup failed and no legacy FDE support is available on this device.\n");
+			gui_err("unable_to_decrypt=Unable to decrypt with default password.");
 		}
 	}
 	if (Decrypt_Data && (!Decrypt_Data->Is_Encrypted || Decrypt_Data->Is_Decrypted)) {
@@ -2168,32 +2157,11 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 		return -1;
 	}
 
-	char isdecrypteddata[PROPERTY_VALUE_MAX];
-	property_get("twrp.decrypt.done", isdecrypteddata, "");
-	if (strcmp(isdecrypteddata, "true") == 0) {
-		LOGINFO("Data has no decryption required\n");
-		return 0;
-	}
-
-	int pwret = -1;
-	pid_t pid = fork();
-	if (pid < 0) {
-		LOGERR("fork failed\n");
-		return -1;
-	} else if (pid == 0) {
-		// Child process
-		char cPassword[255];
-		strcpy(cPassword, Password.c_str());
-		int ret = cryptfs_check_passwd(cPassword);
-		exit(ret);
-	} else {
-		// Parent
-		int status;
-		if (TWFunc::Wait_For_Child_Timeout(pid, &status, "Decrypt", 30))
-			pwret = -1;
-		else
-			pwret = WEXITSTATUS(status) ? -1 : 0;
-	}
+	// Legacy FDE password verification removed; FDE was deprecated as of
+	// Android 10 (see AOSP system/vold commit 0803ba0). This device is
+	// FBE-only, so this codepath is unreachable (TW_IS_FBE returns above),
+	// but is kept compiling as a safe fallback.
+	LOGERR("No legacy FDE decryption path is available on this device.\n");
 
 	// Unmount any partitions that were needed for decrypt
 	for (iter = Partitions.begin(); iter != Partitions.end(); iter++) {
@@ -2203,18 +2171,8 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 	}
 	property_set("twrp.mount_to_decrypt", "0");
 
-	if (pwret != 0) {
-		gui_err("fail_decrypt=Failed to decrypt data.");
-		return -1;
-	}
-
-	property_get("ro.crypto.fs_crypto_blkdev", crypto_blkdev, "error");
-	if (strcmp(crypto_blkdev, "error") == 0) {
-		LOGERR("Error retrieving decrypted data block device.\n");
-	} else {
-		Post_Decrypt(crypto_blkdev);
-	}
-	return 0;
+	gui_err("fail_decrypt=Failed to decrypt data.");
+	return -1;
 #else
 	gui_err("no_crypto_support=No crypto support was compiled into this build.");
 	return -1;
