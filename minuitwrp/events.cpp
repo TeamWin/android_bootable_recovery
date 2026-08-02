@@ -469,6 +469,45 @@ static int vk_tp_to_screen(struct position *p, int *x, int *y)
     return 1;
 }
 
+static int vk_is_himax_touchscreen(const char *deviceName)
+{
+    if (!deviceName)
+        return 0;
+
+    return strstr(deviceName, "himax") != NULL ||
+           strstr(deviceName, "Himax") != NULL ||
+           strstr(deviceName, "HIMAX") != NULL ||
+           strstr(deviceName, "HX831") != NULL ||
+           strstr(deviceName, "hx831") != NULL ||
+           strstr(deviceName, "hxchipset") != NULL ||
+           strstr(deviceName, "HXCHIPSET") != NULL;
+}
+
+static int vk_report_touch_release(struct input_event *ev, int *downX, int *downY,
+                                   int *discard, int last_virt_key)
+{
+    if (*downX == -1 && !*discard)
+        return 1;
+
+    if (*discard)
+    {
+        *discard = 0;
+        ev->type = EV_KEY;
+        ev->code = last_virt_key;
+        ev->value = 0;
+    }
+    else
+    {
+        ev->type = EV_ABS;
+        ev->code = 0;
+        ev->value = (*downX << 16) | *downY;
+    }
+
+    *downX = -1;
+    *downY = -1;
+    return 0;
+}
+
 /* Translate a virtual key in to a real key event, if needed */
 /* Returns non-zero when the event should be consumed */
 static int vk_modify(struct ev *e, struct input_event *ev)
@@ -481,6 +520,7 @@ static int vk_modify(struct ev *e, struct input_event *ev)
 	static int use_tracking_id_negative_as_touch_release = 0; // On some devices, type: 3  code: 39  value: -1, aka EV_ABS ABS_MT_TRACKING_ID -1 indicates a true touch release
     int i;
     int x, y;
+    int himax_touchscreen = vk_is_himax_touchscreen(e->deviceName);
 
     // This is used to ditch useless event handlers, like an accelerometer
     if (e->ignored)     return 1;
@@ -501,6 +541,15 @@ static int vk_modify(struct ev *e, struct input_event *ev)
 
 	// Handle keyboard events, value of 1 indicates key down, 0 indicates key up
 	if (ev->type == EV_KEY) {
+        if (himax_touchscreen && (ev->code == BTN_TOUCH || ev->code == BTN_TOOL_FINGER)) {
+            if (ev->value == 0) {
+                touchReleaseOnNextSynReport = 0;
+                use_tracking_id_negative_as_touch_release = 0;
+                lastWasSynReport = 0;
+                return vk_report_touch_release(ev, &downX, &downY, &discard, last_virt_key);
+            }
+            return 1;
+        }
 		return 0;
 	}
 
