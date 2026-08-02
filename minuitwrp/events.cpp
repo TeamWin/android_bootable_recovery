@@ -18,11 +18,14 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <dirent.h>
+#include <pthread.h>
 #include <sys/poll.h>
+#include <sys/ioctl.h>
 #include <limits.h>
 #include <linux/input.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <time.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
@@ -147,6 +150,155 @@ int write_to_file(const std::string& fn, const std::string& line) {
 
 #ifndef TW_NO_HAPTICS
 #ifndef TW_HAPTICS_TSPDRV
+#ifdef USE_SC27XX_INPUT_HAPTICS
+#define SC27XX_HAPTIC_NAME "sc27xx:vibrator"
+
+static pthread_mutex_t sc27xx_vibrate_lock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_cond_t sc27xx_vibrate_cond = PTHREAD_COND_INITIALIZER;
+static pthread_t sc27xx_vibrate_thread;
+static bool sc27xx_vibrate_thread_started = false;
+static int sc27xx_vibrate_fd = -1;
+static int sc27xx_pending_timeout_ms = 0;
+
+static void sc27xx_close_vibrator_locked()
+{
+    if (sc27xx_vibrate_fd >= 0)
+        close(sc27xx_vibrate_fd);
+    sc27xx_vibrate_fd = -1;
+}
+
+static int sc27xx_open_vibrator_locked()
+{
+    if (sc27xx_vibrate_fd >= 0)
+        return sc27xx_vibrate_fd;
+
+    DIR* dir = opendir("/dev/input");
+    if (!dir)
+        return -1;
+
+    struct dirent* de;
+    while ((de = readdir(dir)) != NULL) {
+        if (strncmp(de->d_name, "event", 5) != 0)
+            continue;
+
+        char path[PATH_MAX];
+        snprintf(path, sizeof(path), "/dev/input/%s", de->d_name);
+        int fd = open(path, O_RDWR | O_CLOEXEC);
+        if (fd < 0)
+            continue;
+
+        char name[80] = { 0 };
+        if (ioctl(fd, EVIOCGNAME(sizeof(name)), name) >= 0 && strcmp(name, SC27XX_HAPTIC_NAME) == 0) {
+            sc27xx_vibrate_fd = fd;
+            closedir(dir);
+            return sc27xx_vibrate_fd;
+        }
+        close(fd);
+    }
+
+    closedir(dir);
+    return -1;
+}
+
+static void sc27xx_play_vibrator(int timeout_ms)
+{
+    pthread_mutex_lock(&sc27xx_vibrate_lock);
+
+    int fd = sc27xx_open_vibrator_locked();
+    if (fd < 0) {
+        pthread_mutex_unlock(&sc27xx_vibrate_lock);
+        return;
+    }
+
+    struct ff_effect effect;
+    memset(&effect, 0, sizeof(effect));
+    effect.type = FF_RUMBLE;
+    effect.id = -1;
+    effect.u.rumble.strong_magnitude = 0xffff;
+    effect.u.rumble.weak_magnitude = 0xffff;
+    effect.replay.length = timeout_ms;
+
+    if (ioctl(fd, EVIOCSFF, &effect) < 0) {
+        sc27xx_close_vibrator_locked();
+        pthread_mutex_unlock(&sc27xx_vibrate_lock);
+        return;
+    }
+
+    struct input_event play;
+    memset(&play, 0, sizeof(play));
+    play.type = EV_FF;
+    play.code = effect.id;
+    play.value = 1;
+    if (write(fd, &play, sizeof(play)) != static_cast<ssize_t>(sizeof(play))) {
+        sc27xx_close_vibrator_locked();
+        pthread_mutex_unlock(&sc27xx_vibrate_lock);
+        return;
+    }
+
+    pthread_mutex_unlock(&sc27xx_vibrate_lock);
+
+    usleep(timeout_ms * 1000);
+
+    pthread_mutex_lock(&sc27xx_vibrate_lock);
+    if (sc27xx_vibrate_fd >= 0) {
+        memset(&play, 0, sizeof(play));
+        play.type = EV_FF;
+        play.code = effect.id;
+        play.value = 0;
+        write(sc27xx_vibrate_fd, &play, sizeof(play));
+        ioctl(sc27xx_vibrate_fd, EVIOCRMFF, effect.id);
+    }
+    pthread_mutex_unlock(&sc27xx_vibrate_lock);
+}
+
+static void* sc27xx_vibrate_worker(void*)
+{
+    for (;;) {
+        pthread_mutex_lock(&sc27xx_vibrate_lock);
+        while (sc27xx_pending_timeout_ms <= 0)
+            pthread_cond_wait(&sc27xx_vibrate_cond, &sc27xx_vibrate_lock);
+
+        int timeout_ms = sc27xx_pending_timeout_ms;
+        sc27xx_pending_timeout_ms = 0;
+        pthread_mutex_unlock(&sc27xx_vibrate_lock);
+
+        sc27xx_play_vibrator(timeout_ms);
+    }
+
+    return NULL;
+}
+
+static int sc27xx_start_vibrate_worker_locked()
+{
+    if (sc27xx_vibrate_thread_started)
+        return 0;
+
+    if (pthread_create(&sc27xx_vibrate_thread, NULL, sc27xx_vibrate_worker, NULL) != 0)
+        return -1;
+
+    pthread_detach(sc27xx_vibrate_thread);
+    sc27xx_vibrate_thread_started = true;
+    return 0;
+}
+
+static int sc27xx_input_vibrate(int timeout_ms)
+{
+    if (timeout_ms <= 0)
+        return -1;
+
+    pthread_mutex_lock(&sc27xx_vibrate_lock);
+    if (sc27xx_start_vibrate_worker_locked() != 0) {
+        pthread_mutex_unlock(&sc27xx_vibrate_lock);
+        return -1;
+    }
+
+    sc27xx_pending_timeout_ms = timeout_ms;
+    pthread_cond_signal(&sc27xx_vibrate_cond);
+    pthread_mutex_unlock(&sc27xx_vibrate_lock);
+    return 0;
+}
+#endif
+
 int vibrate(int timeout_ms)
 {
     if (timeout_ms > 10000) timeout_ms = 1000;
@@ -181,6 +333,8 @@ int vibrate(int timeout_ms)
     if (std::ifstream(VIBRATOR_TIMEOUT_FILE).good()) {
         write_to_file(VIBRATOR_TIMEOUT_FILE, tout);
     }
+#elif defined(USE_SC27XX_INPUT_HAPTICS)
+    sc27xx_input_vibrate(timeout_ms);
 #else
     if (std::ifstream(LEDS_HAPTICS_ACTIVATE_FILE).good()) {
         write_to_file(LEDS_HAPTICS_DURATION_FILE, tout);
@@ -469,6 +623,31 @@ static int vk_tp_to_screen(struct position *p, int *x, int *y)
     return 1;
 }
 
+static int vk_report_touch_release(struct input_event *ev, int *downX, int *downY,
+                                   int *discard, int last_virt_key)
+{
+    if (*downX == -1 && !*discard)
+        return 1;
+
+    if (*discard)
+    {
+        *discard = 0;
+        ev->type = EV_KEY;
+        ev->code = last_virt_key;
+        ev->value = 0;
+    }
+    else
+    {
+        ev->type = EV_ABS;
+        ev->code = 0;
+        ev->value = (*downX << 16) | *downY;
+    }
+
+    *downX = -1;
+    *downY = -1;
+    return 0;
+}
+
 /* Translate a virtual key in to a real key event, if needed */
 /* Returns non-zero when the event should be consumed */
 static int vk_modify(struct ev *e, struct input_event *ev)
@@ -478,7 +657,10 @@ static int vk_modify(struct ev *e, struct input_event *ev)
     static int last_virt_key = 0;
     static int lastWasSynReport = 0;
     static int touchReleaseOnNextSynReport = 0;
-	static int use_tracking_id_negative_as_touch_release = 0; // On some devices, type: 3  code: 39  value: -1, aka EV_ABS ABS_MT_TRACKING_ID -1 indicates a true touch release
+    static int touch_slot = 0;
+    static int touch_finger_down = 0;
+    static int touch_reported = 0;
+    static int use_tracking_id_negative_as_touch_release = 0; // On some devices, type: 3  code: 39  value: -1, aka EV_ABS ABS_MT_TRACKING_ID -1 indicates a true touch release
     int i;
     int x, y;
 
@@ -499,10 +681,27 @@ static int vk_modify(struct ev *e, struct input_event *ev)
     printf("EV: %s => type: %x  code: %x  value: %d\n", e->deviceName, ev->type, ev->code, ev->value);
 #endif
 
-	// Handle keyboard events, value of 1 indicates key down, 0 indicates key up
-	if (ev->type == EV_KEY) {
-		return 0;
-	}
+    // Treat touch contact keys as touch metadata, not as keyboard input.
+    if (ev->type == EV_KEY) {
+        if (ev->code == BTN_TOUCH || ev->code == BTN_TOOL_FINGER) {
+            if (ev->code == BTN_TOUCH) {
+                touch_finger_down = (ev->value != 0);
+                if (ev->value == 0) {
+                    touchReleaseOnNextSynReport = 0;
+                    use_tracking_id_negative_as_touch_release = 0;
+                    touch_slot = 0;
+                    touch_reported = 0;
+                    lastWasSynReport = 0;
+                    return vk_report_touch_release(ev, &downX, &downY, &discard, last_virt_key);
+                } else {
+                    touchReleaseOnNextSynReport = 0;
+                    use_tracking_id_negative_as_touch_release = 0;
+                }
+            }
+            return 1;
+        }
+        return 0;
+    }
 
     if (ev->type == EV_ABS) {
         switch (ev->code) {
@@ -552,34 +751,53 @@ static int vk_modify(struct ev *e, struct input_event *ev)
             break;
 
         case ABS_MT_TOUCH_MAJOR: //30
+            if (touch_slot > 0)
+                break;
             if (ev->value == 0)
             {
 #ifndef TW_IGNORE_MAJOR_AXIS_0
                 // We're in a touch release, although some devices will still send positions as well
                 e->mt_p.x = 0;
                 e->mt_p.y = 0;
-                touchReleaseOnNextSynReport = 1;
+                touch_finger_down = 0;
+                if (touch_reported && touchReleaseOnNextSynReport != 2)
+                    touchReleaseOnNextSynReport = 1;
 #endif
+            }
+            else
+            {
+                touch_finger_down = 1;
             }
 #ifdef _EVENT_LOGGING
             printf("EV: %s => EV_ABS  ABS_MT_TOUCH_MAJOR  %d\n", e->deviceName, ev->value);
 #endif
             break;
 
-		case ABS_MT_PRESSURE: //3a
-                    if (ev->value == 0)
+        case ABS_MT_PRESSURE: //3a
+            if (touch_slot > 0)
+                break;
+            if (ev->value == 0)
             {
                 // We're in a touch release, although some devices will still send positions as well
                 e->mt_p.x = 0;
                 e->mt_p.y = 0;
-                touchReleaseOnNextSynReport = 1;
+                touch_finger_down = 0;
+                if (touch_reported && touchReleaseOnNextSynReport != 2)
+                    touchReleaseOnNextSynReport = 1;
+            }
+            else
+            {
+                touch_finger_down = 1;
             }
 #ifdef _EVENT_LOGGING
             printf("EV: %s => EV_ABS  ABS_MT_PRESSURE  %d\n", e->deviceName, ev->value);
 #endif
             break;
 
-		case ABS_MT_POSITION_X: //35
+        case ABS_MT_POSITION_X: //35
+            if (touch_slot > 0)
+                break;
+            touch_finger_down = 1;
             e->mt_p.synced |= 0x01;
             e->mt_p.x = ev->value;
 #ifdef _EVENT_LOGGING
@@ -588,6 +806,9 @@ static int vk_modify(struct ev *e, struct input_event *ev)
             break;
 
         case ABS_MT_POSITION_Y: //36
+            if (touch_slot > 0)
+                break;
+            touch_finger_down = 1;
             e->mt_p.synced |= 0x02;
             e->mt_p.y = ev->value;
 #ifdef _EVENT_LOGGING
@@ -614,6 +835,8 @@ static int vk_modify(struct ev *e, struct input_event *ev)
             break;
 
         case ABS_MT_TRACKING_ID: //39
+            if (touch_slot > 0)
+                break;
 #ifdef TW_IGNORE_ABS_MT_TRACKING_ID
 #ifdef _EVENT_LOGGING
             printf("EV: %s => EV_ABS ABS_MT_TRACKING_ID %d ignored\n", e->deviceName, ev->value);
@@ -624,14 +847,26 @@ static int vk_modify(struct ev *e, struct input_event *ev)
                 e->mt_p.x = 0;
                 e->mt_p.y = 0;
                 touchReleaseOnNextSynReport = 2;
+                touch_finger_down = 0;
                 use_tracking_id_negative_as_touch_release = 1;
 #ifdef _EVENT_LOGGING
                 if (use_tracking_id_negative_as_touch_release)
                     printf("using ABS_MT_TRACKING_ID value -1 to indicate touch releases\n");
 #endif
+            } else {
+                touch_finger_down = 1;
+                touchReleaseOnNextSynReport = 0;
+                use_tracking_id_negative_as_touch_release = 0;
             }
 #ifdef _EVENT_LOGGING
             printf("EV: %s => EV_ABS ABS_MT_TRACKING_ID %d\n", e->deviceName, ev->value);
+#endif
+            break;
+
+        case ABS_MT_SLOT:
+            touch_slot = ev->value;
+#ifdef _EVENT_LOGGING
+            printf("EV: %s => ABS_MT_SLOT %d\n", e->deviceName, ev->value);
 #endif
             break;
 
@@ -656,10 +891,6 @@ static int vk_modify(struct ev *e, struct input_event *ev)
             printf("EV: %s => EV_ABS ABS_MT_DISTANCE %d\n", e->deviceName, ev->value);
 			return 1;
             break;
-        case ABS_MT_SLOT:
-            printf("EV: %s => ABS_MT_SLOT %d\n", e->deviceName, ev->value);
-			return 1;
-			break;
 #endif
 
         default:
@@ -691,31 +922,18 @@ static int vk_modify(struct ev *e, struct input_event *ev)
     // Discard the MT versions
     if (ev->code == SYN_MT_REPORT)      return 0;
 
-    if (((lastWasSynReport == 1 || touchReleaseOnNextSynReport == 1) && !use_tracking_id_negative_as_touch_release) || (use_tracking_id_negative_as_touch_release && touchReleaseOnNextSynReport == 2))
+    if ((touch_reported && !touch_finger_down) ||
+        (((lastWasSynReport == 1 || touchReleaseOnNextSynReport == 1) && !use_tracking_id_negative_as_touch_release) ||
+        (use_tracking_id_negative_as_touch_release && touchReleaseOnNextSynReport == 2)))
     {
         // Reset the value
         touchReleaseOnNextSynReport = 0;
-
-        // We are a finger-up state
-        if (!discard)
-        {
-            // Report the key up
-            ev->type = EV_ABS;
-            ev->code = 0;
-            ev->value = (downX << 16) | downY;
-        }
-        downX = -1;
-        downY = -1;
-        if (discard)
-        {
-            discard = 0;
-
-            // Send the keyUp event
-            ev->type = EV_KEY;
-            ev->code = last_virt_key;
-            ev->value = 0;
-        }
-        return 0;
+        use_tracking_id_negative_as_touch_release = 0;
+        touch_finger_down = 0;
+        touch_reported = 0;
+        touch_slot = 0;
+        lastWasSynReport = 0;
+        return vk_report_touch_release(ev, &downX, &downY, &discard, last_virt_key);
     }
     lastWasSynReport = 1;
 
@@ -787,6 +1005,8 @@ static int vk_modify(struct ev *e, struct input_event *ev)
                 // and make sure we don't come back into this area
                 discard = 1;
                 downX = 0;
+                touch_finger_down = 1;
+                touch_reported = 1;
                 return 0;
             }
         }
@@ -801,6 +1021,8 @@ static int vk_modify(struct ev *e, struct input_event *ev)
     // Record where we started the touch for deciding if this is a key or a scroll
     downX = x;
     downY = y;
+    touch_finger_down = 1;
+    touch_reported = 1;
 
     ev->type = EV_ABS;
     ev->code = 1;
