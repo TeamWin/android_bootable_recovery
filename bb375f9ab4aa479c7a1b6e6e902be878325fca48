@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e02172e_4aaef848",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1745
+      },
+      "writtenOn": "2026-08-24T08:13:42Z",
+      "side": 1,
+      "message": "Could you please review this change?\n\nThis patch targets android-12.1 and fixes stuck finger-release events\non Himax/HX831 touchscreens. Tested on OnePlus 13 dodge.",
+      "revId": "bb375f9ab4aa479c7a1b6e6e902be878325fca48",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}
