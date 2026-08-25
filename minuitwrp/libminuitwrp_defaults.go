@@ -15,6 +15,11 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DUSE_QTI_HAPTICS")
 	}
 
+	if getMakeVars(ctx, "TW_SUPPORT_INPUT_EVENT_VIBRATOR_HAPTICS") != "" {
+		addflag:="-DUSE_INPUT_EVENT_VIBRATOR_HAPTICS="+ getMakeVars(ctx, "TW_SUPPORT_INPUT_EVENT_VIBRATOR_HAPTICS")
+		cflags = append(cflags,addflag )
+	}
+
 	if getMakeVars(ctx, "TW_SUPPORT_INPUT_AIDL_HAPTICS") == "true" {
 		cflags = append(cflags, "-DUSE_QTI_AIDL_HAPTICS")
 	}
