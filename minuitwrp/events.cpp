@@ -79,6 +79,12 @@ static const std::string kVibratorInstance = std::string(IVibrator::descriptor) 
 #define ABS_MT_PRESSURE     0x3a
 #define ABS_MT_DISTANCE     0x3b
 
+#define BITS_PER_LONG (sizeof(long) * 8)
+#define NBITS(x) ((((x)-1)/BITS_PER_LONG)+1)
+#define OFF(x)  ((x)%BITS_PER_LONG)
+#define LONG(x) ((x)/BITS_PER_LONG)
+#define test_bit(bit, array)	((array[LONG(bit)] >> OFF(bit)) & 1)
+
 enum {
     DOWN_NOT,
     DOWN_SENT,
@@ -117,6 +123,9 @@ static unsigned ev_count = 0;
 static struct timeval lastInputStat;
 static time_t lastInputMTime;
 static int has_mouse = 0;
+static int input_event_haptics_fd = -1;
+static unsigned long input_event_haptics_uses_rumble = 1;
+static signed short input_event_haptics_effect_id=-1;
 
 static inline int ABS(int x) {
     return x<0?-x:x;
@@ -132,6 +141,79 @@ int write_to_file(const std::string& fn, const std::string& line) {
 	}
 	LOGI("Cannot find file %s\n", fn.c_str());
 	return -1;
+}
+
+static int input_event_ff_open(const char *input_dev_path)
+{
+    if (input_event_haptics_fd >= 0)
+        return input_event_haptics_fd;
+
+    int fd = open(input_dev_path, O_RDWR | O_CLOEXEC);
+    if (fd < 0){
+        LOGI("Cannot open file %s\n", input_dev_path);
+        return -1;
+    }
+
+    unsigned long ff_bitmask[NBITS(FF_MAX)];
+    memset(ff_bitmask, 0, sizeof(ff_bitmask));
+    if (ioctl(fd, EVIOCGBIT(EV_FF, sizeof(ff_bitmask)), ff_bitmask) < 0) {
+        close(fd);
+        LOGI("Cannot ioctl file %s\n", input_dev_path);
+        return -1;
+    }
+
+    if (test_bit(FF_CONSTANT, ff_bitmask) || test_bit(FF_RUMBLE, ff_bitmask)) {
+        input_event_haptics_fd = fd;
+        input_event_haptics_uses_rumble = !test_bit(FF_CONSTANT, ff_bitmask);
+        return input_event_haptics_fd;
+    }
+    LOGI("unsupported Force Feedback ff_bitmask\n");
+    close(fd);
+    return -1;
+}
+static int input_event_ff_vibrate(int timeout_ms)
+{
+    if (input_event_haptics_fd < 0){
+        LOGI("wrong fd %d\n",input_event_haptics_fd);
+        return -1;
+    }
+
+    if (input_event_haptics_effect_id>=0 &&ioctl(input_event_haptics_fd, EVIOCRMFF, input_event_haptics_effect_id) == -1) {
+        LOGI("fail to remove effect \n");
+    }
+
+    struct ff_effect effect;
+    memset(&effect, 0, sizeof(effect));
+    effect.id = -1;
+    effect.replay.length = timeout_ms;
+    effect.replay.delay = 0;
+
+    if (input_event_haptics_uses_rumble) {
+        effect.type = FF_RUMBLE;
+        effect.u.rumble.strong_magnitude = 0x7fff;
+        effect.u.rumble.weak_magnitude = 0x7fff;
+    } else {
+        effect.type = FF_CONSTANT;
+        effect.u.constant.level = 0x5fff;
+    }
+
+    if (ioctl(input_event_haptics_fd, EVIOCSFF, &effect) < 0){
+        LOGI("fail to regist effect \n");
+        return -1;
+    }
+
+    input_event_haptics_effect_id = effect.id;
+
+    struct input_event play;
+    memset(&play, 0, sizeof(play));
+    play.type = EV_FF;
+    play.code = input_event_haptics_effect_id;
+    play.value = 1;
+    if (write(input_event_haptics_fd, &play, sizeof(play)) <0){
+        LOGI("fail to play effect \n");
+        return -1;
+    }
+    return 0 ;
 }
 
 #ifndef TW_NO_HAPTICS
@@ -159,6 +241,12 @@ int vibrate(int timeout_ms)
     if (std::ifstream(VIBRATOR_TIMEOUT_FILE).good()) {
         write_to_file(VIBRATOR_TIMEOUT_FILE, tout);
     }
+#elif defined(USE_INPUT_EVENT_VIBRATOR_HAPTICS)
+    /* Some devices like qcom and unisoc have /dev/input/eventX file with device name *haptics or *vibrator
+    could drive vibrator by ioctl input event and effect */
+     if (input_event_ff_open(EXPAND(USE_INPUT_EVENT_VIBRATOR_HAPTICS)) >= 0) {
+    	input_event_ff_vibrate(timeout_ms);
+    } 
 #else
     if (std::ifstream(LEDS_HAPTICS_ACTIVATE_FILE).good()) {
         write_to_file(LEDS_HAPTICS_DURATION_FILE, tout);
@@ -309,12 +397,6 @@ static int vk_init(struct ev *e)
 
     return 0;
 }
-
-#define BITS_PER_LONG (sizeof(long) * 8)
-#define NBITS(x) ((((x)-1)/BITS_PER_LONG)+1)
-#define OFF(x)  ((x)%BITS_PER_LONG)
-#define LONG(x) ((x)/BITS_PER_LONG)
-#define test_bit(bit, array)	((array[LONG(bit)] >> OFF(bit)) & 1)
 
 // Check for EV_REL (REL_X and REL_Y) and, because touchscreens can have those too,
 // check also for EV_KEY (BTN_LEFT and BTN_RIGHT)
