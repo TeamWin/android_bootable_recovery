@@ -1189,6 +1189,7 @@ bool TWPartition::Is_File_System(string File_System) {
 		File_System == "yaffs2" ||
 		File_System == "exfat" ||
 		File_System == "f2fs" ||
+		File_System == "mifs" ||
 		File_System == "erofs" ||
 		File_System == "squashfs" ||
 		File_System == "auto")
