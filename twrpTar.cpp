@@ -812,7 +812,7 @@ int twrpTar::tarList(std::vector<TarListStruct> *TarList, unsigned thread_id) {
 					}
 					archive_count++;
 					gui_msg(Msg("split_thread=Splitting thread ID {1} into archive {2}")(thread_id)(archive_count + 1));
-					if (archive_count > 99) {
+					if (archive_count > 9999) {
 						LOGINFO("Too many archives for thread %i\n", thread_id);
 						gui_err("backup_error=Error creating backup.");
 						return -4;
@@ -871,7 +871,7 @@ void* twrpTar::extractMulti(void *cookie) {
 			return (void*)-2;
 		}
 		archive_count++;
-		if (archive_count > 99)
+		if (archive_count > 9999)
 			break;
 		sprintf(actual_filename, temp.c_str(), threadTar->thread_id, archive_count);
 	}
@@ -1446,7 +1446,7 @@ unsigned long long twrpTar::get_size() {
 				while (TWFunc::Path_Exists(actual_filename)) {
 					total_restore_size += uncompressedSize(actual_filename);
 					archive_count++;
-					if (archive_count > 99)
+					if (archive_count > 9999)
 						break;
 					sprintf(actual_filename, temp.c_str(), i, archive_count);
 				}

@@ -110,8 +110,8 @@ bool twrpDigestDriver::Check_Digest(string Full_Filename) {
 	if (!TWFunc::Path_Exists(Full_Filename)) {
 		// This is a split archive, we presume
 		memset(split_filename, 0, sizeof(split_filename));
-		while (index < 1000) {
-			sprintf(split_filename, "%s%03i", Full_Filename.c_str(), index);
+		while (index < 10000) {
+			sprintf(split_filename, "%s0%02i", Full_Filename.c_str(), index);
 			if (!TWFunc::Path_Exists(split_filename))
 				break;
 				LOGINFO("split_filename: %s\n", split_filename);
@@ -193,8 +193,8 @@ bool twrpDigestDriver::Make_Digest(string Full_Filename) {
 	} else {
 		char filename[512];
 		int index = 0;
-		sprintf(filename, "%s%03i", Full_Filename.c_str(), index);
-		while (index < 1000) {
+		sprintf(filename, "%s0%02i", Full_Filename.c_str(), index);
+		while (index < 10000) {
 			string digest_src(filename);
 			if (TWFunc::Path_Exists(filename)) {
 				if (!Write_Digest(filename))
@@ -203,7 +203,7 @@ bool twrpDigestDriver::Make_Digest(string Full_Filename) {
 				else
 					break;
 				index++;
-				sprintf(filename, "%s%03i", Full_Filename.c_str(), index);
+				sprintf(filename, "%s0%02i", Full_Filename.c_str(), index);
 			}
 			if (index == 0) {
 				LOGERR("Backup file: '%s' not found!\n", filename);
