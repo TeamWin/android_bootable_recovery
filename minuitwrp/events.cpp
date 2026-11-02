@@ -558,7 +558,8 @@ static int vk_modify(struct ev *e, struct input_event *ev)
                 // We're in a touch release, although some devices will still send positions as well
                 e->mt_p.x = 0;
                 e->mt_p.y = 0;
-                touchReleaseOnNextSynReport = 1;
+                if (touchReleaseOnNextSynReport != 2)
+                    touchReleaseOnNextSynReport = 1;
 #endif
             }
 #ifdef _EVENT_LOGGING
@@ -572,7 +573,8 @@ static int vk_modify(struct ev *e, struct input_event *ev)
                 // We're in a touch release, although some devices will still send positions as well
                 e->mt_p.x = 0;
                 e->mt_p.y = 0;
-                touchReleaseOnNextSynReport = 1;
+                if (touchReleaseOnNextSynReport != 2)
+                    touchReleaseOnNextSynReport = 1;
             }
 #ifdef _EVENT_LOGGING
             printf("EV: %s => EV_ABS  ABS_MT_PRESSURE  %d\n", e->deviceName, ev->value);
